@@ -16,6 +16,7 @@ import core.plugin.Plugin
  */
 @Initializable
 class ChairPlugin : OptionHandler() {
+
     override fun newInstance(arg: Any?): Plugin<Any> {
         for (chair in Chairs.values()) {
             SceneryDefinition.forId(chair.objectId).handlers["option:sit-on"] = this
@@ -24,15 +25,14 @@ class ChairPlugin : OptionHandler() {
     }
 
     override fun handle(player: Player, node: Node, option: String): Boolean {
-        val scenery = node as Scenery
+        val scenery = node as? Scenery ?: return false
         val chair = Chairs.fromId(scenery.id) ?: return false
 
-        var animID = chair.anim
+        val animID = if (scenery.type == 11) chair.anim + 1 else chair.anim
         val sitAnimID = chair.sitAnim
 
-        if (scenery.type == 11) animID++
+        forceMove(player, player.location, scenery.location, 0, 30, node.direction.opposite, sitAnimID)
 
-        forceMove(player, player.location, scenery.location, 0, 30, null, sitAnimID)
         player.locks.lockInteractions(600_000)
 
         player.pulseManager.run(object : Pulse(2) {

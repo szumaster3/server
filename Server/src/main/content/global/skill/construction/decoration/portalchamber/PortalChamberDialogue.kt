@@ -7,15 +7,10 @@ import core.game.node.entity.player.Player
 import core.plugin.Initializable
 
 @Initializable
-class PortalChamberDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class PortalChamberDialogue(player: Player? = null) : Dialogue(player) {
     var portal = "nowhere"
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 ->
                 when (buttonId) {

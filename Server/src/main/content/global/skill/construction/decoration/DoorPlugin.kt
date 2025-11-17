@@ -19,73 +19,67 @@ import java.awt.Point
 class DoorPlugin : OptionHandler() {
 
     override fun newInstance(arg: Any?): Plugin<Any> {
-        for (style in HousingStyle.values()) {
-            SceneryDefinition.forId(style.doorId).handlers["option:open"] = this
-            SceneryDefinition.forId(style.secondDoorId).handlers["option:open"] = this
+        val dungeonDoors = BuildHotspot.DUNGEON_DOOR_LEFT.decorations + BuildHotspot.DUNGEON_DOOR_RIGHT.decorations
+        dungeonDoors.forEach { deco ->
+            val def = SceneryDefinition.forId(deco.objectId)
+            listOf("option:open", "option:pick-lock", "option:force").forEach { opt ->
+                def.handlers[opt] = this
+            }
         }
-        for (deco in BuildHotspot.DUNGEON_DOOR_LEFT.decorations + BuildHotspot.DUNGEON_DOOR_RIGHT.decorations) {
-            SceneryDefinition.forId(deco.objectId).handlers["option:open"] = this
-            SceneryDefinition.forId(deco.objectId).handlers["option:pick-lock"] = this
-            SceneryDefinition.forId(deco.objectId).handlers["option:force"] = this
+        HousingStyle.values().forEach { style ->
+            listOf(style.doorId, style.secondDoorId).forEach {
+                SceneryDefinition.forId(it).handlers["option:open"] = this
+            }
         }
         return this
     }
 
     override fun handle(player: Player, node: Node, option: String): Boolean {
-        val door = node as? Scenery ?: return true
+        val door = node as? Scenery ?: return false
 
-        if(option.lowercase() == "open") {
-            try {
-                val secondDoor = getSecondDoor(door)
-                val replaceId = getReplaceId(door)
-                val secondReplaceId = secondDoor?.let { getReplaceId(it) } ?: -1
-                openDoor(door, secondDoor, replaceId, secondReplaceId)
-            } catch (e: Exception) {
-                e.printStackTrace()
-            }
-        }
+        if (!option.equals("open", ignoreCase = true)) return false
+
+        runCatching {
+            val secondDoor = getSecondDoor(door)
+            val replaceId = getReplaceId(door)
+            val secondReplaceId = secondDoor?.let { getReplaceId(it) } ?: -1
+            openDoor(door, secondDoor, replaceId, secondReplaceId)
+        }.onFailure { it.printStackTrace() }
+
         return true
     }
 
     private fun openDoor(door: Scenery, second: Scenery?, replaceId: Int, secondReplaceId: Int) {
         if (second == null) {
             val (offsetX, offsetY, newRot) = getOpenOffset(door)
-            val newDoor =
-                Scenery(replaceId, door.location.transform(offsetX, offsetY, 0), 0, newRot)
+            val newDoor = Scenery(replaceId, door.location.transform(offsetX, offsetY, 0), 0, newRot)
             SceneryBuilder.replace(door, newDoor)
             return
         }
 
-        var obj = door
-        var sec = second
-        val mod = 1
+        val p = DoorActionHandler.getRotationPoint(door.rotation) ?: Point(0, 0)
 
-        var firstDir = (obj.rotation + ((mod + 4) % 4)) % 4
-        val p = DoorActionHandler.getRotationPoint(obj.rotation) ?: Point(0, 0)
-        var firstLoc = obj.location.transform(p.x * mod, p.y * mod, 0)
+        var firstDir = (door.rotation + 1) % 4
+        var secondDir = (second.rotation + 1) % 4
 
-        val offsetDir =
-            Direction.getDirection(sec.location.x - obj.location.x, sec.location.y - obj.location.y)
-        var secondDir = (sec.rotation + mod) % 4
+        val offsetDir = Direction.getDirection(second.location.x - door.location.x,
+            second.location.y - door.location.y)
 
-        if (firstDir == 1 && offsetDir == Direction.NORTH) {
-            firstDir = 3
-        } else if (firstDir == 2 && offsetDir == Direction.EAST) {
-            firstDir = 0
-        } else if (firstDir == 3 && offsetDir == Direction.SOUTH) {
-            firstDir = 1
-        } else if (firstDir == 0 && offsetDir == Direction.WEST) {
-            firstDir = 2
+        firstDir = when {
+            firstDir == 1 && offsetDir == Direction.NORTH -> 3
+            firstDir == 2 && offsetDir == Direction.EAST  -> 0
+            firstDir == 3 && offsetDir == Direction.SOUTH -> 1
+            firstDir == 0 && offsetDir == Direction.WEST  -> 2
+            else -> firstDir
         }
 
-        if (firstDir == secondDir) {
-            secondDir = (secondDir + 2) % 4
-        }
+        if (firstDir == secondDir) secondDir = (secondDir + 2) % 4
 
-        val secondLoc = sec.location.transform(p.x, p.y, 0)
+        val firstLoc = door.location.transform(p.x, p.y, 0)
+        val secondLoc = second.location.transform(p.x, p.y, 0)
 
-        SceneryBuilder.replace(obj, obj.transform(replaceId, firstDir, firstLoc))
-        SceneryBuilder.replace(sec, sec.transform(secondReplaceId, secondDir, secondLoc))
+        SceneryBuilder.replace(door, door.transform(replaceId, firstDir, firstLoc))
+        SceneryBuilder.replace(second, second.transform(secondReplaceId, secondDir, secondLoc))
     }
 
     private fun getOpenOffset(door: Scenery): Triple<Int, Int, Int> {
@@ -103,49 +97,39 @@ class DoorPlugin : OptionHandler() {
             else -> Triple(0, 0, door.rotation)
         }
     }
-    private fun getReplaceId(door: Scenery): Int = REPLACEMENT_MAP[door.id] ?: (door.id + 2)
+
+    private fun getReplaceId(door: Scenery): Int = REPLACEMENT_MAP.getValue(door.id)
 
     private fun getSecondDoor(door: Scenery): Scenery? {
         val possibleIds = setOf(door.id, door.id + 1, door.id - 1)
-
-        val directions =
-            listOf(0 to 0, 1 to 0, -1 to 0, 0 to 1, 0 to -1, 1 to 1, -1 to 1, 1 to -1, -1 to -1)
+        val directions = listOf(
+            0  to 0,    1 to  0,   -1 to  0,
+            0  to 1,    0 to -1,    1 to  1,
+           -1  to 1,    1 to -1,   -1 to -1
+        )
 
         for ((dx, dy) in directions) {
             val loc = door.location.transform(dx, dy, 0)
-
-            for (slot in 0 until 4) {
-                val obj =
-                    try {
-                        RegionManager.getObject(loc.z, loc.x, loc.y, slot)
-                    } catch (e: Exception) {
-                        null
-                    }
-
-                if (obj != null && obj.id in possibleIds && obj != door) {
-                    return obj
-                }
-            }
+            val obj = RegionManager.getObject(loc.z, loc.x, loc.y)
+            if (obj != null && obj != door && obj.id in possibleIds) return obj
         }
-
         return null
     }
 
     companion object {
-        private val REPLACEMENT_MAP =
-            mapOf(
-                13100 to 13102,
-                13101 to 13103,
-                13006 to 13008,
-                13007 to 13008,
-                13015 to 13017,
-                13016 to 13018,
-                13094 to 13095,
-                13096 to 13097,
-                13109 to 13110,
-                13107 to 13108,
-                13118 to 13120,
-                13119 to 13121
-            )
+        private val REPLACEMENT_MAP = mapOf(
+            13100 to 13102,
+            13101 to 13103,
+            13006 to 13008,
+            13007 to 13008,
+            13015 to 13017,
+            13016 to 13018,
+            13094 to 13095,
+            13096 to 13097,
+            13109 to 13110,
+            13107 to 13108,
+            13118 to 13120,
+            13119 to 13121
+        ).withDefault { key -> key + 2 }
     }
 }

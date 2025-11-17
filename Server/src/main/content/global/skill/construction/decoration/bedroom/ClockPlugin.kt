@@ -8,36 +8,31 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 class ClockPlugin : InteractionListener {
-    private val clockSpaceFurniture = intArrayOf(Scenery.CLOCK_13169, Scenery.CLOCK_13170, Scenery.CLOCK_13171)
 
     override fun defineListeners() {
-        on(clockSpaceFurniture, IntType.SCENERY, "read") { player, node ->
+        on(CLOCK_FURNITURE, IntType.SCENERY, "read") { player, _ ->
             val format = SimpleDateFormat("mm")
             val minuteDisplay = format.format(Calendar.getInstance().time).toInt()
-            val sb = StringBuilder("It's ")
-            when (minuteDisplay) {
-                0 -> {
-                    sb.append("Rune o'clock.")
-                }
-
-                15 -> {
-                    sb.append("a quarter past Rune.")
-                }
-
-                in 1..29 -> {
-                    sb.append("$minuteDisplay past Rune.")
-                }
-
-                45 -> {
-                    sb.append("a quarter till Rune.")
-                }
-
-                else -> {
-                    sb.append((60 - minuteDisplay).toString() + " till Rune.")
+            val message = buildString {
+                append("It's ")
+                when (minuteDisplay) {
+                    0 -> append("Rune o'clock.")
+                    15 -> append("a quarter past Rune.")
+                    in 1..29 -> append("$minuteDisplay past Rune.")
+                    45 -> append("a quarter till Rune.")
+                    else -> append("${60 - minuteDisplay} till Rune.")
                 }
             }
-            sendMessage(player, sb.toString())
+            sendMessage(player, message)
             return@on true
         }
+    }
+
+    companion object {
+        private val CLOCK_FURNITURE = intArrayOf(
+            Scenery.CLOCK_13169,
+            Scenery.CLOCK_13170,
+            Scenery.CLOCK_13171
+        )
     }
 }

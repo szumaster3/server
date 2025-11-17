@@ -56,11 +56,7 @@ class StileShortcut : InteractionListener {
     }
 
     companion object {
-        fun getInteractLocation(
-            pLoc: Location,
-            sLoc: Location,
-            orientation: Orientation,
-        ): Location =
+        fun getInteractLocation(pLoc: Location, sLoc: Location, orientation: Orientation): Location =
             when (orientation) {
                 Orientation.HORIZONTAL -> {
                     if (pLoc.x <= sLoc.x) {
@@ -85,10 +81,7 @@ class StileShortcut : InteractionListener {
                 else -> Orientation.VERTICAL
             }
 
-        fun handleFalconry(
-            p: Player,
-            endLoc: Location,
-        ) {
+        fun handleFalconry(p: Player, endLoc: Location) {
             if (endLoc.y == 3619) {
                 ActivityManager.start(p, "falconry", false)
             } else {
@@ -97,8 +90,5 @@ class StileShortcut : InteractionListener {
         }
     }
 
-    enum class Orientation {
-        HORIZONTAL,
-        VERTICAL,
-    }
+    enum class Orientation { HORIZONTAL, VERTICAL }
 }

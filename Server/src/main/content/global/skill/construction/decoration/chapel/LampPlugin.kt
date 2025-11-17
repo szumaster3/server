@@ -11,64 +11,58 @@ import shared.consts.Items
 import shared.consts.Scenery
 
 class LampPlugin : InteractionListener {
+
     override fun defineListeners() {
         on(burnerIds, IntType.SCENERY, "light") { player, node ->
-            if (player.ironmanManager.checkRestriction() && !player.houseManager.isInHouse(player)) return@on true
+            if (!canUseLamp(player)) return@on true
 
-            val missingItemsMessage = checkRequirements(player)
-            if (missingItemsMessage != null) {
-                sendDialogue(player, missingItemsMessage)
+            checkRequirements(player)?.let { missingMessage ->
+                sendDialogue(player, missingMessage)
                 return@on true
             }
 
-            if (removeItem(player, Item(Items.CLEAN_MARRENTILL_251))) {
+            removeItem(player, Item(Items.CLEAN_MARRENTILL_251))?.also {
                 lock(player, 1)
                 animate(player, Animations.USE_TINDERBOX_3687)
                 sendMessage(player, "You burn some marrentill in the incense burner.")
-                replaceScenery(node.asScenery(), node.id + 1, RandomFunction.random(100, 175), node.location)
+                replaceScenery(
+                    node.asScenery(),
+                    node.id + 1,
+                    RandomFunction.random(100, 175),
+                    node.location
+                )
             }
             return@on true
         }
     }
 
-    private fun checkRequirements(player: Player): String? =
-        when {
-            !anyInInventory(
-                player,
-                Items.TINDERBOX_590,
-                Items.CLEAN_MARRENTILL_251,
-            ) -> "You'll need a tinderbox and a clean marrentill herb in order to light the burner."
+    private fun canUseLamp(player: Player) =
+        !(player.ironmanManager.checkRestriction() && !player.houseManager.isInHouse(player))
 
-            inInventory(player, Items.TINDERBOX_590) &&
-                !inInventory(
-                    player,
-                    Items.CLEAN_MARRENTILL_251,
-                ) -> "You'll need a clean marrentill herb in order to light the burner."
+    private fun checkRequirements(player: Player): String? {
+        val requirements = listOf(
+            Items.TINDERBOX_590 to "tinderbox",
+            Items.CLEAN_MARRENTILL_251 to "clean marrentill herb"
+        )
 
-            inInventory(player, Items.CLEAN_MARRENTILL_251) &&
-                !inInventory(
-                    player,
-                    Items.TINDERBOX_590,
-                ) -> "You'll need a tinderbox in order to light the burner."
-
-            else -> null
-        }
+        val missing = requirements.filter { !inInventory(player, it.first) }.map { it.second }
+        return if (missing.isEmpty()) null else "You'll need ${missing.joinToString(" and ")} in order to light the burner."
+    }
 
     companion object {
-        private val burnerIds =
-            intArrayOf(
-                Scenery.TORCH_13202,
-                Scenery.TORCH_13203,
-                Scenery.TORCH_13204,
-                Scenery.TORCH_13205,
-                Scenery.TORCH_13206,
-                Scenery.TORCH_13207,
-                Scenery.INCENSE_BURNER_13208,
-                Scenery.INCENSE_BURNER_13209,
-                Scenery.INCENSE_BURNER_13210,
-                Scenery.INCENSE_BURNER_13211,
-                Scenery.INCENSE_BURNER_13212,
-                Scenery.INCENSE_BURNER_13213,
-            )
+        private val burnerIds = intArrayOf(
+            Scenery.TORCH_13202,
+            Scenery.TORCH_13203,
+            Scenery.TORCH_13204,
+            Scenery.TORCH_13205,
+            Scenery.TORCH_13206,
+            Scenery.TORCH_13207,
+            Scenery.INCENSE_BURNER_13208,
+            Scenery.INCENSE_BURNER_13209,
+            Scenery.INCENSE_BURNER_13210,
+            Scenery.INCENSE_BURNER_13211,
+            Scenery.INCENSE_BURNER_13212,
+            Scenery.INCENSE_BURNER_13213
+        )
     }
 }

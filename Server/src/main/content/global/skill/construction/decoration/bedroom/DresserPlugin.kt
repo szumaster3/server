@@ -11,19 +11,8 @@ import shared.consts.Components
 import shared.consts.Scenery
 
 class DresserPlugin : InteractionListener {
-    private val dresserSpaceFurniture =
-        intArrayOf(
-            Scenery.SHAVING_STAND_13162,
-            Scenery.SHAVING_STAND_13163,
-            Scenery.DRESSER_13164,
-            Scenery.DRESSER_13165,
-            Scenery.DRESSER_13166,
-            Scenery.DRESSER_13167,
-            Scenery.DRESSER_13168,
-        )
-
     override fun defineListeners() {
-        on(dresserSpaceFurniture, IntType.SCENERY, "preen") { player, node ->
+        on(DRESSER_FURNITURE_IDS, IntType.SCENERY, "preen") { player, node ->
             animate(player, Animations.PREEN_OPTION_TO_CHECK_SELF_IN_MIRROR_POH_3670)
 
             val isMale = player.appearance.isMale
@@ -37,5 +26,17 @@ class DresserPlugin : InteractionListener {
 
             return@on true
         }
+    }
+
+    companion object {
+        private val DRESSER_FURNITURE_IDS = intArrayOf(
+            Scenery.SHAVING_STAND_13162,
+            Scenery.SHAVING_STAND_13163,
+            Scenery.DRESSER_13164,
+            Scenery.DRESSER_13165,
+            Scenery.DRESSER_13166,
+            Scenery.DRESSER_13167,
+            Scenery.DRESSER_13168
+        )
     }
 }

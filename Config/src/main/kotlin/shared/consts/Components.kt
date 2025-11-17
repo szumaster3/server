@@ -423,7 +423,7 @@ object Components {
     const val SEW_INTERFACE_419 = 419
     const val COMPONENT_420 = 420
     const val TUTORIAL_TEXT2_421 = 421
-    const val COMPONENT_422 = 422
+    const val TRANSPARENT_BLACK_422 = 422
     const val FAIRY2_CERTIFICATE_BROKEN_423 = 423
     const val FAIRY2_MESSAGE_424 = 424
     const val COMPONENT_425 = 425

@@ -1,8 +1,8 @@
 package content.global.skill.construction.decoration.study
 
 import content.data.GameAttributes
-import content.global.skill.magic.items.TeleportTablet
 import content.global.skill.construction.Decoration
+import content.global.skill.magic.items.TeleportTablet
 import core.api.*
 import core.cache.def.impl.SceneryDefinition
 import core.game.interaction.InterfaceListener

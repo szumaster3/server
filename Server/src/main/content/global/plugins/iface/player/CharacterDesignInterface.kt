@@ -1,6 +1,7 @@
 package content.global.plugins.iface.player
 
 import content.region.island.tutorial.plugin.CharacterDesign
+import core.api.openOverlay
 import core.game.interaction.InterfaceListener
 import shared.consts.Components
 
@@ -9,6 +10,10 @@ import shared.consts.Components
  */
 class CharacterDesignInterface : InterfaceListener {
     override fun defineInterfaceListeners() {
+        onOpen(Components.APPEARANCE_771) { player, _ ->
+            if(player.interfaceManager.isResizable) openOverlay(player, 333)
+            return@onOpen true
+        }
         on(Components.APPEARANCE_771) { player, _, _, buttonID, _, _ ->
             CharacterDesign.handleButtons(player, buttonID)
             return@on true

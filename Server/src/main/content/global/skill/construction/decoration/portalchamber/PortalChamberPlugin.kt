@@ -4,8 +4,8 @@ import content.global.skill.construction.Decoration
 import content.global.skill.runecrafting.Rune
 import core.api.*
 import core.cache.def.impl.SceneryDefinition
-import core.game.dialogue.Dialogue
-import core.game.dialogue.DialogueInterpreter
+import core.game.dialogue.DialogueFile
+import core.game.dialogue.Topic
 import core.game.interaction.OptionHandler
 import core.game.node.Node
 import core.game.node.entity.player.Player
@@ -13,7 +13,6 @@ import core.game.node.entity.player.link.TeleportManager
 import core.game.node.item.Item
 import core.game.world.map.Location
 import core.game.world.update.flag.context.Animation
-import core.plugin.ClassScanner
 import core.plugin.Initializable
 import core.plugin.Plugin
 import core.tools.DARK_RED
@@ -95,7 +94,6 @@ class PortalChamberPlugin : OptionHandler() {
         for (i in Objects.VARROCK_PORTAL_13615..Objects.KHARYRLL_PORTAL_13635) {
             SceneryDefinition.forId(i).handlers["option:enter"] = this
         }
-        ClassScanner.definePlugin(DirectPortalDialogue())
         return this
     }
 
@@ -106,7 +104,7 @@ class PortalChamberPlugin : OptionHandler() {
                 if (!player.houseManager.isBuildingMode) {
                     sendMessage(player,"You can currently only do this in building mode.")
                 } else {
-                    openDialogue(player,"con:directportal")
+                    openDialogue(player,PortalChamberDialogue())
                 }
                 return true
             }
@@ -123,32 +121,54 @@ class PortalChamberPlugin : OptionHandler() {
         }
     }
 
-    /**
-     * The dialogue shown when redirecting a portal.
-     */
-    private class DirectPortalDialogue(player: Player? = null) : Dialogue(player) {
-        override fun open(vararg args: Any?): Boolean {
-            sendDialogue("To direct a portal you need enough runes for$DARK_RED 100</col> castings of that", "teleport spell.", "(Combination runes and staffs cannot be used.)")
-            return true
-        }
-
-        override fun handle(interfaceId: Int, buttonId: Int): Boolean {
+    class PortalChamberDialogue : DialogueFile() {
+        override fun handle(componentID: Int, buttonID: Int) {
             when (stage) {
-                0 -> {
-                    setTitle(player, 3)
-                    sendOptions(player, "Redirect which portal?", "1 Portal", "2 Portal", "3 Portal.")
-                    stage = 1
-                }
+                0 -> sendDialogueLines(player!!,"To direct a portal you need enough runes for$DARK_RED 100</col> castings of that", "teleport spell.", "(Combination runes and staffs cannot be used.)").also { stage++ }
                 1 -> {
-                    end()
-                    setAttribute(player, "con:dp-id", buttonId)
-                    openDialogue(player, 394857)
+                    val room = player!!.houseManager.getRoom(player!!.location)
+                    val portalNames = (1..3).map { id ->
+                        val hotspot = room.hotspots.firstOrNull { it.hotspot.name.equals("PORTAL$id", ignoreCase = true) }
+                        hotspot?.let { h ->
+                            if (h.decorationIndex != -1) h.hotspot.decorations[h.decorationIndex].name else "Empty Portal"
+                        } ?: "Nowhere"
+                    }
+                    setTitle(player!!, 3)
+                    showTopics(
+                        Topic("1: ${portalNames[0]}", 2),
+                        Topic("2: ${portalNames[1]}", 2),
+                        Topic("3: ${portalNames[2]}", 2),
+                        title = "Redirect which portal?"
+                    )
+                    setAttribute(player!!, "con:dp-id", buttonID)
                 }
+                2 -> showTopics(
+                    Topic("Varrock", 4, true),
+                    Topic("Lumbridge", 5, true),
+                    Topic("Falador", 6, true),
+                    Topic("More...", 3, true)
+                )
+                3 -> showTopics(
+                    Topic("Camelot", 7, true),
+                    Topic("Ardougne", 8, true),
+                    Topic("Yanille", 9, true),
+                    Topic("Kharyrll", 10, true),
+                    Topic("Back...", 2, true)
+                )
+                4 -> directPortal("varrock")
+                5 -> directPortal("lumbridge")
+                6 -> directPortal("falador")
+                7 -> directPortal("camelot")
+                8 -> directPortal("ardougne")
+                9 -> directPortal("yanille")
+                10 -> directPortal("kharyrll")
             }
-            return true
         }
 
-        override fun newInstance(player: Player) = DirectPortalDialogue(player)
-        override fun getIds() = intArrayOf(DialogueInterpreter.getDialogueKey("con:directportal"))
+        private fun directPortal(destination: String) {
+            end()
+            direct(player!!, destination.uppercase())
+        }
     }
+
 }

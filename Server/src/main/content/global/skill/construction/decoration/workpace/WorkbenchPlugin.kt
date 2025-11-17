@@ -1,11 +1,11 @@
 package content.global.skill.construction.decoration.workpace
 
-import core.api.*
 import content.data.GameAttributes
 import content.global.skill.construction.BuildHotspot
 import content.global.skill.construction.BuildingUtils.buildDecoration
 import content.global.skill.construction.Decoration
 import content.global.skill.construction.Hotspot
+import core.api.*
 import core.game.component.Component
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
