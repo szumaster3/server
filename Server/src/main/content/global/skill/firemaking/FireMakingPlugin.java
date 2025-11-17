@@ -132,7 +132,8 @@ public final class FireMakingPlugin extends SkillPulse<Item> {
         if (!groundItem.isActive()) {
             return;
         }
-        final Scenery object = RegionManager.getObject(player.getLocation());
+        final Scenery o = new Scenery(83, player.getLocation());
+        final Scenery object = RegionManager.getObject(o.getLocation());
         final Scenery scenery = new Scenery(fire.getFireId(), player.getLocation());
         SceneryBuilder.add(scenery, fire.getLife(), () -> {
             GroundItemManager.create(getAsh(player, fire, scenery));
