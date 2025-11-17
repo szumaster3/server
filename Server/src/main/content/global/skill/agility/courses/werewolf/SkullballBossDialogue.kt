@@ -39,10 +39,10 @@ class SkullballBossDialogue(player: Player? = null) : Dialogue(player) {
             6 -> when (buttonId) {
                 1 -> playerl(FaceAnim.HALF_ASKING, "What are the instructions for using the skullball course?").also { stage = 1 }
                 2 -> playerl(FaceAnim.HALF_GUILTY, "I seem to have lost my ball - can I have another one?").also { stage++ }
-                3 -> playerl(FaceAnim.HALF_GUILTY, "I give up, I can't do it - take my ball away.").also { stage = 7 }
+                3 -> playerl(FaceAnim.HALF_GUILTY, "I give up, I can't do it - take my ball away.").also { stage = 8 }
             }
-            6 -> npcl(FaceAnim.CHILD_NORMAL, "No problem, here's another one. You'll have to start from the beginning again, but the timer will be restarted too.").also { stage = END_DIALOGUE }
-            7 -> npcl(FaceAnim.CHILD_NORMAL, "Oh dear, such a defeatist.").also { stage = END_DIALOGUE }
+            7 -> npcl(FaceAnim.CHILD_NORMAL, "No problem, here's another one. You'll have to start from the beginning again, but the timer will be restarted too.").also { stage = END_DIALOGUE }
+            8 -> npcl(FaceAnim.CHILD_NORMAL, "Oh dear, such a defeatist.").also { stage = END_DIALOGUE }
         }
         return true
     }
