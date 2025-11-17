@@ -52,8 +52,9 @@ class ChairPlugin : OptionHandler() {
                 super.stop()
                 clearLogoutListener(player, "someone else house")
                 player.locks.unlockInteraction()
+                player.moveStep()
+                player.animate(Animation.create(sitAnimID+2))
                 replaceScenery(Scenery(83,node.location,node.rotation,Direction.SOUTH),node.id,-1)
-                forceMove(player,player.location,player.location.transform(node.direction.opposite, 1),0,30,null,sitAnimID+2)
             }
         })
 
