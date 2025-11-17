@@ -23,16 +23,8 @@ import core.tools.RandomFunction
 import shared.consts.Sounds
 
 @Initializable
-class SpellbookSwapSpell :
-    MagicSpell(
-        SpellBook.LUNAR,
-        96,
-        130.0,
-        null,
-        null,
-        null,
-        arrayOf(Item(Runes.LAW_RUNE.id, 1), Item(Runes.COSMIC_RUNE.id, 2), Item(Runes.ASTRAL_RUNE.id, 3)),
-    ) {
+class SpellbookSwapSpell : MagicSpell(SpellBook.LUNAR, 96, 130.0, null, null, null, arrayOf(Item(Runes.LAW_RUNE.id, 1), Item(Runes.COSMIC_RUNE.id, 2), Item(Runes.ASTRAL_RUNE.id, 3))) {
+
     private val ANIMATION = Animation(6299)
     private val Graphics = Graphics(shared.consts.Graphics.SPELLBOOK_SWAP_GFX_1062)
 
@@ -43,10 +35,7 @@ class SpellbookSwapSpell :
         return this
     }
 
-    override fun cast(
-        entity: Entity,
-        target: Node,
-    ): Boolean {
+    override fun cast(entity: Entity, target: Node): Boolean {
         val player = entity as Player
         if (!super.meetsRequirements(player, true, true)) {
             return false
@@ -78,18 +67,13 @@ class SpellbookSwapSpell :
     }
 }
 
-class SpellbookSwapDialogue(
-    player: Player? = null,
-) : Dialogue(player) {
+class SpellbookSwapDialogue(player: Player? = null) : Dialogue(player) {
     override fun open(vararg args: Any?): Boolean {
         sendOptions(player, "Select a Spellbook:", "Ancient", "Modern")
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> {
                 var type = 0

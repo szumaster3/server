@@ -16,11 +16,7 @@ class HumidifySpell :
     Commands {
     override fun defineListeners() {
         onCast(LunarSpells.HUMIDIFY, NONE) { player, _ ->
-            requires(
-                player,
-                68,
-                arrayOf(Item(Items.ASTRAL_RUNE_9075, 1), Item(Items.WATER_RUNE_555, 3), Item(Items.FIRE_RUNE_554, 1)),
-            )
+            requires(player, 68, arrayOf(Item(Items.ASTRAL_RUNE_9075, 1), Item(Items.WATER_RUNE_555, 3), Item(Items.FIRE_RUNE_554, 1)))
             val playerEmpties = ArrayDeque<Item>()
 
             for (item in player.inventory.toArray()) {
@@ -36,13 +32,7 @@ class HumidifySpell :
 
             removeRunes(player)
             delayEntity(player, Animation(Animations.LUNAR_HUMIDIFY_6294).duration)
-            visualizeSpell(
-                player,
-                Animations.LUNAR_HUMIDIFY_6294,
-                Graphics.HUMIDIFY_GFX_1061,
-                20,
-                Sounds.LUNAR_HUMIDIFY_3614,
-            )
+            visualizeSpell(player, Animations.LUNAR_HUMIDIFY_6294, Graphics.HUMIDIFY_GFX_1061, 20, Sounds.LUNAR_HUMIDIFY_3614)
             for (item in playerEmpties) {
                 val filled = HumidifyItems.forId(item.id)
                 removeItem(player, item.id) && addItem(player, filled)

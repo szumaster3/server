@@ -12,13 +12,10 @@ import shared.consts.Items
 import shared.consts.Sounds
 
 class DreamSpell : SpellListener("lunar") {
+
     override fun defineListeners() {
         onCast(LunarSpells.DREAM, NONE) { player, _ ->
-            requires(
-                player,
-                79,
-                arrayOf(Item(Items.ASTRAL_RUNE_9075, 2), Item(Items.BODY_RUNE_559, 5), Item(Items.COSMIC_RUNE_564, 1)),
-            )
+            requires(player, 79, arrayOf(Item(Items.ASTRAL_RUNE_9075, 2), Item(Items.BODY_RUNE_559, 5), Item(Items.COSMIC_RUNE_564, 1)))
             if (player.skills.lifepoints >= getStatLevel(player, Skills.HITPOINTS)) {
                 sendMessage(player, "You have no need to cast this spell since your hitpoints are already full.")
                 return@onCast

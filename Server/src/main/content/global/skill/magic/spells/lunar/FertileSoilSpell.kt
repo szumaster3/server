@@ -15,6 +15,7 @@ import shared.consts.Items
 import shared.consts.Sounds
 
 class FertileSoilSpell : SpellListener("lunar") {
+
     override fun defineListeners() {
         onCast(LunarSpells.FERTILE_SOIL, OBJECT) { player, node ->
             node?.let {
@@ -38,15 +39,8 @@ class FertileSoilSpell : SpellListener("lunar") {
                     sendMessage(player, "This patch has already been composted.")
                     return@onCast
                 }
-                requires(
-                    player,
-                    83,
-                    arrayOf(
-                        Item(Items.ASTRAL_RUNE_9075, 3),
-                        Item(Items.NATURE_RUNE_561, 2),
-                        Item(Items.EARTH_RUNE_557, 15),
-                    ),
-                )
+
+                requires(player, 83, arrayOf(Item(Items.ASTRAL_RUNE_9075, 3), Item(Items.NATURE_RUNE_561, 2), Item(Items.EARTH_RUNE_557, 15)),)
                 removeRunes(player, true)
                 animate(player, Animations.FERTILE_SPELL_4413)
                 sendGraphics(724, node.location)

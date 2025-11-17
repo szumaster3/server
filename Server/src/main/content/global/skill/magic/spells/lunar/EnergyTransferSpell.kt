@@ -34,23 +34,9 @@ class EnergyTransferSpell : SpellListener("lunar") {
                     sendMessage(player, "You need more hitpoints to cast this spell.")
                     return@onCast
                 }
-                requires(
-                    player,
-                    91,
-                    arrayOf(
-                        Item(Items.ASTRAL_RUNE_9075, 3),
-                        Item(Items.LAW_RUNE_563, 2),
-                        Item(Items.NATURE_RUNE_561, 1),
-                    ),
-                )
+                requires(player, 91, arrayOf(Item(Items.ASTRAL_RUNE_9075, 3), Item(Items.LAW_RUNE_563, 2), Item(Items.NATURE_RUNE_561, 1)),)
                 player.face(p)
-                visualizeSpell(
-                    player,
-                    Animations.LUNAR_CURE_ME_4411,
-                    738,
-                    90,
-                    Sounds.LUNAR_ENERGY_TRANSFER_2885,
-                )
+                visualizeSpell(player, Animations.LUNAR_CURE_ME_4411, 738, 90, Sounds.LUNAR_ENERGY_TRANSFER_2885)
                 visualize(p, -1, 738)
                 val hp = floor(player.skills.lifepoints * 0.10)
                 var r = hp

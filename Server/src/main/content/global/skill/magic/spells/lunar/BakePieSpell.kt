@@ -3,6 +3,7 @@ package content.global.skill.magic.spells.lunar
 import content.global.skill.cooking.CookableItems
 import content.global.skill.magic.SpellListener
 import content.global.skill.magic.spells.LunarSpells
+import core.api.rewardXP
 import core.api.sendMessage
 import core.game.node.entity.skill.Skills
 import core.game.node.item.Item
@@ -13,13 +14,10 @@ import shared.consts.Items
 import shared.consts.Sounds
 
 class BakePieSpell : SpellListener("lunar") {
+
     override fun defineListeners() {
         onCast(LunarSpells.BAKE_PIE, NONE) { player, _ ->
-            requires(
-                player,
-                65,
-                arrayOf(Item(Items.ASTRAL_RUNE_9075), Item(Items.FIRE_RUNE_554, 5), Item(Items.WATER_RUNE_555, 4)),
-            )
+            requires(player, 65, arrayOf(Item(Items.ASTRAL_RUNE_9075), Item(Items.FIRE_RUNE_554, 5), Item(Items.WATER_RUNE_555, 4)))
             val playerPies = ArrayList<Item>()
 
             for (item in player.inventory.toArray()) {
@@ -40,16 +38,14 @@ class BakePieSpell : SpellListener("lunar") {
 
                     override fun pulse(): Boolean {
                         if (playerPies.isEmpty()) return true
-                        if (counter ==
-                            0
-                        ) {
+                        if (counter == 0) {
                             delay = Animation(Animations.FERTILE_SPELL_4413).definition.getDurationTicks() + 1
                         }
                         val item = playerPies[0]
                         val pie = CookableItems.forId(item.id)
                         visualizeSpell(player, Animations.FERTILE_SPELL_4413, 746, 75, Sounds.LUNAR_BAKE_PIE_2879)
                         addXP(player, 60.0)
-                        player.skills.addExperience(Skills.COOKING, pie!!.experience)
+                        rewardXP(player, Skills.COOKING, pie!!.experience)
                         setDelay(player, false)
                         player.inventory.remove(item)
                         player.inventory.add(Item(pie.cooked))

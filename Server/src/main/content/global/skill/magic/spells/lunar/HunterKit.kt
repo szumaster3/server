@@ -9,31 +9,23 @@ import core.game.interaction.InteractionListener
 import shared.consts.Items
 
 class HunterKit : InteractionListener {
-    private val HunterKitItems =
-        intArrayOf(
-            Items.NOOSE_WAND_10150,
-            Items.BUTTERFLY_NET_10010,
-            Items.BIRD_SNARE_10006,
-            Items.RABBIT_SNARE_10031,
-            Items.TEASING_STICK_10029,
-            Items.UNLIT_TORCH_596,
-            Items.BOX_TRAP_10008,
-        )
-
     override fun defineListeners() {
         on(Items.HUNTER_KIT_11159, IntType.ITEM, "open") { player, _ ->
             if (freeSlots(player) < 6) {
-                sendMessage(
-                    player,
-                    "You need at least six free inventory space to do this.",
-                ).also { return@on false }
+                sendMessage(player, "You need at least six free inventory space to do this.")
+                return@on false
             }
+
             if (removeItem(player, Items.HUNTER_KIT_11159)) {
-                for (item in HunterKitItems) {
-                    addItemOrDrop(player, item)
+                for (item in HUNTER_KIT_IDS) {
+                    addItemOrDrop(player, item, 1)
                 }
             }
             return@on true
         }
+    }
+
+    companion object {
+        private val HUNTER_KIT_IDS = intArrayOf(Items.NOOSE_WAND_10150, Items.BUTTERFLY_NET_10010, Items.BIRD_SNARE_10006, Items.RABBIT_SNARE_10031, Items.TEASING_STICK_10029, Items.UNLIT_TORCH_596, Items.BOX_TRAP_10008)
     }
 }

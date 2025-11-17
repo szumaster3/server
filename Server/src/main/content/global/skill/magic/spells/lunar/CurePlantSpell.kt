@@ -18,7 +18,7 @@ class CurePlantSpell : SpellListener("lunar") {
                 sendMessage(player, "Bins don't often get diseased.")
                 return@onCast
             }
-            val fPatch = FarmingPatch.forObject(node!!.asScenery())
+            val fPatch = FarmingPatch.forObject(node.asScenery())
             if (fPatch == null) {
                 sendMessage(player, "Umm... this spell won't cure that!")
                 return@onCast
@@ -37,10 +37,7 @@ class CurePlantSpell : SpellListener("lunar") {
                 return@onCast
             }
             if (patch.isDead) {
-                sendMessage(
-                    player,
-                    "It says 'Cure' not 'Resurrect'. Although death may arise from disease, it is not in itself a disease and hence cannot be cured. So there.",
-                )
+                sendMessage(player, "It says 'Cure' not 'Resurrect'. Although death may arise from disease, it is not in itself a disease and hence cannot be cured. So there.")
                 return@onCast
             }
             if (!patch.isDiseased) {

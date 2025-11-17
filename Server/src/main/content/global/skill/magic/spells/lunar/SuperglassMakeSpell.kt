@@ -21,9 +21,7 @@ class SuperglassMakeSpell : SpellListener("lunar") {
             requires(player, 77, arrayOf(Item(Items.ASTRAL_RUNE_9075, 2), Item(Items.FIRE_RUNE_554, 6), Item(Items.AIR_RUNE_556, 10)))
 
             val inv = player.inventory.toArray()
-            var playerWeed = amountInInventory(player, Items.SODA_ASH_1781) +
-                    amountInInventory(player, Items.SEAWEED_401) +
-                    amountInInventory(player, Items.SWAMP_WEED_10978)
+            var playerWeed = amountInInventory(player, Items.SODA_ASH_1781) + amountInInventory(player, Items.SEAWEED_401) + amountInInventory(player, Items.SWAMP_WEED_10978)
             var playerSand = 0
             for (sandId in SAND_SOURCES) {
                 playerSand += amountInInventory(player, sandId)

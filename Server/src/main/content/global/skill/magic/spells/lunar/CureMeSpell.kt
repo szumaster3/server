@@ -19,11 +19,7 @@ class CureMeSpell :
                 sendMessage(player, "You are not poisoned.")
                 return@onCast
             }
-            requires(
-                player,
-                71,
-                arrayOf(Item(Items.ASTRAL_RUNE_9075, 2), Item(Items.LAW_RUNE_563, 1), Item(Items.COSMIC_RUNE_564, 2)),
-            )
+            requires(player, 71, arrayOf(Item(Items.ASTRAL_RUNE_9075, 2), Item(Items.LAW_RUNE_563, 1), Item(Items.COSMIC_RUNE_564, 2)))
             removeRunes(player, true)
             visualizeSpell(player, Animations.LUNAR_CURE_ME_4411, 742, 90, Sounds.LUNAR_CURE_2884)
             curePoison(player)

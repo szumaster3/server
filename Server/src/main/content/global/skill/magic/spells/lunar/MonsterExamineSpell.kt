@@ -14,23 +14,15 @@ class MonsterExamineSpell : SpellListener("lunar") {
     override fun defineListeners() {
         onCast(LunarSpells.MONSTER_EXAMINE, NPC) { player, node ->
             val npc = node!!.asNpc()
-            requires(
-                player,
-                66,
-                arrayOf(Item(Items.ASTRAL_RUNE_9075), Item(Items.MIND_RUNE_558), Item(Items.COSMIC_RUNE_564)),
-            )
+            requires(player, 66, arrayOf(Item(Items.ASTRAL_RUNE_9075), Item(Items.MIND_RUNE_558), Item(Items.COSMIC_RUNE_564)))
+
             if (!npc.location.withinDistance(player.location)) {
                 sendMessage(player, "You must get closer to use this spell.")
                 return@onCast
             }
 
             faceLocation(player, npc.location)
-            visualizeSpell(
-                player,
-                Animations.HUMAN_SPY_STAT_6293,
-                Graphics.STAT_SPY_GFX_1060,
-                soundID = Sounds.LUNAR_STAT_SPY_3620,
-            )
+            visualizeSpell(player, Animations.HUMAN_SPY_STAT_6293, Graphics.STAT_SPY_GFX_1060, soundID = Sounds.LUNAR_STAT_SPY_3620)
             removeRunes(player)
             addXP(player, 66.0)
             setDelay(player, false)

@@ -32,11 +32,7 @@ class CureOtherSpell : SpellListener("lunar") {
                     sendMessage(player, "This player is not poisoned.")
                     return@onCast
                 }
-                requires(
-                    player,
-                    68,
-                    arrayOf(Item(Items.ASTRAL_RUNE_9075, 1), Item(Items.LAW_RUNE_563), Item(Items.EARTH_RUNE_557, 10)),
-                )
+                requires(player, 68, arrayOf(Item(Items.ASTRAL_RUNE_9075, 1), Item(Items.LAW_RUNE_563), Item(Items.EARTH_RUNE_557, 10)))
                 player.face(p)
                 visualizeSpell(player, Animations.LUNAR_CURE_ME_4411, 736, 130, Sounds.LUNAR_CURE_OTHER_2886)
                 visualizeSpell(p, -1, 736, 130, Sounds.LUNAR_CURE_OTHER_INDIVIDUAL_2889)
