@@ -16,6 +16,7 @@ import core.game.world.update.flag.context.Animation
 import core.plugin.Initializable
 import core.plugin.Plugin
 import core.tools.DARK_RED
+import core.tools.END_DIALOGUE
 import shared.consts.Animations
 import shared.consts.Quests
 import shared.consts.Sounds
@@ -138,6 +139,7 @@ class PortalChamberPlugin : OptionHandler() {
                         Topic("1: ${portalNames[0]}", 2),
                         Topic("2: ${portalNames[1]}", 2),
                         Topic("3: ${portalNames[2]}", 2),
+                        Topic("Cancel.", END_DIALOGUE),
                         title = "Redirect which portal?"
                     )
                     setAttribute(player!!, "con:dp-id", buttonID)
@@ -146,7 +148,8 @@ class PortalChamberPlugin : OptionHandler() {
                     Topic("Varrock", 4, true),
                     Topic("Lumbridge", 5, true),
                     Topic("Falador", 6, true),
-                    Topic("More...", 3, true)
+                    Topic("More...", 3, true),
+                    Topic("Back...", 1, true)
                 )
                 3 -> showTopics(
                     Topic("Camelot", 7, true),
