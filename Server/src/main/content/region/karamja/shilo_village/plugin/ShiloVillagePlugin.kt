@@ -1,12 +1,10 @@
 package content.region.karamja.shilo_village.plugin
 
-import content.region.karamja.shilo_village.dialogue.ShiloTravelDialogue
 import core.api.*
 import core.game.global.action.DoorActionHandler
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.interaction.QueueStrength
-import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.game.node.item.Item
 import core.game.world.map.Location
@@ -69,46 +67,43 @@ class ShiloVillagePlugin : InteractionListener {
         }
 
         /*
-         * Handles interaction with NPCs & Scenery related
-         * to travel between Shilo Village & Brimhaven.
+         * Handles travel between Shilo Village & Brimhaven.
          */
 
-        on(Scenery.TRAVEL_CART_2230, IntType.SCENERY, "board") { player, _ ->
-            handleTravelDialogue(player, NPC(NPCs.HAJEDY_510))
-            return@on true
-        }
-
-        on(NPCs.HAJEDY_510, IntType.NPC, "talk-to") { player, node ->
-            handleTravelDialogue(player, node.asNpc())
-            return@on true
-        }
-
         on(Scenery.TRAVEL_CART_2230, IntType.SCENERY, "pay-fare") { player, _ ->
+            if (!hasRequirement(player, Quests.SHILO_VILLAGE)) return@on false
             quickTravel(player, NPCs.HAJEDY_510)
+            return@on true
+        }
+
+        on(Scenery.TRAVEL_CART_2230, IntType.SCENERY, "board") { player, _ ->
+            val npc = findNPC(NPCs.HAJEDY_510)
+            openDialogue(player, NPCs.HAJEDY_510)
+            face(player, npc!!, 3)
             return@on true
         }
 
         on(NPCs.HAJEDY_510, IntType.NPC, "pay-fare") { player, _ ->
+            if (!hasRequirement(player, Quests.SHILO_VILLAGE)) return@on false
             quickTravel(player, NPCs.HAJEDY_510)
             return@on true
         }
 
-        on(Scenery.TRAVEL_CART_2265, IntType.SCENERY, "board") { player, _ ->
-            handleTravelDialogue(player, NPC(NPCs.VIGROY_511))
-            return@on true
-        }
-
         on(Scenery.TRAVEL_CART_2265, IntType.SCENERY, "pay-fare") { player, _ ->
+            if (!hasRequirement(player, Quests.SHILO_VILLAGE)) return@on false
             quickTravel(player, NPCs.VIGROY_511)
             return@on true
         }
 
-        on(NPCs.VIGROY_511, IntType.NPC, "talk-to") { player, node ->
-            handleTravelDialogue(player, node.asNpc())
+        on(Scenery.TRAVEL_CART_2265, IntType.SCENERY, "board") { player, _ ->
+            val npc = findNPC(NPCs.VIGROY_511)
+            openDialogue(player, NPCs.VIGROY_511)
+            face(player, npc!!, 3)
             return@on true
         }
 
         on(NPCs.VIGROY_511, IntType.NPC, "pay-fare") { player, npc ->
+            if (!hasRequirement(player, Quests.SHILO_VILLAGE)) return@on false
             quickTravel(player, npc.id)
             return@on true
         }
@@ -151,7 +146,7 @@ class ShiloVillagePlugin : InteractionListener {
          */
         @JvmStatic
         fun quickTravel(player: Player, npc: Int) {
-            if (!hasRequirement(player, Quests.SHILO_VILLAGE, true)) return
+            if (!hasRequirement(player, Quests.SHILO_VILLAGE)) return
             val isShilo = npc == NPCs.HAJEDY_510
             val npcName = getNPCName(npc)
 
@@ -171,25 +166,10 @@ class ShiloVillagePlugin : InteractionListener {
                     teleport(player, destination)
                     closeOverlay(player)
                     openOverlay(player, Components.FADE_FROM_BLACK_170)
-                    sendDialogueLines(
-                        player,
-                        "You feel tired from the journey, but at least you didn't have to walk",
-                        "all that distance."
-                    )
+                    sendDialogueLines(player, "You feel tired from the journey, but at least you didn't have to walk", "all that distance.")
                     return@queueScript stopExecuting(player)
                 }
             }
-        }
-
-        /**
-         * Handles the cart travel dialogue.
-         *
-         * @param player The player interacting with the NPC.
-         * @param npc The NPC offering the cart ride. If null, the dialogue will not proceed.
-         */
-        private fun handleTravelDialogue(player: Player, npc: NPC?) {
-            if (!hasRequirement(player, Quests.SHILO_VILLAGE) || npc == null) return
-            openDialogue(player, ShiloTravelDialogue())
         }
     }
 }

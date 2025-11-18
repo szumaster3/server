@@ -43,15 +43,15 @@ class ImmerseWorld : StartupListener {
                     Thread.currentThread().name = "BotSpawner"
                     immerseSeersAndCatherby()
                     immerseLumbridgeDraynor()
-                    immerseBarbarianVillage()
-                    immerseGnomeStronghold()
+                    // immerseBarbarianVillage()
+                    // immerseGnomeStronghold()
                     immerseVarrock()
                     immerseWilderness()
                     immerseFishingGuild()
                     immerseAdventurer()
                     immerseFalador()
                     immerseArdougne()
-                    immerseGE()
+                    // immerseGE()
                 }
             }
         }
@@ -158,6 +158,7 @@ class ImmerseWorld : StartupListener {
                     Location.create(3257, 3267, 0),
                 ),
             )
+            /*
             GeneralBotCreator(
                 LumbridgeGoblinKiller(),
                 assembler.produce(
@@ -182,6 +183,7 @@ class ImmerseWorld : StartupListener {
                     Location.create(3247, 3246, 0),
                 ),
             )
+            */
             GeneralBotCreator(
                 FarmerThiever(),
                 skillingBotAssembler.produce(SkillingBotAssembler.Wealth.POOR, Location.create(3094, 3243, 0)),
@@ -259,7 +261,7 @@ class ImmerseWorld : StartupListener {
                 NonBankingMiner(),
                 skillingBotAssembler.produce(SkillingBotAssembler.Wealth.POOR, Location.create(3182, 3374, 0)),
             )
-
+            /*
             GeneralBotCreator(
                 MinotaurKiller(),
                 Location.create(1900, 5208, 0),
@@ -269,6 +271,7 @@ class ImmerseWorld : StartupListener {
                 MinotaurKiller(),
                 Location.create(1901, 5194, 0),
             )
+            */
         }
 
         fun immerseWilderness() {
