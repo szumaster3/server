@@ -2,6 +2,7 @@ package content.global.travel.gnome_glider
 
 import core.api.isQuestComplete
 import core.api.openInterface
+import core.api.sendMessage
 import core.game.dialogue.DialogueFile
 import core.game.dialogue.FaceAnim
 import shared.consts.Components
@@ -16,6 +17,7 @@ class GnomeDialogue : DialogueFile() {
             2 -> if (!isQuestComplete(player!!, Quests.THE_GRAND_TREE)) {
                 end()
                 npcl(FaceAnim.OLD_ANGRY3, "I only fly friends of the gnomes!")
+                sendMessage(player!!, "You must complete The Grand Tree Quest to access the gnome glider.")
             } else {
                 npc(FaceAnim.OLD_DEFAULT, "If you wish.")
                 stage++
