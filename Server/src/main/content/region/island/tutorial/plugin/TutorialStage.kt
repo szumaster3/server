@@ -167,8 +167,8 @@ object TutorialStage {
             }
 
             6 -> {
+                setVarbit(player, FLASHING_ICON, 0)
                 hideTabs(player, login)
-                setVarbit(player, FLASHING_ICON, 4)
                 removeHintIcon(player)
                 registerHintIcon(player, Location(3100, 3095, 0), 100) // TREE
                 player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
@@ -342,6 +342,7 @@ object TutorialStage {
 
             19 -> {
                 hideTabs(player, login)
+                removeHintIcon(player)
                 player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
                     "Making dough",
                     "",
@@ -353,6 +354,7 @@ object TutorialStage {
 
             20 -> {
                 hideTabs(player, login)
+                removeHintIcon(player)
                 registerHintIcon(player, Location(3076, 3081, 0), 50) // COOKING RANGE
                 player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
                     "Cooking dough",
@@ -379,6 +381,7 @@ object TutorialStage {
 
             22 -> {
                 hideTabs(player, login)
+                removeHintIcon(player)
                 setVarbit(player, FLASHING_ICON, 0)
                 registerHintIcon(player, Location(3073, 3090, 0), 100) // DOOR (COOKING EXIT)
                 player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
