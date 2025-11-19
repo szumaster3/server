@@ -44,34 +44,36 @@ class TindelMerchantPlugin : InteractionListener {
         }
 
         fun exchangeRustyWeapon(player: Player) {
-            val inventory = player.inventory
-            val weaponType = when {
-                inventory.contains(SWORD, 1) -> SWORD
-                inventory.contains(SCIMITAR, 1) -> SCIMITAR
-                else -> {
+            val weaponToType = mapOf(
+                SWORD to RustyEquipment.EquipmentType.SWORDS,
+                SCIMITAR to RustyEquipment.EquipmentType.SCIMITARS
+            )
+
+            val weaponEntry = weaponToType.entries.firstOrNull { player.inventory.contains(it.key, 1) }
+                ?: run {
                     sendNPCDialogue(player, TINDEL, "Sorry my friend, but you don't seem to have any swords that need to be identified.", FaceAnim.HALF_GUILTY)
                     return
                 }
-            }
 
-            if (!inventory.contains(COINS, COINS_REQUIRED)) {
+            val weaponId = weaponEntry.key
+            val equipType = weaponEntry.value
+
+            if (!player.inventory.contains(COINS, COINS_REQUIRED)) {
                 sendNPCDialogue(player, TINDEL, "Sorry, you don't have enough coins.", FaceAnim.HALF_GUILTY)
                 return
             }
 
-            sendDoubleItemDialogue(player, weaponType, Items.COINS_8896, "You hand Tindel 100 coins plus the ${getItemName(weaponType).lowercase()}.")
+            sendDoubleItemDialogue(player, weaponId, Items.COINS_8896, "You hand Tindel 100 coins plus the ${getItemName(weaponId).lowercase()}.")
 
             addDialogueAction(player) { _, _ ->
-                val equipmentType = when (weaponType) {
-                    SWORD -> RustyEquipment.EquipmentType.SWORDS
-                    SCIMITAR -> RustyEquipment.EquipmentType.SCIMITARS
-                    else -> return@addDialogueAction
+                val repaired = RustyEquipment.getRepair(equipType)
+                    ?: return@addDialogueAction
+
+                if (!removeItem(player, Item(COINS, COINS_REQUIRED)) ||
+                    !removeItem(player, Item(weaponId))
+                ) {
+                    return@addDialogueAction
                 }
-
-                val repaired = RustyEquipment.getRepair(equipmentType) ?: return@addDialogueAction
-
-                removeItem(player, Item(COINS, COINS_REQUIRED))
-                removeItem(player, Item(weaponType))
 
                 if (success(player, Skills.SMITHING)) {
                     sendItemDialogue(player, repaired.id, "Tindel gives you a ${getItemName(repaired.id).lowercase()}.")
