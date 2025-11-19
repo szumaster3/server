@@ -1,5 +1,6 @@
 package content.global.plugins.iface
 
+import content.data.GameAttributes
 import core.api.*
 import core.game.component.CloseEvent
 import core.game.component.Component
@@ -67,7 +68,13 @@ class MainInterface : ComponentPlugin() {
                         }
                     }
 
-                    66, 110 -> configureWorldMap(player)
+                    66 -> {
+                        if(!getAttribute(player, GameAttributes.TUTORIAL_COMPLETE, false)){
+                            openInterface(player, 764)
+                        } else {
+                            configureWorldMap(player)
+                        }
+                    }
                     69 -> sendString(player, "When you have finished playing ${GameWorld.settings?.name}, always use the button below to logout safely.", 182, 0)
                 }
                 return true
@@ -90,24 +97,24 @@ class MainInterface : ComponentPlugin() {
         return true
     }
 
-    private fun configureWorldMap(player: Player) {
-        if (player.inCombat()) {
-            sendMessage(player, "It wouldn't be very wise opening the world map during combat.")
-            return
-        }
-        if (player.locks.isInteractionLocked() || player.locks.isMovementLocked()) {
-            sendMessage(player, "You can't do this right now.")
-            return
-        }
-        player.interfaceManager.close()
-        player.interfaceManager.openWindowsPane(Component(Components.WORLDMAP_755))
-        val posHash = (player.location.z shl 28) or (player.location.x shl 14) or player.location.y
-        player.packetDispatch.sendScriptConfigs(622, posHash, "", 0)
-        player.packetDispatch.sendScriptConfigs(674, posHash, "", 0)
-    }
-
     companion object {
-        fun openReport(player: Player) {
+        private fun configureWorldMap(player: Player) {
+            if (player.inCombat()) {
+                sendMessage(player, "It wouldn't be very wise opening the world map during combat.")
+                return
+            }
+            if (player.locks.isInteractionLocked() || player.locks.isMovementLocked()) {
+                sendMessage(player, "You can't do this right now.")
+                return
+            }
+            player.interfaceManager.close()
+            player.interfaceManager.openWindowsPane(Component(Components.WORLDMAP_755))
+            val posHash = (player.location.z shl 28) or (player.location.x shl 14) or player.location.y
+            player.packetDispatch.sendScriptConfigs(622, posHash, "", 0)
+            player.packetDispatch.sendScriptConfigs(674, posHash, "", 0)
+        }
+
+        private fun openReport(player: Player) {
             player.interfaceManager.open(Component(Components.SNAPSHOT_MAIN_553))?.closeEvent = CloseEvent { p, _ ->
                 p.packetDispatch.sendRunScript(80, "")
                 p.packetDispatch.sendRunScript(137, "")

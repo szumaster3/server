@@ -32,10 +32,7 @@ class WorldMapInterface : ComponentPlugin() {
     override fun handle(player: Player, component: Component, opcode: Int, button: Int, slot: Int, itemId: Int): Boolean {
         when (button) {
             3 -> {
-                player.interfaceManager.openWindowsPane(
-                    Component(if (player.interfaceManager.isResizable) 746 else 548),
-                    2
-                )
+                player.interfaceManager.openWindowsPane(Component(if (player.interfaceManager.isResizable) 746 else 548), 2)
                 player.packetDispatch.sendRunScript(1187, "ii", 0, 0)
                 player.updateSceneGraph(true)
                 return true
