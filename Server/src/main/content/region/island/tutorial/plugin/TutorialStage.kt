@@ -182,6 +182,7 @@ object TutorialStage {
 
             7 -> {
                 hideTabs(player, login)
+                removeHintIcon(player)
                 player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
                     "",
                     "Please wait.",
@@ -193,7 +194,6 @@ object TutorialStage {
 
             8 -> {
                 hideTabs(player, login)
-                removeHintIcon(player)
                 player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
                     "Making a fire",
                     "Well done! You managed to cut some logs from the tree! Next,",
@@ -342,7 +342,6 @@ object TutorialStage {
 
             19 -> {
                 hideTabs(player, login)
-                removeHintIcon(player)
                 player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
                     "Making dough",
                     "",
@@ -393,6 +392,7 @@ object TutorialStage {
 
             23 -> {
                 hideTabs(player, login)
+                removeHintIcon(player)
                 player.interfaceManager.openTab(Component(Components.EMOTES_464))
                 setVarbit(player, FLASHING_ICON, 13)
                 player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
@@ -511,6 +511,7 @@ object TutorialStage {
 
             32 -> {
                 hideTabs(player, login)
+                removeHintIcon(player)
                 player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
                     "Please wait.",
                     "",
@@ -521,7 +522,7 @@ object TutorialStage {
                 Pulser.submit(
                     object : Pulse(3) {
                         override fun pulse(): Boolean {
-                            setAttribute(player, GameAttributes.TUTORIAL_COMPLETE, 33)
+                            setAttribute(player, GameAttributes.TUTORIAL_STAGE, 33)
                             load(player, 33)
                             return true
                         }
@@ -577,6 +578,7 @@ object TutorialStage {
 
             36 -> {
                 hideTabs(player, login)
+                removeHintIcon(player)
                 player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
                     "Please wait.",
                     "",
@@ -702,6 +704,7 @@ object TutorialStage {
 
             46 -> {
                 hideTabs(player, login)
+                removeHintIcon(player)
                 setVarbit(player, FLASHING_ICON, 0)
                 player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
                     "This is your worn equipment.",
@@ -887,6 +890,7 @@ object TutorialStage {
 
             60 -> {
                 hideTabs(player, login)
+                removeHintIcon(player)
                 registerHintIcon(player, Repository.findNPC(NPCs.BROTHER_BRACE_954)!!)
                 player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
                     "Prayer",
@@ -913,6 +917,7 @@ object TutorialStage {
 
             62 -> {
                 hideTabs(player, login)
+                removeHintIcon(player)
                 setVarbit(player, FLASHING_ICON, 0)
                 registerHintIcon(player, Repository.findNPC(NPCs.BROTHER_BRACE_954)!!)
                 player.dialogueInterpreter.sendPlainMessage(
@@ -952,6 +957,7 @@ object TutorialStage {
 
             65 -> {
                 hideTabs(player, login)
+                removeHintIcon(player)
                 setVarbit(player, FLASHING_ICON, 0)
                 registerHintIcon(player, Repository.findNPC(NPCs.BROTHER_BRACE_954)!!)
                 player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
@@ -1005,6 +1011,7 @@ object TutorialStage {
 
             69 -> {
                 hideTabs(player, login)
+                removeHintIcon(player)
                 setVarbit(player, FLASHING_ICON, 0)
                 registerHintIcon(player, Repository.findNPC(NPCs.MAGIC_INSTRUCTOR_946)!!)
                 player.dialogueInterpreter.sendPlainMessage(
@@ -1106,7 +1113,7 @@ object TutorialStage {
     }
 
     private fun updateProgressBar(player: Player) {
-        val stage = getAttribute(player, GameAttributes.TUTORIAL_COMPLETE, 0)
+        val stage = getAttribute(player, GameAttributes.TUTORIAL_STAGE, 0)
         val percent = if (stage == 0 || stage == 39) 0 else ((stage.toDouble() / 74.0) * 100.0).toInt()
         val barPercent = if (stage == 0 || stage == 39) 0 else (((percent.toDouble() / 100.0) * 20.0).toInt() + 1)
         setVarp(player, 406, barPercent)
