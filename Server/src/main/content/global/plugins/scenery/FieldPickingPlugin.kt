@@ -1,9 +1,6 @@
 package content.global.plugins.scenery
 
-import core.api.freeSlots
-import core.api.playAudio
-import core.api.sendMessage
-import core.api.setAttribute
+import core.api.*
 import core.cache.def.impl.SceneryDefinition
 import core.game.container.impl.EquipmentContainer
 import core.game.event.ResourceProducedEvent
@@ -35,11 +32,7 @@ class FieldPickingPlugin : OptionHandler() {
         return this
     }
 
-    override fun handle(
-        player: Player,
-        node: Node,
-        option: String,
-    ): Boolean {
+    override fun handle(player: Player, node: Node, option: String): Boolean {
         if (player.getAttribute("delay:picking", -1) > ticks) {
             return true
         }
@@ -49,38 +42,34 @@ class FieldPickingPlugin : OptionHandler() {
             return true
         }
         val reward = Item(if (plant == PickingPlant.POTATO && RandomFunction.random(10) == 0) 5318 else plant.reward)
-        if (!player.inventory.hasSpaceFor(reward)) {
+        if (!hasSpaceFor(player, reward)) {
             sendMessage(player, "You don't have enough space in your inventory.")
             return true
         }
         if (freeSlots(player) == 0) {
             return true
         }
+
         player.lock(1)
         setAttribute(player, "delay:picking", ticks + (if (plant == PickingPlant.FLAX) 2 else 3))
         player.animate(ANIMATION)
         playAudio(player, Sounds.PICK_2581, 30)
         player.dispatch(ResourceProducedEvent(reward.id, reward.amount, node, -1))
-        if (plant.name.startsWith(
-                "NETTLES",
-                true,
-            ) &&
-            (
+        if (plant.name.startsWith("NETTLES", true,) && (
                     player.equipment[EquipmentContainer.SLOT_HANDS] == null ||
                             player.equipment[EquipmentContainer.SLOT_HANDS] != null &&
-                            !player.equipment[EquipmentContainer.SLOT_HANDS].name.contains(
-                                "glove",
-                                true,
-                            )
-                    )
+                            !player.equipment[EquipmentContainer.SLOT_HANDS].name.contains("glove", true,)
+                )
         ) {
-            player.packetDispatch.sendMessage("You have been stung by the nettles!")
-            player.impactHandler.manualHit(player, 2, HitsplatType.POISON)
+            sendMessage(player, "You have been stung by the nettles!")
+            impact(player, 2, HitsplatType.POISON)
             return true
         }
+
         if (plant.respawn != -1 && plant != PickingPlant.FLAX) {
             scenery.isActive = false
         }
+
         Pulser.submit(
             object : Pulse(1, player) {
                 override fun pulse(): Boolean {
@@ -98,8 +87,7 @@ class FieldPickingPlugin : OptionHandler() {
                         full = scenery.transform(Scenery.BANANA_TREE_2073)
                         SceneryBuilder.replace(scenery, full)
                     }
-                    val isBloomPlant =
-                        plant == PickingPlant.FUNGI_ON_LOG || plant == PickingPlant.BUDDING_BRANCH || plant == PickingPlant.GOLDEN_PEAR_BUSH || plant == PickingPlant.GOLDEN_PEAR_BUSH
+                    val isBloomPlant = plant == PickingPlant.FUNGI_ON_LOG || plant == PickingPlant.BUDDING_BRANCH || plant == PickingPlant.GOLDEN_PEAR_BUSH
                     if (isBloomPlant) {
                         full = scenery.transform(scenery.id - 1)
                         SceneryBuilder.replace(scenery, full)
@@ -107,7 +95,7 @@ class FieldPickingPlugin : OptionHandler() {
                     if (!isBloomPlant) {
                         SceneryBuilder.replace(
                             if (plant == PickingPlant.BANANA_TREE_4) full else scenery,
-                            scenery.transform(if (banana) plant.respawn else 0),
+                            scenery.transform(if (banana) plant.respawn else 83),
                             if (banana) 300 else plant.respawn,
                         )
                     }
@@ -134,12 +122,12 @@ class FieldPickingPlugin : OptionHandler() {
     ) {
         val charge = scenery.charge
         playAudio(player, Sounds.PICK_2581)
-        player.packetDispatch.sendMessage("You pick some flax.")
+        sendMessage(player, "You pick some flax.")
 
         if (charge > 1000 + RandomFunction.random(2, 8)) {
             scenery.isActive = false
             scenery.charge = 1000
-            SceneryBuilder.replace(scenery, scenery.transform(0), plant.respawn)
+            SceneryBuilder.replace(scenery, scenery.transform(83), plant.respawn)
             return
         }
         scenery.charge = charge + 1
