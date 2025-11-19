@@ -297,9 +297,8 @@ class KharaziDungeonPlugin : InteractionListener {
         val pickaxe = SkillingTool.getPickaxe(player)
             ?: return fail(player, "You do not have a pickaxe to use.")
 
-        if (!finishedMoving(player) ||
-            !clockReady(player, Clocks.SKILLING)
-        ) return clearScripts(player)
+        if (!finishedMoving(player))
+            return restartScript(player)
 
         if (freeSlots(player) == 0)
             return fail(player, "Your inventory is too full to hold any more rocks.")
@@ -326,7 +325,7 @@ class KharaziDungeonPlugin : InteractionListener {
         rewardXP(player, Skills.MINING, 35.0)
         resetAnimator(player)
 
-        val movementOffset = if (player.location.y > boulder.location.y) -2 else 2
+        val movementOffset = if (player.location.y > boulder.location.y) -1 else 2
         val target = boulder.location.transform(0, movementOffset, 0)
 
         forceMove(
@@ -334,7 +333,7 @@ class KharaziDungeonPlugin : InteractionListener {
             player.location,
             target,
             0,
-            120,
+            90,
             null,
             Animations.HUMAN_WALK_SHORT_819
         ) {

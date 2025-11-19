@@ -147,11 +147,7 @@ class MiningPlugin : InteractionListener {
     }
      */
 
-    private fun handleMining(
-        player: Player,
-        node: Node,
-        state: Int,
-    ): Boolean {
+    private fun handleMining(player: Player, node: Node, state: Int): Boolean {
         val resource = MiningNode.forId(node.id)
         val tool = SkillingTool.getPickaxe(player)
         val isEssence = resource!!.id in intArrayOf(
@@ -315,7 +311,7 @@ class MiningPlugin : InteractionListener {
                 25,
                 true,
             )
-        } else if (!isEssence && resource!!.respawnRate != 0) {
+        } else if (!isEssence && resource.respawnRate != 0) {
             SceneryBuilder.replace(
                 node as Scenery,
                 Scenery(
@@ -332,11 +328,7 @@ class MiningPlugin : InteractionListener {
         return true
     }
 
-    private fun calculateRewardAmount(
-        player: Player,
-        isMiningEssence: Boolean,
-        reward: Int,
-    ): Int {
+    private fun calculateRewardAmount(player: Player, isMiningEssence: Boolean, reward: Int): Int {
         var amount = 1
 
         if (!isMiningEssence && player.achievementDiaryManager.getDiary(DiaryType.VARROCK)!!.level != -1) {
@@ -373,13 +365,7 @@ class MiningPlugin : InteractionListener {
         return amount
     }
 
-    private fun calculateReward(
-        player: Player,
-        resource: MiningNode,
-        isMiningEssence: Boolean,
-        isMiningGems: Boolean,
-        reward: Int,
-    ): Int {
+    private fun calculateReward(player: Player, resource: MiningNode, isMiningEssence: Boolean, isMiningGems: Boolean, reward: Int): Int {
         var reward = reward
 
         if (resource == MiningNode.SANDSTONE || resource == MiningNode.GRANITE) {
@@ -395,11 +381,7 @@ class MiningPlugin : InteractionListener {
         return reward
     }
 
-    private fun checkReward(
-        player: Player,
-        resource: MiningNode?,
-        tool: SkillingTool,
-    ): Boolean {
+    private fun checkReward(player: Player, resource: MiningNode?, tool: SkillingTool): Boolean {
         val level = 1 + getDynLevel(player, Skills.MINING) + getFamiliarBoost(player, Skills.MINING)
         val hostRatio = Math.random() * (100.0 * resource!!.rate)
         var toolRatio = tool.ratio
@@ -410,9 +392,7 @@ class MiningPlugin : InteractionListener {
 
     fun getDelay(): Int = 1
 
-    fun anim(
-        player: Player, resource: MiningNode?, tool: SkillingTool
-    ) {
+    fun anim(player: Player, resource: MiningNode?, tool: SkillingTool) {
         val isEssence = resource?.identifier == 14.toByte()
         val isObsidian = resource?.identifier == 19.toByte()
 
@@ -429,11 +409,7 @@ class MiningPlugin : InteractionListener {
         }
     }
 
-    fun checkRequirements(
-        player: Player,
-        resource: MiningNode,
-        node: Node,
-    ): Boolean {
+    fun checkRequirements(player: Player, resource: MiningNode, node: Node): Boolean {
         if (getDynLevel(player, Skills.MINING) < resource.level) {
             sendMessage(player, "You need a mining level of ${resource.level} to mine this rock.")
             return false
