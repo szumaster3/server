@@ -409,6 +409,7 @@ object TutorialStage {
 
             24 -> {
                 hideTabs(player, login)
+                removeHintIcon(player)
                 player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
                     "Emotes",
                     "For those situations where words don't quite describe how you feel try",
@@ -420,6 +421,7 @@ object TutorialStage {
 
             25 -> {
                 hideTabs(player, login)
+                removeHintIcon(player)
                 setVarbit(player, FLASHING_ICON, 12)
                 player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
                     "Running",
@@ -432,6 +434,7 @@ object TutorialStage {
 
             26 -> {
                 hideTabs(player, login)
+                removeHintIcon(player)
                 setVarbit(player, FLASHING_ICON, 0)
                 registerHintIcon(player, Location(3086, 3126, 0), 50) // DOOR (QUEST GUIDE)
                 player.dialogueInterpreter.sendScrollMessageWithBlueTitle(
@@ -458,8 +461,8 @@ object TutorialStage {
             }
 
             28 -> {
-                hideTabs(player, login)
                 setVarbit(player, FLASHING_ICON, 0)
+                hideTabs(player, login)
                 removeHintIcon(player)
                 registerHintIcon(player, Repository.findNPC(NPCs.QUEST_GUIDE_949)!!)
                 player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
@@ -657,6 +660,7 @@ object TutorialStage {
 
             43 -> {
                 hideTabs(player, login)
+                removeHintIcon(player)
                 registerHintIcon(player, Location(3095, 9502, 0), 100)
                 player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
                     "You've finished in this area.",
@@ -744,8 +748,9 @@ object TutorialStage {
             }
 
             49 -> {
-                hideTabs(player, login)
                 setVarbit(player, FLASHING_ICON, 1)
+                hideTabs(player, login)
+                removeHintIcon(player)
                 var wepInter = player.getExtension<WeaponInterface>(WeaponInterface::class.java)
                 if (wepInter == null) {
                     wepInter = WeaponInterface(player)
@@ -762,8 +767,9 @@ object TutorialStage {
             }
 
             50 -> {
-                hideTabs(player, login)
                 setVarbit(player, FLASHING_ICON, 0)
+                hideTabs(player, login)
+                removeHintIcon(player)
                 registerHintIcon(player, Location(3111, 9519, 0), 100)
                 player.dialogueInterpreter.sendScrollMessageWithBlueTitle(
                     "This is your combat interface.",
@@ -806,6 +812,7 @@ object TutorialStage {
 
             53 -> {
                 hideTabs(player, login)
+                removeHintIcon(player)
                 registerHintIcon(player, Repository.findNPC(NPCs.COMBAT_INSTRUCTOR_944)!!)
                 player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
                     "Well done, you've made your first kill!",
@@ -1035,12 +1042,15 @@ object TutorialStage {
                 hideTabs(player, login)
                 removeHintIcon(player)
                 registerHintIcon(player, Repository.findNPC(NPCs.CHICKEN_951)!!)
+                Component.setUnclosable(
+                    player,
                 player.dialogueInterpreter.sendScrollMessageWithBlueTitle(
                     "Cast Wind Strike at a chicken.",
-                    "Now you have the runes you should see the Wind Strike icon at the",
-                    "top-left of your spellbook, second in from the left. Walk over",
+                    "Now you have the runes you should see the Wind Strike icon at",
+                    "the top-left of your spellbook, second in from the left. Walk over",
                     "to the caged chickens, click the Wind Strike icon and then",
                     "select one of the chickens to cast it on. It may take several<br>tries.",
+                    )
                 )
             }
 
@@ -1049,24 +1059,30 @@ object TutorialStage {
                 removeHintIcon(player)
                 player.interfaceManager.restoreTabs()
                 registerHintIcon(player, Repository.findNPC(NPCs.MAGIC_INSTRUCTOR_946)!!)
+                Component.setUnclosable(
+                    player,
                 player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
                     "You have almost completed the tutorial!",
                     "",
                     "All you need to do now is teleport to the mainland. Just speak",
                     "with Terrova and he'll tell you how to do that.",
                     "",
+                    )
                 )
             }
 
             72 -> {
                 removeHintIcon(player)
                 player.locks.unlockTeleport()
+                Component.setUnclosable(
+                    player,
                 player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
                     "You have almost completed the tutorial!",
                     "",
                     "Just click on the first spell, Home Teleport, in your Magic",
                     "Spellbook. This spell doesn't require any runes, but can only",
                     "be cast once every 30 minutes.",
+                )
                 )
             }
         }

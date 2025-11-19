@@ -88,7 +88,7 @@ class MagicInstructorDialogue(player: Player? = null) : Dialogue(player) {
                 4 -> npcl(FaceAnim.HAPPY, "holding a big staff with a question mark on the end. He also has a white beard and carries a rucksack full of scrolls. There are also tutors willing to teach you about the many skills you could learn.").also { stage++ }
                 5 -> player.dialogueInterpreter.sendItemMessage(Items.NULL_5079, "When you get to Lumbridge, look for this icon on your minimap. The Lumbridge Guide and the other tutors will be standing near one of these. The Lumbridge Guide should be standing slightly to the north-east of").also { stage++ }
                 6 -> sendItemDialogue(player, Items.NULL_5079, "the castle's courtyard and the others you will find, scattered around Lumbridge.").also { stage++ }
-                7 -> npcl(FaceAnim.HAPPY, "If all else fails, visit the " + GameWorld.settings!!.name + " website for a whole chestload of information on quests skills and minigames as well as a very good starter's guide.").also { stage++ }
+                7 -> npcl(FaceAnim.HAPPY, "If all else fails visit the " + GameWorld.settings!!.name + " website for a whole chestload of information on quests skills and minigames as well as a very good starter's guide.").also { stage++ }
                 8 -> {
                     end()
                     setAttribute(player, GameAttributes.TUTORIAL_STAGE, 72)
