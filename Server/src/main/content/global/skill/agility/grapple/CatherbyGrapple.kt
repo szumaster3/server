@@ -64,7 +64,7 @@ class CatherbyGrapple : InteractionListener {
                         REQUIREMENTS[Skills.STRENGTH] + " " + Skills.SKILL_NAME[Skills.STRENGTH] +
                         " to use this shortcut.",
                 )
-                return@on true
+                return@on false
             }
             lock(player, 15)
             val start = player.location

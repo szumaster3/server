@@ -98,7 +98,7 @@ class SlayerPlugin : InteractionListener {
          */
 
         on(CAVE_ENTRANCE, IntType.SCENERY, "enter") { player, _ ->
-            if (!hasRequirement(player, Quests.CABIN_FEVER)) return@on true
+            if (!hasRequirement(player, Quests.CABIN_FEVER)) return@on false
             teleport(player, Location(3748, 9373, 0), TeleportManager.TeleportType.INSTANT)
             return@on true
         }

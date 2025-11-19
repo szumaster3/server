@@ -159,7 +159,7 @@ class WildernessPlugin : InteractionListener {
         }
 
         on(Scenery.TRAPDOOR_39188, IntType.SCENERY, "open") { player, _ ->
-            if (!hasRequirement(player, Quests.DEFENDER_OF_VARROCK)) return@on true
+            if (!hasRequirement(player, Quests.DEFENDER_OF_VARROCK)) return@on false
             ClimbActionHandler.climb(
                 player,
                 ClimbActionHandler.CLIMB_DOWN,

@@ -94,7 +94,7 @@ class TeleportTabletOption : InteractionListener {
 
                     if (tab == Items.LAW_ALTAR_TP_13608 && !ItemDefinition.canEnterEntrana(player)) {
                         sendMessage(player, "You can't take weapons and armour into the law rift.")
-                        return@on false
+                        return@on true
                     }
 
                     if (teleport(player, tabloc, TeleportManager.TeleportType.TELETABS)) {

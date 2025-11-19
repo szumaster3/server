@@ -69,7 +69,7 @@ class RovingElvesObstacles : OptionHandler() {
 
         when (node.id) {
             Scenery.TREE_8742 -> {
-                if (!hasRequirement(player, Quests.MOURNINGS_END_PART_I)) return true
+                if (!hasRequirement(player, Quests.MOURNINGS_END_PART_I)) return false
                 dest = playerLoc.transform(dir, 2)
             }
 

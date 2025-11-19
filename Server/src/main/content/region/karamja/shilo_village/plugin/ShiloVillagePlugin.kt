@@ -46,7 +46,7 @@ class ShiloVillagePlugin : InteractionListener {
          */
 
         on(Scenery.BROKEN_CART_2216, IntType.SCENERY, "look-at") { player, _ ->
-            if (!hasRequirement(player, Quests.SHILO_VILLAGE)) return@on true
+            if (!hasRequirement(player, Quests.SHILO_VILLAGE)) return@on false
 
             val playerX = player.location.x
             val location = if (playerX > 2878) Location(2876, 2952) else Location(2880, 2952)

@@ -94,10 +94,7 @@ class WoodcuttingPulse(private val player: Player, private val node: Scenery) : 
             return false
         }
         if (freeSlots(player) < 1) {
-            sendDialogue(
-                player,
-                "Your inventory is too full to hold any more " + forId(resource!!.reward).name.lowercase(Locale.getDefault()) + "."
-            )
+            sendDialogue(player, "Your inventory is too full to hold any more " + forId(resource!!.reward).name.lowercase(Locale.getDefault()) + ".")
             return false
         }
         return true

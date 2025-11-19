@@ -19,14 +19,20 @@ class WarriorsGuildPlugin: InteractionListener {
     private val warriorGuildDoors = intArrayOf(Scenery.DOOR_15653, Scenery.DOOR_1530)
     override fun defineListeners() {
         on(Items.GROUND_ASHES_8865, IntType.ITEM, "dust-hands") { player, node ->
-            if (!(withinDistance(player, Location(2861, 3553, 1), 1) || withinDistance(player, Location(2861, 3547, 1), 1))) {
+            val inShotputArea = withinDistance(player, Location(2861, 3553, 1), 1) ||
+                    withinDistance(player, Location(2861, 3547, 1), 1)
+
+            if (!inShotputArea) {
                 sendMessage(player, "You may only dust your hands while in the shotput throwing areas.")
                 return@on true
             }
-            if (removeItem(player, node as Item)) {
+
+            val item = node as Item
+            if (removeItem(player, item)) {
                 sendMessage(player, "You dust your hands with the finely ground ash.")
                 setAttribute(player, "hand_dust", true)
             }
+
             return@on true
         }
 
@@ -62,19 +68,21 @@ class WarriorsGuildPlugin: InteractionListener {
         }
 
         on(warriorGuildDoors, IntType.SCENERY, "open") { player, node ->
+            val doorScenery = node.asScenery()
+
             if (node.id == Scenery.DOOR_1530 && node.location != Location(2837, 3549, 0)) {
-                handleDoor(player, node.asScenery())
+                handleDoor(player, doorScenery)
                 return@on true
             }
 
             if (canEnter(player)) {
                 player.musicPlayer.unlock(Music.WARRIORS_GUILD_634)
-                handleAutowalkDoor(player, node.asScenery())
+                handleAutowalkDoor(player, doorScenery)
                 return@on true
-            } else {
-                sendNPCDialogue(player, NPCs.GHOMMAL_4285, "You not pass. You too weedy.")
-                return@on false
             }
+
+            sendNPCDialogue(player, NPCs.GHOMMAL_4285, "You not pass. You too weedy.")
+            return@on false
         }
 
         on(NPCs.GAMFRED_4287, IntType.NPC, "claim-shield") { player, node ->

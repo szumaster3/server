@@ -92,17 +92,17 @@ class DragonForgePlugin : InteractionListener {
 
             if (!hasRequirement(player, Quests.WHILE_GUTHIX_SLEEPS, false)) {
                 sendMessage(player, "You cannot currently use items on this dragon yet.")
-                return@onUseWith true
+                return@onUseWith false
             }
 
             if (!anyInEquipment(player, *REQUIRED_SHIELD)) {
                 sendMessage(player, "You need an appropriate shield to approach the dragon safely.")
-                return@onUseWith true
+                return@onUseWith false
             }
 
             if (!anyInInventory(player, *STRANGE_KEYS)) {
                 sendMessage(player, "You have no keys to use on the dragon.")
-                return@onUseWith true
+                return@onUseWith false
             }
 
             if (removeAll(player, STRANGE_KEYS, Container.INVENTORY)) {

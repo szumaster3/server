@@ -11,11 +11,7 @@ import core.game.world.GameWorld
 /**
  * The pulse used to handle mining shooting stars.
  */
-class ShootingStarMiningPulse(
-    player: Player?,
-    node: Scenery?,
-    val star: ShootingStar,
-) : SkillPulse<Scenery?>(player, node) {
+class ShootingStarMiningPulse(player: Player?, node: Scenery?, val star: ShootingStar) : SkillPulse<Scenery?>(player, node) {
     private var ticks = 0
 
     override fun start() {
@@ -37,51 +33,40 @@ class ShootingStarMiningPulse(
 
     override fun checkRequirements(): Boolean {
         tool = SkillingTool.getPickaxe(player)
-        if (!star.starScenery.isActive || !star.isSpawned) {
-            return false
-        }
+
+        if (!star.starScenery.isActive || !star.isSpawned) return false
+
+        val playerMiningLevel = getStatLevel(player, Skills.MINING)
 
         if (!star.isDiscovered && !player.isArtificial) {
-            val bonusXp = 75 * getStatLevel(player, Skills.MINING)
+            val bonusXp = 75 * playerMiningLevel
             player.incrementAttribute("/save:shooting-star:bonus-xp", bonusXp)
-            sendNews(player.username + " is the discoverer of the crashed star near " + star.location + "!")
-            sendMessage(
-                player,
-                "You have ${
-                    player.skills.experienceMultiplier *
-                        getAttribute(
-                            player,
-                            "shooting-star:bonus-xp",
-                            0,
-                        ).toDouble()
-                } bonus xp towards mining stardust.",
-            )
+
+            sendNews("${player.username} is the discoverer of the crashed star near ${star.location}!")
+            val totalXp = player.skills.experienceMultiplier * getAttribute(player, "shooting-star:bonus-xp", 0).toDouble()
+            sendMessage(player, "You have $totalXp bonus xp towards mining stardust.")
+
             ShootingStarPlugin.submitScoreBoard(player)
             star.isDiscovered = true
-            return getStatLevel(player, Skills.MINING) >= star.miningLevel
+
+            return playerMiningLevel >= star.miningLevel
         }
 
-        if (getStatLevel(player, Skills.MINING) < star.miningLevel) {
-            sendDialogue(
-                player,
-                "You need a Mining level of at least " + star.miningLevel + " in order to mine this layer.",
-            )
+        if (playerMiningLevel < star.miningLevel) {
+            sendDialogue(player, "You need a Mining level of at least ${star.miningLevel} in order to mine this layer.")
             return false
         }
+
         if (tool == null) {
             sendMessage(player, "You do not have a pickaxe to use.")
             return false
         }
-        if (freeSlots(player) < 1 &&
-            !inInventory(
-                player,
-                ShootingStarPlugin.STAR_DUST,
-                1,
-            )
-        ) {
+
+        if (freeSlots(player) < 1 && !inInventory(player, ShootingStarPlugin.STAR_DUST, 1)) {
             sendDialogue(player, "Your inventory is too full to hold any more stardust.")
             return false
         }
+
         return true
     }
 

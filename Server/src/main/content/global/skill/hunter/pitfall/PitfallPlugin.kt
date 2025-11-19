@@ -22,18 +22,20 @@ import shared.consts.Sounds
 import java.util.concurrent.TimeUnit
 
 class PitfallPlugin : InteractionListener {
-    private val knife = Items.KNIFE_946
-    private val teasingStick = Items.TEASING_STICK_10029
-    private val logs = Items.LOGS_1511
 
-    private val pitIds =
-        listOf(
-            shared.consts.Scenery.PIT_19227,
-            shared.consts.Scenery.SPIKED_PIT_19228,
-            shared.consts.Scenery.COLLAPSED_TRAP_19231,
-            shared.consts.Scenery.COLLAPSED_TRAP_19232,
-            shared.consts.Scenery.COLLAPSED_TRAP_19233,
-        )
+    companion object {
+        private val knife = Items.KNIFE_946
+        private val teasingStick = Items.TEASING_STICK_10029
+        private val logs = Items.LOGS_1511
+        private val pitIds =
+            listOf(
+                shared.consts.Scenery.PIT_19227,
+                shared.consts.Scenery.SPIKED_PIT_19228,
+                shared.consts.Scenery.COLLAPSED_TRAP_19231,
+                shared.consts.Scenery.COLLAPSED_TRAP_19232,
+                shared.consts.Scenery.COLLAPSED_TRAP_19233,
+            )
+    }
 
     override fun defineListeners() {
         setDest(IntType.SCENERY, pitIds.toIntArray(), "trap", "jump", "dismantle") { player, node ->
@@ -155,10 +157,7 @@ class PitfallPlugin : InteractionListener {
         }
     }
 
-    private fun getBestJumpSpot(
-        src: Location,
-        pit: Scenery,
-    ): Location {
+    private fun getBestJumpSpot(src: Location, pit: Scenery): Location {
         val locs = Pitfall.pitJumpSpots(pit.location)
         var dst = pit.location
         locs?.forEach { (loc, _) ->
@@ -169,14 +168,7 @@ class PitfallPlugin : InteractionListener {
         return dst
     }
 
-    private fun handlePitfallNpcJump(
-        player: Player,
-        pitfallNpc: Entity,
-        pit: Scenery,
-        src: Location,
-        dst: Location,
-        dir: Direction,
-    ) {
+    private fun handlePitfallNpcJump(player: Player, pitfallNpc: Entity, pit: Scenery, src: Location, dst: Location, dir: Direction) {
         if (pitfallNpc.location.getDistance(src) < 3.0) {
             val lastPitLoc: Location? = pitfallNpc.getAttribute("last_pit_loc", null)
             if (lastPitLoc == pit.location) {
@@ -204,23 +196,14 @@ class PitfallPlugin : InteractionListener {
         }
     }
 
-    private fun dismantlePit(
-        player: Player,
-        pit: Scenery,
-    ) {
+    private fun dismantlePit(player: Player, pit: Scenery) {
         playAudio(player, Sounds.HUNTING_TAKEBRANCHES_2649)
         removeAttribute(player, "pitfall:timestamp:${pit.location.x}:${pit.location.y}")
         player.incrementAttribute("pitfall:count", -1)
         setPitState(player, pit.location, 0)
     }
 
-    private fun handleDismantlePit(
-        pitId: Int,
-        goodFur: Int,
-        badFur: Int,
-        name: String,
-        xp: Double,
-    ) {
+    private fun handleDismantlePit(pitId: Int, goodFur: Int, badFur: Int, name: String, xp: Double) {
         on(pitId, IntType.SCENERY, "dismantle") { player, node ->
             lootCorpse(player, node as Scenery, xp, goodFur, badFur)
             sendMessage(player, "You've caught a $name!")
@@ -231,13 +214,7 @@ class PitfallPlugin : InteractionListener {
         }
     }
 
-    private fun lootCorpse(
-        player: Player,
-        pit: Scenery,
-        xp: Double,
-        goodFur: Int,
-        badFur: Int,
-    ) {
+    private fun lootCorpse(player: Player, pit: Scenery, xp: Double, goodFur: Int, badFur: Int) {
         if (freeSlots(player) < 2) {
             sendMessage(player, "You don't have enough inventory space. You need 2 more free slots.")
             return
@@ -252,11 +229,7 @@ class PitfallPlugin : InteractionListener {
         addItemOrDrop(player, furItem)
     }
 
-    private fun setPitState(
-        player: Player,
-        loc: Location,
-        state: Int,
-    ) {
+    private fun setPitState(player: Player, loc: Location, state: Int) {
         val pit = Pitfall.pitVarps[loc] ?: return
         setVarbit(player, pit.varbitId, state)
     }

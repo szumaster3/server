@@ -21,7 +21,7 @@ class TeleportCrystalPlugin : InteractionListener {
          */
 
         on(crystalIDs, IntType.ITEM, "activate") { player, node ->
-            if (!hasRequirement(player, Quests.MOURNINGS_END_PART_I)) return@on true
+            if (!hasRequirement(player, Quests.MOURNINGS_END_PART_I)) return@on false
             if (!WildernessZone.checkTeleport(player, 20)) {
                 sendMessage(player, "The crystal is unresponsive.")
                 return@on false

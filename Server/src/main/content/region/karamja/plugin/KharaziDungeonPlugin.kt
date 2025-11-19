@@ -293,24 +293,16 @@ class KharaziDungeonPlugin : InteractionListener {
         }
     }
 
-    fun handleSmash(player: Player, boulder: Node, state: Int): Boolean {
+    private fun handleSmash(player: Player, boulder: Node, state: Int): Boolean {
         val pickaxe = SkillingTool.getPickaxe(player)
+            ?: return fail(player, "You do not have a pickaxe to use.")
 
-        if (pickaxe == null) {
-            sendMessage(player, "You do not have a pickaxe to use.")
-            return true
-        }
+        if (!finishedMoving(player) ||
+            !clockReady(player, Clocks.SKILLING)
+        ) return clearScripts(player)
 
-        if (!finishedMoving(player) || !clockReady(player, Clocks.SKILLING)) {
-            clearScripts(player)
-            return true
-        }
-
-        if (freeSlots(player) == 0) {
-            sendMessage(player, "Your inventory is too full to hold any more rocks.")
-            return true
-        }
-
+        if (freeSlots(player) == 0)
+            return fail(player, "Your inventory is too full to hold any more rocks.")
 
         if (state == 0) {
             sendMessage(player, "You swing your pickaxe at the rock.")
@@ -319,6 +311,7 @@ class KharaziDungeonPlugin : InteractionListener {
         }
 
         animate(player, pickaxe.animation)
+
         if (!checkReward(player, pickaxe)) {
             sendMessage(player, "You only succeed in scratching the rock.")
             sendMessage(player, "The pick clangs heavily against the rock face and the vibrations rattle your nerves.")
@@ -326,25 +319,36 @@ class KharaziDungeonPlugin : InteractionListener {
             return delayScript(player, 2)
         }
 
-        replaceScenery(boulder.asScenery(), 2918, 5)
+        replaceScenery(boulder.asScenery(), 2918, 6)
         sendMessage(player, "You manage to smash the rock to bits.")
         sendMessage(player, "You get some rock.")
         addItem(player, Items.ROCK_1480, 1)
         rewardXP(player, Skills.MINING, 35.0)
         resetAnimator(player)
 
-        val target = if (player.location.y > boulder.location.y)
-            boulder.location.transform(0, -1, 0)
-        else
-            boulder.location.transform(0, 1, 0)
+        val movementOffset = if (player.location.y > boulder.location.y) -2 else 2
+        val target = boulder.location.transform(0, movementOffset, 0)
 
-        forceMove(player, player.location, target, 0, 90, null, Animations.HUMAN_WALK_SHORT_819) {
+        forceMove(
+            player,
+            player.location,
+            target,
+            0,
+            120,
+            null,
+            Animations.HUMAN_WALK_SHORT_819
+        ) {
             sendMessage(player, "Another boulder drops down behind you.", 1)
             delayClock(player, Clocks.SKILLING, 3)
             clearScripts(player)
         }
 
         return delayScript(player, 2)
+    }
+
+    private fun fail(player: Player, msg: String): Boolean {
+        sendMessage(player, msg)
+        return clearScripts(player)
     }
 
     /**

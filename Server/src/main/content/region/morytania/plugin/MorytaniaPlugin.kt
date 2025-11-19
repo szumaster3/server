@@ -76,7 +76,7 @@ class MorytaniaPlugin : InteractionListener, MapArea {
 
     override fun defineListeners() {
         on(SWAMP_BOAT, IntType.SCENERY, "board", "Board ( Pay 10 )") { player, node ->
-            if (!hasRequirement(player, Quests.NATURE_SPIRIT)) return@on true
+            if (!hasRequirement(player, Quests.NATURE_SPIRIT)) return@on false
             lock(player, 13)
             openOverlay(player, Components.FADE_TO_BLACK_120)
             queueScript(player, 3, QueueStrength.SOFT) { stage ->

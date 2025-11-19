@@ -32,7 +32,7 @@ class WizardTowerListener : InteractionListener {
          */
 
         on(NPCs.SEDRIDOR_300, IntType.NPC, "teleport") { player, node ->
-            if (!hasRequirement(player, Quests.RUNE_MYSTERIES)) return@on true
+            if (!hasRequirement(player, Quests.RUNE_MYSTERIES)) return@on false
             EssenceTeleport.teleport((node as NPC), player)
             return@on true
         }

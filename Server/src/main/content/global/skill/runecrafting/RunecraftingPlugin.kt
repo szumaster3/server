@@ -86,7 +86,7 @@ class RunecraftingPlugin : OptionHandler() {
                 }
                 val a = Altar.forScenery((node.asScenery()))
                 if (a == Altar.ASTRAL) {
-                    if (!hasRequirement(player, Quests.LUNAR_DIPLOMACY)) return true
+                    if (!hasRequirement(player, Quests.LUNAR_DIPLOMACY)) return false
                 }
                 player.pulseManager.run(RunecraftPulse(player, null, a!!, false, null))
             }

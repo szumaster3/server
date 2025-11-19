@@ -22,7 +22,7 @@ class CaptainShanksDialogue(player: Player? = null) : Dialogue(player) {
         if (!hasRequirement(player, Quests.SHILO_VILLAGE, false))
         {
             npcl(FaceAnim.HALF_GUILTY, "Oh dear, this ship is in a terrible state. And I just can't get the items I need to repair it because Shilo village is overrun with zombies.")
-            return true
+            return false
         }
 
         openDialogue(player, CaptainShanksDialogueFile(), npc.id)

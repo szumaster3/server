@@ -24,7 +24,8 @@ class EnchantTabletPlugin : InteractionListener {
                 return@on true
             }
 
-            if(!removeItem(player, node.id)) return@on false
+            if(!removeItem(player, node.id)) return@on true
+
             queueScript(player, 1, strength = QueueStrength.SOFT) { stage: Int ->
                 when (stage) {
                     0 -> {

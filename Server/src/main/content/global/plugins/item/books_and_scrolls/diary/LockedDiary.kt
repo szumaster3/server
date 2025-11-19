@@ -626,28 +626,33 @@ class LockedDiary : InteractionListener {
          */
 
         on(Scenery.SANDY_S_DESK_10805, IntType.SCENERY, "search") { player, _ ->
-            if(getQuestStage(player, Quests.THE_HAND_IN_THE_SAND) == 5 || getVarbit(player, Vars.VARBIT_QUEST_THE_HAND_IN_THE_SAND_PROGRESS_1527) == 2) {
-                if(freeSlots(player) == 0) {
-                    sendDialogue(player, "I'd better make room in my inventory first!")
-                    return@on false
-                }
-                if(inInventory(player, Items.SANDYS_ROTA_6948)) {
-                    sendDialogue(player, "You already have Sandy's original work rota.")
-                    return@on false
-                }
+            val questStage = getQuestStage(player, Quests.THE_HAND_IN_THE_SAND)
+            val varbitProgress = getVarbit(player, Vars.VARBIT_QUEST_THE_HAND_IN_THE_SAND_PROGRESS_1527)
 
-                sendDialogue(player, "You quickly sift through some of the papers on Sandy's desk and find a work rota for Bert.")
-                addItem(player, Items.SANDYS_ROTA_6948)
+            if (questStage == 5 || varbitProgress == 2) {
+                when {
+                    freeSlots(player) == 0 -> {
+                        sendDialogue(player, "I'd better make room in my inventory first!")
+                    }
+                    inInventory(player, Items.SANDYS_ROTA_6948) -> {
+                        sendDialogue(player, "You already have Sandy's original work rota.")
+                    }
+                    else -> {
+                        sendDialogue(player, "You quickly sift through some of the papers on Sandy's desk and find a work rota for Bert.")
+                        addItem(player, Items.SANDYS_ROTA_6948)
+                    }
+                }
                 return@on true
             }
 
-            if(!inInventory(player, Items.LOCKED_DIARY_11761) && getAttribute(player, GameAttributes.RETURNING_CLARENCE_CHECKPOINT, false)) {
+            if (!inInventory(player, Items.LOCKED_DIARY_11761) && getAttribute(player, GameAttributes.RETURNING_CLARENCE_CHECKPOINT, false)) {
                 player.animate(Animation(Animations.HUMAN_MULTI_USE_832))
                 sendMessage(player, "You search through the papers on the table and find a locked diary.")
                 addItemOrDrop(player, Items.LOCKED_DIARY_11761, 1)
             } else {
                 sendMessage(player, "You search through the papers on the table and find nothing.")
             }
+
             return@on true
         }
     }

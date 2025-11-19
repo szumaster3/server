@@ -131,7 +131,7 @@ class WoodcuttingPlugin : InteractionListener {
                         if (player.location.y > it.y) it.transform(0, -1, 0) else it.transform(0, 1, 0)
                     }
                     targetLocation?.let { target ->
-                        forceMove(player, player.location, target, 0, 45, null, Animations.HUMAN_WALK_SHORT_819) {
+                        forceMove(player, player.location, target, 0, 60, null, Animations.HUMAN_WALK_SHORT_819) {
                             sendMessage(player, "You hack your way through the tree.")
                             sendMessage(player, "You move deeper into the jungle.")
                         }

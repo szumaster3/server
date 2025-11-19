@@ -55,7 +55,7 @@ class PiscatorisPlugin : InteractionListener {
          */
 
         on(NET_SCENERY, IntType.SCENERY, "Take-from") { player, node ->
-            if (!hasRequirement(player, Quests.SWAN_SONG)) return@on true
+            if (!hasRequirement(player, Quests.SWAN_SONG)) return@on false
 
             if (!hasSpaceFor(player, Item(Items.SEAWEED_401, 1))) {
                 sendMessage(player, "You do not have space in your inventory.")

@@ -50,7 +50,7 @@ class PyramidPlunderPlugin : InteractionListener {
          */
 
         on(SCEPTRE, IntType.ITEM, "teleport", "operate") { player, node ->
-            if (!hasRequirement(player, Quests.ICTHLARINS_LITTLE_HELPER)) return@on true
+            if (!hasRequirement(player, Quests.ICTHLARINS_LITTLE_HELPER)) return@on false
             val sceptre = node.asItem()
 
             if (sceptre.id == SCEPTRE.last()) {

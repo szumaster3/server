@@ -21,7 +21,7 @@ class RogueVarrockDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        if (!hasRequirement(player, Quests.SUMMERS_END)) return true
+        if (!hasRequirement(player, Quests.SUMMERS_END)) return false
         if (inBorders(player, 3282, 3934, 3287, 3942)) {
             end()
             openDialogue(player, RogueCastleDialogue())

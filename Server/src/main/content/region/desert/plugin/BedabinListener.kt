@@ -16,13 +16,17 @@ class BedabinListener : InteractionListener {
         on(TENT, IntType.SCENERY, "walk-through") { player, _ ->
             if (player.location.y >= 3046) {
                 val door = getScenery(Location(3169, 3046, 0))
-                if (door!!.id != 2701) replaceScenery(door.asScenery(), 2701, 2)
+                if (door != null && door.id != 2701) {
+                    replaceScenery(door.asScenery(), 2701, 2)
+                }
                 player.walkingQueue.reset()
                 player.walkingQueue.addPath(3169, 3045)
                 sendMessage(player, "You walk back out the tent.")
-                return@on true
+            } else {
+                val npc = findNPC(NPCs.BEDABIN_NOMAD_GUARD_834)
+                player.dialogueInterpreter.open(NPCs.BEDABIN_NOMAD_GUARD_834, npc)
             }
-            player.dialogueInterpreter.open(834, findNPC(834))
+
             return@on true
         }
 

@@ -41,7 +41,7 @@ class RoguesJewelleryPlugin : InteractionListener {
             val itemName = getItemName(used.id)
 
             openDialogue(player, RogueJewelleryDialogue(used.id, actualAmount, itemName, itemPrice))
-            true
+            return@onUseWith true
         }
     }
 

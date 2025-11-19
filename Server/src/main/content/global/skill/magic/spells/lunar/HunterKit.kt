@@ -13,7 +13,7 @@ class HunterKit : InteractionListener {
         on(Items.HUNTER_KIT_11159, IntType.ITEM, "open") { player, _ ->
             if (freeSlots(player) < 6) {
                 sendMessage(player, "You need at least six free inventory space to do this.")
-                return@on false
+                return@on true
             }
 
             if (removeItem(player, Items.HUNTER_KIT_11159)) {

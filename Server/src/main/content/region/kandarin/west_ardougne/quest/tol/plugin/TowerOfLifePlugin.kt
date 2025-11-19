@@ -17,7 +17,7 @@ import shared.consts.*
 class TowerOfLifePlugin : InteractionListener {
     override fun defineListeners() {
         on(TOWER_DOORS, IntType.SCENERY, "open") { player, node ->
-            if (!hasRequirement(player, Quests.TOWER_OF_LIFE)) return@on true
+            if (!hasRequirement(player, Quests.TOWER_OF_LIFE)) return@on false
             DoorActionHandler.handleAutowalkDoor(player, node.asScenery())
             playAudio(player, Sounds.TOL_DOOR_OPEN_AND_CLOSE_3419)
             if (player.location.y == 3225)

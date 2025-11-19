@@ -35,7 +35,7 @@ class EctophialPlugin : InteractionListener {
         }
 
         on(Items.ECTOPHIAL_4251, IntType.ITEM, "empty") { player, node ->
-            if (!hasRequirement(player, Quests.GHOSTS_AHOY)) return@on true
+            if (!hasRequirement(player, Quests.GHOSTS_AHOY)) return@on false
 
             if (player.isTeleBlocked) {
                 sendMessage(player, "A magical force has stopped you from teleporting.")

@@ -96,10 +96,12 @@ class ShantayPassPlugin : InteractionListener {
 
                 if (!removeItem(player, Items.SHANTAY_PASS_1854, Container.INVENTORY)) {
                     sendMessage(player, "An error occurred while trying to remove your Shantay pass. Please try again.")
-                    return@on false
+                    return@on true
                 }
+
                 sendMessage(player, "You hand your Shantay pass to the guard and pass through the gate.")
             }
+
             AgilityHandler.walk(player, 0, player.location, destination, null, 0.0, null)
             return@on true
         }
@@ -115,11 +117,11 @@ class ShantayPassPlugin : InteractionListener {
 
             if (!player.getAttribute("shantay-jail", false)) {
                 DoorActionHandler.handleDoor(player, node.asScenery())
-                return@on true
             } else {
                 player.dialogueInterpreter.open(NPCs.SHANTAY_836, null, true)
-                return@on true
             }
+
+            return@on true
         }
 
         on(Scenery.SHANTAY_CHEST_2693, IntType.SCENERY, "open") { player, _ ->

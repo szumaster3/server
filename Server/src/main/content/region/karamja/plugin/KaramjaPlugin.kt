@@ -22,7 +22,6 @@ class KaramjaPlugin : InteractionListener {
     companion object {
         private val PINEAPPLE_PLANT = intArrayOf(Scenery.PINEAPPLE_PLANT_1408, Scenery.PINEAPPLE_PLANT_1409, Scenery.PINEAPPLE_PLANT_1410, Scenery.PINEAPPLE_PLANT_1411, Scenery.PINEAPPLE_PLANT_1412, Scenery.PINEAPPLE_PLANT_1413)
         private val CUSTOM_OFFICERS = intArrayOf(NPCs.CUSTOMS_OFFICER_380, NPCs.CUSTOMS_OFFICER_381)
-        private val MACHETE_ID = intArrayOf(Items.MACHETE_975, Items.JADE_MACHETE_6315, Items.OPAL_MACHETE_6313, Items.RED_TOPAZ_MACHETE_6317)
         private val JUNGLE_BUSH = intArrayOf(Scenery.JUNGLE_BUSH_2892, Scenery.JUNGLE_BUSH_2893)
     }
 
@@ -181,29 +180,18 @@ class KaramjaPlugin : InteractionListener {
          */
 
         on(NPCs.TIADECHE_1164, IntType.NPC, "trade") { player, _ ->
-            if (!hasRequirement(player, Quests.TAI_BWO_WANNAI_TRIO)) return@on true
+            if (!hasRequirement(player, Quests.TAI_BWO_WANNAI_TRIO)) return@on false
             openNpcShop(player, NPCs.TIADECHE_1164)
             return@on true
         }
     }
 
-    /**
-     * Handles chopping jungle bushes using a machete.
-     * @param player The player.
-     * @param bush The node id.
-     * @param state The stage.
-     */
     private fun handleChopBush(player: Player, bush: Node, state: Int): Boolean {
         val machete = SkillingTool.getMachete(player)
+            ?: return fail(player, "You need a machete to cut your way through this dense jungle bush.")
 
-        if (machete == null) {
-            sendMessage(player, "You need a machete to cut your way through this dense jungle bush.")
+        if (!finishedMoving(player) || !clockReady(player, Clocks.SKILLING))
             return clearScripts(player)
-        }
-
-        if (!finishedMoving(player) || !clockReady(player, Clocks.SKILLING)) {
-            return clearScripts(player)
-        }
 
         if (state == 0) {
             sendMessage(player, "You swing your machete at the jungle plant.")
@@ -220,7 +208,9 @@ class KaramjaPlugin : InteractionListener {
             else -> null
         }
 
-        if (jungleBushNode == null || !SkillReward.checkWoodcuttingReward(player, jungleBushNode, machete)) {
+        if (jungleBushNode == null ||
+            !SkillReward.checkWoodcuttingReward(player, jungleBushNode, machete)
+        ) {
             delayClock(player, Clocks.SKILLING, 3)
             return delayScript(player, 2)
         }
@@ -230,17 +220,28 @@ class KaramjaPlugin : InteractionListener {
         rewardXP(player, Skills.WOODCUTTING, 100.0)
         resetAnimator(player)
 
-        val target = if (player.location.y > bush.location.y)
-            bush.location.transform(0, -1, 0)
-        else
-            bush.location.transform(0, 1, 0)
+        val offset = if (player.location.y > bush.location.y) -1 else 1
+        val target = bush.location.transform(0, offset, 0)
 
-        forceMove(player, player.location, target, 0, 45, null, Animations.HUMAN_WALK_SHORT_819) {
+        forceMove(
+            player,
+            player.location,
+            target,
+            0,
+            60,
+            null,
+            Animations.HUMAN_WALK_SHORT_819
+        ) {
             sendMessage(player, "You hack your way through the jungle bush.")
             delayClock(player, Clocks.SKILLING, 3)
             clearScripts(player)
         }
 
         return delayScript(player, 2)
+    }
+
+    private fun fail(player: Player, msg: String): Boolean {
+        sendMessage(player, msg)
+        return clearScripts(player)
     }
 }
