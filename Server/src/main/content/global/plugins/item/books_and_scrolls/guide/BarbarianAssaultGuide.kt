@@ -54,11 +54,7 @@ class BarbarianAssaultGuide : InteractionListener {
     }
 
     @Suppress("UNUSED_PARAMETER")
-    private fun display(
-        player: Player,
-        pageNum: Int,
-        buttonID: Int,
-    ): Boolean {
+    private fun display(player: Player, pageNum: Int, buttonID: Int): Boolean {
         BookInterface.pageSetup(player, BookInterface.FANCY_BOOK_3_49, TITLE, CONTENTS)
         // Hides page numbers.
         sendString(player, "", BookInterface.FANCY_BOOK_3_49, BookInterface.FANCY_BOOK_3_49_LINE_IDS[1])

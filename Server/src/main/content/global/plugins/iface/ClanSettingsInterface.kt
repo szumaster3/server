@@ -1,8 +1,9 @@
 package content.global.plugins.iface
 
+import core.api.openInterface
 import core.api.sendInputDialogue
 import core.api.sendMessage
-import core.game.component.Component
+import core.api.sendString
 import core.game.interaction.InterfaceListener
 import core.game.node.entity.player.Player
 import core.game.system.communication.ClanRank
@@ -132,12 +133,12 @@ class ClanSettingsInterface : InterfaceListener {
      */
     private fun updateSettings(player: Player) {
         val clan = ClanRepository.get(player.name, true)
-        player.packetDispatch.sendString(clan.name, Components.CLANSETUP_590, 22)
+        sendString(player, clan.name, Components.CLANSETUP_590, 22)
         // player.getPacketDispatch().sendConfig(1083, (isCoinshare() ? 1 : 0) << 18 | (isLootshare() ? 0 : 1));
-        player.packetDispatch.sendString(clan.joinRequirement.info, Components.CLANSETUP_590, 23)
-        player.packetDispatch.sendString(clan.messageRequirement.info, Components.CLANSETUP_590, 24)
-        player.packetDispatch.sendString(clan.kickRequirement.info, Components.CLANSETUP_590, 25)
-        player.packetDispatch.sendString(clan.lootRequirement.info, Components.CLANSETUP_590, 26)
+        sendString(player, clan.joinRequirement.info, Components.CLANSETUP_590, 23)
+        sendString(player, clan.messageRequirement.info, Components.CLANSETUP_590, 24)
+        sendString(player, clan.kickRequirement.info, Components.CLANSETUP_590, 25)
+        sendString(player, clan.lootRequirement.info, Components.CLANSETUP_590, 26)
     }
 
     /**
@@ -146,7 +147,7 @@ class ClanSettingsInterface : InterfaceListener {
      * @param player The player.
      */
     private fun openSettings(player: Player) {
-        player.interfaceManager.open(Component(Components.CLANSETUP_590))
+        openInterface(player, Components.CLANSETUP_590)
         updateSettings(player)
     }
 }

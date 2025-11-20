@@ -1,4 +1,4 @@
-package content.global.plugins.iface
+package content.global.skill.magic.iface
 
 import content.global.skill.magic.SpellUtils
 import core.api.*
