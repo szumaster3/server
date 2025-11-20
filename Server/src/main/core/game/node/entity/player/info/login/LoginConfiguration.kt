@@ -324,5 +324,10 @@ object LoginConfiguration {
         } else {
             setVarbit(player, 3909, 0)
         }
+
+        if(hasRequirement(player, Quests.EAGLES_PEAK))
+            // setVarbit(player, 2780, 15)
+            setVarbit(player, 3109, 3)
+            // setVarbit(player, 4056, 199)
     }
 }
