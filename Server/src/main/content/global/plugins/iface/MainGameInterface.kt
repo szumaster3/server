@@ -1,7 +1,6 @@
 package content.global.plugins.iface
 
 import content.data.GameAttributes
-import content.global.plugins.iface.MainInterface.Companion
 import core.api.*
 import core.game.component.CloseEvent
 import core.game.component.Component
