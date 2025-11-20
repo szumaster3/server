@@ -10,8 +10,6 @@ import shared.consts.NPCs
 @Initializable
 class ElissaDialogue(player: Player? = null) : Dialogue(player) {
 
-    var qb = 2
-
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         npc(FaceAnim.FRIENDLY, "Hello there.")
@@ -20,8 +18,8 @@ class ElissaDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
-            0 -> (options("What do you do here?", "What is this place?")).also { stage++ }
-            1 -> when (qb) {
+            0 -> options("What do you do here?", "What is this place?").also { stage++ }
+            1 -> when (buttonId) {
                 1 -> player(FaceAnim.ASKING, "What do you do here?").also { stage = 10 }
                 2 -> player(FaceAnim.ASKING, "What is this place?").also { stage = 20 }
             }

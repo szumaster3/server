@@ -2,10 +2,9 @@ package content.region.misthalin.dig_site.quest.itexam.plugin
 
 import content.global.skill.thieving.PickpocketPlugin
 import content.region.misthalin.dig_site.quest.itexam.TheDigSite
+import content.region.misthalin.dig_site.quest.itexam.dialogue.DigsiteWorkmanDialogueFile
 import content.region.misthalin.dig_site.quest.itexam.dialogue.PanningGuideDialogue
 import core.api.*
-import core.api.getQuestStage
-import core.api.setQuestStage
 import core.api.utils.PlayerCamera
 import core.api.utils.WeightBasedTable
 import core.api.utils.WeightedItem
@@ -776,6 +775,15 @@ class TheDigSitePlugin : InteractionListener {
                 return@on true
             }
         }
+
+        /*
+         * Handles interaction with workmans.
+         */
+        onUseWith(IntType.NPC, Items.INVITATION_LETTER_696, NPCs.DIGSITE_WORKMAN_613, NPCs.DIGSITE_WORKMAN_4564, NPCs.DIGSITE_WORKMAN_4565) { player, _, with ->
+            openDialogue(player, DigsiteWorkmanDialogueFile(), with.asNpc())
+            return@onUseWith false
+        }
+
     }
 
     companion object {

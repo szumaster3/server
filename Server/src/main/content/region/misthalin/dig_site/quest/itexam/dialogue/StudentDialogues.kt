@@ -2,7 +2,6 @@ package content.region.misthalin.dig_site.quest.itexam.dialogue
 
 import content.region.misthalin.dig_site.quest.itexam.TheDigSite
 import core.api.*
-import core.api.getQuestStage
 import core.game.dialogue.Dialogue
 import core.game.dialogue.DialogueBuilder
 import core.game.dialogue.DialogueBuilderFile

@@ -1,7 +1,6 @@
 package content.region.misthalin.dig_site.quest.itexam
 
 import core.api.*
-import core.api.getQuestStage
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.quest.Quest
 import core.game.node.entity.skill.Skills
@@ -353,8 +352,6 @@ class TheDigSite : Quest(Quests.THE_DIG_SITE, 47, 46, 2, 131, 0, 1, 9) {
     override fun finish(player: Player) {
         var ln = 10
         super.finish(player)
-        player.packetDispatch.sendString("You have completed Digsite Quest!", 277, 4)
-
         player.packetDispatch.sendModelOnInterface(17343, 277, 5, 0)
         player.packetDispatch.sendAngleOnInterface(277, 5, 1020, 0, 0)
 
