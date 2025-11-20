@@ -12,17 +12,18 @@ import shared.consts.Components
  * - [Tribal Totem quest][content.region.karamja.quest.totem.TribalTotem]
  */
 class CombinationLockInterface : InterfaceListener {
-    override fun defineInterfaceListeners() {
+
+    companion object {
         val LETTERS = arrayOf(
             "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"
         )
-
         val LETTERS_BACK = arrayOf(17, 19, 21, 23)
         val LETTERS_FORWARD = arrayOf(18, 20, 22, 24)
         val LETTERS_POSITIONS = arrayOf(13, 14, 15, 16)
+        const val DOORLOCKINTERFACE = Components.COMBI_LOCK_369
+    }
 
-        val DOORLOCKINTERFACE = Components.COMBI_LOCK_369
-
+    override fun defineInterfaceListeners() {
         /*
          * Handles init the letter values when interface is opened.
          */

@@ -11,7 +11,9 @@ import shared.consts.NPCs
 
 class ApeAtollPlugin : InteractionListener {
 
-    val ELDER_GUARDS = intArrayOf(NPCs.ELDER_GUARD_1461, NPCs.ELDER_GUARD_1462)
+    companion object {
+        private val ELDER_GUARDS = intArrayOf(NPCs.ELDER_GUARD_1461, NPCs.ELDER_GUARD_1462)
+    }
 
     override fun defineListeners() {
 

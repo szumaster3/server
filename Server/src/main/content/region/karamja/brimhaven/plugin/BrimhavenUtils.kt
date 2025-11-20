@@ -57,7 +57,7 @@ object BrimhavenUtils {
             Animation.create(769),
             10,
             0.0,
-            null,
+            null
         ).direction
         val loc = player.location
 
@@ -90,7 +90,7 @@ object BrimhavenUtils {
                         Animation.create(769),
                         10,
                         0.0,
-                        null,
+                        null
                     )
                     return stage == 6
                 }

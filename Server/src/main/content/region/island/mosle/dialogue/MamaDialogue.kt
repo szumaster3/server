@@ -25,7 +25,7 @@ class MamaDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
-            0 ->      if (!inInventory(player, Items.BOOK_O_PIRACY_7144)) {
+            0 -> if (!inInventory(player, Items.BOOK_O_PIRACY_7144)) {
                 npcl(FaceAnim.FRIENDLY, "Ar, darlin'! How might ya' Mama help ye?").also { stage++ }
             } else {
                 npcl(FaceAnim.FRIENDLY, "Hello stranger, you come for a drink?").also { stage = 4 }

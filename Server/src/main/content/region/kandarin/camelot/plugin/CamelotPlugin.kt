@@ -11,21 +11,24 @@ import shared.consts.Items
 import shared.consts.Scenery
 
 class CamelotPlugin : InteractionListener {
-    private val petFish = intArrayOf(Items.FISHBOWL_6670, Items.FISHBOWL_6671, Items.FISHBOWL_6672)
-    private val feedAnim = Animation(Animations.FEED_BOWL_2781)
 
-    private val fishFoodInteraction: Map<Int, (Player, Item) -> Unit> = mapOf(
-        Items.FISH_FOOD_272 to { player, used ->
-            lock(player, feedAnim.duration)
-            removeItem(player, used)
-            addItem(player, Items.AN_EMPTY_BOX_6675, 1)
-            animate(player, feedAnim)
-            sendMessage(player, "You feed your fish.")
-        },
-        Items.POISONED_FISH_FOOD_274 to { player, _ ->
-            sendMessage(player, "You can't poison your own pet!")
-        }
-    )
+    companion object {
+        private val petFish = intArrayOf(Items.FISHBOWL_6670, Items.FISHBOWL_6671, Items.FISHBOWL_6672)
+        private val feedAnim = Animation(Animations.FEED_BOWL_2781)
+
+        private val fishFoodInteraction: Map<Int, (Player, Item) -> Unit> = mapOf(
+            Items.FISH_FOOD_272 to { player, used ->
+                lock(player, feedAnim.duration)
+                removeItem(player, used)
+                addItem(player, Items.AN_EMPTY_BOX_6675, 1)
+                animate(player, feedAnim)
+                sendMessage(player, "You feed your fish.")
+            },
+            Items.POISONED_FISH_FOOD_274 to { player, _ ->
+                sendMessage(player, "You can't poison your own pet!")
+            }
+        )
+    }
 
     override fun defineListeners() {
 

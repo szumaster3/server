@@ -15,8 +15,6 @@ import shared.consts.NPCs
 @Initializable
 class TamayuDialogue(player: Player? = null) : Dialogue(player) {
 
-    private val randomConversation = arrayOf("Get out of my way! Argh! I'm hunting!", "Move, lest I slay not the beast but you!", "Die! Die!!")
-
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         if (npc.id == NPCs.TAMAYU_1167) {
@@ -42,4 +40,8 @@ class TamayuDialogue(player: Player? = null) : Dialogue(player) {
     }
 
     override fun getIds(): IntArray = intArrayOf(2487, NPCs.TAMAYU_1167, NPCs.TAMAYU_1168, NPCs.TAMAYU_1169, NPCs.TAMAYU_1170)
+
+    companion object {
+        private val randomConversation = arrayOf("Get out of my way! Argh! I'm hunting!", "Move, lest I slay not the beast but you!", "Die! Die!!")
+    }
 }

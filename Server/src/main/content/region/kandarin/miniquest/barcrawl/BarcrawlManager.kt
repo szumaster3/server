@@ -114,20 +114,8 @@ class BarcrawlManager :
 
     companion object {
         val BARCRAWL_CARD: Item = Item(Items.BARCRAWL_CARD_455)
-        val NAMES: Array<String> =
-            arrayOf(
-                "BlueMoon Inn",
-                "Blueberry's Bar",
-                "Dead Man's Chest",
-                "Dragon Inn",
-                "Flying Horse Inn",
-                "Foresters Arms",
-                "Jolly Boar Inn",
-                "Karamja Spirits bar",
-                "Rising Sun Inn",
-                "Rusty Anchor Inn",
-            )
-        val COMPONENT = Components.MESSAGESCROLL_220
+        val NAMES: Array<String> = arrayOf("BlueMoon Inn", "Blueberry's Bar", "Dead Man's Chest", "Dragon Inn", "Flying Horse Inn", "Foresters Arms", "Jolly Boar Inn", "Karamja Spirits bar", "Rising Sun Inn", "Rusty Anchor Inn")
+        const val COMPONENT = Components.MESSAGESCROLL_220
 
         @JvmStatic
         fun getInstance(player: Player): BarcrawlManager = player.getAttribute("barcrawl-inst", BarcrawlManager())

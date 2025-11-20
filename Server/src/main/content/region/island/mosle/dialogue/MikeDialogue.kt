@@ -27,7 +27,7 @@ class MikeDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
-            0 ->      if (!inInventory(player, Items.BOOK_O_PIRACY_7144)) {
+            0 -> if (!inInventory(player, Items.BOOK_O_PIRACY_7144)) {
                 npcl(FaceAnim.FRIENDLY, "Arr? Be ye wantin' te go on account with our gang o' fillibusters?").also { stage++ }
             } else {
                 npcl(FaceAnim.HALF_ASKING, "Wanna buy some clothes? Good quality, none of yer rags.").also {

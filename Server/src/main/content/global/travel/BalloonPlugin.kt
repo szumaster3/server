@@ -1,4 +1,4 @@
-package content.region.island.entrana.plugin
+package content.global.travel
 
 import content.data.GameAttributes
 import core.api.*

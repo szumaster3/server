@@ -1,4 +1,4 @@
-package content.region.island.entrana
+package content.region.island.entrana.plugin
 
 import core.api.*
 import core.cache.def.impl.ItemDefinition

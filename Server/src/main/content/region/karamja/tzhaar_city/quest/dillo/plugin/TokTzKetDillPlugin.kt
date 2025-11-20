@@ -40,7 +40,7 @@ class TokTzKetDillPlugin : InteractionListener {
          * Handles cave entrances in TzHaar City.
          */
 
-        on(Scenery.CAVE_ENTRANCE_31292, IntType.SCENERY, "go-through") { player, node ->
+        on(Scenery.CAVE_ENTRANCE_31292, IntType.SCENERY, "go-through") { player, _ ->
             lock(player, 6)
             queueScript(player, 1, QueueStrength.SOFT) { stage: Int ->
                 when (stage) {
@@ -77,7 +77,7 @@ class TokTzKetDillPlugin : InteractionListener {
          */
 
         on(Items.STONE_TABLET_13243, IntType.ITEM, "read") { player, _ ->
-            openInterface(player, 738)
+            openInterface(player, Components.STONE_TABLET_738)
             return@on true
         }
     }

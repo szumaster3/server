@@ -18,7 +18,9 @@ import shared.consts.Scenery
 
 class KharaziDungeonPlugin : InteractionListener {
 
-    val BOULDER = intArrayOf(Scenery.BOULDER_2919, Scenery.BOULDER_2920, Scenery.BOULDER_2921)
+    companion object {
+        val BOULDER = intArrayOf(Scenery.BOULDER_2919, Scenery.BOULDER_2920, Scenery.BOULDER_2921)
+    }
 
     override fun defineListeners() {
 

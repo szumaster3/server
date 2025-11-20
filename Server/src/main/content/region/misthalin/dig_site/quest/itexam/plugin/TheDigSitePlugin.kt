@@ -69,86 +69,65 @@ class TheDigSitePlugin : InteractionListener {
          * Handles stealing from Digsite Workmen NPCs.
          */
 
-        on(intArrayOf(NPCs.DIGSITE_WORKMAN_613, NPCs.DIGSITE_WORKMAN_4564, NPCs.DIGSITE_WORKMAN_4565), NPC, "steal-from") { player, node ->
+        on(intArrayOf(NPCs.DIGSITE_WORKMAN_613, NPCs.DIGSITE_WORKMAN_4564, NPCs.DIGSITE_WORKMAN_4565),
+            IntType.NPC,
+            "steal-from"
+        ) { player, node ->
+
             if (getStatLevel(player, Skills.THIEVING) < 25) {
                 sendMessage(player, "You need a Thieving level of 25 to do that.")
                 return@on true
             }
-            if (!workmanPickpocketingTable.canRoll(player)) {
+
+            val table =
+                if (getQuestStage(player, Quests.THE_DIG_SITE) == 3)
+                    workmanPickpocketingTable
+                else
+                    workmanPostQuestPickpocketingTable
+
+            if (!table.canRoll(player)) {
                 sendMessage(player, "You don't have enough inventory space to do that.")
                 return@on true
             }
+
             sendMessage(player, "You attempt to pick the workman's pocket...")
-            if (getQuestStage(player, Quests.THE_DIG_SITE) == 3) {
-                player.animator.animate(PickpocketPlugin.PICKPOCKET_ANIM)
-                val rollOutcome = PickpocketPlugin.pickpocketRoll(player, 84.0, 240.0, workmanPickpocketingTable)
-                if (rollOutcome != null) {
-                    queueScript(player, PickpocketPlugin.PICKPOCKET_ANIM.duration, QueueStrength.NORMAL) { stage: Int ->
-                        when (stage) {
-                            0 -> {
-                                if (rollOutcome.size > 0) {
-                                    addItemOrDrop(player, rollOutcome[0].id)
-                                    when (rollOutcome[0].id) {
-                                        Items.ANIMAL_SKULL_671 -> sendItemDialogue(player, Items.ANIMAL_SKULL_671, "You steal an animal skull.")
-                                        else -> sendMessage(player, "You steal something.")
-                                    }
-                                } else {
-                                    sendMessage(player, "You couldn't steal anything.")
-                                }
-                                return@queueScript stopExecuting(player)
+            player.animator.animate(PickpocketPlugin.PICKPOCKET_ANIM)
+
+            val roll = PickpocketPlugin.pickpocketRoll(player, 84.0, 240.0, table)
+
+            fun applyFail() {
+                val npc = node.asNpc()
+                npc.face(player)
+                npc.animator.animate(PickpocketPlugin.NPC_ANIM)
+                sendMessage(player, "You fail to pick the workman's pocket.")
+                sendChat(npc, "What do you think you're doing???")
+                sendMessage(player, "You have been stunned.")
+                playHurtAudio(player, 20)
+                stun(player, 3)
+                player.impactHandler.manualHit(npc, 1, ImpactHandler.HitsplatType.NORMAL)
+                npc.face(null)
+            }
+
+            fun applySuccess() {
+                queueScript(player, PickpocketPlugin.PICKPOCKET_ANIM.duration, QueueStrength.NORMAL) { stage ->
+                    if (stage == 0) {
+                        val loot = roll!!
+                        if (loot.isNotEmpty()) {
+                            val id = loot[0].id
+                            addItemOrDrop(player, id)
+
+                            when (id) {
+                                Items.ANIMAL_SKULL_671 ->
+                                    sendItemDialogue(player, id, "You steal an animal skull.")
+                                else ->
+                                    sendMessage(player, "You steal something.")
                             }
-
-                            else -> return@queueScript stopExecuting(player)
-                        }
-                    }
-                } else {
-                    node.asNpc().face(player)
-                    node.asNpc().animator.animate(PickpocketPlugin.NPC_ANIM)
-                    sendMessage(player, "You fail to pick the workman's pocket.")
-                    sendChat(node.asNpc(), "What do you think you're doing???")
-                    sendMessage(player, "You have been stunned.")
-                    playHurtAudio(player, 20)
-                    stun(player, 3)
-                    player.impactHandler.manualHit(node.asNpc(), 1, ImpactHandler.HitsplatType.NORMAL)
-                    node.asNpc().face(null)
-                }
-            } else {
-                player.animator.animate(PickpocketPlugin.PICKPOCKET_ANIM)
-                val rollOutcome =
-                    PickpocketPlugin.pickpocketRoll(player, 84.0, 240.0, workmanPostQuestPickpocketingTable)
-                if (rollOutcome != null) {
-                    queueScript(player, PickpocketPlugin.PICKPOCKET_ANIM.duration, QueueStrength.NORMAL) { stage: Int ->
-                        when (stage) {
-                            0 -> {
-                                if (rollOutcome.size > 0) {
-                                    addItemOrDrop(player, rollOutcome[0].id)
-                                    when (rollOutcome[0].id) {
-                                        Items.ANIMAL_SKULL_671 ->
-                                            sendItemDialogue(player, Items.ANIMAL_SKULL_671, "You steal an animal skull.")
-
-                                        else -> sendMessage(player, "You steal something.")
-                                    }
-                                } else {
-                                    sendMessage(player, "You couldn't steal anything.")
-                                }
-                                return@queueScript stopExecuting(player)
-                            }
-
-                            else -> return@queueScript stopExecuting(player)
-                        }
-                    }
-                } else {
-                    node.asNpc().face(player)
-                    node.asNpc().animator.animate(PickpocketPlugin.NPC_ANIM)
-                    sendMessage(player, "You fail to pick the workman's pocket.")
-                    sendChat(player, "What do you think you're doing???")
-                    sendMessage(player, "You have been stunned.")
-                    playHurtAudio(player, 20)
-                    stun(player, 3)
-                    player.impactHandler.manualHit(node.asNpc(), 1, ImpactHandler.HitsplatType.NORMAL)
-                    node.asNpc().face(null)
+                        } else sendMessage(player, "You couldn't steal anything.")
+                        return@queueScript stopExecuting(player)
+                    } else return@queueScript stopExecuting(player)
                 }
             }
+            if (roll == null) applyFail() else applySuccess()
             return@on true
         }
 

@@ -14,14 +14,16 @@ import shared.consts.Scenery
 
 class BraindeathIslandPlugin : InteractionListener {
 
-    private val zombieNPC = intArrayOf(
-        NPCs.ZOMBIE_SWAB_2843,
-        NPCs.ZOMBIE_SWAB_2844,
-        NPCs.ZOMBIE_SWAB_2845,
-        NPCs.ZOMBIE_SWAB_2846,
-        NPCs.ZOMBIE_SWAB_2847,
-        NPCs.ZOMBIE_SWAB_2848
-    )
+    companion object {
+        private val zombieNPC = intArrayOf(
+            NPCs.ZOMBIE_SWAB_2843,
+            NPCs.ZOMBIE_SWAB_2844,
+            NPCs.ZOMBIE_SWAB_2845,
+            NPCs.ZOMBIE_SWAB_2846,
+            NPCs.ZOMBIE_SWAB_2847,
+            NPCs.ZOMBIE_SWAB_2848
+        )
+    }
 
     override fun defineListeners() {
 

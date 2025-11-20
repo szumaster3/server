@@ -19,58 +19,58 @@ class SkullSceptrePlugin : InteractionListener {
             val option = getUsedOption(player)
             val charge = getCharge(node)
 
-            if (option == "invoke" || option == "operate") {
-                if (hasTimerActive(player, GameAttributes.TELEBLOCK_TIMER)) {
-                    sendMessage(player, "A magical force has stopped you from teleporting.")
-                    return@on true
-                }
-
-                if (!inEquipmentOrInventory(player, Items.SKULL_SCEPTRE_9013)) {
-                    sendMessage(player, "You need to have the sceptre in your equipment or inventory to use it.")
-                    return@on true
-                }
-
+            fun notEnoughCharges(): Boolean {
                 if (charge < 1) {
                     sendMessage(player, "You don't have enough charges left.")
-                    return@on true
+                    return true
                 }
+                return false
+            }
 
-                lock(player, 7)
-                submitIndividualPulse(player, object : Pulse(1, player) {
-                    var count = 0
-                    override fun pulse(): Boolean {
-                        when (count++) {
-                            0 -> {
-                                visualize(
+            when (option) {
+                "invoke", "operate" -> {
+                    if (hasTimerActive(player, GameAttributes.TELEBLOCK_TIMER)) {
+                        sendMessage(player, "A magical force has stopped you from teleporting.")
+                        return@on true
+                    }
+
+                    if (!inEquipmentOrInventory(player, Items.SKULL_SCEPTRE_9013)) {
+                        sendMessage(player, "You need to have the sceptre in your equipment or inventory to use it.")
+                        return@on true
+                    }
+
+                    if (notEnoughCharges()) return@on true
+
+                    lock(player, 7)
+                    submitIndividualPulse(player, object : Pulse(1, player) {
+                        var tick = 0
+                        override fun pulse(): Boolean {
+                            when (tick++) {
+                                0 -> visualize(
                                     player,
                                     Animations.HUMAN_USE_SCEPTRE_9601,
                                     core.game.world.update.flag.context.Graphics(Graphics.USE_SCEPTRE_1683, 100)
                                 )
-                            }
 
-                            6 -> {
-                                teleport(player, Location.create(3081, 3421, 0), TeleportManager.TeleportType.INSTANT)
-                                return true
+                                6 -> {
+                                    teleport(player, Location.create(3081, 3421, 0), TeleportManager.TeleportType.INSTANT)
+                                    return true
+                                }
                             }
+                            return false
                         }
-                        return false
-                    }
-                })
+                    })
 
-                setCharge(node, charge - 200)
-                if (getCharge(node) < 1) {
-                    removeItem(player, Items.SKULL_SCEPTRE_9013, Container.INVENTORY)
-                    sendMessage(player, "Your staff crumbles to dust as you use its last charge.")
+                    setCharge(node, charge - 200)
+                    if (getCharge(node) < 1) {
+                        removeItem(player, Items.SKULL_SCEPTRE_9013, Container.INVENTORY)
+                        sendMessage(player, "Your staff crumbles to dust as you use its last charge.")
+                    }
                 }
-            } else {
-                if (charge < 1) {
-                    sendMessage(player, "You don't have enough charges left.")
-                } else {
-                    val remaining = charge / 200
-                    sendMessage(
-                        player,
-                        "Concentrating deeply, you divine that the sceptre has $remaining charges left."
-                    )
+
+                "divine" -> {
+                    if (notEnoughCharges()) return@on true
+                    sendMessage(player, "Concentrating deeply, you divine that the sceptre has ${charge / 200} charges left.")
                 }
             }
 
@@ -86,7 +86,6 @@ class SkullSceptrePlugin : InteractionListener {
         }
 
         onUseWith(IntType.ITEM, Items.BOTTOM_OF_SCEPTRE_9011, Items.TOP_OF_SCEPTRE_9010) { player, used, with ->
-            // The two halves of the Sceptre fit perfectly. The Sceptre appears to be designed to have something on top.
             if (removeItem(player, used.asItem())) {
                 sendItemDialogue(player, Items.RUNED_SCEPTRE_9012, "The two halves of the sceptre fit perfectly.")
                 replaceSlot(player, with.asItem().index, Item(Items.RUNED_SCEPTRE_9012, 1))
@@ -95,14 +94,8 @@ class SkullSceptrePlugin : InteractionListener {
         }
 
         onUseWith(IntType.ITEM, Items.STRANGE_SKULL_9009, Items.RUNED_SCEPTRE_9012) { player, used, with ->
-            // The skull fits perfectly atop the Sceptre, you feel there is great magical power at work here.
             if (removeItem(player, used.asItem())) {
-                sendDoubleItemDialogue(
-                    player,
-                    -1,
-                    Items.SKULL_SCEPTRE_9013,
-                    "The skull fits perfectly atop the Sceptre."
-                )
+                sendDoubleItemDialogue(player, -1, Items.SKULL_SCEPTRE_9013, "The skull fits perfectly atop the Sceptre.")
                 replaceSlot(player, with.asItem().index, Item(Items.SKULL_SCEPTRE_9013, 1))
             }
             return@onUseWith true

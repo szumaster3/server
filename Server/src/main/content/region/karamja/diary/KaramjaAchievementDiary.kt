@@ -29,15 +29,7 @@ class KaramjaAchievementDiary : DiaryEventHookBase(DiaryType.KARAMJA) {
         private val KET_ZEKS = arrayOf(NPCs.KET_ZEK_2743, NPCs.KET_ZEK_2744)
         private val METAL_DRAGONS = arrayOf(NPCs.BRONZE_DRAGON_1590, NPCs.IRON_DRAGON_1591, NPCs.STEEL_DRAGON_1592)
 
-        private val FRUIT_TREES = arrayOf(
-            Scenery.BANANA_TREE_7999,
-            Scenery.APPLE_TREE_7948,
-            Scenery.CURRY_TREE_8033,
-            Scenery.ORANGE_TREE_8064,
-            Scenery.PINEAPPLE_PLANT_7979,
-            Scenery.PALM_TREE_8091,
-            Scenery.PAPAYA_TREE_8118,
-        )
+        private val FRUIT_TREES = arrayOf(Scenery.BANANA_TREE_7999, Scenery.APPLE_TREE_7948, Scenery.CURRY_TREE_8033, Scenery.ORANGE_TREE_8064, Scenery.PINEAPPLE_PLANT_7979, Scenery.PALM_TREE_8091, Scenery.PAPAYA_TREE_8118)
 
         object EasyTasks {
             const val PICK_5_BANANAS = 0
