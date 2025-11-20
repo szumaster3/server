@@ -1,6 +1,5 @@
 package content.minigame.pest_control.plugin
 
-import content.data.getRespawnLocation
 import content.minigame.pest_control.npc.*
 import core.ServerConstants
 import core.api.*
@@ -36,13 +35,7 @@ import java.util.*
  */
 @Initializable
 class PestControlActivityPlugin @JvmOverloads constructor(val type: BoatType = BoatType.NOVICE) :
-    ActivityPlugin(
-        "pest control ${type.name.lowercase()}",
-        false,
-        true,
-        true,
-        ZoneRestriction.CANNON
-    ) {
+    ActivityPlugin("pest control ${type.name.lowercase()}", false, true, true, ZoneRestriction.CANNON) {
 
     companion object {
         const val MAX_TEAM_SIZE = 25
@@ -86,7 +79,9 @@ class PestControlActivityPlugin @JvmOverloads constructor(val type: BoatType = B
         safeRespawn = Location.create(2657, 2646, 0)
     }
 
-    /** Starts a new Pest Control session (region + game instances). */
+    /**
+     * Starts a new session.
+     */
     fun start() {
         val region = DynamicRegion.create(Regions.PEST_CONTROL_10536)
         val session = PestControlSession(region, this)
@@ -241,7 +236,9 @@ class PestControlActivityPlugin @JvmOverloads constructor(val type: BoatType = B
         return true
     }
 
-    /** Opens the lander waiting interface for a player. */
+    /**
+     * Opens the lander waiting interface for a player.
+     */
     private fun openLanderInterface(p: Player) {
         openOverlay(p, Components.PEST_LANDER_OVERLAY_407)
         updateTime(p)
@@ -250,7 +247,9 @@ class PestControlActivityPlugin @JvmOverloads constructor(val type: BoatType = B
         sendString(p, StringUtils.formatDisplayName(type.name), Components.PEST_LANDER_OVERLAY_407, 3)
     }
 
-    /** Updates the countdown shown to a waiting player. */
+    /**
+     * Updates the countdown shown to a waiting player.
+     */
     fun updateTime(p: Player) {
         val remaining = 500 - this.ticks
         val text =
@@ -262,7 +261,9 @@ class PestControlActivityPlugin @JvmOverloads constructor(val type: BoatType = B
         sendString(p, text, Components.PEST_LANDER_OVERLAY_407, 13)
     }
 
-    /** Notify all waiting players about current queue size. */
+    /**
+     * Notify all waiting players about current queue size.
+     */
     private fun updatePlayerCount() {
         for (p in waitingPlayers) {
             sendString(p, "Players Ready: ${waitingPlayers.size?: 0}", Components.PEST_LANDER_OVERLAY_407, 14)
@@ -290,7 +291,7 @@ class PestControlActivityPlugin @JvmOverloads constructor(val type: BoatType = B
 
     override fun newInstance(p: Player): ActivityPlugin = this
 
-    override fun getSpawnLocation(): Location = player.getRespawnLocation()
+    override fun getSpawnLocation(): Location = ServerConstants.HOME_LOCATION!!
 
     override fun configure() {
         registerRegion(Regions.PEST_CONTROL_10536)

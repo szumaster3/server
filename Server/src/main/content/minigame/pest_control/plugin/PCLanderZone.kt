@@ -39,9 +39,7 @@ class PCLanderZone(private val activities: Array<PestControlActivityPlugin>) : M
         if (e is Player && type != -1) {
             for (activity in activities) {
                 if (activity.waitingPlayers.contains(e)) {
-                    e.packetDispatch.sendMessage(
-                        "The knights don't appreciate you teleporting off their craft!"
-                    )
+                    e.packetDispatch.sendMessage("The knights don't appreciate you teleporting off their craft!")
                     return false
                 }
             }

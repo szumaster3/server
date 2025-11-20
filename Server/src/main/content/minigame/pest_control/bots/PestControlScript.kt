@@ -1,6 +1,7 @@
 package content.minigame.pest_control.bots
 
 import content.minigame.pest_control.plugin.PCUtils
+import content.minigame.pest_control.plugin.PestControlActivityPlugin
 import core.game.bots.CombatBotAssembler
 import core.game.bots.PvMBots
 import core.game.world.map.Location
@@ -17,6 +18,8 @@ class PestControlScript(location: Location, val lander: PCUtils.LanderZone) :
     var moveTimer = 0
     var openedGate = false
     var start = true
+    private var inPostGame = false
+    private var switch = false
 
     private val combatHandler = CombatState(this)
     private val role = if (random.nextInt(100) < 30) "defend_squire" else "attack_portals"
@@ -59,8 +62,6 @@ class PestControlScript(location: Location, val lander: PCUtils.LanderZone) :
                 else -> State.GET_TO_PC
             }
 
-    private var inPostGame = false
-
     private fun startPostGameReturn() {
         inPostGame = true
         openedGate = false
@@ -86,7 +87,16 @@ class PestControlScript(location: Location, val lander: PCUtils.LanderZone) :
 
     private fun handleInGame() {
         val session = PCUtils.getMyPestControlSession(this)
+
         if (session?.isActive != true) {
+            PestControlActivityPlugin().leave(this, false)
+            val ladderNode = getClosestNodeWithEntry(50, lander.ladderId)
+            if (ladderNode != null) {
+                ladderNode.interaction.handle(this, ladderNode.interaction[0])
+            } else {
+                teleport(lander.landerLocation)
+            }
+
             startPostGameReturn()
             return
         }
