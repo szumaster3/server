@@ -78,7 +78,7 @@ class GertrudeDialogue(player: Player? = null) : Dialogue(player) {
             302 -> npc(FaceAnim.HALF_GUILTY, "You should try tempting her with a", "seasoned sardine! Those are her favourite snacks.").also { stage++ }
             303 -> player(FaceAnim.HALF_GUILTY, "Thanks for the advice!").also { stage = END_DIALOGUE }
             320 -> npc(FaceAnim.HALF_GUILTY, "You're back! Thank you! Thank you! Fluffs just came", "back! I think she was just upset as she couldn't find her", "kitten.").also {
-                face(npc, player)
+                face(npc, player, 3)
                 stage++
             }
             321 -> sendDialogue(player, "Gertrude gives you a hug.").also { stage++ }
@@ -195,6 +195,6 @@ class GertrudeDialogue(player: Player? = null) : Dialogue(player) {
     override fun getIds(): IntArray = intArrayOf(NPCs.GERTRUDE_780)
 
     companion object {
-        private val COINS = Item(995, 100)
+        private val COINS = Item(Items.COINS_995, 100)
     }
 }
