@@ -1,6 +1,7 @@
 package content.region.desert.quest.deserttreasure.npc
 
-import content.global.skill.magic.spells.modern.WaterSpell
+import content.global.skill.magic.spells.modern.ElementalSpellDefinition
+import content.global.skill.magic.spells.modern.ModernElementalSpell
 import content.region.desert.quest.deserttreasure.DTUtils
 import content.region.desert.quest.deserttreasure.DesertTreasure
 import core.api.*
@@ -45,8 +46,11 @@ class FareedBehavior : NPCBehavior(NPCs.FAREED_1977) {
     }
 
     override fun beforeDamageReceived(self: NPC, attacker: Entity, state: BattleState) {
-        if (state.style == CombatStyle.MAGIC && state.spell !is WaterSpell) {
-            state.neutralizeHits()
+        val spell = state.spell
+        if (state.style == CombatStyle.MAGIC && spell is ModernElementalSpell) {
+            if (spell.def.element != ElementalSpellDefinition.Element.WATER) {
+                state.neutralizeHits()
+            }
         }
     }
 

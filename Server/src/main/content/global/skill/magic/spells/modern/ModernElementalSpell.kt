@@ -10,7 +10,7 @@ import core.plugin.Initializable
 import core.plugin.Plugin
 
 @Initializable
-class ModernElementalSpell private constructor(private val def: ElementalSpellDefinition) :
+class ModernElementalSpell private constructor(val def: ElementalSpellDefinition) :
     CombatSpell(
         def.type,
         SpellBook.MODERN,
