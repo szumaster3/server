@@ -26,7 +26,7 @@ object SystemLogger {
                 if (GameWorld.settings?.isDevMode != true) {
                     return
                 }
-                val msg = TextColors.white("${getTime()}: [${clazz.simpleName}] $message")
+                val msg = TextColors.green("${getTime()}: [${clazz.simpleName}] $message")
                 t.println(msg)
             }
 

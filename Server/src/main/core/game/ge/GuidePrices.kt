@@ -1,5 +1,7 @@
 package core.game.ge
 
+import core.api.sendInterfaceConfig
+import core.api.sendString
 import core.game.component.Component
 import core.game.ge.GrandExchange.Companion.getRecommendedPrice
 import core.game.node.entity.player.Player
@@ -169,7 +171,6 @@ object GuidePrices {
         /**
          * The list of items for this guide type.
          */
-        @JvmField
         val items: Array<GuideItem> = items as Array<GuideItem>
 
         /**
@@ -182,12 +183,12 @@ object GuidePrices {
             if (this != LOGS) {
                 clear(player)
             }
-            player.packetDispatch.sendString("Guide Prices: " + formatDisplayName(name), COMPONENT.id, 14)
+            sendString(player, "Guide Prices: " + formatDisplayName(name), COMPONENT.id, 14)
             for (i in childData[0] until childData[1]) {
-                player.packetDispatch.sendInterfaceConfig(Components.EXCHANGE_GUIDE_PRICE_642, i, false)
+                sendInterfaceConfig(player, Components.EXCHANGE_GUIDE_PRICE_642, i, false)
             }
             for (item in items) {
-                player.packetDispatch.sendString(
+                sendString(player,
                     "" + getRecommendedPrice(item.item, false) + " gp", COMPONENT.id, item.childData[0]
                 )
             }
