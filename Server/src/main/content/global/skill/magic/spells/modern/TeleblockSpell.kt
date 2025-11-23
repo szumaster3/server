@@ -33,47 +33,23 @@ class TeleblockSpell : CombatSpell {
 
     constructor() : super()
 
-    constructor(
-        type: SpellType,
-        level: Int,
-        baseExperience: Double,
-        impactSound: Int,
-        anim: Animation,
-        start: Graphics,
-        projectile: Projectile,
-        end: Graphics,
-        vararg runes: Item
-    ) : super(
-        type,
-        SpellBook.MODERN,
-        level,
-        baseExperience,
-        Sounds.TPBLOCK_CAST_202,
-        Sounds.TPBLOCK_IMPACT_203,
-        anim,
-        TELEBLOCK_START,
-        TELEBLOCK_ORB,
-        TELEBLOCK_SUCCESS,
-        *runes
-    )
+    constructor(type: SpellType, level: Int, baseExperience: Double, impactSound: Int, anim: Animation, start: Graphics, projectile: Projectile, end: Graphics, vararg runes: Item) : super(type, SpellBook.MODERN, level, baseExperience, Sounds.TPBLOCK_CAST_202, Sounds.TPBLOCK_IMPACT_203, anim, TELEBLOCK_START, TELEBLOCK_ORB, TELEBLOCK_SUCCESS, *runes)
 
     @Throws(Throwable::class)
     override fun newInstance(arg: SpellType?): Plugin<SpellType?> {
-        SpellBook.MODERN.register(
-            ModernSpells.TELEBLOCK, TeleblockSpell(
-                SpellType.TELEBLOCK,
-                85,
-                80.0,
-                Sounds.TPBLOCK_IMPACT_203,
-                Animation(Animations.TELEBLOCK_CAST_10503, Priority.HIGH),
-                TELEBLOCK_START,
-                TELEBLOCK_ORB,
-                TELEBLOCK_SUCCESS,
-                Runes.LAW_RUNE.getItem(1),
-                Runes.DEATH_RUNE.getItem(1),
-                Runes.CHAOS_RUNE.getItem(1)
-            )
-        )
+        SpellBook.MODERN.register(ModernSpells.TELEBLOCK, TeleblockSpell(
+            SpellType.TELEBLOCK,
+            85,
+            80.0,
+            Sounds.TPBLOCK_IMPACT_203,
+            Animation(Animations.TELEBLOCK_CAST_10503, Priority.HIGH),
+            TELEBLOCK_START,
+            TELEBLOCK_ORB,
+            TELEBLOCK_SUCCESS,
+            Runes.LAW_RUNE.getItem(1),
+            Runes.DEATH_RUNE.getItem(1),
+            Runes.CHAOS_RUNE.getItem(1)
+        ))
         return this
     }
 
@@ -113,11 +89,7 @@ class TeleblockSpell : CombatSpell {
     }
 
     override fun fireEffect(entity: Entity, victim: Entity, state: BattleState) {
-        if (!hasTimerActive(
-                victim,
-                GameAttributes.TELEBLOCK_TIMER
-            ) && victim is Player && state.style.swingHandler.isAccurateImpact(entity, victim)
-        ) {
+        if (!hasTimerActive(victim, GameAttributes.TELEBLOCK_TIMER) && victim is Player && state.style.swingHandler.isAccurateImpact(entity, victim)) {
             var ticks = 500
             if (victim.prayer[PrayerType.PROTECT_FROM_MAGIC]) {
                 ticks /= 2

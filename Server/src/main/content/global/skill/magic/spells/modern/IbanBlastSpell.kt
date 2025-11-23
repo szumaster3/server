@@ -32,9 +32,9 @@ class IbanBlastSpell : CombatSpell(
     Sounds.FIREWAVE_CAST_AND_FIRE_162,
     Sounds.FIREWAVE_HIT_163,
     Animation(Animations.IBAN_STAFF_708, Priority.HIGH),
-    Graphics(shared.consts.Graphics.IBAN_BLAST_CAST_87, 96),
+    Graphics(shared.consts.Graphics.IBAN_BLAST_CAST_87, 92),
     SpellProjectile.create(shared.consts.Graphics.IBAN_BLAST_PROJECTILE_88),
-    Graphics(shared.consts.Graphics.IBAN_BLAST_IMPACT_89, 96),
+    Graphics(shared.consts.Graphics.IBAN_BLAST_IMPACT_89, 92),
     Runes.FIRE_RUNE.getItem(5),
     Runes.DEATH_RUNE.getItem(1),
 ) {

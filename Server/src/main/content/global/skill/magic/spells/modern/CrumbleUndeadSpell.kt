@@ -31,9 +31,9 @@ class CrumbleUndeadSpell : CombatSpell(
     Sounds.CRUMBLE_CAST_AND_FIRE_122,
     Sounds.CRUMBLE_HIT_124,
     Animation(Animations.CAST_SPELL_PUSH_724, Priority.HIGH),
-    Graphics(shared.consts.Graphics.CRUMBLE_UNDEAD_CAST_145, 96),
+    Graphics(shared.consts.Graphics.CRUMBLE_UNDEAD_CAST_145, 92),
     SpellProjectile.create(shared.consts.Graphics.CRUMBLE_UNDEAD_PROJECTILE_146),
-    Graphics(shared.consts.Graphics.CRUMBLE_UNDEAD_IMPACT_147, 96),
+    Graphics(shared.consts.Graphics.CRUMBLE_UNDEAD_IMPACT_147, 92),
     Runes.EARTH_RUNE.getItem(2),
     Runes.AIR_RUNE.getItem(2),
     Runes.CHAOS_RUNE.getItem(1)

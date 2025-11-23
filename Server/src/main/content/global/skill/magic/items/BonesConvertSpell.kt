@@ -17,7 +17,7 @@ import shared.consts.Sounds
 
 class BonesConvertSpell : SpellListener("modern") {
     private val boneConvertAnimation = Animation(Animations.ENCHANT_JEWEL_722, Animator.Priority.HIGH)
-    private val boneConvertGraphics = Graphics(shared.consts.Graphics.BONES_TO_BANANAS_141, 96)
+    private val boneConvertGraphics = Graphics(shared.consts.Graphics.BONES_TO_BANANAS_141, 92)
 
     override fun defineListeners() {
         onCast(ModernSpells.BONES_TO_BANANAS, NONE) { player, _ ->

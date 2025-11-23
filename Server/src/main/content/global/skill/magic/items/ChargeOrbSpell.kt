@@ -35,7 +35,7 @@ class ChargeOrbSpell : SpellListener("modern") {
             requiredAmount = intArrayOf(3, 30, 1),
             level = 56,
             experience = 66.0,
-            graphics = Graphics(Gfx.POWERING_WATER_ORB_149, 90),
+            graphics = Graphics(Gfx.POWERING_WATER_ORB_149, 92),
             sound = Sounds.CHARGE_WATER_ORB_118,
             product = Items.WATER_ORB_571
         ),
@@ -45,7 +45,7 @@ class ChargeOrbSpell : SpellListener("modern") {
             requiredAmount = intArrayOf(3, 30, 1),
             level = 60,
             experience = 70.0,
-            graphics = Graphics(Gfx.POWERING_EARTH_ORB_151, 90),
+            graphics = Graphics(Gfx.POWERING_EARTH_ORB_151, 92),
             sound = Sounds.CHARGE_EARTH_ORB_115,
             product = Items.EARTH_ORB_575
         ),
@@ -55,7 +55,7 @@ class ChargeOrbSpell : SpellListener("modern") {
             requiredAmount = intArrayOf(3, 30, 1),
             level = 63,
             experience = 73.0,
-            graphics = Graphics(Gfx.POWERING_FIRE_ORB_152, 90),
+            graphics = Graphics(Gfx.POWERING_FIRE_ORB_152, 92),
             sound = Sounds.CHARGE_FIRE_ORB_117,
             product = Items.FIRE_ORB_569
         ),
@@ -65,7 +65,7 @@ class ChargeOrbSpell : SpellListener("modern") {
             requiredAmount = intArrayOf(3, 30, 1),
             level = 66,
             experience = 76.0,
-            graphics = Graphics(Gfx.POWERING_AIR_ORB_150, 90),
+            graphics = Graphics(Gfx.POWERING_AIR_ORB_150, 92),
             sound = Sounds.CHARGE_AIR_ORB_116,
             product = Items.AIR_ORB_573
         );

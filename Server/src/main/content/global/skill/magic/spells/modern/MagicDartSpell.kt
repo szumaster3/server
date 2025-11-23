@@ -33,8 +33,8 @@ class MagicDartSpell : CombatSpell(
     Sounds.WINDBOLT_HIT_219,
     Animation(1576, Priority.HIGH),
     null,
-    SpellProjectile.create(330),
-    Graphics(331, 96),
+    SpellProjectile.create(shared.consts.Graphics.SLAYER_DART_PROJECTILE_SLIGHTLY_BETTER_LOOKING_330),
+    Graphics(shared.consts.Graphics.SLAYER_DART_CONTACT_SAME_AS_ABOVE_SLIGHT_COLOR_CHANGE_331, 92),
     Runes.DEATH_RUNE.getItem(1),
     Runes.MIND_RUNE.getItem(4),
 ) {

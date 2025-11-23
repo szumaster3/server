@@ -28,10 +28,10 @@ class ModernElementalSpell private constructor(val def: ElementalSpellDefinition
 
     override fun getMaximumImpact(entity: Entity, victim: Entity, state: BattleState): Int =
         when (def.element) {
-            ElementalSpellDefinition.Element.AIR -> def.type.getImpactAmount(entity, victim, 1)
-            ElementalSpellDefinition.Element.WATER -> def.type.getImpactAmount(entity, victim, 2)
-            ElementalSpellDefinition.Element.EARTH -> def.type.getImpactAmount(entity, victim, 3)
-            ElementalSpellDefinition.Element.FIRE -> def.type.getImpactAmount(entity, victim, 4)
+            ElementalSpellDefinition.Element.AIR    -> def.type.getImpactAmount(entity, victim, 1)
+            ElementalSpellDefinition.Element.WATER  -> def.type.getImpactAmount(entity, victim, 2)
+            ElementalSpellDefinition.Element.EARTH  -> def.type.getImpactAmount(entity, victim, 3)
+            ElementalSpellDefinition.Element.FIRE   -> def.type.getImpactAmount(entity, victim, 4)
         }
 
     override fun newInstance(type: SpellType?): Plugin<SpellType?> {
