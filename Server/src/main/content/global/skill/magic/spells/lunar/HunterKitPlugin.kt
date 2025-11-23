@@ -8,7 +8,7 @@ import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import shared.consts.Items
 
-class HunterKit : InteractionListener {
+class HunterKitPlugin : InteractionListener {
     override fun defineListeners() {
         on(Items.HUNTER_KIT_11159, IntType.ITEM, "open") { player, _ ->
             if (freeSlots(player) < 6) {

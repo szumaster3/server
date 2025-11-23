@@ -3,7 +3,7 @@ package content.global.skill.magic.spells.lunar
 import content.global.skill.magic.spells.LunarSpells
 import core.api.*
 import core.game.component.Component
-import core.game.dialogue.Dialogue
+import core.game.dialogue.DialogueFile
 import core.game.node.Node
 import core.game.node.entity.Entity
 import core.game.node.entity.combat.spell.MagicSpell
@@ -16,7 +16,6 @@ import core.game.system.task.Pulse
 import core.game.world.GameWorld.Pulser
 import core.game.world.update.flag.context.Animation
 import core.game.world.update.flag.context.Graphics
-import core.plugin.ClassScanner
 import core.plugin.Initializable
 import core.plugin.Plugin
 import core.tools.RandomFunction
@@ -25,13 +24,9 @@ import shared.consts.Sounds
 @Initializable
 class SpellbookSwapSpell : MagicSpell(SpellBook.LUNAR, 96, 130.0, null, null, null, arrayOf(Item(Runes.LAW_RUNE.id, 1), Item(Runes.COSMIC_RUNE.id, 2), Item(Runes.ASTRAL_RUNE.id, 3))) {
 
-    private val ANIMATION = Animation(6299)
-    private val Graphics = Graphics(shared.consts.Graphics.SPELLBOOK_SWAP_GFX_1062)
-
     @Throws(Throwable::class)
     override fun newInstance(arg: SpellType?): Plugin<SpellType?> {
         SpellBook.LUNAR.register(LunarSpells.SPELLBOOK_SWAP, this)
-        ClassScanner.definePlugin(SpellbookSwapDialogue())
         return this
     }
 
@@ -42,11 +37,11 @@ class SpellbookSwapSpell : MagicSpell(SpellBook.LUNAR, 96, 130.0, null, null, nu
         }
         player.lock(9)
         visualize(player, ANIMATION, Graphics)
-        player.dialogueInterpreter.open(3264731)
+        openDialogue(player, SpellBookSwapDialogue())
         val id = RandomFunction.random(1, 500000)
         setAttribute(player, "spell:swap", id)
         Pulser.submit(
-            object : Pulse(20, player) {
+            object : Pulse(100, player) {
                 override fun pulse(): Boolean {
                     if (player.getAttribute("spell:swap", 0) == id) {
                         removeTemporarySpell(player)
@@ -59,37 +54,34 @@ class SpellbookSwapSpell : MagicSpell(SpellBook.LUNAR, 96, 130.0, null, null, nu
     }
 
     companion object {
+        private val ANIMATION = Animation(6299)
+        private val Graphics = Graphics(shared.consts.Graphics.SPELLBOOK_SWAP_GFX_1062)
+
         fun removeTemporarySpell(player: Player) {
             removeAttribute(player, "spell:swap")
             player.spellBookManager.setSpellBook(SpellBook.LUNAR)
             player.interfaceManager.openTab(Component(SpellBook.LUNAR.interfaceId))
         }
     }
-}
 
-class SpellbookSwapDialogue(player: Player? = null) : Dialogue(player) {
-    override fun open(vararg args: Any?): Boolean {
-        sendOptions(player, "Select a Spellbook:", "Ancient", "Modern")
-        return true
-    }
+    private class SpellBookSwapDialogue : DialogueFile() {
 
-    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
-        when (stage) {
-            0 -> {
-                var type = 0
-                when (buttonId) {
-                    1 -> type = 1
-                    2 -> type = 2
+        override fun handle(componentID: Int, buttonID: Int) {
+            when (stage) {
+                0 -> sendOptions(player!!, "Select a Spellbook:", "Ancient", "Modern")
+                1 -> {
+                    var type = 0
+                    when (buttonID) {
+                        1 -> type = 1
+                        2 -> type = 2
+                    }
+                    val book = if (type == 1) SpellBook.ANCIENT else SpellBook.MODERN
+                    playAudio(player!!, Sounds.LUNAR_CHANGE_SPELLBOOK_3613)
+                    player?.spellBookManager?.setSpellBook(book)
+                    player?.interfaceManager?.openTab(Component(book.interfaceId))
+                    end()
                 }
-                val book = if (type == 1) SpellBook.ANCIENT else SpellBook.MODERN
-                playAudio(player, Sounds.LUNAR_CHANGE_SPELLBOOK_3613)
-                player.spellBookManager.setSpellBook(book)
-                player.interfaceManager.openTab(Component(book.interfaceId))
-                end()
             }
         }
-        return true
     }
-
-    override fun getIds(): IntArray = intArrayOf(3264731)
 }
