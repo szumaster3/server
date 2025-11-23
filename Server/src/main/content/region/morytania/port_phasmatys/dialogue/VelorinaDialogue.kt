@@ -24,6 +24,7 @@ class VelorinaDialogue(player: Player? = null) : Dialogue(player) {
         if (!inEquipment(player, Items.GHOSTSPEAK_AMULET_552)) {
             npc("Woooo wooo wooooo woooo")
             stage = 4
+            return true
         }
 
         // Handling quest completion and dialogue options.

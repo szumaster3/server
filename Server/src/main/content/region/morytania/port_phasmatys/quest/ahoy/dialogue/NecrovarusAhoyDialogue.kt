@@ -41,7 +41,7 @@ class NecrovarusAhoyDialogue : DialogueFile() {
 
             in 5..10 -> when (stage) {
                 0 -> if (getAttribute(player!!, GhostsAhoyUtils.petitioncomplete, false)) {
-                    player("Necrovarus, I am preseting you with a petition form", "that has been signed by 10 citizens of Port Phasmatys.").also { stage++ }
+                    player("Necrovarus, I am presenting you with a petition form", "that has been signed by 10 citizens of Port Phasmatys.").also { stage++ }
                 } else {
                     npc(FaceAnim.ANGRY, "Get out of my sight!! Or I promise you that you will", "regret your insolence for the rest of eternity!!!").also { stage = END_DIALOGUE }
                 }

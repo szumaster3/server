@@ -34,6 +34,7 @@ class GiantLobsterNPC(id: Int = 0, location: Location? = null) : AbstractNPC(id,
                     override fun pulse(): Boolean {
                         giantLobster.init()
                         sendMessage(player, "You are attacked by a giant lobster!!")
+                        setAttribute(player, "ghostsAhoyCrabSpawned", true)
                         registerHintIcon(player, giantLobster)
                         giantLobster.attack(player)
                         return true
@@ -48,6 +49,7 @@ class GiantLobsterNPC(id: Int = 0, location: Location? = null) : AbstractNPC(id,
             clearHintIcon(killer)
             setAttribute(killer,
                 GhostsAhoyUtils.lastMapScrap, true)
+            removeAttribute(killer, "ghostsAhoyCrabSpawned")
         }
         clear()
         super.finalizeDeath(killer)

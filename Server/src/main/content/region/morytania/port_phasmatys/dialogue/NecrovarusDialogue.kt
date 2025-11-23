@@ -1,10 +1,7 @@
 package content.region.morytania.port_phasmatys.dialogue
 
 import content.region.morytania.port_phasmatys.quest.ahoy.dialogue.NecrovarusAhoyDialogue
-import core.api.hasRequirement
-import core.api.inEquipment
-import core.api.isQuestComplete
-import core.api.openDialogue
+import core.api.*
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
 import core.game.node.entity.player.Player
@@ -22,20 +19,22 @@ class NecrovarusDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         if (!inEquipment(player, Items.GHOSTSPEAK_AMULET_552)) {
-            core.api.sendDialogue(player, "You cannot understand the ghost.").also { stage = END_DIALOGUE }
+            sendDialogue(player, "You cannot understand the ghost.").also { stage = END_DIALOGUE }
             return true
         }
-        if (hasRequirement(player, Quests.GHOSTS_AHOY) && !isQuestComplete(player, Quests.GHOSTS_AHOY)) {
-            end()
+
+        if (isQuestInProgress(player, Quests.GHOSTS_AHOY, 1,99)) {
             openDialogue(player, NecrovarusAhoyDialogue())
             return true
         }
+
         if (isQuestComplete(player, Quests.GHOSTS_AHOY)) {
             player("Told you I'd defeat you, Necrovarus. My advice to", "you is to pass over to the next world yourself with", "everybody else.")
             stage = 4
-        } else {
-            options("What is this place?", "What happened to everyone here?", "How do I get into the town?")
+            return true
         }
+
+        options("What is this place?", "What happened to everyone here?", "How do I get into the town?")
         return true
     }
 

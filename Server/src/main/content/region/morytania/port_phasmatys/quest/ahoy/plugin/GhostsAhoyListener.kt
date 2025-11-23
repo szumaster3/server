@@ -10,6 +10,7 @@ import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.interaction.InterfaceListener
 import core.game.node.entity.npc.NPC
+import core.game.node.entity.player.Player
 import core.game.node.scenery.Scenery
 import core.game.world.map.Location
 import core.tools.END_DIALOGUE
@@ -19,6 +20,7 @@ import shared.consts.Scenery as Objects
 class GhostsAhoyListener : InteractionListener, InterfaceListener {
 
     override fun defineListeners() {
+        /*
         on(Objects.DOOR_5244, IntType.SCENERY, "open") { player, node ->
             if (node.location == Location(3461, 3555, 0)) {
                 DoorActionHandler.handleDoor(player, node.asScenery())
@@ -49,6 +51,7 @@ class GhostsAhoyListener : InteractionListener, InterfaceListener {
             }
             return@on false
         }
+        */
 
         on(Objects.COFFIN_5278, IntType.SCENERY, "open") { player, node ->
             sendMessage(player, "The coffin creaks open...")
@@ -192,7 +195,8 @@ class GhostsAhoyListener : InteractionListener, InterfaceListener {
                             1 -> GhostsAhoyUtils.handleDyeSelection(player, buttonID)
                         }
                     }
-                }, node.asItem(),)
+                }, node.asItem()
+            )
             return@onUseWith true
         }
 
@@ -202,100 +206,70 @@ class GhostsAhoyListener : InteractionListener, InterfaceListener {
             return@on true
         }
 
-        on(Objects.CLOSED_CHEST_5272, IntType.SCENERY, "open") { player, _ ->
-            if (inBorders(player, 3619, 3543, 3617, 3541)) {
-                animate(player, Animations.HUMAN_OPEN_CHEST_536)
-                addScenery(Objects.OPEN_CHEST_5273, Location(3618, 3542, 0), 0, 10)
-                removeScenery(Scenery(Objects.CLOSED_CHEST_5270, Location(3618, 3542, 0)))
-            } else {
-                animate(player, Animations.HUMAN_OPEN_CHEST_536)
-                addScenery(Objects.OPEN_CHEST_5273, Location(3606, 3564, 0), 3, 10)
-                removeScenery(Scenery(Objects.CLOSED_CHEST_5272, Location(3606, 3564, 0)))
-            }
+        on(Objects.CLOSED_CHEST_5272, IntType.SCENERY, "open") { player, node ->
+            animate(player, Animations.HUMAN_OPEN_CHEST_536)
+            replaceScenery(node.asScenery(), node.id + 1, -1)
             return@on true
         }
 
-        onUseWith(IntType.SCENERY, Items.CHEST_KEY_2404, Objects.CLOSED_CHEST_5270) { player, _, _ ->
+        onUseWith(IntType.SCENERY, Items.CHEST_KEY_2404, Objects.CLOSED_CHEST_5270) { player, _, with ->
             animate(player, Animations.HUMAN_OPEN_CHEST_536)
             removeItem(player, Items.CHEST_KEY_2404)
-            sendItemDialogue(player, Items.CHEST_KEY_2404, "You unlock the chest.")
-            addScenery(Objects.OPEN_CHEST_5273, Location(3619, 3545, 1), 2, 10)
-            removeScenery(Scenery(Objects.CLOSED_CHEST_5270, Location(3619, 3545, 1)))
+            if (removeItem(player, Items.CHEST_KEY_2404)) {
+                animate(player, Animations.HUMAN_OPEN_CHEST_536)
+                sendItemDialogue(player, Items.CHEST_KEY_2404, "You unlock the chest.")
+                replaceScenery(with.asScenery(), with.id + 3, -1)
+            }
             return@onUseWith true
         }
 
-        on(Objects.OPEN_CHEST_5273, IntType.SCENERY, "close") { player, _ ->
-            val chestData: List<Pair<Location, Pair<Int, Int>>> = listOf(
-                Location(3606, 3564, 0) to (3 to 10),
-                Location(3618, 3542, 0) to (0 to 10),
-                Location(3619, 3545, 1) to (2 to 10)
-            )
-
-            val chest = when {
-                inBorders(player, 3604, 3563, 3607, 3565) -> chestData[0]
-                inBorders(player, 3619, 3543, 3617, 3541) -> chestData[1]
-                else -> chestData[2]
-            }
-
-            val (location, params) = chest
-            val (rotation, delay) = params
-
-            addScenery(Objects.CLOSED_CHEST_5270, location, rotation, delay)
-            removeScenery(Scenery(Objects.OPEN_CHEST_5273, location))
-
+        on(Objects.OPEN_CHEST_5273, IntType.SCENERY, "close") { _, node ->
+            replaceScenery(node.asScenery(), node.id - 3, -1)
             return@on true
         }
 
         on(Objects.OPEN_CHEST_5273, IntType.SCENERY, "search") { player, _ ->
-            val hasMapScrapA = hasAnItem(player, Items.MAP_SCRAP_4274).container != null
-            val hasMapScrapB = hasAnItem(player, Items.MAP_SCRAP_4276).container != null
-            val hasMapScrapC = hasAnItem(player, Items.MAP_SCRAP_4275).container != null
-
-            when {
-                inBorders(player, 3618, 3544, 3620, 3546) -> {
-                    if (!hasMapScrapA) {
-                        if (freeSlots(player) > 1) {
-                            addItem(player, Items.MAP_SCRAP_4274, 1)
-                            sendItemDialogue(player, Items.MAP_SCRAP_4274, "You find a piece of a map inside the chest.")
-                        } else {
-                            sendItemDialogue(player, Items.MAP_SCRAP_4274, "You unlock the chest and find a map inside but you don't have enough room to take it.")
-                        }
-                    } else {
-                        sendDialogue(player, "You already have the map from this chest.")
-                    }
+            fun giveScrap(player: Player, hasScrap: Boolean, scrapId: Int) {
+                if (hasScrap) {
+                    sendDialogue(player, "You already have the map from this chest.")
+                    return
                 }
 
-                inBorders(player, 3604, 3563, 3607, 3565) -> {
-                    if (!hasMapScrapB) {
-                        if (freeSlots(player) > 1) {
-                            addItem(player, Items.MAP_SCRAP_4276, 1)
-                            sendItemDialogue(player, Items.MAP_SCRAP_4276, "You find a piece of a map inside the chest.")
-                        } else {
-                            sendItemDialogue(player, Items.MAP_SCRAP_4276, "You find a map inside but you don't have enough room to take it.")
-                        }
-                    } else {
-                        sendDialogue(player, "You already have the map from this chest.")
-                    }
-                }
-
-                inBorders(player, 3619, 3543, 3617, 3541) -> {
-                    if (getAttribute(player, GhostsAhoyUtils.lastMapScrap, false)) {
-                        if (!hasMapScrapC) {
-                            if (freeSlots(player) > 1) {
-                                addItem(player, Items.MAP_SCRAP_4275, 1)
-                                sendItemDialogue(player, Items.MAP_SCRAP_4275, "You find a piece of a map inside the chest.")
-                            } else {
-                                sendItemDialogue(player, Items.MAP_SCRAP_4275, "You find a map inside but you don't have enough room to take it.")
-                            }
-                        } else {
-                            sendDialogue(player, "You already have the map from this chest.")
-                        }
-                    } else {
-                        spawnGiantLobster(player)
-                    }
+                if (freeSlots(player) > 1) {
+                    addItem(player, scrapId, 1)
+                    sendItemDialogue(player, scrapId, "You find a piece of a map inside the chest.")
+                } else {
+                    sendItemDialogue(player, scrapId, "You find a map inside but you don't have enough room to take it.")
                 }
             }
 
+            val hasA = hasAnItem(player, Items.MAP_SCRAP_4274).container != null
+            val hasB = hasAnItem(player, Items.MAP_SCRAP_4276).container != null
+            val hasC = hasAnItem(player, Items.MAP_SCRAP_4275).container != null
+
+            val crabSpawned = getAttribute(player, "ghostsAhoyCrabSpawned", false)
+
+            when {
+                inBorders(player, 3618, 3544, 3620, 3546) ->
+                    giveScrap(player, hasA, Items.MAP_SCRAP_4274)
+
+                inBorders(player, 3604, 3563, 3607, 3565) ->
+                    giveScrap(player, hasB, Items.MAP_SCRAP_4276)
+
+                inBorders(player, 3619, 3543, 3617, 3541) -> {
+                    if (crabSpawned) {
+                        giveScrap(player, hasC, Items.MAP_SCRAP_4275)
+                        return@on true
+                    }
+
+                    if (!getAttribute(player, GhostsAhoyUtils.lastMapScrap, false)) {
+                        spawnGiantLobster(player)
+                        return@on true
+                    }
+
+                    giveScrap(player, hasC, Items.MAP_SCRAP_4275)
+                }
+            }
             return@on true
         }
     }

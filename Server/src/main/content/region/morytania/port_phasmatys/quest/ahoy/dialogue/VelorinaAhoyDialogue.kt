@@ -8,6 +8,7 @@ import core.tools.END_DIALOGUE
 import shared.consts.Items
 import shared.consts.NPCs
 import shared.consts.Quests
+import shared.consts.Vars
 
 class VelorinaAhoyDialogue : DialogueFile() {
     override fun handle(componentID: Int, buttonID: Int) {
@@ -59,6 +60,7 @@ class VelorinaAhoyDialogue : DialogueFile() {
                 32 -> {
                     end()
                     setQuestStage(player!!, Quests.GHOSTS_AHOY, 1)
+                    setVarbit(player!!, Vars.VARBIT_GHOSTS_AHOY_PROGRESS_217, 1, true)
                 }
             }
 

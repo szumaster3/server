@@ -7,26 +7,34 @@ import core.tools.RandomFunction
 import shared.consts.NPCs
 
 class GravingasNPC : NPCBehavior(NPCs.GRAVINGAS_1685) {
-    private var timer = 0L
-    private val forceChat =
-        arrayOf(
-            "Down with Necrovaus!!",
-            "Rise up my fellow ghosts, and we shall be victorious!",
-            "Power to the Ghosts!!",
-            "Rise together, Ghosts without a cause!!",
-            "United we conquer - divided we fall!!",
-            "We shall overcome!!",
-            "Let Necrovarus know we want out!!",
-            "Don't stay silent - victory in numbers!!",
-        )
+
+    companion object {
+        private const val TICK_INTERVAL = 15
+        private const val CHANCE_TO_TALK = 2
+    }
+
+    private var ticksToNextChat = RandomFunction.random(TICK_INTERVAL)
+
+    private val forceChat = listOf(
+        "Down with Necrovaus!!",
+        "Rise up my fellow ghosts, and we shall be victorious!",
+        "Power to the Ghosts!!",
+        "Rise together, Ghosts without a cause!!",
+        "United we conquer - divided we fall!!",
+        "We shall overcome!!",
+        "Let Necrovarus know we want out!!",
+        "Don't stay silent - victory in numbers!!",
+    )
 
     override fun tick(self: NPC): Boolean {
-        val now = System.currentTimeMillis()
-        if (now < timer) return true
-        if (RandomFunction.random(10, 100) == 5) {
+        if (--ticksToNextChat > 0) return true
+
+        ticksToNextChat = TICK_INTERVAL
+
+        if (RandomFunction.roll(CHANCE_TO_TALK)) {
             sendChat(self, forceChat.random())
-            timer = now + 3000
         }
+
         return true
     }
 }
