@@ -25,59 +25,59 @@ class AncientSpellbookTeleport : SpellListener("ancient") {
         onCast(AncientSpells.EDGEVILLE_TELEPORT, NONE) { player, _ ->
             val runes = emptyArray<Item>()
             requires(player, 0, runes)
-            sendAncientTeleport(player, 0.0, "Edgeville", Location.create(3095, 3513, 0), runes, isHome = true)
+            sendTeleport(player, 0.0, "Edgeville", Location.create(3095, 3513, 0), runes, isHome = true)
         }
 
         onCast(AncientSpells.PADDEWWA_TELEPORT, NONE) { player, _ ->
             val runes = arrayOf(Item(Runes.AIR_RUNE.id, 1), Item(Runes.FIRE_RUNE.id, 1), Item(Runes.LAW_RUNE.id, 2))
             requires(player, 54, runes)
-            sendAncientTeleport(player, 64.0, "Paddewwa", Location.create(3053, 9555, 0), runes)
+            sendTeleport(player, 64.0, "Paddewwa", Location.create(3098, 9883, 0), runes)
         }
 
         onCast(AncientSpells.SENNTISTEN_TELEPORT, NONE) { player, _ ->
             val runes = arrayOf(Item(Runes.LAW_RUNE.id, 2), Item(Runes.SOUL_RUNE.id, 1))
             requires(player, 60, runes)
-            sendAncientTeleport(player, 70.0, "Senntisten", Location.create(3308, 3337, 0), runes)
+            sendTeleport(player, 70.0, "Senntisten", Location.create(3321, 3336, 0), runes)
         }
 
         onCast(AncientSpells.KHARYRLL_TELEPORT, NONE) { player, _ ->
             val runes = arrayOf(Item(Runes.BLOOD_RUNE.id, 1), Item(Runes.LAW_RUNE.id, 2))
             requires(player, 66, runes)
-            sendAncientTeleport(player, 76.0, "Kharyrll", Location.create(3494, 3471, 0), runes)
+            sendTeleport(player, 76.0, "Kharyrll", Location.create(3494, 3471, 0), runes)
         }
 
         onCast(AncientSpells.LASSAR_TELEPORT, NONE) { player, _ ->
             val runes = arrayOf(Item(Runes.WATER_RUNE.id, 4), Item(Runes.LAW_RUNE.id, 2))
             requires(player, 72, runes)
-            sendAncientTeleport(player, 82.0, "Lassar", Location.create(3005, 3473, 0), runes)
+            sendTeleport(player, 82.0, "Lassar", Location.create(3005, 3473, 0), runes)
         }
 
         onCast(AncientSpells.DAREEYAK_TELEPORT, NONE) { player, _ ->
             val runes = arrayOf(Item(Runes.AIR_RUNE.id, 2), Item(Runes.FIRE_RUNE.id, 3), Item(Runes.LAW_RUNE.id, 2))
             requires(player, 78, runes)
-            sendAncientTeleport(player, 88.0, "Dareeyak", Location.create(3162, 3676, 0), runes)
+            sendTeleport(player, 88.0, "Dareeyak", Location.create(2965, 3695, 0), runes)
         }
 
         onCast(AncientSpells.CARRALLANGER_TELEPORT, NONE) { player, _ ->
             val runes = arrayOf(Item(Runes.LAW_RUNE.id, 2), Item(Runes.SOUL_RUNE.id, 2))
             requires(player, 84, runes)
-            sendAncientTeleport(player, 94.0, "Carrallanger", Location.create(3287, 3883, 0), runes)
+            sendTeleport(player, 94.0, "Carrallanger", Location.create(3218, 3678, 0), runes)
         }
 
         onCast(AncientSpells.ANNAKARL_TELEPORT, NONE) { player, _ ->
             val runes = arrayOf(Item(Runes.BLOOD_RUNE.id, 2), Item(Runes.LAW_RUNE.id, 2))
             requires(player, 90, runes)
-            sendAncientTeleport(player, 100.0, "Annakarl", Location.create(3735, 3071, 0), runes)
+            sendTeleport(player, 100.0, "Annakarl", Location.create(3288, 3886, 0), runes)
         }
 
         onCast(AncientSpells.GHORROCK_TELEPORT, NONE) { player, _ ->
             val runes = arrayOf(Item(Runes.WATER_RUNE.id, 8), Item(Runes.LAW_RUNE.id, 2))
             requires(player, 96, runes)
-            sendAncientTeleport(player, 106.0, "Ghorrock", Location.create(2972, 3873, 0), runes)
+            sendTeleport(player, 106.0, "Ghorrock", Location.create(2975, 3877, 0), runes)
         }
     }
 
-    private fun sendAncientTeleport(player: Player, xp: Double, destName: String, loc: Location, runes: Array<Item>, isHome: Boolean = false) {
+    private fun sendTeleport(player: Player, xp: Double, destName: String, loc: Location, runes: Array<Item>, isHome: Boolean = false) {
         if (player.isTeleBlocked) {
             sendMessage(player, "A magical force has stopped you from teleporting.")
             return
