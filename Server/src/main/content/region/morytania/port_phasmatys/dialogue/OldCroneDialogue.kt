@@ -38,39 +38,61 @@ class OldCroneDialogue(player: Player? = null) : Dialogue(player) {
         val sweptAwayComplete = isQuestComplete(player, Quests.SWEPT_AWAY)
         val hasBroomstick = inInventory(player, Items.BROOMSTICK_14057)
         val labelsComplete = getAttribute(player, GameAttributes.QUEST_SWEPT_AWAY_LABELS_COMPLETE, false)
+        val enchantReceived = getAttribute(player, GameAttributes.QUEST_SWEPT_AWAY_OLD_CRONE_ENCH_RECEIVED, false)
 
-        val sweptAwayReady = sweptAwayComplete && hasBroomstick && magicLevel >= MIN_MAGIC_LEVEL_FOR_BROOM && labelsComplete && !getAttribute(player, GameAttributes.QUEST_SWEPT_AWAY_OLD_CRONE_ENCH_RECEIVED, false)
+        val ghostsAhoyReady = ghostsAhoy >= QUEST_STAGE_GHOSTS_AHOY_REQUIRED
+        val animalMagnetismActive = animalMagnetism in ANIMAL_MAGNETISM_ACTIVE_RANGE
+        val animalMagnetismDoneOrStarted = animalMagnetism < QUEST_COMPLETE || isQuestComplete(player, Quests.ANIMAL_MAGNETISM)
+
+        val sweptAwayReady =
+            sweptAwayComplete &&
+                    hasBroomstick &&
+                    magicLevel >= MIN_MAGIC_LEVEL_FOR_BROOM &&
+                    labelsComplete &&
+                    !enchantReceived
+
 
         when {
-            // Ghosts Ahoy >= 3 and Animal Magnetism started or complete
-            ghostsAhoy >= QUEST_STAGE_GHOSTS_AHOY_REQUIRED &&
-                    (animalMagnetism < QUEST_COMPLETE || isQuestComplete(player, Quests.ANIMAL_MAGNETISM)) -> {
+            /**
+             * PRIORITY 1 — Ghosts Ahoy special dialogue
+             */
+            ghostsAhoyReady && animalMagnetismDoneOrStarted -> {
                 openDialogue(player, OldCroneAhoyDialogue())
             }
 
-            // Both quests in progress
-            animalMagnetism in ANIMAL_MAGNETISM_ACTIVE_RANGE && ghostsAhoy >= QUEST_STAGE_GHOSTS_AHOY_REQUIRED -> {
+            /**
+             * PRIORITY 2 — Both quests active
+             */
+            animalMagnetismActive && ghostsAhoyReady -> {
                 options(
                     "Talk about quest. (Animal Magnetism)",
                     "Talk about quest. (Ghosts Ahoy)",
                     "Nevermind."
-                ).also { stage = 1 }
+                )
+                stage = 1
             }
 
-            // Only Animal Magnetism in progress
-            animalMagnetism in ANIMAL_MAGNETISM_ACTIVE_RANGE -> {
+            /**
+             * PRIORITY 3 — Only Animal Magnetism active
+             */
+            animalMagnetismActive -> {
                 openDialogue(player, OldCroneAnimalDialogue())
             }
 
-            // Swept Away ready
+            /**
+             * PRIORITY 4 — Swept Away broom enchant ready
+             */
             sweptAwayReady -> {
                 options(
                     "Hello, old woman.",
                     "Could you enchant this broom for me?"
-                ).also { stage = 2 }
+                )
+                stage = 2
             }
 
-            // Default dialogue
+            /**
+             * PRIORITY 5 — fallback.
+             */
             else -> {
                 player("Hello, old woman.")
             }
