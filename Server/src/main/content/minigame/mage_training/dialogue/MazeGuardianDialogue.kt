@@ -1,6 +1,6 @@
 package content.minigame.mage_training.dialogue
 
-import content.minigame.mage_training.plugin.TelekineticTheatrePlugin
+import content.minigame.mage_training.plugin.rooms.TelekineticTheatrePlugin
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
 import core.game.node.entity.npc.NPC
@@ -21,10 +21,7 @@ class MazeGuardianDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    override fun handle(
-        interfaceId: Int,
-        buttonId: Int,
-    ): Boolean {
+    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> npc(FaceAnim.OLD_NORMAL, "Well done on releasing me. Would you like to try", "another maze?").also { stage++ }
             1 -> options("Yes please!", "No thanks.").also { stage++ }

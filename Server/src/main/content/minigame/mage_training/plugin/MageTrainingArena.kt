@@ -2,6 +2,7 @@ package content.minigame.mage_training.plugin
 
 import content.global.skill.magic.spells.modern.EnchantSpell
 import content.global.skill.magic.spells.modern.TelekineticGrabSpell
+import content.minigame.mage_training.plugin.rooms.TelekineticTheatrePlugin
 import core.api.*
 import core.cache.def.impl.ItemDefinition
 import core.cache.def.impl.NPCDefinition

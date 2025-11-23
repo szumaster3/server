@@ -1,12 +1,11 @@
 package content.global.skill.magic.spells.modern
 
-import content.minigame.mage_training.plugin.EnchantmentChamberPlugin
+import content.minigame.mage_training.plugin.rooms.EnchantmentChamberPlugin
 import content.minigame.mage_training.plugin.MTAType
 import core.api.*
 import core.game.node.Node
 import core.game.node.entity.Entity
 import core.game.node.entity.combat.spell.MagicSpell
-import core.game.node.entity.combat.spell.Runes
 import core.game.node.entity.combat.spell.SpellType
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.SpellBookManager
@@ -14,10 +13,6 @@ import core.game.node.entity.player.link.audio.Audio
 import core.game.node.item.Item
 import core.game.world.update.flag.context.Graphics
 import core.plugin.Plugin
-import shared.consts.Animations
-import shared.consts.Items
-import shared.consts.Sounds
-import shared.consts.Graphics as Graphic
 
 /**
  * Represents the Enchant spell for MTA.

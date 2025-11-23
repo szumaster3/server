@@ -1,5 +1,9 @@
 package content.minigame.mage_training.plugin
 
+import content.minigame.mage_training.plugin.rooms.AlchemistPlaygroundPlugin
+import content.minigame.mage_training.plugin.rooms.CreatureGraveyardPlugin
+import content.minigame.mage_training.plugin.rooms.EnchantmentChamberPlugin
+import content.minigame.mage_training.plugin.rooms.TelekineticTheatrePlugin
 import core.api.*
 import core.game.component.Component
 import core.game.node.entity.player.Player
@@ -28,7 +32,7 @@ enum class MTAType(
         Vars.VARBIT_MTA_TELEKINETIC_POINTS_1485,
         null,
         Location.create(3363, 3316, 0),
-        TelekineticTheatrePlugin(),
+        TelekineticTheatrePlugin()
     ) {
         override fun hasRequirement(player: Player): Boolean {
             val magicLevel = getStatLevel(player, Skills.MAGIC)
@@ -50,7 +54,7 @@ enum class MTAType(
         Vars.VARBIT_MTA_ALCHEMIST_POINTS_1489,
         Location(3366, 9623, 2),
         Location(3363, 3320, 0),
-        AlchemistPlaygroundPlugin.ZONE,
+        AlchemistPlaygroundPlugin.ZONE
     ) {
         override fun hasRequirement(player: Player): Boolean {
             val magicLevel = getStatLevel(player, Skills.MAGIC)
@@ -84,7 +88,7 @@ enum class MTAType(
         Vars.VARBIT_MTA_ENCHANTMENT_POINTS_1488,
         Location(3363, 9649, 0),
         Location(3361, 3318, 0),
-        EnchantmentChamberPlugin.ZONE,
+        EnchantmentChamberPlugin.ZONE
     ) {
         override fun hasRequirement(player: Player): Boolean {
             val magicLevel = getStatLevel(player, Skills.MAGIC)
@@ -102,7 +106,7 @@ enum class MTAType(
         Vars.VARBIT_MTA_GRAVEYARD_POINTS_1486,
         Location(3363, 9639, 1),
         Location(3365, 3318, 0),
-        CreatureGraveyardPlugin.ZONE,
+        CreatureGraveyardPlugin.ZONE
     ) {
         override fun hasRequirement(player: Player): Boolean {
             val magicLevel = getStatLevel(player, Skills.MAGIC)
@@ -121,8 +125,6 @@ enum class MTAType(
             return true
         }
     }, ;
-
-    private val playerMagicLevels: MutableMap<Player, Int> = HashMap()
 
     fun enter(player: Player) {
         if (!player.getSavedData().activityData.isStartedMta ||

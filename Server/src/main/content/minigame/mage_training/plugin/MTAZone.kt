@@ -1,7 +1,5 @@
 package content.minigame.mage_training.plugin
 
-import content.data.getRespawnLocation
-import core.ServerConstants
 import core.api.*
 import core.game.interaction.Option
 import core.game.node.Node
@@ -20,7 +18,7 @@ open class MTAZone(name: String?, val items: Array<Item>) : MapZone(name.toStrin
     var type: MTAType? = null
 
     init {
-        setZoneType(ZoneType.SAFE.id)
+        zoneType = ZoneType.SAFE.id
     }
 
     override fun enter(entity: Entity): Boolean {

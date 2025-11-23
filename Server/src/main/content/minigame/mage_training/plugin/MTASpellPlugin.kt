@@ -2,6 +2,7 @@ package content.minigame.mage_training.plugin
 
 import content.global.skill.magic.SpellListener
 import content.global.skill.magic.spells.ModernSpells
+import content.minigame.mage_training.plugin.rooms.AlchemistPlaygroundPlugin
 import core.api.*
 import core.game.node.entity.player.Player
 import core.game.node.item.Item
@@ -10,7 +11,7 @@ import shared.consts.Animations
 import shared.consts.Items
 import shared.consts.Sounds
 
-class MTASpellLPlugin : SpellListener("modern") {
+class MTASpellPlugin : SpellListener("modern") {
     private val lowAlchemyAnimation = Animations.HUMAN_CAST_LOW_ALCHEMY_SPELL_712
     private val lowAlchemyGraphics = Graphics(112, 5)
     private val highAlchemyAnimation = Animations.HIGH_ALCHEMY_713

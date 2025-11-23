@@ -1,5 +1,7 @@
-package content.minigame.mage_training.plugin
+package content.minigame.mage_training.plugin.rooms
 
+import content.minigame.mage_training.plugin.MTAType
+import content.minigame.mage_training.plugin.MTAZone
 import core.api.*
 import core.game.interaction.Option
 import core.game.node.Node
