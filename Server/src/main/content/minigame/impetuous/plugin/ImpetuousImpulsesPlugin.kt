@@ -14,6 +14,7 @@ import shared.consts.Items
 import shared.consts.Scenery
 
 class ImpetuousImpulsesPlugin : InteractionListener {
+
     override fun defineListeners() {
         on(wheatSceneryIDs, IntType.SCENERY, "push-through") { player, node ->
             if (getStatLevel(player, Skills.HUNTER) < 17) {
@@ -124,14 +125,13 @@ class ImpetuousImpulsesPlugin : InteractionListener {
     }
 
     companion object {
-        val wheatSceneryIDs =
-            intArrayOf(
-                Scenery.MAGICAL_WHEAT_25016,
-                Scenery.MAGICAL_WHEAT_25029,
-                Scenery.MAGICAL_WHEAT_25019,
-                Scenery.MAGICAL_WHEAT_25018,
-                Scenery.MAGICAL_WHEAT_25020,
-                Scenery.MAGICAL_WHEAT_25021,
-            )
+        val wheatSceneryIDs = intArrayOf(
+            Scenery.MAGICAL_WHEAT_25016,
+            Scenery.MAGICAL_WHEAT_25029,
+            Scenery.MAGICAL_WHEAT_25019,
+            Scenery.MAGICAL_WHEAT_25018,
+            Scenery.MAGICAL_WHEAT_25020,
+            Scenery.MAGICAL_WHEAT_25021,
+        )
     }
 }

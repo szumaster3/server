@@ -24,7 +24,7 @@ import shared.consts.Regions
 class ImpetuousImpulses : MapZone("puro puro", true), Plugin<Any> {
 
     init {
-        setZoneType(ZoneType.SAFE.id)
+        zoneType = ZoneType.SAFE.id
     }
 
     @Throws(Throwable::class)
@@ -212,16 +212,15 @@ class ImpetuousImpulses : MapZone("puro puro", true), Plugin<Any> {
     companion object {
         private val WHEAT: MutableList<WheatSet> = ArrayList(20)
 
-        private val PULSE: Pulse =
-            object : Pulse(1) {
-                override fun pulse(): Boolean {
-                    for (set in WHEAT) {
-                        if (set.canWhilt()) {
-                            set.whilt()
-                        }
+        private val PULSE: Pulse = object : Pulse(1) {
+            override fun pulse(): Boolean {
+                for (set in WHEAT) {
+                    if (set.canWhilt()) {
+                        set.whilt()
                     }
-                    return false
                 }
+                return false
             }
+        }
     }
 }

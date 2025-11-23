@@ -16,6 +16,7 @@ import shared.consts.Items
 import shared.consts.NPCs
 
 class ImpDefenderNPC : NPCBehavior(NPCs.IMP_DEFENDER_6074) {
+
     override fun onCreation(self: NPC) {
         self.isWalks = true
         self.isNeverWalks = false
@@ -24,7 +25,6 @@ class ImpDefenderNPC : NPCBehavior(NPCs.IMP_DEFENDER_6074) {
 
     override fun tick(self: NPC): Boolean {
         if (!RandomFunction.roll(10)) return true
-
         var nextCaptureTick = getAttribute(self, "next-capture-tick", 0)
         if (getWorldTicks() < nextCaptureTick) return true
 
@@ -42,14 +42,10 @@ class ImpDefenderNPC : NPCBehavior(NPCs.IMP_DEFENDER_6074) {
         return true
     }
 
-    private class TryReleasePulse(
-        val self: NPC,
-    ) : Pulse() {
+    private class TryReleasePulse(val self: NPC) : Pulse() {
         companion object {
             const val catchPlayerLow = 35.0
-
             const val catchPlayerHigh = 280.0
-
             const val impRepellentBonus = 20.0
         }
 
@@ -71,22 +67,12 @@ class ImpDefenderNPC : NPCBehavior(NPCs.IMP_DEFENDER_6074) {
                     var hasRepellent = inInventory(player, Items.IMP_REPELLENT_11262)
                     var baseRoll = RandomFunction.randomDouble(100.0)
                     var playerRoll =
-                        RandomFunction.getSkillSuccessChance(
-                            catchPlayerLow + if (hasRepellent) impRepellentBonus else 0.0,
-                            catchPlayerHigh + if (hasRepellent) impRepellentBonus else 0.0,
-                            getStatLevel(player, Skills.THIEVING),
-                        )
+                        RandomFunction.getSkillSuccessChance(catchPlayerLow + if (hasRepellent) impRepellentBonus else 0.0, catchPlayerHigh + if (hasRepellent) impRepellentBonus else 0.0, getStatLevel(player, Skills.THIEVING))
                     if (playerRoll < baseRoll) {
                         sendChat(self, "Be free!")
                         animate(self, 6629)
                         removeItem(player, jarItem)
-                        var loc =
-                            ZoneBorders(
-                                self.location.x - 2,
-                                self.location.y - 2,
-                                self.location.x + 2,
-                                self.location.y + 2,
-                            ).randomLoc
+                        var loc = ZoneBorders(self.location.x - 2, self.location.y - 2, self.location.x + 2, self.location.y + 2).randomLoc
                         GroundItemManager.create(Item(Items.IMPLING_JAR_11260), loc, player)
                     }
                     resetFace(self)
