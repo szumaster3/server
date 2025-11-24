@@ -19,12 +19,14 @@ import shared.consts.Items
 @Initializable
 class SawmillInterface : ComponentPlugin() {
 
-    private val buttonMap = listOf(
-        102..107 to PlankType.WOOD,
-        109..113 to PlankType.OAK,
-        115..119 to PlankType.TEAK,
-        121..125 to PlankType.MAHOGANY
-    )
+    companion object {
+        private val buttonMap = listOf(
+            102..107 to PlankType.WOOD,
+            109..113 to PlankType.OAK,
+            115..119 to PlankType.TEAK,
+            121..125 to PlankType.MAHOGANY
+        )
+    }
 
     override fun newInstance(arg: Any?): Plugin<Any> {
         ComponentDefinition.put(Components.POH_SAWMILL_403, this)
@@ -70,13 +72,12 @@ class SawmillInterface : ComponentPlugin() {
         }
 
         removeItem(player, Item(Items.COINS_995, plank.price * amount))
+        removeItem(player, plank.log.asItem().also { it.amount = amount })
+        player.inventory.add(plank.plank.asItem().also { it.amount = amount })
 
         when {
             plank == PlankType.WOOD -> finishDiaryTask(player, DiaryType.VARROCK, 0, 3)
             plank == PlankType.MAHOGANY && amount >= 20 -> finishDiaryTask(player, DiaryType.VARROCK, 1, 15)
         }
-
-        removeItem(player, plank.log.asItem().also { it.amount = amount })
-        player.inventory.add(plank.plank.asItem().also { it.amount = amount })
     }
 }
