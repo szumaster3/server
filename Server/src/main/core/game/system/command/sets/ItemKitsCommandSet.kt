@@ -31,6 +31,10 @@ class ItemKitsCommandSet : CommandSet(Privilege.ADMIN) {
             addItem(p, Items.KNIFE_946)
         }
 
+        define(name = "chisel", privilege = Privilege.ADMIN, usage = "", description = "") { p, _ ->
+            addItem(p, Items.CHISEL_1755)
+        }
+
         /*
          * Provide a set of talismans.
          */
