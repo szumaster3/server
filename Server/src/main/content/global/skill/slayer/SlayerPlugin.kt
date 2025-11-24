@@ -20,7 +20,6 @@ class SlayerPlugin : InteractionListener {
         private const val FADE_START = Components.FADE_TO_BLACK_115
         private const val FADE_END = Components.FADE_FROM_BLACK_170
         private const val TRAPDOOR = Scenery.TRAPDOOR_8783
-        private const val LADDER = Scenery.LADDER_8785
         private const val STAIRS = Scenery.STAIRS_96
         private const val STAIRS_2 = Scenery.STAIRS_35121
         private const val CAVE_ENTRANCE = Scenery.CAVE_ENTRANCE_15767
@@ -62,7 +61,7 @@ class SlayerPlugin : InteractionListener {
     override fun defineListeners() {
         for (location in SWENS_DIG_LOCATIONS) {
             onDig(location) { player: Player ->
-                enterCavern(player)
+                return@onDig enterCavern(player)
             }
         }
 
