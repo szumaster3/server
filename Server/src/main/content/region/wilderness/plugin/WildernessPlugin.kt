@@ -20,7 +20,7 @@ class WildernessPlugin : InteractionListener {
 
     companion object {
         val MUDDY_CHEST_LOOT = arrayOf(Item(Items.UNCUT_RUBY_1619), Item(Items.MITHRIL_BAR_2359), Item(Items.MITHRIL_DAGGER_1209), Item(Items.ANCHOVY_PIZZA_2297), Item(Items.LAW_RUNE_563, 2), Item(Items.DEATH_RUNE_560, 2), Item(Items.CHAOS_RUNE_562, 10), Item(Items.COINS_995, 50))
-        private val WILDERNESS_LADDER = intArrayOf(Scenery.LEVER_1814, Scenery.LEVER_1815, Scenery.LEVER_5959, Scenery.LEVER_5960, Scenery.LEVER_9706, Scenery.LEVER_9707)
+        private val WILDERNESS_LEVER_IDS = intArrayOf(Scenery.LEVER_1814, Scenery.LEVER_1815, Scenery.LEVER_5959, Scenery.LEVER_5960, Scenery.LEVER_9706, Scenery.LEVER_9707)
         private val KBD_LADDER = intArrayOf(Scenery.LEVER_1816, Scenery.LEVER_1817)
     }
 
@@ -58,7 +58,7 @@ class WildernessPlugin : InteractionListener {
          * Handles interaction with wilderness ladders.
          */
 
-        on(WILDERNESS_LADDER, IntType.SCENERY, "pull") { player, node ->
+        on(WILDERNESS_LEVER_IDS, IntType.SCENERY, "pull") { player, node ->
             when(node.id) {
                 Scenery.LEVER_1814 -> {
                     openDialogue(player, WildernessLeverDialogue())

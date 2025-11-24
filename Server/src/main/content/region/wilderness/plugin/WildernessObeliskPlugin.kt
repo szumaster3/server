@@ -18,7 +18,6 @@ import core.game.world.update.flag.chunk.GraphicUpdateFlag
 import core.game.world.update.flag.context.Graphics
 import core.plugin.Initializable
 import core.plugin.Plugin
-import core.tools.RandomFunction
 import shared.consts.Sounds
 import shared.consts.Scenery as Objects
 
@@ -38,106 +37,65 @@ class WildernessObeliskPlugin : OptionHandler() {
     override fun handle(player: Player, node: Node, option: String): Boolean {
         val scenery = node as Scenery
         val stationObelisk = Obelisk.forLocation(player.location) ?: return false
+        val base = stationObelisk.location
 
-        for (i in 0..3) {
-            var x = stationObelisk.location.x
-            var y = stationObelisk.location.y
-            val z = stationObelisk.location.z
-            when (i) {
-                0 -> {
-                    x = x + 2
-                    y = y + 2
-                    SceneryBuilder.replace(
-                        Scenery(scenery.id, Location.create(x, y, z)),
-                        Scenery(shared.consts.Scenery.OBELISK_14825, Location.create(x, y, 0)),
-                        6,
-                    )
-                }
+        val offsets = listOf(2 to 2, -2 to 2, -2 to -2, 2 to -2)
 
-                1 -> {
-                    x = x - 2
-                    y = y + 2
-                    SceneryBuilder.replace(
-                        Scenery(scenery.id, Location.create(x, y, z)),
-                        Scenery(shared.consts.Scenery.OBELISK_14825, Location.create(x, y, 0)),
-                        6,
-                    )
-                }
+        offsets.forEach { (dx, dy) ->
+            val origin = stationObelisk.location
+            val from = Location.create(origin.x + dx, origin.y + dy, origin.z)
+            val to   = Location.create(origin.x + dx, origin.y + dy, 0)
 
-                2 -> {
-                    x = x - 2
-                    y = y - 2
-                    SceneryBuilder.replace(
-                        Scenery(scenery.id, Location.create(x, y, z)),
-                        Scenery(shared.consts.Scenery.OBELISK_14825, Location.create(x, y, 0)),
-                        6,
-                    )
-                }
-
-                3 -> {
-                    x = x + 2
-                    y = y - 2
-                    SceneryBuilder.replace(
-                        Scenery(scenery.id, Location.create(x, y, z)),
-                        Scenery(shared.consts.Scenery.OBELISK_14825, Location.create(x, y, 0)),
-                        6,
-                    )
-                }
-            }
+            SceneryBuilder.replace(
+                Scenery(scenery.id, from),
+                Scenery(Objects.OBELISK_14825, to),
+                6
+            )
         }
+
         playAudio(player, Sounds.WILDERNESS_TP_204)
 
-        Pulser.submit(
-            object : Pulse(6, player) {
-                override fun pulse(): Boolean {
-                    val center = stationObelisk.location
-                    if (delay == 1) {
-                        for (x in center.x - 1..center.x + 1) {
-                            for (y in center.y - 1..center.y + 1) {
-                                val l = Location.create(x, y, 0)
-                                getRegionChunk(l).flag(GraphicUpdateFlag(Graphics.create(342), l))
-                            }
-                        }
-                        return true
-                    }
-
-                    val newObelisks = Obelisk.values()
-                    for (i in newObelisks.indices) {
-                        if (newObelisks[i] == stationObelisk) {
-                            newObelisks[i] = newObelisks[newObelisks.size - 1]
-                            break
+        Pulser.submit(object : Pulse(6, player) {
+            override fun pulse(): Boolean {
+                if (delay == 1) {
+                    for (x in base.x - 1..base.x + 1) {
+                        for (y in base.y - 1..base.y + 1) {
+                            val loc = Location.create(x, y, 0)
+                            getRegionChunk(loc).flag(GraphicUpdateFlag(Graphics.create(342), loc))
                         }
                     }
-                    val index = RandomFunction.random(0, newObelisks.size - 1)
-
-                    val newObelisk = newObelisks[index]
-
-                    for (player in getLocalPlayersBoundingBox(center, 1, 1)) {
-                        sendMessage(player, "Ancient magic teleports you to a place within the wilderness!")
-                        val xOffset = player.location.x - center.x
-                        val yOffset = player.location.y - center.y
-                        player.teleporter.send(
-                            Location.create(
-                                newObelisk.location.x + xOffset,
-                                newObelisk.location.y + yOffset,
-                                0,
-                            ),
-                            TeleportType.OBELISK,
-                            2,
-                        )
-                    }
-                    super.setDelay(1)
-                    return false
+                    return true
                 }
-            },
-        )
+
+                val possible = Obelisk.values().filter { it != stationObelisk }
+                val newObelisk = possible.random()
+
+                getLocalPlayersBoundingBox(base, 1, 1).forEach { p ->
+                    sendMessage(p, "Ancient magic teleports you to a place within the wilderness!")
+
+                    val offsetX = p.location.x - base.x
+                    val offsetY = p.location.y - base.y
+
+                    p.teleporter.send(
+                        Location.create(
+                            newObelisk.location.x + offsetX,
+                            newObelisk.location.y + offsetY,
+                            0
+                        ),
+                        TeleportType.OBELISK
+                    )
+                }
+
+                delay = 1
+                return false
+            }
+        })
+
         return true
     }
 
     /**
      * Enum representing various Obelisks in the game world.
-     *
-     * Each obelisk is associated with a specific location coordinate.
      *
      * @property location The coordinates of the obelisk in the game world.
      */
