@@ -380,7 +380,7 @@ class VarrockPlugin : InteractionListener {
         }
 
         /*
-         * Handles using the portal.
+         * Handles hunt for surok related tp.
          */
 
         on(Scenery.PORTAL_28780, IntType.SCENERY, "use") { player, _ ->
