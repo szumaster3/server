@@ -1,4 +1,4 @@
-package content.global.skill.fletching.items.darts
+package content.global.skill.fletching.darts
 
 import content.global.skill.fletching.Fletching
 import core.api.*

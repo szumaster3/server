@@ -1,5 +1,6 @@
 package content.region.misthalin.varrock.quest.firedup.dialogue
 
+import content.global.skill.firemaking.items.Log
 import content.minigame.allfiredup.plugin.BeaconState
 import core.api.getVarbit
 import core.api.inInventory
@@ -32,7 +33,7 @@ class SquireFyreDialogueFile : DialogueFile() {
                     BeaconState.EMPTY.ordinal -> npcl(FaceAnim.FRIENDLY, "Of course. Once the beacon is lit, just leave 5 logs with me and I'll take care of the fire for as long as I can.").also { stage = END_DIALOGUE }
                     BeaconState.DYING.ordinal -> npcl(FaceAnim.FRIENDLY, "Well, I could, but since you're here, you might as well do it yourself.").also { stage = END_DIALOGUE }
                     else -> {
-                        val logs = content.global.skill.firemaking.Log.values().map { it.logId }
+                        val logs = Log.values().map { it.logId }
                         validLog = logs.firstOrNull { player!!.inventory.getAmount(it) >= 5 } ?: -1
                         if (validLog == -1) {
                             npcl(FaceAnim.FRIENDLY,"I'm afraid you don't have enough of the right type of log for me to use.").also { stage = END_DIALOGUE }

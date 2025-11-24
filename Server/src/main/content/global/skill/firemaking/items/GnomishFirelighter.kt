@@ -1,4 +1,4 @@
-package content.global.skill.firemaking
+package content.global.skill.firemaking.items
 
 import shared.consts.Items
 

@@ -1,4 +1,4 @@
-package content.global.skill.fletching.items.arrows
+package content.global.skill.fletching.arrows
 
 import shared.consts.Items
 

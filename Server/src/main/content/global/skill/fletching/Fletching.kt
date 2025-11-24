@@ -1,10 +1,10 @@
 package content.global.skill.fletching
 
-import content.global.skill.fletching.items.arrows.ArrowHead
-import content.global.skill.fletching.items.arrows.BrutalArrow
-import content.global.skill.fletching.items.bolts.GemBolt
-import content.global.skill.fletching.items.bow.Strings
-import content.global.skill.fletching.items.crossbow.Limb
+import content.global.skill.fletching.arrows.ArrowHead
+import content.global.skill.fletching.arrows.BrutalArrow
+import content.global.skill.fletching.bolts.GemBolt
+import content.global.skill.fletching.bow.Strings
+import content.global.skill.fletching.crossbow.Limb
 import core.game.node.item.Item
 import shared.consts.Items
 

@@ -1,7 +1,7 @@
 package content.global.skill.summoning.familiar.npc
 
 import content.global.skill.firemaking.FireMakingPlugin
-import content.global.skill.firemaking.Log
+import content.global.skill.firemaking.items.Log
 import content.global.skill.summoning.familiar.Familiar
 import content.global.skill.summoning.familiar.FamiliarSpecial
 import core.api.finishDiaryTask

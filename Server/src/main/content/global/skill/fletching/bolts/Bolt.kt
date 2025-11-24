@@ -1,4 +1,4 @@
-package content.global.skill.fletching.items.bolts
+package content.global.skill.fletching.bolts
 
 import shared.consts.Items
 

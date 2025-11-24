@@ -1,10 +1,10 @@
 package content.global.skill.fletching
 
-import content.global.skill.fletching.items.bolts.Bolt
-import content.global.skill.fletching.items.bolts.BoltPulse
-import content.global.skill.fletching.items.bolts.GemBolt
-import content.global.skill.fletching.items.darts.Dart
-import content.global.skill.fletching.items.darts.DartPulse
+import content.global.skill.fletching.bolts.Bolt
+import content.global.skill.fletching.bolts.BoltPulse
+import content.global.skill.fletching.bolts.GemBolt
+import content.global.skill.fletching.darts.Dart
+import content.global.skill.fletching.darts.DartPulse
 import core.api.amountInInventory
 import core.api.clockReady
 import core.api.submitIndividualPulse

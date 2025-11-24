@@ -1,4 +1,4 @@
-package content.global.skill.fletching.items.bolts
+package content.global.skill.fletching.bolts
 
 import content.global.skill.slayer.SlayerManager.Companion.getInstance
 import core.api.*

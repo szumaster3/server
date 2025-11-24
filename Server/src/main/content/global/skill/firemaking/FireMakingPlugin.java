@@ -1,5 +1,6 @@
 package content.global.skill.firemaking;
 
+import content.global.skill.firemaking.items.Log;
 import core.api.Container;
 import core.game.event.LitFireEvent;
 import core.game.node.entity.player.Player;

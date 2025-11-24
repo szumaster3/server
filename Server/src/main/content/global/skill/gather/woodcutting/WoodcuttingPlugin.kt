@@ -4,7 +4,7 @@ import content.data.GameAttributes
 import content.data.skill.SkillingTool
 import content.data.tables.BirdNestDropTable
 import content.global.skill.farming.FarmingPatch
-import content.global.skill.firemaking.Log
+import content.global.skill.firemaking.items.Log
 import core.api.*
 import core.cache.def.impl.ItemDefinition
 import core.game.container.impl.EquipmentContainer

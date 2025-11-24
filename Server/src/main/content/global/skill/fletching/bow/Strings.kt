@@ -1,4 +1,4 @@
-package content.global.skill.fletching.items.bow
+package content.global.skill.fletching.bow
 
 import shared.consts.Animations
 import shared.consts.Items

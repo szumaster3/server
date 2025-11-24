@@ -1,4 +1,4 @@
-package content.global.skill.fletching.items.crossbow
+package content.global.skill.fletching.crossbow
 
 import shared.consts.Items
 

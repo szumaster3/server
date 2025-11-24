@@ -2,8 +2,8 @@ package content.region.kandarin.baxtorian.plugin.barbarian_training
 
 import content.data.skill.SkillingTool
 import content.global.skill.firemaking.FireMakingPlugin
-import content.global.skill.firemaking.Log
-import content.global.skill.firemaking.Log.Companion.forId
+import content.global.skill.firemaking.items.Log
+import content.global.skill.firemaking.items.Log.Companion.forId
 import content.region.kandarin.baxtorian.plugin.BarbarianTraining
 import core.api.*
 import core.game.event.LitFireEvent
