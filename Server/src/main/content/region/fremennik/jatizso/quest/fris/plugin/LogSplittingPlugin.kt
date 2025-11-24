@@ -81,23 +81,23 @@ class LogSplittingPlugin : InteractionListener {
 private class LogCuttingPulse(
     player: Player?,
     node: Item?,
-    var amount: Int,
+    var amount: Int
 ) : SkillPulse<Item?>(player, null) {
 
     private val arcticPineLog = Items.ARCTIC_PINE_LOGS_10810
-    private val splitLog: Item = Item(Items.SPLIT_LOG_10812)
+    private val splitLog = Item(Items.SPLIT_LOG_10812)
     private val splittingAnimation = Animation(Animations.HUMAN_SPLIT_LOGS_5755)
 
-    var ticks = 0
+    private var ticks = 0
 
     override fun checkRequirements(): Boolean {
         val tool = SkillingTool.getToolForSkill(player, Skills.WOODCUTTING)
         if (tool == null) {
-            sendMessage(player, "You do not have a axe to use.")
+            sendMessage(player, "You do not have an axe to use.")
             return false
         }
-        if (amountInInventory(player, Items.ARCTIC_PINE_LOGS_10810) < 1) {
-            sendMessage(player, "You have run out of an Arctic pine log.")
+        if (amountInInventory(player, arcticPineLog) < 1) {
+            sendMessage(player, "You have run out of Arctic pine logs.")
             return false
         }
         return true
@@ -110,17 +110,20 @@ private class LogCuttingPulse(
     }
 
     override fun reward(): Boolean {
-        if (++ticks % 5 != 0) {
-            return false
+        ticks++
+        if (ticks % 5 != 0) return false
+
+        if (!removeItem(player, arcticPineLog)) {
+            sendMessage(player, "You have run out of Arctic pine logs.")
+            return true
         }
-        amount = arcticPineLog
-        if (removeItem(player, arcticPineLog)) {
-            addItem(player, splitLog.id, 1)
-            rewardXP(player, Skills.WOODCUTTING, 42.5)
-            sendMessage(player, "You make a split log of Arctic pine.")
-        }
+
+        addItem(player, splitLog.id)
+        rewardXP(player, Skills.WOODCUTTING, 42.5)
+        sendMessage(player, "You make a split log of Arctic pine.")
+
         amount--
-        return amount < 1
+        return amount <= 0
     }
 }
 
@@ -130,39 +133,35 @@ private class LogCuttingPulse(
 private class FremennikShieldPulse(
     player: Player?,
     node: Item,
-    var amount: Int,
+    var amount: Int
 ) : SkillPulse<Item>(player, null) {
-    val splitAnimation = Animations.HUMAN_SPLIT_LOGS_5755
-    var ticks = 0
+
+    private val splitAnimation = Animations.HUMAN_SPLIT_LOGS_5755
+    private var ticks = 0
 
     override fun checkRequirements(): Boolean {
-        if (!anyInInventory(
-                player,
-                Items.HAMMER_2347,
-                Items.ARCTIC_PINE_LOGS_10810,
-                Items.ROPE_954,
-                Items.BRONZE_NAILS_4819,
-            )
-        ) {
-            sendMessage(player, "You don't have required items in your inventory.")
-            return false
-        }
-        if (amountInInventory(player, Items.ARCTIC_PINE_LOGS_10810) < 2) {
-            sendMessage(player, "You need at least 2 arctic pine logs to do this.")
-            return false
-        }
-        if (!inInventory(player, Items.ROPE_954)) {
-            sendMessage(player, "You will need a rope in order to do this.")
-            return false
-        }
-        if (!inInventory(player, Items.HAMMER_2347) && inInventory(player, Items.BRONZE_NAILS_4819)) {
+        val hasHammer = inInventory(player, Items.HAMMER_2347)
+        val hasNails = inInventory(player, Items.BRONZE_NAILS_4819)
+        val hasRope = inInventory(player, Items.ROPE_954)
+        val logCount = amountInInventory(player, Items.ARCTIC_PINE_LOGS_10810)
+
+        if (!hasHammer) {
             sendMessage(player, "You need a hammer to force the nails in with.")
             return false
         }
-        if (!inInventory(player, Items.BRONZE_NAILS_4819)) {
+        if (!hasNails) {
             sendMessage(player, "You need bronze nails for this.")
             return false
         }
+        if (!hasRope) {
+            sendMessage(player, "You will need a rope in order to do this.")
+            return false
+        }
+        if (logCount < 2) {
+            sendMessage(player, "You need at least 2 arctic pine logs to do this.")
+            return false
+        }
+
         return true
     }
 
@@ -171,6 +170,7 @@ private class FremennikShieldPulse(
     }
 
     override fun reward(): Boolean {
+        ticks++
         if (ticks == 1) {
             delay = 3
             return false
@@ -179,18 +179,22 @@ private class FremennikShieldPulse(
         if (player.inventory.remove(
                 Item(Items.ARCTIC_PINE_LOGS_10810, 2),
                 Item(Items.ROPE_954, 1),
-                Item(Items.BRONZE_NAILS_4819, 1),
+                Item(Items.BRONZE_NAILS_4819, 1)
             )
         ) {
             rewardXP(player, Skills.CRAFTING, 34.0)
             addItem(player, Items.FREMENNIK_ROUND_SHIELD_10826, 1)
             sendMessage(player, "You make a Fremennik round shield.")
             amount--
-            return amount == 0
+        } else {
+            sendMessage(player, "You don't have the required items to make this.")
+            return true
         }
 
-        return true
+        return amount <= 0
     }
 
-    override fun message(type: Int) {}
+    override fun message(type: Int) {
+
+    }
 }
