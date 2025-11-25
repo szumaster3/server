@@ -35,20 +35,14 @@ class LightSourceLighter : InteractionListener {
          */
 
         on(IntType.ITEM, "extinguish") { player, node ->
-            val lightSources = LightSources.forId(node.id)
+            val lightSources = LightSources.forLitId(node.id)
 
             lightSources ?: return@on false.also {
                 log(this::class.java, Log.WARN, "UNHANDLED EXTINGUISH OPTION: ID = ${node.id}")
             }
 
-            player.inventory.replace(node.asItem(), Item(lightSources.fullId))
+            replaceSlot(player, node.asItem().slot, Item(lightSources.fullId))
             return@on true
-        }
-    }
-
-    private fun Container.replace(item: Item, with: Item) {
-        if (remove(item)) {
-            add(with)
         }
     }
 
@@ -69,7 +63,7 @@ class LightSourceLighter : InteractionListener {
 
         // Normal lighting.
         playAudio(player, data.sfxId)
-        player.inventory.replace(item, Item(data.litId))
+        replaceSlot(player, item.slot, Item(data.litId))
         player.dispatch(LitLightSourceEvent(data.litId))
         sendMessage(player, "You light the ${getItemName(data.litId).lowercase()}.")
 
