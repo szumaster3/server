@@ -72,16 +72,22 @@ class LightSourceLighter : InteractionListener {
 
     companion object {
         val LIGHTABLE_ITEM_IDS = intArrayOf(
-            Items.CANDLE_36,
-            Items.BLACK_CANDLE_38,
-            Items.UNLIT_TORCH_596,
-            Items.CANDLE_LANTERN_4529,
-            Items.CANDLE_LANTERN_4532,
-            Items.OIL_LAMP_4522,
-            Items.OIL_LANTERN_4537,
-            Items.BULLSEYE_LANTERN_4548,
-            Items.SAPPHIRE_LANTERN_4701,
-            Items.EMERALD_LANTERN_9064
+            // Brightness 1
+            Items.CANDLE_36,               // candle
+            Items.BLACK_CANDLE_38,         // black candle
+            Items.UNLIT_TORCH_596,         // torch
+            Items.CANDLE_LANTERN_4529,     // candle lantern (full)
+            Items.CANDLE_LANTERN_4532,     // black candle lantern (full)
+
+            // Brightness 2
+            Items.OIL_LAMP_4522,           // oil lamp (full)
+            Items.OIL_LANTERN_4537,        // oil lantern (full)
+            Items.SAPPHIRE_LANTERN_4701,   // sapphire lantern (full)
+            Items.MINING_HELMET_5014,      // mining helmet
+
+            // Brightness 3
+            Items.BULLSEYE_LANTERN_4548,   // bullseye lantern (full)
+            Items.EMERALD_LANTERN_9064     // emerald lantern (full)
         )
     }
 }
