@@ -1,12 +1,12 @@
 package content.region.asgarnia.falador.quest.fortress.dialogue
 
+import core.api.allInEquipment
 import core.api.sendChat
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
 import core.game.global.action.DoorActionHandler
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
-import core.game.node.item.Item
 import core.game.world.map.RegionManager.getLocalNpcs
 import core.game.world.map.RegionManager.getObject
 import core.plugin.Initializable
@@ -33,8 +33,9 @@ class FortressGuardDialogue(player: Player? = null) : Dialogue(player) {
             npc(FaceAnim.NEUTRAL, "I wouldn't go in there if I were you. Those Black", "Knights are in an important meeting. They said they'd", "kill anyone who went in there!").also { stage = 50 }
             return true
         }
-        if (!inUniform(player)) {
-            npc(FaceAnim.ANGRY, "Get lost. This is private property.").also { stage = 0 }
+
+        if (!allInEquipment(player, Items.BRONZE_MED_HELM_1139, Items.IRON_CHAINBODY_1101)) {
+            npc(FaceAnim.ANGRY, "Get lost. This is private property.")
         } else {
             npc(FaceAnim.FURIOUS, "Hey! Get back on duty!").also { stage = 30 }
         }
@@ -100,17 +101,4 @@ class FortressGuardDialogue(player: Player? = null) : Dialogue(player) {
         NPCs.FORTRESS_GUARD_4605,
         NPCs.FORTRESS_GUARD_4606,
     )
-
-    companion object {
-        private val UNIFORM = arrayOf(Item(Items.BRONZE_MED_HELM_1139), Item(Items.IRON_CHAINBODY_1101))
-
-        fun inUniform(player: Player): Boolean {
-            for (i in UNIFORM) {
-                if (!player.equipment.containsItem(i)) {
-                    return false
-                }
-            }
-            return true
-        }
-    }
 }

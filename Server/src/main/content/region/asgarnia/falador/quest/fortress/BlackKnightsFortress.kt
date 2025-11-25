@@ -23,10 +23,10 @@ class BlackKnightsFortress : Quest(Quests.BLACK_KNIGHTS_FORTRESS, 14, 13, 3, Var
         if (stage == 0) {
             line(player, "I can start this quest by speaking to the !!Sir Amik Varze?? at the", line++)
             line(player, "!!White Knight's Castle?? in !!Falador??.", line++)
-            if (player.questRepository.points > 12) {
-                line(player, "---I have a total of at least 13 Quest Points/--", line++)
-            } else {
+            if (player.questRepository.points < 13) {
                 line(player, "!!I must have a total of at least 13 Quest Points??", line++)
+            } else {
+                line(player, "---I have a total of at least 13 Quest Points/--", line++)
             }
             line(player, "I would have an advantage if I could fight !!Level 33 Knights??", line++)
             line(player, "and if I had a smithing level of !!26??.", line++)
