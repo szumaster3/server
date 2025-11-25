@@ -88,6 +88,7 @@ class NecromancerNPC : NPCBehavior(NPCs.INVRIGAR_THE_NECROMANCER_173, NPCs.NECRO
         npc.summonedZombie!!.isActive = true
         npc.summonedZombie!!.isWalks = true
         npc.summonedZombie!!.isNeverWalks = false
+        npc.summonedZombie!!.isRespawn = false
         summonedZombieCounter++
         GameWorld.Pulser.submit(object : Pulse(2, entity) {
             override fun pulse(): Boolean {
