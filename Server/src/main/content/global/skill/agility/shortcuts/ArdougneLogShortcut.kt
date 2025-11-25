@@ -1,6 +1,7 @@
 package content.global.skill.agility.shortcuts
 
 import content.global.skill.agility.AgilityHandler
+import content.global.skill.agility.AgilityHandler.extinguishLightOnWater
 import content.global.skill.agility.AgilityShortcut
 import core.api.*
 import core.game.node.entity.player.Player
@@ -50,6 +51,7 @@ class ArdougneLogShortcut : AgilityShortcut(intArrayOf(Scenery.LOG_BALANCE_35997
                     0 -> {
                         visualize(player, Animations.DROWN_765, splashGraphics)
                         playAudio(player, Sounds.WATERSPLASH_2496)
+                        extinguishLightOnWater(player)
                         teleport(player, failLocation)
                         animate(player, swimmingLoopAnimation)
                         false

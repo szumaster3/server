@@ -3,73 +3,93 @@ package content.global.skill.crafting.items.lamps
 import core.api.*
 import core.game.container.Container
 import core.game.event.LitLightSourceEvent
-import core.game.interaction.NodeUsageEvent
-import core.game.interaction.UseWithHandler
+import core.game.interaction.InteractionListener
+import core.game.interaction.IntType
 import core.game.node.entity.player.Player
 import core.game.node.entity.skill.Skills
 import core.game.node.item.Item
 import core.plugin.Initializable
-import core.plugin.Plugin
+import core.tools.Log
 import shared.consts.Items
+import shared.consts.Regions
 
 @Initializable
-class LightSourceLighter : UseWithHandler(Items.TINDERBOX_590, Items.CANDLE_36, Items.BLACK_CANDLE_38) {
-    override fun newInstance(arg: Any?): Plugin<Any> {
-        addHandler(Items.TINDERBOX_590, ITEM_TYPE, this)
-        addHandler(Items.UNLIT_TORCH_596, ITEM_TYPE, this)
-        addHandler(Items.CANDLE_LANTERN_4529, ITEM_TYPE, this)
-        addHandler(Items.CANDLE_LANTERN_4532, ITEM_TYPE, this)
-        addHandler(Items.OIL_LAMP_4522, ITEM_TYPE, this)
-        addHandler(Items.OIL_LANTERN_4537, ITEM_TYPE, this)
-        addHandler(Items.BULLSEYE_LANTERN_4548, ITEM_TYPE, this)
-        addHandler(Items.SAPPHIRE_LANTERN_4701, ITEM_TYPE, this)
-        addHandler(Items.EMERALD_LANTERN_9064, ITEM_TYPE, this)
-        return this
-    }
+class LightSourceLighter : InteractionListener {
 
-    override fun handle(event: NodeUsageEvent?): Boolean {
-        event ?: return false
+    override fun defineListeners() {
+        /*
+         * Handles using a tinderbox on any lightable light-source.
+         */
 
-        val used = if (event.used.id == Items.TINDERBOX_590) event.usedWith.asItem() else event.used.asItem()
-        val lightSources = LightSources.forId(used.id)
+        onUseWith(IntType.ITEM, Items.TINDERBOX_590, *LIGHTABLE_ITEM_IDS) { player, _, with ->
+            val item = with.asItem()
+            val light = LightSources.forId(item.id) ?: return@onUseWith true
 
-        lightSources ?: return false
+            if (!light(player, item, light)) {
+                sendMessage(player, "You need a Firemaking level of at least ${light.level} to light this.")
+            }
 
-        if (!light(event.player, used, lightSources)) {
-            sendMessage(
-                event.player,
-                "You need a Firemaking level of at least ${lightSources.levelRequired} to light this.",
-            )
+            return@onUseWith true
         }
 
-        return true
+        /*
+         * Handles using the “extinguish” option on lit light-sources.
+         */
+
+        on(IntType.ITEM, "extinguish") { player, node ->
+            val lightSources = LightSources.forId(node.id)
+
+            lightSources ?: return@on false.also {
+                log(this::class.java, Log.WARN, "UNHANDLED EXTINGUISH OPTION: ID = ${node.id}")
+            }
+
+            player.inventory.replace(node.asItem(), Item(lightSources.fullId))
+            return@on true
+        }
     }
 
-    fun Container.replace(item: Item, with: Item) {
+    private fun Container.replace(item: Item, with: Item) {
         if (remove(item)) {
             add(with)
         }
     }
 
-    fun light(player: Player, item: Item, lightSources: LightSources): Boolean {
-        val requiredLevel = lightSources.levelRequired
+    private fun light(player: Player, item: Item, data: LightSources): Boolean {
+        val requiredLevel = data.level
         val playerLevel = getStatLevel(player, Skills.FIREMAKING)
 
         if (playerLevel < requiredLevel) return false
 
-        // If the player attempts to use the tinderbox on an unlit torch at Fishing platform.
-        if(inBorders(player, 2761, 3275, 2789, 3296)) {
+        // Fishing platform exception.
+        if (player.location.isInRegion(Regions.FISHING_PLATFORM_11059)) {
             sendMessage(player, "Your tinderbox is damp from the sea crossing. It won't light here.")
             return true
         }
 
-        // Making sure that a lit source cannot be ignited again.
-        if (item.id != lightSources.litId) {
-            playAudio(player, lightSources.sfxId)
-            player.inventory.replace(item, Item(lightSources.litId))
-            player.dispatch(LitLightSourceEvent(lightSources.litId))
-            sendMessage(player, "You light the ${getItemName(LightSources.forId(item.id)!!.litId)}.")
-        }
+        // Already lit.
+        if (item.id == data.litId) return true
+
+        // Normal lighting.
+        playAudio(player, data.sfxId)
+        player.inventory.replace(item, Item(data.litId))
+        player.dispatch(LitLightSourceEvent(data.litId))
+        sendMessage(player, "You light the ${getItemName(data.litId).lowercase()}.")
+
         return true
+    }
+
+    companion object {
+        val LIGHTABLE_ITEM_IDS = intArrayOf(
+            Items.CANDLE_36,
+            Items.BLACK_CANDLE_38,
+            Items.UNLIT_TORCH_596,
+            Items.CANDLE_LANTERN_4529,
+            Items.CANDLE_LANTERN_4532,
+            Items.OIL_LAMP_4522,
+            Items.OIL_LANTERN_4537,
+            Items.BULLSEYE_LANTERN_4548,
+            Items.SAPPHIRE_LANTERN_4701,
+            Items.EMERALD_LANTERN_9064
+        )
     }
 }

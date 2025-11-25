@@ -1,7 +1,7 @@
 package content.region.asgarnia.falador.npc;
 
-import content.data.LightSource;
 import content.data.BossKillCounter;
+import content.global.skill.crafting.items.lamps.LightSources;
 import core.cache.def.impl.SceneryDefinition;
 import core.game.global.action.DigAction;
 import core.game.global.action.DigSpadeHandler;
@@ -119,13 +119,13 @@ public final class GiantMoleNPC extends AbstractNPC {
     private void splatterMud(Location hole) {
         for (Player p : RegionManager.getLocalPlayers(getCenterLocation(), (size() >> 1) + 2)) {
             PacketRepository.send(Interface.class, new InterfaceContext(p, 548, 77, 226, true));
-            LightSource s = LightSource.getActiveLightSource(p);
+            LightSources s = LightSources.getActiveLightSource(p);
             if (s == null || s.getOpen()) {
                 if (s != null) {
                     p.getPacketDispatch().sendMessage("Your " + s.name() + " seems to have been extinguished by the mud.");
-                    int slot = p.getInventory().getSlot(new Item(s.getProduct(), 1));
+                    int slot = p.getInventory().getSlot(new Item(s.getLitId(), 1));
                     if (slot > -1) {
-                        p.getInventory().replace(new Item(s.getRaw()), slot);
+                        p.getInventory().replace(new Item(s.getFullId()), slot);
                     }
                 }
                 DarkZone.Companion.checkDarkArea(p);
@@ -193,7 +193,7 @@ public final class GiantMoleNPC extends AbstractNPC {
         DigAction action = new DigAction() {
             @Override
             public void run(Player player) {
-                if (!LightSource.hasActiveLightSource(player)) {
+                if (!LightSources.hasActiveLightSource(player)) {
                     player.getPacketDispatch().sendMessage("It's going to be dark down there, I should bring a light source.");
                     return;
                 }

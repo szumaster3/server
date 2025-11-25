@@ -10,9 +10,6 @@ import shared.consts.Sounds
 import kotlin.math.min
 
 class BattlestaveMakePlugin : InteractionListener {
-    private val BATTLESTAFF_ID = Items.BATTLESTAFF_1391
-    private val ORB_ID = Battlestaff.values().map { it.required }.toIntArray()
-
     override fun defineListeners() {
         onUseWith(IntType.ITEM, ORB_ID, BATTLESTAFF_ID) { player, used, with ->
             val product = Battlestaff.forId(used.id) ?: return@onUseWith true
@@ -59,6 +56,12 @@ class BattlestaveMakePlugin : InteractionListener {
             return@onUseWith true
         }
     }
+
+    companion object {
+        private val BATTLESTAFF_ID = Items.BATTLESTAFF_1391
+        private val ORB_ID = Battlestaff.values().map { it.required }.toIntArray()
+    }
+
 }
 
 /**

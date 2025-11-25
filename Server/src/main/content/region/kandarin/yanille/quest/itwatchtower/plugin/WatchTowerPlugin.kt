@@ -1,7 +1,6 @@
 package content.region.kandarin.yanille.quest.itwatchtower.plugin
 
 import content.data.GameAttributes
-import content.data.LightSource
 import content.data.skill.SkillingTool
 import content.region.kandarin.yanille.quest.itwatchtower.dialogue.BattlementDialogue
 import content.region.kandarin.yanille.quest.itwatchtower.dialogue.CityGuardDialogue
