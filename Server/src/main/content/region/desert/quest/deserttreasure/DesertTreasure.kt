@@ -14,7 +14,8 @@ import shared.consts.Vars
  *
  * ### Related Content
  *
- * **Shadow Varbit** - Controls the state switch for indivisible NPCs in [General Shadow][content.region.fremennik.handlers.gs.GeneralShadow] and [Curse of Zaros][content.region.kandarin.miniquest.secret_ghost.CurseOfZaros]
+ * **Shadow Varbit**
+ * - Controls the state switch for indivisible NPCs in [General Shadow][content.region.fremennik.rellekka.miniquest.shadow_maj.GeneralShadow] and [Curse of Zaros][content.region.kandarin.miniquest.secret_ghost.ViggoraDialogue]
  *
  * ```kotlin
  * const val varbitSmokeDungeonLadder = 393

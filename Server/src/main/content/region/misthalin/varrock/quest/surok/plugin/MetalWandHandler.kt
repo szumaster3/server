@@ -25,13 +25,11 @@ class MetalWandHandler : UseWithHandler(WhatLiesBelowListener.WAND) {
             return true
         }
 
-        val chaosItem =
-            if (inInventory(player, WhatLiesBelowListener.CHAOS_TALISMAN)
-            ) {
-                WhatLiesBelowListener.CHAOS_TALISMAN
-            } else {
-                WhatLiesBelowListener.CHAOS_TIARA
-            }
+        val chaosItem = if (inInventory(player, WhatLiesBelowListener.CHAOS_TALISMAN)) {
+            WhatLiesBelowListener.CHAOS_TALISMAN
+        } else {
+            WhatLiesBelowListener.CHAOS_TIARA
+        }
         if (getStatLevel(player, Skills.RUNECRAFTING) >= 35) {
             if (chaosItem != null && removeItem(player, Item(WhatLiesBelowListener.CHAOS_RUNES, 15))) {
                 lock(player, 5)
@@ -39,11 +37,7 @@ class MetalWandHandler : UseWithHandler(WhatLiesBelowListener.WAND) {
                 removeItem(player, WhatLiesBelowListener.WAND)
                 addItem(player, WhatLiesBelowListener.INFUSED_WAND)
                 animate(player, 6104)
-                sendDialogueLines(
-                    player,
-                    "The metal wand bursts into life and crackles with arcane",
-                    "power. This is a powerful instrument indeed!",
-                )
+                sendDialogueLines(player, "The metal wand bursts into life and crackles with arcane", "power. This is a powerful instrument indeed!")
             }
             return true
         } else {

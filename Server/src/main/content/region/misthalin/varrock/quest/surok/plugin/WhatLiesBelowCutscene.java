@@ -31,11 +31,8 @@ import static core.api.ContentAPIKt.setAttribute;
  * The type What lies below cutscene.
  */
 public class WhatLiesBelowCutscene extends CutscenePlugin {
-
     private NPC SUROK_NPC;
-
     private NPC KING;
-
     private NPC ZAFF;
 
     /**
@@ -306,39 +303,12 @@ public class WhatLiesBelowCutscene extends CutscenePlugin {
     }
 
     /**
-     * Gets surok.
-     *
-     * @return the surok
-     */
-    public NPC getSUROK_NPC() {
-        return SUROK_NPC;
-    }
-
-    /**
-     * Sets surok.
-     *
-     * @param SUROK_NPC the surok
-     */
-    public void setSUROK_NPC(NPC SUROK_NPC) {
-        this.SUROK_NPC = SUROK_NPC;
-    }
-
-    /**
      * Gets king.
      *
      * @return the king
      */
     public NPC getKING() {
         return KING;
-    }
-
-    /**
-     * Sets king.
-     *
-     * @param KING the king
-     */
-    public void setKING(NPC KING) {
-        this.KING = KING;
     }
 
     /**
@@ -350,13 +320,5 @@ public class WhatLiesBelowCutscene extends CutscenePlugin {
         return ZAFF;
     }
 
-    /**
-     * Sets zaff.
-     *
-     * @param ZAFF the zaff
-     */
-    public void setZAFF(NPC ZAFF) {
-        this.ZAFF = ZAFF;
-    }
 
 }

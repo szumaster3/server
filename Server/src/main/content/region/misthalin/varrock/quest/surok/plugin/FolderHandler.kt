@@ -9,6 +9,7 @@ import core.game.node.item.Item
 import core.plugin.Initializable
 import core.plugin.Plugin
 
+
 @Initializable
 class FolderHandler : UseWithHandler(WhatLiesBelowListener.EMPTY_FOLDER, WhatLiesBelowListener.USED_FOLDER) {
     @Throws(Throwable::class)
@@ -33,15 +34,8 @@ class FolderHandler : UseWithHandler(WhatLiesBelowListener.EMPTY_FOLDER, WhatLie
             sendMessage(player, "You add the page to the folder that Rat gave to you.")
             if (remainingPages <= 0) {
                 player.inventory.replace(Item(WhatLiesBelowListener.FULL_FOLDER), folder.slot)
-                sendMessage(
-                    player,
-                    "You add the last page to Rat's folder. You should take this back to Rat as soon as possible.",
-                )
-                sendDialogueLines(
-                    player,
-                    "You have added all the pages to the folder that Rat gave to you.",
-                    "You should take this folder back to Rat.",
-                )
+                sendMessage(player, "You add the last page to Rat's folder. You should take this back to Rat as soon as possible.")
+                sendDialogueLines(player, "You have added all the pages to the folder that Rat gave to you.", "You should take this folder back to Rat.")
             } else {
                 sendMessage(player, "You need to find $remainingPages more page${if (remainingPages > 1) "s" else "."}")
             }
