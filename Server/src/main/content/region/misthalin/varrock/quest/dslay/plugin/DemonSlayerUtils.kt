@@ -34,7 +34,7 @@ object DemonSlayerUtils {
      */
     @JvmStatic
     fun getIncantation(player: Player): String {
-        return player.getAttribute("/save:demon-slayer:incantation") ?: generateIncantation(player)
+        return player.getAttribute("demon-slayer:incantation") ?: generateIncantation(player)
     }
 
     /**

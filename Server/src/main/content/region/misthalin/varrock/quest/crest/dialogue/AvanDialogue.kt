@@ -1,6 +1,6 @@
 package content.region.misthalin.varrock.quest.crest.dialogue
 
-import content.region.misthalin.varrock.quest.crest.plugin.SwapGauntletsHelper
+import content.region.misthalin.varrock.quest.crest.plugin.FamilyCrestListener
 import core.api.getAttribute
 import core.api.setQuestStage
 import core.game.dialogue.Dialogue
@@ -15,14 +15,14 @@ import shared.consts.Quests
 @Initializable
 class AvanDialogue(player: Player? = null) : Dialogue(player) {
 
-    val crestAvan: Item = Item(Items.CREST_PART_779)
+    private val crestAvan: Item = Item(Items.CREST_PART_779)
 
     override fun open(vararg args: Any?): Boolean {
         npc = (args[0] as NPC).getShownNPC(player)
         val qstage = player?.questRepository?.getStage(Quests.FAMILY_CREST) ?: -1
 
         if (qstage == 100) {
-            options("Can you change my gauntlets for me?", "Nevermind")
+            options("Can you change my gauntlets for me?", "Nevermind.")
             stage = 6000
             return true
         }
@@ -50,59 +50,55 @@ class AvanDialogue(player: Player? = null) : Dialogue(player) {
                 1 -> npc("It's a good place to find gold...").also { stage = 1000 }
                 2 -> npc("Then you have found him. My name is Avan Fitzharmon.").also { stage++ }
             }
-            3 -> player("You have a part of your family crest. I am on a quest ", "to retrieve all of the fragmented pieces ", "and restore the crest.").also { stage++ }
-            4 -> npc("Ha! I suppose one of my worthless brothers ", "has sent you on this quest then?").also { stage++ }
+            3 -> player("You have a part of your family crest. I am on a quest", "to retrieve all of the fragmented pieces", "and restore the crest.").also { stage++ }
+            4 -> npc("Ha! I suppose one of my worthless brothers", "has sent you on this quest then?").also { stage++ }
             5 -> player("No, it was your father who has asked me to do this for him.").also { stage++ }
-            6 -> npc("My... my father wishes this? Then that is a different matter. ", "I will let you have my crest shard, adventurer, ", "but you must first do something for me.").also { stage++ }
-            7 -> npc("There is a certain lady I am trying to impress. ", "As a man of noble birth, I can not give her just ", "any gold trinket to show my devotion. ").also { stage++ }
-            8 -> npc("What I intend to give her, is a golden ring, ", "embedded with the finest precious red stone available, ", "and a necklace to match this ring. ").also { stage++ }
-            9 -> npc("The problem however for me, is that ", "not just any old gold will be suitable. ", "I seek only the purest, the most high quality of gold ", "what I seek, if you will, is perfect gold.").also { stage++ }
-            10 -> npc("None of the gold around here is even ", "remotely suitable in terms of quality. ", "I have searched far and wide for the perfect gold I desire, ", "but have had no success so in finding it I am afraid. ").also { stage++ }
-            11 -> npc("If you can find me my perfect gold, ", "make a ring and necklace from it, and add rubies to them, ", "I will gladly hand over my fragment of ", "the family crest to you.").also { stage++ }
+            6 -> npc("My... my father wishes this? Then that is a different matter.", "I will let you have my crest shard, adventurer,", "but you must first do something for me.").also { stage++ }
+            7 -> npc("There is a certain lady I am trying to impress.", "As a man of noble birth, I can not give her just", "any gold trinket to show my devotion.").also { stage++ }
+            8 -> npc("What I intend to give her, is a golden ring,", "embedded with the finest precious red stone available,", "and a necklace to match this ring.").also { stage++ }
+            9 -> npc("The problem however for me, is that", "not just any old gold will be suitable.", "I seek only the purest, the most high quality of gold", "what I seek, if you will, is perfect gold.").also { stage++ }
+            10 -> npc("None of the gold around here is even", "remotely suitable in terms of quality.", "I have searched far and wide for the perfect gold I desire,", "but have had no success so in finding it I am afraid.").also { stage++ }
+            11 -> npc("If you can find me my perfect gold,", "make a ring and necklace from it, and add rubies to them,", "I will gladly hand over my fragment of", "the family crest to you.").also { stage++ }
             12 -> player("Can you give me any help on finding this 'perfect gold'?").also { stage++ }
-            13 -> npc("I thought I had found a solid lead on its whereabouts ", "when I heard of a dwarf who is an expert ", "on gold who goes by the name of 'Boot'. ").also { stage++ }
-            14 -> npc("Unfortunately he has apparently returned to this home,", "somewhere in the mountains, ", "and I have no idea how to find him.").also { stage++ }
+            13 -> npc("I thought I had found a solid lead on its whereabouts", "when I heard of a dwarf who is an expert", "on gold who goes by the name of 'Boot'.").also { stage++ }
+            14 -> npc("Unfortunately he has apparently returned to this home,", "somewhere in the mountains,", "and I have no idea how to find him.").also { stage++ }
             15 -> player("Well, I'll see what I can do.").also {
                 setQuestStage(player, Quests.FAMILY_CREST, 14)
                 stage = 1000
             }
             100 -> player("I'm still after that 'perfect gold'.").also { stage++ }
-            101 -> npc("I know how you feel... for such a long time ", "I have searched and searched for the elusive perfect gold... ", "I thought I had gotten a good lead on finding it ").also { stage++ }
-            102 -> npc("when I heard talk of a dwarven expert on gold named Boot ", "some time back, but unfortunately for me,", "he has returned to his mountain home, which I cannot find.").also { stage = 1000 }
+            101 -> npc("I know how you feel... for such a long time", "I have searched and searched for the elusive perfect gold...", "I thought I had gotten a good lead on finding it").also { stage++ }
+            102 -> npc("when I heard talk of a dwarven expert on gold named Boot", "some time back, but unfortunately for me,", "he has returned to his mountain home, which I cannot find.").also { stage = 1000 }
             200 -> if (!player.inventory.containItems(774, 773)) {
-                npc("I have spoken to Boot the dwarf about the location ", "of 'perfect gold', ", "but haven't managed to make you your jewelry yet.").also { stage++ }
+                npc("I have spoken to Boot the dwarf about the location", "of 'perfect gold',", "but haven't managed to make you your jewelry yet.").also { stage++ }
             } else {
                 player("I have the ring and necklace right here.")
                 stage = 300
             }
-            201 -> npc("Well, I won't entrust you with my piece of the crest ", "until you have brought me a necklace of perfect gold ", "with a red precious stone, and a perfect gold ring to match.").also { stage = 1000 }
+            201 -> npc("Well, I won't entrust you with my piece of the crest", "until you have brought me a necklace of perfect gold", "with a red precious stone, and a perfect gold ring to match.").also { stage = 1000 }
             300 -> sendDialogue("You hand Avan the perfect gold ring and necklace.").also {
                 setQuestStage(player, Quests.FAMILY_CREST, 16)
                 player.inventory.remove(Item(774), Item(773))
                 player.inventory.add(crestAvan)
                 stage++
             }
-            301 -> npc("These... these are exquisite! E", "XACTLY what I was searching for all of this time! ", "Please, take my crest fragment!").also { stage++ }
-            302 -> npc("Now, I suppose you will be wanting to find my brother ", "Johnathon who is in possession of the ", "final piece of the family's crest?").also { stage++ }
+            301 -> npc("These... these are exquisite!", "EXACTLY what I was searching for all of this time!", "Please, take my crest fragment!").also { stage++ }
+            302 -> npc("Now, I suppose you will be wanting to find my brother", "Johnathon who is in possession of the", "final piece of the family's crest?").also { stage++ }
             303 -> player("That's correct.").also { stage++ }
-            304 -> npc("Well, the last I heard of my brother Johnathon,", "he was studying the magical arts, ", "and trying to hunt some demon or other out in The Wilderness.").also { stage++ }
-            305 -> npc("Unsurprisingly, I do not believe he is doing a particularly good job of things, ", "and spends most of his time recovering from his injuries ", "in some tavern or other near the eastern edge of The Wilderness. ", "You'll probably find him still there.").also { stage++ }
+            304 -> npc("Well, the last I heard of my brother Johnathon,", "he was studying the magical arts,", "and trying to hunt some demon or other out in The Wilderness.").also { stage++ }
+            305 -> npc("Unsurprisingly, I do not believe he is doing a particularly good job of things,", "and spends most of his time recovering from his injuries", "in some tavern or other near the eastern edge of The Wilderness.", "You'll probably find him still there.").also { stage++ }
             306 -> player("Thanks Avan.").also { stage = 1000 }
             400 -> player("I am still working on it.").also { stage++ }
             401 -> npc("I hope you succeed for my father's sake.").also {
-                if (player.inventory.containItems(
-                        crestAvan.id,
-                        782,
-                    ) || player.bank.containItems(crestAvan.id, 782)
-                ) {
+                if (player.inventory.containItems(crestAvan.id, 782) || player.bank.containItems(crestAvan.id, 782)) {
                     stage = 1000
                 } else {
                     stage++
                 }
             }
             402 -> player("I have lost the fragment you gave me...").also { stage++ }
-            403 -> npc("I have a confession myself adventurer... ", "I did not fully trust you with the actual part ", "of my family's crest before, and gave you a ", "worthless replica before... ").also { stage++ }
-            404 -> npc("In hindsight, it seems I was right. ", "I will give you the real piece now, ", "but please try not to lose it; ", "it is a priceless family heirloom.").also {
+            403 -> npc("I have a confession myself adventurer...", "I did not fully trust you with the actual part", "of my family's crest before, and gave you a", "worthless replica before...").also { stage++ }
+            404 -> npc("In hindsight, it seems I was right.", "I will give you the real piece now,", "but please try not to lose it;", "it is a priceless family heirloom.").also {
                 stage = 1000
                 player.inventory.add(crestAvan)
             }
@@ -121,7 +117,7 @@ class AvanDialogue(player: Player? = null) : Dialogue(player) {
                 1 -> {
                     stage = 1000
                     val givingGauntletsId = Items.GOLDSMITH_GAUNTLETS_776
-                    val npcString = SwapGauntletsHelper.swapGauntlets(player, givingGauntletsId)
+                    val npcString = FamilyCrestListener.swapGauntlets(player, givingGauntletsId)
                     if (npcString == "") {
                         end()
                     } else {

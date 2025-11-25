@@ -1,5 +1,8 @@
 package content.region.misthalin.varrock.quest.crest.plugin
 
+import core.api.getQuestStage
+import core.api.sendMessage
+import core.api.setQuestStage
 import core.game.node.entity.Entity
 import core.game.node.entity.combat.BattleState
 import core.game.node.entity.combat.CombatStyle
@@ -9,88 +12,92 @@ import core.game.world.map.Location
 import shared.consts.NPCs
 import shared.consts.Quests
 
-class ChronozonNPC(
-    id: Int,
-    location: Location?,
-) : AbstractNPC(NPCs.CHRONOZON_667, Location(3085, 9936, 0)) {
-    private lateinit var targetplayer: Player
-    private var amountOfFireDamageTaken: Int = 0
-    private var amountOfAirDamageTaken: Int = 0
-    private var amountOfWaterDamageTaken: Int = 0
-    private var amountOfEarthDamageTaken: Int = 0
+class ChronozonNPC(id: Int, location: Location) : AbstractNPC(id, location) {
 
-    override fun construct(
-        id: Int,
-        location: Location?,
-        vararg objects: Any?,
-    ): AbstractNPC = ChronozonNPC(id, location)
+    private var targetPlayer: Player? = null
+
+    private var airDamage   = 0
+    private var waterDamage = 0
+    private var earthDamage = 0
+    private var fireDamage  = 0
+
+    override fun construct(id: Int, location: Location?, vararg objects: Any?): AbstractNPC {
+        return ChronozonNPC(id, location ?: Location(3085, 9936, 0))
+    }
 
     override fun getIds(): IntArray = intArrayOf(NPCs.CHRONOZON_667)
 
     override fun checkImpact(state: BattleState?) {
-        if (state != null) {
-            if (amountOfAirDamageTaken == 0 ||
-                amountOfWaterDamageTaken == 0 ||
-                amountOfEarthDamageTaken == 0 ||
-                amountOfFireDamageTaken == 0
-            ) {
-                if (state.style != CombatStyle.MAGIC || state.totalDamage >= skills.lifepoints) {
-                    state.neutralizeHits()
-                }
+        state ?: return
+        val missingWeakness = airDamage == 0 || waterDamage == 0 || earthDamage == 0 || fireDamage == 0
+        if (missingWeakness) {
+            if (state.style != CombatStyle.MAGIC) {
+                state.neutralizeHits()
+                return
             }
 
-            if (state.spell != null) {
-                if (state.spell.spellId == 24) {
-                    if (state.totalDamage > 0 && amountOfAirDamageTaken == 0) {
-                        targetplayer.sendMessage("Chronozon weakens...")
-                    }
-                    amountOfAirDamageTaken += state.totalDamage
-                }
+            if (state.totalDamage >= skills.lifepoints) {
+                state.neutralizeHits()
+            }
+        }
 
-                if (state.spell.spellId == 27) {
-                    if (state.totalDamage > 0 && amountOfWaterDamageTaken == 0) {
-                        targetplayer.sendMessage("Chronozon weakens...")
-                    }
-                    amountOfWaterDamageTaken += state.totalDamage
-                }
+        val spell = state.spell ?: return
 
-                if (state.spell.spellId == 33) {
-                    if (state.totalDamage > 0 && amountOfEarthDamageTaken == 0) {
-                        targetplayer.sendMessage("Chronozon weakens...")
-                    }
-                    amountOfEarthDamageTaken += state.totalDamage
-                }
+        when (spell.spellId) {
 
-                if (state.spell.spellId == 38) {
-                    if (state.totalDamage > 0 && amountOfFireDamageTaken == 0) {
-                        targetplayer.sendMessage("Chronozon weakens...")
-                    }
-                    amountOfFireDamageTaken += state.totalDamage
+            24 -> { // Air Bolt
+                if (state.totalDamage > 0 && airDamage == 0) {
+                    targetPlayer?.let { sendMessage(it,"Chronozon weakens...") }
                 }
+                airDamage += state.totalDamage
+            }
+
+            27 -> { // Water Bolt
+                if (state.totalDamage > 0 && waterDamage == 0) {
+                    targetPlayer?.let { sendMessage(it,"Chronozon weakens...") }
+                }
+                waterDamage += state.totalDamage
+            }
+
+            33 -> { // Earth Bolt
+                if (state.totalDamage > 0 && earthDamage == 0) {
+                    targetPlayer?.let { sendMessage(it,"Chronozon weakens...") }
+                }
+                earthDamage += state.totalDamage
+            }
+
+            38 -> { // Fire Bolt
+                if (state.totalDamage > 0 && fireDamage == 0) {
+                    targetPlayer?.let { sendMessage(it,"Chronozon weakens...") }
+                }
+                fireDamage += state.totalDamage
             }
         }
     }
 
     override fun finalizeDeath(killer: Entity?) {
-        if (killer == targetplayer) {
-            if (targetplayer.questRepository.getStage(Quests.FAMILY_CREST) != 20) {
-                targetplayer.questRepository.getQuest(Quests.FAMILY_CREST).setStage(targetplayer, 20)
-                this.clear()
+        val player = killer as? Player
+        val target = targetPlayer
+
+        if (player != null && player == target) {
+            if (getQuestStage(player, Quests.FAMILY_CREST) != 20) {
+                setQuestStage(player, Quests.FAMILY_CREST, 20)
             }
         }
-        clear()
+
         super.finalizeDeath(killer)
+        clear()
     }
 
     fun setPlayer(player: Player) {
-        targetplayer = player
+        targetPlayer = player
     }
 
     override fun init() {
-        amountOfFireDamageTaken = 0
-        amountOfAirDamageTaken = 0
-        amountOfWaterDamageTaken = 0
-        amountOfEarthDamageTaken = 0
+        airDamage   = 0
+        waterDamage = 0
+        earthDamage = 0
+        fireDamage  = 0
         super.init()
     }
 }

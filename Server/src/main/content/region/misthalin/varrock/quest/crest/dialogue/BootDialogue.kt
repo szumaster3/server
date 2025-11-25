@@ -33,15 +33,15 @@ class BootDialogue(player: Player? = null) : Dialogue(player) {
             2 -> options("Hello. I'm in search of very high quality gold.", "Hello short person.", "Why are you called Boot?").also { stage = 20 }
             10 -> when (buttonId) {
                 1 -> player("Hello short person.").also { stage = 1000 }
-                2 -> npc(FaceAnim.OLD_ANGRY1, "I'm called Boot, because when I was very young, ", "I used to sleep, in a large boot.").also { stage++ }
+                2 -> npc(FaceAnim.OLD_ANGRY1, "I'm called Boot, because when I was very young,", "I used to sleep, in a large boot.").also { stage++ }
             }
             11 -> player("Yeah, great, I didn't want your life story.").also { stage = 1000 }
             20 -> when (buttonId) {
-                1 -> npc(FaceAnim.OLD_DEFAULT, "High quality gold eh? Hmmm... ", "Well, the very best quality gold that I know of ", "can be found in an underground ruin near Witchaven.").also { stage++ }
+                1 -> npc(FaceAnim.OLD_DEFAULT, "High quality gold eh? Hmmm...", "Well, the very best quality gold that I know of", "can be found in an underground ruin near Witchaven.").also { stage++ }
                 2 -> player("Hello short person.").also { stage = 1000 }
-                3 -> npc(FaceAnim.OLD_ANGRY1, "I'm called Boot, because when I was very young, ", "I used to sleep, in a large boot.").also { stage = 11 }
+                3 -> npc(FaceAnim.OLD_ANGRY1, "I'm called Boot, because when I was very young,", "I used to sleep, in a large boot.").also { stage = 11 }
             }
-            21 -> npc("I don't believe it's exactly easy to get to though...").also {
+            21 -> npc(FaceAnim.OLD_DEFAULT,"I don't believe it's exactly easy to get to though...").also {
                 setQuestStage(player, Quests.FAMILY_CREST, 15)
                 stage = 1000
             }

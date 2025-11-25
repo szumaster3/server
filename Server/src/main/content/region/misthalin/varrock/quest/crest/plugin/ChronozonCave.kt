@@ -16,44 +16,41 @@ import shared.consts.NPCs
 import shared.consts.Quests
 
 @Initializable
-class ChronozonCave :
-    MapZone("FC ChronozoneZone", true),
-    Plugin<Unit> {
-    val spawnLoc = Location(3086, 9936, 0)
-    var chronozon = ChronozonNPC(NPCs.CHRONOZON_667, spawnLoc)
+class ChronozonCave : MapZone("FC_Chronozon_Zone", true), Plugin<Unit> {
+
+    private val spawnLoc = Location(3086, 9936, 0)
+    private var chronozon = ChronozonNPC(NPCs.CHRONOZON_667, spawnLoc)
 
     override fun configure() {
         register(ZoneBorders(3079, 9927, 3095, 9944))
     }
 
-    override fun move(e: Entity, from: Location, to: Location): Boolean = super.move(e, from, to)
-
     override fun enter(e: Entity): Boolean {
-        if (e != null) {
-            if (e.isPlayer) {
-                val player = e as Player
-                if (getQuestStage(player, Quests.FAMILY_CREST) in (19..99) &&
-                    !hasAnItem(
-                        player,
-                        Items.CREST_PART_781,
-                    ).exists()
-                ) {
-                    if (!RegionManager.getLocalNpcs(spawnLoc, 5).contains(chronozon)) {
-                        chronozon.setPlayer(e)
-                        chronozon.isRespawn = false
-                        chronozon.location = spawnLoc
-                        chronozon.init()
-                    }
-                }
+        if (!e.isPlayer) return true
+        val player = e as Player
+        val stage = getQuestStage(player, Quests.FAMILY_CREST)
+        val crestPart = hasAnItem(player, Items.CREST_PART_781).container != null
+        val shouldSpawn = stage in 19..99 && !crestPart
+
+        if (shouldSpawn) {
+            val local = RegionManager.getLocalNpcs(spawnLoc, 5)
+            val exists = local.any { it.id == NPCs.CHRONOZON_667 }
+
+            if (!exists) {
+                chronozon.setPlayer(player)
+                chronozon.isRespawn = false
+                chronozon.location = spawnLoc
+                chronozon.init()
             }
-            return true
         }
-        return false
+
+        return true
     }
 
     override fun leave(e: Entity, logout: Boolean): Boolean {
         if (e.isPlayer) {
-            if (RegionManager.getLocalPlayers(spawnLoc, 5).size <= 0) {
+            val playersNearby = RegionManager.getLocalPlayers(spawnLoc, 5)
+            if (playersNearby.isEmpty()) {
                 chronozon.clear()
             }
         }
@@ -65,5 +62,7 @@ class ChronozonCave :
         return this
     }
 
-    override fun fireEvent(identifier: String?, vararg args: Any?): Any = UInt
+    override fun fireEvent(identifier: String?, vararg args: Any?): Any? {
+        return null
+    }
 }
