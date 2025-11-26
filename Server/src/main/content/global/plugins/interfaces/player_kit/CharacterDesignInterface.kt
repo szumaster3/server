@@ -9,6 +9,7 @@ import shared.consts.Components
  * Listener for character design.
  */
 class CharacterDesignInterface : InterfaceListener {
+
     override fun defineInterfaceListeners() {
         onOpen(Components.APPEARANCE_771) { player, _ ->
             if(player.interfaceManager.isResizable) openOverlay(player, 333)

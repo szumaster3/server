@@ -5072,4 +5072,65 @@ fun displayQuestItem(
     )
 }
 
+fun updateTorsoLook(player : Player, lookId : Int){
+    player.appearance.torso.changeLook(lookId)
+}
+
+fun updateTorsoColor(player : Player, colorId : Int){
+    player.appearance.torso.changeColor(colorId)
+}
+
+fun updateArmsLook(player : Player, lookId : Int){
+    player.appearance.arms.changeLook(lookId)
+}
+
+fun updateArmsColor(player : Player, colorId : Int){
+    player.appearance.arms.changeColor(colorId)
+}
+
+fun updateLegsLook(player : Player, lookId : Int){
+    player.appearance.legs.changeLook(lookId)
+}
+
+fun updateLegsColor(player : Player, colorId : Int){
+    player.appearance.legs.changeColor(colorId)
+}
+
+fun updateWristsLook(player : Player, lookId : Int){
+    player.appearance.wrists.changeLook(lookId)
+}
+
+fun updateHairLook(player : Player, lookId : Int){
+    player.appearance.hair.changeLook(lookId)
+}
+
+fun updateHairColor(player : Player, colorId : Int){
+    player.appearance.hair.changeColor(colorId)
+}
+
+fun updateBeardLook(player : Player, lookId : Int){
+    player.appearance.beard.changeLook(lookId)
+}
+
+fun updateBeardColor(player : Player, colorId : Int){
+    player.appearance.beard.changeColor(colorId)
+}
+
+fun updateFeetLook(player : Player, lookId : Int){
+    player.appearance.feet.changeLook(lookId)
+}
+
+fun updateFeetColor(player : Player, colorId : Int){
+    player.appearance.feet.changeColor(colorId)
+}
+
+fun updateSkinColor(player : Player, colorId : Int){
+    player.appearance.skin.changeColor(colorId)
+}
+
+fun updateHeadIcon(player : Player, iconId : Int){
+    player.appearance.headIcon = iconId
+}
+
+
 private class ContentAPI
