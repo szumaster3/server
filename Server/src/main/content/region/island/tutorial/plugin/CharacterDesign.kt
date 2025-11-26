@@ -1,10 +1,11 @@
 package content.region.island.tutorial.plugin
 
+import content.global.plugins.interfaces.player_kit.PlayerKit
 import core.api.*
+import core.game.component.Component
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.appearance.Gender
 import core.tools.RandomFunction
-import shared.consts.Components
 import kotlin.math.abs
 
 /**
@@ -14,70 +15,20 @@ import kotlin.math.abs
  */
 object CharacterDesign {
 
-    val MALE_LOOK_IDS = arrayOf(
-        // Male head component ids.
-        intArrayOf(0, 1, 2, 3, 4, 5, 6, 7, 8, 91, 92, 93, 94, 95, 96, 97, 261, 262, 263, 264, 265, 266, 267, 268),
-        // Male jaw component ids.
-        intArrayOf(10, 11, 12, 13, 14, 15, 16, 17, 98, 99, 100, 101, 102, 103, 104, 305, 306, 307, 308),
-        // Male torso component ids.
-        intArrayOf(18, 19, 20, 21, 22, 23, 24, 25, 111, 112, 113, 114, 115, 116),
-        // Male arms component ids.
-        intArrayOf(26, 27, 28, 29, 30, 31, 105, 106, 107, 108, 109, 110),
-        // Male hand component ids.
-        intArrayOf(33, 34, 84, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126),
-        // Male legs component ids.
-        intArrayOf(36, 37, 38, 39, 40, 85, 86, 87, 88, 89, 90),
-        // Male feet component ids.
-        intArrayOf(42, 43)
-    )
-
-    val FEMALE_LOOK_IDS = arrayOf(
-        // Female head component ids.
-        intArrayOf(45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 269, 270, 271, 272, 273, 274, 275, 276, 277, 278, 279, 280),
-        // Female jaw component ids.
-        intArrayOf(1000),
-        // Female torso component ids.
-        intArrayOf(56, 57, 58, 59, 60, 153, 154, 155, 156, 157, 158),
-        // Female arms component ids.
-        intArrayOf(61, 62, 63, 64, 65, 147, 148, 149, 150, 151, 152),
-        // Female hand component ids.
-        intArrayOf(67, 68, 127, 159, 160, 161, 162, 163, 164, 165, 166, 167, 168),
-        // Female legs component ids.
-        intArrayOf(70, 71, 72, 73, 74, 75, 76, 77, 128, 129, 130, 131, 132, 133, 134),
-        // Female feet component ids.
-        intArrayOf(79, 80)
-    )
-
-    // Global appearance components.
-    private val HAIR_COLORS = intArrayOf(20, 19, 10, 18, 4, 5, 15, 7, 0, 6, 21, 9, 22, 17, 8, 16, 11, 24, 23, 3, 2, 1, 14, 13, 12)
-    private val TORSO_COLORS = intArrayOf(24, 23, 2, 22, 12, 11, 6, 19, 4, 0, 9, 13, 25, 8, 15, 26, 21, 7, 20, 14, 10, 28, 27, 3, 5, 18, 17, 1, 16)
-    private val LEG_COLORS = intArrayOf(26, 24, 23, 3, 22, 13, 12, 7, 19, 5, 1, 10, 14, 25, 9, 0, 21, 8, 20, 15, 11, 28, 27, 4, 6, 18, 17, 2, 16)
-    private val FEET_COLORS = intArrayOf(0, 1, 2, 3, 4, 5)
-    private val SKIN_COLORS = intArrayOf(7, 6, 5, 4, 3, 2, 1, 0)
-
-    // Color map.
-    private val COLOR_MAPPINGS = listOf(
-        Triple(0, HAIR_COLORS, 100..124),
-        Triple(2, TORSO_COLORS, 189..217),
-        Triple(5, LEG_COLORS, 248..276),
-        Triple(6, FEET_COLORS, 307..312),
-        Triple(4, SKIN_COLORS, 151..158)
-    )
-
     @JvmStatic
     fun open(player: Player) {
         player.unlock()
         removeAttribute(player, "char-design:accepted")
-        sendPlayerOnInterface(player, Components.APPEARANCE_771, 79)
-        sendAnimationOnInterface(player, 9806, Components.APPEARANCE_771, 79)
+        sendPlayerOnInterface(player, PlayerKit.START_APPEARANCE_INTERFACE_ID, 79)
+        sendAnimationOnInterface(player, 9806, PlayerKit.START_APPEARANCE_INTERFACE_ID, 79)
         player.appearance.changeGender(player.appearance.gender)
-        player.interfaceManager.openComponent(Components.APPEARANCE_771)?.setUncloseEvent { p, _ ->
-            p.getAttribute("char-design:accepted", false)
+        Component(PlayerKit.START_APPEARANCE_INTERFACE_ID).setUncloseEvent { p, _ ->
+            getAttribute(p,"char-design:accepted", false)
         }
         reset(player)
-        sendInterfaceConfig(player, Components.APPEARANCE_771, 22, false)
-        sendInterfaceConfig(player, Components.APPEARANCE_771, 92, false)
-        sendInterfaceConfig(player, Components.APPEARANCE_771, 97, false)
+        sendInterfaceConfig(player, PlayerKit.START_APPEARANCE_INTERFACE_ID, 22, false)
+        sendInterfaceConfig(player, PlayerKit.START_APPEARANCE_INTERFACE_ID, 92, false)
+        sendInterfaceConfig(player, PlayerKit.START_APPEARANCE_INTERFACE_ID, 97, false)
         setVarp(player, 1262, if (player.appearance.isMale) 1 else 0)
     }
 
@@ -97,7 +48,7 @@ object CharacterDesign {
             169 -> { randomize(player, true); return true }
             362 -> { confirm(player, true); return true }
         }
-        COLOR_MAPPINGS.find { (_, _, range) -> buttonId in range }?.let { (index, colors, range) ->
+        PlayerKit.COLOR_MAPPINGS.find { (_, _, range) -> buttonId in range }?.let { (index, colors, range) ->
             val startId = if (index == 4) range.last else range.first
             changeColor(player, index, colors, startId, buttonId)
         }
@@ -105,7 +56,6 @@ object CharacterDesign {
     }
 
     private fun changeGender(player: Player, male: Boolean) {
-        player.setAttribute("male", male)
         setVarp(player, 1262, if (male) 1 else 0)
         setVarbit(player, 5008, if (male) 1 else 0)
         setVarbit(player, 5009, if (male) 0 else 1)
@@ -118,7 +68,7 @@ object CharacterDesign {
             return
         }
         val currentIndex = getAttribute(player, "look:$index", 0)
-        val appearanceIds = if (getAttribute(player,"male", player.appearance.isMale)) MALE_LOOK_IDS else FEMALE_LOOK_IDS
+        val appearanceIds = if (getVarp(player, 1262) == 1) PlayerKit.MALE_LOOK_IDS else PlayerKit.FEMALE_LOOK_IDS
         val values = appearanceIds[index]
         val nextIndex = when {
             increment && currentIndex + 1 >= values.size -> 0
@@ -150,14 +100,14 @@ object CharacterDesign {
         if (head) {
             changeLook(player, 0, RandomFunction.random(2) == 1)
             changeLook(player, 1, RandomFunction.random(2) == 1)
-            changeColor(player, 0, HAIR_COLORS, 100, RandomFunction.random(100, 124))
-            changeColor(player, 4, SKIN_COLORS, 158, RandomFunction.random(151, 158))
+            changeColor(player, 0, PlayerKit.HAIR_COLORS, 100, RandomFunction.random(100, 124))
+            changeColor(player, 4, PlayerKit.SKIN_COLORS, 158, RandomFunction.random(151, 158))
         } else {
             for (i in player.appearance.appearanceCache.indices) {
                 changeLook(player, i, RandomFunction.random(2) == 1)
             }
             listOf(1, 2, 3).forEach {
-                val (index, colors, range) = COLOR_MAPPINGS[it]
+                val (index, colors, range) = PlayerKit.COLOR_MAPPINGS[it]
                 changeColor(player, index, colors, range.first, RandomFunction.random(range.first, range.last))
             }
         }

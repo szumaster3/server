@@ -27,6 +27,7 @@ object PlayerKit {
     /* ╔════════════════════════════════════════════╗
      * ║ INTERFACE IDS                              ║
      * ╚════════════════════════════════════════════╝ */
+    const val START_APPEARANCE_INTERFACE_ID   = Components.APPEARANCE_771 // All.
     const val YRSA_SHOE_STORE_INTERFACE_ID    = Components.YRSA_SHOE_STORE_200 // Feet appearance.
     const val MAKEOVER_MAGE_INTERFACE_ID      = Components.MAKEOVER_MAGE_205 // Skin & gender appearance.
     const val REINALD_BRACELETS_INTERFACE_ID  = Components.REINALD_SMITHING_EMPORIUM_593 // Wrists appearance.
@@ -125,5 +126,51 @@ object PlayerKit {
         133 to 27705,
         134 to 27700,
         135 to 27709
+    )
+
+    /* ╔════════════════════════════════════════════╗
+     * ║ APPEARANCE INTERFACE COMPONENT IDS         ║
+     * ╚════════════════════════════════════════════╝ */
+    val SKIN_COLORS = intArrayOf(7, 6, 5, 4, 3, 2, 1, 0)
+    val COLOR_MAPPINGS = listOf(
+        Triple(0, HAIR_COLORS, 100..124),
+        Triple(2, torsoColors, 189..217),
+        Triple(5, legColors, 248..276),
+        Triple(6, YRSA_COLOR_BUTTONS_COMPONENT_IDS, 307..312),
+        Triple(4, SKIN_COLORS, 151..158)
+    )
+
+    val MALE_LOOK_IDS = arrayOf(
+        // head component ids.
+        intArrayOf(0,1,2,3,4,5,6,7,8,91,92,93,94,95,96,97,261,262,263,264,265,266,267,268),
+        // jaw component ids.
+        intArrayOf(10,11,12,13,14,15,16,17,98,99,100,101,102,103,104,305,306,307,308),
+        // torso component ids.
+        intArrayOf(18,19,20,21,22,23,24,25,111,112,113,114,115,116),
+        // arms component ids.
+        intArrayOf(26,27,28,29,30,31,105,106,107,108,109,110),
+        // hand component ids.
+        intArrayOf(33,34,84,117,118,119,120,121,122,123,124,125,126),
+        // legs component ids.
+        intArrayOf(36,37,38,39,40,85,86,87,88,89,90),
+        // feet component ids.
+        intArrayOf(42,43)
+    )
+
+    val FEMALE_LOOK_IDS = arrayOf(
+        // head component ids.
+        intArrayOf(45,46,47,48,49,50,51,52,53,54,135,136,137,138,139,140,141,142,143,144,145,146,269,270,271,272,273,274,275,276,277,278,279,280),
+        // jaw component ids.
+        intArrayOf(1000),
+        // torso component ids.
+        intArrayOf(56,57,58,59,60,153,154,155,156,157,158),
+        // arms component ids.
+        intArrayOf(61,62,63,64,65,147,148,149,150,151,152),
+        // hand component ids.
+        intArrayOf(67,68,127,159,160,161,162,163,164,165,166,167,168),
+        // legs component ids.
+        intArrayOf(70,71,72,73,74,75,76,77,128,129,130,131,132,133,134),
+        // feet component ids.
+        intArrayOf(79,80)
     )
 }

@@ -14,15 +14,19 @@ import shared.consts.Components
 import shared.consts.Items
 import shared.consts.NPCs
 
+/**
+ * Handles the player kit interfaces
+ * @author Emperor, Vexia, Ceikry
+ */
 class PlayerKitInterface : InterfaceListener {
 
     override fun defineInterfaceListeners() {
         // Start appearance changer.
-        onOpen(Components.APPEARANCE_771) { player, _ ->
+        onOpen(PlayerKit.START_APPEARANCE_INTERFACE_ID) { player, _ ->
             if (player.interfaceManager.isResizable) openOverlay(player, Components.BLACK_OVERLAY_333)
             return@onOpen true
         }
-        on(Components.APPEARANCE_771) { player, _, _, buttonID, _, _ ->
+        on(PlayerKit.START_APPEARANCE_INTERFACE_ID) { player, _, _, buttonID, _, _ ->
             CharacterDesign.handleButtons(player, buttonID)
             return@on true
         }
@@ -587,8 +591,8 @@ class PlayerKitInterface : InterfaceListener {
         val oldCache = appearance.appearanceCache.map { it.look to it.color }
         appearance.setGender(newGender)
 
-        val src = if (oldGender == Gender.MALE) CharacterDesign.MALE_LOOK_IDS else CharacterDesign.FEMALE_LOOK_IDS
-        val dst = if (newGender == Gender.MALE) CharacterDesign.MALE_LOOK_IDS else CharacterDesign.FEMALE_LOOK_IDS
+        val src = if (oldGender == Gender.MALE) PlayerKit.MALE_LOOK_IDS else PlayerKit.FEMALE_LOOK_IDS
+        val dst = if (newGender == Gender.MALE) PlayerKit.MALE_LOOK_IDS else PlayerKit.FEMALE_LOOK_IDS
 
         val newCache = appearance.appearanceCache
         for (i in newCache.indices) {
