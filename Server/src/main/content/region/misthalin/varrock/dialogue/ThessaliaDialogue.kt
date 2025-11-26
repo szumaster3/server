@@ -29,7 +29,7 @@ class ThessaliaDialogue(player: Player? = null) : Dialogue(player) {
                     openInterface(player, Components.THESSALIA_CLOTHES_FEMALE_594)
                 }
             } else {
-                npc(FaceAnim.WORRIED, "You can't try them on while wearing armour. Take", "it off and speak to me again.").also { stage = END_DIALOGUE }
+                npc(FaceAnim.WORRIED, "You're not able to try on my clothes with all that", "armour. Take it off and then speak to me again.").also { stage = END_DIALOGUE }
             }
             return true
         }

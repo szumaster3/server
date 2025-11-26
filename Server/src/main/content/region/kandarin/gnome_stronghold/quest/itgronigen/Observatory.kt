@@ -69,7 +69,7 @@ class Observatory : Quest(Quests.OBSERVATORY_QUEST, 96, 95, 2, Vars.VARP_QUEST_O
     override fun finish(player: Player) {
         super.finish(player)
         var ln = 10
-        displayQuestItem(player, Items.NULL_11601)
+        displayQuestItem(player, Items.NULL_4557)
         drawReward(player, "2 Quest Points", ln++)
         drawReward(player, "2,250 Crafting XP", ln++)
         drawReward(player, "A payment depending on", ln++)

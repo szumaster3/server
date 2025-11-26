@@ -76,6 +76,165 @@ class CacheCommandSet : CommandSet(Privilege.ADMIN) {
             }
         }
 
+        define(
+            name = "ifaceitem",
+            privilege = Privilege.ADMIN,
+            usage = "::ifaceitem <sceneryId>",
+            description = "Find item definitions that use any model used by a scenery object."
+        ) { player, args ->
+
+            val sceneryId = args?.getOrNull(1)?.toIntOrNull()
+
+            if (sceneryId == null) {
+                reject(player, "Usage: ::ifaceitem <sceneryId>")
+                return@define
+            }
+
+            val sceneryDef = SceneryDefinition.forId(sceneryId)
+            if (sceneryDef == null) {
+                reject(player, "Scenery definition $sceneryId not found.")
+                return@define
+            }
+
+            val sceneryModels: List<Int> = when {
+                sceneryDef.modelIds != null -> sceneryDef.modelIds!!.toList()
+                else -> emptyList()
+            }
+
+            if (sceneryModels.isEmpty()) {
+                reject(player, "Scenery $sceneryId has no model IDs.")
+                return@define
+            }
+            player.debug("[loc_$sceneryId] name=${sceneryDef.name}")
+
+            GlobalScope.launch {
+
+                val results = mutableMapOf<Int, MutableList<String>>()
+
+                for (modelId in sceneryModels) {
+                    results[modelId] = mutableListOf()
+                }
+
+                for (itemId in 0 until Cache.getItemDefinitionsSize()) {
+                    val def = ItemDefinition.forId(itemId) ?: continue
+
+                    val itemModels: List<Int> = buildList {
+                        def.interfaceModelId?.let { add(it) }
+                    }
+
+                    for (modelId in sceneryModels) {
+                        if (modelId in itemModels) {
+                            results[modelId]!!.add("[obj_${def.id}] name=${def.name}")
+                        }
+                    }
+                }
+
+                var foundAny = false
+
+                for ((modelId, items) in results) {
+                    if (items.isNotEmpty()) {
+                        foundAny = true
+                        player.debug("model=model_$modelId")
+                        items.forEach { player.debug("--->$it") }
+                    }
+                }
+                if (!foundAny) {
+                    player.debug("No items found using any model from scenery $sceneryId.")
+                }
+            }
+        }
+
+        define(
+            name = "finditembymodel",
+            privilege = Privilege.ADMIN,
+            usage = "::finditembymodel <modelId>",
+            description = "Find item definitions that use the given model ID."
+        ) { player, args ->
+
+            val modelId = args?.getOrNull(1)?.toIntOrNull()
+
+            if (modelId == null) {
+                reject(player, "Usage: ::finditembymodel <modelId>")
+                return@define
+            }
+
+            player.debug("Searching for items using model_$modelId...")
+
+            GlobalScope.launch {
+
+                val matches = mutableListOf<String>()
+
+                val total = Cache.getItemDefinitionsSize()
+                for (itemId in 0 until total) {
+                    val def = ItemDefinition.forId(itemId) ?: continue
+
+                    val itemModel = def.interfaceModelId ?: continue
+                    if (itemModel == modelId) {
+                        matches.add("[obj_${def.id}] name=${def.name}")
+                    }
+                }
+
+                if (matches.isEmpty()) {
+                    player.debug("No items found using model_$modelId.")
+                    return@launch
+                }
+
+                player.debug("Items using model_$modelId:")
+                matches.forEach { player.debug("---> $it") }
+            }
+        }
+
+        define(
+            name = "itemformodel",
+            privilege = Privilege.ADMIN,
+            usage = "::itemformodel <itemId>",
+            description = "Find item definitions that use the same interface model as the given item."
+        ) { player, args ->
+
+            val itemId = args?.getOrNull(1)?.toIntOrNull()
+
+            if (itemId == null) {
+                reject(player, "Usage: ::itemformodel <itemId>")
+                return@define
+            }
+
+            val baseDef = ItemDefinition.forId(itemId)
+            if (baseDef == null) {
+                reject(player, "Item definition $itemId not found.")
+                return@define
+            }
+
+            val baseModel = baseDef.interfaceModelId
+            if (baseModel == null) {
+                reject(player, "Item $itemId has no interface model.")
+                return@define
+            }
+
+            player.debug("[obj_$itemId] name=${baseDef.name} model=$baseModel")
+
+            GlobalScope.launch {
+
+                val matches = mutableListOf<String>()
+
+                for (id in 0 until Cache.getItemDefinitionsSize()) {
+                    val def = ItemDefinition.forId(id) ?: continue
+
+                    val model = def.interfaceModelId ?: continue
+                    if (model == baseModel) {
+                        matches.add("[obj_${def.id}] name=${def.name}")
+                    }
+                }
+
+                if (matches.isEmpty()) {
+                    player.debug("No items found using model $baseModel.")
+                    return@launch
+                }
+
+                player.debug("Items using model_$baseModel:")
+                matches.forEach { player.debug("---> $it") }
+            }
+        }
+
         /*
          * Command for listing all object options in-game.
          */

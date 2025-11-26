@@ -70,14 +70,14 @@ object TutorialStage {
             0 -> {
                 lock(player, 10)
                 teleport(player, Location.create(3094, 3107, 0))
-                setVarbit(player, 4895, 2)
+                setVarbit(player, Vars.VARBIT_TUTORIAL_ISLAND_LOCK_COMPONENTS_4895, 2)
                 setMinimapState(player, 2)
                 hideTabs(player, login)
                 CharacterDesign.open(player)
                 player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
+                    "",
+                    "",
                     "Getting started",
-                    "",
-                    "",
                     "Please take a moment to design your character.",
                     "",
                 )
@@ -91,9 +91,9 @@ object TutorialStage {
                 player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
                     "Getting started",
                     "To start the tutorial use your left mouse button to click on the",
-                    "" + settings!!.name + " Guide in this room. He is indicated by a flashing yellow",
-                    "arrow above his head. If you can't see him, use your keyboard's arrow",
-                    "keys to rotate the view.",
+                    "" + settings!!.name + " Guide in this room. He is indicated by a flashing",
+                    "yellow arrow above his head. If you can't see him, use your",
+                    "keyboard's arrow keys to rotate the view.",
                 )
             }
 

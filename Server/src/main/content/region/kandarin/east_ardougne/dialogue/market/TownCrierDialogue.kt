@@ -1,6 +1,6 @@
 package content.region.kandarin.east_ardougne.dialogue.market
 
-import content.global.plugins.item.books_and_scrolls.GeneralRuleBook.Companion.openBook
+import content.global.plugins.item.books_and_scrolls.impl.GeneralRuleBook
 import core.api.lock
 import core.api.runTask
 import core.api.stopWalk
@@ -49,7 +49,7 @@ class TownCrierDialogue(player: Player? = null) : Dialogue(player) {
                 lock(npc, 5)
                 visualize(npc, 6866, 1178)
                 runTask(player, 3) {
-                    openBook(player)
+                    GeneralRuleBook.Companion.openBook(player)
                 }
             }
             100 -> when ((0..4).random()) {

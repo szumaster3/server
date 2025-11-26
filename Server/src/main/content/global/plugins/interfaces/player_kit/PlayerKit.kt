@@ -27,13 +27,13 @@ object PlayerKit {
     /* ╔════════════════════════════════════════════╗
      * ║ INTERFACE IDS                              ║
      * ╚════════════════════════════════════════════╝ */
-    const val YRSA_SHOE_STORE_INTERFACE_ID    = Components.YRSA_SHOE_STORE_200     // Feet appearance.
-    const val MAKEOVER_MAGE_INTERFACE_ID      = Components.MAKEOVER_MAGE_205   // Skin & gender appearance.
-    const val REINALD_BRACELETS_INTERFACE_ID  = Components.REINALD_SMITHING_EMPORIUM_593   // Wrists appearance.
-    const val THESSALIA_MALE_INTERFACE_ID     = Components.THESSALIA_CLOTHES_MALE_591  // Clothes (male) appearance.
-    const val THESSALIA_FEMALE_INTERFACE_ID   = Components.THESSALIA_CLOTHES_FEMALE_594    // Clothes (female) appearance.
-    const val HAIRDRESSER_MALE_INTERFACE_ID   = Components.HAIRDRESSER_MALE_596// Hair (male) appearance.
-    const val HAIRDRESSER_FEMALE_INTERFACE_ID = Components.HAIRDRESSER_FEMALE_592// Hair (female) appearance.
+    const val YRSA_SHOE_STORE_INTERFACE_ID    = Components.YRSA_SHOE_STORE_200 // Feet appearance.
+    const val MAKEOVER_MAGE_INTERFACE_ID      = Components.MAKEOVER_MAGE_205 // Skin & gender appearance.
+    const val REINALD_BRACELETS_INTERFACE_ID  = Components.REINALD_SMITHING_EMPORIUM_593 // Wrists appearance.
+    const val THESSALIA_MALE_INTERFACE_ID     = Components.THESSALIA_CLOTHES_MALE_591 // Clothes (male) appearance.
+    const val THESSALIA_FEMALE_INTERFACE_ID   = Components.THESSALIA_CLOTHES_FEMALE_594 // Clothes (female) appearance.
+    const val HAIRDRESSER_MALE_INTERFACE_ID   = Components.HAIRDRESSER_MALE_596 // Hair (male) appearance.
+    const val HAIRDRESSER_FEMALE_INTERFACE_ID = Components.HAIRDRESSER_FEMALE_592 // Hair (female) appearance.
     /* ╔════════════════════════════════════════════╗
      * ║ PRICES                                     ║
      * ╚════════════════════════════════════════════╝ */
@@ -56,38 +56,34 @@ object PlayerKit {
      * ╚════════════════════════════════════════════╝ */
     const val MAKEOVER_MODEL_MALE_COMPONENT_ID    = 90
     const val MAKEOVER_MODEL_FEMALE_COMPONENT_ID  = 92
-    const val MAKEOVER_TEXT_COMPONENT_ID          = 88
-    val SKIN_COLOR_BUTTON_COMPONENT_IDS     = 93..100
+    const val MAKEOVER_CONFIRM_COMPONENT_ID          = 88
+    val SKIN_COLOR_BUTTON_COMPONENT_IDS           = 93..100
 
     /* ╔════════════════════════════════════════════╗
      * ║ THESSALIA CLOTHES INTERFACE COMPONENT IDS  ║
      * ╚════════════════════════════════════════════╝ */
     const val CLOTHES_DISPLAY_COMPONENT_ID = 59
-    val FEMALE_TORSO_BUTTONS_COMPONENT_IDS = 186..196 ; val MALE_TORSO_BUTTONS_COMPONENT_IDS = 185..198
-    val FEMALE_ARMS_BUTTONS_COMPONENT_IDS  = 197..207 ; val MALE_ARMS_BUTTONS_COMPONENT_IDS  = 199..210
-    val FEMALE_LEGS_BUTTONS_COMPONENT_IDS  = 208..222 ; val MALE_LEGS_BUTTONS_COMPONENT_IDS  = 211..221
-    val FEMALE_COLOR_BUTTONS_COMPONENT_IDS = 253..281 ; val MALE_COLOR_BUTTONS_COMPONENT_IDS = 252..280
+    val maleTorsoButtonRange = (185..198)        ; val femaleTorsoButtonRange = (186..196)
+    val maleArmsButtonRange = (199..210)         ; val femaleArmsButtonRange = (197..207)
+    val maleLegsButtonRange = (211..221)         ; val femaleLegsButtonRange = (208..222)
+    val maleClothesColorButtonRange = (252..280) ; val femaleClothesColorButtonRange = (253..281)
 
-    val MALE_TORSO_IDS =
+    val maleTorsoIDs =
         intArrayOf(111,113,114,115,21,116,18,19,20,112,24,23,24,25)
-    val MALE_SLEEVE_IDS =
+    val maleSleeveIDs =
         intArrayOf(107,108,29,106,110,109,28,26,27,105,30,31)
-    val MALE_LEG_IDS =
+    val maleLegIDs =
         intArrayOf(36,85,37,40,89,90,86,88,39,38,87)
-    val FEMALE_TORSO_IDS =
+    val femaleTopIDs =
         intArrayOf(153,155,156,157,154,158,56,57,58,59,60)
-    val FEMALE_ARMS_IDS =
+    val femaleArmIDs =
         intArrayOf(149,150,65,148,151,152,64,61,63,147,62)
-    val FEMALE_LEG_IDS =
+    val femaleLegIDs =
         intArrayOf(129,130,128,74,133,134,71,131,132,75,73,76)
-
-    val LEGS_BUTTON_COLOR_COMPONENT_IDS =
+    val legColors =
         intArrayOf(24,23,3,22,13,12,7,19,5,1,10,14,25,9,0,26,21,8,20,15,11,28,27,4,6,18,17,2,16)
-    val TORSO_BUTTON_COLOR_COMPONENT_IDS =
+    val torsoColors =
         intArrayOf(24,23,2,22,12,11,6,19,4,0,9,13,25,8,15,26,21,7,20,14,10,28,27,3,5,18,17,1,16)
-
-    enum class ColorType { TORSO, ARMS, LEGS }
-
     /* ╔════════════════════════════════════════════╗
      * ║ HAIRDRESSER INTERFACE COMPONENT IDS        ║
      * ╚════════════════════════════════════════════╝ */
