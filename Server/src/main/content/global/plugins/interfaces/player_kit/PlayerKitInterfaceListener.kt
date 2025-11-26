@@ -55,11 +55,11 @@ class PlayerKitInterfaceListener : InterfaceListener {
             return@onOpen true
         }
         on(PlayerKit.THESSALIA_MALE_INTERFACE_ID) { player, _, _, button, _, _ ->
-            handleClothesButtons(player, button, true)
+            handleClothesButtons(player, PlayerKit.THESSALIA_MALE_INTERFACE_ID, button, true)
             return@on true
         }
         on(PlayerKit.THESSALIA_FEMALE_INTERFACE_ID) { player, _, _, button, _, _ ->
-            handleClothesButtons(player, button, false)
+            handleClothesButtons(player, PlayerKit.THESSALIA_FEMALE_INTERFACE_ID, button, false)
             return@on true
         }
         onClose(PlayerKit.THESSALIA_MALE_INTERFACE_ID) { player, _ ->
@@ -69,7 +69,7 @@ class PlayerKitInterfaceListener : InterfaceListener {
             return@onClose closeClothesShop(player)
         }
         onOpen(PlayerKit.YRSA_SHOE_STORE_INTERFACE_ID) { player, _ ->
-            openShoeInterface(player)
+            openShoeShop(player)
             return@onOpen true
         }
         on(PlayerKit.YRSA_SHOE_STORE_INTERFACE_ID) { player, _, _, button, _, _ ->
@@ -95,7 +95,7 @@ class PlayerKitInterfaceListener : InterfaceListener {
         }
         on(PlayerKit.REINALD_BRACELETS_INTERFACE_ID) { player, _, _, buttonId, _, _ ->
             PlayerKit.WRISTS_MODELS[buttonId]?.let { modelId -> openBraceShop(player, modelId) }
-                ?: run { if (buttonId == 117) braceletPay(player) }
+                ?: run { if (buttonId == 117) pay(player, PlayerKit.REINALD_BRACELETS_INTERFACE_ID) }
             return@on true
         }
     }
@@ -126,7 +126,7 @@ class PlayerKitInterfaceListener : InterfaceListener {
         when (button) {
             199 -> setAttribute(player, PlayerKit.PLAYER_KIT_BEARD_SETTINGS_ATTRIBUTE, false)
             200 -> setAttribute(player, PlayerKit.PLAYER_KIT_BEARD_SETTINGS_ATTRIBUTE, true)
-            196, 274 -> hairdresserPay(player)
+            196, 274 -> pay(player, iface)
             else -> {
                 if (iface == PlayerKit.HAIRDRESSER_MALE_INTERFACE_ID)
                     updateHairMale(player, button) else updateHairFemale(player, button)
@@ -234,50 +234,10 @@ class PlayerKitInterfaceListener : InterfaceListener {
         }
     }
 
-    private fun updateSkin(player: Player, button: Int) {
-        val newIndex =
-            when (button) {
-                in 93..99 -> button - 92
-                100 -> 8
-                else -> return
-            }
-        val newSkin = button - PlayerKit.SKIN_COLOR_BUTTON_COMPONENT_IDS.first
-        setAttribute(player, PlayerKit.PLAYER_KIT_SKIN_COLOR_SAVE_ATTRIBUTE, newSkin)
-        setVarp(player, 262, newIndex)
-        updateSkinColor(player, newSkin)
-        refreshAppearance(player)
-    }
-
-    private fun mapAppearance(player: Player, newGender: Gender) {
-        val appearance = player.appearance
-        val oldGender = appearance.gender
-        if (oldGender == newGender) return
-
-        val oldCache = appearance.appearanceCache.map { it.look to it.color }
-        appearance.setGender(newGender)
-
-        val src = if (oldGender == Gender.MALE) CharacterDesign.MALE_LOOK_IDS else CharacterDesign.FEMALE_LOOK_IDS
-        val dst = if (newGender == Gender.MALE) CharacterDesign.MALE_LOOK_IDS else CharacterDesign.FEMALE_LOOK_IDS
-
-        val newCache = appearance.appearanceCache
-        for (i in newCache.indices) {
-            val (look, col) = oldCache.getOrNull(i) ?: continue
-            val s = src.getOrNull(i)
-            val d = dst.getOrNull(i)
-            if (s == null || d == null || s.isEmpty() || d.isEmpty()) continue
-            val idx = s.indexOf(look)
-            val mapped = if (idx != -1 && idx < d.size) d[idx] else d.first()
-            newCache[i].changeLook(mapped)
-            newCache[i].changeColor(col)
-        }
-        appearance.sync()
-    }
-
-    private fun openShoeInterface(player: Player) {
+    private fun openShoeShop(player: Player) {
         val original = player.appearance.feet.color
-        setAttribute(player, PlayerKit.PLAYER_KIT_FEET_SAVE_ATTRIBUTE, original)
-        playGlobalAudio(player.location, Sounds.WARDROBE_OPEN_96, 1)
         player.toggleWardrobe(true)
+        setAttribute(player, PlayerKit.PLAYER_KIT_FEET_SAVE_ATTRIBUTE, original)
         for (i in PlayerKit.YRSA_FEET_MODEL_IDS.indices) {
             sendItemOnInterface(
                 player,
@@ -289,13 +249,13 @@ class PlayerKitInterfaceListener : InterfaceListener {
         val text = if (!player.houseManager.isInHouse(player)) "CONFIRM (500 GOLD)" else "CONFIRM (FREE)"
         sendString(player, text, PlayerKit.YRSA_SHOE_STORE_INTERFACE_ID, 14)
         Component(PlayerKit.YRSA_SHOE_STORE_INTERFACE_ID)?.setUncloseEvent { p, _ ->
-            closeShoeInterface(p)
+            closeShoeShop(p)
             true
         }
         refreshAppearance(player)
     }
 
-    private fun closeShoeInterface(player: Player) {
+    private fun closeShoeShop(player: Player) {
         player.toggleWardrobe(false)
         playGlobalAudio(player.location, Sounds.WARDROBE_CLOSE_95, 1)
 
@@ -310,22 +270,66 @@ class PlayerKitInterfaceListener : InterfaceListener {
         refreshAppearance(player)
     }
 
-    private fun updateFeet(player: Player, button: Int) {
-        val subtract = 15
-        val idx = button - subtract
-        setVarp(player, 261, button - 14)
-        updateFeetColor(player, PlayerKit.YRSA_COLOR_BUTTONS_COMPONENT_IDS[idx])
-        refreshAppearance(player)
+    private fun openClothesShop(player: Player, male: Boolean) {
+        player.toggleWardrobe(true)
+
+        setAttribute(player, PlayerKit.PLAYER_KIT_TORSO_SAVE_ATTRIBUTE, player.appearance.torso.look)
+        setAttribute(player, PlayerKit.PLAYER_KIT_TORSO_COLOR_SAVE_ATTRIBUTE, player.appearance.torso.color)
+
+        setAttribute(player, PlayerKit.PLAYER_KIT_ARMS_SAVE_ATTRIBUTE, player.appearance.arms.look)
+        setAttribute(player, PlayerKit.PLAYER_KIT_ARMS_COLOR_SAVE_ATTRIBUTE, player.appearance.arms.color)
+
+        setAttribute(player, PlayerKit.PLAYER_KIT_LEGS_SAVE_ATTRIBUTE, player.appearance.legs.look)
+        setAttribute(player, PlayerKit.PLAYER_KIT_LEGS_COLOR_SAVE_ATTRIBUTE, player.appearance.legs.color)
+
+        val componentId = PlayerKit.CLOTHES_DISPLAY_COMPONENT_ID
+        if (male) sendPlayerOnInterface(player, PlayerKit.THESSALIA_MALE_INTERFACE_ID, componentId)
+        else sendPlayerOnInterface(player, PlayerKit.THESSALIA_FEMALE_INTERFACE_ID, componentId)
     }
 
-    inner class EndDialogue : DialogueFile() {
-        override fun handle(componentID: Int, buttonID: Int) {
-            when (stage) {
-                0 -> npc(NPCs.YRSA_1301, FaceAnim.FRIENDLY, "I think they suit you.").also { stage++ }
-                1 -> player(FaceAnim.HAPPY, "Thanks!").also { stage++ }
-                2 -> end()
-            }
+    private fun handleClothesButtons(player: Player, comp: Int, button: Int, male: Boolean) {
+        // pay buttons.
+        if (button == 181 || button == 180 || button == 297) {
+            pay(player, comp)
+            return
         }
+        // type select.
+        when (button) {
+            if (male) 182 else 183 -> setAttribute(player, PlayerKit.PLAYER_KIT_TYPE_ATTRIBUTE, PlayerKit.ColorType.TORSO)
+            if (male) 183 else 184 -> setAttribute(player, PlayerKit.PLAYER_KIT_TYPE_ATTRIBUTE, PlayerKit.ColorType.ARMS)
+            if (male) 184 else 185 -> setAttribute(player, PlayerKit.PLAYER_KIT_TYPE_ATTRIBUTE, PlayerKit.ColorType.LEGS)
+        }
+        val type = getAttribute(player, PlayerKit.PLAYER_KIT_TYPE_ATTRIBUTE, PlayerKit.ColorType.TORSO)
+        if (male) {
+            if (button in PlayerKit.MALE_ARMS_BUTTONS_COMPONENT_IDS) updateArms(player, button, true)
+            if (button in PlayerKit.MALE_TORSO_BUTTONS_COMPONENT_IDS) updateTorso(player, button, true)
+            if (button in PlayerKit.MALE_LEGS_BUTTONS_COMPONENT_IDS) updateLegs(player, button, true)
+            if (button in PlayerKit.MALE_COLOR_BUTTONS_COMPONENT_IDS) updateColor(player, button, true, type)
+        } else {
+            if (button in PlayerKit.FEMALE_ARMS_BUTTONS_COMPONENT_IDS) updateArms(player, button, false)
+            if (button in PlayerKit.FEMALE_TORSO_BUTTONS_COMPONENT_IDS) updateTorso(player, button, false)
+            if (button in PlayerKit.FEMALE_LEGS_BUTTONS_COMPONENT_IDS) updateLegs(player, button, false)
+            if (button in PlayerKit.FEMALE_COLOR_BUTTONS_COMPONENT_IDS) updateColor(player, button, false, type)
+        }
+    }
+
+    private fun closeClothesShop(player: Player): Boolean {
+        player.toggleWardrobe(false)
+        removeAttribute(player, PlayerKit.PLAYER_KIT_TYPE_ATTRIBUTE)
+        playJingle(player, 266)
+
+        if (!getAttribute(player, PlayerKit.PLAYER_KIT_PAID_ATTRIBUTE, false)) {
+            updateTorsoLook(player,  getAttribute(player, PlayerKit.PLAYER_KIT_TORSO_SAVE_ATTRIBUTE, 0))
+            updateTorsoColor(player, getAttribute(player, PlayerKit.PLAYER_KIT_TORSO_COLOR_SAVE_ATTRIBUTE, 0))
+            updateArmsLook(player,   getAttribute(player, PlayerKit.PLAYER_KIT_ARMS_SAVE_ATTRIBUTE, 0))
+            updateArmsColor(player,  getAttribute(player, PlayerKit.PLAYER_KIT_ARMS_COLOR_SAVE_ATTRIBUTE, 0))
+            updateLegsLook(player,   getAttribute(player, PlayerKit.PLAYER_KIT_LEGS_SAVE_ATTRIBUTE, 0))
+            updateLegsColor(player,  getAttribute(player, PlayerKit.PLAYER_KIT_LEGS_COLOR_SAVE_ATTRIBUTE, 0))
+            refreshAppearance(player)
+        }
+
+        removeAttribute(player, PlayerKit.PLAYER_KIT_PAID_ATTRIBUTE)
+        return true
     }
 
     private fun updateHairFemale(player: Player, button: Int) {
@@ -381,68 +385,6 @@ class PlayerKitInterfaceListener : InterfaceListener {
         refreshAppearance(player)
     }
 
-    private fun openClothesShop(player: Player, male: Boolean) {
-        player.toggleWardrobe(true)
-
-        setAttribute(player, PlayerKit.PLAYER_KIT_TORSO_SAVE_ATTRIBUTE, player.appearance.torso.look)
-        setAttribute(player, PlayerKit.PLAYER_KIT_TORSO_COLOR_SAVE_ATTRIBUTE, player.appearance.torso.color)
-
-        setAttribute(player, PlayerKit.PLAYER_KIT_ARMS_SAVE_ATTRIBUTE, player.appearance.arms.look)
-        setAttribute(player, PlayerKit.PLAYER_KIT_ARMS_COLOR_SAVE_ATTRIBUTE, player.appearance.arms.color)
-
-        setAttribute(player, PlayerKit.PLAYER_KIT_LEGS_SAVE_ATTRIBUTE, player.appearance.legs.look)
-        setAttribute(player, PlayerKit.PLAYER_KIT_LEGS_COLOR_SAVE_ATTRIBUTE, player.appearance.legs.color)
-
-        val componentId = PlayerKit.CLOTHES_DISPLAY_COMPONENT_ID
-        if (male) sendPlayerOnInterface(player, PlayerKit.THESSALIA_MALE_INTERFACE_ID, componentId)
-        else sendPlayerOnInterface(player, PlayerKit.THESSALIA_FEMALE_INTERFACE_ID, componentId)
-    }
-
-    private fun handleClothesButtons(player: Player, button: Int, male: Boolean) {
-        // pay buttons.
-        if (button == 181 || button == 180 || button == 297) {
-            clothesPay(player)
-            return
-        }
-        // type select.
-        when (button) {
-            if (male) 182 else 183 -> setAttribute(player, PlayerKit.PLAYER_KIT_TYPE_ATTRIBUTE, PlayerKit.ColorType.TORSO)
-            if (male) 183 else 184 -> setAttribute(player, PlayerKit.PLAYER_KIT_TYPE_ATTRIBUTE, PlayerKit.ColorType.ARMS)
-            if (male) 184 else 185 -> setAttribute(player, PlayerKit.PLAYER_KIT_TYPE_ATTRIBUTE, PlayerKit.ColorType.LEGS)
-        }
-        val type = getAttribute(player, PlayerKit.PLAYER_KIT_TYPE_ATTRIBUTE, PlayerKit.ColorType.TORSO)
-        if (male) {
-            if (button in PlayerKit.MALE_ARMS_BUTTONS_COMPONENT_IDS) updateArms(player, button, true)
-            if (button in PlayerKit.MALE_TORSO_BUTTONS_COMPONENT_IDS) updateTorso(player, button, true)
-            if (button in PlayerKit.MALE_LEGS_BUTTONS_COMPONENT_IDS) updateLegs(player, button, true)
-            if (button in PlayerKit.MALE_COLOR_BUTTONS_COMPONENT_IDS) updateColor(player, button, true, type)
-        } else {
-            if (button in PlayerKit.FEMALE_ARMS_BUTTONS_COMPONENT_IDS) updateArms(player, button, false)
-            if (button in PlayerKit.FEMALE_TORSO_BUTTONS_COMPONENT_IDS) updateTorso(player, button, false)
-            if (button in PlayerKit.FEMALE_LEGS_BUTTONS_COMPONENT_IDS) updateLegs(player, button, false)
-            if (button in PlayerKit.FEMALE_COLOR_BUTTONS_COMPONENT_IDS) updateColor(player, button, false, type)
-        }
-    }
-
-    private fun closeClothesShop(player: Player): Boolean {
-        player.toggleWardrobe(false)
-        removeAttribute(player, PlayerKit.PLAYER_KIT_TYPE_ATTRIBUTE)
-        playJingle(player, 266)
-
-        if (!getAttribute(player, PlayerKit.PLAYER_KIT_PAID_ATTRIBUTE, false)) {
-            updateTorsoLook(player,  getAttribute(player, PlayerKit.PLAYER_KIT_TORSO_SAVE_ATTRIBUTE, 0))
-            updateTorsoColor(player, getAttribute(player, PlayerKit.PLAYER_KIT_TORSO_COLOR_SAVE_ATTRIBUTE, 0))
-            updateArmsLook(player,   getAttribute(player, PlayerKit.PLAYER_KIT_ARMS_SAVE_ATTRIBUTE, 0))
-            updateArmsColor(player,  getAttribute(player, PlayerKit.PLAYER_KIT_ARMS_COLOR_SAVE_ATTRIBUTE, 0))
-            updateLegsLook(player,   getAttribute(player, PlayerKit.PLAYER_KIT_LEGS_SAVE_ATTRIBUTE, 0))
-            updateLegsColor(player,  getAttribute(player, PlayerKit.PLAYER_KIT_LEGS_COLOR_SAVE_ATTRIBUTE, 0))
-            refreshAppearance(player)
-        }
-
-        player.removeAttribute(PlayerKit.PLAYER_KIT_PAID_ATTRIBUTE)
-        return true
-    }
-
     private fun updateTorso(p: Player, button: Int, male: Boolean) {
         val arr = if (male) PlayerKit.MALE_TORSO_IDS else PlayerKit.FEMALE_TORSO_IDS
         val subtract = if (male) PlayerKit.MALE_TORSO_BUTTONS_COMPONENT_IDS.first else PlayerKit.FEMALE_TORSO_BUTTONS_COMPONENT_IDS.first
@@ -474,34 +416,76 @@ class PlayerKitInterfaceListener : InterfaceListener {
         }
         refreshAppearance(p)
     }
+    private fun updateFeet(player: Player, button: Int) {
+        val subtract = 15
+        val idx = button - subtract
+        setVarp(player, 261, button - 14)
+        updateFeetColor(player, PlayerKit.YRSA_COLOR_BUTTONS_COMPONENT_IDS[idx])
+        refreshAppearance(player)
+    }
 
-    private fun hairdresserPay(player: Player) {
-        if (!player.houseManager.isInHouse(player)) {
-            if (!removeItem(player, PlayerKit.HAIR_CHANGE_PRICE)) {
-                sendDialogue(player, "You can not afford that.")
+    private fun updateSkin(player: Player, button: Int) {
+        val newIndex =
+            when (button) {
+                in 93..99 -> button - 92
+                100 -> 8
+                else -> return
+            }
+        val newSkin = button - PlayerKit.SKIN_COLOR_BUTTON_COMPONENT_IDS.first
+        setAttribute(player, PlayerKit.PLAYER_KIT_SKIN_COLOR_SAVE_ATTRIBUTE, newSkin)
+        setVarp(player, 262, newIndex)
+        updateSkinColor(player, newSkin)
+        refreshAppearance(player)
+    }
+
+    private fun mapAppearance(player: Player, newGender: Gender) {
+        val appearance = player.appearance
+        val oldGender = appearance.gender
+        if (oldGender == newGender) return
+
+        val oldCache = appearance.appearanceCache.map { it.look to it.color }
+        appearance.setGender(newGender)
+
+        val src = if (oldGender == Gender.MALE) CharacterDesign.MALE_LOOK_IDS else CharacterDesign.FEMALE_LOOK_IDS
+        val dst = if (newGender == Gender.MALE) CharacterDesign.MALE_LOOK_IDS else CharacterDesign.FEMALE_LOOK_IDS
+
+        val newCache = appearance.appearanceCache
+        for (i in newCache.indices) {
+            val (look, col) = oldCache.getOrNull(i) ?: continue
+            val s = src.getOrNull(i)
+            val d = dst.getOrNull(i)
+            if (s == null || d == null || s.isEmpty() || d.isEmpty()) continue
+            val idx = s.indexOf(look)
+            val mapped = if (idx != -1 && idx < d.size) d[idx] else d.first()
+            newCache[i].changeLook(mapped)
+            newCache[i].changeColor(col)
+        }
+        appearance.sync()
+    }
+
+    private fun pay(player: Player, shop: Int) {
+        val price = when(shop) {
+            PlayerKit.HAIRDRESSER_FEMALE_INTERFACE_ID,
+            PlayerKit.HAIRDRESSER_MALE_INTERFACE_ID -> PlayerKit.HAIR_CHANGE_PRICE
+
+            PlayerKit.REINALD_BRACELETS_INTERFACE_ID -> PlayerKit.WRISTS_CHANGE_PRICE
+
+            PlayerKit.THESSALIA_FEMALE_INTERFACE_ID,
+            PlayerKit.THESSALIA_MALE_INTERFACE_ID -> PlayerKit.CLOTHES_PRICE
+
+            else -> {
+                sendDialogue(player, "Invalid shop.")
                 return
             }
         }
-        setAttribute(player, PlayerKit.PLAYER_KIT_PAID_ATTRIBUTE, true)
-        closeInterface(player)
-    }
 
-    private fun braceletPay(player: Player) {
-        if (!removeItem(player, PlayerKit.WRISTS_CHANGE_PRICE)) {
+        val inHouse = player.houseManager.isInHouse(player)
+
+        if (!inHouse && !removeItem(player, price)) {
             sendDialogue(player, "You cannot afford that.")
             return
         }
-        setAttribute(player, PlayerKit.PLAYER_KIT_PAID_ATTRIBUTE, true)
-        closeInterface(player)
-    }
 
-    private fun clothesPay(player: Player) {
-        if (!player.houseManager.isInHouse(player)) {
-            if (!removeItem(player, PlayerKit.CLOTHES_PRICE)) {
-                sendDialogue(player, "You cannot afford that.")
-                return
-            }
-        }
         setAttribute(player, PlayerKit.PLAYER_KIT_PAID_ATTRIBUTE, true)
         closeInterface(player)
     }
@@ -569,6 +553,16 @@ class PlayerKitInterfaceListener : InterfaceListener {
             queueScript(player, 5, QueueStrength.SOFT) {
                 npc.transform(NPCs.MAKE_OVER_MAGE_599)
                 return@queueScript stopExecuting(player)
+            }
+        }
+    }
+
+    inner class EndDialogue : DialogueFile() {
+        override fun handle(componentID: Int, buttonID: Int) {
+            when (stage) {
+                0 -> npc(NPCs.YRSA_1301, FaceAnim.FRIENDLY, "I think they suit you.").also { stage++ }
+                1 -> player(FaceAnim.HAPPY, "Thanks!").also { stage++ }
+                2 -> end()
             }
         }
     }
