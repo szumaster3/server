@@ -43,6 +43,7 @@ class FishbowlOptionPlugin : OptionHandler() {
             def.handlers["option:feed"] = this
             def.handlers["option:drop"] = this
         }
+
         ClassScanner.definePlugin(FishbowlDialogue())
         ClassScanner.definePlugin(FeedPetFishHandler())
         AquariumPlugin().newInstance(arg)

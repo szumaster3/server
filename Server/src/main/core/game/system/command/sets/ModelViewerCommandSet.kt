@@ -1,9 +1,9 @@
 package core.game.system.command.sets
 
-import content.global.plugins.iface.BookInterface
-import content.global.plugins.iface.BookLine
-import content.global.plugins.iface.Page
-import content.global.plugins.iface.PageSet
+import content.global.plugins.item.books_and_scrolls.BookInterface
+import content.global.plugins.item.books_and_scrolls.BookLine
+import content.global.plugins.item.books_and_scrolls.Page
+import content.global.plugins.item.books_and_scrolls.PageSet
 import core.api.getAttribute
 import core.api.setAttribute
 import core.game.dialogue.FaceAnim

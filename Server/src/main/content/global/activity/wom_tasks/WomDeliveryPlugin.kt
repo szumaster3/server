@@ -1,7 +1,7 @@
 package content.global.activity.wom_tasks
 
-import content.global.plugins.iface.ScrollInterface
-import content.global.plugins.iface.ScrollLine
+import content.global.plugins.item.books_and_scrolls.ScrollInterface
+import content.global.plugins.item.books_and_scrolls.ScrollLine
 import core.api.*
 import core.api.utils.WeightBasedTable
 import core.api.utils.WeightedItem

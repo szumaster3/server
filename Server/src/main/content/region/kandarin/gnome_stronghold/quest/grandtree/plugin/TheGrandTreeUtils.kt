@@ -1,6 +1,6 @@
 package content.region.kandarin.gnome_stronghold.quest.grandtree.plugin
 
-import content.global.plugins.iface.ScrollLine
+import content.global.plugins.item.books_and_scrolls.ScrollLine
 import content.region.kandarin.gnome_stronghold.quest.grandtree.dialogue.FemiCartDialogueFile
 import core.api.*
 import core.game.node.entity.player.Player

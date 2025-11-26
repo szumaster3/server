@@ -1,16 +1,15 @@
 package core.game.system.command.sets
 
 import content.global.activity.trails.TreasureTrailManager
-import content.global.plugins.iface.BookInterface
-import content.global.plugins.iface.Page
-import content.global.plugins.iface.PageSet
+import content.global.plugins.item.books_and_scrolls.BookInterface
+import content.global.plugins.item.books_and_scrolls.Page
+import content.global.plugins.item.books_and_scrolls.PageSet
 import content.global.skill.slayer.SlayerManager
 import core.api.setAttribute
 import content.data.BossKillCounter
 import content.data.GameAttributes
 import content.global.skill.construction.CrestType
 import content.region.asgarnia.falador.plugin.temple_knights.WhiteKnightRankManager
-import core.api.getAttribute
 import core.api.utils.PlayerStatsCounter
 import core.game.node.entity.player.Player
 import core.game.system.command.Privilege

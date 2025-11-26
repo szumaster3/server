@@ -1,7 +1,7 @@
 package content.region.misthalin.varrock.dialogue
 
-import content.global.plugins.iface.ge.ExchangeItemSets
-import content.global.plugins.iface.ge.StockMarket
+import content.global.plugins.interfaces.ge.ExchangeItemSets
+import content.global.plugins.interfaces.ge.StockMarket
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
 import core.game.ge.ExchangeHistory.Companion.getInstance

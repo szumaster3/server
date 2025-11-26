@@ -3,7 +3,7 @@ package core.api.utils
 import content.data.tables.*
 import content.global.activity.trails.ClueLevel
 import content.global.activity.trails.ClueScroll
-import content.global.plugins.item.equipment.gloves.FOGGlovesListener
+import content.global.plugins.item.equipment.fog_gloves.FOGGlovesManager
 import core.api.inEquipment
 import core.cache.def.impl.ItemDefinition
 import core.game.node.entity.Entity
@@ -23,8 +23,9 @@ open class WeightBasedTable : ArrayList<WeightedItem>() {
     val guaranteedItems = ArrayList<WeightedItem>() // List of guaranteed items
 
     /**
-     * Adds an item to the table. Guaranteed items are added to the `guaranteedItems` list.
-     * Non-guaranteed items are added with their weight affecting the total weight.
+     * Adds an item to the table.
+     * - Guaranteed items are added to the [guaranteedItems] list.
+     * - `Non-guaranteed` items are added with their weight affecting the total weight.
      *
      * @param element The [WeightedItem] to add.
      * @return True if the item was successfully added, false otherwise.
@@ -108,10 +109,7 @@ open class WeightBasedTable : ArrayList<WeightedItem>() {
      * @param receiver The entity that will receive the items.
      * @return A list of items corresponding to the weighted items.
      */
-    fun convertWeightedItems(
-        weightedItems: ArrayList<WeightedItem>,
-        receiver: Entity?,
-    ): ArrayList<Item> {
+    fun convertWeightedItems(weightedItems: ArrayList<WeightedItem>, receiver: Entity?): ArrayList<Item> {
         val safeItems = ArrayList<Item>()
         for (e in weightedItems) {
             val safeItem =
@@ -125,16 +123,16 @@ open class WeightBasedTable : ArrayList<WeightedItem>() {
                     SLOT_HDT -> {
                         if (RandomFunction.nextBool() && receiver is Player) {
                             if (inEquipment(receiver, Items.IRIT_GLOVES_12856)) {
-                                FOGGlovesListener.updateCharges(receiver)
+                                FOGGlovesManager.updateCharges(receiver)
                                 Item(Items.GRIMY_IRIT_209)
                             } else if (inEquipment(receiver, Items.AVANTOE_GLOVES_12857)) {
-                                FOGGlovesListener.updateCharges(receiver)
+                                FOGGlovesManager.updateCharges(receiver)
                                 Item(Items.GRIMY_AVANTOE_211)
                             } else if (inEquipment(receiver, Items.KWUARM_GLOVES_12858)) {
-                                FOGGlovesListener.updateCharges(receiver)
+                                FOGGlovesManager.updateCharges(receiver)
                                 Item(Items.GRIMY_KWUARM_213)
                             } else if (inEquipment(receiver, Items.CADANTINE_GLOVES_12859)) {
-                                FOGGlovesListener.updateCharges(receiver)
+                                FOGGlovesManager.updateCharges(receiver)
                                 Item(Items.GRIMY_CADANTINE_215)
                             } else {
                                 HerbDropTable.retrieve(receiver)
@@ -165,22 +163,22 @@ open class WeightBasedTable : ArrayList<WeightedItem>() {
         if (receiver is Player && RandomFunction.nextBool()) {
             when {
                 inEquipment(receiver, Items.IRIT_GLOVES_12856) -> {
-                    FOGGlovesListener.updateCharges(receiver)
+                    FOGGlovesManager.updateCharges(receiver)
                     Item(Items.GRIMY_IRIT_209)
                 }
 
                 inEquipment(receiver, Items.AVANTOE_GLOVES_12857) -> {
-                    FOGGlovesListener.updateCharges(receiver)
+                    FOGGlovesManager.updateCharges(receiver)
                     Item(Items.GRIMY_AVANTOE_211)
                 }
 
                 inEquipment(receiver, Items.KWUARM_GLOVES_12858) -> {
-                    FOGGlovesListener.updateCharges(receiver)
+                    FOGGlovesManager.updateCharges(receiver)
                     Item(Items.GRIMY_KWUARM_213)
                 }
 
                 inEquipment(receiver, Items.CADANTINE_GLOVES_12859) -> {
-                    FOGGlovesListener.updateCharges(receiver)
+                    FOGGlovesManager.updateCharges(receiver)
                     Item(Items.GRIMY_CADANTINE_215)
                 }
 

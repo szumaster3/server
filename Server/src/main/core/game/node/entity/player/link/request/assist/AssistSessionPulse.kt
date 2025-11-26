@@ -18,7 +18,7 @@ import java.util.*
  * It handles experience sharing and applies restrictions based on a 24-hour period.
  *
  * Related Components:
- *  - [Request Assist interface][content.global.plugins.iface.RequestAssistInterface]
+ *  - [Request Assist interface][content.global.plugins.interfaces.RequestAssistInterface]
  */
 class AssistSessionPulse : Pulse, RequestModule {
     /**

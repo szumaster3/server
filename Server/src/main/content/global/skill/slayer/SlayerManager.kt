@@ -1,7 +1,7 @@
 package content.global.skill.slayer
 
 import com.google.gson.JsonObject
-import content.global.plugins.item.equipment.gloves.FOGGlovesListener
+import content.global.plugins.item.equipment.fog_gloves.FOGGlovesManager
 import core.api.*
 import core.cache.def.impl.NPCDefinition
 import core.game.event.EventHook
@@ -11,11 +11,8 @@ import core.game.node.entity.player.Player
 import core.game.node.entity.skill.Skills
 import shared.consts.Items
 
-class SlayerManager(
-    val player: Player? = null,
-) : LoginListener,
-    PersistPlayer,
-    EventHook<NPCKillEvent> {
+class SlayerManager(val player: Player? = null) : LoginListener, PersistPlayer, EventHook<NPCKillEvent> {
+
     override fun login(player: Player) {
         val instance = SlayerManager(player)
         player.hook(Event.NPCKilled, instance)
@@ -133,13 +130,13 @@ class SlayerManager(
             var xp = npc.skills.maximumLifepoints.toDouble()
             if (slayer.task!!.dragon && inEquipment(player, Items.DRAGON_SLAYER_GLOVES_12862)) {
                 xp *= 1.15
-                FOGGlovesListener.updateCharges(player)
+                FOGGlovesManager.updateCharges(player)
             }
             rewardXP(player, Skills.SLAYER, xp)
             slayer.decrementAmount(1)
             if (slayer.hasTask()) return
-            flags.taskStreak = flags.taskStreak + 1
-            flags.completedTasks = flags.completedTasks + 1
+            flags.taskStreak += 1
+            flags.completedTasks += 1
             if ((flags.completedTasks > 4 || flags.canEarnPoints()) &&
                 flags.getMaster() != SlayerMaster.TURAEL &&
                 flags.getPoints() < 64000
@@ -154,26 +151,14 @@ class SlayerManager(
                 if (flags.getPoints() > 64000) {
                     flags.setPoints(64000)
                 }
-                player.sendMessages(
-                    "You've completed " + flags.taskStreak + " tasks in a row and received " + points +
-                        " points, with a total of " +
-                        flags.getPoints(),
-                    "You have completed " + flags.completedTasks + " tasks in total. Return to a Slayer master.",
-                )
+                player.sendMessages("You've completed " + flags.taskStreak + " tasks in a row and received " + points + " points, with a total of " + flags.getPoints(), "You have completed " + flags.completedTasks + " tasks in total. Return to a Slayer master.",)
             } else if (flags.completedTasks == 4) {
                 sendMessage(player, "You've completed your task; you will start gaining points on your next task!")
                 flags.flagCanEarnPoints()
             } else if (flags.getMaster() == SlayerMaster.TURAEL) {
-                player.sendMessages(
-                    "You've completed your task; Tasks from Turael do not award points.",
-                    "Return to a Slayer master.",
-                )
+                player.sendMessages("You've completed your task; Tasks from Turael do not award points.", "Return to a Slayer master.")
             } else {
-                player.sendMessages(
-                    "You've completed your task; Complete " + (4 - flags.completedTasks) +
-                        " more task(s) to start gaining points.",
-                    "Return to a Slayer master.",
-                )
+                player.sendMessages("You've completed your task; Complete " + (4 - flags.completedTasks) + " more task(s) to start gaining points.", "Return to a Slayer master.",)
             }
         }
     }

@@ -1,9 +1,9 @@
 package content.region.karamja.tzhaar_city.book
 
-import content.global.plugins.iface.BookInterface
-import content.global.plugins.iface.BookLine
-import content.global.plugins.iface.Page
-import content.global.plugins.iface.PageSet
+import content.global.plugins.item.books_and_scrolls.BookInterface
+import content.global.plugins.item.books_and_scrolls.BookLine
+import content.global.plugins.item.books_and_scrolls.Page
+import content.global.plugins.item.books_and_scrolls.PageSet
 import core.api.openDialogue
 import core.api.openInterface
 import core.api.sendDialogueLines
@@ -13,6 +13,7 @@ import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.node.entity.player.Player
 import core.game.world.GameWorld
+import core.tools.RED
 import shared.consts.Components
 import shared.consts.Items
 
@@ -40,12 +41,12 @@ class TzHaarTouristGuideBook : InteractionListener {
                 ),
                 Page(
                     BookLine("Index", 53),
-                    BookLine(core.tools.RED + "Section 1:</col> Getting to the", 54),
+                    BookLine(RED + "Section 1:</col> Getting to the", 54),
                     BookLine("TzHaar City", 55),
-                    BookLine(core.tools.RED + "Section 2:</col> Tourist Attractions", 56),
-                    BookLine(core.tools.RED + "Section 3:</col> Dos and Don'ts", 57),
-                    BookLine(core.tools.RED + "Section 4:</col> Useful Pharses", 58),
-                    BookLine(core.tools.RED + "Section 5:</col> Counting in", 59),
+                    BookLine(RED + "Section 2:</col> Tourist Attractions", 56),
+                    BookLine(RED + "Section 3:</col> Dos and Don'ts", 57),
+                    BookLine(RED + "Section 4:</col> Useful Pharses", 58),
+                    BookLine(RED + "Section 5:</col> Counting in", 59),
                     BookLine("TzHaar", 60),
                 ),
             ),

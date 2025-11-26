@@ -1,7 +1,7 @@
 package content.global.skill.gather.fishing
 
 import content.data.GameAttributes
-import content.global.plugins.item.equipment.gloves.FOGGlovesListener
+import content.global.plugins.item.equipment.fog_gloves.FOGGlovesManager
 import content.global.skill.summoning.familiar.Forager
 import content.region.kandarin.baxtorian.plugin.BarbarianTraining
 import core.api.*
@@ -136,11 +136,11 @@ class FishingListener : InteractionListener {
                 (item.id == Items.RAW_SHARK_383 && inEquipment(player, Items.SHARK_GLOVES_12861))
             ) {
                 xp += 100
-                FOGGlovesListener.updateCharges(player)
+                FOGGlovesManager.updateCharges(player)
             }
 
             if (isBarehandEnabled(player) && op.isHarpoonType() && !getAttribute(player, BarbarianTraining.FISHING_FULL, false)) {
-                player.dialogueInterpreter.sendDialogue("You feel you have learned more of barbarian ways. Otto mght wish", "to talk to you more.")
+                sendDialogueLines(player,"You feel you have learned more of barbarian ways. Otto mght wish", "to talk to you more.")
                 setAttribute(player, BarbarianTraining.FISHING_FULL, true)
             }
 
@@ -209,7 +209,7 @@ class FishingListener : InteractionListener {
                     else -> 0
                 }
             }
-            if (player.skills.getLevel(Skills.FISHING) < minFishingLevel || player.skills.getLevel(Skills.STRENGTH) < minStrengthLevel) {
+            if (getStatLevel(player, Skills.FISHING) < minFishingLevel || getStatLevel(player, Skills.STRENGTH) < minStrengthLevel) {
                 sendDialogue(player, "You don't meet the requirements to barehand these fish.")
                 return false
             }

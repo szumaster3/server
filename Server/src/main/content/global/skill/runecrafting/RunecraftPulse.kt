@@ -1,6 +1,6 @@
 package content.global.skill.runecrafting
 
-import content.global.plugins.item.equipment.gloves.FOGGlovesListener.Companion.updateCharges
+import content.global.plugins.item.equipment.fog_gloves.FOGGlovesManager
 import content.global.skill.runecrafting.Talisman.Companion.forName
 import core.ServerConstants
 import core.api.*
@@ -159,7 +159,7 @@ class RunecraftPulse(
                     (altar == Altar.WATER && inEquipment(player, Items.WATER_RUNECRAFTING_GLOVES_12864, 1)) ||
                     (altar == Altar.EARTH && inEquipment(player, Items.EARTH_RUNECRAFTING_GLOVES_12865, 1))
                 ) {
-                    xp += xp * updateCharges(player, amount) / amount
+                    xp += xp * FOGGlovesManager.updateCharges(player, amount) / amount
                 }
                 rewardXP(player, Skills.RUNECRAFTING, xp)
 

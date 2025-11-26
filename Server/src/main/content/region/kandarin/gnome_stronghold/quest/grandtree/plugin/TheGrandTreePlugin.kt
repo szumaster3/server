@@ -1,6 +1,6 @@
 package content.region.kandarin.gnome_stronghold.quest.grandtree.plugin
 
-import content.global.plugins.iface.ScrollInterface
+import content.global.plugins.item.books_and_scrolls.ScrollInterface
 import content.region.kandarin.gnome_stronghold.quest.grandtree.cutscene.GloughsPetCutscene
 import content.region.kandarin.gnome_stronghold.quest.grandtree.dialogue.ForemanDialogue
 import content.region.kandarin.gnome_stronghold.quest.grandtree.dialogue.KingNarnodeDialogue

@@ -1,7 +1,7 @@
 package content.global.random.event.surprise_exam
 
 import content.data.GameAttributes
-import content.global.plugins.iface.ExperienceInterface
+import content.global.plugins.interfaces.ExperienceInterface
 import core.api.*
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener

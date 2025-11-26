@@ -1,6 +1,6 @@
 package core.game.world.map.zone.impl
 
-import content.global.plugins.item.equipment.gloves.BrawlingGloves
+import content.global.plugins.item.equipment.brawling_gloves.BrawlingGloves
 import core.api.*
 import core.game.component.Component
 import core.game.interaction.Option

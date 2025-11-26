@@ -1,6 +1,6 @@
 package content.global.plugins.npc
 
-import content.global.plugins.scenery.BankBoothPlugin
+import content.global.plugins.`object`.BankBoothPlugin
 import core.api.*
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener

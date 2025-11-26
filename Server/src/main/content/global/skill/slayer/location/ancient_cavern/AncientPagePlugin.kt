@@ -1,10 +1,10 @@
 package content.region.kandarin.plugin.ancient_cavern
 
 import content.data.GameAttributes
-import content.global.plugins.iface.BookInterface
-import content.global.plugins.iface.BookLine
-import content.global.plugins.iface.Page
-import content.global.plugins.iface.PageSet
+import content.global.plugins.item.books_and_scrolls.BookInterface
+import content.global.plugins.item.books_and_scrolls.BookLine
+import content.global.plugins.item.books_and_scrolls.Page
+import content.global.plugins.item.books_and_scrolls.PageSet
 import core.api.*
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener

@@ -1,6 +1,6 @@
 package content.region.kandarin.seers_village.quest.elemental_workshop.book
 
-import content.global.plugins.iface.BookInterface
+import content.global.plugins.item.books_and_scrolls.BookInterface
 import content.region.kandarin.seers_village.quest.elemental_workshop.plugin.EWUtils
 import core.api.sendMessage
 import core.game.interaction.IntType

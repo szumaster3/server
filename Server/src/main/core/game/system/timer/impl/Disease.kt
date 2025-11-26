@@ -1,7 +1,7 @@
 package core.game.system.timer.impl
 
 import com.google.gson.JsonObject
-import content.global.plugins.item.InoculationBracePlugin
+import content.global.plugins.item.InoculationBraceOptionPlugin
 import core.api.hasTimerActive
 import core.api.playAudio
 import core.api.removeTimer
@@ -53,7 +53,7 @@ class Disease :
         var damage = RandomFunction.random(1, 5)
 
         if (entity is Player) {
-            val plugin = InoculationBracePlugin.instance
+            val plugin = InoculationBraceOptionPlugin.instance
             if (plugin != null) {
                 val blocked = plugin.applyDiseaseAbsorption(entity, damage)
                 damage -= blocked

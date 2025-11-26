@@ -1,7 +1,7 @@
 package core.game.node.entity.player.link;
 
 import com.google.gson.JsonObject;
-import content.global.plugins.iface.ge.StockMarket;
+import content.global.plugins.interfaces.ge.StockMarket;
 import core.game.component.CloseEvent;
 import core.game.component.Component;
 import core.game.ge.ExchangeHistory;

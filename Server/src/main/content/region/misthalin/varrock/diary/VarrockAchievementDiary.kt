@@ -1,7 +1,7 @@
 package content.region.misthalin.varrock.diary
 
 import content.data.GameAttributes
-import content.global.plugins.iface.FairyRing
+import content.global.travel.FairyRing
 import content.global.skill.magic.TeleportMethod
 import content.global.skill.prayer.Bones
 import content.global.travel.CanoePlugin
@@ -127,10 +127,7 @@ class VarrockAchievementDiary : DiaryEventHookBase(DiaryType.VARROCK) {
                 ),
             )
 
-    override fun onResourceProduced(
-        player: Player,
-        event: ResourceProducedEvent,
-    ) {
+    override fun onResourceProduced(player: Player, event: ResourceProducedEvent) {
         when (player.viewport.region!!.id) {
             12341 ->
                 when (event.itemId) {
@@ -196,10 +193,7 @@ class VarrockAchievementDiary : DiaryEventHookBase(DiaryType.VARROCK) {
         }
     }
 
-    override fun onTeleported(
-        player: Player,
-        event: TeleportEvent,
-    ) {
+    override fun onTeleported(player: Player, event: TeleportEvent) {
         when (event.source) {
             is NPC ->
                 if (event.method == TeleportMethod.NPC && event.source.id == NPCs.AUBURY_553) {
@@ -221,10 +215,7 @@ class VarrockAchievementDiary : DiaryEventHookBase(DiaryType.VARROCK) {
         }
     }
 
-    override fun onInteracted(
-        player: Player,
-        event: InteractionEvent,
-    ) {
+    override fun onInteracted(player: Player, event: InteractionEvent) {
         when (player.viewport.region!!.id) {
             12342 ->
                 if (event.target.id == Scenery.TRAPDOOR_26934) {
@@ -264,10 +255,7 @@ class VarrockAchievementDiary : DiaryEventHookBase(DiaryType.VARROCK) {
         }
     }
 
-    override fun onButtonClicked(
-        player: Player,
-        event: ButtonClickEvent,
-    ) {
+    override fun onButtonClicked(player: Player, event: ButtonClickEvent) {
         player.viewport.region?.let {
             when (it.id) {
                 12342 -> {
@@ -286,10 +274,7 @@ class VarrockAchievementDiary : DiaryEventHookBase(DiaryType.VARROCK) {
         }
     }
 
-    override fun onDialogueOptionSelected(
-        player: Player,
-        event: DialogueOptionSelectionEvent,
-    ) {
+    override fun onDialogueOptionSelected(player: Player, event: DialogueOptionSelectionEvent) {
         when (event.dialogue) {
             is BennyDialogue ->
                 if (event.currentStage == 14) {
@@ -332,10 +317,7 @@ class VarrockAchievementDiary : DiaryEventHookBase(DiaryType.VARROCK) {
         }
     }
 
-    override fun onUsedWith(
-        player: Player,
-        event: UseWithEvent,
-    ) {
+    override fun onUsedWith(player: Player, event: UseWithEvent) {
         when (event.used) {
             in Bones.array ->
                 if (event.with in STRAY_DOGS) {
@@ -361,10 +343,7 @@ class VarrockAchievementDiary : DiaryEventHookBase(DiaryType.VARROCK) {
         }
     }
 
-    override fun onInterfaceOpened(
-        player: Player,
-        event: InterfaceOpenEvent,
-    ) {
+    override fun onInterfaceOpened(player: Player, event: InterfaceOpenEvent) {
         when (event.component.id) {
             Components.THESSALIA_CLOTHES_MALE_591,
             Components.THESSALIA_CLOTHES_FEMALE_594,
@@ -379,10 +358,7 @@ class VarrockAchievementDiary : DiaryEventHookBase(DiaryType.VARROCK) {
         }
     }
 
-    override fun onSpellCast(
-        player: Player,
-        event: SpellCastEvent,
-    ) {
+    override fun onSpellCast(player: Player, event: SpellCastEvent) {
         if (event.spellBook == SpellBookManager.SpellBook.MODERN &&
             event.spellId == 15 &&
             getStatLevel(player, Skills.MAGIC) >= 25 &&
@@ -413,10 +389,7 @@ class VarrockAchievementDiary : DiaryEventHookBase(DiaryType.VARROCK) {
         }
     }
 
-    override fun onFairyRingDialed(
-        player: Player,
-        event: FairyRingDialEvent,
-    ) {
+    override fun onFairyRingDialed(player: Player, event: FairyRingDialEvent) {
         if (event.fairyRing == FairyRing.DKR) {
             finishTask(
                 player,
@@ -426,10 +399,7 @@ class VarrockAchievementDiary : DiaryEventHookBase(DiaryType.VARROCK) {
         }
     }
 
-    override fun onPickedUp(
-        player: Player,
-        event: PickUpEvent,
-    ) {
+    override fun onPickedUp(player: Player, event: PickUpEvent) {
         when {
             inBorders(player, FARMING_PATCH_AREA) -> {
                 if (event.itemId == Items.POISON_IVY_BERRIES_6018) {
@@ -443,10 +413,7 @@ class VarrockAchievementDiary : DiaryEventHookBase(DiaryType.VARROCK) {
         }
     }
 
-    override fun onDialogueOpened(
-        player: Player,
-        event: DialogueOpenEvent,
-    ) {
+    override fun onDialogueOpened(player: Player, event: DialogueOpenEvent) {
         when (event.dialogue) {
             is CuratorHaigHalenDialogue -> {
                 if (getQuestPoints(player) == 50) {

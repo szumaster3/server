@@ -1,6 +1,6 @@
 package content.region.desert.quest.deserttreasure.dialogue
 
-import content.global.plugins.iface.BookInterface
+import content.global.plugins.item.books_and_scrolls.BookInterface
 import content.region.desert.quest.deserttreasure.DesertTreasure
 import content.region.desert.quest.deserttreasure.book.TranslationBook
 import core.api.*

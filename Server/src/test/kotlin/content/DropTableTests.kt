@@ -1,7 +1,7 @@
 package content
 
 import TestUtils
-import content.global.plugins.npc.ChromaticDragonBehavior
+import content.global.plugins.npc.ChromaticDragonNPC
 import core.ServerConstants
 import core.api.utils.NPCDropTable
 import core.api.utils.WeightedItem
@@ -25,10 +25,10 @@ class DropTableTests {
         testTable.add(WeightedItem(Items.BLACK_DRAGON_EGG_12480, 1, 1, 1.0))
 
         npc.definition.dropTables.table = testTable
-        npc.behavior = ChromaticDragonBehavior()
+        npc.behavior = ChromaticDragonNPC.ChromaticDragonBehavior()
 
         TestUtils.getMockPlayer("chromaticeggdrop").use { p ->
-            ChromaticDragonBehavior.EGG_RATE = 1 // guarantee egg drop if other parameters are satisfied
+            ChromaticDragonNPC.ChromaticDragonBehavior.EGG_RATE = 1 // guarantee egg drop if other parameters are satisfied
             var hasEgg = false
 
             var items = npc.definition.dropTables.roll(npc, p, 1)
