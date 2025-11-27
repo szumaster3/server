@@ -299,11 +299,7 @@ object PacketProcessor {
             is Packet.ItemExamine -> {
                 val def = ItemDefinition.forId(pkt.id) ?: return
                 pkt.player.debug("[ITEM] ID: ${pkt.id} Value: ${def.value} Model: ${def.interfaceModelId}")
-                val completeTutorial = pkt.player.getAttribute(GameAttributes.TUTORIAL_COMPLETE, false)
-                if(!completeTutorial)
-                    pkt.player.dialogueInterpreter.sendBoldInput(def.examine)
-                else
-                    pkt.player.sendMessage(def.examine)
+                pkt.player.sendMessage(def.examine)
             }
 
             is Packet.SceneryExamine -> {
@@ -313,11 +309,7 @@ object PacketProcessor {
                 if (def.configFile != null)
                     pkt.player.debug("Varbit: ${def.configFile.id}")
                 pkt.player.debug("------------------------------")
-                val completeTutorial = pkt.player.getAttribute(GameAttributes.TUTORIAL_COMPLETE, false)
-                if(!completeTutorial)
-                    pkt.player.dialogueInterpreter.sendBoldInput(def.examine)
-                else
-                    pkt.player.sendMessage(def.examine)
+                pkt.player.sendMessage(def.examine)
             }
 
             is Packet.NpcExamine -> {
@@ -327,11 +319,7 @@ object PacketProcessor {
                 if (def.configFileId != -1)
                     pkt.player.debug("Varbit: ${def.configFileId}")
                 pkt.player.debug("------------------------------")
-                val completeTutorial = pkt.player.getAttribute(GameAttributes.TUTORIAL_COMPLETE, false)
-                if(!completeTutorial)
-                    pkt.player.dialogueInterpreter.sendBoldInput(def.examine)
-                else
-                    pkt.player.sendMessage(def.examine)
+                pkt.player.sendMessage(def.examine)
             }
 
 
@@ -526,7 +514,7 @@ object PacketProcessor {
             player.interfaceManager.closeChatbox()
 
         if (!canWalk || !player.dialogueInterpreter.close()) {
-            player.debug("[WALK ACTION]-- Action canceled. Either player is locked, interfaces can't close, or distance is beyond server pathfinding limit.")
+            player.debug("[WALK ACTION]-- Action canceled: player locked, interfaces open, or distance too far.")
             return sendClearMinimap(player)
         }
 

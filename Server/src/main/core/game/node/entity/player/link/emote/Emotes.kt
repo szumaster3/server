@@ -576,11 +576,7 @@ enum class Emotes(
             buttonId: Int,
         ) {
             if (player.locks.isLocked("emote")) {
-                if (!getAttribute(player, GameAttributes.TUTORIAL_COMPLETE, false)) {
-                    player.dialogueInterpreter.sendBoldInput("You're already doing an emote!")
-                } else {
-                    sendMessage(player, "You're already doing an emote!")
-                }
+                sendMessage(player, "You're already doing an emote!")
                 return
             }
             if (player.properties.combatPulse.isAttacking || player.inCombat()) {

@@ -709,15 +709,6 @@ public final class DialogueInterpreter {
     }
 
     /**
-     * Send bold input.
-     *
-     * @param objects the objects
-     */
-    public void sendBoldInput(Object... objects) {
-        player.getPacketDispatch().sendRunScript(102, "s", objects);
-    }
-
-    /**
      * Send long input.
      *
      * @param objects the objects

@@ -62,6 +62,8 @@ object TutorialStage {
             player.hook(Event.SpellCast, TutorialCastReceiver)
             openOverlay(player, Components.TUTORIAL_PROGRESS_371)
             sendInterfaceConfig(player, Components.TUTORIAL_PROGRESS_371, 4, true)
+            setVarbit(player, 4925, 0)
+            setVarbit(player, 4895, 2)
         }
 
         updateProgressBar(player)
@@ -72,7 +74,6 @@ object TutorialStage {
                 hideTabs(player, login)
                 CharacterDesign.open(player)
                 setMinimapState(player, 2)
-                setVarbit(player, 4895, 2)
                 player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
                     "",
                     "",

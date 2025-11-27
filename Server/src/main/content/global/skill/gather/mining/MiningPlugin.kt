@@ -76,21 +76,11 @@ class MiningPlugin : InteractionListener {
                 return@on true
             }
 
-            val tutorialStage = getAttribute(player, GameAttributes.TUTORIAL_COMPLETE, false)
             val resourceName = Item(rock.reward).name.lowercase()
 
             when (identifier) {
-                2.toByte() -> if (!tutorialStage) {
-                    player.dialogueInterpreter.sendBoldInput("This rock contains tin.")
-                } else {
-                    sendMessage(player, "This rock contains $resourceName.")
-                }
-
-                1.toByte() -> if (!tutorialStage) {
-                    player.dialogueInterpreter.sendBoldInput("This rock contains copper.")
-                } else {
-                    sendMessage(player, "This rock contains $resourceName.")
-                }
+                2.toByte() -> sendMessage(player, "This rock contains $resourceName.")
+                1.toByte() -> sendMessage(player, "This rock contains $resourceName.")
 
                 else -> queueScript(player, 3, QueueStrength.SOFT) {
                     sendMessage(player, "This rock contains $resourceName.")

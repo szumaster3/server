@@ -1,5 +1,6 @@
 package core.game.node.entity.player;
 
+import content.data.GameAttributes;
 import content.data.RespawnPoint;
 import content.global.plugins.item.equipment.EquipmentDegrade;
 import content.global.plugins.item.equipment.bolt_pouch.BoltPouchManager;
@@ -935,7 +936,11 @@ public class Player extends Entity {
      * @param messages the messages
      */
     public void sendMessages(String... messages) {
-        packetDispatch.sendMessages(messages);
+        if (!getAttribute(GameAttributes.TUTORIAL_COMPLETE, false)) {
+            packetDispatch.sendRunScript(102, "s", messages);
+        } else {
+            packetDispatch.sendMessages(messages);
+        }
     }
 
     /**
