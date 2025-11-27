@@ -13,6 +13,7 @@ import core.tools.END_DIALOGUE
  * # Relations
  * - varbit id: 3717
  * - scenery id: 24839
+ * - npc id: 5989 (sleep)
  */
 @Initializable
 class GrimgnashDialogue(player: Player? = null) : Dialogue(player) {

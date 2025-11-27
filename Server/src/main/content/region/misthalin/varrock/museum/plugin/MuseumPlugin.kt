@@ -3,39 +3,32 @@ package content.region.misthalin.varrock.museum.plugin
 import content.region.misthalin.dig_site.dialogue.GateGuardDialogue
 import content.region.misthalin.varrock.museum.dialogue.*
 import core.api.*
+import core.api.utils.PlayerCamera
 import core.game.global.action.ClimbActionHandler
 import core.game.global.action.DoorActionHandler
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.interaction.InterfaceListener
+import core.game.node.Node
 import core.game.node.entity.Entity
+import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.game.world.map.Location
+import core.game.world.map.RegionManager
 import core.game.world.map.zone.ZoneBorders
 import core.game.world.update.flag.context.Animation
 import shared.consts.*
 
-class MuseumPlugin :
-    InteractionListener,
-    InterfaceListener,
-    MapArea {
+class MuseumPlugin : MapArea, InteractionListener, InterfaceListener {
+
     override fun areaEnter(entity: Entity) {
-        /*
-         * Handles when a player enters the museum area.
-         */
         if (entity is Player) {
             val player = entity.asPlayer()
             openOverlay(player, Components.VM_KUDOS_532)
         }
     }
 
-    override fun areaLeave(
-        entity: Entity,
-        logout: Boolean,
-    ) {
-        /*
-         * Handles when a player leaves the museum area.
-         */
+    override fun areaLeave(entity: Entity, logout: Boolean) {
         if (entity is Player) {
             val player = entity.asPlayer()
             closeOverlay(player)
@@ -43,41 +36,113 @@ class MuseumPlugin :
     }
 
     override fun defineAreaBorders(): Array<ZoneBorders> {
-        /*
-         * Defines the borders of the museum area.
-         */
         return VARROCK_MUSEUM
     }
 
-    /*
-     * Defines all interaction listeners for the museum.
-     */
-
     override fun defineListeners() {
-        /*
-         * Handles interactions with the plaques in the museum.
-         */
+        on((24605..24618).toIntArray(), IntType.SCENERY, "study") { player, _ ->
+            study(player)
+            return@on true
+        }
 
-        on(BUTTON_PLUS_PLAQUES, IntType.SCENERY, "study", "push") { player, node ->
+        on((24590..24603).toIntArray(), IntType.SCENERY, "push") { player, node ->
+            val watchTime = animationDuration(Animation(6448))
+            val camera = PlayerCamera(player)
+
+            player.faceLocation(node.location)
+            player.animate(Animation(Animations.PUSH_BUTTON_VARROCK_MUSEUM_6462))
+
             when (node.id) {
-                24605 -> openDialogue(player, TalkAboutLizards())
-                24606 -> openDialogue(player, TalkAboutTortoises())
-                24607 -> openDialogue(player, TalkAboutDragons())
-                24608 -> openDialogue(player, TalkAboutWyverns())
+                24590 -> {
+                    face(player, location(1742, 4980, 0))
+                    camera.panTo(1746, 4976, 500, 300)
+                    camera.rotateTo(1738, 4985, 400, 300)
+                    findNPC(NPCs.LIZARD_DISPLAY_5975)?.animate(Animation(6436))
+                }
+                24591 -> {
+                    face(player, location(1752, 4981, 0))
+                    camera.panTo(1757, 4976, 500, 300)
+                    camera.rotateTo(1751, 4982, 400, 300)
+                    findNPC(NPCs.BATTLE_TORTOISE_DISPLAY_5981)?.animate(Animation(6448))
+                }
+                24592 -> {
+                    face(player, location(1767, 4981, 0))
+                    camera.panTo(1772, 4976, 500, 300)
+                    camera.rotateTo(1765, 4983, 400, 300)
+                    findNPC(NPCs.DRAGON_DISPLAY_5979)?.animate(Animation(6446))
+                }
+                24593 -> {
+                    face(player, location(1776, 4980, 0))
+                    camera.panTo(1781, 4976, 600, 300)
+                    camera.rotateTo(1775, 4982, 500, 300)
+                    findNPC(NPCs.WYVERN_DISPLAY_5980)?.animate(Animation(6444))
 
-                24609 -> openDialogue(player, TalkAboutCamels())
-                24610 -> openDialogue(player, TalkAboutLeeches())
-                24611 -> openDialogue(player, TalkAboutMoles())
-                24612 -> openDialogue(player, TalkAboutPenguins())
+                }
+                24594 -> {
+                    face(player, location(1736, 4965, 0))
+                    camera.panTo(1740, 4961, 500, 300)
+                    camera.rotateTo(1733, 4969, 400, 300)
+                    findNPC(NPCs.CAMEL_DISPLAY_5977)?.animate(Animation(6440))
 
-                24613 -> openDialogue(player, TalkAboutSnails())
-                24614 -> openDialogue(player, TalkAboutSnakes())
-                24615 -> openDialogue(player, TalkAboutMonkeys())
-                24616 -> openDialogue(player, TalkAboutSeaSlugs())
+                }
+                24595 -> {
+                    face(player, location(1743, 4965, 0))
+                    camera.panTo(1747, 4961, 500, 300)
+                    camera.rotateTo(1740, 4969, 400, 300)
+                    findNPC(NPCs.LEECH_DISPLAY_5971)?.animate(Animation(6428))
 
-                24617 -> openDialogue(player, TalkAboutTerrorBirds())
-                24618 -> openDialogue(player, TalkAboutKalphiteQueen())
+                }
+                24596 -> {
+                    face(player, location(1736, 4955, 0))
+                    camera.panTo(1732, 4959, 500, 300)
+                    camera.rotateTo(1739, 4951, 400, 300)
+                    findNPC(NPCs.MOLE_DISPLAY_5982)?.animate(Animation(6450))
+
+                }
+                24597 -> {
+                    face(player, location(1736, 4955, 0))
+                    camera.panTo(1747, 4959, 500, 300)
+                    camera.rotateTo(1740, 4951, 400, 300)
+                    findNPC(NPCs.PENGUIN_DISPLAY_5976)?.animate(Animation(6438))
+                }
+                24598 -> {
+                    face(player, location(1775, 4965, 0))
+                    camera.panTo(1771, 4961, 500, 300)
+                    camera.rotateTo(1777, 4968, 400, 300)
+                    findNPC(NPCs.SNAIL_DISPLAY_5973)?.animate(Animation(6430))
+                }
+                24599 -> {// Snake.
+                    face(player, location(1782, 4965, 0))
+                    camera.panTo(1786, 4961, 500, 300)
+                    camera.rotateTo(1779, 4969, 400, 300)
+                    animateScenery(RegionManager.getObject(0, 1781, 4964)!!, 6452)
+                }
+                24600 -> {
+                    face(player, location(1775, 4955, 0))
+                    camera.panTo(1771, 4959, 500, 300)
+                    camera.rotateTo(1778, 4951, 400, 300)
+                    findNPC(NPCs.MONKEY_DISPLAY_5974)?.animate(Animation(6434))
+                }
+                24601 -> {
+                    face(player, location(1782, 4955, 0))
+                    camera.panTo(1778, 4959, 500, 300)
+                    camera.rotateTo(1785, 4951, 400, 300)
+                    findNPC(NPCs.SEA_SLUGS_DISPLAY_5972)?.animate(Animation(6432))
+                }
+                24602 -> {
+                    face(player, location(1753, 4939, 0))
+                    camera.panTo(1757, 4943, 500, 300)
+                    camera.rotateTo(1749, 4936, 400, 300)
+                    findNPC(NPCs.TERRORBIRD_DISPLAY_5978)?.animate(Animation(6442))
+                }
+                24603 -> {  // Kalphite Queen.
+                    face(player, location(1766, 4939, 0))
+                    camera.panTo(1760, 4944, 500, 300)
+                    camera.rotateTo(1767, 4937, 400, 300)
+                    animateScenery(RegionManager.getObject(0, 1763, 4937)!!, 6240)
+                }
             }
+            runTask(player, watchTime) { resetCamera(player) }
             return@on true
         }
 
@@ -190,12 +255,7 @@ class MuseumPlugin :
          * Handles looking at or taking the museum floor maps.
          */
 
-        on(
-            intArrayOf(Scenery.MAP_24390, Scenery.MAP_24391, Scenery.MAP_24392),
-            IntType.SCENERY,
-            "look-at",
-            "take",
-        ) { player, node ->
+        on(intArrayOf(Scenery.MAP_24390, Scenery.MAP_24391, Scenery.MAP_24392), IntType.SCENERY, "look-at", "take") { player, node ->
             if (getUsedOption(player) == "take") {
                 if (!addItem(player, Items.MUSEUM_MAP_11184)) {
                     sendMessage(player, "You don't have enough space in your inventory.")
@@ -242,22 +302,6 @@ class MuseumPlugin :
         }
 
         /*
-         * Handles opening the Natural History exam interface.
-         */
-
-        onOpen(NATURAL_HISTORY_EXAM_533) { player, component ->
-            val model = getScenery(1763, 4937, 0)?.definition?.modelIds?.first()
-            player.packetDispatch.sendModelOnInterface(model!!, component.id, 3, 0)
-            setComponentVisibility(player, component.id, 27, false)
-            sendString(player, "1", component.id, 25)
-            sendString(player, "Question", component.id, 28)
-            sendString(player, "1.", component.id, 29)
-            sendString(player, "2.", component.id, 30)
-            sendString(player, "3.", component.id, 31)
-            return@onOpen true
-        }
-
-        /*
          * Handles the response to the Natural History exam questions.
          */
 
@@ -296,10 +340,10 @@ class MuseumPlugin :
 
     companion object {
         private val VARROCK_MUSEUM = arrayOf(ZoneBorders(3253, 3442, 3267, 3455), ZoneBorders(1730, 4932, 1788, 4988))
+
         private val MUSEUM_DOOR = intArrayOf(24565, 24567)
         private val MUSEUM_STAIRS = intArrayOf(24427, 24428)
         private const val MUSEUM_GATE = 24536
-        private val BUTTON_PLUS_PLAQUES = (24588..24618).toIntArray()
 
         private const val TOOL_RACK = 24535
         private const val NATURAL_HISTORY_EXAM_533 = 533
@@ -310,45 +354,46 @@ class MuseumPlugin :
         private val mapButtonsToSecondFloor = intArrayOf(42, 44, 152, 153)
         private val mapButtonsToTopFloor = intArrayOf(42, 44, 118, 119)
 
-        private fun updateVarbit(
-            player: Player,
-            value: Int,
-        ) {
+        private fun updateVarbit(player: Player, value: Int) {
             val currentVarbitValue = getVarbit(player, Vars.VARBIT_VARROCK_MUSEUM_CENSUS_5390)
             setVarbit(player, Vars.VARBIT_VARROCK_MUSEUM_CENSUS_5390, currentVarbitValue + value)
         }
 
-        private fun resetVarbit(player: Player) {
-            setVarbit(player, Vars.VARBIT_VARROCK_MUSEUM_CENSUS_5390, 0)
-        }
+        private fun resetVarbit(player: Player) { setVarbit(player, Vars.VARBIT_VARROCK_MUSEUM_CENSUS_5390, 0) }
 
-        private fun showMapFloor(
-            player: Player,
-            floor: String,
-        ) {
+        private fun showMapFloor(player: Player, floor: String) {
             when (floor) {
                 "basement" -> {
                     setComponentVisibility(player, Components.VM_MUSEUM_MAP_527, 2, true)
                     setComponentVisibility(player, Components.VM_MUSEUM_MAP_527, 7, false)
                 }
-
                 "main" -> {
                     setComponentVisibility(player, Components.VM_MUSEUM_MAP_527, 3, true)
                     setComponentVisibility(player, Components.VM_MUSEUM_MAP_527, 7, true)
                     setComponentVisibility(player, Components.VM_MUSEUM_MAP_527, 2, false)
                 }
-
                 "second" -> {
                     setComponentVisibility(player, Components.VM_MUSEUM_MAP_527, 2, true)
                     setComponentVisibility(player, Components.VM_MUSEUM_MAP_527, 5, true)
                     setComponentVisibility(player, Components.VM_MUSEUM_MAP_527, 3, false)
                 }
-
                 "top" -> {
                     setComponentVisibility(player, Components.VM_MUSEUM_MAP_527, 3, true)
                     setComponentVisibility(player, Components.VM_MUSEUM_MAP_527, 5, false)
                 }
             }
+        }
+
+        private fun study(player:Player) {
+            openInterface(player, 533)
+            val model = getScenery(1763, 4937, 0)?.definition?.modelIds?.first()
+            player.packetDispatch.sendModelOnInterface(model!!, 533, 3, 0)
+            setComponentVisibility(player, 533, 27, false)
+            sendString(player, "1", 533, 25)
+            sendString(player, "Question", 533, 28)
+            sendString(player, "1.", 533, 29)
+            sendString(player, "2.", 533, 30)
+            sendString(player, "3.", 533, 31)
         }
     }
 }

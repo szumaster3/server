@@ -908,11 +908,7 @@ class MuseumDisplayInterface : InterfaceListener, InteractionListener {
          * Handles study the display case (number 24).
          */
 
-        on(
-            intArrayOf(Scenery.DISPLAY_CASE_24639, Scenery.DISPLAY_CASE_24551),
-            IntType.SCENERY,
-            "study",
-        ) { player, node ->
+        on(intArrayOf(Scenery.DISPLAY_CASE_24639, Scenery.DISPLAY_CASE_24551), IntType.SCENERY, "study") { player, node ->
             val n = node as core.game.node.scenery.Scenery
             val model = n.definition.modelIds!![0]
             val arrav = getVarbit(player, Vars.VARBIT_SCENERY_MUSEUM_DISPLAY_24_5394)
