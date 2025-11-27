@@ -86,7 +86,19 @@ object LevelUp {
      */
     @JvmStatic
     fun levelup(player: Player, slot: Int, amount: Int) {
-        if (!getAttribute(player, GameAttributes.TUTORIAL_COMPLETE, false)) return
+        val tutorialComplete = getAttribute(player, GameAttributes.TUTORIAL_COMPLETE, false)
+        if (!tutorialComplete && player.getSkills().getStaticLevel(slot) >= 3 && !player.isArtificial) {
+
+            sendMessage(
+                player,
+                "<col=000080>You've now reached the highest skill level that you can achieve during the tutorial. " +
+                        "Once you finish the tutorial, you can advance this skill even further!"
+            )
+        }
+
+        if (!tutorialComplete) {
+            return
+        }
 
         Graphics.send(Graphics(shared.consts.Graphics.FIREWORKS_WHEN_A_LVL_IS_GAINED_199, 100), player.location)
         playJingle(player, getSkillJingle(player, slot))
