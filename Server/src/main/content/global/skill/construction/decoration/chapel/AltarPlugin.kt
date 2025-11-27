@@ -90,7 +90,7 @@ class AltarPlugin : InteractionListener {
     }
 
     private fun canUseAltar(player: Player): Boolean {
-        if (player.ironmanManager.isIronman && !player.houseManager.isInHouse(player)) {
+        if (!player.houseManager.isInHouse(player)) {
             sendMessage(player, "You cannot do this on someone else's altar.")
             return false
         }

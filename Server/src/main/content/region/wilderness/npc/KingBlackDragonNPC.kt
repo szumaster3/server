@@ -1,7 +1,6 @@
 package content.region.wilderness.npc
 
 import core.api.calculateDragonFireMaxHit
-import content.data.BossKillCounter
 import core.game.node.entity.Entity
 import core.game.node.entity.combat.BattleState
 import core.game.node.entity.combat.CombatStyle
@@ -31,7 +30,6 @@ class KingBlackDragonNPC : AbstractNPC {
 
     override fun finalizeDeath(killer: Entity) {
         super.finalizeDeath(killer)
-        BossKillCounter.addToKillCount(killer as Player, this.id)
     }
 
     constructor(id: Int, l: Location?) : super(id, l)

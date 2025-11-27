@@ -1,6 +1,5 @@
 package core.game.system.command.sets
 
-import content.global.skill.runecrafting.Talisman
 import core.api.addItem
 import core.game.node.entity.combat.spell.Runes
 import core.game.node.item.Item
@@ -11,7 +10,6 @@ import shared.consts.Items
 @Initializable
 class ItemKitsCommandSet : CommandSet(Privilege.ADMIN) {
     private val farmKit = arrayListOf(Items.RAKE_5341, Items.SPADE_952, Items.SEED_DIBBER_5343, Items.WATERING_CAN8_5340, Items.SECATEURS_5329, Items.GARDENING_TROWEL_5325)
-    private val talismanKit = Talisman.values().map { it.item }.toIntArray()
     private val runeKit = Runes.values()
         .filter { "STAFF" !in it.name }
         .map { it.id }
@@ -33,22 +31,6 @@ class ItemKitsCommandSet : CommandSet(Privilege.ADMIN) {
 
         define(name = "chisel", privilege = Privilege.ADMIN, usage = "", description = "") { p, _ ->
             addItem(p, Items.CHISEL_1755)
-        }
-
-        /*
-         * Provide a set of talismans.
-         */
-
-        define(
-            name = "talismankit",
-            privilege = Privilege.ADMIN,
-            usage = "::talismankit",
-            description = "Provides a set of talisman items.",
-        ) { player, _ ->
-            for (item in talismanKit) {
-                player.inventory.add(Item(item))
-            }
-            return@define
         }
 
         /*

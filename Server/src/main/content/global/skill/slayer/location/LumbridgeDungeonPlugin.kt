@@ -1,4 +1,4 @@
-package content.global.skill.slayer.dungeon
+package content.global.skill.slayer.location
 
 import content.global.skill.slayer.SlayerEquipmentFlags
 import core.api.sendMessage

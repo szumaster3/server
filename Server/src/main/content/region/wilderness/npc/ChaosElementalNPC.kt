@@ -3,7 +3,6 @@ package content.region.wilderness.npc
 import core.api.getPathableRandomLocalCoordinate
 import core.api.playAudio
 import core.api.playGlobalAudio
-import content.data.BossKillCounter
 import core.game.node.entity.Entity
 import core.game.node.entity.combat.BattleState
 import core.game.node.entity.combat.CombatStyle
@@ -50,7 +49,6 @@ class ChaosElementalNPC @JvmOverloads constructor(id: Int = -1, location: Locati
 
     override fun finalizeDeath(killer: Entity) {
         super.finalizeDeath(killer)
-        BossKillCounter.addToKillCount(killer as Player, this.id)
     }
 
     class ChaosCombatHandler : MultiSwingHandler(*ATTACKS) {

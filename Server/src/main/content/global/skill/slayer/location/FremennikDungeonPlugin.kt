@@ -1,4 +1,4 @@
-package content.global.skill.slayer.dungeon
+package content.global.skill.slayer.location
 
 import content.global.skill.agility.AgilityHandler
 import core.api.getStatLevel

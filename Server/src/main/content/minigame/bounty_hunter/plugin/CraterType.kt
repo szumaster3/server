@@ -37,9 +37,6 @@ enum class CraterType(
 
     fun canEnter(player: Player): Boolean {
         val combatLevel = player.properties.currentCombatLevel
-        if (player.ironmanManager.checkRestriction()) {
-            return false
-        }
         if (ordinal < CraterType.values().size - 1) {
             if (combatLevel > CraterType.values()[ordinal + 1].level + 5) {
                 sendMessage(

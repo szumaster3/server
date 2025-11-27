@@ -37,7 +37,7 @@ class LampPlugin : InteractionListener {
     }
 
     private fun canUseLamp(player: Player) =
-        !(player.ironmanManager.checkRestriction() && !player.houseManager.isInHouse(player))
+        !player.houseManager.isInHouse(player)
 
     private fun checkRequirements(player: Player): String? {
         val requirements = listOf(

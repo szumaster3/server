@@ -97,9 +97,6 @@ import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 import static core.api.ContentAPIKt.*;
-import static core.api.utils.PermanentDeathKt.permanentDeath;
-import static core.game.system.command.sets.StatsAttributeSetKt.STATS_BASE;
-import static core.game.system.command.sets.StatsAttributeSetKt.STATS_DEATHS;
 import static core.tools.GlobalsKt.colorize;
 
 /**
@@ -327,11 +324,6 @@ public class Player extends Entity {
      * Manages player diary progress.
      */
     private final DiaryManager diaryManager = new DiaryManager(this);
-
-    /**
-     * Manages Ironman status and restrictions.
-     */
-    private final IronmanManager ironmanManager = new IronmanManager(this);
 
     /**
      * Indicates whether the player is currently active.
@@ -705,24 +697,11 @@ public class Player extends Entity {
         if (this.isArtificial() && killer instanceof NPC) {
             return;
         }
-        if (killer instanceof Player && killer.getName() != getName()) { // the latter happens if you died via typeless damage from an external cause, e.g. bugs in a dark cave without a light source
-            long unixSeconds = System.currentTimeMillis() / 1000L;
-            if (unixSeconds - killer.getAttribute("/save:last-murder-news", 0L) >= 300) {
-                Item wep = getItemFromEquipment((Player) killer, EquipmentSlot.WEAPON);
-                killer.setAttribute("/save:last-murder-news", unixSeconds);
-            }
-        }
+
         getPacketDispatch().sendMessage("Oh dear, you are dead!");
-        incrementAttribute("/save:"+STATS_BASE+":"+STATS_DEATHS);
 
         packetDispatch.sendTempMusic(90);
         if (!getZoneMonitor().handleDeath(killer) && (!getProperties().isSafeZone() && getZoneMonitor().getType() != ZoneType.SAFE.getId()) && getDetails().getRights() != Rights.ADMINISTRATOR) {
-            if (this.getIronmanManager().getMode().equals(IronmanMode.HARDCORE)) {
-                if (getAttributes().containsKey("permadeath")) {
-                    permanentDeath(this);
-                    return;
-                }
-            }
             GroundItemManager.create(new Item(Items.BONES_526), this.getAttribute("/save:original-loc",location), k);
             final Container[] c = DeathTask.getContainers(this);
 
@@ -1434,15 +1413,6 @@ public class Player extends Entity {
      */
     public DiaryManager getAchievementDiaryManager() {
         return diaryManager;
-    }
-
-    /**
-     * Gets ironman manager.
-     *
-     * @return the ironman manager
-     */
-    public IronmanManager getIronmanManager() {
-        return ironmanManager;
     }
 
     /**

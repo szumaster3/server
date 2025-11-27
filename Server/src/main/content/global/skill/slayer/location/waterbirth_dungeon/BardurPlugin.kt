@@ -1,5 +1,7 @@
-package content.global.skill.slayer.waterbirth_dungeon
+package content.global.skill.slayer.location.waterbirth_dungeon
 
+import content.global.skill.slayer.location.waterbirth_dungeon.BardurDialogue
+import content.global.skill.slayer.location.waterbirth_dungeon.BardurExchangeDialogue
 import core.api.openDialogue
 import core.api.isQuestComplete
 import core.api.sendMessage

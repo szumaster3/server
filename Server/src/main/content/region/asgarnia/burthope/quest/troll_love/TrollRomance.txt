@@ -92,6 +92,4 @@ class TrollRomance : Quest("Troll Romance", 127, 126, 2, Vars.VARP_QUEST_TROLL_R
 //Unlocks sledding route from Trollweiss
 //A new colour of wieldable flowers
 //2 Treasure Hunter keys (Ironman accounts will not receive these)
-
-
- */
+*/

@@ -24,17 +24,12 @@ class BlastFurnaceForemanDialogue(player: Player? = null) : Dialogue(player) {
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
             0 -> {
-                if (player.ironmanManager.isIronman) {
-                    sendMessage(player, "This minigame is disabled in Ironman mode.", 1)
-                    npcl(FaceAnim.OLD_ANGRY1,"I won't let you into my furnace! Stop asking!")
-                    stage++
-                } else {
-                    npcl(FaceAnim.OLD_ANGRY1, "You! Get to work!")
-                    stage++
-                }
+                npcl(FaceAnim.OLD_ANGRY1, "You! Get to work!")
+                stage++
+
             }
             1 -> showTopics(
-                Topic("What?", if(player.ironmanManager.isIronman) 74 else 2, true),
+                Topic("What?", 2, true),
                 Topic("Ask about dragon metal.", 52, true),
                 Topic(FaceAnim.FRIENDLY, "Okay.", END_DIALOGUE),
             )

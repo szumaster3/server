@@ -11,7 +11,6 @@ import core.game.node.entity.combat.graves.GraveController
 import core.game.node.entity.combat.graves.GraveType
 import core.game.node.entity.combat.spell.CombatSpell
 import core.game.node.entity.player.Player
-import core.game.node.entity.player.link.IronmanMode
 import core.game.node.entity.player.link.SpellBookManager
 import core.game.node.entity.player.link.emote.Emotes
 import core.game.node.entity.player.link.music.MusicEntry
@@ -70,7 +69,6 @@ class PlayerSaveParser(val player: Player) {
         parseFamiliars()
         parseBankPin()
         parseHouse()
-        parseIronman()
         parseEmoteManager()
         parseStatistics()
         parseAchievements()
@@ -279,11 +277,6 @@ class PlayerSaveParser(val player: Player) {
     fun parseHouse() {
         val houseData = saveFile?.getAsJsonObject("houseData") ?: return
         player.houseManager.parse(houseData)
-    }
-
-    fun parseIronman() {
-        val ironmanMode = saveFile?.get("ironManMode")?.asString?.toIntOrNull() ?: return
-        player.ironmanManager.mode = IronmanMode.values()[ironmanMode]
     }
 
     fun parseEmoteManager() {

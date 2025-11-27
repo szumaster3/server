@@ -77,11 +77,8 @@ class AssistSessionPulse : Pulse, RequestModule {
      * @param target the player being assisted.
      */
     override fun open(player: Player?, target: Player?) {
-        if (player!!.ironmanManager.checkRestriction() || target!!.ironmanManager.checkRestriction()) {
-            return
-        }
-        player.face(target)
-        target.face(player)
+        player?.face(target)
+        target?.face(player)
         extend(player, target)
         getExtension(player).open()
     }

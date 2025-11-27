@@ -1,11 +1,9 @@
-package content.global.skill.slayer.waterbirth_dungeon
+package content.global.skill.slayer.location.waterbirth_dungeon
 
-import content.data.BossKillCounter
 import core.game.node.entity.Entity
 import core.game.node.entity.combat.BattleState
 import core.game.node.entity.combat.CombatStyle
 import core.game.node.entity.npc.AbstractNPC
-import core.game.node.entity.player.Player
 import core.game.world.map.Location
 import core.game.world.map.RegionManager
 import core.tools.RandomFunction
@@ -75,9 +73,6 @@ class DagannothKingNPC(id: Int = 0, location: Location? = null) : AbstractNPC(id
 
     override fun finalizeDeath(killer: Entity) {
         super.finalizeDeath(killer)
-        if (id == NPCs.DAGANNOTH_SUPREME_2881 || id == NPCs.DAGANNOTH_PRIME_2882 || id == NPCs.DAGANNOTH_REX_2883) {
-            BossKillCounter.addToKillCount(killer as Player, this.id)
-        }
     }
 
     enum class DagType(

@@ -153,7 +153,7 @@ public final class NPCDropTables {
      */
     public Player getLooter(Player player, NPC npc, Item item) {
         int itemId = item.getDefinition().isUnnoted() ? item.getId() : item.getNoteChange();
-        if (player != null && npc.getProperties().isMultiZone() && (item.getDefinition().isTradeable() || item.getName().endsWith("charm")) && player.getCommunication().getClan() != null && player.getCommunication().isLootShare() && player.getCommunication().getLootRequirement().ordinal() >= player.getCommunication().getClan().getLootRequirement().ordinal() && !player.getIronmanManager().isIronman()) {
+        if (player != null && npc.getProperties().isMultiZone() && (item.getDefinition().isTradeable() || item.getName().endsWith("charm")) && player.getCommunication().getClan() != null && player.getCommunication().isLootShare() && player.getCommunication().getLootRequirement().ordinal() >= player.getCommunication().getClan().getLootRequirement().ordinal()) {
             Player looter = player;
             List<Player> players = RegionManager.getLocalPlayers(npc, 16);
             List<Player> looters = new ArrayList<>(20);

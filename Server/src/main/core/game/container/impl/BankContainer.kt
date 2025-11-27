@@ -10,7 +10,6 @@ import core.game.container.ContainerType
 import core.game.container.SortType
 import core.game.container.access.InterfaceContainer.generateItems
 import core.game.node.entity.player.Player
-import core.game.node.entity.player.link.IronmanMode
 import core.game.node.item.Item
 import core.game.system.config.ItemConfigParser
 import core.game.world.GameWorld.settings
@@ -105,7 +104,6 @@ class BankContainer(private val player: Player) : Container(SIZE, ContainerType.
      */
     private inline fun open(p: Player, extra: () -> Unit) {
         if (isOpen) return
-        if (p.ironmanManager.checkRestriction(IronmanMode.ULTIMATE)) return
         if (!p.bankPinManager.isUnlocked && !settings!!.isDevMode) {
             p.bankPinManager.openType(1)
             return

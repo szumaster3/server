@@ -5,7 +5,6 @@ import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
 import core.game.dialogue.Topic
 import core.game.node.entity.player.Player
-import core.game.node.entity.player.link.IronmanMode
 import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import core.tools.START_DIALOGUE
@@ -20,15 +19,11 @@ class EniolaDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
-            START_DIALOGUE -> if (hasIronmanRestriction(player, IronmanMode.ULTIMATE)) {
-                npcl(FaceAnim.NEUTRAL, "My apologies, dear ${if (player.isMale) "sir" else "madam"}, " + "our services are not available for Ultimate ${if (player.isMale) "Ironman" else "Ironwoman"}.").also { stage = END_DIALOGUE }
-            } else {
-                npcl(FaceAnim.NEUTRAL, "Good day, how may I help you?").also {
-                    if (hasAwaitingGrandExchangeCollections(player)) {
-                        stage++
-                    } else {
-                        stage += 2
-                    }
+            0 -> npcl(FaceAnim.NEUTRAL, "Good day, how may I help you?").also {
+                if (hasAwaitingGrandExchangeCollections(player)) {
+                    stage++
+                } else {
+                    stage += 2
                 }
             }
             1 -> npcl(FaceAnim.NEUTRAL, "Before we go any further, I should inform you that you " + "have items ready for collection from the Grand Exchange.").also { stage++ }

@@ -265,7 +265,7 @@ public final class BalloonManager extends OptionHandler {
                     switch (++counter) {
                         case 1:
                             SceneryBuilder.remove(popped);
-                            if (!player.getIronmanManager().isIronman() && RandomFunction.random(3) == 1) {
+                            if (RandomFunction.random(3) == 1) {
                                 GroundItem ground = getGround(object.getLocation(), player);
                                 if (ground != null) {
                                     GroundItemManager.create(ground);

@@ -1,7 +1,6 @@
 package content.region.desert.nardah.plugin.kalphite;
 
 import content.region.kandarin.seers_village.quest.mcannon.plugin.DMCHandler;
-import content.data.BossKillCounter;
 import core.game.node.entity.Entity;
 import core.game.node.entity.combat.BattleState;
 import core.game.node.entity.combat.CombatStyle;
@@ -85,10 +84,8 @@ public final class KalphiteQueenNPC extends AbstractNPC {
             removeAttribute("disable:drop");
             super.finalizeDeath(killer);
             reTransform();
-            BossKillCounter.addToKillCount((Player) killer, 1160);
             return;
         }
-        BossKillCounter.addToKillCount((Player) killer, this.getId());
         setAttribute("disable:drop", true);
         super.finalizeDeath(killer);
         super.setRespawnTick(-1);

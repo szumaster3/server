@@ -6,7 +6,6 @@ import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
 import core.game.dialogue.Topic
 import core.game.node.entity.player.Player
-import core.game.node.entity.player.link.IronmanMode
 import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import core.tools.START_DIALOGUE
@@ -31,21 +30,15 @@ class BankerDialogue(player: Player? = null) : Dialogue(player) {
         }
 
         when (stage) {
-            START_DIALOGUE -> when {
-                hasIronmanRestriction(player, IronmanMode.ULTIMATE) -> {
-                    npcl(FaceAnim.ANNOYED, "My apologies, dear ${if (player.isMale) "sir" else "madam"}, " + "our services are not available for Ultimate ${if (player.isMale) "Ironman" else "Ironwoman"}").also { stage = END_DIALOGUE }
-                }
-
-                else -> {
-                    npcl(checkFaceAnim, "Good day, how may I help you?").also {
-                        if (hasAwaitingGrandExchangeCollections(player)) {
-                            stage++
-                        } else {
-                            stage += 2
-                        }
-                    }
+            START_DIALOGUE -> npcl(checkFaceAnim, "Good day, how may I help you?").also {
+                if (hasAwaitingGrandExchangeCollections(player)) {
+                    stage++
+                } else {
+                    stage += 2
                 }
             }
+
+
 
             1 -> npcl(checkFaceAnim, "Before we go any further, I should inform you that you " + "have items ready for collection from the Grand Exchange.").also { stage++ }
             2 -> showTopics(
@@ -60,10 +53,7 @@ class BankerDialogue(player: Player? = null) : Dialogue(player) {
             10 -> {
                 end()
                 if (checkRestriction) {
-                    sendDialogue(
-                        player,
-                        "The banker detected that the items in your inventory are blacklisted, which prevented you from opening a bank account. You can do it again after removing them."
-                    )
+                    sendDialogue(player, "The banker detected that the items in your inventory are blacklisted, which prevented you from opening a bank account. You can do it again after removing them.")
                 } else {
                     openBankAccount(player)
                 }
@@ -74,10 +64,7 @@ class BankerDialogue(player: Player? = null) : Dialogue(player) {
                 end()
             }
 
-            12 -> {
-                openGrandExchangeCollectionBox(player)
-                end()
-            }
+            12 -> end()
         }
         return true
     }

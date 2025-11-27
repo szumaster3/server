@@ -17,7 +17,6 @@ class BlastFurnaceDoorDialogue(val fee: Int) : DialogueFile() {
 
     override fun handle(componentID: Int, buttonID: Int) {
         when (stage) {
-            // if (player.ironmanManager.isIronman) {
             0 -> sendDialogue(player!!, "You must be Smithing Level 60 or higher in order to enter the Blast Furnace").also { stage++ }
             1 -> sendDialogue(player!!, "However, you may enter for 10 minutes if you pay the entrance fee.<br>($fee gp)").also { stage++ }
             2 -> options("Yes", "No").also { stage++ }

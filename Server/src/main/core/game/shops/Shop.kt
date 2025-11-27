@@ -348,10 +348,6 @@ class Shop(val title: String, val stock: Array<ShopItem>, val general: Boolean =
     fun buy(player: Player, slot: Int, amount: Int): TransactionStatus {
         if (amount !in 1..Integer.MAX_VALUE) return TransactionStatus.Failure("Invalid amount: $amount")
         val isMainStock = getAttribute(player, "shop-main", false)
-        if (!isMainStock && player.ironmanManager.isIronman) {
-            sendDialogue(player, "As an ironman, you cannot buy from player stock in shops.")
-            return TransactionStatus.Failure("Ironman buying from player stock")
-        }
         val cont = if (isMainStock) {
             (getAttribute<Container?>(player, "shop-cont", null)
                 ?: return TransactionStatus.Failure("Invalid shop-cont attr"))
@@ -370,17 +366,9 @@ class Shop(val title: String, val stock: Array<ShopItem>, val general: Boolean =
             sendMessage(player, "There is no stock of that item at the moment.")
             return TransactionStatus.Failure("Shop item out of stock.")
         }
-        if (isMainStock && inStock.amount > stock[slot].amount && (!getServerConfig().getBoolean(
-                Shops.personalizedShops,
-                false,
-            ) || forceShared) && player.ironmanManager.isIronman
-        ) {
-            sendDialogue(player, "As an ironman, you cannot buy overstocked items from shops.")
-            return TransactionStatus.Failure("Ironman overstock purchase")
-        }
         val cost = getBuyPrice(player, slot)
         if (cost.id == -1) {
-            sendMessage(player, "This shop cannot sell that item.",).also { return TransactionStatus.Failure("Shop cannot sell this item") }
+            sendMessage(player, "This shop cannot sell that item.").also { return TransactionStatus.Failure("Shop cannot sell this item") }
         }
         if (currency == Items.COINS_995) {
             var amt = item.amount

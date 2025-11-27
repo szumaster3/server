@@ -35,17 +35,6 @@ class DuelComponentPlugin : ComponentPlugin() {
                             player.packetDispatch.sendMessage("Other player is busy at the moment.")
                             return true
                         }
-                        if (player.getAttribute(
-                                "duel:staked",
-                                false,
-                            ) &&
-                            other.ironmanManager.isIronman &&
-                            !GameWorld.settings!!.isDevMode
-                        ) {
-                            other.sendMessage("You can't accept a staked duel as an Ironman.")
-                            player.sendMessage("You can't duel Ironman players.")
-                            return true
-                        }
                         player.interfaceManager.close()
                         if (!player.getAttribute("duel:staked", false)) {
                             player.requestManager.request(other, DuelArenaActivity.FRIEND_REQUEST)
@@ -58,10 +47,6 @@ class DuelComponentPlugin : ComponentPlugin() {
                     18, 22 -> staked = false
                     19, 21 -> {
                         staked = true
-                        if (player.ironmanManager.isIronman) {
-                            player.sendMessage("You can't stake as an Iron man.")
-                            staked = false
-                        }
                     }
 
                     else -> return false

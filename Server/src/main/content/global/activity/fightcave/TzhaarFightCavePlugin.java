@@ -2,7 +2,6 @@ package content.global.activity.fightcave;
 
 import content.global.skill.slayer.SlayerManager;
 import content.global.skill.slayer.Tasks;
-import content.data.BossKillCounter;
 import core.game.activity.ActivityPlugin;
 import core.game.dialogue.FaceAnim;
 import core.game.event.NPCKillEvent;
@@ -163,7 +162,6 @@ public final class TzhaarFightCavePlugin extends ActivityPlugin {
             }
             player.getPacketDispatch().sendMessage("You were victorious!");
             if (!practice) {
-                BossKillCounter.addToKillCount(player, NPCs.TZTOK_JAD_2745);
                 if (SlayerManager.getInstance(player).getTask() == Tasks.JAD) {
                     player.getSkills().addExperience(Skills.SLAYER, 25000);
                     SlayerManager.getInstance(player).clear();

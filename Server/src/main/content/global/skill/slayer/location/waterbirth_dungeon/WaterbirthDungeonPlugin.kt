@@ -1,4 +1,4 @@
-package content.global.skill.slayer.waterbirth_dungeon
+package content.global.skill.slayer.location.waterbirth_dungeon
 
 import core.game.node.entity.player.link.WarningManager
 import core.game.node.entity.player.link.Warnings

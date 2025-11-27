@@ -557,7 +557,7 @@ public class NPC extends Entity {
         if (getAttribute("disable:drop", false)) {
             return;
         }
-        if (killer instanceof Player && p != null && p.getIronmanManager().isIronman() && getImpactHandler().getPlayerImpactLog().size() > 1) {
+        if (killer instanceof Player && p != null && getImpactHandler().getPlayerImpactLog().size() > 1) {
             return;
         }
         if (definition == null || definition.getDropTables() == null) {

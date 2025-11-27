@@ -8,7 +8,6 @@ import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.node.Node
 import core.game.node.entity.player.Player
-import core.game.node.entity.player.link.IronmanMode
 import core.game.world.GameWorld
 import shared.consts.Components
 import shared.consts.Scenery
@@ -25,7 +24,7 @@ class DepositBoxOptionPlugin : InteractionListener {
                 return true
             }
 
-            restrictForIronman(player, IronmanMode.ULTIMATE) {
+
                 player.interfaceManager.open(Component(Components.BANK_DEPOSIT_BOX_11))?.closeEvent =
                     CloseEvent { p, _ ->
                         p.interfaceManager.openDefaultTabs()
@@ -34,7 +33,7 @@ class DepositBoxOptionPlugin : InteractionListener {
                 sendString(player, "The Bank of " + GameWorld.settings!!.name + " - Deposit Box", Components.BANK_DEPOSIT_BOX_11, 12)
                 removeTabs(player, 0, 1, 2, 3, 4, 5, 6)
                 player.generateItems(Components.BANK_DEPOSIT_BOX_11, 15, listOf("Deposit-X", "Deposit-All", "Deposit-10", "Deposit-5", "Deposit-1"), 5, 7)
-            }
+
             return true
         }
     }

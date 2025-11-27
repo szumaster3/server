@@ -1,6 +1,5 @@
 package content.global.activity.godwars;
 
-import content.data.BossKillCounter;
 import core.game.node.entity.Entity;
 import core.game.node.entity.combat.*;
 import core.game.node.entity.npc.AbstractNPC;
@@ -196,9 +195,6 @@ public final class GodwarsBossNPC extends AbstractNPC {
     @Override
     public void finalizeDeath(Entity killer) {
         super.finalizeDeath(killer);
-        if (getId() == 6222 || getId() == 6260 || getId() == 6247 || getId() == 6203) {
-            BossKillCounter.addToKillCount((Player) killer, this.getId());
-        }
         if (minions == null) {
             return;
         }

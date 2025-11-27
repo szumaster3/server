@@ -476,7 +476,7 @@ abstract class CombatSwingHandler(var type: CombatStyle?) {
      * @param state The battle state.
      */
     open fun addExperience(entity: Entity?, victim: Entity?, state: BattleState?) {
-        if (entity == null || (victim is Player && entity is Player && entity.asPlayer().ironmanManager.isIronman)) {
+        if (entity == null || (victim is Player && entity is Player)) {
             return
         }
         val player: Player

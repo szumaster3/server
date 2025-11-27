@@ -1,5 +1,4 @@
 
-import core.game.node.entity.player.link.IronmanMode
 import core.game.node.item.Item
 import core.game.shops.Shop
 import core.game.shops.Shops
@@ -18,14 +17,13 @@ class ShopTests {
     }
 
     private val testPlayer = TestUtils.getMockPlayer("test")
-    private val testIronman = TestUtils.getMockPlayer("test2", IronmanMode.STANDARD)
     private var nonGeneral = TestUtils.getMockShop("Not General", false, false, Item(4151, 1))
     private var general = TestUtils.getMockShop("General", true, false, Item(4151, 1))
     private var highAlch = TestUtils.getMockShop("High(af) Alch", true, true, Item(4151, 1))
     private var tokkulShop = TestUtils.getMockTokkulShop("Tokkul", Item(Items.DEATH_RUNE_560, 10))
 
     @BeforeEach fun beforeEach() {
-        val testPlayers = arrayOf(testPlayer, testIronman)
+        val testPlayers = arrayOf(testPlayer)
         for (player in testPlayers) {
             player.inventory.clear()
             player.attributes.remove("shop-cont")
@@ -253,13 +251,6 @@ class ShopTests {
         )
     }
 
-    @Test fun shouldSellUnstockedItemToGeneralStoreAsIronman() {
-        testIronman.inventory.add(Item(1511, 1))
-        testIronman.setAttribute("shop-cont", general.getContainer(testIronman))
-        val status = general.sell(testIronman, 0, 1)
-        assertTransactionSuccess(status)
-    }
-
     @Test fun shouldSellStackOfUnstockedItemsToPlayerStock() {
         testPlayer.inventory.add(Item(1512, 20))
         testPlayer.setAttribute("shop-cont", general.getContainer(testPlayer))
@@ -300,24 +291,6 @@ class ShopTests {
         general.playerStock.add(Item(4151, 100))
         val status = general.buy(testPlayer, 0, 1)
         assertTransactionSuccess(status)
-    }
-
-    @Test fun shouldNotAllowIronmanToBuyOverstock() {
-        testIronman.inventory.add(Item(995, 100000))
-        testIronman.setAttribute("shop-cont", general.getContainer(testIronman))
-        testIronman.setAttribute("shop-main", true)
-        general.getContainer(testIronman).add(Item(4151, 100))
-        val status = general.buy(testIronman, 0, 1)
-        Assertions.assertEquals(true, status is Shop.TransactionStatus.Failure)
-    }
-
-    @Test fun shouldNotAllowIronmanToBuyPlayerStock() {
-        testIronman.inventory.add(Item(995, 100000))
-        testIronman.setAttribute("shop-cont", general.playerStock)
-        testIronman.setAttribute("shop-main", false)
-        general.playerStock.add(Item(4151, 1))
-        val status = general.buy(testIronman, 0, 1)
-        Assertions.assertEquals(true, status is Shop.TransactionStatus.Failure)
     }
 
     @Test fun openShopShouldNotThrowException() {

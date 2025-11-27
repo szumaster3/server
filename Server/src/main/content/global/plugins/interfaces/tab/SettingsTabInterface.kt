@@ -2,10 +2,8 @@ package content.global.plugins.interfaces.tab
 
 import core.api.openInterface
 import core.api.openSingleTab
-import core.api.restrictForIronman
 import core.api.sendMessage
 import core.game.interaction.InterfaceListener
-import core.game.node.entity.player.link.IronmanMode
 import shared.consts.Components
 
 /**
@@ -19,14 +17,13 @@ class SettingsTabInterface : InterfaceListener {
                 CHAT_EFFECTS -> player.settings.toggleChatEffects()
                 SPLIT_PM -> player.settings.toggleSplitPrivateChat()
                 MOUSE -> player.settings.toggleMouseButton()
-                AID -> restrictForIronman(player, IronmanMode.STANDARD) { player.settings.toggleAcceptAid() }
+                AID -> player.settings.toggleAcceptAid()
                 HOUSE ->
                     if (!player.houseManager.isInHouse(player)) {
                         sendMessage(player, "You need to be in a house to use house options.")
                     } else {
                         openSingleTab(player, Components.POH_HOUSE_OPTIONS_398)
                     }
-
                 GRAPHICS -> openInterface(player, Components.GRAPHICS_OPTIONS_742)
                 AUDIO -> openInterface(player, Components.SOUND_OPTIONS_743)
             }

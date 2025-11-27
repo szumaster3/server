@@ -90,7 +90,7 @@ class AncientSpellbookTeleport : SpellListener("ancient") {
         val teleportType = if (isHome) TeleportManager.TeleportType.HOME else TeleportManager.TeleportType.ANCIENT
 
         RegionManager.getLocalPlayers(player, 1).forEach {
-            if (it == player || it.isTeleBlocked || !it.isActive || !it.settings.isAcceptAid || it.ironmanManager.isIronman) return@forEach
+            if (it == player || it.isTeleBlocked || !it.isActive || !it.settings.isAcceptAid) return@forEach
             it.setAttribute("t-o_location", dest)
             it.interfaceManager.open(Component(Components.TP_OTHER_326))
             it.packetDispatch.sendString(player.username, Components.TP_OTHER_326, 1)

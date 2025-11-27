@@ -1,4 +1,4 @@
-package content.global.skill.slayer.dungeon
+package content.global.skill.slayer.location
 
 import content.region.asgarnia.taverley.npc.ArmourSuitNPC
 import core.api.inInventory

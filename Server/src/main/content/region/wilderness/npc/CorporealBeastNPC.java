@@ -1,6 +1,5 @@
 package content.region.wilderness.npc;
 
-import content.data.BossKillCounter;
 import core.game.node.entity.Entity;
 import core.game.node.entity.combat.*;
 import core.game.node.entity.combat.ImpactHandler.HitsplatType;
@@ -87,7 +86,6 @@ public final class CorporealBeastNPC extends NPCBehavior {
 
     @Override
     public void onDeathFinished(NPC self, Entity killer) {
-        BossKillCounter.addToKillCount((Player) killer, NPCs.CORPOREAL_BEAST_8133);
         if (darkEnergyCore != null) {
             darkEnergyCore.clear();
             darkEnergyCore = null;

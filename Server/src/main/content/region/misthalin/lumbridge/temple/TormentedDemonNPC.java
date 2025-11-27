@@ -1,6 +1,5 @@
 package content.region.misthalin.lumbridge.temple;
 
-import content.data.BossKillCounter;
 import core.game.node.entity.Entity;
 import core.game.node.entity.combat.BattleState;
 import core.game.node.entity.combat.CombatStyle;
@@ -147,7 +146,6 @@ public class TormentedDemonNPC extends AbstractNPC {
         super.finalizeDeath(killer);
         reTransform();
         fireShield = true;
-        BossKillCounter.addToKillCount((Player) killer, this.getId());
     }
 
     @Override

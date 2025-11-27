@@ -116,7 +116,7 @@ object PickupHandler {
         type: Int,
     ): Boolean {
         // Check if the item was dropped by another player and if the player is restricted from picking it up.
-        if (item.dropper != null && !item.droppedBy(player) && player.ironmanManager.checkRestriction()) {
+        if (item.dropper != null && !item.droppedBy(player)) {
             return false
         }
 

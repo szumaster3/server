@@ -14,7 +14,6 @@ import core.game.node.entity.player.info.PlayerDetails
 import core.game.node.entity.player.info.Rights
 import core.game.node.entity.player.info.login.PlayerSaveParser
 import core.game.node.entity.player.info.login.PlayerSaver
-import core.game.node.entity.player.link.IronmanMode
 import core.game.node.entity.player.link.SavedData
 import core.game.node.entity.player.link.quest.QuestRepository
 import core.game.node.entity.skill.Skills
@@ -48,12 +47,10 @@ object TestUtils {
 
     fun getMockPlayer(
         name: String,
-        ironman: IronmanMode = IronmanMode.NONE,
         rights: Rights = Rights.ADMINISTRATOR,
         isBot: Boolean = false,
     ): MockPlayer {
         val p = MockPlayer(name, isBot)
-        p.ironmanManager.mode = ironman
         p.details.accountInfo.uid = uidCounter++
         p.setPlaying(true)
         p.playerFlags.lastSceneGraph = p.location ?: ServerConstants.HOME_LOCATION

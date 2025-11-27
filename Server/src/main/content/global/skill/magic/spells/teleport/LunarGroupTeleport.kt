@@ -92,7 +92,6 @@ class LunarGroupTeleport : SpellListener("lunar") {
             if (it.isTeleBlocked) return@forEach
             if (!it.isActive) return@forEach
             if (!it.settings.isAcceptAid) return@forEach
-            if (it.ironmanManager.isIronman) return@forEach
             it.setAttribute("t-o_location", loc)
             it.interfaceManager.open(Component(Components.TP_OTHER_326))
             it.packetDispatch.sendString(player.username, Components.TP_OTHER_326, 1)

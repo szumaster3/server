@@ -111,11 +111,6 @@ public final class PortalOptionPlugin extends OptionHandler {
                             player.getHouseManager().enter(player, buttonId == 2);
                             break;
                         case 3:
-                            if (player.getIronmanManager().isIronman()) {
-                                end();
-                                sendMessage(player, "You can't do that as an ironman.", null);
-                                return true;
-                            }
                             sendInputDialogue(player, false, "Enter friend's name:", (value) -> {
                                 Player p = Repository.getPlayerByName((String) value);
                                 if (p == null || !p.isActive()) {

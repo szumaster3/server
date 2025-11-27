@@ -1,6 +1,5 @@
 package content.region.asgarnia.falador.npc;
 
-import content.data.BossKillCounter;
 import content.global.skill.crafting.items.lamps.LightSources;
 import core.cache.def.impl.SceneryDefinition;
 import core.game.global.action.DigAction;
@@ -246,7 +245,6 @@ public final class GiantMoleNPC extends AbstractNPC {
         super.finalizeDeath(killer);
         if (killer instanceof Player) {
             Player player = killer.asPlayer();
-            BossKillCounter.addToKillCount(player, this.getId());
         }
     }
 

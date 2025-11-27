@@ -336,9 +336,6 @@ class StockMarket : InterfaceListener {
     companion object {
         @JvmStatic
         fun openFor(player: Player) {
-            if (player.ironmanManager.checkRestriction()) {
-                return
-            }
             if (!player.bankPinManager.isUnlocked) {
                 player.bankPinManager.openType(4)
                 return

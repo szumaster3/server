@@ -21,8 +21,6 @@ import core.game.node.entity.skill.Skills
 import core.game.node.item.Item
 import core.game.node.scenery.Scenery
 import core.game.node.scenery.SceneryBuilder
-import core.game.system.command.sets.STATS_BASE
-import core.game.system.command.sets.STATS_LOGS
 import core.game.world.map.RegionManager
 import core.game.world.update.flag.context.Animation
 import core.tools.RandomFunction
@@ -143,8 +141,6 @@ class WoodcuttingPlugin : InteractionListener {
 
                 player.inventory.add(Item(reward, rewardAmount))
                 player.dispatch(ResourceProducedEvent(reward, rewardAmount, node, -1))
-                var cutLogs = player.getAttribute("$STATS_BASE:$STATS_LOGS", 0)
-                setAttribute(player, "/save:$STATS_BASE:$STATS_LOGS", ++cutLogs)
 
                 val chance = 282
                 if (RandomFunction.random(chance) == chance / 2) {

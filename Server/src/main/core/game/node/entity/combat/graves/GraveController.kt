@@ -11,7 +11,6 @@ import core.game.node.Node
 import core.game.node.entity.combat.ImpactHandler
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.info.Rights
-import core.game.node.entity.player.link.IronmanMode
 import core.game.node.entity.skill.Skills
 import core.game.node.item.Item
 import core.game.system.command.Privilege
@@ -225,9 +224,6 @@ class GraveController : PersistWorld, TickListener, InteractionListener, Command
                 return false
             }
             if (WildernessZone.isInZone(player)) {
-                return false
-            }
-            if (player.ironmanManager.mode == IronmanMode.HARDCORE) {
                 return false
             }
             if (player.zoneMonitor.isRestricted(ZoneRestriction.GRAVES)) {

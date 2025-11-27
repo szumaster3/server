@@ -81,13 +81,7 @@ public final class FireMakingPlugin extends SkillPulse<Item> {
                 sendDialogue(player, "You must begin the relevant section of Otto Godblessed's barbarian training.");
                 return false;
             }
-        } else {
-            if (player.getIronmanManager().isIronman() && !groundItem.droppedBy(player)) {
-                player.getPacketDispatch().sendMessage("You can't do that as an Ironman.");
-                return false;
-            }
         }
-
         if (RegionManager.getObject(player.getLocation()) != null || player.getZoneMonitor().isInZone("bank")) {
             player.getPacketDispatch().sendMessage("You can't light a fire here.");
             return false;

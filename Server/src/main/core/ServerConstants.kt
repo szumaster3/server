@@ -126,9 +126,6 @@ class ServerConstants {
         var BANK_BOOTH_NOTE_ENABLED: Boolean = true
 
         @JvmField
-        var BANK_BOOTH_NOTE_UIM: Boolean = true
-
-        @JvmField
         var GE_AUTOSAVE_FREQUENCY = secondsToTicks(3600) // 1 hour
 
         @JvmField
@@ -284,9 +281,6 @@ class ServerConstants {
 
         @JvmField
         var MAX_PATHFIND_DISTANCE = 50
-
-        @JvmField
-        var IRONMAN_ICONS = false
 
         @JvmField
         var PLAYER_STOCK_CLEAR_INTERVAL = 1

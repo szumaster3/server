@@ -15,8 +15,6 @@ import core.game.node.entity.player.link.diary.DiaryType
 import core.game.node.entity.skill.Skills
 import core.game.node.scenery.Scenery
 import core.game.node.scenery.SceneryBuilder
-import core.game.system.command.sets.STATS_BASE
-import core.game.system.command.sets.STATS_LOGS
 import core.game.system.task.Pulse
 import core.game.world.map.Location
 import core.game.world.map.RegionManager.getLocalPlayers
@@ -31,7 +29,7 @@ import java.util.stream.Collectors
 /**
  * Woodcutting skill pulse
  *
- * @author ceik
+ * @author Ceikry
  */
 class WoodcuttingPulse(private val player: Player, private val node: Scenery) : Pulse(1, player, node) {
 
@@ -169,20 +167,6 @@ class WoodcuttingPulse(private val player: Player, private val node: Scenery) : 
             // Reward
             addItem(player, reward, rewardAmount)
             player.dispatch(ResourceProducedEvent(reward, rewardAmount, node, -1))
-            var cutLogs = player.getAttribute("$STATS_BASE:$STATS_LOGS", 0)
-            player.setAttribute("/save:$STATS_BASE:$STATS_LOGS", ++cutLogs)
-
-            // Calculate bonus bird nest for mining.
-            // int chance = 282;
-            // if (RandomFunction.random(chance) == chance / 2) {
-            //     if(SkillcapePerks.isActive(SkillcapePerks.NEST_HUNTER,player)){
-            //         if(!player.getInventory().add(BirdNest.getRandomNest(false).getNest())){
-            //             BirdNest.drop(player);
-            //         }
-            //     } else {
-            //         BirdNest.drop(player);
-            //     }
-            // }
         }
 
         return rollDepletion()

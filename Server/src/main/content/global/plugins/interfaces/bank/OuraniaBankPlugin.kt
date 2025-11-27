@@ -3,12 +3,10 @@ package content.global.plugins.interfaces.bank
 import core.api.*
 import core.api.openBankAccount
 import core.api.openGrandExchangeCollectionBox
-import core.api.restrictForIronman
 import core.game.dialogue.FaceAnim
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.interaction.InterfaceListener
-import core.game.node.entity.player.link.IronmanMode
 import core.game.node.item.Item
 import shared.consts.Components
 import shared.consts.Items
@@ -23,15 +21,13 @@ class OuraniaBankPlugin : InteractionListener, InterfaceListener {
          */
 
         on(NPCs.ENIOLA_6362, IntType.NPC, "bank", "collect") { player, _ ->
-            val option = getUsedOption(player)
-            restrictForIronman(player, IronmanMode.ULTIMATE) {
-                when (option) {
-                    "bank" -> setAttribute(player, "zmi:bankaction", "open")
-                    "collect" -> setAttribute(player, "zmi:bankaction", "collect")
-                    else -> return@restrictForIronman
-                }
-                openInterface(player, Components.BANK_CHARGE_ZMI_619)
+            when (getUsedOption(player)) {
+                "bank" -> setAttribute(player, "zmi:bankaction", "open")
+                "collect" -> setAttribute(player, "zmi:bankaction", "collect")
+                else -> return@on true
             }
+
+            openInterface(player, Components.BANK_CHARGE_ZMI_619)
             return@on true
         }
     }

@@ -8,7 +8,6 @@ import core.game.interaction.InteractionListener
 import core.game.node.Node
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
-import core.game.node.entity.player.link.IronmanMode
 import core.game.node.item.Item
 import core.game.world.map.Direction
 import core.game.world.map.Location
@@ -30,10 +29,7 @@ class BankBoothPlugin : InteractionListener {
     /**
      * Finds a banker around the node in a square radius.
      */
-    private fun locateAdjacentBankerSquare(
-        node: Node,
-        size: Int = 1,
-    ): NPC? {
+    private fun locateAdjacentBankerSquare(node: Node, size: Int = 1): NPC? {
         for (y in (node.location.y - size)..(node.location.y + size)) {
             for (x in (node.location.x - size)..(node.location.x + size)) {
                 Repository.findNPC(Location(x, y))?.let { return it as? BankerNPC }
@@ -45,10 +41,7 @@ class BankBoothPlugin : InteractionListener {
     /**
      * Tries to start a dialogue with a nearby banker.
      */
-    private fun tryInvokeBankerDialogue(
-        player: Player,
-        node: Node,
-    ) {
+    private fun tryInvokeBankerDialogue(player: Player, node: Node) {
         (locateAdjacentBankerLinear(node) ?: locateAdjacentBankerSquare(node, 2))?.let {
             if (core.game.dialogue.DialogueInterpreter
                     .contains(it.id)
@@ -64,14 +57,7 @@ class BankBoothPlugin : InteractionListener {
     /**
      * Handles quick-use bank booth interaction.
      */
-    private fun quickBankBoothUse(
-        player: Player,
-        node: Node,
-        state: Int,
-    ): Boolean {
-        if (player.ironmanManager.checkRestriction(IronmanMode.ULTIMATE)) {
-            return true
-        }
+    private fun quickBankBoothUse(player: Player, node: Node, state: Int): Boolean {
         if (BankerNPC.checkLunarIsleRestriction(player, node)) {
             tryInvokeBankerDialogue(player, node)
             return true
@@ -84,15 +70,7 @@ class BankBoothPlugin : InteractionListener {
     /**
      * Handles regular-use bank booth interaction.
      */
-    private fun regularBankBoothUse(
-        player: Player,
-        node: Node,
-        state: Int,
-    ): Boolean {
-        if (player.ironmanManager.checkRestriction(IronmanMode.ULTIMATE)) {
-            return true
-        }
-
+    private fun regularBankBoothUse(player: Player, node: Node, state: Int): Boolean {
         if (ServerConstants.BANK_BOOTH_QUICK_OPEN) {
             return quickBankBoothUse(player, node, state)
         }
@@ -127,10 +105,6 @@ class BankBoothPlugin : InteractionListener {
         with: Node,
     ): Boolean {
         if (!hasOption(with, "use")) {
-            return true
-        }
-
-        if (!ServerConstants.BANK_BOOTH_NOTE_UIM && player.ironmanManager.checkRestriction(IronmanMode.ULTIMATE)) {
             return true
         }
 

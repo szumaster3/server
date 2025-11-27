@@ -1,4 +1,4 @@
-package content.region.kandarin.plugin.ancient_cavern.npc
+package content.global.skill.slayer.location.ancient_cavern
 
 import core.api.location
 import core.api.sendMessage

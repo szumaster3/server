@@ -1,7 +1,6 @@
 package content.region.wilderness.npc
 
 import core.api.setMinimapState
-import content.data.BossKillCounter
 import core.game.activity.ActivityPlugin
 import core.game.activity.CutscenePlugin
 import core.game.component.Component
@@ -63,7 +62,6 @@ class BorkNPC : AbstractNPC {
 
     override fun finalizeDeath(killer: Entity) {
         super.finalizeDeath(killer)
-        BossKillCounter.addToKillCount(killer as Player, this.id)
     }
 
     override fun commenceDeath(killer: Entity) {

@@ -1,5 +1,6 @@
-package content.global.skill.slayer.waterbirth_dungeon
+package content.global.skill.slayer.location.waterbirth_dungeon
 
+import content.global.skill.slayer.waterbirth_dungeon.BardurPlugin
 import content.region.fremennik.rellekka.quest.viking.FremennikTrials
 import core.api.*
 import core.api.isQuestComplete

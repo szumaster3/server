@@ -10,7 +10,6 @@ import core.game.node.entity.impl.Animator
 import core.game.node.entity.impl.PulseType
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
-import core.game.node.entity.player.link.IronmanMode
 import core.game.node.entity.player.link.prayer.PrayerType
 import core.game.node.item.Item
 import core.game.system.task.NodeTask
@@ -102,7 +101,7 @@ class DeathTask private constructor() : NodeTask(1) {
             }
             val keptItems = Container(count, ContainerType.NEVER_STACK)
             containers[0] = keptItems
-            if (player.ironmanManager.mode != IronmanMode.ULTIMATE) {
+
                 for (i in 0 until count) {
                     for (j in 0..41) {
                         var item = wornItems[j]
@@ -133,7 +132,7 @@ class DeathTask private constructor() : NodeTask(1) {
                         }
                     }
                 }
-            }
+
             containers[1] = Container(42, ContainerType.DEFAULT)
             containers[1]!!.addAll(wornItems)
             return containers

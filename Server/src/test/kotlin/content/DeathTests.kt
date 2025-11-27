@@ -8,7 +8,6 @@ import core.game.global.action.DropListener
 import core.game.node.entity.combat.graves.GraveController
 import core.game.node.entity.combat.graves.GraveType
 import core.game.node.entity.player.info.Rights
-import core.game.node.entity.player.link.IronmanMode
 import core.game.world.GameWorld
 import core.game.world.map.Location
 import core.tools.secondsToTicks
@@ -39,7 +38,7 @@ class DeathTests {
                 Items.RUNE_SCIMITAR_1333.asItem(),
                 Items.YELLOW_BEAD_1472.asItem(),
             )
-        val player = TestUtils.getMockPlayer("gravetest", IronmanMode.NONE, Rights.REGULAR_PLAYER)
+        val player = TestUtils.getMockPlayer("gravetest",Rights.REGULAR_PLAYER)
 
         val grave = GraveController.produceGrave(GraveType.MEM_PLAQUE)
         grave.initialize(player, Location.create(0, 0, 0), inventory)
@@ -205,7 +204,7 @@ class DeathTests {
                 Items.YELLOW_BEAD_1472.asItem(),
                 Items.RED_BEAD_1470.asItem(),
             )
-        val p = TestUtils.getMockPlayer("gravetester", IronmanMode.NONE, Rights.REGULAR_PLAYER)
+        val p = TestUtils.getMockPlayer("gravetester", Rights.REGULAR_PLAYER)
         p.location = Location.create(0, 0, 0)
         p.setAttribute(GameAttributes.TUTORIAL_COMPLETE, true)
 
@@ -230,7 +229,7 @@ class DeathTests {
                 Items.ABYSSAL_WHIP_4151.asItem(),
                 Items.ABYSSAL_WHIP_4151.asItem(),
             )
-        val p = TestUtils.getMockPlayer("gravetester", IronmanMode.NONE, Rights.REGULAR_PLAYER)
+        val p = TestUtils.getMockPlayer("gravetester", Rights.REGULAR_PLAYER)
         p.location = Location.create(0, 0, 0)
         p.setAttribute(GameAttributes.TUTORIAL_COMPLETE, true)
 
@@ -288,7 +287,7 @@ class DeathTests {
                 Items.RUNE_SCIMITAR_1333.asItem(),
                 Items.RUNE_SCIMITAR_1333.asItem(),
             )
-        val p = TestUtils.getMockPlayer("gtester", IronmanMode.NONE, Rights.REGULAR_PLAYER)
+        val p = TestUtils.getMockPlayer("gtester", Rights.REGULAR_PLAYER)
         p.location = Location.create(0, 0, 0)
         p.setAttribute(GameAttributes.TUTORIAL_COMPLETE, true)
 
@@ -310,7 +309,7 @@ class DeathTests {
                 Items.RUNE_SCIMITAR_1333.asItem(),
                 Items.RUNE_SCIMITAR_1333.asItem(),
             )
-        val p = TestUtils.getMockPlayer("tester3333", IronmanMode.NONE, Rights.REGULAR_PLAYER)
+        val p = TestUtils.getMockPlayer("tester3333", Rights.REGULAR_PLAYER)
         p.skullManager.isWilderness = true
 
         for (item in inventory) {
@@ -336,7 +335,7 @@ class DeathTests {
                 Items.GLOVES_7461.asItem(),
                 Items.GLOVES_7462.asItem(),
             )
-        val p = TestUtils.getMockPlayer("glovetest", IronmanMode.NONE, Rights.REGULAR_PLAYER)
+        val p = TestUtils.getMockPlayer("glovetest", Rights.REGULAR_PLAYER)
 
         for (item in inventory) {
             p.inventory.add(item)
@@ -357,7 +356,7 @@ class DeathTests {
                 Items.RUNE_SCIMITAR_1333.asItem(),
                 Items.RUNE_SCIMITAR_1333.asItem(),
             )
-        val p = TestUtils.getMockPlayer("droptest", IronmanMode.NONE, Rights.REGULAR_PLAYER)
+        val p = TestUtils.getMockPlayer("droptest", Rights.REGULAR_PLAYER)
 
         for (item in inventory) {
             p.inventory.add(item)

@@ -138,9 +138,6 @@ public final class TradeContainer extends Container {
         if (item.getId() == 11174 || item.getId() == 11173 || item.getId() == 759) {
             return true;
         }
-        if (player.getIronmanManager().isIronman() || target != null && target.getIronmanManager().isIronman()) {
-            return false;
-        }
         if ((playerIsBot || targetIsBot) && (playerIP.equals(targetIP) || playerMac.equals(targetMac) || playerHost.equals(targetHost))) {
             sendMessage(player, colorize("%RYou can not trade items with your own bot accounts."), null);
             return false;

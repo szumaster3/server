@@ -481,9 +481,6 @@ public final class Settings {
      * @return the boolean
      */
     public boolean isAcceptAid() {
-        if (player.getIronmanManager().isIronman()) {
-            return false;
-        }
         return acceptAid;
     }
 
