@@ -22,11 +22,11 @@ class PlayerKitInterface : InterfaceListener {
 
     override fun defineInterfaceListeners() {
         // Start appearance changer.
-        onOpen(PlayerKit.START_APPEARANCE_INTERFACE_ID) { player, _ ->
+        onOpen(PlayerKit.APPEARANCE_INTERFACE_ID) { player, _ ->
             if (player.interfaceManager.isResizable) openOverlay(player, Components.BLACK_OVERLAY_333)
             return@onOpen true
         }
-        on(PlayerKit.START_APPEARANCE_INTERFACE_ID) { player, _, _, buttonID, _, _ ->
+        on(PlayerKit.APPEARANCE_INTERFACE_ID) { player, _, _, buttonID, _, _ ->
             CharacterDesign.handleButtons(player, buttonID)
             return@on true
         }

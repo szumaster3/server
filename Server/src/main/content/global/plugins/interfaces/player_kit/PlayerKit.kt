@@ -27,7 +27,7 @@ object PlayerKit {
     /* ╔════════════════════════════════════════════╗
      * ║ INTERFACE IDS                              ║
      * ╚════════════════════════════════════════════╝ */
-    const val START_APPEARANCE_INTERFACE_ID   = Components.APPEARANCE_771 // All.
+    const val APPEARANCE_INTERFACE_ID         = Components.APPEARANCE_771 // All.
     const val YRSA_SHOE_STORE_INTERFACE_ID    = Components.YRSA_SHOE_STORE_200 // Feet appearance.
     const val MAKEOVER_MAGE_INTERFACE_ID      = Components.MAKEOVER_MAGE_205 // Skin & gender appearance.
     const val REINALD_BRACELETS_INTERFACE_ID  = Components.REINALD_SMITHING_EMPORIUM_593 // Wrists appearance.

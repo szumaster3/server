@@ -448,4 +448,7 @@ internal object GameAttributes {
     const val OBSERVATORY_GOBLIN_KEY = "/save:observatory:goblin-key"
     const val OBSERVATORY_CONSTELLATION = "/save:observatory:constellation"
     const val OBSERVATORY_CHEST_FAIL_COUNTER = "/save:observatory:fail-counter"
+
+    // Varrock Museum.
+    const val NATURAL_HISTORIAN_FIRST_TALK = "/save:varrock_museum:natural-historian-meet"
 }

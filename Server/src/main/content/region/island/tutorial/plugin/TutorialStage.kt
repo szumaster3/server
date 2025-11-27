@@ -69,11 +69,10 @@ object TutorialStage {
         when (stage) {
             0 -> {
                 lock(player, 10)
-                teleport(player, Location.create(3094, 3107, 0))
-                setVarbit(player, Vars.VARBIT_TUTORIAL_ISLAND_LOCK_COMPONENTS_4895, 2)
-                setMinimapState(player, 2)
                 hideTabs(player, login)
                 CharacterDesign.open(player)
+                setMinimapState(player, 2)
+                setVarbit(player, 4895, 2)
                 player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
                     "",
                     "",
@@ -85,8 +84,6 @@ object TutorialStage {
 
             39 -> {
                 setMinimapState(player, 0)
-                hideTabs(player, login)
-                removeHintIcon(player)
                 registerHintIcon(player, Repository.findNPC(NPCs.RUNESCAPE_GUIDE_945)!!)
                 player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
                     "Getting started",
@@ -99,9 +96,9 @@ object TutorialStage {
 
             1 -> {
                 hideTabs(player, login)
+                removeHintIcon(player)
                 player.interfaceManager.openTab(Component(Components.OPTIONS_261))
                 setVarbit(player, FLASHING_ICON, 12)
-                removeHintIcon(player)
                 player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
                     "Game Options",
                     "",

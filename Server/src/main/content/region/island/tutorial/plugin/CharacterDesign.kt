@@ -6,6 +6,7 @@ import core.game.component.Component
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.appearance.Gender
 import core.tools.RandomFunction
+import shared.consts.Components
 import kotlin.math.abs
 
 /**
@@ -19,16 +20,16 @@ object CharacterDesign {
     fun open(player: Player) {
         player.unlock()
         removeAttribute(player, "char-design:accepted")
-        sendPlayerOnInterface(player, PlayerKit.START_APPEARANCE_INTERFACE_ID, 79)
-        sendAnimationOnInterface(player, 9806, PlayerKit.START_APPEARANCE_INTERFACE_ID, 79)
+        sendPlayerOnInterface(player, Components.APPEARANCE_771, 79)
+        sendAnimationOnInterface(player, 9806, Components.APPEARANCE_771, 79)
         player.appearance.changeGender(player.appearance.gender)
-        Component(PlayerKit.START_APPEARANCE_INTERFACE_ID).setUncloseEvent { p, _ ->
-            getAttribute(p,"char-design:accepted", false)
+        player.interfaceManager.openComponent(Components.APPEARANCE_771)?.setUncloseEvent { p, _ ->
+            p.getAttribute("char-design:accepted", false)
         }
         reset(player)
-        sendInterfaceConfig(player, PlayerKit.START_APPEARANCE_INTERFACE_ID, 22, false)
-        sendInterfaceConfig(player, PlayerKit.START_APPEARANCE_INTERFACE_ID, 92, false)
-        sendInterfaceConfig(player, PlayerKit.START_APPEARANCE_INTERFACE_ID, 97, false)
+        sendInterfaceConfig(player, Components.APPEARANCE_771, 22, false)
+        sendInterfaceConfig(player, Components.APPEARANCE_771, 92, false)
+        sendInterfaceConfig(player, Components.APPEARANCE_771, 97, false)
         setVarp(player, 1262, if (player.appearance.isMale) 1 else 0)
     }
 
