@@ -26,14 +26,9 @@ class GhastNPC : AbstractNPC {
     constructor() : super(NPCs.GHAST_1052, null, true) {}
     private constructor(id: Int, location: Location) : super(id, location) {}
 
-    val BASE_CHARGE_AMOUNT = 1000
     private val supportRange = 10
 
-    override fun construct(
-        id: Int,
-        location: Location,
-        vararg objects: Any?,
-    ): AbstractNPC {
+    override fun construct(id: Int, location: Location, vararg objects: Any?): AbstractNPC {
         isAggressive = id != ids[0]
         return GhastNPC(id, location)
     }
@@ -81,17 +76,16 @@ class GhastNPC : AbstractNPC {
     override fun getIds(): IntArray = intArrayOf(NPCs.GHAST_1052, NPCs.GHAST_1053)
 
     fun attemptLifeSiphon(player: Player) {
+        // Pouch effect takes priority.
         if (NSUtils.activatePouch(player, this)) return
 
-        val allItems = buildList {
-            addAll(player.inventory.toArray().filterNotNull())
-            addAll(player.equipment.toArray().filterNotNull())
-        }
-
-        val foodInInventory = player.inventory.toArray().filterNotNull().firstOrNull { item ->
-            val consumable = Consumables.getConsumableById(item.id)
-            consumable?.consumable is Food
-        }
+        // Check normal food in inventory.
+        val foodInInventory = player.inventory.toArray()
+            .filterNotNull()
+            .firstOrNull { item ->
+                val consumable = Consumables.getConsumableById(item.id)
+                consumable?.consumable is Food
+            }
 
         if (foodInInventory != null) {
             playAudio(player, Sounds.FOOD_ROT_1494)
@@ -101,19 +95,20 @@ class GhastNPC : AbstractNPC {
             return
         }
 
-        val foodInSatchel = allItems.firstOrNull { item ->
-            item.id in SatchelPlugin.SATCHEL_IDS && getCharge(item) > SatchelPlugin.BASE_CHARGE_AMOUNT
-        }
+        // Check food in satchel.
+        val foodInSatchel = (
+                player.inventory.toArray().filterNotNull() +
+                        player.equipment.toArray().filterNotNull()
+                ).firstOrNull { it.id in SatchelPlugin.SATCHEL_IDS }
 
         if (foodInSatchel != null) {
-            val mask = getCharge(foodInSatchel) - SatchelPlugin.BASE_CHARGE_AMOUNT
-            val contents = SatchelPlugin.getItemsFromMask(mask)
+            val contents = SatchelPlugin.decodeList(getCharge(foodInSatchel))
 
             if (contents.isNotEmpty()) {
+                // Pick random food to rot
                 val foodToRot = contents.random()
-                val newMask = mask and SatchelPlugin.getMaskFor(foodToRot).inv()
-
-                setCharge(foodInSatchel, SatchelPlugin.BASE_CHARGE_AMOUNT + newMask)
+                contents.remove(foodToRot)
+                SatchelPlugin.encodeList(foodInSatchel, contents)
                 addItem(player, Items.ROTTEN_FOOD_2959)
                 sendMessage(player, "You feel something attacking your satchel, and smell a terrible stench.")
                 playAudio(player, Sounds.FOOD_ROT_1494)
@@ -121,6 +116,7 @@ class GhastNPC : AbstractNPC {
             }
         }
 
+        // No food.
         if (RandomFunction.roll(3)) {
             sendMessage(player, "An attacking Ghast just misses you.")
         } else {

@@ -28,25 +28,33 @@ class SatchelPlugin : InteractionListener {
             Items.RUNE_SATCHEL_10882
         )
 
-        fun getMaskFor(foodId: Int): Int {
-            val index = FOOD_ITEMS.indexOf(foodId)
-            if (index == -1) return 0
-            return 1 shl index
+        /**
+         * charge = BASE
+         * -        + slot0
+         * -        + (slot1 << 8)
+         * -        + (slot2 << 16)
+         */
+
+        fun decodeList(charge: Int): MutableList<Int> {
+            val raw = charge - BASE_CHARGE_AMOUNT
+            if (raw < 0) return mutableListOf()
+
+            val a = raw and 0xFF
+            val b = (raw shr 8) and 0xFF
+            val c = (raw shr 16) and 0xFF
+
+            return listOf(a, b, c).filter { it != 0 }.toMutableList()
         }
 
-        fun getItemsFromMask(mask: Int): List<Int> {
-            val items = mutableListOf<Int>()
-            FOOD_ITEMS.forEachIndexed { index, id ->
-                if ((mask and (1 shl index)) != 0) items.add(id)
-            }
-            return items
+        fun encodeList(into: Item, items: List<Int>) {
+            var encoded = 0
+            if (items.isNotEmpty()) encoded = encoded or (items[0] and 0xFF)
+            if (items.size > 1) encoded = encoded or ((items[1] and 0xFF) shl 8)
+            if (items.size > 2) encoded = encoded or ((items[2] and 0xFF) shl 16)
+
+            setCharge(into, BASE_CHARGE_AMOUNT + encoded)
         }
 
-        private fun getMaskFromItems(items: Collection<Int>): Int {
-            var mask = 0
-            items.forEach { mask = mask or getMaskFor(it) }
-            return mask
-        }
     }
 
     override fun defineListeners() {
@@ -76,72 +84,84 @@ class SatchelPlugin : InteractionListener {
     }
 
     private fun add(player: Player, food: Item, satchel: Item) {
-        val currentCharge = getCharge(satchel)
-        val currentMask = currentCharge - BASE_CHARGE_AMOUNT
-        val currentItems = getItemsFromMask(currentMask).toMutableSet()
+        val list = decodeList(getCharge(satchel))
 
-        if (currentItems.contains(food.id)) {
-            sendMessage(player, "You already have a ${getItemName(food.id).lowercase().removePrefix("triangle ").trim()} in there.")
+        if (list.contains(food.id)) {
+            sendMessage(player, "You already have a ${formatName(food.id)} in there.")
             return
         }
 
-        if (currentItems.size >= 3) {
+        if (list.size >= 3) {
             sendMessage(player, "Your satchel is already full.")
             return
         }
 
-        currentItems.add(food.id)
-        val newMask = getMaskFromItems(currentItems)
-        setCharge(satchel, BASE_CHARGE_AMOUNT + newMask)
+        list.add(food.id)
+        encodeList(satchel, list)
 
         replaceSlot(player, food.slot, Item())
-        sendMessage(player, "You add a ${getItemName(food.id).lowercase().removePrefix("triangle ").trim()} to the satchel.")
+        sendMessage(player, "You add a ${formatName(food.id)} to the satchel.")
     }
 
-    // TODO: Right now, the satchel uses bitmasks, so the items always show in a fixed order.
-    //  The items should stay in the order the player added them.
     private fun inspect(player: Player, item: Item) {
-        val mask = getCharge(item) - BASE_CHARGE_AMOUNT
-        val contents = getItemsFromMask(mask)
-        val names = contents.map { getItemName(it).lowercase().removePrefix("triangle ").trim() }
+        val list = decodeList(getCharge(item))
 
-        val message = when (names.size) {
-            0 -> "Empty!"
-            1 -> "one ${names[0]}"
-            2 -> names.joinToString(", ") { "one $it" }
-            3 -> "${names.take(2).joinToString(", ") { "one $it" }} and one <br>${names[2]}"
-            else -> return
+        if (list.isEmpty()) {
+            player.dialogueInterpreter.sendItemMessage(
+                item.id,
+                "The ${getItemName(item.id)}!",
+                "(Containing: Empty!)"
+            )
+            return
         }
 
-        player.dialogueInterpreter.sendItemMessage(item.id, "The ${getItemName(item.id)}!", "(Containing: $message)")
+        val names = list.map { "one ${formatName(it)}" }
+
+        val msg = when (names.size) {
+            1 -> names[0]
+            2 -> names.joinToString(", ")
+            3 -> "${names[0]}, ${names[1]} and <br>${names[2]}"
+            else -> ""
+        }
+
+        player.dialogueInterpreter.sendItemMessage(
+            item.id,
+            "The ${getItemName(item.id)}!",
+            "(Containing: $msg)"
+        )
     }
 
     private fun empty(player: Player, item: Item) {
-        val mask = getCharge(item) - BASE_CHARGE_AMOUNT
-        val contents = getItemsFromMask(mask)
+        val list = decodeList(getCharge(item))
 
-        if (contents.isEmpty()) {
+        if (list.isEmpty()) {
             sendMessage(player, "It's already empty.")
             return
         }
 
-        if (freeSlots(player) < contents.size) {
+        if (freeSlots(player) < list.size) {
             sendMessage(player, "You don't have enough inventory space.")
             return
         }
 
-        contents.forEach { addItem(player, it, 1) }
-        setCharge(item, BASE_CHARGE_AMOUNT)
+        list.forEach { addItem(player, it, 1) }
+
+        encodeList(item, emptyList())
         sendMessage(player, "You empty the contents of the satchel.")
     }
 
     private fun drop(player: Player, satchel: Item) {
-        val mask = getCharge(satchel) - BASE_CHARGE_AMOUNT
-        val contents = getItemsFromMask(mask)
-        contents.forEach { DropListener.drop(player, Item(it)) }
+        val list = decodeList(getCharge(satchel))
 
-        setCharge(satchel, BASE_CHARGE_AMOUNT)
+        list.forEach { DropListener.drop(player, Item(it)) }
+
+        encodeList(satchel, emptyList())
         DropListener.drop(player, satchel)
+
         sendMessage(player, "The contents of the satchel fell out as you dropped it!")
+    }
+
+    private fun formatName(itemId: Int): String {
+        return getItemName(itemId).lowercase().removePrefix("triangle ").trim()
     }
 }
