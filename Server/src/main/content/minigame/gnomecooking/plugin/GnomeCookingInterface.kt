@@ -98,10 +98,10 @@ class GnomeCookingInterface : InterfaceListener {
                         12 -> Items.PICTURE_2193
                         21 -> Items.PICTURE_2193
                         34 -> Items.PICTURE_2181
-                        else -> 2888
+                        else -> Items.NULL_9546
                     }
                 } else {
-                    2888
+                    Items.NULL_9546
                 }
                 sendItemOnInterface(player, component.id, buttonID, itemID)
             }

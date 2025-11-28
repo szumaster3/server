@@ -3,11 +3,14 @@ package content.global.skill.crafting.jewellery
 import core.api.*
 import core.game.component.Component
 import core.game.interaction.Clocks
+import core.game.interaction.QueueStrength
 import core.game.node.entity.player.Player
 import core.game.node.entity.skill.Skills
 import core.game.node.item.Item
+import shared.consts.Animations
 import shared.consts.Components
 import shared.consts.Items
+import shared.consts.Sounds
 
 /**
  * Handles jewellery crafting functionality.
@@ -195,7 +198,7 @@ object Jewellery {
         }
         closeInterface(player)
         delayClock(player, Clocks.SKILLING, 5)
-        submitIndividualPulse(player, JewelleryCraftingPulse(player, null, data, amount))
+        handleJewelleryCrafting(player, null, data, amount)
     }
 
     /**
@@ -216,5 +219,72 @@ object Jewellery {
         return if (name.contains("bracelet")) {
             BRACELET_MOULD
         } else -1
+    }
+
+    /**
+     * Handles crafting the jewellery.
+     */
+    private fun handleJewelleryCrafting(player: Player, node: Item?, type: Jewellery.JewelleryItem, amount: Int) {
+        var remaining = amount
+        var ticks = 0
+
+        queueScript(player, 0, QueueStrength.WEAK) { stage ->
+            if (remaining <= 0) {
+                stopExecuting(player)
+                return@queueScript false
+            }
+
+            when (stage) {
+                0 -> {
+                    if (getStatLevel(player, Skills.CRAFTING) < type.level) {
+                        sendMessage(player, "You need a Crafting level of ${type.level} to make this.")
+                        stopExecuting(player)
+                        return@queueScript false
+                    }
+
+                    if (ticks % 3 == 0) {
+                        animate(player, Animations.HUMAN_FURNACE_SMELT_3243)
+                        playAudio(player, Sounds.FURNACE_2725)
+                    }
+
+                    ticks++
+                    delayScript(player, 3)
+                }
+
+                else -> {
+                    delayClock(player, Clocks.SKILLING, 3)
+
+
+                    val reqItems = type.items.map { it }.toIntArray()
+
+
+                    if (!allInInventory(player, *reqItems)) {
+                        sendMessage(player, "You have run out of materials.")
+                        stopExecuting(player)
+                        return@queueScript false
+                    }
+
+                    if (!removeItem(player, reqItems)) {
+                        stopExecuting(player)
+                        return@queueScript false
+                    }
+
+                    player.inventory.add(Item(type.sendItem))
+                    rewardXP(player, Skills.CRAFTING, type.experience)
+
+                    remaining--
+
+                    if (remaining > 0) {
+                        setCurrentScriptState(player, 0)
+                        delayScript(player, 3)
+                    } else {
+                        stopExecuting(player)
+                        return@queueScript false
+                    }
+                }
+            }
+
+            return@queueScript true
+        }
     }
 }
