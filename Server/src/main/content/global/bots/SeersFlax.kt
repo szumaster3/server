@@ -1,10 +1,10 @@
 package content.global.bots
 
-import content.global.skill.crafting.spinning.Spinning
-import content.global.skill.crafting.spinning.SpinningPulse
 import core.game.bots.Script
 import core.game.bots.SkillingBotAssembler
 import core.game.interaction.DestinationFlag
+import core.game.interaction.IntType
+import core.game.interaction.InteractionListeners
 import core.game.interaction.MovementPulse
 import core.game.node.entity.skill.Skills
 import core.game.node.item.Item
@@ -66,14 +66,9 @@ class SeersFlax : Script() {
             }
 
             State.SPINNING -> {
-                bot.pulseManager.run(
-                    SpinningPulse(
-                        bot,
-                        Item(Items.FLAX_1779),
-                        bot.inventory.getAmount(Items.FLAX_1779),
-                        Spinning.FLAX,
-                    ),
-                )
+                val spinner = scriptAPI.getNearestNode(25824, true) ?: return
+                bot.faceLocation(spinner.location)
+                InteractionListeners.run(spinner.id, IntType.SCENERY, "spin", bot, Item(Items.FLAX_1779))
                 state = State.FIND_BANK
             }
 

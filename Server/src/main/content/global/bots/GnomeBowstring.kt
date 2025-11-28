@@ -1,11 +1,9 @@
 package content.global.bots
 
-import content.global.skill.crafting.spinning.Spinning
-import content.global.skill.crafting.spinning.SpinningPulse
 import core.api.freeSlots
 import core.game.bots.*
-import core.game.interaction.DestinationFlag
-import core.game.interaction.MovementPulse
+import core.game.interaction.IntType
+import core.game.interaction.InteractionListeners
 import core.game.node.item.Item
 import core.game.world.map.Location
 import core.game.world.map.path.Pathfinder
@@ -17,18 +15,21 @@ import shared.consts.Items
 @ScriptDescription("Start in Gnome Stronghold, South of the Agility Course")
 @ScriptIdentifier("gnome_bowstring")
 class GnomeBowstring : Script() {
-    var state = State.PICKING
-    var stage = 0
-    var bLadderSwitch = false
-    var sLadderSwitch = false
-    val flaxzone = ZoneBorders(2457, 3391, 2493, 3413, 0)
-    val bankbottomLadder = ZoneBorders(2444, 3413, 2445, 3414, 0)
-    val banktopLadder = ZoneBorders(2445, 3415, 2446, 3414, 1)
-    val spinnerbottomLadder = ZoneBorders(2475, 3400, 2476, 3399, 0)
-    val spinnertopLadder = ZoneBorders(2474, 3397, 2476, 3399, 1)
-    val pick = ZoneBorders(2478, 3394, 339, 9)
-    val bank = ZoneBorders(2447, 3415, 2444, 3434)
-    var overlay: ScriptAPI.BottingOverlay? = null
+
+    enum class State { INIT, PICKING, TO_SPINNER, SPINNING, FIND_BANK, RETURN_TO_FLAX, BANKING }
+
+    private var state = State.INIT
+    private var sLadderSwitch = false
+    private var bLadderSwitch = false
+    private var stage = 0
+    private var overlay: ScriptAPI.BottingOverlay? = null
+
+    private val flaxzone = ZoneBorders(2457, 3391, 2493, 3413, 0)
+    private val spinnerbottomLadder = ZoneBorders(2475, 3400, 2476, 3399, 0)
+    private val spinnertopLadder = ZoneBorders(2474, 3397, 2476, 3399, 1)
+    private val bankbottomLadder = ZoneBorders(2444, 3413, 2445, 3414, 0)
+    private val banktopLadder = ZoneBorders(2445, 3415, 2446, 3414, 1)
+    private val bank = ZoneBorders(2447, 3415, 2444, 3434)
 
     override fun tick() {
         when (state) {
@@ -38,16 +39,18 @@ class GnomeBowstring : Script() {
                 overlay!!.setTitle("Picking")
                 overlay!!.setTaskLabel("Flax Picked")
                 overlay!!.setAmount(0)
+                state = State.PICKING
             }
 
             State.PICKING -> {
                 bot.interfaceManager.close()
                 if (!flaxzone.insideBorder(bot)) {
                     scriptAPI.walkTo(flaxzone.randomLoc)
-                } else if (flaxzone.insideBorder(bot)) {
-                    var flax = scriptAPI.getNearestNode(2646, true)
-                    scriptAPI.interact(bot, flax, "pick")
+                } else {
+                    val flax = scriptAPI.getNearestNode(2646, true)
+                    if (flax != null) scriptAPI.interact(bot, flax, "pick")
                 }
+
                 if (bot.inventory.getAmount(Items.FLAX_1779) > 27) {
                     sLadderSwitch = true
                     state = State.TO_SPINNER
@@ -68,35 +71,20 @@ class GnomeBowstring : Script() {
                         }
                     }
                 }
-                if (stage == 0) {
-                    Pathfinder.find(bot, Location.create(2475, 3399, 1)).walk(bot).also { stage++ }
-                }
+
                 when (bot.location) {
                     Location.create(2475, 3399, 1) -> Pathfinder.find(bot, Location.create(2477, 3399, 1)).walk(bot)
                     Location.create(2477, 3399, 1) -> Pathfinder.find(bot, Location.create(2477, 3398, 1)).walk(bot)
                     Location.create(2477, 3398, 1) -> Pathfinder.find(bot, Location.create(2476, 3398, 1)).walk(bot)
                     Location.create(2476, 3398, 1) -> {
                         val spinner = scriptAPI.getNearestNode(2644, true)
-                        bot.faceLocation(spinner?.location)
-                        bot.pulseManager.run(
-                            object : MovementPulse(bot, spinner, DestinationFlag.OBJECT) {
-                                override fun pulse(): Boolean {
-                                    bot.faceLocation(spinner?.location)
-                                    state = State.SPINNING
-                                    return true
-                                }
-                            },
-                        )
+                        if (spinner != null) {
+                            bot.faceLocation(spinner.location)
+                            InteractionListeners.run(spinner.id, IntType.SCENERY, "spin", bot, Item(Items.FLAX_1779))
+                            state = State.FIND_BANK
+                        }
                     }
                 }
-            }
-
-            State.SPINNING -> {
-                bot.pulseManager.run(
-                    SpinningPulse(bot, Item(Items.FLAX_1779), bot.inventory.getAmount(Items.FLAX_1779), Spinning.FLAX),
-                )
-                sLadderSwitch = true
-                state = State.FIND_BANK
             }
 
             State.FIND_BANK -> {
@@ -107,11 +95,13 @@ class GnomeBowstring : Script() {
                         sLadderSwitch = false
                     }
                 }
+
                 if (!bankbottomLadder.insideBorder(bot.location) && !spinnertopLadder.insideBorder(bot)) {
                     scriptAPI.walkTo(bankbottomLadder.randomLoc)
                 } else if (bankbottomLadder.insideBorder(bot)) {
                     bLadderSwitch = true
                 }
+
                 if (bLadderSwitch) {
                     val ladder = scriptAPI.getNearestNode("staircase", true)
                     if (ladder != null) {
@@ -119,24 +109,19 @@ class GnomeBowstring : Script() {
                         bLadderSwitch = false
                     }
                 }
+
                 if (banktopLadder.insideBorder(bot)) {
                     state = State.BANKING
                 }
             }
 
             State.BANKING -> {
-                val bank = scriptAPI.getNearestNode(2213, true)
-                if (bank != null) {
-                    bot.pulseManager.run(
-                        object : MovementPulse(bot, bank, DestinationFlag.OBJECT) {
-                            override fun pulse(): Boolean {
-                                bot.faceLocation(bank.location)
-                                scriptAPI.bankItem(Items.BOW_STRING_1777)
-                                return true
-                            }
-                        },
-                    )
+                val bankObj = scriptAPI.getNearestNode(2213, true)
+                if (bankObj != null) {
+                    bot.faceLocation(bankObj.location)
+                    scriptAPI.bankItem(Items.BOW_STRING_1777)
                 }
+
                 if (freeSlots(bot) > 27) {
                     bLadderSwitch = true
                     state = State.RETURN_TO_FLAX
@@ -155,9 +140,10 @@ class GnomeBowstring : Script() {
                         scriptAPI.walkTo(banktopLadder.randomLoc)
                     }
                 }
+
                 if (!flaxzone.insideBorder(bot)) {
                     scriptAPI.walkTo(flaxzone.randomLoc)
-                } else if (flaxzone.insideBorder(bot)) {
+                } else {
                     state = State.PICKING
                 }
             }
@@ -167,17 +153,8 @@ class GnomeBowstring : Script() {
     }
 
     override fun newInstance(): Script {
-        TODO("Not yet implemented")
+        val script = GnomeBowstring()
+        script.bot = SkillingBotAssembler().produce(SkillingBotAssembler.Wealth.POOR, bot.startLocation)
+        return script
     }
-}
-
-enum class State {
-    PICKING,
-    MINING,
-    SPINNING,
-    TO_SPINNER,
-    FIND_BANK,
-    RETURN_TO_FLAX,
-    BANKING,
-    INIT,
 }

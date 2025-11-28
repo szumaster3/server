@@ -1,6 +1,5 @@
-package content.global.skill.slayer.waterbirth_dungeon
+package content.global.skill.slayer.location.waterbirth_dungeon
 
-import content.global.skill.slayer.location.waterbirth_dungeon.DagannothKingNPC
 import core.api.sendMessage
 import core.cache.def.impl.NPCDefinition
 import core.cache.def.impl.SceneryDefinition
