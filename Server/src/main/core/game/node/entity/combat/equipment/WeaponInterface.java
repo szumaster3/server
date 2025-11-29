@@ -496,7 +496,7 @@ public final class WeaponInterface extends Component {
         }
         boolean ancientStaff = player.getEquipment().getNew(3).getName().contains("ncient staff") || player.getEquipment().getNew(3).getName().contains("uriel's staff");
         ;
-        if ((player.getSpellBookManager().getSpellBook() == Components.MAGIC_192 && ancientStaff) || (player.getSpellBookManager().getSpellBook() == Components.MAGIC_ZAROS_193 && !ancientStaff)) {
+        if ((player.getSpellBookManager().getSpellBook() == Components.MAGIC_ZAROS_193 && !ancientStaff)) {
             if (message) {
                 player.getPacketDispatch().sendMessage("You can only autocast ancient magicks with an Ancient or Zuriel's staff.");
             }
