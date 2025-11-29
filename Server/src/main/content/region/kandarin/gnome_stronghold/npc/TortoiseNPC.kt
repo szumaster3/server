@@ -2,6 +2,11 @@ package content.region.kandarin.gnome_stronghold.npc
 
 import core.api.sendChat
 import core.game.node.entity.Entity
+import core.game.node.entity.combat.CombatStyle
+import core.game.node.entity.combat.CombatSwingHandler
+import core.game.node.entity.combat.MultiSwingHandler
+import core.game.node.entity.combat.equipment.SwitchAttack
+import core.game.world.update.flag.context.Animation
 import core.game.node.entity.npc.AbstractNPC
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
@@ -21,6 +26,16 @@ class TortoiseNPC(id: Int = 0, location: Location? = null) : AbstractNPC(id, loc
     private val gnomeDespawnTicks = mutableMapOf<NPC, Int>()
     private val spawnedGnomes = mutableListOf<NPC>()
     private val driverChat = listOf("You Beast!", "This is for Dobbie!", "Tortoise Murderer!")
+    private val isMultiZone = this.properties.isMultiZone
+
+    private val combatHandler = MultiSwingHandler(
+        false,
+        SwitchAttack(CombatStyle.MELEE.swingHandler, Animation(if(isMultiZone) 3957 else 3960)),
+        SwitchAttack(CombatStyle.RANGE.swingHandler, Animation(if(isMultiZone) 3956 else 3954)),
+        SwitchAttack(CombatStyle.MAGIC.swingHandler, Animation(if(isMultiZone) 3956 else 3955))
+    )
+
+    override fun getSwingHandler(swing: Boolean): CombatSwingHandler = combatHandler
 
     init {
         isAggressive = false
