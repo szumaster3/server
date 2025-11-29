@@ -2,9 +2,7 @@ package content.global.plugins.interaction.with_item
 
 import content.data.Capes
 import content.data.Dyes
-import core.api.inInventory
-import core.api.removeItem
-import core.api.replaceSlot
+import core.api.*
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.node.entity.player.Player
@@ -70,9 +68,9 @@ class ItemDyeOptionPlugin : InteractionListener {
          * Handles message when trying to wear goblin armor.
          */
 
-        on(GOBLIN_MAIL, IntType.ITEM, "wear") { player, _ ->
-            player.sendMessage("That armour is too small for a human.")
-            return@on true
+        onEquip(GOBLIN_MAIL){ player, _ ->
+            sendMessage(player,"That armour is too small for a human.")
+            return@onEquip false
         }
     }
 
@@ -89,21 +87,21 @@ class ItemDyeOptionPlugin : InteractionListener {
             setOf(Dyes.YELLOW, Dyes.BLUE) -> Dyes.GREEN
             setOf(Dyes.RED, Dyes.BLUE) -> Dyes.PURPLE
             else -> null
-        } ?: return player.sendMessage("Those dyes don't mix together.").let { false }
+        } ?: return sendMessage(player, "Those dyes don't mix together.").let { false }
 
         if (!inInventory(player, firstColor.id) || !inInventory(player, secondColor.id)) {
-            player.sendMessage("You don't have the required dyes to mix.")
+            sendMessage(player, "You don't have the required dyes to mix.")
             return false
         }
 
-        player.lock(1)
-        player.animate(Animation.create(Animations.DYE_COMBINE_4348))
-        player.inventory.remove(Item(firstColor.id))
-        player.inventory.remove(Item(secondColor.id))
-        player.inventory.add(Item(mix.id))
-
         val article = if (mix.name.first().lowercaseChar() in "aeiou") "an" else "a"
-        player.sendMessage("You mix the two dyes and make $article ${mix.name.lowercase()} dye.")
+        if(removeItem(player, firstColor) && removeItem(player, secondColor))
+        {
+            player.animate(Animation(Animations.DYE_COMBINE_4348))
+            sendMessage(player, "You mix the two dyes and make $article ${mix.name.lowercase()} dye.")
+            addItemOrDrop(player, mix.id)
+        }
+        
         return true
     }
 
