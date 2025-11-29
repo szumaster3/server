@@ -3,17 +3,14 @@ package content.region.other.tutorial_island.dialogue
 import content.data.GameAttributes
 import content.region.other.tutorial_island.plugin.TutorialStage
 import core.api.*
-import core.game.component.Component
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import core.tools.END_DIALOGUE
-import shared.consts.Components
 import shared.consts.Items
 import shared.consts.NPCs
-import shared.consts.Vars
 
 @Initializable
 class QuestGuideDialogue(player: Player? = null) : Dialogue(player) {
@@ -33,9 +30,6 @@ class QuestGuideDialogue(player: Player? = null) : Dialogue(player) {
         when (getAttribute(player, GameAttributes.TUTORIAL_STAGE, 0)) {
             27 -> {
                 sendPlainDialogue(player, true, "${core.tools.BLUE}Open the Quest Journal.", "", "Click on the flashing icon next to your inventory.")
-                TutorialStage.removeHintIcon(player)
-                setVarbit(player, Vars.VARBIT_FLASHING_TAB_ICON_3756, 3)
-                player.interfaceManager.openTab(Component(Components.QUESTJOURNAL_V2_274))
             }
             28 -> when (stage) {
                 0 -> npc("When you start a quest it will change colour to yellow,", "and to green when you've finished. This is so you can", "easily see what's complete, what's started and what's left", "to begin.").also { stage++ }
