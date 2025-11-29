@@ -463,7 +463,7 @@ class CombatBotAssembler {
         val initial = when (tier) {
             Tier.LOW -> RandomFunction.random(33).also { max = 33 }
             Tier.MED -> RandomFunction.random(33, 66).also { max = 66 }
-            Tier.HIGH -> RandomFunction.random(66, 99).also { max = 99 }
+            Tier.HIGH -> RandomFunction.random(95, 99).also { max = 99 }
             Tier.PURE -> RandomFunction.random(90, 99).also { max = 99 }
         }
         for (skill in skills.indices) {

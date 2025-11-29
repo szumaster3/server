@@ -27,8 +27,8 @@ import shared.consts.Scenery
 import kotlin.random.Random
 
 class GreenDragonKiller(val style: CombatStyle) : Script() {
-
     companion object {
+        //val southDragons = ZoneBorders(3333, 3681, 3352, 3698)
         val westDragons = ZoneBorders(2971, 3606, 2991, 3628)
         val wildernessLine = ZoneBorders(3078, 3523, 3096, 3523)
         val bankZone = ZoneBorders(3092, 3489, 3094, 3493)
@@ -62,7 +62,16 @@ class GreenDragonKiller(val style: CombatStyle) : Script() {
 
     init {
         handler = MeleeSwinger(this)
+        equipment.add(Item(Items.DRAGON_MED_HELM_1149))
+        equipment.add(Item(Items.GRANITE_BODY_10564))
+        equipment.add(Item(Items.DRAGON_PLATELEGS_4087))
+        equipment.add(Item(Items.OBSIDIAN_CAPE_6568))
+        equipment.add(Item(Items.COMBAT_BRACELET_11126))
+        equipment.add(Item(Items.AMULET_OF_GLORY_1704))
         equipment.add(Item(Items.ANTI_DRAGON_SHIELD_1540))
+        equipment.add(Item(Items.DRAGON_BOOTS_11732))
+        equipment.add(Item(Items.ABYSSAL_WHIP_4151))
+
         myBorders = westDragons
         skills[Skills.AGILITY] = 99
         bankZone.addException(ZoneBorders(3094, 3492, 3094, 3492))
@@ -258,8 +267,6 @@ class GreenDragonKiller(val style: CombatStyle) : Script() {
 
     override fun newInstance(): Script {
         val script = GreenDragonKiller(style)
-        val tier = CombatBotAssembler.Tier.MED
-        script.bot = CombatBotAssembler().assembleMeleeDragonBot(tier, bot.startLocation)
         return script
     }
 
