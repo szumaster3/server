@@ -1,5 +1,6 @@
 package content.global.skill.construction
 
+import content.data.GameAttributes
 import core.api.*
 import core.game.node.entity.Entity
 import core.game.node.entity.player.Player
@@ -57,6 +58,7 @@ class HouseZone(private val house: HouseManager) : MapZone("poh-zone", true, Zon
     override fun leave(e: Entity, logout: Boolean): Boolean {
         if (e is Player) {
             val player = e.asPlayer()
+            if(getAttribute(player, GameAttributes.CON_GAZE_INTO, false)) return false
             if (house == player.houseManager) {
                 val items = restrictedItems.toIntArray()
                 if (anyInInventory(player, *items)) {

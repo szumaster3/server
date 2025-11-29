@@ -12,19 +12,18 @@ import core.game.node.Node
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.TeleportManager
 import core.game.node.item.Item
-import core.game.node.scenery.Scenery
 import core.game.system.task.Pulse
+import core.game.world.GameWorld.Pulser
 import core.game.world.map.Location
+import core.game.world.map.RegionManager
 import core.game.world.update.flag.context.Animation
 import core.plugin.ClassScanner
 import core.plugin.Initializable
 import core.plugin.Plugin
 import core.tools.DARK_RED
-import core.tools.RandomFunction
 import shared.consts.Components
 import shared.consts.Quests
 import shared.consts.Sounds
-import java.io.File
 import shared.consts.Scenery as Objects
 
 /**
@@ -38,13 +37,34 @@ class PortalChamberPlugin : OptionHandler() {
      * Supported portal destinations together with required runes.
      */
     private enum class Locations(val location: Location, vararg val runes: Item) {
-        VARROCK(  Location.create(3213, 3428, 0), Item(Rune.FIRE.rune.id,   100), Item(Rune.AIR.rune.id, 300), Item(Rune.LAW.rune.id, 100)),
-        LUMBRIDGE(Location.create(3222, 3217, 0), Item(Rune.EARTH.rune.id,  100), Item(Rune.AIR.rune.id, 300), Item(Rune.LAW.rune.id, 100)),
-        FALADOR(  Location.create(2965, 3380, 0), Item(Rune.WATER.rune.id,  100), Item(Rune.AIR.rune.id, 300), Item(Rune.LAW.rune.id, 100)),
-        CAMELOT(  Location.create(2730, 3485, 0), Item(Rune.AIR.rune.id,    500), Item(Rune.LAW.rune.id, 100)),
-        ARDOUGNE( Location.create(2663, 3305, 0), Item(Rune.WATER.rune.id,  200), Item(Rune.LAW.rune.id, 200)),
-        YANILLE(  Location.create(2554, 3114, 0), Item(Rune.EARTH.rune.id,  200), Item(Rune.LAW.rune.id, 200)),
-        KHARYRLL( Location.create(3493, 3474, 0), Item(Rune.BLOOD.rune.id,  100), Item(Rune.LAW.rune.id, 200))
+        VARROCK(
+            Location.create(3213, 3428, 0),
+            Item(Rune.FIRE.rune.id, 100),
+            Item(Rune.AIR.rune.id, 300),
+            Item(Rune.LAW.rune.id, 100)
+        ),
+        LUMBRIDGE(
+            Location.create(3222, 3217, 0),
+            Item(Rune.EARTH.rune.id, 100),
+            Item(Rune.AIR.rune.id, 300),
+            Item(Rune.LAW.rune.id, 100)
+        ),
+        FALADOR(
+            Location.create(2965, 3380, 0),
+            Item(Rune.WATER.rune.id, 100),
+            Item(Rune.AIR.rune.id, 300),
+            Item(Rune.LAW.rune.id, 100)
+        ),
+        CAMELOT(Location.create(2730, 3485, 0), Item(Rune.AIR.rune.id, 500), Item(Rune.LAW.rune.id, 100)), ARDOUGNE(
+            Location.create(2663, 3305, 0),
+            Item(Rune.WATER.rune.id, 200),
+            Item(Rune.LAW.rune.id, 200)
+        ),
+        YANILLE(Location.create(2554, 3114, 0), Item(Rune.EARTH.rune.id, 200), Item(Rune.LAW.rune.id, 200)), KHARYRLL(
+            Location.create(3493, 3474, 0),
+            Item(Rune.BLOOD.rune.id, 100),
+            Item(Rune.LAW.rune.id, 200)
+        )
     }
 
     companion object {
@@ -56,7 +76,7 @@ class PortalChamberPlugin : OptionHandler() {
          */
         fun direct(player: Player, identifier: String) {
             closeSingleTab(player)
-            val dpId = getAttribute(player,"con:dp-id", 1)
+            val dpId = getAttribute(player, "con:dp-id", 1)
             val hotspots = player.houseManager.getRoom(player.location).hotspots
 
             hotspots.firstOrNull { it.hotspot.name.equals("PORTAL$dpId", ignoreCase = true) }?.let { h ->
@@ -94,18 +114,21 @@ class PortalChamberPlugin : OptionHandler() {
         private fun getPortalName(player: Player, id: Int): String {
             val room = player.houseManager.getRoom(player.location)
             val hotspot = room.hotspots.firstOrNull { it.hotspot.name.equals("PORTAL$id", ignoreCase = true) }
-                ?: return "$id Nowhere"
+                ?: return "$id: Nowhere"
+            if (hotspot.decorationIndex == -1) return "$id: Nowhere"
 
-            if (hotspot.decorationIndex == -1)
-                return "$id: Nowhere"
+            val decoName = hotspot.hotspot.decorations[hotspot.decorationIndex].name.lowercase()
+            if (!decoName.contains("portal")) return "$id: Nowhere"
 
-            val decoName = hotspot.hotspot.decorations[hotspot.decorationIndex].name
-                .replace("_PORTAL", "", true)
-                .substringAfter("_")
-                .lowercase()
-                .replaceFirstChar { it.titlecase() }
+            val parts = decoName.split("_")
+            if (parts.size < 3) return "$id: Nowhere"
 
-            return decoName
+            val locationPart = parts[1].lowercase()
+
+            val location = Locations.values().firstOrNull { it.name.equals(locationPart, ignoreCase = true) }?.name
+                ?: return "$id: Nowhere"
+
+            return location.lowercase().replaceFirstChar { it.uppercase() }
         }
     }
 
@@ -117,7 +140,7 @@ class PortalChamberPlugin : OptionHandler() {
         for (i in Objects.VARROCK_PORTAL_13615..Objects.KHARYRLL_PORTAL_13635) {
             SceneryDefinition.forId(i).handlers["option:enter"] = this
         }
-        ClassScanner.definePlugin(ScryDialogue())
+        ClassScanner.definePlugin(GazeIntoDialogue())
         ClassScanner.definePlugin(DirectPortalDialogue())
         return this
     }
@@ -129,14 +152,16 @@ class PortalChamberPlugin : OptionHandler() {
                 openDialogue(player, "con:observe-location")
                 return true
             }
+
             "direct-portal" -> {
                 if (!player.houseManager.isBuildingMode) {
-                    sendMessage(player,"You can currently only do this in building mode.")
+                    sendMessage(player, "You can currently only do this in building mode.")
                 } else {
-                    openDialogue(player,"con:directportal")
+                    openDialogue(player, GameAttributes.CON_PORTAL_DIR)
                 }
                 return true
             }
+
             "enter" -> {
                 Locations.values().firstOrNull {
                     scenery.name.contains(it.name, true)
@@ -146,6 +171,7 @@ class PortalChamberPlugin : OptionHandler() {
                 }
                 return true
             }
+
             else -> return false
         }
     }
@@ -155,7 +181,11 @@ class PortalChamberPlugin : OptionHandler() {
      */
     private class DirectPortalDialogue(player: Player? = null) : Dialogue(player) {
         override fun open(vararg args: Any?): Boolean {
-            sendDialogue("To direct a portal you need enough runes for$DARK_RED 100</col> castings of that", "teleport spell.", "(Combination runes and staffs cannot be used.)")
+            sendDialogue(
+                "To direct a portal you need enough runes for$DARK_RED 100</col> castings of that",
+                "teleport spell.",
+                "(Combination runes and staffs cannot be used.)"
+            )
             return true
         }
 
@@ -166,12 +196,17 @@ class PortalChamberPlugin : OptionHandler() {
                     val p1 = getPortalName(player, 1)
                     val p2 = getPortalName(player, 2)
                     val p3 = getPortalName(player, 3)
-                    sendOptions(player, "Redirect which portal?", "1: $p1", "2: $p2", "3: $p3", "Cancel.")
+                    sendOptions(player, "Redirect which portal?", p1, p2, p3, "Cancel.")
                     stage = 1
                 }
+
                 1 -> {
-                    end()
-                    if (buttonId != 4) {
+                    val portalNames =
+                        listOf(getPortalName(player, 1), getPortalName(player, 2), getPortalName(player, 3))
+                    if (buttonId == 4 || portalNames.getOrNull(buttonId - 1) == "Nowhere") {
+                        end()
+                    } else {
+                        end()
                         setAttribute(player, "con:dp-id", buttonId)
                         openDialogue(player, 394857)
                     }
@@ -184,66 +219,91 @@ class PortalChamberPlugin : OptionHandler() {
         override fun getIds() = intArrayOf(DialogueInterpreter.getDialogueKey("con:directportal"))
     }
 
-    private class ScryDialogue(player: Player? = null) : Dialogue(player) {
-
+    private class GazeIntoDialogue(player: Player? = null) : Dialogue(player) {
         override fun open(vararg args: Any?): Boolean {
             setTitle(player, 4)
-            val p0 = getPortalName(player, 1)
-            val p1 = getPortalName(player, 2)
-            val p2 = getPortalName(player, 3)
-            sendOptions(player, "Observe which location?", p0, p1, p2, "Entrance portal")
+            val options = arrayOf(
+                getPortalName(player, 1), getPortalName(player, 2), getPortalName(player, 3), "Cancel."
+            )
+            sendOptions(player, "Observe which location?", *options)
+            stage = 0
             return true
         }
 
         override fun handle(interfaceId: Int, buttonId: Int): Boolean {
-            when (stage) {
-                0 -> {
-                    val originalLocation = Location.create(2953, 3224, 0) // outside house.
-                    setAttribute(player!!, GameAttributes.ORIGINAL_LOCATION, originalLocation)
-                    registerLogoutListener(player!!, GameAttributes.LOGOUT) { p ->
-                        p.location = getAttribute(p, GameAttributes.ORIGINAL_LOCATION, originalLocation)
-                    }
-                    val portalName = getPortalName(player, buttonId) ?: "Entrance portal"
-                    val location = buttonId.let {
-                        Locations.values().firstOrNull { loc -> portalName.contains(loc.name, ignoreCase = true) }
-                    }
-                    location?.let {
-                        player.lock(600_000)
-                        player.isInvisible = true
-                        setMinimapState(player, 2)
-                        openOverlay(player, Components.POH_SCRYING_POOL_404)
-                        teleport(player, it.location, TeleportManager.TeleportType.INSTANT)
-                        sendPlainDialogue(player, true, "You view $portalName...")
-                    }
-                    player.pulseManager.run(object : Pulse(3) {
-                        var ticks = 0
-                        override fun pulse(): Boolean {
-                            animate(player, 2590)
-                            ticks++
-                            return if (ticks >= 30) {
-                                stop()
-                                true
-                            } else false
-                        }
-
-                        override fun stop() {
-                            super.stop()
-                            player.locks.unlockInteraction()
-                            openChatbox(player, 137)
-                            clearLogoutListener(player, GameAttributes.ORIGINAL_LOCATION)
-                            player.isInvisible = false
-                            player.appearance.transformNPC(-1)
-                            setMinimapState(player, 0)
-                            closeOverlay(player)
-                            teleport(player, originalLocation, TeleportManager.TeleportType.INSTANT)
-                        }
-                    })
-                }
+            if (stage != 0) return false
+            // Cancel.
+            if (buttonId == 4) {
+                end()
+                return true
             }
+
+            val portalName = getPortalName(player, buttonId)
+            if (portalName.equals("Nowhere", true)) {
+                sendMessage(player, "This portal has no destination.")
+                end()
+                return true
+            }
+
+            val location = Locations.values().firstOrNull { it.name.equals(portalName, true) }
+            if (location == null) {
+                sendMessage(player, "Cannot observe this portal.")
+                end()
+                return true
+            }
+
+            val players = RegionManager.getViewportPlayers(location.location)
+            if (players.size > 3) {
+                end()
+                sendMessage(player, "Unable to complete action - system busy.")
+                return true
+            }
+
+            val originalLocation = player.location
+            setAttribute(player, GameAttributes.ORIGINAL_LOCATION, originalLocation)
+            registerLogoutListener(player, GameAttributes.LOGOUT) { p ->
+                p.location = getAttribute(p, GameAttributes.ORIGINAL_LOCATION, Location.create(2953, 3224, 0))
+            }
+
+            player.lock(30)
+            player.isInvisible = true
+            setMinimapState(player, 2)
+            openOverlay(player, Components.POH_SCRYING_POOL_404)
+            setAttribute(player, GameAttributes.CON_GAZE_INTO, true)
+
+            player.teleporter.send(location.location, TeleportManager.TeleportType.INSTANT)
+            RegionManager.move(player)
+
+            //player.viewport.updateViewport(player)
+
+            sendPlainDialogue(player, true, "You view $portalName...")
+
+            Pulser.submit(object : Pulse(3, player) {
+                private var ticks = 0
+                override fun pulse(): Boolean {
+                    animate(player, 2590)
+                    return ++ticks >= 10
+                }
+
+                override fun stop() {
+                    super.stop()
+                    player.unlock()
+                    teleport(player, originalLocation, TeleportManager.TeleportType.INSTANT)
+                    setMinimapState(player, 0)
+                    player.isInvisible = false
+                    player.dialogueInterpreter.close()
+                    clearLogoutListener(player, GameAttributes.ORIGINAL_LOCATION)
+                    player.viewport.updateViewport(player)
+                    removeAttribute(player, GameAttributes.CON_GAZE_INTO)
+                    closeOverlay(player)
+                    resetAnimator(player)
+                }
+            })
+
             return true
         }
 
-        override fun newInstance(player: Player) = ScryDialogue(player)
+        override fun newInstance(player: Player) = GazeIntoDialogue(player)
         override fun getIds() = intArrayOf(DialogueInterpreter.getDialogueKey("con:observe-location"))
     }
 }
