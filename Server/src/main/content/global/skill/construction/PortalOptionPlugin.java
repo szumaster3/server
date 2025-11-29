@@ -12,7 +12,6 @@ import core.plugin.*;
 import kotlin.Unit;
 
 import static core.api.ContentAPIKt.sendInputDialogue;
-import static core.api.ContentAPIKt.sendMessage;
 
 /**
  * Handles the poh portal options.
@@ -133,10 +132,7 @@ public final class PortalOptionPlugin extends OptionHandler {
                                     player.getPacketDispatch().sendMessage("The other player has locked their house.");
                                     return Unit.INSTANCE;
                                 }
-                                if (p.getHouseManager().getLocation() != location) {
-                                    player.sendMessage("That friend's house is not located here.");
-                                    return Unit.INSTANCE;
-                                }
+                                //player.sendMessage("That friend's house is not located here.");
                                 player.getLocks().lockComponent(6);
                                 p.setAttribute("poh_owner", (String) value);
                                 player.getInterfaceManager().closeSingleTab();
