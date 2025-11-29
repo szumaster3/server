@@ -28,8 +28,9 @@ import kotlin.random.Random
 
 class GreenDragonKiller(val style: CombatStyle) : Script() {
     companion object {
-        //val southDragons = ZoneBorders(3333, 3681, 3352, 3698)
+        val southDragons = ZoneBorders(3333, 3681, 3352, 3698)
         val westDragons = ZoneBorders(2971, 3606, 2991, 3628)
+        val dragonLoc = arrayOf(southDragons, westDragons).random()
         val wildernessLine = ZoneBorders(3078, 3523, 3096, 3523)
         val bankZone = ZoneBorders(3092, 3489, 3094, 3493)
         val forceChat = arrayOf(
@@ -72,7 +73,7 @@ class GreenDragonKiller(val style: CombatStyle) : Script() {
         equipment.add(Item(Items.DRAGON_BOOTS_11732))
         equipment.add(Item(Items.ABYSSAL_WHIP_4151))
 
-        myBorders = westDragons
+        myBorders = dragonLoc
         skills[Skills.AGILITY] = 99
         bankZone.addException(ZoneBorders(3094, 3492, 3094, 3492))
         bankZone.addException(ZoneBorders(3094, 3490, 3094, 3490))
@@ -118,13 +119,24 @@ class GreenDragonKiller(val style: CombatStyle) : Script() {
             state = State.KILLING
             return
         }
+
         if (bot.inventory.isFull) {
             if (bot.inventory.containsItem(Item(food))) scriptAPI.forceEat(food)
             else state = State.TO_BANK
             return
         }
-        items.forEach { scriptAPI.takeNearestGroundItem(it.id) }
-        state = State.KILLING
+
+        var allCollected = true
+        items.forEach {
+            val collected = scriptAPI.takeNearestGroundItem(it.id)
+            if (!collected) allCollected = false
+        }
+
+        if (allCollected) {
+            state = State.KILLING
+        } else {
+            state = State.LOOTING
+        }
     }
 
     private fun runningState() {
