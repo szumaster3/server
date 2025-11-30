@@ -1,43 +1,38 @@
 package content.global.skill.slayer
 
-import core.game.global.action.DoorActionHandler.handleAutowalkDoor
+import core.api.*
+import core.game.global.action.DoorActionHandler
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
-import core.game.node.scenery.SceneryBuilder
-import core.game.world.map.Location
-import core.game.world.map.RegionManager.getObject
-import core.plugin.Initializable
 import shared.consts.Scenery
 
-@Initializable
 class SlayerTowerPlugin : InteractionListener {
 
     companion object {
-        private val LOCATIONS = arrayOf(Location(3430, 3534, 0), Location(3426, 3534, 0))
-        private val sceneryIDs = intArrayOf(Scenery.DOOR_4490, Scenery.DOOR_4487, Scenery.DOOR_4492)
-        private const val OPEN_ID = Scenery.STATUE_5117
-        private const val CLOSED_ID = Scenery.STATUE_5116
+        private val SLAYER_DOOR_IDS = intArrayOf(Scenery.DOOR_4490, Scenery.DOOR_4487, Scenery.DOOR_4492)
+    }
+
+    enum class GargoyleStatues(val x: Int, val y: Int, val z: Int) {
+        STATUE_1(3426, 3534, 0),
+        STATUE_2(3430, 3534, 0);
+
+        fun get(): core.game.node.scenery.Scenery? = getScenery(x, y, z)
     }
 
     override fun defineListeners() {
-        on(sceneryIDs, IntType.SCENERY, "open", "close") { player, node ->
+        on(SLAYER_DOOR_IDS, IntType.SCENERY, "open", "close") { player, node ->
             when (node.id) {
-                Scenery.DOOR_4490, Scenery.DOOR_4487 ->
-                    handleAutowalkDoor(player, node.asScenery()).also {
-                        switchStatue()
+                Scenery.DOOR_4490, Scenery.DOOR_4487 -> {
+                    DoorActionHandler.handleDoor(player, node.asScenery())
+                    GargoyleStatues.values().forEach { statue ->
+                        statue.get()?.let {
+                            val anim = if (getUsedOption(player) == "open") 1533 else 1532
+                            animateScenery(it, anim)
+                        }
                     }
+                }
             }
             return@on true
-        }
-    }
-
-    private fun switchStatue() {
-        for (l in LOCATIONS) {
-            val `object` = getObject(l)
-            if (`object` != null) {
-                val id = if (`object`.id == OPEN_ID) CLOSED_ID else OPEN_ID
-                SceneryBuilder.replace(`object`, `object`.transform(id))
-            }
         }
     }
 }

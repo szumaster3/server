@@ -22,7 +22,6 @@ class ImmerseWorld : StartupListener {
 
     companion object {
         var assembler = CombatBotAssembler()
-
         var skillingBotAssembler = SkillingBotAssembler()
 
         private fun randomizeLocationInRanges(
@@ -43,14 +42,11 @@ class ImmerseWorld : StartupListener {
                     Thread.currentThread().name = "BotSpawner"
                     immerseSeersAndCatherby()
                     immerseLumbridgeDraynor()
-                    // immerseBarbarianVillage()
-                    // immerseGnomeStronghold()
                     immerseVarrock()
                     immerseWilderness()
                     immerseFishingGuild()
                     immerseAdventurer()
                     immerseFalador()
-                    // immerseArdougne()
                     immerseGE()
                 }
             }
@@ -59,9 +55,7 @@ class ImmerseWorld : StartupListener {
         fun immerseAdventurer() {
             for (i in 0..(GameWorld.settings?.max_adv_bots ?: 50)) {
                 val random = Random.nextInt(20000, 400000).toLong()
-                Timer().schedule(random) {
-                    spawn_adventurers()
-                }
+                Timer().schedule(random) { spawn_adventurers() }
             }
         }
 
@@ -108,23 +102,6 @@ class ImmerseWorld : StartupListener {
             GeneralBotCreator(LobsterCatcher(), Location.create(2805, 3435, 0))
         }
 
-        fun immerseBarbarianVillage() {
-            GeneralBotCreator(
-                BarbarianSalmon(),
-                skillingBotAssembler.produce(
-                    SkillingBotAssembler.Wealth.values().random(),
-                    Location.create(3105, 3434, 0),
-                ),
-            )
-            GeneralBotCreator(
-                BarbarianSalmon(),
-                skillingBotAssembler.produce(
-                    SkillingBotAssembler.Wealth.values().random(),
-                    Location.create(3103, 3433, 0),
-                ),
-            )
-        }
-
         fun immerseLumbridgeDraynor() {
             GeneralBotCreator(
                 CowKiller(),
@@ -158,32 +135,6 @@ class ImmerseWorld : StartupListener {
                     Location.create(3257, 3267, 0),
                 ),
             )
-            /*
-            GeneralBotCreator(
-                LumbridgeGoblinKiller(),
-                assembler.produce(
-                    CombatBotAssembler.Type.MAGE,
-                    CombatBotAssembler.Tier.LOW,
-                    Location.create(3263, 3235, 0),
-                ),
-            )
-            GeneralBotCreator(
-                GoblinKiller(),
-                assembler.produce(
-                    CombatBotAssembler.Type.RANGE,
-                    CombatBotAssembler.Tier.LOW,
-                    Location.create(3264, 3234, 0),
-                ),
-            )
-            GeneralBotCreator(
-                GoblinKiller(),
-                assembler.produce(
-                    CombatBotAssembler.Type.MELEE,
-                    CombatBotAssembler.Tier.LOW,
-                    Location.create(3247, 3246, 0),
-                ),
-            )
-            */
             GeneralBotCreator(
                 FarmerThiever(),
                 skillingBotAssembler.produce(SkillingBotAssembler.Wealth.POOR, Location.create(3094, 3243, 0)),
@@ -261,17 +212,6 @@ class ImmerseWorld : StartupListener {
                 NonBankingMiner(),
                 skillingBotAssembler.produce(SkillingBotAssembler.Wealth.POOR, Location.create(3182, 3374, 0)),
             )
-            /*
-            GeneralBotCreator(
-                MinotaurKiller(),
-                Location.create(1900, 5208, 0),
-            )
-
-            GeneralBotCreator(
-                MinotaurKiller(),
-                Location.create(1901, 5194, 0),
-            )
-            */
         }
 
         fun immerseWilderness() {
@@ -285,13 +225,6 @@ class ImmerseWorld : StartupListener {
             }
         }
 
-        fun immerseArdougne() {
-            GeneralBotCreator(
-                ArdougneStallThief(),
-                skillingBotAssembler.produce(SkillingBotAssembler.Wealth.POOR, Location.create(2662, 3302, 0)),
-            )
-        }
-
         fun immerseFalador() {
             GeneralBotCreator(
                 CoalMiner(),
@@ -300,13 +233,6 @@ class ImmerseWorld : StartupListener {
             GeneralBotCreator(
                 CannonballSmelter(),
                 skillingBotAssembler.produce(SkillingBotAssembler.Wealth.AVERAGE, Location.create(3013, 3356, 0)),
-            )
-        }
-
-        fun immerseGnomeStronghold() {
-            GeneralBotCreator(
-                GnomeAgility(),
-                skillingBotAssembler.produce(SkillingBotAssembler.Wealth.POOR, Location.create(2475, 3439, 0)),
             )
         }
 

@@ -114,4 +114,5 @@ object Regions {
     const val MOS_LE_HARMLESS_CAVE_14995 = 14995
     const val DORGESH_KAAN_SOUTH_DUNGEON_10833 = 10833
     const val TEMPLE_OF_IKOV_10648 = 10648
+    const val MORYTANIA_SLAYER_TOWER_13623 = 13623
 }
