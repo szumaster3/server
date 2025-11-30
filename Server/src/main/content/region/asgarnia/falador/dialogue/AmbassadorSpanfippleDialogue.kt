@@ -28,7 +28,6 @@ class AmbassadorSpanfippleDialogue(player: Player? = null) : Dialogue(player) {
             3 -> npc(FaceAnim.OLD_DEFAULT, "You're probably right. Maybe brown, then.").also { stage++ }
             4 -> player(FaceAnim.HALF_THINKING, "I think that may be worse...").also { stage++ }
             5 -> npc(FaceAnim.OLD_ANGRY1, "Bah, humans have no sense of style...").also { stage = END_DIALOGUE }
-            99 -> end()
         }
         return true
     }
