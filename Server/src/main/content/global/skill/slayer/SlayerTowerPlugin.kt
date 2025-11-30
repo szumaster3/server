@@ -5,12 +5,13 @@ import core.game.global.action.DoorActionHandler
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.node.entity.skill.Skills
+import shared.consts.Animations
 import shared.consts.Scenery
 
 class SlayerTowerPlugin : InteractionListener {
 
     companion object {
-        private val SLAYER_DOOR_IDS = intArrayOf(Scenery.DOOR_4490, Scenery.DOOR_4487, Scenery.DOOR_4492)
+        private val SLAYER_DOOR_IDS = intArrayOf(Scenery.DOOR_4490, Scenery.DOOR_4487, Scenery.DOOR_4491, Scenery.DOOR_4492)
         private val SLAYER_DOOR_FIRST_FLOOR_IDS = intArrayOf(Scenery.DOOR_10527,Scenery.DOOR_10528)
     }
 
@@ -24,16 +25,18 @@ class SlayerTowerPlugin : InteractionListener {
     override fun defineListeners() {
         on(SLAYER_DOOR_IDS, IntType.SCENERY, "open", "close") { player, node ->
             when (node.id) {
-                Scenery.DOOR_4490, Scenery.DOOR_4487 -> {
+                Scenery.DOOR_4491, Scenery.DOOR_4492, Scenery.DOOR_4490, Scenery.DOOR_4487 -> {
                     DoorActionHandler.handleDoor(player, node.asScenery())
-                    GargoyleStatues.values().forEach { statue ->
-                        statue.get()?.let {
-                            val anim = when (getUsedOption(player)) {
-                                "open" -> 1533
-                                "close"-> 1532
-                                else -> return@on false
-                            }
-                            animateScenery(it, anim)
+                    val option = getUsedOption(player)
+                    val anim = when (option) {
+                        "open"  -> Animations.GARGOYLE_STATUE_OPEN_1533
+                        "close" -> Animations.GARGOYLE_STATUE_CLOSE_1532
+                        else    -> null
+                    }
+
+                    if (anim != null) {
+                        GargoyleStatues.values().forEach { statue ->
+                            statue.get()?.let { animateScenery(it, anim) }
                         }
                     }
                 }

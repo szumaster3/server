@@ -1346,8 +1346,8 @@ object Animations {
     const val ANIMATION_1529 = 1529
     const val ANIMATION_1530 = 1530
     const val BARBARIAN_CHEERING_1531 = 1531
-    const val ANIMATION_1532 = 1532
-    const val ANIMATION_1533 = 1533
+    const val GARGOYLE_STATUE_CLOSE_1532 = 1532
+    const val GARGOYLE_STATUE_OPEN_1533 = 1533
     const val ANIMATION_1534 = 1534
     const val ANIMATION_1535 = 1535
     const val ANIMATION_1536 = 1536
