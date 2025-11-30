@@ -2,7 +2,6 @@ package content.global.skill.construction.decoration.study
 
 import content.data.GameAttributes
 import content.global.skill.construction.Decoration
-import content.global.skill.magic.items.TeleportTablet
 import core.api.*
 import core.cache.def.impl.SceneryDefinition
 import core.game.interaction.InterfaceListener
@@ -30,22 +29,22 @@ class LecternPlugin : OptionHandler() {
     /**
      * Represents all teleport–tablet buttons inside the lectern interface.
      */
-    private enum class TeleportTabButton(val buttonId: Int, val requiredLevel: Int, val xp: Double, val tabItem: Item, val requiredDecorations: Array<Decoration>, vararg requiredItems: Item) {
-        ARDOUGNE(2, 51, 61.0, Item(TeleportTablet.ARDOUGNE_TELEPORT.item), arrayOf(Decoration.TEAK_EAGLE_LECTERN, Decoration.MAHOGANY_EAGLE_LECTERN), SOFT_CLAY, Item(Items.LAW_RUNE_563, 2), Item(Items.WATER_RUNE_555, 2)),
-        BONES_TO_BANANNAS(3, 15, 25.0, Item(Items.BONES_TO_BANANAS_8014), arrayOf(Decoration.DEMON_LECTERN, Decoration.TEAK_DEMON_LECTERN, Decoration.MAHOGANY_DEMON_LECTERN), SOFT_CLAY, Item(Items.NATURE_RUNE_561), Item(Items.EARTH_RUNE_557, 2), Item(Items.WATER_RUNE_555, 2)),
-        BONES_TO_PEACHES(4, 60, 35.5, Item(Items.BONES_TO_PEACHES_8015), arrayOf(Decoration.MAHOGANY_DEMON_LECTERN), SOFT_CLAY, Item(Items.NATURE_RUNE_561, 2), Item(Items.EARTH_RUNE_557, 4), Item(Items.WATER_RUNE_555, 4)),
-        CAMELOT(5, 45, 55.5, Item(TeleportTablet.CAMELOT_TELEPORT.item), arrayOf(Decoration.TEAK_EAGLE_LECTERN, Decoration.MAHOGANY_EAGLE_LECTERN), SOFT_CLAY, Item(Items.LAW_RUNE_563), Item(Items.AIR_RUNE_556, 5)),
-        ENCHANT_DIAMOND(6, 57, 67.0, Item(Items.ENCHANT_DIAMOND_8019), arrayOf(Decoration.TEAK_DEMON_LECTERN, Decoration.MAHOGANY_DEMON_LECTERN), SOFT_CLAY, Item(Items.COSMIC_RUNE_564), Item(Items.EARTH_RUNE_557, 10)),
-        ENCHANT_DRAGONSTONE(7, 68, 78.0,Item(Items.ENCHANT_DRAGONSTN_8020), arrayOf(Decoration.MAHOGANY_DEMON_LECTERN), SOFT_CLAY, Item(Items.COSMIC_RUNE_564), Item(Items.EARTH_RUNE_557, 15), Item(Items.WATER_RUNE_555, 15)),
-        ENCHANT_EMERALD(8, 27, 37.0, Item(Items.ENCHANT_EMERALD_8017), arrayOf(Decoration.DEMON_LECTERN, Decoration.TEAK_DEMON_LECTERN, Decoration.MAHOGANY_DEMON_LECTERN), SOFT_CLAY, Item(Items.COSMIC_RUNE_564), Item(Items.AIR_RUNE_556, 3)),
-        ENCHANT_ONYX(9, 87, 97.0, Item(Items.ENCHANT_ONYX_8021), arrayOf(Decoration.MAHOGANY_DEMON_LECTERN), SOFT_CLAY, Item(Items.COSMIC_RUNE_564), Item(Items.EARTH_RUNE_557, 20), Item(Items.FIRE_RUNE_554, 20)),
-        ENCHANT_RUBY(10, 49, 59.0, Item(Items.ENCHANT_RUBY_8018), arrayOf(Decoration.TEAK_DEMON_LECTERN, Decoration.MAHOGANY_DEMON_LECTERN), SOFT_CLAY, Item(Items.COSMIC_RUNE_564), Item(Items.FIRE_RUNE_554, 5)),
-        ENCHANT_SAPPHIRE(11, 7, 17.5, Item(Items.ENCHANT_SAPPHIRE_8016), arrayOf(Decoration.OAK_LECTERN, Decoration.EAGLE_LECTERN, Decoration.TEAK_EAGLE_LECTERN, Decoration.MAHOGANY_EAGLE_LECTERN, Decoration.DEMON_LECTERN, Decoration.TEAK_DEMON_LECTERN, Decoration.MAHOGANY_DEMON_LECTERN), SOFT_CLAY, Item(Items.COSMIC_RUNE_564), Item(Items.WATER_RUNE_555)),
-        FALADOR(12, 37, 48.0, Item(TeleportTablet.FALADOR_TELEPORT.item), arrayOf(Decoration.EAGLE_LECTERN, Decoration.TEAK_EAGLE_LECTERN, Decoration.MAHOGANY_EAGLE_LECTERN), SOFT_CLAY, Item(Items.LAW_RUNE_563), Item(Items.WATER_RUNE_555), Item(Items.AIR_RUNE_556, 3)),
-        LUMBRIDGE(13, 31, 41.0, Item(TeleportTablet.LUMBRIDGE_TELEPORT.item), arrayOf(Decoration.EAGLE_LECTERN, Decoration.TEAK_EAGLE_LECTERN, Decoration.MAHOGANY_EAGLE_LECTERN), SOFT_CLAY, Item(Items.LAW_RUNE_563), Item(Items.EARTH_RUNE_557), Item(Items.AIR_RUNE_556, 3)),
-        HOUSE(14, 40, 30.0, Item(Items.TP_TO_HOUSE_8013), arrayOf(Decoration.MAHOGANY_EAGLE_LECTERN), SOFT_CLAY, Item(Items.LAW_RUNE_563), Item(Items.EARTH_RUNE_557), Item(Items.AIR_RUNE_556)),
-        VARROCK(15, 25, 35.0, Item(TeleportTablet.VARROCK_TELEPORT.item), arrayOf(Decoration.OAK_LECTERN, Decoration.EAGLE_LECTERN, Decoration.TEAK_EAGLE_LECTERN, Decoration.MAHOGANY_EAGLE_LECTERN, Decoration.DEMON_LECTERN, Decoration.TEAK_DEMON_LECTERN, Decoration.MAHOGANY_DEMON_LECTERN), SOFT_CLAY, Item(Items.LAW_RUNE_563), Item(Items.FIRE_RUNE_554), Item(Items.AIR_RUNE_556, 3)),
-        WATCHTOWER(16, 58, 68.0, Item(TeleportTablet.WATCH_TOWER_TELEPORT.item), arrayOf(Decoration.MAHOGANY_EAGLE_LECTERN), SOFT_CLAY, Item(Items.LAW_RUNE_563, 2), Item(Items.EARTH_RUNE_557, 2));
+    private enum class TeleportTabButton(val buttonId: Int, val requiredLevel: Int, val xp: Double, val tabItem: Int, val requiredDecorations: Array<Decoration>, vararg requiredItems: Item) {
+        ARDOUGNE(2, 51, 61.0, Items.ARDOUGNE_TP_8011, arrayOf(Decoration.TEAK_EAGLE_LECTERN, Decoration.MAHOGANY_EAGLE_LECTERN), SOFT_CLAY, Item(Items.LAW_RUNE_563, 2), Item(Items.WATER_RUNE_555, 2)),
+        BONES_TO_BANANNAS(3, 15, 25.0, Items.BONES_TO_BANANAS_8014, arrayOf(Decoration.DEMON_LECTERN, Decoration.TEAK_DEMON_LECTERN, Decoration.MAHOGANY_DEMON_LECTERN), SOFT_CLAY, Item(Items.NATURE_RUNE_561), Item(Items.EARTH_RUNE_557, 2), Item(Items.WATER_RUNE_555, 2)),
+        BONES_TO_PEACHES(4, 60, 35.5, Items.BONES_TO_PEACHES_8015, arrayOf(Decoration.MAHOGANY_DEMON_LECTERN), SOFT_CLAY, Item(Items.NATURE_RUNE_561, 2), Item(Items.EARTH_RUNE_557, 4), Item(Items.WATER_RUNE_555, 4)),
+        CAMELOT(5, 45, 55.5, Items.CAMELOT_TP_8010, arrayOf(Decoration.TEAK_EAGLE_LECTERN, Decoration.MAHOGANY_EAGLE_LECTERN), SOFT_CLAY, Item(Items.LAW_RUNE_563), Item(Items.AIR_RUNE_556, 5)),
+        ENCHANT_DIAMOND(6, 57, 67.0, Items.ENCHANT_DIAMOND_8019, arrayOf(Decoration.TEAK_DEMON_LECTERN, Decoration.MAHOGANY_DEMON_LECTERN), SOFT_CLAY, Item(Items.COSMIC_RUNE_564), Item(Items.EARTH_RUNE_557, 10)),
+        ENCHANT_DRAGONSTONE(7, 68, 78.0,Items.ENCHANT_DRAGONSTN_8020, arrayOf(Decoration.MAHOGANY_DEMON_LECTERN), SOFT_CLAY, Item(Items.COSMIC_RUNE_564), Item(Items.EARTH_RUNE_557, 15), Item(Items.WATER_RUNE_555, 15)),
+        ENCHANT_EMERALD(8, 27, 37.0, Items.ENCHANT_EMERALD_8017, arrayOf(Decoration.DEMON_LECTERN, Decoration.TEAK_DEMON_LECTERN, Decoration.MAHOGANY_DEMON_LECTERN), SOFT_CLAY, Item(Items.COSMIC_RUNE_564), Item(Items.AIR_RUNE_556, 3)),
+        ENCHANT_ONYX(9, 87, 97.0, Items.ENCHANT_ONYX_8021, arrayOf(Decoration.MAHOGANY_DEMON_LECTERN), SOFT_CLAY, Item(Items.COSMIC_RUNE_564), Item(Items.EARTH_RUNE_557, 20), Item(Items.FIRE_RUNE_554, 20)),
+        ENCHANT_RUBY(10, 49, 59.0, Items.ENCHANT_RUBY_8018, arrayOf(Decoration.TEAK_DEMON_LECTERN, Decoration.MAHOGANY_DEMON_LECTERN), SOFT_CLAY, Item(Items.COSMIC_RUNE_564), Item(Items.FIRE_RUNE_554, 5)),
+        ENCHANT_SAPPHIRE(11, 7, 17.5, Items.ENCHANT_SAPPHIRE_8016, arrayOf(Decoration.OAK_LECTERN, Decoration.EAGLE_LECTERN, Decoration.TEAK_EAGLE_LECTERN, Decoration.MAHOGANY_EAGLE_LECTERN, Decoration.DEMON_LECTERN, Decoration.TEAK_DEMON_LECTERN, Decoration.MAHOGANY_DEMON_LECTERN), SOFT_CLAY, Item(Items.COSMIC_RUNE_564), Item(Items.WATER_RUNE_555)),
+        FALADOR(12, 37, 48.0, Items.FALADOR_TP_8009, arrayOf(Decoration.EAGLE_LECTERN, Decoration.TEAK_EAGLE_LECTERN, Decoration.MAHOGANY_EAGLE_LECTERN), SOFT_CLAY, Item(Items.LAW_RUNE_563), Item(Items.WATER_RUNE_555), Item(Items.AIR_RUNE_556, 3)),
+        LUMBRIDGE(13, 31, 41.0, Items.LUMBRIDGE_TP_8008, arrayOf(Decoration.EAGLE_LECTERN, Decoration.TEAK_EAGLE_LECTERN, Decoration.MAHOGANY_EAGLE_LECTERN), SOFT_CLAY, Item(Items.LAW_RUNE_563), Item(Items.EARTH_RUNE_557), Item(Items.AIR_RUNE_556, 3)),
+        HOUSE(14, 40, 30.0, Items.TP_TO_HOUSE_8013, arrayOf(Decoration.MAHOGANY_EAGLE_LECTERN), SOFT_CLAY, Item(Items.LAW_RUNE_563), Item(Items.EARTH_RUNE_557), Item(Items.AIR_RUNE_556)),
+        VARROCK(15, 25, 35.0, Items.VARROCK_TP_8007, arrayOf(Decoration.OAK_LECTERN, Decoration.EAGLE_LECTERN, Decoration.TEAK_EAGLE_LECTERN, Decoration.MAHOGANY_EAGLE_LECTERN, Decoration.DEMON_LECTERN, Decoration.TEAK_DEMON_LECTERN, Decoration.MAHOGANY_DEMON_LECTERN), SOFT_CLAY, Item(Items.LAW_RUNE_563), Item(Items.FIRE_RUNE_554), Item(Items.AIR_RUNE_556, 3)),
+        WATCHTOWER(16, 58, 68.0, Items.WATCHTOWER_TPORT_8012, arrayOf(Decoration.MAHOGANY_EAGLE_LECTERN), SOFT_CLAY, Item(Items.LAW_RUNE_563, 2), Item(Items.EARTH_RUNE_557, 2));
 
         val requiredItemsList = requiredItems.toList()
 
@@ -88,11 +87,12 @@ class LecternPlugin : OptionHandler() {
                     !hasStaff && !inInventory(player, item.id)
                 }
 
+            val productName = getItemName(tabItem).lowercase()
             if (missingItems.isNotEmpty()) {
-                val names = missingItems.joinToString(", ") { it.definition!!.name.lowercase() }
+                val names = missingItems.joinToString(", ") { getItemName(it.definition!!.id).lowercase() }
                 sendMessage(
                     player,
-                    "You need $names to make ${tabItem.definition!!.name.lowercase()}."
+                    "You need $names to make $productName."
                 )
                 return false
             }
@@ -188,7 +188,7 @@ class LecternPlugin : OptionHandler() {
                         }
                         1 -> {
                             rewardXP(player, Skills.MAGIC, ttb.xp)
-                            addItemOrDrop(player, ttb.tabItem.id)
+                            addItemOrDrop(player, ttb.tabItem)
                             val obj = getAttribute(player, GameAttributes.CON_LECTERN_OBJECT, 0)
                             if (
                                 ttb == TeleportTabButton.VARROCK &&

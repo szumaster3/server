@@ -1,5 +1,6 @@
 package content.global.skill.construction.decoration.bedroom
 
+import core.api.playAudio
 import core.api.sendMessage
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
@@ -23,6 +24,7 @@ class ClockPlugin : InteractionListener {
                     else -> append("${60 - minuteDisplay} till Rune.")
                 }
             }
+            playAudio(player,941)
             sendMessage(player, message)
             return@on true
         }

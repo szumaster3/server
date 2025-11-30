@@ -13,11 +13,12 @@ import core.game.node.item.Item
 import core.game.world.map.Location
 import shared.consts.Items
 import shared.consts.Quests
+import shared.consts.Sounds
 
 /**
  * Represents teleport tablet items.
  */
-enum class TeleportTablet(val item: Int, val location: Location, val exp: Double) {
+private enum class TeleportTablet(val item: Int, val location: Location, val exp: Double) {
     ARDOUGNE_TELEPORT(    Items.ARDOUGNE_TP_8011,            Location.create(2662, 3307, 0), 61.0),
     AIR_ALTAR_TELEPORT(   Items.AIR_ALTAR_TP_13599,          Location.create(2978, 3296, 0), 0.0),
     ASTRAL_ALTAR_TELEPORT(Items.ASTRAL_ALTAR_TP_13611,       Location.create(2156, 3862, 0), 0.0),
@@ -54,13 +55,25 @@ enum class TeleportTablet(val item: Int, val location: Location, val exp: Double
 /**
  * Handles the break option on teleport tablets.
  */
-class TabletOptionHandler : InteractionListener {
+class TeleportTabletPlugin : InteractionListener {
 
     companion object {
         /**
          * Get all teleport tablet item ids.
          */
         private val TABLET_ID = TeleportTablet.values().map { it.item }.toIntArray()
+
+        /**
+         * Requirements map for tablet item.
+         */
+        val teleportRequirements: Map<Int, (Player) -> Boolean> = mapOf(
+            Items.ARDOUGNE_TP_8011      to { p -> getAttribute(p, GameAttributes.ARDOUGNE_TELEPORT, false) },
+            Items.WATCHTOWER_TPORT_8012 to { p -> getAttribute(p, GameAttributes.WATCHTOWER_TELEPORT, false) },
+            Items.ASTRAL_ALTAR_TP_13611 to { p -> hasRequirement(p, QuestReq(QuestRequirements.LUNAR_DIPLOMACY)) },
+            Items.COSMIC_ALTAR_TP_13605 to { p -> isQuestComplete(p, Quests.LOST_CITY) },
+            Items.DEATH_ALTAR_TP_13609  to { p -> hasRequirement(p, QuestReq(QuestRequirements.MEP_2)) },
+            Items.BLOOD_ALTAR_TP_13610  to { p -> hasRequirement(p, QuestReq(QuestRequirements.SEERGAZE)) }
+        )
     }
 
     override fun defineListeners() {
@@ -69,17 +82,9 @@ class TabletOptionHandler : InteractionListener {
             val tabEnum = TeleportTablet.forId(tab)
 
             if (tabEnum != null && inInventory(player, tab)) {
-                val tabloc = tabEnum.location
+                val destination = tabEnum.location
 
                 if (inInventory(player, tab)) {
-                    val teleportRequirements: Map<Int, (Player) -> Boolean> = mapOf(
-                        Items.ARDOUGNE_TP_8011      to { p -> getAttribute(p, GameAttributes.ARDOUGNE_TELEPORT, false) },
-                        Items.WATCHTOWER_TPORT_8012 to { p -> getAttribute(p, GameAttributes.WATCHTOWER_TELEPORT, false) },
-                        Items.ASTRAL_ALTAR_TP_13611 to { p -> hasRequirement(p, QuestReq(QuestRequirements.LUNAR_DIPLOMACY)) },
-                        Items.COSMIC_ALTAR_TP_13605 to { p -> isQuestComplete(p, Quests.LOST_CITY) },
-                        Items.DEATH_ALTAR_TP_13609  to { p -> hasRequirement(p, QuestReq(QuestRequirements.MEP_2)) },
-                        Items.BLOOD_ALTAR_TP_13610  to { p -> hasRequirement(p, QuestReq(QuestRequirements.SEERGAZE)) }
-                    )
 
                     val requirementCheck = teleportRequirements[tab]
                     if (requirementCheck != null && !requirementCheck(player)) {
@@ -92,9 +97,41 @@ class TabletOptionHandler : InteractionListener {
                         return@on true
                     }
 
-                    if (teleport(player, tabloc, TeleportManager.TeleportType.TELETABS)) {
+                    val soundEffect = if(node.name.contains("altar", true)) {
+                        965
+                    } else {
+                        Sounds.POH_TABLET_BREAK_979
+                    }
+
+                    playGlobalAudio(player.getLocation(), soundEffect)
+                    if (teleport(player, destination, TeleportManager.TeleportType.TELETABS)) {
                         removeItem(player, Item(node.id, 1))
                     }
+                }
+            }
+            return@on true
+        }
+
+
+        on(Items.TP_TO_HOUSE_8013, IntType.ITEM, "break") { player, node ->
+            var hasHouse = player.houseManager.location.exitLocation != null
+            if (!hasHouse) {
+                sendMessage(player, "You must have a house to teleport to before attempting that.")
+                return@on false
+            }
+            if (hasTimerActive(player, GameAttributes.TELEBLOCK_TIMER)) {
+                sendMessage(player, "A magical force has stopped you from teleporting.")
+                return@on true
+            }
+            closeInterface(player)
+            player.locks.lockComponent(8)
+            player.lock(8)
+            if (inInventory(player, node.id)) {
+                player.houseManager.preEnter(player, false)
+                val location = player.houseManager.getEnterLocation()
+                if (teleport(player, location, TeleportManager.TeleportType.TELETABS)) {
+                    removeItem(player, Item(node.id, 1))
+                    player.houseManager.postEnter(player, false)
                 }
             }
             return@on true

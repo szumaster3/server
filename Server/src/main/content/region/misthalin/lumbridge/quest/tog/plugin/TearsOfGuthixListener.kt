@@ -108,6 +108,7 @@ class TearsOfGuthixListener : InteractionListener {
             } else {
                 Location.create(3228, 9527, 2)
             }
+            playAudio(player, Sounds.LIGHT_CREATURE_UP_1799)
             forceMove(player, player.location, destination, 0, 400, null, 2048)
         }
     }

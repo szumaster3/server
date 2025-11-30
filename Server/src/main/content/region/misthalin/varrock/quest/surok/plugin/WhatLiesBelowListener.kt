@@ -106,26 +106,24 @@ class WhatLiesBelowListener : InteractionListener {
                     return@on true
                 }
                 lock(player, 16)
-                animate(player, tool.animation)
+                animate(player, 6102)
+                playAudio(player, 3526)
                 Pulser.submit(
                     object : Pulse(1, player) {
                         var count: Int = 0
 
                         override fun pulse(): Boolean {
-                            count++
-                            val duration = 7
-                            when (count) {
-                                duration -> {
+                            when (count++) {
+                                2 -> {
+                                    playAudio(player, 3534)
+                                    animate(player, 6102)
                                     sendChat(player, "Hmmm...")
                                 }
 
-                                duration + 2 -> {
-                                    animate(player, tool.animation)
-                                }
-
-                                duration * 2 -> {
+                                4 -> {
                                     setQuestStage(player, Quests.WHAT_LIES_BELOW, 40)
                                     resetAnimator(player)
+                                    playAudio(player, 3535)
                                     setVarp(player, 992, 1 shl 8, true)
                                     openDialogue(player, 5837, true, true, true)
                                     unlock(player)

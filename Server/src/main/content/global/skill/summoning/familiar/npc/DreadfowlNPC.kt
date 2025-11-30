@@ -2,6 +2,7 @@ package content.global.skill.summoning.familiar.npc
 
 import content.global.skill.summoning.familiar.Familiar
 import content.global.skill.summoning.familiar.FamiliarSpecial
+import core.api.playGlobalAudio
 import core.api.sendMessage
 import core.game.node.entity.Entity
 import core.game.node.entity.combat.BattleState
@@ -67,7 +68,7 @@ class DreadfowlNPC @JvmOverloads constructor(
     fun performMagicAttack(target: Entity) {
         visualize(Animation(5387, Priority.HIGH), Graphics.create(1523))
         Projectile.magic(this, target, 1318, 40, 36, 51, 10).send()
-
+        playGlobalAudio(this.location, 4174)
         val ticks = 2 + floor(location.getDistance(target.location) * 0.5).toInt()
         properties.combatPulse.setNextAttack(4)
 

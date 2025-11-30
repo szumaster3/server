@@ -61,7 +61,7 @@ class RecruitmentDrivePlugin :
                 )
             } else {
                 setAttribute(player, RecruitmentDrive.stageFail, true)
-                openDialogue(player, content.region.asgarnia.falador.quest.rd.plugin.LadyTablePlugin(2), NPC(NPCs.LADY_TABLE_2283))
+                openDialogue(player, content.region.asgarnia.falador.quest.rd.plugin.LadyTableDialogue(2), NPC(NPCs.LADY_TABLE_2283))
             }
             return@on true
         }
@@ -300,7 +300,7 @@ class RecruitmentDrivePlugin :
         ) {
             when (npc) {
                 NPCs.SIR_SPISHYUS_2282 -> openDialogue(player, SirSpishyusDialogueFile(1), NPC(npc))
-                NPCs.LADY_TABLE_2283 -> openDialogue(player, LadyTablePlugin(1), NPC(npc))
+                NPCs.LADY_TABLE_2283 -> openDialogue(player, LadyTableDialogue(1), NPC(npc))
                 NPCs.SIR_KUAM_FERENTSE_2284 -> openDialogue(player, SirKuamPlugin(1), NPC(npc))
                 NPCs.SIR_TINLEY_2286 -> openDialogue(player, SirTinleyPlugin(1), NPC(npc))
                 NPCs.SIR_REN_ITCHOOD_2287 -> openDialogue(player, SirReenItchoodPlugin(1), NPC(npc))

@@ -1,4 +1,4 @@
-package content.global.skill.summoning.familiar.dialogue
+package content.global.skill.summoning.familiar.dialogue.titan
 
 import core.api.inInventory
 import core.game.dialogue.Dialogue
@@ -14,10 +14,10 @@ import shared.consts.NPCs
  * Represents the Fire Giant familiar dialogue.
  */
 @Initializable
-class FireGiantDialogue : Dialogue {
+class FireTitanDialogue : Dialogue {
     private var branch: Int = -1
 
-    override fun newInstance(player: Player?) = FireGiantDialogue(player)
+    override fun newInstance(player: Player?) = FireTitanDialogue(player)
 
     constructor()
     constructor(player: Player?) : super(player)
@@ -91,5 +91,5 @@ class FireGiantDialogue : Dialogue {
         return true
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.FIRE_GIANT_7003, NPCs.FIRE_GIANT_7004)
+    override fun getIds(): IntArray = intArrayOf(NPCs.FIRE_TITAN_7355, NPCs.FIRE_TITAN_7356)
 }

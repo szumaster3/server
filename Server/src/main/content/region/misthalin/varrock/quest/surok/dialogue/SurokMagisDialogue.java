@@ -12,6 +12,8 @@ import core.plugin.Initializable;
 import shared.consts.NPCs;
 import shared.consts.Quests;
 
+import static core.api.ContentAPIKt.playGlobalAudio;
+
 /**
  * The type Surok magis dialogue.
  */
@@ -165,6 +167,7 @@ public class SurokMagisDialogue extends Dialogue {
                         stage++;
                         break;
                     case 6:
+                        playGlobalAudio(player.getLocation(),3523);
                         npc.animate(Animation.create(6096));
                         npc("Of all the luck!");
                         stage++;

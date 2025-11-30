@@ -24,8 +24,7 @@ import core.net.packet.out.CameraViewPacket;
 import shared.consts.Music;
 import shared.consts.Quests;
 
-import static core.api.ContentAPIKt.removeAttribute;
-import static core.api.ContentAPIKt.setAttribute;
+import static core.api.ContentAPIKt.*;
 
 /**
  * The type What lies below cutscene.
@@ -80,6 +79,7 @@ public class WhatLiesBelowCutscene extends CutscenePlugin {
     public void open() {
         player.lock();
         sendCamera(0, -6, 0, 0, 500, 100);
+        playAudio(player, 3530);
         SUROK_NPC.animate(Animation.create(1084));
         SUROK_NPC.graphics(Graphics.create(108));
         SUROK_NPC.sendChat("Annach Narh Hin Dei!");
@@ -122,10 +122,12 @@ public class WhatLiesBelowCutscene extends CutscenePlugin {
                         ZAFF.face(SUROK_NPC);
                         SUROK_NPC.face(ZAFF);
                         player.lock();
+                        playAudio(player, 3529);
                         SUROK_NPC.animate(Animation.create(1084));
                         SUROK_NPC.sendChat("Mirra din namus!!", 1);
                         player.sendMessage("Surok looks like he's trying to teleport away!");
                         ZAFF.sendChat("Stop!!", 3);
+                        playAudio(player, 3536);
                         SUROK_NPC.sendChat("Nooooooooooooo!", 6);
                         GameWorld.getPulser().submit(new Pulse(3, player) {
 
@@ -133,6 +135,7 @@ public class WhatLiesBelowCutscene extends CutscenePlugin {
                             public boolean pulse() {
                                 SUROK_NPC.animate(Animation.create(6098));
                                 ZAFF.animate(Animation.create(1819));
+                                playAudio(player, 3537);
                                 Projectile.magic(ZAFF, SUROK_NPC, 109, 60, 36, 36, 10).send();
                                 return true;
                             }

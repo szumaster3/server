@@ -1,6 +1,7 @@
 package content.global.skill.construction.decoration
 
-import core.api.playAudio
+import content.data.GameAttributes
+import core.api.*
 import core.cache.def.impl.SceneryDefinition
 import core.game.interaction.OptionHandler
 import core.game.node.Node
@@ -8,16 +9,16 @@ import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.TeleportManager
 import core.game.system.task.Pulse
 import core.game.world.GameWorld
+import core.game.world.map.Location
 import core.plugin.Initializable
 import core.plugin.Plugin
 import shared.consts.Scenery
-import shared.consts.Sounds
 
 /**
- * Handles the bell interaction.
+ * Handles the Bell-pulls immediately call the servant.
  */
 @Initializable
-class BellPlugin : OptionHandler() {
+class BellPullPlugin : OptionHandler() {
 
     override fun newInstance(arg: Any?): Plugin<Any> {
         SceneryDefinition.forId(Scenery.ROPE_BELL_PULL_13307).handlers["option:ring"] = this
@@ -30,24 +31,24 @@ class BellPlugin : OptionHandler() {
         val manager = player?.houseManager ?: return true
         val servant = manager.servant
         if (servant == null || !manager.hasServant()) {
-            player.sendMessage("You have no servant to ring.")
+            sendMessage(player,"You have no servant to ring.")
             return true
         }
 
-        if (player.getAttribute("servant:call", false) == true) {
-            player.sendMessage("Your servant has already been called!")
+        if (getAttribute(player, GameAttributes.CON_SERVANT_CALL, false)) {
+            sendMessage(player,"Your servant has already been called!")
             return true
         }
 
-        // Temporary solution because it spawns behind a wall.
-        // val destination = getPathableCardinal(servant.asNpc(), player.location)
-        playAudio(player, Sounds.BELL_2192)
-        servant.teleporter.send(player.location, TeleportManager.TeleportType.INSTANT)
-        player.setAttribute("servant:call", true)
+        playAudio(player, 932)
+        val spawn = Location.getRandomLocation(player.location,1,true)
+        servant.teleporter.send(player.location.transform(spawn), TeleportManager.TeleportType.INSTANT)
+
+        setAttribute(player, GameAttributes.CON_SERVANT_CALL, true)
 
         GameWorld.Pulser.submit(object : Pulse(17) {
             override fun pulse(): Boolean {
-                player.removeAttribute("servant:call")
+                removeAttribute(player, GameAttributes.CON_SERVANT_CALL)
                 return true
             }
         })

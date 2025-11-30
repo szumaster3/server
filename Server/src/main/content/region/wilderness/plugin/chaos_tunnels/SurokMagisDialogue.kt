@@ -28,19 +28,8 @@ class SurokMagisDialogue(player: Player? = null) : Dialogue(player) {
             0 -> player("Surok! What are you doing here?", "How did you-").also { stage++ }
             1 -> npc("Escape from Varrock Palace Library? That cruel", "imprisonment you left me in?").also { stage++ }
             2 -> player("Well...er..yes.").also { stage++ }
-            3 ->
-                npc(
-                    "Bah! A mere trifle for a powerful mage such as myself.",
-                    "There were plenty of other foolish people to help with",
-                    "my plans, you would do well to stay out of my way.",
-                ).also { stage++ }
-
-            4 ->
-                player(
-                    "Stop, Surok! As a member of the Varrock Palace Secret",
-                    "Guard, I arrest you! Again!",
-                ).also { stage++ }
-
+            3 -> npc("Bah! A mere trifle for a powerful mage such as myself.", "There were plenty of other foolish people to help with", "my plans, you would do well to stay out of my way.").also { stage++ }
+            4 -> player("Stop, Surok! As a member of the Varrock Palace Secret", "Guard, I arrest you! Again!").also { stage++ }
             5 -> npc("Ha! I tire of this meaningless drivel. Catch me if you can.").also { stage = END_DIALOGUE }
         }
         return true

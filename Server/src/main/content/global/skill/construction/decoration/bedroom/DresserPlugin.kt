@@ -1,9 +1,6 @@
 package content.global.skill.construction.decoration.bedroom
 
-import core.api.animate
-import core.api.openInterface
-import core.api.sendInterfaceConfig
-import core.api.sendString
+import core.api.*
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import shared.consts.Animations
@@ -19,11 +16,10 @@ class DresserPlugin : InteractionListener {
             val interfaceId = if (isMale) Components.HAIRDRESSER_MALE_596 else Components.HAIRDRESSER_FEMALE_592
             val stringComponentId = if (isMale) 64 else 18
             val configId = if (isMale) 197 else 202
-
             openInterface(player, interfaceId)
             sendString(player, node.name, interfaceId, stringComponentId)
             sendInterfaceConfig(player, interfaceId, configId, true)
-
+            playAudio(player, 939)
             return@on true
         }
     }

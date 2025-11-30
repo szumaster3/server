@@ -84,6 +84,7 @@ class ObservatoryCutscene(
 
             13 -> {
                 face(getNPC(PROFESSOR)!!, player, 3)
+                // has sound.
                 animate(getNPC(PROFESSOR)!!, Animations.OBSERVATORY_PROFESSOR_FIXES_TELESCOPE_6847)
                 sendChat(getNPC(PROFESSOR)!!, "Bit of a tap here...")
                 timedUpdate(8)
@@ -119,6 +120,7 @@ class ObservatoryCutscene(
             }
 
             19 -> {
+                // has sound.
                 animate(getNPC(PROFESSOR)!!, Animations.OBSERVATORY_PROFESSOR_FIXES_TELESCOPE_6848)
                 sendChat(getNPC(PROFESSOR)!!, "In here the lens.")
                 timedUpdate(6)
@@ -137,6 +139,7 @@ class ObservatoryCutscene(
             }
 
             23 -> {
+                playAudio(player, 3800)
                 animate(getNPC(PROFESSOR)!!, Animations.HUMAN_FIX_TELESCOPE_6845)
                 timedUpdate(6)
             }

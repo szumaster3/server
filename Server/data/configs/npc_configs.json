@@ -2428,6 +2428,7 @@
   },
   {
     "examine": "An angry Ogre in a funny hat.",
+    "combat_audio": "246,244,245",
     "melee_animation": "359",
     "range_animation": "359",
     "attack_speed": "5",
@@ -24814,6 +24815,7 @@
   },
   {
     "examine": "Stoic, dedicated follower of his Goddess.",
+    "combat_audio": "478,481,480",
     "name": "Gorilla",
     "defence_level": "1",
     "safespot": null,
@@ -30713,6 +30715,7 @@
   },
   {
     "examine": "A nasty crawling critter.",
+    "combat_audio": "1577,1580,1578",
     "melee_animation": "6079",
     "range_animation": "0",
     "attack_speed": "4",
@@ -30736,6 +30739,7 @@
   },
   {
     "examine": "A little, slimy-beetle thing.",
+    "combat_audio": "1577,1580,1579",
     "melee_animation": "0",
     "range_animation": "0",
     "magic_level": "1",
@@ -42163,6 +42167,7 @@
   },
   {
     "examine": "*The Mej caste protect the TzHaar using powerful fire magic.",
+"combat_audio": "260,264,263",
     "start_gfx": "1618",
     "combat_style": "2",
     "melee_animation": "9260",
@@ -42187,6 +42192,7 @@
   },
   {
     "examine": "*The Mej caste protect the TzHaar using powerful fire magic.",
+"combat_audio": "260,264,263",
     "start_gfx": "1618",
     "combat_style": "2",
     "melee_animation": "9260",
@@ -42211,6 +42217,7 @@
   },
   {
     "examine": "*The Mej caste protect the TzHaar using powerful fire magic.",
+"combat_audio": "260,264,263",
     "start_gfx": "1618",
     "combat_style": "2",
     "melee_animation": "9260",
@@ -42235,6 +42242,7 @@
   },
   {
     "examine": "*The Mej caste protect the TzHaar using powerful fire magic.",
+"combat_audio": "260,264,263",
     "start_gfx": "1618",
     "combat_style": "2",
     "melee_animation": "9260",
@@ -42259,6 +42267,7 @@
   },
   {
     "examine": "*The Mej caste protect the TzHaar using powerful fire magic.",
+"combat_audio": "260,264,263",
     "start_gfx": "1618",
     "combat_style": "2",
     "melee_animation": "9260",
@@ -42274,7 +42283,7 @@
     "safespot": null,
     "lifepoints": "100",
     "strength_level": "70",
-    "id": "2595",
+    "id": "2595","combat_audio": "260,264,263",
     "aggressive": "false",
     "bonuses": "60,120,90,120,60,60,50,45,0,0,0,0,0,0,0",
     "range_level": "1",
@@ -42283,6 +42292,7 @@
   },
   {
     "examine": "*The Mej caste protect the TzHaar using powerful fire magic.",
+"combat_audio": "260,264,263",
     "start_gfx": "1618",
     "combat_style": "2",
     "melee_animation": "9260",
@@ -42307,6 +42317,7 @@
   },
   {
     "examine": "*The Mej caste protect the TzHaar using powerful fire magic.",
+"combat_audio": "260,264,263",
     "start_gfx": "1618",
     "combat_style": "2",
     "melee_animation": "9260",
@@ -42331,6 +42342,7 @@
   },
   {
     "examine": "The Hur caste, with their small, dexterous hands, are skilled craftsmen.",
+"combat_audio": "251,253,252",
     "melee_animation": "9286",
     "range_animation": "9286",
     "attack_speed": "5",
@@ -42351,6 +42363,7 @@
   },
   {
     "examine": "The Hur caste, with their small, dexterous hands, are skilled craftsmen.",
+"combat_audio": "251,253,252",
     "melee_animation": "9286",
     "range_animation": "9286",
     "attack_speed": "5",
@@ -42371,6 +42384,7 @@
   },
   {
     "examine": "The Hur caste, with their small, dexterous hands, are skilled craftsmen.",
+"combat_audio": "251,253,252",
     "melee_animation": "9286",
     "range_animation": "9286",
     "attack_speed": "5",
@@ -42391,6 +42405,7 @@
   },
   {
     "examine": "The Hur caste, with their small, dexterous hands, are skilled craftsmen.",
+"combat_audio": "251,253,252",
     "melee_animation": "9286",
     "range_animation": "9286",
     "attack_speed": "5",
@@ -42411,6 +42426,7 @@
   },
   {
     "examine": "The Hur caste, with their small, dexterous hands, are skilled craftsmen.",
+"combat_audio": "251,253,252",
     "melee_animation": "9286",
     "range_animation": "9286",
     "attack_speed": "5",
@@ -42431,6 +42447,7 @@
   },
   {
     "examine": "The Hur caste, with their small, dexterous hands, are skilled craftsmen.",
+"combat_audio": "251,253,252",
     "melee_animation": "9286",
     "range_animation": "9286",
     "attack_speed": "5",
@@ -42451,6 +42468,7 @@
   },
   {
     "examine": "It belongs to the hunter class.",
+"combat_audio": "266,271,270",
     "melee_animation": "9345",
     "range_animation": "9345",
     "attack_speed": "4",
@@ -42471,6 +42489,7 @@
   },
   {
     "examine": "It belongs to the hunter class.",
+"combat_audio": "266,271,270",
     "melee_animation": "9345",
     "range_animation": "9345",
     "attack_speed": "4",
@@ -42491,6 +42510,7 @@
   },
   {
     "examine": "It belongs to the hunter class.",
+"combat_audio": "266,271,270",
     "combat_style": "1",
     "melee_animation": "9345",
     "range_animation": "9345",
@@ -42513,6 +42533,7 @@
   },
   {
     "examine": "It belongs to the hunter class.",
+"combat_audio": "266,271,270",
     "melee_animation": "9345",
     "range_animation": "9345",
     "attack_speed": "4",
@@ -42533,6 +42554,7 @@
   },
   {
     "examine": "It belongs to the hunter class.",
+"combat_audio": "266,271,270",
     "melee_animation": "9345",
     "range_animation": "9345",
     "attack_speed": "4",
@@ -42553,6 +42575,7 @@
   },
   {
     "examine": "It belongs to the hunter class.",
+"combat_audio": "266,271,270",
     "combat_style": "1",
     "melee_animation": "9345",
     "range_animation": "9345",
@@ -42576,6 +42599,7 @@
   },
   {
     "examine": "Must be a guard or something.",
+"combat_audio": "250,257,256",
     "melee_animation": "9345",
     "range_animation": "9345",
     "attack_speed": "4",
@@ -42596,6 +42620,7 @@
   },
   {
     "examine": "Must be a guard or something.",
+"combat_audio": "250,257,256",
     "melee_animation": "9345",
     "range_animation": "9345",
     "attack_speed": "4",
@@ -42616,6 +42641,7 @@
   },
   {
     "examine": "Must be a guard or something.",
+    "combat_audio": "250,257,256",
     "melee_animation": "9345",
     "range_animation": "9345",
     "attack_speed": "4",
@@ -42636,6 +42662,7 @@
   },
   {
     "examine": "Must be a guard or something.",
+    "combat_audio": "250,257,256",
     "melee_animation": "9345",
     "range_animation": "9345",
     "attack_speed": "4",
@@ -42656,6 +42683,7 @@
   },
   {
     "examine": "Must be a guard or something.",
+    "combat_audio": "250,257,256",
     "melee_animation": "9345",
     "range_animation": "9345",
     "attack_speed": "4",
@@ -42676,6 +42704,7 @@
   },
   {
     "examine": "Must be a guard or something.",
+    "combat_audio": "250,257,256",
     "melee_animation": "9345",
     "range_animation": "9345",
     "attack_speed": "4",
@@ -42696,6 +42725,7 @@
   },
   {
     "examine": "Must be a guard or something.",
+    "combat_audio": "250,257,256",
     "melee_animation": "9345",
     "range_animation": "9345",
     "attack_speed": "4",
@@ -49402,6 +49432,7 @@
   {
     "agg_radius": "20",
     "examine": "Champion of the skeletons.",
+    "combat_audio": "776,778,777",
     "melee_animation": "5485",
     "range_animation": "5493",
     "attack_speed": "5",
@@ -49425,6 +49456,7 @@
   {
     "agg_radius": "20",
     "examine": "Champion of the zombies.",
+        "combat_audio": "921,923,922",
     "melee_animation": "5581",
     "range_animation": "0",
     "attack_speed": "5",
@@ -54920,7 +54952,7 @@
     "examine": "Not the most beautiful fish in the sea.",
     "melee_animation": "3433",
     "range_animation": "0",
-    "combat_audio": "241,243,242",
+"combat_audio": "243,241,242",
     "attack_speed": "4",
     "magic_level": "0",
     "respawn_delay": "10",
@@ -54942,7 +54974,7 @@
   {
     "examine": "Not the most beautiful fish in the sea.",
     "melee_animation": "3433",
-    "combat_audio": "241,243,242",
+"combat_audio": "243,241,242",
     "attack_speed": "4",
     "magic_level": "0",
     "respawn_delay": "5",
@@ -68204,7 +68236,7 @@
     "examine": "A horrible, emaciated ape like creature with beady red eyes.",
     "melee_animation": "4234",
     "range_animation": "4234",
-    "combat_audio": "496,500,499",
+    "combat_audio": "497,500,499",
     "attack_speed": "4",
     "magic_level": "1",
     "respawn_delay": "50",
@@ -68229,7 +68261,7 @@
     "examine": "A horrible, emaciated ape like creature with beady red eyes.",
     "melee_animation": "4234",
     "range_animation": "4234",
-    "combat_audio": "496,500,499",
+    "combat_audio": "497,500,499",
     "attack_speed": "4",
     "magic_level": "1",
     "respawn_delay": "50",
@@ -68254,7 +68286,7 @@
     "examine": "A horrible, emaciated ape like creature with beady red eyes.",
     "melee_animation": "4234",
     "range_animation": "4234",
-    "combat_audio": "496,500,499",
+    "combat_audio": "497,500,499",
     "attack_speed": "4",
     "magic_level": "1",
     "respawn_delay": "50",
@@ -68279,7 +68311,7 @@
     "examine": "A horrible, emaciated ape like creature with beady red eyes.",
     "melee_animation": "4234",
     "range_animation": "4234",
-    "combat_audio": "496,500,499",
+    "combat_audio": "497,500,499",
     "attack_speed": "4",
     "magic_level": "1",
     "respawn_delay": "50",
@@ -68495,6 +68527,7 @@
   },
   {
     "examine": "A colourful bird.",
+    "combat_audio": "306,308,307",
     "name": "Parrot",
     "defence_level": "1",
     "safespot": null,
@@ -68933,7 +68966,7 @@
   {
     "examine": "Big... Cow-like... But cows don't have serpent tails!",
     "melee_animation": "4271",
-    "combat_audio": "511,330,329",
+"combat_audio": "328,331,329",
     "attack_speed": "4",
     "magic_level": "35",
     "spell_id": "7",
@@ -68957,7 +68990,7 @@
   {
     "examine": "Big... Cow-like... But cows don't have serpent tails!",
     "melee_animation": "4271",
-    "combat_audio": "328,330,329",
+"combat_audio": "328,331,329",
     "attack_speed": "4",
     "magic_level": "35",
     "spell_id": "7",
@@ -106734,6 +106767,7 @@
   },
   {
     "examine": "Wax on, wax off, grab a butterfly and eat it... Wait, what?",
+"combat_audio": "4306,4288,4285",
     "melee_animation": "8069",
     "range_animation": "0",
     "attack_speed": "7",
@@ -106755,6 +106789,7 @@
   },
   {
     "examine": "Wax on, wax off, grab a butterfly and eat it... Wait, what?",
+"combat_audio": "4306,4288,4285",
     "melee_animation": "8069",
     "range_animation": "0",
     "attack_speed": "7",
@@ -106776,6 +106811,7 @@
   },
   {
     "examine": "He ent such a bad guy.",
+    "combat_audio": "4282,4294,4295",
     "melee_animation": "7853",
     "range_animation": "0",
     "magic_level": "71",
@@ -106796,6 +106832,7 @@
   },
   {
     "examine": "He ent such a bad guy.",
+    "combat_audio": "4282,4294,4295",
     "melee_animation": "7853",
     "range_animation": "0",
     "magic_level": "71",
@@ -106898,6 +106935,7 @@
   },
   {
     "examine": "A hermit slug!",
+    "combat_audio": "4298,4320,4303",
     "combat_style": "1",
     "melee_animation": "8143",
     "range_animation": "8143",
@@ -106923,6 +106961,7 @@
   },
   {
     "examine": "A hermit slug!",
+    "combat_audio": "4298,4320,4303",
     "combat_style": "1",
     "melee_animation": "8143",
     "range_animation": "8143",
@@ -107003,6 +107042,7 @@
   },
   {
     "examine": "A very split personality.",
+    "combat_audio": "4223,4251,4257",
     "combat_style": "1",
     "melee_animation": "7935",
     "magic_level": "72",
@@ -107021,6 +107061,7 @@
   },
   {
     "examine": "A very split personality.",
+    "combat_audio": "4223,4251,4257",
     "combat_style": "1",
     "melee_animation": "7935",
     "magic_level": "72",
@@ -107039,6 +107080,7 @@
   },
   {
     "examine": "Smells worse than he looks.",
+    "combat_audio": "4198,4139,4147",
     "melee_animation": "7741",
     "magic_level": "62",
     "respawn_delay": "0",
@@ -107056,6 +107098,7 @@
   },
   {
     "examine": "Smells worse than he looks.",
+        "combat_audio": "4198,4139,4147",
     "melee_animation": "7741",
     "magic_level": "62",
     "respawn_delay": "0",
@@ -107074,6 +107117,7 @@
   {
     "examine": "Definitely not teenaged, although the jury is out on its ninja skills.",
     "combat_style": "0",
+    "combat_audio": "4287,4296,4281",
     "melee_animation": "8286",
     "range_animation": "0",
     "attack_speed": "7",
@@ -107095,6 +107139,7 @@
   },
   {
     "examine": "Definitely not teenaged, although the jury is out on its ninja skills.",
+    "combat_audio": "4287,4296,4281",
     "combat_style": "0",
     "melee_animation": "8286",
     "range_animation": "0",
@@ -107174,6 +107219,7 @@
   },
   {
     "examine": "Lurking like only a lurker can.",
+    "combat_audio": "4215,4221,4267",
     "melee_animation": "7680",
     "range_animation": "0",
     "attack_speed": "7",
@@ -107195,6 +107241,7 @@
   },
   {
     "examine": "Lurking like only a lurker can.",
+    "combat_audio": "4215,4221,4267",
     "melee_animation": "7680",
     "range_animation": "0",
     "attack_speed": "7",
@@ -107281,6 +107328,7 @@
   },
   {
     "examine": "Southern fried please!",
+    "combat_audio": "4197,4214,4222",
     "combat_style": "2",
     "melee_animation": "7810",
     "range_animation": "7810",
@@ -107305,6 +107353,7 @@
   },
   {
     "examine": "Southern fried please!",
+    "combat_audio": "4197,4214,4222",
     "combat_style": "2",
     "melee_animation": "7810",
     "range_animation": "7810",
@@ -107330,6 +107379,7 @@
   },
   {
     "examine": "It's mean and green.",
+    "combat_audio": "4234,4218,4192",
     "melee_animation": "8208",
     "range_animation": "0",
     "attack_speed": "5",
@@ -107351,6 +107401,7 @@
   },
   {
     "examine": "It's mean and green.",
+    "combat_audio": "4234,4218,4192",
     "melee_animation": "8208",
     "range_animation": "0",
     "attack_speed": "5",
@@ -107413,6 +107464,7 @@
   },
   {
     "examine": "Surprisingly slime-free.",
+    "combat_audio": "4308,4309,4313",
     "combat_style": "1",
     "melee_animation": "7795",
     "range_animation": "0",
@@ -107435,6 +107487,7 @@
   },
   {
     "examine": "Surprisingly slime-free.",
+    "combat_audio": "4308,4309,4313",
     "combat_style": "1",
     "melee_animation": "7795",
     "range_animation": "0",
@@ -107539,7 +107592,7 @@
     "examine": "Salt and vinegaroon.",
     "melee_animation": "6254",
     "range_animation": "0",
-    "combat_audio": "3611,3612,3610",
+"combat_audio": "4305,4280,4317",
     "attack_speed": "8",
     "magic_level": "18",
     "respawn_delay": "0",
@@ -107561,7 +107614,7 @@
     "examine": "Salt and vinegaroon.",
     "melee_animation": "6254",
     "range_animation": "0",
-    "combat_audio": "3611,3612,3610",
+"combat_audio": "4305,4280,4317",
     "attack_speed": "8",
     "magic_level": "18",
     "respawn_delay": "0",
@@ -107712,6 +107765,7 @@
   {
     "examine": "Violent little so-and-so.",
     "melee_animation": "7928",
+    "combat_audio": "4160,4184,4210",
     "range_animation": "0",
     "attack_speed": "8",
     "magic_level": "29",
@@ -107732,6 +107786,7 @@
   },
   {
     "examine": "Violent little so-and-so.",
+        "combat_audio": "4160,4184,4210",
     "melee_animation": "7928",
     "range_animation": "0",
     "attack_speed": "8",
@@ -107790,6 +107845,7 @@
   },
   {
     "examine": "Puts the 'crust' in 'crustacean'.",
+    "combat_audio": "4216,4235,4201",
     "melee_animation": "8112",
     "attack_speed": "7",
     "magic_level": "67",
@@ -107809,6 +107865,7 @@
   },
   {
     "examine": "Puts the 'crust' in 'crustacean'.",
+    "combat_audio": "4216,4235,4201",
     "melee_animation": "8112",
     "range_animation": "0",
     "attack_speed": "7",
@@ -107861,6 +107918,7 @@
   },
   {
     "examine": "He's just a big bully.",
+    "combat_audio": "4338,4334,4335",
     "combat_style": "0",
     "melee_animation": "8024",
     "attack_speed": "8",
@@ -107881,6 +107939,7 @@
   },
   {
     "examine": "He's just a big bully.",
+    "combat_audio": "4338,4334,4335",
     "combat_style": "0",
     "melee_animation": "8024",
     "range_animation": "0",
@@ -107904,6 +107963,7 @@
   },
   {
     "examine": "He's just a big bully.",
+    "combat_audio": "4338,4334,4335",
     "combat_style": "0",
     "melee_animation": "8024",
     "attack_speed": "8",
@@ -107925,6 +107985,7 @@
   },
   {
     "examine": "He's just a big bully.",
+    "combat_audio": "4338,4334,4335",
     "combat_style": "0",
     "melee_animation": "8024",
     "range_animation": "0",
@@ -107949,6 +108010,7 @@
   },
   {
     "examine": "He's just a big bully.",
+    "combat_audio": "4338,4334,4335",
     "combat_style": "0",
     "melee_animation": "8024",
     "attack_speed": "7",
@@ -107969,6 +108031,7 @@
   },
   {
     "examine": "He's just a big bully.",
+    "combat_audio": "4338,4334,4335",
     "combat_style": "0",
     "melee_animation": "8024",
     "range_animation": "0",
@@ -107992,6 +108055,7 @@
   },
   {
     "examine": "He's just a big bully.",
+    "combat_audio": "4338,4334,4335",
     "combat_style": "0",
     "melee_animation": "8024",
     "attack_speed": "7",
@@ -108013,6 +108077,7 @@
   },
   {
     "examine": "He's just a big bully.",
+    "combat_audio": "4338,4334,4335",
     "combat_style": "0",
     "melee_animation": "8024",
     "range_animation": "0",
@@ -108036,6 +108101,7 @@
   },
   {
     "examine": "He's just a big bully.",
+    "combat_audio": "4338,4334,4335",
     "combat_style": "0",
     "melee_animation": "8024",
     "attack_speed": "",
@@ -108057,6 +108123,7 @@
   },
   {
     "examine": "He's just a big bully.",
+    "combat_audio": "4338,4334,4335",
     "combat_style": "0",
     "melee_animation": "8024",
     "range_animation": "0",
@@ -108079,6 +108146,7 @@
   },
   {
     "examine": "He's just a big bully.",
+    "combat_audio": "4338,4334,4335",
     "melee_animation": "8024",
     "magic_level": "78",
     "respawn_delay": "0",
@@ -108097,6 +108165,7 @@
   },
   {
     "examine": "He's just a big bully.",
+    "combat_audio": "4338,4334,4335",
     "melee_animation": "8024",
     "magic_level": "78",
     "respawn_delay": "0",
@@ -108158,6 +108227,7 @@
   },
   {
     "examine": "Putting all three of its best feet forward.",
+    "combat_audio": "4212,4264,4229",
     "melee_animation": "7896",
     "range_animation": "0",
     "attack_speed": "8",
@@ -108179,6 +108249,7 @@
   },
   {
     "examine": "Putting all three of its best feet forward.",
+    "combat_audio": "4212,4264,4229",
     "melee_animation": "7896",
     "range_animation": "0",
     "attack_speed": "8",
@@ -108200,6 +108271,7 @@
   },
   {
     "examine": "It's just a harmless wee rabbit.",
+    "combat_audio": "4163,4272,4243",
     "combat_style": "2",
     "melee_animation": "8304",
     "range_animation": "8304",
@@ -108222,6 +108294,7 @@
   },
   {
     "examine": "It's just a harmless wee rabbit.",
+    "combat_audio": "4163,4272,4243",
     "combat_style": "2",
     "melee_animation": "8304",
     "range_animation": "8304",
@@ -108244,6 +108317,7 @@
   },
   {
     "examine": "I suppose it could smell worse, I just can't think how.",
+    "combat_audio": "4134,4233,4162",
     "melee_animation": "7769",
     "range_animation": "0",
     "attack_speed": "8",
@@ -108265,6 +108339,7 @@
   },
   {
     "examine": "I suppose it could smell worse, I just can't think how.",
+    "combat_audio": "4134,4233,4162",
     "melee_animation": "7769",
     "range_animation": "0",
     "attack_speed": "8",
@@ -108286,6 +108361,7 @@
   },
   {
     "examine": "Bulk haulage never smelled so bad.",
+    "combat_audio": "4175,4200,4207",
     "melee_animation": "5782",
     "range_animation": "5782",
     "attack_speed": "5",
@@ -108307,6 +108383,7 @@
   },
   {
     "examine": "Bulk haulage never smelled so bad.",
+    "combat_audio": "4175,4200,4207",
     "melee_animation": "5782",
     "range_animation": "5782",
     "attack_speed": "5",
@@ -108667,6 +108744,7 @@
   },
   {
     "examine": "The only creature with a mouth big enough to hold a cannonball.",
+    "combat_audio": "4328,4301,4289",
     "melee_animation": "7260",
     "range_animation": "0",
     "attack_speed": "7",
@@ -108688,6 +108766,7 @@
   },
   {
     "examine": "The only creature with a mouth big enough to hold a cannonball.",
+    "combat_audio": "4328,4301,4289",
     "melee_animation": "7260",
     "range_animation": "0",
     "attack_speed": "7",
@@ -110139,7 +110218,8 @@
     "attack_level": "1"
   },
   {
-    "examine": "On RuneScape, acid gets indigestion from YOU!",
+    "examine": "On Gielinor, acid gets indigestion from YOU!",
+    "combat_audio": "4242,4182,4252",
     "melee_animation": "8569",
     "range_animation": "0",
     "attack_speed": "7",
@@ -110160,7 +110240,8 @@
     "attack_level": "50"
   },
   {
-    "examine": "On RuneScape, acid gets indigestion from YOU!",
+    "examine": "On Gielinor, acid gets indigestion from YOU!",
+        "combat_audio": "4242,4182,4252",
     "melee_animation": "8569",
     "range_animation": "0",
     "attack_speed": "7",
@@ -114436,6 +114517,7 @@
   },
   {
     "examine": "Do you hear duelling banjos?",
+    "combat_audio": "4624,4715,4673",
     "combat_style": "0",
     "melee_animation": "8222",
     "magic_level": "77",
@@ -114455,6 +114537,7 @@
   },
   {
     "examine": "Do you hear duelling banjos?",
+    "combat_audio": "4624,4715,4673",
     "combat_style": "0",
     "melee_animation": "8222",
     "range_animation": "0",
@@ -114477,6 +114560,7 @@
   },
   {
     "examine": "It buzzes and bites. Nasty.",
+    "combat_audio": "4600,4610,4615",
     "melee_animation": "8032",
     "range_animation": "8032",
     "attack_speed": "8",
@@ -114499,6 +114583,7 @@
   },
   {
     "examine": "It buzzes and bites. Nasty.",
+    "combat_audio": "4600,4610,4615",
     "melee_animation": "8032",
     "range_animation": "8032",
     "attack_speed": "8",
@@ -114522,6 +114607,7 @@
   },
   {
     "examine": "It spins.",
+    "combat_audio": "4672,4691,4690",
     "melee_animation": "8172",
     "range_animation": "0",
     "attack_speed": "8",
@@ -114542,6 +114628,7 @@
   },
   {
     "examine": "It spins.",
+    "combat_audio": "4672,4691,4690",
     "melee_animation": "8172",
     "range_animation": "0",
     "attack_speed": "8",
@@ -114646,6 +114733,7 @@
   },
   {
     "examine": "It'll kill your enemies, and makes a great cup of tea.",
+    "combat_audio": "4602,4697,4642",
     "combat_style": "1",
     "melee_animation": "7879",
     "range_animation": "422",
@@ -114669,6 +114757,7 @@
   },
   {
     "examine": "It'll kill your enemies, and makes a great cup of tea.",
+    "combat_audio": "4602,4697,4642",
     "combat_style": "1",
     "melee_animation": "7879",
     "range_animation": "422",
@@ -114737,6 +114826,7 @@
   },
   {
     "examine": "The King of the Titans!",
+    "combat_audio": "4616,4704,4668",
     "combat_style": "1",
     "melee_animation": "8183",
     "range_animation": "8183",
@@ -114762,6 +114852,7 @@
   },
   {
     "examine": "The King of the Titans!",
+    "combat_audio": "4616,4704,4668",
     "combat_style": "1",
     "melee_animation": "8183",
     "range_animation": "8183",
@@ -114787,6 +114878,7 @@
   },
   {
     "examine": "Four fists can make quite an impression IN someone...",
+    "combat_audio": "4632,4718,4692",
     "melee_animation": "8050",
     "attack_speed": "7",
     "magic_level": "66",
@@ -114806,6 +114898,7 @@
   },
   {
     "examine": "Four fists can make quite an impression IN someone...",
+    "combat_audio": "4632,4718,4692",
     "melee_animation": "8050",
     "range_animation": "0",
     "attack_speed": "7",
@@ -114828,6 +114921,7 @@
   },
   {
     "examine": "If a normal black cat is bad luck, what happens if this crosses your path?",
+    "combat_audio": "4628,4643,4667",
     "melee_animation": "5989",
     "range_animation": "0",
     "attack_speed": "8",
@@ -114849,6 +114943,7 @@
   },
   {
     "examine": "If a normal black cat is bad luck, what happens if this crosses your path?",
+    "combat_audio": "4628,4643,4667",
     "melee_animation": "5989",
     "range_animation": "0",
     "attack_speed": "8",
@@ -114870,6 +114965,7 @@
   },
   {
     "examine": "Big, mean, ugly, and from a different dimension.",
+    "combat_audio": "4644,4660,4717",
     "melee_animation": "7693",
     "range_animation": "0",
     "attack_speed": "8",
@@ -114891,6 +114987,7 @@
   },
   {
     "examine": "Big, mean, ugly, and from a different dimension.",
+    "combat_audio": "4644,4660,4717",
     "melee_animation": "7693",
     "range_animation": "0",
     "attack_speed": "8",
@@ -114954,6 +115051,7 @@
   },
   {
     "examine": "Looks a little...volatile.",
+    "combat_audio": "4601,4675,4716",
     "combat_style": "1",
     "melee_animation": "7755",
     "range_animation": "0",
@@ -114976,6 +115074,7 @@
   },
   {
     "examine": "Looks a little...volatile.",
+    "combat_audio": "4601,4675,4716",
     "combat_style": "1",
     "melee_animation": "7755",
     "range_animation": "0",
@@ -114998,6 +115097,7 @@
   },
   {
     "examine": "Scorching!",
+    "combat_audio": "4604,4614,4688",
     "combat_style": "2",
     "melee_animation": "7834",
     "range_animation": "7834",
@@ -115023,6 +115123,7 @@
   },
   {
     "examine": "Scorching!",
+    "combat_audio": "4604,4614,4688",
     "combat_style": "2",
     "melee_animation": "7834",
     "range_animation": "7834",
@@ -115048,6 +115149,7 @@
   },
   {
     "examine": "Gathers rolling stones to bash people with.",
+    "combat_audio": "4607,4662,4663",
     "melee_animation": "7844",
     "range_animation": "7834",
     "attack_speed": "5",
@@ -115072,6 +115174,7 @@
   },
   {
     "examine": "Gathers rolling stones to bash people with.",
+        "combat_audio": "4607,4662,4663",
     "melee_animation": "7844",
     "range_animation": "7834",
     "attack_speed": "5",
@@ -115144,6 +115247,7 @@
   },
   {
     "examine": "This bat burned down the belfry.",
+    "combat_audio": "4627,4669,4703",
     "combat_style": "2",
     "melee_animation": "8257",
     "range_animation": "0",
@@ -115166,6 +115270,7 @@
   },
   {
     "examine": "This bat burned down the belfry.",
+    "combat_audio": "4627,4669,4703",
     "combat_style": "2",
     "melee_animation": "8257",
     "range_animation": "0",
@@ -115231,6 +115336,7 @@
   },
   {
     "examine": "Those teeth are pretty big!",
+    "combat_audio": "4650,4687,4664",
     "start_gfx": "1365",
     "melee_animation": "5228",
     "range_animation": "0",
@@ -115253,6 +115359,7 @@
   },
   {
     "examine": "Those teeth are pretty big!",
+    "combat_audio": "4650,4687,4664",
     "start_gfx": "1365",
     "melee_animation": "5228",
     "range_animation": "0",
@@ -115275,6 +115382,7 @@
   },
   {
     "examine": "It shifts.",
+    "combat_audio": "4606,4689,4649",
     "melee_animation": "8131",
     "range_animation": "0",
     "attack_speed": "8",
@@ -115295,6 +115403,7 @@
   },
   {
     "examine": "It shifts.",
+        "combat_audio": "4606,4689,4649",
     "melee_animation": "8131",
     "range_animation": "0",
     "attack_speed": "8",
@@ -115368,6 +115477,7 @@
   },
   {
     "examine": "*It's like a little stomach on wings.",
+    "combat_audio": "4625,4711,4629",
     "melee_animation": "7994",
     "range_animation": "0",
     "attack_speed": "7",
@@ -115389,6 +115499,7 @@
   },
   {
     "examine": "*It's like a little stomach on wings.",
+    "combat_audio": "4625,4711,4629",
     "melee_animation": "7994",
     "range_animation": "0",
     "attack_speed": "7",
@@ -115431,6 +115542,7 @@
   },
   {
     "examine": "He is an iron man!",
+    "combat_audio": "4596,4612,4666",
     "combat_style": "0",
     "melee_animation": "7946",
     "attack_speed": "6",
@@ -115452,6 +115564,7 @@
   },
   {
     "examine": "He is an iron man!",
+    "combat_audio": "4596,4612,4666",
     "combat_style": "0",
     "melee_animation": "7946",
     "combat_audio": "0,0,0",
@@ -120758,6 +120871,7 @@
   },
   {
     "examine": "*The Mej caste protect the TzHaar using powerful fire magic.",
+    "combat_audio": "260,264,263",
     "name": "TzHaar-Mej",
     "defence_level": "62",
     "safespot": null,
@@ -126354,6 +126468,7 @@
   },
   {
     "examine": "An annoying flappy thing.",
+    "combat_audio": "294,292,293",
     "name": "Bat",
     "defence_level": "10",
     "safespot": null,

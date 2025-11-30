@@ -19,6 +19,7 @@ import core.game.world.map.zone.MapZone
 import core.game.world.map.zone.ZoneBorders
 import shared.consts.Components
 import shared.consts.Regions
+import shared.consts.Sounds
 import java.util.*
 
 /**
@@ -188,6 +189,7 @@ class DarkZone : MapZone("Dark zone", true), EventHook<UseWithEvent> {
             // 4.2s.
             runTask(player, 7) {
                 val damage = player.skills.lifepoints / 4 // 25% damage.
+                playGlobalAudio(player.location, Sounds.LANTERN_EXPLODES_1583)
                 impact(player, damage, HitsplatType.NORMAL)
 
                 val slot = player.inventory.getSlot(Item(source.litId))

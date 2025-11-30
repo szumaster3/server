@@ -32,6 +32,7 @@ internal object GameAttributes {
     const val CON_TOOLS = "construction:tools"
     const val CON_ROOM = "construction:room"
     const val CON_REMOVE = "construction:remove_dialogue"
+    const val CON_SERVANT_CALL = "con:call"
     const val CON_LAST_TASK = "construction:servant_last_task"
     const val CON_TASK = "construction:servant_task"
     const val CON_FLATPACK_TIER = "construction:flatpack:tier"

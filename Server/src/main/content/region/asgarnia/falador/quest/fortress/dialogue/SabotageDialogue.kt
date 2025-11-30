@@ -50,18 +50,23 @@ class SabotageDialogue(player: Player? = null) : Dialogue(player) {
                 playAudio(player, Sounds.BK_CABBAGE_HIT_1414)
                 sendNPCDialogue(player, NPCs.BLACK_KNIGHT_CAPTAIN_610, "What's that noise?", FaceAnim.ASKING).also { stage++ }
             }
-            11 -> sendNPCDialogueLines(player, NPCs.WITCH_611, FaceAnim.NEUTRAL, false, "Hopefully Greldo with the cabbage... yes, look her it", "co....NOOOOOoooo!").also { stage++ }
+            11 -> {
+                playAudio(player, Sounds.BK_EXPLOSION_1417)
+                sendNPCDialogueLines(player, NPCs.WITCH_611, FaceAnim.NEUTRAL, false, "Hopefully Greldo with the cabbage... yes, look her it", "co....NOOOOOoooo!").also { stage++ }
+            }
             12 -> {
                 playAudio(player, Sounds.BK_EXPLOSION_1418)
                 sendNPCDialogue(player, NPCs.WITCH_611, "My potion!", FaceAnim.EXTREMELY_SHOCKED).also { stage++ }
             }
             13 -> sendNPCDialogue(player, NPCs.BLACK_KNIGHT_CAPTAIN_610, "Oh boy, this doesn't look good!", FaceAnim.WORRIED).also { stage++ }
             14 -> sendNPCDialogue(player, NPCs.BLACK_CAT_4607, "Meow!", FaceAnim.CHILD_FRIENDLY).also { stage++ }
-            15 -> if (removeItem(player, Items.CABBAGE_1965)) {
-                end()
-                setVarbit(player, 2494, 1, true)
-                setQuestStage(player, Quests.BLACK_KNIGHTS_FORTRESS, 30)
-                player(FaceAnim.HAPPY, "Looks like my work here is done. Seems like that's", "successfully sabotaged their little secret weapon plan.")
+            15 -> {
+                if (removeItem(player, Items.CABBAGE_1965)) {
+                    end()
+                    setVarbit(player, 2494, 1, true)
+                    setQuestStage(player, Quests.BLACK_KNIGHTS_FORTRESS, 30)
+                    player(FaceAnim.HAPPY, "Looks like my work here is done. Seems like that's", "successfully sabotaged their little secret weapon plan.")
+                }
             }
         }
         return true

@@ -25,25 +25,24 @@ class SlayerTowerPlugin : InteractionListener {
 
     override fun defineListeners() {
         on(SLAYER_DOOR_IDS, IntType.SCENERY, "open", "close") { player, node ->
-            when (node.id) {
-                Scenery.DOOR_4491, Scenery.DOOR_4492, Scenery.DOOR_4490, Scenery.DOOR_4487 -> {
-                    DoorActionHandler.handleDoor(player, node.asScenery())
-                    val option = getUsedOption(player)
-                    val anim = when (option) {
-                        "open"  -> Animations.GARGOYLE_STATUE_OPEN_1533
-                        "close" -> Animations.GARGOYLE_STATUE_CLOSE_1532
-                        else    -> null
+            if (node.id in listOf(Scenery.DOOR_4487, Scenery.DOOR_4490, Scenery.DOOR_4491, Scenery.DOOR_4492)) {
+                DoorActionHandler.handleDoor(player, node.asScenery())
+                val option = getUsedOption(player)
+                val anim = when(option) {
+                    "open" ->  Animations.GARGOYLE_STATUE_OPEN_1533 to 2717
+                    "close" -> Animations.GARGOYLE_STATUE_CLOSE_1532 to 2718
+                    else -> null
+                }
+                anim?.let { (animation, sound) ->
+                    GargoyleStatues.values().forEach { statue ->
+                        statue.get()?.let { animateScenery(it, animation) }
                     }
-
-                    if (anim != null) {
-                        GargoyleStatues.values().forEach { statue ->
-                            statue.get()?.let { animateScenery(it, anim) }
-                        }
-                    }
+                    playGlobalAudio(player.location, sound)
                 }
             }
             return@on true
         }
+
 
         on(SLAYER_DOOR_FIRST_FLOOR_IDS, IntType.SCENERY, "open", "close") { player, node ->
             DoorActionHandler.handleDoor(player, node.asScenery())

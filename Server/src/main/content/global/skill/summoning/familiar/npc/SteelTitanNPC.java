@@ -17,6 +17,8 @@ import core.tools.RandomFunction;
 import shared.consts.Items;
 import shared.consts.NPCs;
 
+import static core.api.ContentAPIKt.playGlobalAudio;
+
 @Initializable
 public final class SteelTitanNPC extends content.global.skill.summoning.familiar.Familiar {
     private static final SwitchAttack[] ATTACKS = {new SwitchAttack(CombatStyle.RANGE.getSwingHandler(), Animation.create(8190), null, null, Projectile.create(null, null, 1445, 60, 36, 41, 46)), new SwitchAttack(CombatStyle.MAGIC.getSwingHandler(), Animation.create(8190), null, null, Projectile.create(null, null, 1445, 60, 36, 41, 46)), new SwitchAttack(CombatStyle.MELEE.getSwingHandler(), Animation.create(8183))};
@@ -72,6 +74,8 @@ public final class SteelTitanNPC extends content.global.skill.summoning.familiar
             return false;
         }
         specialMove = true;
+        playGlobalAudio(this.location, 4611);
+        playGlobalAudio(this.location, 4653, 30);
         visualize(Animation.create(8183), Graphics.create(1449));
         return true;
     }

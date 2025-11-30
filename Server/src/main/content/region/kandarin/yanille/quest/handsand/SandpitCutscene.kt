@@ -11,6 +11,7 @@ import core.tools.END_DIALOGUE
 import shared.consts.Animations
 import shared.consts.NPCs
 import shared.consts.Quests
+import shared.consts.Sounds
 
 class SandpitCutscene(player: Player) : Cutscene(player) {
     override fun setup() {
@@ -44,6 +45,7 @@ class SandpitCutscene(player: Player) : Cutscene(player) {
             }
             5 -> {
                 sendChat(getNPC(NPCs.BERT_3108)!!, "My sand! My lovely sand!")
+                playAudio(player, Sounds.HANDSAND_SANDSWIRL_1591)
                 animateScenery(getObject(46,31)!!, 3038)
                 getNPC(NPCs.BERT_3108)!!.animate(Animation(Animations.CRY_860))
                 sendDialogue(player, "Something very strange happens to the Sandpit, it looks like it has filled itself up!")

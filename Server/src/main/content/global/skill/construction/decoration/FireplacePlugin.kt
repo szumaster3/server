@@ -57,6 +57,7 @@ class FireplacePlugin : OptionHandler() {
             if (!obj.isActive) {
                 return@queueScript stopExecuting(player)
             }
+            playGlobalAudio(player.location,2596)
             removeItem(player, Items.LOGS_1511)
             rewardXP(player, Skills.FIREMAKING, 80.0)
             val durationTicks = 70 + RandomUtils.random(20)

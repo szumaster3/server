@@ -155,6 +155,7 @@ class TheHandintheSandPlugin : InteractionListener {
             lock(player, 3)
             queueScript(player, 1, QueueStrength.SOFT) {
                 if (removeItem(player, used.asItem())) {
+                    playGlobalAudio(player.location,Sounds.HANDSAND_SERUM_1592)
                     sendItemDialogue(player, Items.TRUTH_SERUM_6952, "As you focus the light on the vial and Betty pours the potion in, the lens heats up and shatters. After a few seconds Betty hands you the vial of Truth Serum.")
                     player.questRepository.setStageNonmonotonic(player.questRepository.forIndex(72), 8)
                     setVarbit(player, Vars.VARBIT_BETTY_DESK_1537, 0)
@@ -201,6 +202,7 @@ class TheHandintheSandPlugin : InteractionListener {
          */
 
         on(Items.MAGICAL_ORB_6950, IntType.ITEM, "activate") { player, node ->
+            playAudio(player, Sounds.HANDSAND_ORB_1590)
             if(getQuestStage(player, Quests.THE_HAND_IN_THE_SAND) == 9) {
                 replaceSlot(player, node.index, Item(Items.MAGICAL_ORB_A_6951, 1))
                 sendItemDialogue(player, Items.MAGICAL_ORB_A_6951, "You rub the magical scrying orb as the Wizard told you, it starts to glow, recording everything it sees and hears, now you can talk to Sandy in Brimhaven.")

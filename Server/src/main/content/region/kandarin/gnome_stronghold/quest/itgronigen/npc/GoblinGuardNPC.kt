@@ -41,6 +41,7 @@ class GoblinGuardNPC(
             if (guard.asNpc() != null && guard.isActive) {
                 guard.properties.teleportLocation = guard.properties.spawnLocation
             }
+            //3799,3798
             guard.isActive = true
             GameWorld.Pulser.submit(
                 object : Pulse(0, guard) {

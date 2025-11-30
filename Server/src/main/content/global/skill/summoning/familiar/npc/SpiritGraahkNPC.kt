@@ -2,6 +2,7 @@ package content.global.skill.summoning.familiar.npc
 
 import content.global.skill.summoning.familiar.Familiar
 import content.global.skill.summoning.familiar.FamiliarSpecial
+import core.api.playGlobalAudio
 import core.game.node.entity.combat.equipment.WeaponInterface
 import core.game.node.entity.player.Player
 import core.game.node.entity.skill.SkillBonus
@@ -27,6 +28,7 @@ class SpiritGraahkNPC @JvmOverloads constructor(owner: Player? = null, id: Int =
             return false
         }
         call()
+        playGlobalAudio(this.location, 4622)
         return true
     }
 

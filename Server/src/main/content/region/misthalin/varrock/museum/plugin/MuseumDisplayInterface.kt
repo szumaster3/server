@@ -7,10 +7,7 @@ import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.interaction.InterfaceListener
 import core.game.world.map.Location
-import shared.consts.Components
-import shared.consts.Items
-import shared.consts.Scenery
-import shared.consts.Vars
+import shared.consts.*
 
 class MuseumDisplayInterface : InterfaceListener, InteractionListener {
 
@@ -80,6 +77,7 @@ class MuseumDisplayInterface : InterfaceListener, InteractionListener {
                 sendMessage(player, "You have already taken the statuette.")
                 return@on true
             }
+            playAudio(player, Sounds.VM_DISPLAYCASE_OPEN_3650)
             addItemOrDrop(player, Items.STATUETTE_4618, 1)
             sendItemDialogue(player, Items.STATUETTE_4618, "You open the cabinet and retrieve the statuette.")
             TheGolemListener.updateVarps(player)

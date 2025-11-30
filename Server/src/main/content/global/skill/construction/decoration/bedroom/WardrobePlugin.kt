@@ -17,6 +17,7 @@ class WardrobePlugin : InteractionListener {
             lock(player, 3)
             animate(player, Animations.OPEN_POH_WARDROBE_535)
             openWardrobe(player, scenery)
+            playAudio(player, 942)
             return@on true
         }
     }

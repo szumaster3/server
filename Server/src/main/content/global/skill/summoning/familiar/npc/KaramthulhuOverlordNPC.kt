@@ -16,6 +16,8 @@ class KaramthulhuOverlordNPC @JvmOverloads constructor(owner: Player? = null, id
     }
 
     override fun specialMove(special: FamiliarSpecial): Boolean {
+        //Special: 4193,
+        //Special Impact:4248
         return false
     }
 

@@ -13,7 +13,7 @@ import shared.consts.NPCs
 class LadyTableDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
-        openDialogue(player, content.region.asgarnia.falador.quest.rd.plugin.LadyTablePlugin(), npc)
+        openDialogue(player, content.region.asgarnia.falador.quest.rd.plugin.LadyTableDialogue(), npc)
         return true
     }
 

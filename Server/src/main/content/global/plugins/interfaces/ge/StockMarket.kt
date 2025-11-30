@@ -137,8 +137,14 @@ class StockMarket : InterfaceListener {
                     player.packetDispatch.sendIfaceSettings(settings, 18, 107, 0, 27)
                 }
 
-                157 -> updateOfferAmount(player, tempOffer, tempOffer.amount - 1)
-                159 -> updateOfferAmount(player, tempOffer, tempOffer.amount + 1)
+                157 -> {
+                    playAudio(player, Sounds.GE_DOWN_AMOUNT_4045)
+                    updateOfferAmount(player, tempOffer, tempOffer.amount - 1)
+                }
+                159 -> {
+                    playAudio(player, Sounds.GE_UP_AMOUNT_4041)
+                    updateOfferAmount(player, tempOffer, tempOffer.amount + 1)
+                }
                 162 -> updateOfferAmount(player, tempOffer, if (tempOffer.sell) 1 else tempOffer.amount + 1)
                 164 -> updateOfferAmount(player, tempOffer, if (tempOffer.sell) 10 else tempOffer.amount + 10)
                 166 -> updateOfferAmount(player, tempOffer, if (tempOffer.sell) 100 else tempOffer.amount + 100)
@@ -166,13 +172,9 @@ class StockMarket : InterfaceListener {
                 }
 
                 180 -> updateOfferValue(player, tempOffer, GrandExchange.getRecommendedPrice(tempOffer.itemID))
-                177 -> updateOfferValue(
-                    player, tempOffer, (GrandExchange.getRecommendedPrice(tempOffer.itemID) * 0.95).toInt()
-                )
+                177 -> updateOfferValue(player, tempOffer, (GrandExchange.getRecommendedPrice(tempOffer.itemID) * 0.95).toInt())
 
-                183 -> updateOfferValue(
-                    player, tempOffer, (GrandExchange.getRecommendedPrice(tempOffer.itemID) * 1.05).toInt()
-                )
+                183 -> updateOfferValue(player, tempOffer, (GrandExchange.getRecommendedPrice(tempOffer.itemID) * 1.05).toInt())
 
                 171 -> updateOfferValue(player, tempOffer, tempOffer.offeredValue - 1)
                 173 -> updateOfferValue(player, tempOffer, tempOffer.offeredValue + 1)
@@ -249,8 +251,10 @@ class StockMarket : InterfaceListener {
         }
         offer.offerState = OfferState.ABORTED
         if (offer.sell) {
+            playAudio(player,Sounds.GE_COLLECT_ITEMS_4040)
             offer.addWithdrawItem(offer.itemID, offer.amountLeft)
         } else {
+            playAudio(player,Sounds.GE_COLLECT_COINS_4042)
             offer.addWithdrawItem(Items.COINS_995, offer.amountLeft * offer.offeredValue)
         }
         offer.update()

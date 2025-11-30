@@ -4,6 +4,8 @@ import content.global.skill.gather.mining.MiningNode
 import content.global.skill.summoning.familiar.Familiar
 import content.global.skill.summoning.familiar.FamiliarSpecial
 import content.global.skill.summoning.familiar.Forager
+import core.api.playAudio
+import core.api.playGlobalAudio
 import core.api.sendMessage
 import core.cache.def.impl.NPCDefinition
 import core.game.interaction.OptionHandler
@@ -49,6 +51,7 @@ class DesertWyrmNPC @JvmOverloads constructor(
         if (!canCombatSpecial(target)) return false
 
         faceTemporary(target, 2)
+        playGlobalAudio(target.location,4326)
         visualize(Animation(7795), Graphics(1410))
         Projectile.magic(this, target, 1411, 40, 36, 51, 10).send()
         sendFamiliarHit(target, 5)

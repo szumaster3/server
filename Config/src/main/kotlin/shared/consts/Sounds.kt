@@ -1418,7 +1418,7 @@ object Sounds {
     const val BK_CABBAGE_HIT_1414 = 1414
     const val BK_CAULDRON_BUBBLES_1415 = 1415
     const val BK_CABBAGE_LAND_1416 = 1416
-    const val BK_EXPLODSION_1417 = 1417
+    const val BK_EXPLOSION_1417 = 1417
     const val BK_EXPLOSION_1418 = 1418
     const val BK_FROTH_1419 = 1419
     const val BK_THROW_CABBAGE_1420 = 1420

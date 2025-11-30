@@ -2,6 +2,7 @@ package content.global.skill.summoning.familiar.npc
 
 import content.global.skill.summoning.familiar.Familiar
 import content.global.skill.summoning.familiar.FamiliarSpecial
+import core.api.playGlobalAudio
 import core.api.stun
 import core.game.node.entity.Entity
 import core.game.node.entity.combat.CombatStyle
@@ -18,6 +19,7 @@ import core.plugin.Plugin
 import core.tools.RandomFunction
 import shared.consts.Items
 import shared.consts.NPCs
+import shared.consts.Sounds
 import kotlin.math.floor
 
 @Initializable
@@ -43,6 +45,7 @@ class MinotaurFamiliarNPC : Plugin<Any?> {
         if (!familiar.canCombatSpecial(target)) {
             return false
         }
+        playGlobalAudio(familiar.location, Sounds.MINOTAUR_SPECIAL_4337)
         familiar.sendFamiliarHit(target, RandomFunction.random(maxHit))
         Projectile.magic(familiar, target, 1497, 80, 36, 70, 10).send()
         familiar.visualize(Animation.create(8026), Graphics.create(1496))

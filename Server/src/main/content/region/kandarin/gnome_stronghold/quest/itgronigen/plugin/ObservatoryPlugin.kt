@@ -237,6 +237,7 @@ class ObservatoryPlugin : InteractionListener {
             val telescopeAnim = Animation(Animations.HUMAN_LOOK_TELESCOPE_6849)
             animate(player, telescopeAnim)
             sendMessage(player, "You look through the telescope.")
+            playAudio(player, 3804)
             runTask(player, telescopeAnim.duration) {
                 openInterface(player, Components.TELESCOPE_552)
                 setQuestStage(player, Quests.OBSERVATORY_QUEST, 14)

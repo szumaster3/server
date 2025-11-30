@@ -49,12 +49,7 @@ enum class EnchantedJewellery(val options: Array<String>, val locations: Array<L
     /**
      * Teleport pulse.
      */
-    fun attemptTeleport(
-        player: Player,
-        item: Item,
-        buttonID: Int,
-        isEquipped: Boolean,
-    ): Boolean {
+    fun attemptTeleport(player: Player, item: Item, buttonID: Int, isEquipped: Boolean): Boolean {
         val itemIndex = getItemIndex(item)
         val nextJewellery = Item(getNext(itemIndex))
         if (!canTeleport(player, nextJewellery)) {

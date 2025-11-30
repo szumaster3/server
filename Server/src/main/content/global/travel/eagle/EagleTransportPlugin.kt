@@ -22,10 +22,9 @@ class EagleTransportPlugin : InteractionListener {
                 sendMessage(player, "You need a rope.")
                 return@onUseWith true
             }
-
-            player.animate(Animation(Animations.WRANGLING_EAGLE_WITH_ROPE_5210))
-
             lock(player, 10)
+            player.animate(Animation(Animations.WRANGLING_EAGLE_WITH_ROPE_5210))
+            playGlobalAudio(player.location, 2622)
             eagleTransport(player, npc, npc.location.regionId)
             return@onUseWith true
         }

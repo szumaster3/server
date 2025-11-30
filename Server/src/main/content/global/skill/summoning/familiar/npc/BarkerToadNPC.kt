@@ -2,12 +2,14 @@ package content.global.skill.summoning.familiar.npc
 
 import content.global.skill.summoning.familiar.Familiar
 import content.global.skill.summoning.familiar.FamiliarSpecial
+import core.api.playGlobalAudio
 import core.game.node.entity.combat.equipment.WeaponInterface
 import core.game.node.entity.player.Player
 import core.game.world.update.flag.context.Graphics
 import core.plugin.Initializable
 import shared.consts.Items
 import shared.consts.NPCs
+import shared.consts.Sounds
 
 @Initializable
 class BarkerToadNPC @JvmOverloads constructor(owner: Player? = null, id: Int = NPCs.BARKER_TOAD_6889) :
@@ -22,6 +24,7 @@ class BarkerToadNPC @JvmOverloads constructor(owner: Player? = null, id: Int = N
         if (!canCombatSpecial(target)) {
             return false
         }
+        playGlobalAudio(this.location, Sounds.BARKER_TOAD_SPECIAL_ATTACK_4310)
         animate(properties.attackAnimation)
         graphics(Graphics.create(1403))
         sendFamiliarHit(target, 8, Graphics.create(1404))

@@ -28,7 +28,7 @@ class HerbCleaningPlugin : InteractionListener {
             val exp = herb.experience
             replaceSlot(player, node.asItem().slot, herb.product, node.asItem())
             rewardXP(player, Skills.HERBLORE, exp)
-            playAudio(player, 5153)
+            playAudio(player, 3921)
             sendMessage(player, "You clean the dirt from the " +
                         herb.product.name
                             .lowercase()

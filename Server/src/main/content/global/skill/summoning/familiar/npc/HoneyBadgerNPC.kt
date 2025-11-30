@@ -2,6 +2,7 @@ package content.global.skill.summoning.familiar.npc
 
 import content.global.skill.summoning.familiar.Familiar
 import content.global.skill.summoning.familiar.FamiliarSpecial
+import core.api.playGlobalAudio
 import core.api.sendMessage
 import core.game.node.entity.combat.equipment.WeaponInterface
 import core.game.node.entity.impl.Animator.Priority
@@ -32,6 +33,7 @@ class HoneyBadgerNPC @JvmOverloads constructor(owner: Player? = null, id: Int = 
             return false
         }
         charge()
+        playGlobalAudio(this.location, 4174)
         visualize(Animation(7928, Priority.HIGH), Graphics.create(1397))
         return true
     }

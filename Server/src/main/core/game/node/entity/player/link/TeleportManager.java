@@ -323,7 +323,6 @@ public class TeleportManager {
                     @Override
                     public boolean pulse() {
                         if (delay == 0) {
-                            playGlobalAudio(entity.getLocation(), Sounds.POH_TABLET_BREAK_979);
                             entity.getAnimator().forceAnimation(new Animation(4069));
                         } else if (delay == 2) {
                             entity.getAnimator().forceAnimation(new Animation(getSettings().getStartEmote(), Priority.HIGH));

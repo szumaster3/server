@@ -197,8 +197,8 @@ class HorrorFromTheDeepPlugin : InteractionListener {
             val questStage = getQuestStage(player, Quests.HORROR_FROM_THE_DEEP)
             if (questStage >= 50) {
                 openDoor(player, node.asScenery())
-                playAudio(player, Sounds.SCRAPE_1626)
-                playAudio(player, Sounds.STRANGEDOOR_CLOSE_1625, 2)
+                playAudio(player, Sounds.STRANGEDOOR_SOUND_1627)
+                playAudio(player, Sounds.STRANGEDOOR_CLOSE_1625, 3)
                 if (!isQuestComplete(player, Quests.HORROR_FROM_THE_DEEP)) {
                     setQuestStage(player, Quests.HORROR_FROM_THE_DEEP, 55)
                     removeAttribute(player, GameAttributes.QUEST_HFTD_STRANGE_WALL_DISCOVER)

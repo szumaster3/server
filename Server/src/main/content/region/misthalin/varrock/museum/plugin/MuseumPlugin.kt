@@ -138,6 +138,7 @@ class MuseumPlugin : InteractionListener{
         val pLoc = player.location
         val nLoc = node.location
         player.faceLocation(nLoc)
+        playGlobalAudio(player.location, Sounds.VM_PUSH_BUTTON_3664)
         player.animate(Animation(Animations.PUSH_BUTTON_VARROCK_MUSEUM_6462))
 
         val camera = PlayerCamera(player)
