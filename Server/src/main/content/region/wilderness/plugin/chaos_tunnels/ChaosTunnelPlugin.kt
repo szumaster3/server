@@ -3,7 +3,6 @@ package content.region.wilderness.plugin.chaos_tunnels
 import com.google.gson.JsonObject
 import core.ServerStore.Companion.getArchive
 import core.api.*
-import core.cache.def.impl.ItemDefinition
 import core.game.activity.ActivityManager
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
@@ -23,6 +22,7 @@ import core.game.world.update.flag.context.Graphics
 import core.tools.Log
 import core.tools.RandomFunction
 import core.tools.SystemLogger
+import shared.consts.Items
 import shared.consts.Quests
 import java.util.*
 import shared.consts.Scenery as Objects
@@ -64,11 +64,15 @@ class ChaosTunnelPlugin : MapArea, InteractionListener {
                 return@on true
             }
 
-            val cannonIds = ItemDefinition.getDefinitions().values
-                .filter { it.name.contains("cannon", ignoreCase = true) }
-                .map { it.id }
+            val cannonParts = intArrayOf(
+                Items.DWARF_CANNON_SET_11967,
+                Items.CANNON_BASE_6,
+                Items.CANNON_STAND_8,
+                Items.CANNON_BARRELS_10,
+                Items.CANNON_FURNACE_12
+            )
 
-            if (cannonIds.any { inInventory(player, it) }) {
+            if (anyInInventory(player, *cannonParts)) {
                 sendMessage(player, "The cannon is too heavy to take it down there - you'll have to leave it behind.")
                 return@on true
             }
