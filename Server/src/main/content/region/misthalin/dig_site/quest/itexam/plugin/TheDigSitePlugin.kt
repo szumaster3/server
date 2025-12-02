@@ -1,6 +1,6 @@
 package content.region.misthalin.dig_site.quest.itexam.plugin
 
-import content.global.skill.thieving.PickpocketPlugin
+import content.global.skill.thieving.ThievingOptionPlugin
 import content.region.misthalin.dig_site.quest.itexam.TheDigSite
 import content.region.misthalin.dig_site.quest.itexam.dialogue.DigsiteWorkmanDialogueFile
 import content.region.misthalin.dig_site.quest.itexam.dialogue.PanningGuideDialogue
@@ -67,14 +67,14 @@ class TheDigSitePlugin : InteractionListener {
             }
 
             sendMessage(player, "You attempt to pick the workman's pocket...")
-            player.animator.animate(PickpocketPlugin.PICKPOCKET_ANIM)
+            player.animator.animate(ThievingOptionPlugin.PICKPOCKET_ANIM)
 
-            val roll = PickpocketPlugin.pickpocketRoll(player, 84.0, 240.0, table)
+            val roll = ThievingOptionPlugin.pickpocketRoll(player, 84.0, 240.0, table)
 
             fun handleFail() {
                 val npc = node.asNpc()
                 npc.face(player)
-                npc.animator.animate(PickpocketPlugin.NPC_ANIM)
+                npc.animator.animate(ThievingOptionPlugin.NPC_ANIM)
                 sendMessage(player, "You fail to pick the workman's pocket.")
                 sendChat(npc, "What do you think you're doing???")
                 sendMessage(player, "You have been stunned.")
@@ -85,7 +85,7 @@ class TheDigSitePlugin : InteractionListener {
             }
 
             fun handleSuccess() {
-                queueScript(player, PickpocketPlugin.PICKPOCKET_ANIM.duration, QueueStrength.NORMAL) { stage ->
+                queueScript(player, ThievingOptionPlugin.PICKPOCKET_ANIM.duration, QueueStrength.NORMAL) { stage ->
                     if (stage == 0) {
                         val loot = roll!!
                         if (loot.isNotEmpty()) {

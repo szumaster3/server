@@ -1,6 +1,6 @@
 package content.global.bots
 
-import content.global.skill.fletching.Fletching
+import content.global.skill.fletching.FletchingDefinition
 import content.global.skill.fletching.FletchingPulse
 import core.game.bots.Script
 import core.game.bots.SkillingBotAssembler
@@ -13,7 +13,7 @@ class FletchingBankstander : Script() {
 
     override fun tick() {
         val bank = scriptAPI.getNearestNode("Bank booth")
-        val fletchData = Fletching.getEntries(Items.LOGS_1511)?.firstOrNull() ?: return
+        val fletchData = FletchingDefinition.getEntries(Items.LOGS_1511)?.firstOrNull() ?: return
         bot.faceLocation(bank?.location)
         state =
             when (state) {

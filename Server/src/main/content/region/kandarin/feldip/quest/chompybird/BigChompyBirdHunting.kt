@@ -1,6 +1,6 @@
 package content.region.kandarin.feldip.quest.chompybird
 
-import content.global.skill.fletching.Fletching
+import content.global.skill.fletching.FletchingDefinition
 import core.api.*
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
@@ -49,7 +49,7 @@ class BigChompyBirdHunting :
                 line(player, "Rantz needs me to make 'stabbers'. To do this I need:", ln++, false)
                 line(player, "- !!Achey Logs??", ln++, inInventory(player, Items.ACHEY_TREE_LOGS_2862))
                 line(player, "- !!Wolf Bones??", ln++, inInventory(player, Items.WOLF_BONES_2859))
-                line(player, "- !!Feathers??", ln++, anyInInventory(player, *Fletching.FEATHER_IDS))
+                line(player, "- !!Feathers??", ln++, anyInInventory(player, *FletchingDefinition.FEATHER_IDS))
                 line(player, "I then must turn the !!achey logs?? into !!ogre shafts??,", ln++, false)
                 line(player, "attach !!feathers?? to these !!shafts??, and then tip them", ln++, false)
                 line(player, "with !!wolf bones?? chiseled into !!tips??.", ln++, false)
