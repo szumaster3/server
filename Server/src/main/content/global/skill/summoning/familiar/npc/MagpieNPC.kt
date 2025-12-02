@@ -1,5 +1,6 @@
 package content.global.skill.summoning.familiar.npc
 
+import core.api.asItem
 import content.global.skill.crafting.gem.Gem
 import content.global.skill.summoning.familiar.Familiar
 import content.global.skill.summoning.familiar.FamiliarSpecial
@@ -44,6 +45,6 @@ class MagpieNPC @JvmOverloads constructor(owner: Player? = null, id: Int = NPCs.
     }
 
     companion object {
-        private val ITEMS = arrayOf(Gem.SAPPHIRE.uncut, Gem.EMERALD.uncut, Gem.RUBY.uncut, Gem.DIAMOND.uncut)
+        private val ITEMS = arrayOf(Gem.SAPPHIRE.uncut.asItem(), Gem.EMERALD.uncut.asItem(), Gem.RUBY.uncut.asItem(), Gem.DIAMOND.uncut.asItem())
     }
 }
