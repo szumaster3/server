@@ -116,4 +116,6 @@ object Regions {
     const val TEMPLE_OF_IKOV_10648 = 10648
     const val MORYTANIA_SLAYER_TOWER_13623 = 13623
     const val TEMPLE_KNIGHTS_TESTING_ROOM_9805 = 9805
+    const val MISCELLANIA_10044 = 10044
+    const val ETCETERIA_10300 = 10300
 }

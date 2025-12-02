@@ -24,17 +24,9 @@ import core.game.node.scenery.SceneryBuilder
 import core.game.world.map.RegionManager
 import core.game.world.update.flag.context.Animation
 import core.tools.RandomFunction
-import shared.consts.Animations
-import shared.consts.Items
-import shared.consts.NPCs
-import shared.consts.Sounds
+import shared.consts.*
 
 class WoodcuttingPlugin : InteractionListener {
-
-    /*
-     * TODO: Attempting to use the adze to cut trees on Miscellania or Etceteria results in the message:
-     * sendDialogue(player, "I don't think I should use the Inferno Adze in here, since there is a chance I might set the logs on fire.")
-     */
 
     private val woodcuttingSounds =
         intArrayOf(
@@ -76,6 +68,13 @@ class WoodcuttingPlugin : InteractionListener {
                 return clearScripts(player)
             }
             if (!checkWoodcuttingRequirements(player, resource!!, node)) {
+                return clearScripts(player)
+            }
+            if(inEquipmentOrInventory(player, Items.INFERNO_ADZE_13661) &&
+                player.location.isInRegion(Regions.MISCELLANIA_10044) ||
+                player.location.isInRegion(Regions.ETCETERIA_10300))
+            {
+                sendDialogue(player, "I don't think I should use the Inferno Adze in here, since there is a chance I might set the logs on fire.")
                 return clearScripts(player)
             }
             sendMessage(player, "You swing your axe at the tree.")
