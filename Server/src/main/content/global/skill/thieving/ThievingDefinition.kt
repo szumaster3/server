@@ -144,7 +144,7 @@ object ThievingDefinition {
         MALE_HAM_MEMBER(ThievingLootTable.HAM_MALE_IDS, 20, 117.0, 240.0, 22.5, 1, 3, 4, "What do you think you're doing?", ThievingLootTable.HAM_PICKPOCKET_LOOT),
         FEMALE_HAM_MEMBER(ThievingLootTable.HAM_FEMALE_IDS, 15, 135.0, 240.0, 18.5, 1, 3, 4, "Stop! @name is a thief!", ThievingLootTable.HAM_PICKPOCKET_LOOT),
         WARRIOR(ThievingLootTable.WARRIOR_IDS, 25, 84.0, 240.0, 26.0, 2, 2, 5, "What do you think you're doing?", ThievingLootTable.WARRIOR_PICKPOCKET_LOOT),
-        VILLAGER(ThievingLootTable.VILLAGER_IDS, 30, 74.0, 240.0, 8.0, 2, 2, 5, "Thief! Thief! Get away from me.", ThievingLootTable.WARRIOR_PICKPOCKET_LOOT),
+        VILLAGER(ThievingLootTable.VILLAGER_IDS, 30, 74.0, 240.0, 8.0, 2, 2, 5, "Thief! Thief! Get away from me.", ThievingLootTable.VILLAGER_PICKPOCKET_LOOT),
         ROGUE(ThievingLootTable.ROGUE_IDS, 32, 74.0, 240.0, 35.5, 2, 2, 5, "What do you think you're doing?", ThievingLootTable.ROGUE_PICKPOCKET_LOOT),
         CAVE_GOBLIN(ThievingLootTable.CAVE_GOBLIN_IDS, 36, 72.0, 240.0, 40.0, 1, 1, 5, null, ThievingLootTable.CAVE_GOBLIN_PICKPOCKET_LOOT),
         MASTER_FARMER(ThievingLootTable.MASTER_FARMER_IDS, 38, 90.0, 240.0, 43.0, 3, 3, 5, "Cor blimey, mate! What are ye doing in me pockets?", ThievingLootTable.MASTER_FARMER_PICKPOCKET_LOOT),

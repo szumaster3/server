@@ -196,10 +196,10 @@ object ThievingLootTable {
         NPCs.SASSILIK_1313,
         NPCs.INGA_1314
     )
+
     val FREMENNIK_PICKPOCKET_LOOT = WeightBasedTable.create(
         WeightedItem(Items.COINS_995, 40, 40, 1.0, true)
     )
-
 
     val BEARDED_BANDIT_IDS = intArrayOf(
         NPCs.BANDIT_1880,
