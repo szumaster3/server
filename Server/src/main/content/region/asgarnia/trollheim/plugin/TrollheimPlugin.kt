@@ -36,7 +36,6 @@ import core.plugin.Initializable
 import core.plugin.Plugin
 import shared.consts.Animations
 import shared.consts.Items
-import shared.consts.Scenery
 import shared.consts.Sounds
 
 @Initializable
@@ -152,14 +151,16 @@ class TrollheimPlugin : OptionHandler() {
                 val xOffset = if (player.location.x < loc.x) 2 else -2
                 val yOffset = 0
 
+                player.faceLocation(node.location)
+
                 when (id) {
-                    3722 -> runClimb(player, Location.create(2880, 3592, 0), CLIMB_DOWN, Direction.NORTH)
-                    3723 -> runClimb(player, Location.create(2881, 3596, 0), CLIMB_UP, Direction.NORTH)
+                    3722 -> runClimb(player, Location.create(2880, 3592, 0), CLIMB_DOWN)
+                    3723 -> runClimb(player, Location.create(2881, 3596, 0), CLIMB_UP)
 
                     3790, 3791 -> {
                         val anim = if (player.location.x > 2877) CLIMB_DOWN else CLIMB_UP
                         val dir = if (player.location.x > 2877) Direction.EAST else Direction.WEST
-                        runClimb(player, scenery.location.transform(xOffset, yOffset, 0), anim, dir)
+                        runClimb(player, scenery.location.transform(xOffset, yOffset, 0), anim)
                     }
 
                     3748 -> {
@@ -394,11 +395,12 @@ class TrollheimPlugin : OptionHandler() {
      * @param anim The animation id (default is CLIMB_DOWN_B_740).
      * @param direction The direction the player faces during the climb (default is NORTH).
      */
-    private fun runClimb(player: Player, to: Location, anim: Int = CLIMB_UP, direction: Direction = Direction.NORTH) {
+    private fun runClimb(player: Player, to: Location, anim: Int = CLIMB_UP) {
         lock(player, 3)
         lockInteractions(player, 3)
         sendMessage(player, "You climb onto the rock...")
         sendMessage(player, "...and step down the other side.", 3)
+        val direction = Direction.getDirection(player.location, to.location)
         ForceMovement.run(player, player.location, to, Animation.create(anim), Animation.create(anim), direction, 13).endAnimation = Animation.RESET
     }
 }
