@@ -220,7 +220,7 @@ object ThievingDefinition {
     }
 
     /**
-     * Represents door available to force open data.
+     * Represents doors available to force open.
      */
     enum class Doors(val locations: Array<Location>, val level: Int, val experience: Double, val isLockpick: Boolean = false, val flipped: Boolean = false) {
         PORT_SARIM_JAIL(arrayOf(Location.create(3014, 3182)), 1, 0.0),
@@ -320,6 +320,9 @@ object ThievingDefinition {
         }
     }
 
+    /**
+     * Represents the chests available to force open.
+     */
     enum class Chests(val objectIds: IntArray, val level: Int, val xp: Double, val rewards: Array<Item>, val respawnTicks: Int) {
         TEN_COIN(intArrayOf(shared.consts.Scenery.CHEST_2566), 13, 7.8, arrayOf(Item(Items.COINS_995, 10)), 7),
         NATURE_RUNE(intArrayOf(shared.consts.Scenery.CHEST_2567), 28, 25.0, arrayOf(Item(Items.COINS_995, 3), Item(Items.NATURE_RUNE_561, 1)), 8),
