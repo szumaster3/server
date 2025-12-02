@@ -240,7 +240,6 @@ object ThievingDefinition {
                 val lootTable = pickpocketRoll(player, pocketData.low, pocketData.high, pocketData.table)
 
                 if (lootTable == null) {
-                    npc.walkingQueue.reset()
                     npc.face(player)
                     npc.animator.animate(Animation(Animations.PUNCH_422))
                     npc.sendChat(pocketData.message)
