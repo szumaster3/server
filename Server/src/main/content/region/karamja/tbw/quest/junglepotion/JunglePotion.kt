@@ -3,7 +3,7 @@ package content.region.karamja.tbw.quest.junglepotion
 import content.global.skill.herblore.herbs.HerbItem
 import content.region.karamja.tbw.quest.junglepotion.dialogue.JogreCavernDialogue
 import content.region.karamja.tbw.quest.junglepotion.dialogue.TrufitusDialogue
-import content.region.karamja.tbw.quest.junglepotion.plugin.JungleObjective
+import content.region.karamja.tbw.quest.junglepotion.plugin.JungleObject
 import core.api.*
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.quest.Quest
@@ -28,17 +28,19 @@ class JunglePotion : Quest(Quests.JUNGLE_POTION, 81, 80, 1, Vars.VARP_QUEST_JUNG
 
         when (stage) {
             10, 20, 30, 40, 50 -> {
-                val objective = JungleObjective.forStage(stage)
-                val herbName = getItemName(objective!!.herb.product.id)
-                if (objective.herb.product.id.let { inInventory(player, it) }) {
+                val loc = JungleObject.forStage(stage)
+                val herbName = getItemName(loc!!.productId)
+                if (inInventory(player, loc.productId)) {
                     line(player, "I spoke to Trufitus, he needs to commune with the", line++, true)
                     line(player, "gods, he's asked me to help him by collecting herbs.", line++, true)
+                    line++
                     line(player, "I picked some fresh $herbName for Trufitus.", line++, true)
                     line(player, "I need to give the !!$herbName?? to !!Trufitus??.", line)
                     return
                 }
                 line(player, "I spoke to Trufitus, he needs to commune with the", line++, true)
                 line(player, "gods, he's asked me to help him by collecting herbs.", line++, true)
+                line++
                 line(player, "I need to pick some fresh !!$herbName?? for !!Trufitus??.", line)
             }
             60 -> {
@@ -47,6 +49,7 @@ class JunglePotion : Quest(Quests.JUNGLE_POTION, 81, 80, 1, Vars.VARP_QUEST_JUNG
                 line(player, "I have given Trufitus Snakeweed, Ardrigal,", line++, true)
                 line(player, "Sito Foil, Volencia moss and Rogues purse.", line++, true)
                 line(player, "Trufitus needs to commune with the gods.", line++, true)
+                line++
                 line(player, "I should speak to !!Trufitus??.", line)
             }
             100 -> {

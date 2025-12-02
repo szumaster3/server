@@ -1,13 +1,12 @@
 package content.region.karamja.tbw.quest.junglepotion.plugin
 
-import core.api.freeSlots
+import core.api.getSceneryName
+import core.api.openDialogue
 import core.api.sendMessage
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
-import core.game.node.Node
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.quest.Quest
-
 import core.game.world.map.Location
 import shared.consts.Quests
 import shared.consts.Scenery
@@ -22,7 +21,7 @@ class JunglePotionListener : InteractionListener {
 
         on(JUNGLE_OBJECTIVE, IntType.SCENERY, "search") { player, node ->
             val quest = player.getQuestRepository().getQuest(Quests.JUNGLE_POTION)
-            JungleObjective.forId(node.id)?.let { search(player, quest, node.asScenery(), it) }
+            JungleObject.forId(node.id)?.let { search(player, quest, node.asScenery(), it) }
             return@on true
         }
 
@@ -31,7 +30,7 @@ class JunglePotionListener : InteractionListener {
          */
 
         on(Scenery.ROCKS_2584, IntType.SCENERY, "search") { player, _ ->
-            player.dialogueInterpreter.open("jogre_dialogue")
+            openDialogue(player, "jogre_dialogue")
             return@on true
         }
 
@@ -40,23 +39,19 @@ class JunglePotionListener : InteractionListener {
          */
 
         on(Scenery.HAND_HOLDS_2585, IntType.SCENERY, "climb") { player, _ ->
-            player.dialogueInterpreter.open("jogre_dialogue", true, true)
+            openDialogue(player, "jogre_dialogue", true, true)
             return@on true
         }
 
     }
 
-    private fun search(player: Player, quest: Quest, scenery: Node, objective: JungleObjective) {
-        if (quest.getStage(player) < objective.stage) {
+    private fun search(player: Player, quest: Quest, scenery: core.game.node.scenery.Scenery, loc: JungleObject) {
+        sendMessage(player,"You search the " + getSceneryName(scenery.id).lowercase() + "...")
+        if (quest.getStage(player) < loc.stage) {
             sendMessage(player, "Unfortunately, you find nothing of interest.")
             return
         }
-        if (freeSlots(player) < 1) {
-            sendMessage(player,"You don't have enough inventory space.")
-            return
-        }
-        sendMessage(player,"You search the " + scenery.name.lowercase() + "...")
-        objective.search(player, scenery)
+        loc.search(player, scenery)
     }
 
     override fun defineDestinationOverrides() {
@@ -66,6 +61,6 @@ class JunglePotionListener : InteractionListener {
     }
 
     companion object {
-        val JUNGLE_OBJECTIVE = JungleObjective.values().map { it.objectId }.toIntArray()
+        val JUNGLE_OBJECTIVE = JungleObject.values().map { it.objectId }.toIntArray()
     }
 }
