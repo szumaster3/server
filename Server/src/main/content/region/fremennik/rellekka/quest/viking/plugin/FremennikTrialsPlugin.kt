@@ -15,6 +15,7 @@ import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
+import core.game.node.entity.player.link.TeleportManager
 import core.game.node.entity.player.link.diary.DiaryType
 import core.game.node.entity.player.link.music.MusicEntry
 import core.game.node.entity.skill.Skills
@@ -349,6 +350,16 @@ class FremennikTrialsPlugin : InteractionListener {
                     NPCs.FISH_MONGER_1315 -> sendMessage(player, "Only Fremenniks may purchase fish here.")
                 }
             }
+            return@on true
+        }
+
+        /*
+         * Handles exit from swensen maze.
+         */
+
+        on(shared.consts.Scenery.ESCAPE_ROPE_4161, IntType.SCENERY, "climb") { player, _ ->
+            teleport(player, Location.create(2644, 3658, 0), TeleportManager.TeleportType.INSTANT)
+            removeAttribute(player, GameAttributes.QUEST_VIKING_SWENSEN_START)
             return@on true
         }
     }
