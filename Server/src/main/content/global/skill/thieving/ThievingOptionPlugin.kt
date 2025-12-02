@@ -47,14 +47,5 @@ class ThievingOptionPlugin : InteractionListener {
             ChestsDefinition.forId(node.id)?.searchTraps(player, node as Scenery)
             return@on true
         }
-
-        /*
-         * Handles opening the chests.
-         */
-
-        on(ChestsDefinition.allObjectIds, IntType.SCENERY, "open") { player, node ->
-            ChestsDefinition.forId(node.id)?.open(player, node as Scenery)
-            return@on true
-        }
     }
 }
