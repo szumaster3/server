@@ -10,14 +10,12 @@ import core.game.world.update.flag.context.Animation
 import shared.consts.Animations
 import shared.consts.Components
 import shared.consts.Items
-import kotlin.math.ceil
-import kotlin.math.roundToInt
 
 class GrindItemPlugin : InteractionListener {
 
     override fun defineListeners() {
 
-        onUseWith(IntType.ITEM, Items.PESTLE_AND_MORTAR_233, *GRIND_ITEM_IDS) { player, used, with ->
+        onUseWith(IntType.ITEM, Items.PESTLE_AND_MORTAR_233, *GRIND_ITEM_IDS) { player, _, with ->
             val grind = GrindItem.forID(with.id) ?: return@onUseWith false
             val sourceId = with.id
             val productId = grind.product
@@ -31,18 +29,15 @@ class GrindItemPlugin : InteractionListener {
                             player.animate(Animation.create(Animations.HUMAN_USE_PESTLE_AND_MORTAR_364))
                             delayScript(player, 2)
                         }
-
                         else -> {
                             if (removeItem(player, Item(sourceId, 1))) {
                                 addItem(player, productId, 1)
                                 sendMessage(player, grind.message)
-
                             }
                             stopExecuting(player)
                         }
                     }
                 }
-
                 return@onUseWith true
             }
 
@@ -54,17 +49,16 @@ class GrindItemPlugin : InteractionListener {
                     val invAmount = amountInInventory(player, sourceId)
                     remaining = remaining.coerceAtMost(invAmount)
                     if (sourceId == FISHING_BAIT) {
-                        val max = ceil(invAmount.toDouble() / 10).roundToInt()
-                        remaining = remaining.coerceAtMost(max)
+                        remaining = remaining.coerceAtMost(10)
                     }
 
                     queueScript(player, 0, QueueStrength.WEAK) { stage ->
-                        if (remaining <= 0) return@queueScript stopExecuting(player)
+
                         val currentSource = amountInInventory(player, sourceId)
-                        if (currentSource <= 0) return@queueScript stopExecuting(player)
+                        if (remaining <= 0 || currentSource <= 0)
+                            return@queueScript stopExecuting(player)
 
                         when (stage) {
-
                             0 -> {
                                 player.animate(Animation.create(Animations.HUMAN_USE_PESTLE_AND_MORTAR_364))
                                 delayScript(player, 2)
@@ -76,21 +70,27 @@ class GrindItemPlugin : InteractionListener {
 
                                     if (removeItem(player, Item(sourceId, removeQty))) {
                                         addItem(player, productId, removeQty)
-                                    } else return@queueScript stopExecuting(player)
+                                    } else {
+                                        return@queueScript stopExecuting(player)
+                                    }
 
                                 } else {
                                     if (removeItem(player, Item(sourceId, 1))) {
                                         addItem(player, productId, 1)
-                                    } else return@queueScript stopExecuting(player)
+                                    } else {
+                                        return@queueScript stopExecuting(player)
+                                    }
                                 }
-                                sendMessage(player, grind.message)
 
+                                sendMessage(player, grind.message)
                                 remaining--
 
                                 if (remaining > 0) {
                                     setCurrentScriptState(player, 0)
                                     delayScript(player, 2)
-                                } else stopExecuting(player)
+                                } else {
+                                    return@queueScript stopExecuting(player)
+                                }
                             }
                         }
                     }
@@ -99,7 +99,7 @@ class GrindItemPlugin : InteractionListener {
                 override fun getAll(index: Int): Int {
                     val invAmount = amountInInventory(player, with.id)
                     return if (with.id == FISHING_BAIT)
-                        ceil(invAmount.toDouble() / 10).roundToInt()
+                        10
                     else invAmount
                 }
             }
