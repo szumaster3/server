@@ -1,6 +1,6 @@
 package content.region.desert.uzer.quest.golem
 
-import content.global.skill.thieving.ThievingOptionPlugin
+import content.global.skill.thieving.ThievingDefinition
 import core.api.*
 import core.api.utils.WeightBasedTable
 import core.api.utils.WeightedItem
@@ -394,7 +394,7 @@ class TheGolemListener : InteractionListener, InterfaceListener {
             if (getAttribute(player, "the-golem:varmen-notes-read", false)) {
                 lock(player, 1000)
                 val lootTable =
-                    ThievingOptionPlugin.pickpocketRoll(player = player, low = 90.0, high = 240.0, table = WeightBasedTable.create(WeightedItem(Items.PHOENIX_FEATHER_4621, 1, 1, 1.0, true)))
+                    ThievingDefinition.pickpocketRoll(player = player, low = 90.0, high = 240.0, table = WeightBasedTable.create(WeightedItem(Items.PHOENIX_FEATHER_4621, 1, 1, 1.0, true)))
                 if (lootTable != null) {
                     sendMessage(player, "You attempt to grab the pheonix's tail-feather.")
                     animate(player, Animations.HUMAN_PICKPOCKETING_881)

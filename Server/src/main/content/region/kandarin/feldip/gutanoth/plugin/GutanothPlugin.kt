@@ -1,6 +1,6 @@
 package content.region.kandarin.feldip.gutanoth.plugin
 
-import content.global.skill.thieving.ThievingOptionPlugin
+import content.global.skill.thieving.ThievingDefinition
 import content.region.kandarin.feldip.quest.zogre.npc.BrentleVahnNPC
 import content.region.kandarin.feldip.quest.zogre.npc.SlashBashNPC
 import content.region.kandarin.feldip.quest.zogre.plugin.ZogreUtils
@@ -190,7 +190,7 @@ class GutanothPlugin : InteractionListener {
             submitIndividualPulse(
                 player,
                 object : Pulse(2) {
-                    var table = ThievingOptionPlugin.pickpocketRoll(player, 84.0, 240.0, OgreCoffin.OGRE_COFFIN.table)
+                    var table = ThievingDefinition.pickpocketRoll(player, 84.0, 240.0, OgreCoffin.OGRE_COFFIN.table)
                     override fun pulse(): Boolean {
                         if (table != null) {
                             sendMessage(player, "You unlock the coffin...")

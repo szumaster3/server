@@ -12,6 +12,7 @@ import core.game.node.entity.skill.Skills
 import core.game.node.item.Item
 import core.game.node.scenery.Scenery
 import core.game.world.GameWorld.ticks
+import core.game.world.map.Direction
 import core.game.world.map.Location
 import core.game.world.map.RegionManager
 import core.game.world.update.flag.context.Animation
@@ -261,13 +262,34 @@ object ThievingDefinition {
         }
 
         /**
+         * Checks if the player is on the correct side of the door to interact with it.
+         *
+         * @param player The player interacting with the door.
+         * @param door The door being interacted with.
+         * @return True if the player is inside the door, otherwise false.
+         */
+        private fun isInside(player: Player, door: Scenery): Boolean {
+            var inside = false
+            val dir = Direction.getLogicalDirection(player.location, door.location)
+            val direction = door.direction
+            if (direction == Direction.SOUTH && dir == Direction.WEST) {
+                inside = true
+            } else if (direction == Direction.EAST && dir == Direction.SOUTH) {
+                inside = true
+            } else if (direction == Direction.NORTH && dir == Direction.EAST) {
+                inside = true
+            }
+            return inside
+        }
+
+        /**
          * Attempts to pick the lock on the door. If successful, the door is opened.
          * @param player The player attempting to pick the lock.
          * @param door The door being unlocked.
          */
         fun pickLock(player: Player, door: Scenery) {
             val success = RandomFunction.random(12) >= 4
-            if (isOnCorrectSide(player, door.asScenery()) != flipped) {
+            if (isInside(player, door.asScenery()) != flipped) {
                 sendMessage(player, "The door is already unlocked.")
                 return
             }
@@ -292,7 +314,7 @@ object ThievingDefinition {
         }
 
         companion object {
-            val DOOR_IDS = intArrayOf(Objects.DOOR_2550, Objects.DOOR_2551, Objects.DOOR_2554, Objects.DOOR_2555, Objects.DOOR_2556, Objects.DOOR_2557, Objects.DOOR_2558, Objects.DOOR_2559, Objects.DOOR_5501, Objects.DOOR_7246, Objects.DOOR_9565, Objects.DOOR_13314, Objects.DOOR_13317, Objects.DOOR_13320, Objects.DOOR_13323, Objects.DOOR_13326, Objects.DOOR_13344, Objects.DOOR_13345, Objects.DOOR_13346, Objects.DOOR_13347, Objects.DOOR_13348, Objects.DOOR_13349, Objects.DOOR_15759, Objects.DOOR_34005, Objects.DOOR_34805, Objects.DOOR_34806, Objects.DOOR_34812, Objects.CELL_DOOR_40186)
+            val DOOR_IDS = intArrayOf(Objects.DOOR_2550, Objects.DOOR_2551, Objects.DOOR_2554, Objects.DOOR_2555, Objects.DOOR_2556, Objects.DOOR_2557, Objects.DOOR_2558, Objects.DOOR_2559, Objects.DOOR_5501, Objects.DOOR_7246, Objects.DOOR_13314, Objects.DOOR_13317, Objects.DOOR_13320, Objects.DOOR_13323, Objects.DOOR_13326, Objects.DOOR_13344, Objects.DOOR_13345, Objects.DOOR_13346, Objects.DOOR_13347, Objects.DOOR_13348, Objects.DOOR_13349, Objects.DOOR_15759, Objects.DOOR_34005, Objects.DOOR_34805, Objects.DOOR_34806, Objects.DOOR_34812, Objects.CELL_DOOR_40186)
             fun forLocation(loc: Location): Doors? =
                 values().firstOrNull { door -> door.locations.any { it == loc } }
         }
