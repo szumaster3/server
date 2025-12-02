@@ -34,41 +34,38 @@ import core.net.packet.out.CameraViewPacket
 import core.plugin.ClassScanner.definePlugin
 import core.plugin.Initializable
 import core.plugin.Plugin
-import shared.consts.Animations
-import shared.consts.Items
-import shared.consts.Sounds
+import shared.consts.*
 
 @Initializable
 class TrollheimPlugin : OptionHandler() {
     override fun newInstance(arg: Any?): Plugin<Any?> {
-        NPCDefinition.forId(1069).handlers["option:talk-to"] = this
-        SceneryDefinition.forId(3742).handlers["option:read"] = this
-        SceneryDefinition.forId(3774).handlers["option:leave"] = this
-        SceneryDefinition.forId(3723).handlers["option:climb"] = this
-        SceneryDefinition.forId(3722).handlers["option:climb"] = this
-        SceneryDefinition.forId(3748).handlers["option:climb"] = this
-        SceneryDefinition.forId(3790).handlers["option:climb"] = this
-        SceneryDefinition.forId(3791).handlers["option:climb"] = this
-        SceneryDefinition.forId(3782).handlers["option:open"] = this
-        SceneryDefinition.forId(3783).handlers["option:open"] = this
-        SceneryDefinition.forId(4499).handlers["option:enter"] = this
-        SceneryDefinition.forId(4500).handlers["option:enter"] = this
-        SceneryDefinition.forId(9303).handlers["option:climb"] = this
-        SceneryDefinition.forId(3782).handlers["option:open"] = this
-        SceneryDefinition.forId(3783).handlers["option:open"] = this
-        SceneryDefinition.forId(3785).handlers["option:open"] = this
-        SceneryDefinition.forId(3786).handlers["option:open"] = this
-        SceneryDefinition.forId(3757).handlers["option:enter"] = this
-        SceneryDefinition.forId(3758).handlers["option:exit"] = this
-        SceneryDefinition.forId(9327).handlers["option:climb"] = this
-        SceneryDefinition.forId(9304).handlers["option:climb"] = this
-        SceneryDefinition.forId(3803).handlers["option:climb"] = this
-        SceneryDefinition.forId(3804).handlers["option:climb"] = this
-        SceneryDefinition.forId(9306).handlers["option:climb"] = this
-        SceneryDefinition.forId(9305).handlers["option:climb"] = this
-        SceneryDefinition.forId(3771).handlers["option:enter"] = this
-        SceneryDefinition.forId(18834).handlers["option:climb-up"] = this
-        SceneryDefinition.forId(18833).handlers["option:climb-down"] = this
+        SceneryDefinition.forId(Scenery.DANGER_SIGN_3742).handlers["option:read"] = this
+        SceneryDefinition.forId(Scenery.EXIT_3774).handlers["option:leave"] = this
+        SceneryDefinition.forId(Scenery.ROCKS_3723).handlers["option:climb"] = this
+        SceneryDefinition.forId(Scenery.ROCKS_3722).handlers["option:climb"] = this
+        SceneryDefinition.forId(Scenery.ROCKS_3748).handlers["option:climb"] = this
+        SceneryDefinition.forId(Scenery.ROCKS_3790).handlers["option:climb"] = this
+        SceneryDefinition.forId(Scenery.ROCKS_3791).handlers["option:climb"] = this
+        SceneryDefinition.forId(Scenery.ARENA_ENTRANCE_3782).handlers["option:open"] = this
+        SceneryDefinition.forId(Scenery.ARENA_ENTRANCE_3783).handlers["option:open"] = this
+        SceneryDefinition.forId(Scenery.CAVE_ENTRANCE_4499).handlers["option:enter"] = this
+        SceneryDefinition.forId(Scenery.TUNNEL_4500).handlers["option:enter"] = this
+        SceneryDefinition.forId(Scenery.ROCKS_9303).handlers["option:climb"] = this
+        SceneryDefinition.forId(Scenery.ARENA_ENTRANCE_3782).handlers["option:open"] = this
+        SceneryDefinition.forId(Scenery.ARENA_ENTRANCE_3783).handlers["option:open"] = this
+        SceneryDefinition.forId(Scenery.ARENA_EXIT_3785).handlers["option:open"] = this
+        SceneryDefinition.forId(Scenery.ARENA_EXIT_3786).handlers["option:open"] = this
+        SceneryDefinition.forId(Scenery.CAVE_ENTRANCE_3757).handlers["option:enter"] = this
+        SceneryDefinition.forId(Scenery.CAVE_EXIT_3758).handlers["option:exit"] = this
+        SceneryDefinition.forId(Scenery.ROCKS_9327).handlers["option:climb"] = this
+        SceneryDefinition.forId(Scenery.ROCKS_9304).handlers["option:climb"] = this
+        SceneryDefinition.forId(Scenery.ROCKS_3803).handlers["option:climb"] = this
+        SceneryDefinition.forId(Scenery.ROCKS_3804).handlers["option:climb"] = this
+        SceneryDefinition.forId(Scenery.ROCKS_9306).handlers["option:climb"] = this
+        SceneryDefinition.forId(Scenery.ROCKS_9305).handlers["option:climb"] = this
+        SceneryDefinition.forId(Scenery.STRONGHOLD_3771).handlers["option:enter"] = this
+        SceneryDefinition.forId(Scenery.TROLL_LADDER_18834).handlers["option:climb-up"] = this
+        SceneryDefinition.forId(Scenery.TROLL_LADDER_18833).handlers["option:climb-down"] = this
         definePlugin(WarningZone())
         ActivityManager.register(WarningCutscene())
         return this
@@ -79,32 +76,31 @@ class TrollheimPlugin : OptionHandler() {
         val loc = node.location
         when (option) {
             "enter" -> when (id) {
-                3735 -> player.properties.teleportLocation = LOCATIONS[0]
-                4499 -> player.properties.teleportLocation = LOCATIONS[2]
-                4500 -> player.properties.teleportLocation = LOCATIONS[3]
-                3723 -> player.properties.teleportLocation = LOCATIONS[4]
-                3757 -> player.properties.teleportLocation =
+                Scenery.CAVE_ENTRANCE_3735 -> player.properties.teleportLocation = LOCATIONS[0]
+                Scenery.CAVE_ENTRANCE_4499 -> player.properties.teleportLocation = LOCATIONS[2]
+                Scenery.TUNNEL_4500 -> player.properties.teleportLocation = LOCATIONS[3]
+                Scenery.ROCKS_3723 -> player.properties.teleportLocation = LOCATIONS[4]
+                Scenery.CAVE_ENTRANCE_3757 -> player.properties.teleportLocation =
                     if (loc == Location(2907, 3652, 0)) LOCATIONS[7] else LOCATIONS[4]
 
-                3771 -> player.teleport(Location(2837, 10090, 2))
+                Scenery.STRONGHOLD_3771 -> player.teleport(Location(2837, 10090, 2))
             }
 
             "leave" -> player.teleport(Location(2840, 3690))
             "exit" -> when (id) {
-                3758 -> player.properties.teleportLocation =
+                Scenery.CAVE_EXIT_3758 -> player.properties.teleportLocation =
                     if (loc == Location(2906, 10036, 0)) LOCATIONS[6] else LOCATIONS[5]
             }
 
-            "talk-to" -> when (id) {
-                1069 -> player.dialogueInterpreter.open(id, node)
-            }
-
             "read" -> when (id) {
-                3742 -> ActivityManager.start(player, "trollheim-warning", false)
+                Scenery.DANGER_SIGN_3742 -> ActivityManager.start(player, "trollheim-warning", false)
             }
 
             "open" -> when (id) {
-                3785, 3786, 3782, 3783 -> {
+                Scenery.ARENA_EXIT_3785,
+                Scenery.ARENA_EXIT_3786,
+                Scenery.ARENA_ENTRANCE_3782,
+                Scenery.ARENA_ENTRANCE_3783 -> {
                     DoorActionHandler.handleAutowalkDoor(player, node.asScenery())
                     return true
                 }
@@ -113,7 +109,7 @@ class TrollheimPlugin : OptionHandler() {
             }
 
             "climb-up" -> when (id) {
-                18834 -> ClimbActionHandler.climb(
+                Scenery.TROLL_LADDER_18834 -> ClimbActionHandler.climb(
                     player,
                     ClimbActionHandler.CLIMB_UP,
                     Location(2828, 3678),
@@ -122,7 +118,7 @@ class TrollheimPlugin : OptionHandler() {
             }
 
             "climb-down" -> when (id) {
-                18833 -> ClimbActionHandler.climb(
+                Scenery.TROLL_LADDER_18833 -> ClimbActionHandler.climb(
                     player,
                     ClimbActionHandler.CLIMB_DOWN,
                     Location(2831, 10076, 2),
@@ -154,16 +150,16 @@ class TrollheimPlugin : OptionHandler() {
                 player.faceLocation(node.location)
 
                 when (id) {
-                    3722 -> runClimb(player, Location.create(2880, 3592, 0), CLIMB_DOWN)
-                    3723 -> runClimb(player, Location.create(2881, 3596, 0), CLIMB_UP)
+                    Scenery.ROCKS_3722 -> runClimb(player, Location.create(2880, 3592, 0), CLIMB_DOWN)
+                    Scenery.ROCKS_3723 -> runClimb(player, Location.create(2881, 3596, 0), CLIMB_UP)
 
-                    3790, 3791 -> {
+                    Scenery.ROCKS_3790,
+                    Scenery.ROCKS_3791 -> {
                         val anim = if (player.location.x > 2877) CLIMB_DOWN else CLIMB_UP
-                        val dir = if (player.location.x > 2877) Direction.EAST else Direction.WEST
                         runClimb(player, scenery.location.transform(xOffset, yOffset, 0), anim)
                     }
 
-                    3748 -> {
+                    Scenery.ROCKS_3748 -> {
                         when (loc) {
                             Location(2821, 3635, 0) -> runClimb(
                                 player, loc.transform(if (player.location.x > loc.x) -1 else 1, 0, 0), JUMP.id
@@ -187,7 +183,8 @@ class TrollheimPlugin : OptionHandler() {
                         }
                     }
 
-                    3803, 3804 -> {
+                    Scenery.ROCKS_3803,
+                    Scenery.ROCKS_3804 -> {
                         if (checkRequirements(43)) return true
                         val target = when (player.location) {
                             Location(2884, 3684, 0) -> Location(2886, 3684, 0)
@@ -201,7 +198,11 @@ class TrollheimPlugin : OptionHandler() {
                         runClimb(player, target, anim)
                     }
 
-                    9303, 9304, 9305, 9306, 9327 -> {
+                    Scenery.ROCKS_9303,
+                    Scenery.ROCKS_9304,
+                    Scenery.ROCKS_9305,
+                    Scenery.ROCKS_9306,
+                    Scenery.ROCKS_9327 -> {
                         val requiredLevel = when (id) {
                             9303 -> 41
                             9304 -> 47
@@ -212,23 +213,23 @@ class TrollheimPlugin : OptionHandler() {
                         }
                         if (checkRequirements(requiredLevel)) return true
                         val target = when (id) {
-                            9303 -> if (player.location.x > loc.x) scenery.location.transform(
+                            Scenery.ROCKS_9303 -> if (player.location.x > loc.x) scenery.location.transform(
                                 -2, 0, 0
                             ) else scenery.location.transform(2, 0, 0)
 
-                            9304 -> if (player.location == Location.create(2878, 3665, 0)) Location.create(
+                            Scenery.ROCKS_9304 -> if (player.location == Location.create(2878, 3665, 0)) Location.create(
                                 2878, 3668, 0
                             ) else Location.create(2878, 3665, 0)
 
-                            9305 -> if (player.location == Location.create(2909, 3684, 0)) Location.create(
+                            Scenery.ROCKS_9305 -> if (player.location == Location.create(2909, 3684, 0)) Location.create(
                                 2907, 3682, 0
                             ) else Location.create(2909, 3684, 0)
 
-                            9306 -> if (player.location == Location.create(2903, 3680, 0)) Location.create(
+                            Scenery.ROCKS_9306 -> if (player.location == Location.create(2903, 3680, 0)) Location.create(
                                 2900, 3680, 0
                             ) else Location.create(2903, 3680, 0)
 
-                            9327 -> when (scenery.location) {
+                            Scenery.ROCKS_9327 -> when (scenery.location) {
                                 Location(2916, 3672, 0) -> Location.create(2918, 3672, 0)
                                 Location(2917, 3672, 0) -> Location.create(2915, 3672, 0)
                                 Location(2923, 3673, 0) -> Location.create(2921, 3672, 0)
