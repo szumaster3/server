@@ -123,8 +123,12 @@ class SilverCraftingPlugin : InteractionListener, InterfaceListener {
                 sendDialogue(player, "You need silver bar to make $productName.")
                 return@on true
             }
+            if (product.product == Items.CONDUCTOR_4201 && getQuestStage(player, Quests.CREATURE_OF_FENKENSTRAIN) < 4) {
+                sendMessage(player, "You need partial completion of Creature of Fenkenstrain to do that.")
+                return@on true
+            }
             if (product.product == Items.SILVTHRIL_CHAIN_13154 && !inInventory(player, Items.MITHRIL_BAR_2359)) {
-                sendMessage(player, "You need silver bar to make chain.")
+                sendMessage(player, "You need mithril bar to make chain.")
                 return@on true
             }
             val amount =
