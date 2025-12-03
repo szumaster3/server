@@ -1,12 +1,16 @@
-package content.global.skill.crafting.misc
+package content.global.skill.crafting
 
-import content.global.skill.crafting.CraftingDefinition
+import content.global.skill.construction.items.NailType
 import core.api.*
+import core.game.dialogue.DialogueFile
+import core.game.dialogue.Topic
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.node.entity.player.link.diary.DiaryType
 import core.game.node.entity.skill.Skills
 import core.game.node.item.Item
+import core.tools.END_DIALOGUE
+import shared.consts.Animations
 import shared.consts.Items
 import shared.consts.Sounds
 import kotlin.math.min
@@ -207,6 +211,112 @@ class CraftingItemPlugin : InteractionListener {
                 }
             }
 
+            return@onUseWith true
+        }
+
+        /*
+         * Handles crafting broodo shields.
+         */
+
+        onUseWith(IntType.ITEM, Items.HAMMER_2347, *CraftingDefinition.TRIBAL_ITEM_IDS.keys.toIntArray()) { player, _, with ->
+            val maskId = with.id
+            val shieldId = CraftingDefinition.TRIBAL_ITEM_IDS[maskId] ?: return@onUseWith false
+
+            if (getStatLevel(player, Skills.CRAFTING) < 35) {
+                sendMessage(player, "You don't have the crafting level needed to do that.")
+                return@onUseWith false
+            }
+
+            if (!inInventory(player, Items.SNAKESKIN_6289, 2)) {
+                sendMessage(player, "You don't have enough snakeskins.")
+                return@onUseWith false
+            }
+
+            var totalNails = 0
+            var hasCheap = false
+            var hasExpensive = false
+            for (nail in NailType.values) {
+                val count = player.inventory.getAmount(Item(nail.itemId))
+                if (count > 0) {
+                    totalNails += count
+                    if (nail.ordinal <= NailType.STEEL.ordinal) hasCheap = true else hasExpensive = true
+                }
+            }
+
+            when {
+                totalNails == 0 -> sendMessage(player, "You don't have nails.")
+                totalNails < 8 -> sendMessage(player, "You don't have enough nails.")
+                !hasCheap && hasExpensive -> {
+                    object : DialogueFile() {
+                        override fun handle(componentID: Int, buttonID: Int) {
+                            when (stage) {
+                                0 -> sendDoubleItemDialogue(player, Items.BLACK_NAILS_4821, Items.RUNE_NAILS_4824, "Using these nails will consume higher value nails. Are you sure?").also { stage++ }
+                                1 -> showTopics(
+                                    Topic("Yes, use the high-value nails.",2),
+                                    Topic("No, I'll get cheaper nails.", END_DIALOGUE)
+                                )
+                                2 -> {
+                                    end()
+                                    var canCraft = true
+                                    if (!removeItem(player, maskId) || !removeItem(player, Item(Items.SNAKESKIN_6289, 2))) canCraft = false
+
+                                    var remaining = 8
+                                    for (type in NailType.values) {
+                                        if (remaining <= 0) break
+                                        val amt = player.inventory.getAmount(Item(type.itemId))
+                                        if (amt > 0) {
+                                            val remove = min(amt, remaining)
+                                            removeItem(player, Item(type.itemId, remove))
+                                            remaining -= remove
+                                        }
+                                    }
+                                    if (remaining > 0) canCraft = false
+
+                                    if (canCraft) {
+                                        val anim = when (maskId) {
+                                            Items.TRIBAL_MASK_6335 -> Animations.CRAFT_SHIELD_GREEN_2410
+                                            Items.TRIBAL_MASK_6337 -> Animations.CRAFT_SHIELD_ORANGE_2411
+                                            Items.TRIBAL_MASK_6339 -> Animations.CRAFT_SHIELD_WHITE_2409
+                                            else -> Animations.CRAFT_SHIELD_GREEN_2410
+                                        }
+                                        animate(player, anim)
+                                        addItemOrDrop(player, shieldId, 1)
+                                        rewardXP(player, Skills.CRAFTING, 100.0)
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                else -> {
+                    var canCraft = true
+                    if (!removeItem(player, maskId) || !removeItem(player, Item(Items.SNAKESKIN_6289, 2))) canCraft = false
+
+                    var remaining = 8
+                    for (type in NailType.values) {
+                        if (remaining <= 0) break
+                        val amt = player.inventory.getAmount(Item(type.itemId))
+                        if (amt > 0) {
+                            val remove = min(amt, remaining)
+                            removeItem(player, Item(type.itemId, remove))
+                            remaining -= remove
+                        }
+                    }
+                    if (remaining > 0) canCraft = false
+
+                    if (canCraft) {
+                        val anim = when (maskId) {
+                            Items.TRIBAL_MASK_6335 -> Animations.CRAFT_SHIELD_GREEN_2410
+                            Items.TRIBAL_MASK_6337 -> Animations.CRAFT_SHIELD_ORANGE_2411
+                            Items.TRIBAL_MASK_6339 -> Animations.CRAFT_SHIELD_WHITE_2409
+                            else -> Animations.CRAFT_SHIELD_GREEN_2410
+                        }
+                        animate(player, anim)
+                        addItemOrDrop(player, shieldId, 1)
+                        rewardXP(player, Skills.CRAFTING, 100.0)
+                    }
+                }
+            }
             return@onUseWith true
         }
     }

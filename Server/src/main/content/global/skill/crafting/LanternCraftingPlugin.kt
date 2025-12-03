@@ -1,4 +1,4 @@
-package content.global.skill.crafting.glass
+package content.global.skill.crafting
 
 import core.api.addItem
 import core.api.addItemOrDrop

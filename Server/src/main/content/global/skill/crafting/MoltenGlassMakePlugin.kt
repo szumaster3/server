@@ -1,6 +1,5 @@
-package content.global.skill.crafting.glass
+package content.global.skill.crafting
 
-import content.global.skill.crafting.CraftingObject
 import core.api.*
 import core.game.event.ResourceProducedEvent
 import core.game.interaction.Clocks

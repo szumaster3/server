@@ -1,6 +1,5 @@
-package content.global.skill.crafting.glass
+package content.global.skill.crafting
 
-import content.global.skill.crafting.CraftingDefinition
 import core.api.*
 import core.game.event.LitLightSourceEvent
 import core.game.interaction.IntType

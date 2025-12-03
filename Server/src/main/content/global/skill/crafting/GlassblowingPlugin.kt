@@ -1,13 +1,9 @@
-package content.global.skill.crafting.glass
+package content.global.skill.crafting
 
-import content.global.skill.crafting.CraftingDefinition
 import core.api.*
 import core.game.dialogue.InputType
 import core.game.event.ResourceProducedEvent
-import core.game.interaction.Clocks
-import core.game.interaction.IntType
-import core.game.interaction.InteractionListener
-import core.game.interaction.InterfaceListener
+import core.game.interaction.*
 import core.game.node.entity.player.Player
 import core.game.node.entity.skill.Skills
 import shared.consts.Animations
@@ -44,19 +40,25 @@ class GlassblowingPlugin : InteractionListener, InterfaceListener {
             }
 
             when (opcode) {
-                OP_MAKE_ONE -> make(player, product, 1)
+                OP_MAKE_ONE  -> make(player, product, 1)
                 OP_MAKE_FIVE -> make(player, product, 5)
-                OP_MAKE_ALL -> make(player, product, amountInInventory(player, MOLTEN_GLASS))
-                OP_MAKE_X ->
+                OP_MAKE_ALL  -> make(player, product, amountInInventory(player, MOLTEN_GLASS))
+                OP_MAKE_X    -> {
                     sendInputDialogue(player, InputType.AMOUNT, "Enter the amount:") { value ->
                         make(player, product, Integer.parseInt(value.toString()))
                     }
+                }
 
                 else -> return@on true
             }
 
             return@on true
         }
+    }
+
+    private fun make(player: Player, product: CraftingDefinition.Glass, amount: Int) {
+        closeInterface(player)
+        handleGlassblowing(player, product, amount)
     }
 
     companion object {
@@ -69,15 +71,10 @@ class GlassblowingPlugin : InteractionListener, InterfaceListener {
         private const val MOLTEN_GLASS = Items.MOLTEN_GLASS_1775
         private const val GLASS_BLOWING_INTERFACE = Components.CRAFTING_GLASS_542
 
-        fun make(player: Player, product: CraftingDefinition.Glass, amount: Int) {
-            closeInterface(player)
-            handleGlassblowing(player, product, amount)
-        }
-
         fun handleGlassblowing(player: Player, product: CraftingDefinition.Glass, amount: Int) {
             var remaining = amount
 
-            queueScript(player, 0) { stage ->
+            queueScript(player, 0, QueueStrength. WEAK) { stage ->
                 if (remaining <= 0) return@queueScript stopExecuting(player)
                 if (!clockReady(player, Clocks.SKILLING)) return@queueScript stopExecuting(player)
 

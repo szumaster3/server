@@ -1,7 +1,7 @@
 package content.global.bots
 
 import content.global.skill.crafting.CraftingDefinition
-import content.global.skill.crafting.glass.GlassblowingPlugin
+import content.global.skill.crafting.GlassblowingPlugin
 import core.game.bots.Script
 import core.game.bots.SkillingBotAssembler
 import core.game.node.entity.skill.Skills
@@ -19,8 +19,7 @@ class GlassBlowingBankstander : Script() {
                 State.BLOWING -> {
                     bot.inventory.add(Item(Items.GLASSBLOWING_PIPE_1785))
                     bot.inventory.add(Item(Items.MOLTEN_GLASS_1775, 27))
-                    bot.interfaceManager.close()
-                    GlassblowingPlugin.make(bot, CraftingDefinition.Glass.UNPOWERED_ORB, 27)
+                    GlassblowingPlugin.handleGlassblowing(bot, CraftingDefinition.Glass.UNPOWERED_ORB, 27)
                     State.BANKING
                 }
 
