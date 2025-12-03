@@ -1,8 +1,6 @@
 package content.global.skill.farming
 
-enum class PatchType(
-    val stageGrowthTime: Int,
-) {
+enum class PatchType(val stageGrowthTime: Int) {
     ALLOTMENT(10),
     HOPS_PATCH(10),
     TREE_PATCH(40),

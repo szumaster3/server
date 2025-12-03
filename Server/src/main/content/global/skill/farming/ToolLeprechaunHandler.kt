@@ -16,6 +16,7 @@ val TL_IDS = arrayOf(NPCs.TOOL_LEPRECHAUN_3021, NPCs.GOTH_LEPRECHAUN_8000, NPCs.
 
 @Initializable
 class ToolLeprechaunHandler : OptionHandler() {
+
     override fun newInstance(arg: Any?): Plugin<Any> {
         for (id in TL_IDS) {
             val def = NPCDefinition.forId(id)
@@ -25,11 +26,7 @@ class ToolLeprechaunHandler : OptionHandler() {
         return this
     }
 
-    override fun handle(
-        player: Player?,
-        node: Node?,
-        option: String?,
-    ): Boolean {
+    override fun handle(player: Player?, node: Node?, option: String?): Boolean {
         node ?: return false
         when (option) {
             "exchange" -> player?.interfaceManager?.open(Component(Components.FARMING_TOOLS_125))

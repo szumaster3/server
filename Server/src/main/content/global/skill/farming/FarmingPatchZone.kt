@@ -25,10 +25,7 @@ class FarmingPatchZone : MapArea, TickListener {
         }
     }
 
-    override fun areaLeave(
-        entity: Entity,
-        logout: Boolean,
-    ) {
+    override fun areaLeave(entity: Entity, logout: Boolean) {
         if (entity is Player) {
             playersInZone.remove(entity)
         }
@@ -47,10 +44,7 @@ class FarmingPatchZone : MapArea, TickListener {
         }
     }
 
-    private fun spawnGithan(
-        player: Player,
-        firstDialogue: Boolean,
-    ) {
+    private fun spawnGithan(player: Player, firstDialogue: Boolean) {
         val npc = NPC(NPCs.GITHAN_7122)
         npc.location = player.location
         npc.init()
@@ -59,25 +53,14 @@ class FarmingPatchZone : MapArea, TickListener {
         openDialogue(player, SpiritDialogue(firstDialogue), npc)
     }
 
-    internal class SpiritDialogue(
-        private val firstDialogue: Boolean,
-    ) : DialogueFile() {
-        override fun handle(
-            componentID: Int,
-            buttonID: Int,
-        ) {
+    internal class SpiritDialogue(private val firstDialogue: Boolean) : DialogueFile() {
+        override fun handle(componentID: Int, buttonID: Int) {
             when (stage) {
                 0 -> {
                     if (firstDialogue) {
-                        npcl(
-                            FaceAnim.NEUTRAL,
-                            "In case you didn't know, you don't have to stand by your Farming patch. Your crops will grow even if you're not around.",
-                        ).also { stage++ }
+                        npcl(FaceAnim.NEUTRAL, "In case you didn't know, you don't have to stand by your Farming patch. Your crops will grow even if you're not around.").also { stage++ }
                     } else {
-                        npcl(
-                            FaceAnim.NEUTRAL,
-                            "Did you know that if your Farming patch has fully grown, it will never catch disease or die? It will be perfectly safe until you choose to harvest it.",
-                        ).also { stage++ }
+                        npcl(FaceAnim.NEUTRAL, "Did you know that if your Farming patch has fully grown, it will never catch disease or die? It will be perfectly safe until you choose to harvest it.").also { stage++ }
                     }
                 }
 

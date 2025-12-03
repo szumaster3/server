@@ -11,18 +11,7 @@ import java.util.concurrent.TimeUnit
 import kotlin.math.ceil
 import kotlin.math.min
 
-class Patch(
-    val player: Player,
-    val patch: FarmingPatch,
-    var plantable: Plantable?,
-    var currentGrowthStage: Int,
-    var isDiseased: Boolean,
-    var isDead: Boolean,
-    var isWatered: Boolean,
-    var nextGrowth: Long,
-    var harvestAmt: Int,
-    var isCheckHealth: Boolean,
-) {
+class Patch(val player: Player, val patch: FarmingPatch, var plantable: Plantable?, var currentGrowthStage: Int, var isDiseased: Boolean, var isDead: Boolean, var isWatered: Boolean, var nextGrowth: Long, var harvestAmt: Int, var isCheckHealth: Boolean) {
     constructor(player: Player, patch: FarmingPatch) : this(player, patch, null, 0, false, false, false, 0L, 0, false)
 
     var diseaseMod = 0
@@ -42,6 +31,7 @@ class Patch(
                 Plantable.LIMPWURT_SEED, Plantable.WOAD_SEED -> 3
                 Plantable.MUSHROOM_SPORE -> 6
                 Plantable.WILLOW_SAPLING -> 0
+                Plantable.AUGUSTE_SAPLING -> 0
                 else -> 1
             }
         if (plantable != null && plantable?.applicablePatch != PatchType.FLOWER_PATCH) {
@@ -50,52 +40,45 @@ class Patch(
         cropLives = 3 + compostMod
     }
 
-    fun rollLivesDecrement(
-        farmingLevel: Int,
-        magicSecateurs: Boolean,
-    ) {
+    fun rollLivesDecrement(farmingLevel: Int, magicSecateurs: Boolean) {
         if (patch.type == PatchType.HERB_PATCH) {
             var herbSaveLow =
                 when (plantable) {
-                    Plantable.GUAM_SEED -> min(24 + farmingLevel, 80)
-                    Plantable.MARRENTILL_SEED -> min(28 + farmingLevel, 80)
-                    Plantable.TARROMIN_SEED -> min(31 + farmingLevel, 80)
-                    Plantable.HARRALANDER_SEED -> min(36 + farmingLevel, 80)
-                    Plantable.GOUT_TUBER -> min(39 + farmingLevel, 80)
-                    Plantable.RANARR_SEED -> min(39 + farmingLevel, 80)
-                    Plantable.SPIRIT_WEED_SEED -> min(43 + farmingLevel, 80)
-                    Plantable.TOADFLAX_SEED -> min(43 + farmingLevel, 80)
-                    Plantable.IRIT_SEED -> min(46 + farmingLevel, 80)
-                    Plantable.AVANTOE_SEED -> min(50 + farmingLevel, 80)
-                    Plantable.KWUARM_SEED -> min(54 + farmingLevel, 80)
-                    Plantable.SNAPDRAGON_SEED -> min(57 + farmingLevel, 80)
-                    Plantable.CADANTINE_SEED -> min(60 + farmingLevel, 80)
-                    Plantable.LANTADYME_SEED -> min(64 + farmingLevel, 80)
-                    Plantable.DWARF_WEED_SEED -> min(67 + farmingLevel, 80)
-                    Plantable.TORSTOL_SEED -> min(71 + farmingLevel, 80)
+                    Plantable.GUAM_SEED         -> min(24 + farmingLevel, 80)
+                    Plantable.MARRENTILL_SEED   -> min(28 + farmingLevel, 80)
+                    Plantable.TARROMIN_SEED     -> min(31 + farmingLevel, 80)
+                    Plantable.HARRALANDER_SEED  -> min(36 + farmingLevel, 80)
+                    Plantable.GOUT_TUBER        -> min(39 + farmingLevel, 80)
+                    Plantable.RANARR_SEED       -> min(39 + farmingLevel, 80)
+                    Plantable.SPIRIT_WEED_SEED  -> min(43 + farmingLevel, 80)
+                    Plantable.TOADFLAX_SEED     -> min(43 + farmingLevel, 80)
+                    Plantable.IRIT_SEED         -> min(46 + farmingLevel, 80)
+                    Plantable.AVANTOE_SEED      -> min(50 + farmingLevel, 80)
+                    Plantable.KWUARM_SEED       -> min(54 + farmingLevel, 80)
+                    Plantable.SNAPDRAGON_SEED   -> min(57 + farmingLevel, 80)
+                    Plantable.CADANTINE_SEED    -> min(60 + farmingLevel, 80)
+                    Plantable.LANTADYME_SEED    -> min(64 + farmingLevel, 80)
+                    Plantable.DWARF_WEED_SEED   -> min(67 + farmingLevel, 80)
+                    Plantable.TORSTOL_SEED      -> min(71 + farmingLevel, 80)
                     else -> -1
                 }
 
             if (magicSecateurs) herbSaveLow = ceil(1.10 * herbSaveLow).toInt()
-
             val rand = RandomFunction.random(256)
-
-            if (rand > herbSaveLow) {
+            if (rand > herbSaveLow)
+            {
                 cropLives -= 1
             }
         } else {
-            var chance =
-                when (patch.type) {
-                    PatchType.ALLOTMENT -> 8
-                    PatchType.HOPS_PATCH -> 6
-                    PatchType.BELLADONNA_PATCH -> 2
-                    PatchType.EVIL_TURNIP_PATCH -> 2
-                    PatchType.CACTUS_PATCH -> 3
-                    else -> 0
-                }
-
+            var chance = when (patch.type) {
+                PatchType.ALLOTMENT -> 8
+                PatchType.HOPS_PATCH -> 6
+                PatchType.BELLADONNA_PATCH -> 2
+                PatchType.EVIL_TURNIP_PATCH -> 2
+                PatchType.CACTUS_PATCH -> 3
+                else -> 0
+            }
             if (magicSecateurs) chance += ceil(1.10 * chance).toInt()
-
             if (RandomFunction.roll(chance)) cropLives -= 1
         }
 
@@ -120,36 +103,50 @@ class Patch(
 
     fun ensureStateSanity(state: Int): Int {
         val patchDef = FarmingPatch.getSceneryDefByVarbit(patch.varbit) ?: return state
-        val currentStateDef = patchDef.getChildObjectAtIndex(state)
-        if (currentStateDef.name == patchDef.getChildObjectAtIndex(3).name) {
-            if (state and 0x40 != 0) {
-                isDead = false
-                isWatered = false
-                log(
-                    this::class.java,
-                    Log.DEBUG,
-                    "Patch for ${player.username} at varbit ${patch.varbit} with plantable ${plantable?.name ?: "none"} was set to watered/dead at stage $currentGrowthStage, which isn't valid.",
-                )
-                return (state and (0x40.inv()))
-            } else if (state and 0x80 != 0) {
-                isDiseased = false
-                log(
-                    this::class.java,
-                    Log.DEBUG,
-                    "Patch for ${player.username} at varbit ${patch.varbit} with plantable ${plantable?.name ?: "none"} was set to diseased at stage $currentGrowthStage, which isn't valid.",
-                )
-                return (state and (0x80.inv()))
-            } else if (state in listOf(0, 1, 2, 3)) {
-            } else {
-                log(
-                    this::class.java,
-                    Log.ERR,
-                    "Patch for ${player.username} at varbit ${patch.varbit} with plantable ${plantable?.name ?: "none"} was set to state $state at growth stage $currentGrowthStage, which isn't valid. We're not sure why this is happening.",
-                )
-            }
+        val current = patchDef.getChildObjectAtIndex(state)
+        val base = patchDef.getChildObjectAtIndex(3)
+
+        if (current.name != base.name) return state
+
+        fun clearFlag(bit: Int): Int = state and bit.inv()
+
+        // Dead/watered at invalid stages.
+        if (state hasFlag 0x40) {
+            isDead = false
+            isWatered = false
+            log(
+                this::class.java,
+                Log.DEBUG,
+                "Patch for ${player.username} at varbit ${patch.varbit} " +
+                        "with plantable ${plantable?.name ?: "none"} was set to watered/dead at stage $currentGrowthStage, which isn't valid."
+            )
+            return clearFlag(0x40)
         }
+
+        // Diseased at invalid stage.
+        if (state hasFlag 0x80) {
+            isDiseased = false
+            log(
+                this::class.java,
+                Log.DEBUG,
+                "Patch for ${player.username} at varbit ${patch.varbit} " + "with plantable ${plantable?.name ?: "none"} was set to diseased at stage $currentGrowthStage, which isn't valid."
+            )
+            return clearFlag(0x80)
+        }
+
+        // Valid base states 0-3
+        if (state in 0..3) return state
+
+        // Unknown invalid state
+        log(
+            this::class.java,
+            Log.ERR,
+            "Patch for ${player.username} at varbit ${patch.varbit} with plantable ${plantable?.name ?: "none"} " + "was set to state $state at growth stage $currentGrowthStage, which isn't valid. We're not sure why this is happening."
+        )
         return state
     }
+
+    private infix fun Int.hasFlag(flag: Int) = (this and flag) != 0
 
     fun isFertilized(): Boolean = compost != CompostType.NONE
 
@@ -157,102 +154,84 @@ class Patch(
 
     fun updateBit() {
         if (isCheckHealth) {
-            when (patch.type) {
-                PatchType.FRUIT_TREE_PATCH ->
-                    setVarbit(
-                        player,
-                        patch.varbit,
-                        plantable!!.value + plantable!!.stages + 20,
-                    )
+            updateCheckHealth()
+            return
+        }
+        updateRegular()
+    }
 
-                PatchType.BUSH_PATCH ->
-                    setVarbit(
-                        player,
-                        patch.varbit,
-                        250 + (plantable!!.ordinal - Plantable.REDBERRY_SEED.ordinal),
-                    )
-
-                PatchType.CACTUS_PATCH -> setVarbit(player, patch.varbit, 31)
-                PatchType.TREE_PATCH -> setVarbit(player, patch.varbit, plantable!!.value + plantable!!.stages)
-                else ->
-                    log(
-                        this::class.java,
-                        Log.WARN,
-                        "Invalid setting of isCheckHealth for patch type: " + patch.type.name,
-                    )
+    private fun updateCheckHealth() {
+        val v = when (patch.type) {
+            PatchType.FRUIT_TREE_PATCH -> plantable!!.value + plantable!!.stages + 20
+            PatchType.BUSH_PATCH -> 250 + (plantable!!.ordinal - Plantable.REDBERRY_SEED.ordinal)
+            PatchType.CACTUS_PATCH -> 31
+            PatchType.TREE_PATCH -> plantable!!.value + plantable!!.stages
+            else -> {
+                log(this::class.java, Log.WARN, "Invalid setting of isCheckHealth for patch type: ${patch.type.name}")
+                return
             }
-        } else {
-            when (patch.type) {
-                PatchType.ALLOTMENT, PatchType.FLOWER_PATCH, PatchType.HOPS_PATCH -> {
-                    var state = getUnmodifiedValue()
-                    if (isWatered || isDead) state = state or 0x40
-                    if (isDiseased) state = state or 0x80
+        }
+        setVarbit(player, patch.varbit, v)
+    }
 
-                    if (state != getVarbit(player, patch.varbit)) {
-                        setVisualState(state)
-                    }
-                }
+    private fun updateRegular() {
+        when (patch.type) {
+            PatchType.ALLOTMENT,
+            PatchType.FLOWER_PATCH,
+            PatchType.HOPS_PATCH       -> updateSimplePatch()
 
-                PatchType.BUSH_PATCH -> {
-                    if (isDead) {
-                        setVisualState(getBushDeathValue())
-                    } else if (isDiseased && !isDead) {
-                        setVisualState(getBushDiseaseValue())
-                    }
-                }
+            PatchType.BUSH_PATCH       -> updateStateBased(::getBushDeathValue, ::getBushDiseaseValue)
+            PatchType.TREE_PATCH       -> updateTreePatch()
+            PatchType.FRUIT_TREE_PATCH -> updateStateBased(::getFruitTreeDeathValue, ::getFruitTreeDiseaseValue)
+            PatchType.BELLADONNA_PATCH -> updateBelladonna()
+            PatchType.CACTUS_PATCH     -> updateStateBased(::getCactusDeathValue, ::getCactusDiseaseValue)
+            PatchType.HERB_PATCH       -> updateHerb()
+            else -> {}
+        }
+    }
 
-                PatchType.TREE_PATCH -> {
-                    var state = getVarbit(player, patch.varbit)
+    private fun updateSimplePatch() {
+        var state = getUnmodifiedValue()
 
-                    if (isDead) {
-                        state = state or 0x80
-                    } else if (isDiseased) {
-                        state = state or 0x40
-                    }
+        if (isWatered || isDead) state = state or 0x40
+        if (isDiseased) state = state or 0x80
 
-                    if (state != getVarbit(player, patch.varbit)) {
-                        setVisualState(state)
-                    }
-                }
+        if (state != getVarbit(player, patch.varbit)) {
+            setVisualState(state)
+        }
+    }
 
-                PatchType.FRUIT_TREE_PATCH -> {
-                    if (isDead) {
-                        setVisualState(getFruitTreeDeathValue())
-                    } else if (isDiseased && !isDead) {
-                        setVisualState(getFruitTreeDiseaseValue())
-                    }
-                }
+    private fun updateStateBased(death: () -> Int, disease: () -> Int) {
+        when {
+            isDead -> setVisualState(death())
+            isDiseased -> setVisualState(disease())
+        }
+    }
 
-                PatchType.BELLADONNA_PATCH -> {
-                    if (isDead) {
-                        setVisualState(getBelladonnaDeathValue())
-                    } else if (isDiseased && !isDead) {
-                        setVisualState(getBelladonnaDiseaseValue())
-                    } else {
-                        setVisualState((plantable?.value ?: 0) + currentGrowthStage)
-                    }
-                }
+    private fun updateTreePatch() {
+        var state = getVarbit(player, patch.varbit)
 
-                PatchType.CACTUS_PATCH -> {
-                    if (isDead) {
-                        setVisualState(getCactusDeathValue())
-                    } else if (isDiseased && !isDead) {
-                        setVisualState(getCactusDiseaseValue())
-                    }
-                }
+        if (isDead) state = state or 0x80
+        else if (isDiseased) state = state or 0x40
 
-                PatchType.HERB_PATCH -> {
-                    if (isDead) {
-                        setVisualState(getHerbDeathValue())
-                    } else if (isDiseased && !isDead) {
-                        setVisualState(getHerbDiseaseValue())
-                    } else {
-                        setVisualState((plantable?.value ?: 0) + currentGrowthStage)
-                    }
-                }
+        if (state != getVarbit(player, patch.varbit)) {
+            setVisualState(state)
+        }
+    }
 
-                else -> {}
-            }
+    private fun updateHerb() {
+        when {
+            isDead -> setVisualState(getHerbDeathValue())
+            isDiseased -> setVisualState(getHerbDiseaseValue())
+            else -> setVisualState((plantable?.value ?: 0) + currentGrowthStage)
+        }
+    }
+
+    private fun updateBelladonna() {
+        when {
+            isDead -> setVisualState(getBelladonnaDeathValue())
+            isDiseased -> setVisualState(getBelladonnaDiseaseValue())
+            else -> setVisualState((plantable?.value ?: 0) + currentGrowthStage)
         }
     }
 

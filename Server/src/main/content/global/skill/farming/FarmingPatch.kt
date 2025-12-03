@@ -110,10 +110,7 @@ enum class FarmingPatch(
         fun getSceneryDefByVarbit(id: Int): SceneryDefinition? = nodeMap[id]
     }
 
-    fun getPatchFor(
-        player: Player,
-        addPatch: Boolean = true,
-    ): Patch {
+    fun getPatchFor(player: Player, addPatch: Boolean = true): Patch {
         val crops = getOrStartTimer<CropGrowth>(player)
         return crops.getPatch(this, addPatch)
     }

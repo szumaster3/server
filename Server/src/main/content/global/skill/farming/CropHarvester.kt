@@ -16,16 +16,15 @@ import shared.consts.Animations
 import shared.consts.Items
 import shared.consts.Sounds
 
-val livesBased =
-    arrayOf(
-        PatchType.HERB_PATCH,
-        PatchType.CACTUS_PATCH,
-        PatchType.BELLADONNA_PATCH,
-        PatchType.HOPS_PATCH,
-        PatchType.ALLOTMENT,
-        PatchType.EVIL_TURNIP_PATCH,
-        PatchType.SPECIAL_PATCH,
-    )
+val livesBased = arrayOf(
+    PatchType.HERB_PATCH,
+    PatchType.CACTUS_PATCH,
+    PatchType.BELLADONNA_PATCH,
+    PatchType.HOPS_PATCH,
+    PatchType.ALLOTMENT,
+    PatchType.EVIL_TURNIP_PATCH,
+    PatchType.SPECIAL_PATCH,
+)
 
 @Initializable
 class CropHarvester : OptionHandler() {
@@ -60,51 +59,44 @@ class CropHarvester : OptionHandler() {
                         sendMessage(player, "You have run out of inventory space.")
                         return true
                     }
-                    var requiredItem =
-                        when (fPatch.type) {
-                            PatchType.TREE_PATCH -> Items.SECATEURS_5329
-                            else -> Items.SPADE_952
-                        }
+                    var requiredItem = when (fPatch.type) {
+                        PatchType.TREE_PATCH -> Items.SECATEURS_5329
+                        else -> Items.SPADE_952
+                    }
                     if (requiredItem == Items.SECATEURS_5329) {
                         if (inInventory(player, Items.MAGIC_SECATEURS_7409)) {
                             requiredItem = Items.MAGIC_SECATEURS_7409
                         }
                     }
-                    val anim =
-                        when (requiredItem) {
-                            Items.SPADE_952 -> {
-                                when (fPatch.type) {
-                                    PatchType.HERB_PATCH -> Animation(Animations.PICK_SOMETHING_UP_FROM_GROUND_2282)
-                                    PatchType.FLOWER_PATCH -> Animation(Animations.BEND_AND_PICK_2292)
-                                    else -> Animation(Animations.DIG_SPADE_830)
-                                }
+                    val anim = when (requiredItem) {
+                        Items.SPADE_952 -> {
+                            when (fPatch.type) {
+                                PatchType.HERB_PATCH -> Animation(Animations.PICK_SOMETHING_UP_FROM_GROUND_2282)
+                                PatchType.FLOWER_PATCH -> Animation(Animations.BEND_AND_PICK_2292)
+                                else -> Animation(Animations.DIG_SPADE_830)
                             }
-
-                            Items.SECATEURS_5329 ->
-                                if (fPatch.type == PatchType.TREE_PATCH) {
-                                    Animation(Animations.SECUTARS_2277)
-                                } else {
-                                    Animation(Animations.SECUTARS_7227)
-                                }
-
-                            Items.MAGIC_SECATEURS_7409 ->
-                                if (fPatch.type ==
-                                    PatchType.TREE_PATCH
-                                ) {
-                                    Animation(Animations.PRUNING_WITH_MAGIC_SECATEURS_3340)
-                                } else {
-                                    Animation(Animations.MAGIC_SECATEURS_7228)
-                                }
-
-                            else -> Animation(0)
                         }
-                    val sound =
-                        when (requiredItem) {
-                            Items.SPADE_952 -> Sounds.DIGSPADE_1470
-                            Items.SECATEURS_5329 -> Sounds.FARMING_PICK_2437
-                            Items.MAGIC_SECATEURS_7409 -> Sounds.FARMING_PICK_2437
-                            else -> 0
+
+                        Items.SECATEURS_5329 -> if (fPatch.type == PatchType.TREE_PATCH) {
+                            Animation(Animations.SECUTARS_2277)
+                        } else {
+                            Animation(Animations.SECUTARS_7227)
                         }
+
+                        Items.MAGIC_SECATEURS_7409 -> if (fPatch.type == PatchType.TREE_PATCH) {
+                            Animation(Animations.PRUNING_WITH_MAGIC_SECATEURS_3340)
+                        } else {
+                            Animation(Animations.MAGIC_SECATEURS_7228)
+                        }
+
+                        else -> Animation(0)
+                    }
+                    val sound = when (requiredItem) {
+                        Items.SPADE_952 -> Sounds.DIGSPADE_1470
+                        Items.SECATEURS_5329 -> Sounds.FARMING_PICK_2437
+                        Items.MAGIC_SECATEURS_7409 -> Sounds.FARMING_PICK_2437
+                        else -> 0
+                    }
                     if (!inInventory(player, requiredItem)) {
                         sendMessage(player, "You lack the needed tool to harvest these crops.")
                         return true
@@ -140,11 +132,7 @@ class CropHarvester : OptionHandler() {
         }
     }
 
-    override fun handle(
-        player: Player?,
-        node: Node?,
-        option: String?,
-    ): Boolean {
+    override fun handle(player: Player?, node: Node?, option: String?): Boolean {
         player ?: return false
         node ?: return false
         val fPatch = FarmingPatch.forObject(node.asScenery())

@@ -108,7 +108,7 @@ class UseWithPatchHandler : InteractionListener {
                                     }
                                 },
                             )
-                        } else if (p.plantable == Plantable.WILLOW_SAPLING && p.harvestAmt > 0) {
+                        } else if (p.plantable == Plantable.WILLOW_SAPLING ||  p.plantable == Plantable.AUGUSTE_SAPLING && p.harvestAmt > 0) {
                             val pulse = CropHarvester.harvestPulse(player, with, Items.WILLOW_BRANCH_5933)
                                 ?: return@onUseWith false
                             submitIndividualPulse(player, pulse)
@@ -340,10 +340,7 @@ class UseWithPatchHandler : InteractionListener {
                         else -> Items.SEED_DIBBER_5343
                     }
                     if (requiredItem != null && !inInventory(player, requiredItem)) {
-                        sendMessage(
-                            player,
-                            "You need ${prependArticle(requiredItem.asItem().name.lowercase())} to plant that.",
-                        )
+                        sendMessage(player, "You need ${prependArticle(requiredItem.asItem().name.lowercase())} to plant that.")
                         return@onUseWith true
                     }
                     player.lock()

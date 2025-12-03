@@ -17,16 +17,13 @@ import java.util.concurrent.TimeUnit
 
 @Initializable
 class HealthChecker : OptionHandler() {
+
     override fun newInstance(arg: Any?): Plugin<Any> {
         SceneryDefinition.setOptionHandler("check-health", this)
         return this
     }
 
-    override fun handle(
-        player: Player?,
-        node: Node?,
-        option: String?,
-    ): Boolean {
+    override fun handle(player: Player?, node: Node?, option: String?): Boolean {
         player ?: return false
         node ?: return false
         val fPatch = FarmingPatch.forObject(node.asScenery())

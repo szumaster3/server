@@ -12,10 +12,7 @@ import shared.consts.Items
 import shared.consts.Sounds
 import java.util.concurrent.TimeUnit
 
-class CompostBin(
-    val player: Player,
-    val bin: CompostBins,
-) {
+class CompostBin(val player: Player, val bin: CompostBins) {
     private var items = ArrayList<Int>()
     var isSuperCompost = true
     var isTomatoes = true

@@ -22,11 +22,7 @@ class CompostBinOptionHandler : OptionHandler() {
         return this
     }
 
-    override fun handle(
-        player: Player?,
-        node: Node?,
-        option: String?,
-    ): Boolean {
+    override fun handle(player: Player?, node: Node?, option: String?): Boolean {
         player ?: return false
         node ?: return false
         val cBin = CompostBins.forObject(node.asScenery()) ?: return false
@@ -34,19 +30,13 @@ class CompostBinOptionHandler : OptionHandler() {
 
         when (option) {
             "close" -> if (!bin.isFull()) {
-                sendMessage(
-                    player,
-                    "This shouldn't be happening. Report this.",
-                )
+                sendMessage(player, "This shouldn't be happening. Report this.")
             } else {
                 bin.close()
             }
 
             "open" -> if (!bin.isFinished) {
-                sendMessage(
-                    player,
-                    "I should probably wait until it is done to open it.",
-                )
+                sendMessage(player, "I should probably wait until it is done to open it.")
             } else {
                 bin.open()
             }

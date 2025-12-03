@@ -9,14 +9,9 @@ import shared.consts.Items
 
 class SackBasketPlugin : InteractionListener {
     private companion object {
-        val fruit =
-            arrayOf(
-                Items.ORANGE_2108,
-                Items.COOKING_APPLE_1955,
-                Items.BANANA_1963,
-                Items.STRAWBERRY_5504,
-                Items.TOMATO_1982
-            )
+        val fruit = arrayOf(
+            Items.ORANGE_2108, Items.COOKING_APPLE_1955, Items.BANANA_1963, Items.STRAWBERRY_5504, Items.TOMATO_1982
+        )
         val produce = arrayOf(Items.POTATO_1942, Items.ONION_1957, Items.CABBAGE_1965)
     }
 
@@ -43,10 +38,7 @@ class SackBasketPlugin : InteractionListener {
         }
     }
 
-    private fun tryFill(
-        player: Player,
-        item: Item,
-    ) {
+    private fun tryFill(player: Player, item: Item) {
         if (item.id == Items.EMPTY_SACK_5418) {
             val hasProduce = anyInInventory(player, Items.POTATO_1942, Items.ONION_1957, Items.CABBAGE_1965)
             if (!hasProduce) {
@@ -76,10 +68,7 @@ class SackBasketPlugin : InteractionListener {
         }
     }
 
-    private fun tryEmpty(
-        player: Player,
-        item: Item,
-    ) {
+    private fun tryEmpty(player: Player, item: Item) {
         val container = BasketsAndSacks.forId(item.id) ?: return
         val emptyItem = if (produce.contains(container.produceID)) Items.EMPTY_SACK_5418 else Items.BASKET_5376
         val returnItem = Item(container.produceID, container.checkWhich(item.id) + 1)
@@ -97,10 +86,7 @@ class SackBasketPlugin : InteractionListener {
         }
     }
 
-    private fun tryTakeOne(
-        player: Player,
-        item: Item,
-    ) {
+    private fun tryTakeOne(player: Player, item: Item) {
         val container = BasketsAndSacks.forId(item.id) ?: return
         val emptyItem = if (produce.contains(container.produceID)) Items.EMPTY_SACK_5418 else Items.BASKET_5376
         val isLast = container.checkIsFirst(item.id)
@@ -122,34 +108,30 @@ class SackBasketPlugin : InteractionListener {
         }
     }
 
-    private fun getAppropriateProduce(
-        player: Player,
-        containerID: Int,
-    ): Item? {
+    private fun getAppropriateProduce(player: Player, containerID: Int): Item? {
         val container = BasketsAndSacks.forId(containerID)
-        val produce =
-            if (container == null) {
-                var selected = 0
-                if (containerID == Items.EMPTY_SACK_5418) {
-                    for (i in produce) {
-                        if (inInventory(player, i, 1)) {
-                            selected = i
-                            break
-                        }
+        val produce = if (container == null) {
+            var selected = 0
+            if (containerID == Items.EMPTY_SACK_5418) {
+                for (i in produce) {
+                    if (inInventory(player, i, 1)) {
+                        selected = i
+                        break
                     }
-                    selected
-                } else {
-                    for (i in fruit) {
-                        if (inInventory(player, i, 1)) {
-                            selected = i
-                            break
-                        }
-                    }
-                    selected
                 }
+                selected
             } else {
-                container.produceID
+                for (i in fruit) {
+                    if (inInventory(player, i, 1)) {
+                        selected = i
+                        break
+                    }
+                }
+                selected
             }
+        } else {
+            container.produceID
+        }
 
         return if (produce == 0) null else Item(produce, player.inventory.getAmount(produce))
     }

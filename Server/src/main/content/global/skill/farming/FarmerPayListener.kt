@@ -18,14 +18,9 @@ class FarmerPayListener : InteractionListener {
         }
     }
 
-    private fun attemptPay(
-        player: Player,
-        node: Node,
-        index: Int,
-    ): Boolean {
+    private fun attemptPay(player: Player, node: Node, index: Int): Boolean {
         val farmer = Farmers.forId(node.id) ?: return false
         val patch = farmer.patches[index].getPatchFor(player)
-
         openDialogue(player, FarmerPayOptionDialogue(patch, true), node.asNpc())
         return true
     }

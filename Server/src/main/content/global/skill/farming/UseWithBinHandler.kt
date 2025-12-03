@@ -91,7 +91,7 @@ class UseWithBinHandler : InteractionListener {
         }
     }
 
-    fun loadNodes() {
+    private fun loadNodes() {
         for (p in Plantable.values()) {
             if (p.harvestItem != Items.SCARECROW_6059) {
                 allowedNodes.add(p.harvestItem)
@@ -107,10 +107,10 @@ class UseWithBinHandler : InteractionListener {
     }
 
     private fun Int.getNext(): Int {
-        if (this != 6476) {
-            return this + 2
+        return if (this != 6476) {
+            this + 2
         } else {
-            return Items.VIAL_229
+            Items.VIAL_229
         }
     }
 }

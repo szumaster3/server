@@ -15,11 +15,7 @@ class SeedlingListener : InteractionListener {
         onUseWith(IntType.ITEM, TREE_SEEDLINGS, *WATERING_CANS, handler = ::waterSeedling)
     }
 
-    fun addSeedToPot(
-        player: Player,
-        used: Node,
-        with: Node,
-    ): Boolean {
+    fun addSeedToPot(player: Player, used: Node, with: Node): Boolean {
         val seed = used.asItem() ?: return false
         val pot = with.asItem() ?: return false
 
@@ -37,11 +33,7 @@ class SeedlingListener : InteractionListener {
         return true
     }
 
-    fun waterSeedling(
-        player: Player,
-        used: Node,
-        with: Node,
-    ): Boolean {
+    fun waterSeedling(player: Player, used: Node, with: Node): Boolean {
         val seedling = used.asItem() ?: return false
         val can = with.asItem() ?: return false
 

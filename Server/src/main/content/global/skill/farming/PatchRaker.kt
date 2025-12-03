@@ -12,10 +12,7 @@ object PatchRaker {
     val RAKE_ANIM = getAnimation(Animations.RAKE_2273)
 
     @JvmStatic
-    fun rake(
-        player: Player,
-        patch: FarmingPatch,
-    ) {
+    fun rake(player: Player, patch: FarmingPatch) {
         val p = patch.getPatchFor(player)
         val patchName = p.patch.type.displayName()
         var firstRake = true

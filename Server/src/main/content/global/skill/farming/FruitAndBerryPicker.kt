@@ -32,11 +32,7 @@ class FruitAndBerryPicker : OptionHandler() {
         return this
     }
 
-    override fun handle(
-        player: Player?,
-        node: Node?,
-        option: String?,
-    ): Boolean {
+    override fun handle(player: Player?, node: Node?, option: String?): Boolean {
         player ?: return false
         node ?: return false
 

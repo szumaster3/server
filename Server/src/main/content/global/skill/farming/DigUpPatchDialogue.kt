@@ -33,7 +33,7 @@ class DigUpPatchDialogue(player: Player? = null) : Dialogue(player) {
             player,
             "Are you sure you want to dig up this patch?",
             "Yes, I want to clear it for new crops.",
-            "No, I want to leave it as it is.",
+            "No, I want to leave it as it is."
         )
         return true
     }
@@ -61,10 +61,10 @@ class DigUpPatchDialogue(player: Player? = null) : Dialogue(player) {
 
                             2 -> {
                                 if (patch?.patch?.type == PatchType.TREE_PATCH) {
-                                    if (patch?.getCurrentState() == (patch?.plantable?.value ?: 0) +
-                                        (patch?.plantable?.stages ?: 0) + 2 && patch?.isWeedy() != true
-                                        && patch?.isEmptyAndWeeded() != true)
-                                    {
+                                    if (patch?.getCurrentState() == (patch?.plantable?.value
+                                            ?: 0) + (patch?.plantable?.stages
+                                            ?: 0) + 2 && patch?.isWeedy() != true && patch?.isEmptyAndWeeded() != true
+                                    ) {
                                         addItemOrDrop(player, patch?.plantable?.harvestItem ?: 0)
                                     }
                                 }

@@ -12,16 +12,13 @@ import core.tools.prependArticle
 
 @Initializable
 class InspectionHandler : OptionHandler() {
+
     override fun newInstance(arg: Any?): Plugin<Any> {
         SceneryDefinition.setOptionHandler("inspect", this)
         return this
     }
 
-    override fun handle(
-        player: Player?,
-        node: Node?,
-        option: String?,
-    ): Boolean {
+    override fun handle(player: Player?, node: Node?, option: String?): Boolean {
         if (player == null || node == null) return false
 
         val patch =
@@ -38,27 +35,19 @@ class InspectionHandler : OptionHandler() {
         return true
     }
 
-    private fun handleEnrichedSeedInspection(
-        player: Player,
-        node: Node,
-    ) {
+    private fun handleEnrichedSeedInspection(player: Player, node: Node) {
         val scenery = node.asScenery()
         when (scenery) {
-            Scenery(41016, node.location) ->
-                sendMessage(
-                    player,
-                    "This is a specially prepared herb patch. You think it's probably best not to use it in case you get into trouble.",
-                )
-
-            Scenery(shared.consts.Scenery.HERBS_41017, node.location) -> sendMessage(player, "The seed has only just been planted.")
-            Scenery(shared.consts.Scenery.HERBS_41018, node.location) -> sendMessage(player, "The herb is fully grown and ready to harvest.")
+            Scenery(shared.consts.Scenery.HERB_PATCH_41016, node.location) ->
+                sendMessage(player, "This is a specially prepared herb patch. You think it's probably best not to use it in case you get into trouble.")
+            Scenery(shared.consts.Scenery.HERBS_41017, node.location) ->
+                sendMessage(player, "The seed has only just been planted.")
+            Scenery(shared.consts.Scenery.HERBS_41018, node.location) ->
+                sendMessage(player, "The herb is fully grown and ready to harvest.")
         }
     }
 
-    private fun handleGeneralInspection(
-        player: Player,
-        patch: FarmingPatch,
-    ) {
+    private fun handleGeneralInspection(player: Player, patch: FarmingPatch) {
         val p = patch.getPatchFor(player)
         val patchName = p.patch.type.displayName()
 

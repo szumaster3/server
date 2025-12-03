@@ -12,8 +12,7 @@ enum class CompostBins(
     FALADOR_COMPOST(740),
     CATHERBY_COMPOST(741),
     PORT_PHAS_COMPOST(742),
-    ARDOUGNE_COMPOST(743),
-    ;
+    ARDOUGNE_COMPOST(743);
 
     companion object {
         @JvmField
