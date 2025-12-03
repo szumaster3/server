@@ -19,6 +19,7 @@ import core.game.node.entity.player.link.diary.DiaryType
 import core.game.system.command.Privilege
 import core.game.system.task.Pulse
 import core.game.world.map.Location
+import core.game.world.map.build.DynamicRegion
 import core.game.world.repository.Repository
 import core.net.packet.PacketWriteQueue
 import core.net.packet.context.PlayerContext
@@ -34,6 +35,35 @@ import shared.consts.Items
 class DevelopmentCommandSet : CommandSet(Privilege.ADMIN) {
 
     override fun defineCommands() {
+
+        /*
+         * Command for allowing to load a dynamic region and move to it.
+         */
+
+        define(
+            name = "loadregion",
+            privilege = Privilege.ADMIN,
+            usage = "::loadregion <id>",
+            description = "Load a dynamic region."
+        ) { player, args ->
+
+            if (args.size < 2) {
+                sendMessage(player, "Usage: ::loadregion <region_id>")
+                return@define
+            }
+
+            val regionId = args[1].toIntOrNull()
+            if (regionId == null) {
+                sendMessage(player, "Invalid region id.")
+                return@define
+            }
+
+            val dyn = DynamicRegion.create(regionId)
+            dyn.add(player)
+            teleport(player, dyn.baseLocation)
+
+            sendMessage(player, "Dynamic region $regionId loaded.")
+        }
 
         /*
          * Command for spawning items for summoning pouches creation.
