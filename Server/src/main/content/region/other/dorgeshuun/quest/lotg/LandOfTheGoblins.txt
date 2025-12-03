@@ -1,4 +1,4 @@
-package content.region.other.dorgeshuun.quest.lotg
+/*package content.region.other.dorgeshuun.quest.lotg
 
 import core.api.displayQuestItem
 import core.api.rewardXP
@@ -62,3 +62,4 @@ class LandOfTheGoblins :
 //Access to the Bandos gravestone (talk to Blasidar the sculptor in Keldagrim).
 //Ability to access the beacon located near the Goblin Village, west of Ice Mountain.
 //2 Treasure Hunter keys (Ironman accounts will not receive these)
+*/
