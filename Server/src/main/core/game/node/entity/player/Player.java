@@ -216,7 +216,10 @@ public class Player extends Entity {
      */
     private final PacketDispatch packetDispatch = new PacketDispatch(this);
 
-    private  Boolean isAfkLogout;
+    /**
+     * Indicates whether the player was logged out automatically for being AFK.
+     */
+    public Boolean isAfkLogout;
 
     private StorageState costumeRoomState;
 

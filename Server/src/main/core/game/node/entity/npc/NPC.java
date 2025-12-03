@@ -427,7 +427,7 @@ public class NPC extends Entity {
                         public boolean pulse() {
                             getProperties().getCombatPulse().stop();
                             getLocks().unlockMovement();
-                            fullRestore();
+                            // fullRestore();
                             getImpactHandler().setDisabledTicks(0);
                             removeAttribute("return-to-spawn");
                             removeAttribute("return-to-spawn-pulse");

@@ -6,11 +6,12 @@ import core.game.node.entity.player.info.login.PlayerParser
 import core.game.system.task.TaskExecutor
 import core.game.world.GameWorld
 import core.tools.Log
+import core.tools.secondsToTicks
 
 /**
  * Handles disconnecting players queuing.
  *
- * @author Emperor
+ * @author Emperor, Ceikry
  */
 class DisconnectionQueue {
     /**
@@ -31,20 +32,19 @@ class DisconnectionQueue {
 
         //loop through entries and disconnect each
         entries.forEach {
-            if (finish(it.value, false)) {
-                queue.remove(it.key)
-            } else {
+            if(finish(it.value,false)) queue.remove(it.key)
+            else {
+                //Make sure there's no room for the disconnection queue to stroke out and leave someone logged in for 10 years.
                 queueTimers[it.key] = (queueTimers[it.key] ?: 0) + 3
-                if ((queueTimers[it.key] ?: Int.MAX_VALUE) >= 1500) {
+                val isValidAFKLogout = it.value?.player?.isAfkLogout == true
+                val seconds = if (isValidAFKLogout) 30 else 5 * 60 //30 seconds for AFK logout, 5 minutes for normal logout
+                val ticksNeeded = secondsToTicks(seconds)
+                if ((queueTimers[it.key] ?: Int.MAX_VALUE) >= ticksNeeded) {
                     it.value?.player?.let { player ->
                         player.finishClear()
                         Repository.removePlayer(player)
                         remove(it.key)
-                        log(
-                            this::class.java,
-                            Log.WARN,
-                            "Force-clearing ${it.key} after 15 minutes of being in the disconnection queue!",
-                        )
+                        log(this::class.java, Log.WARN, "Force-clearing ${it.key} after 15 minutes of being in the disconnection queue!")
                     }
                 }
             }
