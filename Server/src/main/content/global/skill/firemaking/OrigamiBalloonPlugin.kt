@@ -7,16 +7,13 @@ import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.interaction.QueueStrength
 import core.game.node.entity.impl.Projectile
-import core.game.node.entity.impl.Projectile.getLocation
 import core.game.node.entity.skill.Skills
 import core.game.node.item.Item
-import core.game.world.map.Direction
-import core.game.world.map.Location
 import core.game.world.map.RegionManager.getObject
 import shared.consts.Animations
-import shared.consts.Graphics
 import shared.consts.Items
 import shared.consts.Quests
+import java.util.*
 import kotlin.math.min
 
 class OrigamiBalloonPlugin : InteractionListener {
@@ -88,13 +85,7 @@ class OrigamiBalloonPlugin : InteractionListener {
          * Lighting and releasing balloons.
          */
 
-        onUseWith(IntType.ITEM, Items.TINDERBOX_590, *BALLOON_IDS + Items.ORIGAMI_BALLOON_9934) { player, _, with ->
-            val baseGfx = BALLOON_GFX[with.id]
-            if (baseGfx == null) {
-                sendMessage(player, "Nothing interesting happens.")
-                return@onUseWith true
-            }
-
+        onUseWith(IntType.ITEM, Items.TINDERBOX_590, *BALLOON_IDS) { player, _, with ->
             if (!clockReady(player, Clocks.SKILLING)) return@onUseWith true
             if (getStatLevel(player, Skills.FIREMAKING) < 20) {
                 sendMessage(player, "You need a Firemaking level of 20 to light the balloon.")
@@ -102,22 +93,23 @@ class OrigamiBalloonPlugin : InteractionListener {
             }
             if (getObject(player.location) != null || player.zoneMonitor.isInZone("bank")) {
                 sendMessage(player, "You can't light a balloon here.")
-                return@onUseWith false
+                return@onUseWith true
             }
             if (!removeItem(player, with.asItem())) return@onUseWith true
 
-            val flyUpwardsGfx = baseGfx
-            val projectileGfx = baseGfx + 2
+            val flyUpwardsGfx = 880
+            val projectileGfx = 880 + 2
 
             queueScript(player, 1, QueueStrength.WEAK) {
                 visualize(player, Animations.BALLOON_FLY_5142, flyUpwardsGfx)
-                sendMessage(player, "You light the origami ${getItemName(with.id).lowercase()}.")
+                sendMessage(player, "You light the origami ${getItemName(with.id).lowercase(Locale.getDefault())}.")
                 delayClock(player, Clocks.SKILLING, 3)
                 rewardXP(player, Skills.FIREMAKING, 20.0)
                 Projectile
                     .create(player, null, projectileGfx, 45, 45, 1, 70, 0)
-                    .transform(player, player.location.transform(player.direction, player.direction.ordinal + 1), false, 70, 140).send()
-                return@queueScript stopExecuting(player)
+                    .transform(player, player.location.transform(player.direction, (player.direction.ordinal + 1) % 8), false, 70, 140)
+                    .send()
+                stopExecuting(player)
             }
 
             return@onUseWith true
@@ -128,17 +120,7 @@ class OrigamiBalloonPlugin : InteractionListener {
         /**
          * The balloon graphics.
          */
-        private val BALLOON_GFX = mapOf(
-            Items.ORIGAMI_BALLOON_9934 to Graphics.BALLOON_FLY_UPWARDS_880,
-            Items.YELLOW_BALLOON_9935  to Graphics.YELLOW_BALLOON_FLY_UPWARDS_883,
-            Items.BLUE_BALLOON_9936    to Graphics.BLUE_BALLOON_FLY_UPWARDS_886,
-            Items.RED_BALLOON_9937     to Graphics.RED_BALLOON_FLY_UPWARDS_889,
-            Items.ORANGE_BALLOON_9938  to Graphics.ORANGE_BALLOON_FLY_UPWARDS_892,
-            Items.GREEN_BALLOON_9939   to Graphics.GREEN_BALLOON_FLY_UPWARDS_895,
-            Items.PURPLE_BALLOON_9940  to Graphics.PURPLE_BALLOON_FLY_UPWARDS_898,
-            Items.PINK_BALLOON_9941    to Graphics.PINK_BALLOON_FLY_UPWARDS_901,
-            Items.BLACK_BALLOON_9942   to Graphics.BLACK_BALLOON_FLY_UPWARDS_904
-        )
+
 
         /**
          * The dyes.
@@ -148,6 +130,6 @@ class OrigamiBalloonPlugin : InteractionListener {
         /**
          * The coloured origami balloons.
          */
-        private val BALLOON_IDS = Dyes.values().map { it.origamiBallonId }.toIntArray()
+        private val BALLOON_IDS = (Dyes.values().map { it.origamiBallonId } + Items.ORIGAMI_BALLOON_9934).toIntArray()
     }
 }

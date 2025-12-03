@@ -1,11 +1,9 @@
 package content.region.other.entrana.quest.zep.dialogue
 
-import content.region.other.entrana.quest.zep.cutscene.FirstExperimentCutscene
-import content.region.other.entrana.quest.zep.cutscene.SecondExperimentCutscene
+import content.data.Dyes
+import content.region.other.entrana.quest.zep.cutscene.ExperimentCutscene
 import core.api.*
-import core.game.dialogue.Dialogue
-import core.game.dialogue.DialogueFile
-import core.game.dialogue.FaceAnim
+import core.game.dialogue.*
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.game.node.entity.skill.Skills
@@ -24,7 +22,11 @@ class AugusteDialogue(player: Player? = null) : Dialogue(player) {
         val hasWool = inInventory(player!!, Items.BALL_OF_WOOL_1759, 1)
         val hasPotatoes = inInventory(player!!, Items.POTATOES10_5438, 1)
 
+        val hasDyedBalloon = Dyes.values().map { it.origamiBallonId }.toIntArray()
         val hasDye = (inInventory(player!!, Items.YELLOW_DYE_1765, 1) && inInventory(player!!, Items.RED_DYE_1763, 1))
+        val hasPlain = inInventory(player, Items.ORIGAMI_BALLOON_9934)
+        val hasDyed = anyInInventory(player, *hasDyedBalloon)
+
         val hasSandbags = inInventory(player!!, Items.SANDBAG_9943, 8)
         val hasSilk = inInventory(player!!, Items.SILK_950, 10)
         val hasBowl = inInventory(player!!, Items.UNFIRED_BOWL_1791, 1)
@@ -33,7 +35,7 @@ class AugusteDialogue(player: Player? = null) : Dialogue(player) {
 
         when (getQuestStage(player, Quests.ENLIGHTENED_JOURNEY)) {
             0 -> when (stage) {
-                0 -> npc(FaceAnim.HAPPY, "Greetings! would you like to be my number one accomplice?", "I mean, assistant?").also { stage++ }
+                0 -> npc(FaceAnim.HAPPY, "Greetings! would you like to be my number one", "accomplice?", "I mean, assistant?").also { stage++ }
                 1 -> player(FaceAnim.ASKING, "Who are you?").also { stage++ }
                 2 -> npc(FaceAnim.HAPPY, "I am Auguste. I am going to be the first balloonist in", "all of " + GameWorld.settings!!.name + "!").also { stage++ }
                 3 -> player(FaceAnim.HALF_THINKING, "Balloo-what? I thought only monks lived on Entrana.").also { stage++ }
@@ -142,10 +144,10 @@ class AugusteDialogue(player: Player? = null) : Dialogue(player) {
             }
 
             3 -> when (stage) {
-                0 -> if (inInventory(player, Items.ORIGAMI_BALLOON_9934)) {
-                    playerl(FaceAnim.HAPPY, "I finished the origami balloon!").also { stage = 4 }
-                } else {
-                    playerl(FaceAnim.FRIENDLY, "How do you make the origami balloon?").also { stage = 1 }
+                0 -> when {
+                    hasDyed && !hasPlain -> npcl(FaceAnim.FRIENDLY, "I just need a plain origami balloon. The dye could contaminate the experiment.").also { stage = END_DIALOGUE }
+                    hasPlain -> playerl(FaceAnim.HAPPY, "I finished the origami balloon!").also { stage = 4 }
+                    else -> playerl(FaceAnim.FRIENDLY, "How do you make the origami balloon?").also { stage++ }
                 }
                 1 -> npcl(FaceAnim.FRIENDLY, "First, use the papyrus on the ball of wool. The papyrus is folded into an origami box and the yarn will support the heat source.").also { stage++ }
                 2 -> npcl(FaceAnim.FRIENDLY, "Next, add the unlit candle to the balloon structure. It will act as the heat source.").also { stage++ }
@@ -154,7 +156,7 @@ class AugusteDialogue(player: Player? = null) : Dialogue(player) {
                 5 -> {
                     end()
                     if(removeItem(player, Items.ORIGAMI_BALLOON_9934)) {
-                        FirstExperimentCutscene(player).start()
+                        ExperimentCutscene(player).start(true)
                         setQuestStage(player, Quests.ENLIGHTENED_JOURNEY, 4)
                     }
                 }
@@ -171,7 +173,7 @@ class AugusteDialogue(player: Player? = null) : Dialogue(player) {
                         }
 
                         if (missing.isEmpty()) {
-                            stage = 5
+                            stage = 3
                         } else {
                             val message = if (missing.size == 1) "You need ${missing[0]}." else "You need ${missing.joinToString(" and ")}."
                             npcl(FaceAnim.FRIENDLY, message)
@@ -180,13 +182,15 @@ class AugusteDialogue(player: Player? = null) : Dialogue(player) {
                     }
                     2 -> playerl(FaceAnim.NEUTRAL, "Oh, I've misplaced them.").also { stage = END_DIALOGUE }
                 }
-                5 -> {
+                3 -> npc(FaceAnim.HAPPY, "Commendable. If I may have those, I will construct this", "experiment.").also { stage++ }
+                4 -> {
                     end()
                     if(removeItem(player, Item(Items.PAPYRUS_970, 2)) && removeItem(player, Item(Items.POTATOES10_5438, 1))) {
-                        SecondExperimentCutscene(player).start()
+                        ExperimentCutscene(player).start(true)
                         setQuestStage(player, Quests.ENLIGHTENED_JOURNEY, 5)
                     }
                 }
+
             }
 
             5 -> when (stage) {
@@ -228,21 +232,23 @@ class AugusteDialogue(player: Player? = null) : Dialogue(player) {
                     3 -> playerl(FaceAnim.FRIENDLY, "I have lost my willow sapling. Can I buy a replacement?").also { stage = 20 }
                     else -> { stage = END_DIALOGUE }
                 }
-                3 -> options("Dye.", "Sandbags.", "Silk.", "Bowl.", "Never mind.").also { stage = 4 }
-                4 -> when (buttonID) {
-                    1 -> playerl(FaceAnim.FRIENDLY, "Dye.").also { stage = 5 }
-                    2 -> playerl(FaceAnim.FRIENDLY, "Sandbags.").also { stage = 7 }
-                    3 -> playerl(FaceAnim.FRIENDLY, "Silk.").also { stage = 10 }
-                    4 -> playerl(FaceAnim.FRIENDLY, "Bowl.").also { stage = 11 }
-                    5 -> playerl(FaceAnim.FRIENDLY, "Never mind.").also { stage = END_DIALOGUE }
-                    else -> { stage = END_DIALOGUE }
-                }
+                3 -> showTopics(
+                    IfTopic("Dye", 5,!hasGiven(player, "ej-dye"),true),
+                    IfTopic("Sandbags", 7,!hasGiven(player, "ej-sandbags"),true),
+                    IfTopic("Silk", 10,!hasGiven(player, "ej-silk"),true),
+                    IfTopic("Bowl", 11,!hasGiven(player, "ej-bowl"),true),
+                    Topic("Never mind.", END_DIALOGUE, true)
+                )
+
                 5 -> {
                     val hasYellow = inInventory(player, Items.YELLOW_DYE_1765, 1)
                     val hasRed = inInventory(player, Items.RED_DYE_1763, 1)
 
                     if (hasGiven(player, "ej-dye")) {
                         npcl(FaceAnim.FRIENDLY, "You have already given me the dyes.").also { stage = 6 }
+                    } else if (inInventory(player, Items.YELLOW_DYE_1766, 1) || inInventory(player, Items.RED_DYE_1764, 1)) {
+                        npc(FaceAnim.SAD, "What am I supposed to do with a note?? I can't make ", "a baloon from notes!")
+                        stage = END_DIALOGUE
                     } else if (hasYellow && hasRed) {
                         removeItem(player, Item(Items.YELLOW_DYE_1765, 1))
                         removeItem(player, Item(Items.RED_DYE_1763, 1))
@@ -252,12 +258,12 @@ class AugusteDialogue(player: Player? = null) : Dialogue(player) {
                         npcl(FaceAnim.FRIENDLY, "You don't have the required dyes with you (need red and yellow).").also { stage = 6 }
                     }
                 }
-                6 -> npcl(FaceAnim.FRIENDLY, "I need red and yellow dye for the balloon.").also { stage = 3 }
+                6 -> npcl(FaceAnim.FRIENDLY, "I need red and yellow dye for the balloon.").also { stage = END_DIALOGUE }
                 7 -> {
                     val neededSandbags = 8
                     if (hasGiven(player, "ej-sandbags")) {
                         npcl(FaceAnim.FRIENDLY, "You have already given me sandbags.").also { stage = 3 }
-                    } else if (inInventory(player, Items.SANDBAG_9943, neededSandbags)) {
+                    } else if (hasSandbags) {
                         removeItem(player, Item(Items.SANDBAG_9943, neededSandbags))
                         setGiven(player, "ej-sandbags")
                         npcl(FaceAnim.FRIENDLY, "Sandbags, thank you. This will allow us to change height.").also { stage = 3 }
@@ -274,7 +280,7 @@ class AugusteDialogue(player: Player? = null) : Dialogue(player) {
                     } else if (inInventory(player, Items.SILK_951, neededSilk)) {
                         npc(FaceAnim.SAD, "What am I supposed to do with a note?? I can't make ", "a baloon from notes!")
                         stage = END_DIALOGUE
-                    } else if (inInventory(player, Items.SILK_950, neededSilk)) {
+                    } else if (hasSilk) {
                         removeItem(player, Item(Items.SILK_950, neededSilk))
                         setGiven(player, "ej-silk")
                         npcl(FaceAnim.FRIENDLY, "Silk for the balloon, thank you.").also { stage = 3 }
@@ -283,11 +289,13 @@ class AugusteDialogue(player: Player? = null) : Dialogue(player) {
                     }
                 }
                 11 -> {
-                    val hasBowl = inInventory(player, Items.UNFIRED_BOWL_1791, 1)
                     val alreadyGivenBowl = hasGiven(player, "ej-bowl")
                     if (alreadyGivenBowl) {
                         npcl(FaceAnim.FRIENDLY, "You have already given the bowl.").also { stage = 3 }
-                    } else if (!hasBowl) {
+                    } else if (inInventory(player, Items.UNFIRED_BOWL_1792, 1)) {
+                        npc(FaceAnim.SAD, "What am I supposed to do with a note?? I can't make ", "a baloon from notes!")
+                        stage = END_DIALOGUE
+                    } else if(!hasBowl) {
                         npcl(FaceAnim.FRIENDLY, "I need a plain clay-fired bowl; they're quite easy to come by.").also { stage = 3 }
                     } else if (hasGiven(player, "ej-dye") && hasGiven(player, "ej-sandbags") && hasGiven(player, "ej-silk")) {
                         removeItem(player, Item(Items.UNFIRED_BOWL_1791, 1))
@@ -300,31 +308,25 @@ class AugusteDialogue(player: Player? = null) : Dialogue(player) {
                         npcl(FaceAnim.FRIENDLY, "You must bring me the dyes, sandbags and silk before I can accept the bowl.").also { stage = 3 }
                     }
                 }
-                12 -> npcl(FaceAnim.FRIENDLY, "What do you need help with?").also { stage = 13 }
-                13 -> options("Dye.", "Sandbags.", "Silk.", "Bowl.", "Never mind.").also { stage = 14 }
-                14 -> when (buttonID) {
-                    1 -> playerl(FaceAnim.FRIENDLY, "Dye.").also { stage = 15 }
-                    2 -> playerl(FaceAnim.FRIENDLY, "Sandbags.").also { stage = 16 }
-                    3 -> playerl(FaceAnim.FRIENDLY, "Silk.").also { stage = 18 }
-                    4 -> playerl(FaceAnim.FRIENDLY, "Bowl.").also { stage = 19 }
-                    5 -> playerl(FaceAnim.FRIENDLY, "Never mind.").also { stage = END_DIALOGUE }
-                    else -> stage = END_DIALOGUE
-                }
-                15 -> npcl(FaceAnim.FRIENDLY, "I was told a while ago that there was a witch who made dye in Draynor Village. Maybe you should start by looking there.").also { stage = END_DIALOGUE }
-                16 -> npcl(FaceAnim.FRIENDLY, "Sandbags can be made by getting empty sacks and filling them at the sandpit here on Entrana.").also { stage = 17 }
-                17 -> npcl(FaceAnim.FRIENDLY, "However, there are other sand pits around the world that will work as well; there is one in Yanille, Rellekka, and Zanaris.").also { stage = END_DIALOGUE }
-                18 -> npcl(FaceAnim.FRIENDLY, "Hmm, I believe silk is imported from the desert. Perhaps someone there can tell you where to find it.").also { stage = END_DIALOGUE }
-                19 -> npcl(FaceAnim.FRIENDLY, "I think there is a spare one in the glass blower's house. I rent a room from him there, so I don't think he'll mind you taking it.").also { stage = END_DIALOGUE }
-                20 -> npcl(FaceAnim.FRIENDLY, "It will cost you 30,000 gold coins to replace it, do you want to pay that?").also { stage = 21 }
-                21 -> options("Yes.", "No way!").also { stage = 22 }
-
-                22 -> when (buttonID) {
-                    1 -> playerl(FaceAnim.FRIENDLY, "Yes.").also { stage = 23 }
-                    2 -> playerl(FaceAnim.FRIENDLY, "No way!").also { stage = END_DIALOGUE }
-                    else -> stage = END_DIALOGUE
-                }
-
-                23 -> {
+                12 -> npcl(FaceAnim.FRIENDLY, "What do you need help with?").also { stage++ }
+                13 -> showTopics(
+                    Topic("Dye", 14,true),
+                    Topic("Sandbags", 15,true),
+                    Topic("Silk", 17,true),
+                    Topic("Bowl", 18,true),
+                    Topic("Never mind.", END_DIALOGUE, true)
+                )
+                14 -> npcl(FaceAnim.FRIENDLY, "I was told a while ago that there was a witch who made dye in Draynor Village. Maybe you should start by looking there.").also { stage = 13 }
+                15 -> npcl(FaceAnim.FRIENDLY, "Sandbags can be made by getting empty sacks and filling them at the sandpit here on Entrana.").also { stage++ }
+                16 -> npcl(FaceAnim.FRIENDLY, "However, there are other sand pits around the world that will work as well; there is one in Yanille, Rellekka, and Zanaris.").also { stage = 13 }
+                17 -> npcl(FaceAnim.FRIENDLY, "Hmm, I believe silk is imported from the desert. Perhaps someone there can tell you where to find it.").also { stage = 13 }
+                18 -> npcl(FaceAnim.FRIENDLY, "I think there is a spare one in the glass blower's house. I rent a room from him there, so I don't think he'll mind you taking it.").also { stage = 13 }
+                19 -> npcl(FaceAnim.FRIENDLY, "It will cost you 30,000 gold coins to replace it, do you want to pay that?").also { stage++ }
+                20 -> showTopics(
+                    Topic("Yes.", 21),
+                    Topic("No way!", END_DIALOGUE),
+                )
+                21 -> {
                     if (freeSlots(player) < 2) {
                         npcl(FaceAnim.FRIENDLY, "Looks like you don't have enough room in your inventory for the basket and the sapling. Come back when you do.")
                         return true
@@ -334,11 +336,12 @@ class AugusteDialogue(player: Player? = null) : Dialogue(player) {
                         return true
                     }
                     if (removeItem(player, Item(Items.COINS_995, 30000))) {
-                        npcl(FaceAnim.FRIENDLY, "Here you go. Now be very careful not to lose it again!").also { stage = 24 }
-                        addItemOrDrop(player, Items.AUGUSTES_SAPLING_9932)
+                        npcl(FaceAnim.FRIENDLY, "Here you go. Now be very careful not to lose it again!")
+                        addItemOrDrop(player, Items.AUGUSTES_SAPLING_9932, 1)
+                        stage = 22
                     }
                 }
-                24 -> npcl(FaceAnim.FRIENDLY, "Good luck with the balloon.").also { stage = END_DIALOGUE }
+                22 -> npcl(FaceAnim.FRIENDLY, "Good luck with the balloon.").also { stage = END_DIALOGUE }
                 else -> stage = END_DIALOGUE
             }
 
