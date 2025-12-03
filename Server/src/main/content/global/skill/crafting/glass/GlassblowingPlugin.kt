@@ -59,11 +59,6 @@ class GlassblowingPlugin : InteractionListener, InterfaceListener {
         }
     }
 
-    private fun make(player: Player, product: CraftingDefinition.Glass, amount: Int) {
-        closeInterface(player)
-        handleGlassblowing(player, product, amount)
-    }
-
     companion object {
         private const val OP_MAKE_ONE = 155
         private const val OP_MAKE_FIVE = 196
@@ -73,6 +68,11 @@ class GlassblowingPlugin : InteractionListener, InterfaceListener {
         private const val GLASS_BLOWING_PIPE = Items.GLASSBLOWING_PIPE_1785
         private const val MOLTEN_GLASS = Items.MOLTEN_GLASS_1775
         private const val GLASS_BLOWING_INTERFACE = Components.CRAFTING_GLASS_542
+
+        fun make(player: Player, product: CraftingDefinition.Glass, amount: Int) {
+            closeInterface(player)
+            handleGlassblowing(player, product, amount)
+        }
 
         fun handleGlassblowing(player: Player, product: CraftingDefinition.Glass, amount: Int) {
             var remaining = amount

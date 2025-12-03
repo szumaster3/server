@@ -19,7 +19,8 @@ class GlassBlowingBankstander : Script() {
                 State.BLOWING -> {
                     bot.inventory.add(Item(Items.GLASSBLOWING_PIPE_1785))
                     bot.inventory.add(Item(Items.MOLTEN_GLASS_1775, 27))
-                    GlassblowingPlugin.handleGlassblowing(bot, CraftingDefinition.Glass.UNPOWERED_ORB, 27)
+                    bot.interfaceManager.close()
+                    GlassblowingPlugin.make(bot, CraftingDefinition.Glass.UNPOWERED_ORB, 27)
                     State.BANKING
                 }
 
