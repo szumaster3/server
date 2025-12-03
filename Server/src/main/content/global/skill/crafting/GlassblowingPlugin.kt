@@ -74,46 +74,32 @@ class GlassblowingPlugin : InteractionListener, InterfaceListener {
         fun handleGlassblowing(player: Player, product: CraftingDefinition.Glass, amount: Int) {
             var remaining = amount
 
-            queueScript(player, 0, QueueStrength. WEAK) { stage ->
-                if (remaining <= 0) return@queueScript stopExecuting(player)
-                if (!clockReady(player, Clocks.SKILLING)) return@queueScript stopExecuting(player)
-
-                if (!inInventory(player, Items.GLASSBLOWING_PIPE_1785) ||
-                    !inInventory(player, Items.MOLTEN_GLASS_1775)) {
+            queueScript(player, 0, QueueStrength.WEAK) {
+                if (remaining <= 0 || !clockReady(player, Clocks.SKILLING)) return@queueScript stopExecuting(player)
+                if (!inInventory(player, Items.GLASSBLOWING_PIPE_1785) || !inInventory(player, Items.MOLTEN_GLASS_1775)) {
                     return@queueScript stopExecuting(player)
                 }
 
-                when (stage) {
-                    0 -> {
-                        delayClock(player, Clocks.SKILLING, 3)
-                        animate(player, Animations.GLASS_BLOW_884)
-                        playAudio(player, Sounds.GLASSBLOWING_2724)
-                        delayScript(player, 3)
-                    }
+                animate(player, Animations.GLASS_BLOW_884)
+                playAudio(player, Sounds.GLASSBLOWING_2724)
+                delayClock(player, Clocks.SKILLING, 3)
 
-                    else -> {
-                        if (!removeItem(player, Items.MOLTEN_GLASS_1775)) {
-                            return@queueScript stopExecuting(player)
-                        }
+                if (!removeItem(player, Items.MOLTEN_GLASS_1775)) return@queueScript stopExecuting(player)
+                addItem(player, product.productId, product.amount)
+                rewardXP(player, Skills.CRAFTING, product.experience)
+                player.dispatch(ResourceProducedEvent(product.productId, product.amount, player))
 
-                        addItem(player, product.productId, product.amount)
-                        rewardXP(player, Skills.CRAFTING, product.experience)
-                        player.dispatch(ResourceProducedEvent(product.productId, product.amount, player))
+                val name = getItemName(product.productId)
+                val article = if (product.productId in intArrayOf(Items.UNPOWERED_ORB_567, Items.OIL_LAMP_4525)) "an" else "a"
+                sendMessage(player, "You make $article $name.")
 
-                        if (product.productId in intArrayOf(Items.UNPOWERED_ORB_567, Items.OIL_LAMP_4525))
-                            sendMessage(player, "You make an ${getItemName(product.productId)}.")
-                        else
-                            sendMessage(player, "You make a ${getItemName(product.productId)}.")
+                remaining--
 
-                        remaining--
-
-                        if (remaining > 0 && inInventory(player, Items.MOLTEN_GLASS_1775)) {
-                            setCurrentScriptState(player, 0)
-                            delayScript(player, 3)
-                        } else {
-                            stopExecuting(player)
-                        }
-                    }
+                if (remaining > 0 && inInventory(player, Items.MOLTEN_GLASS_1775)) {
+                    setCurrentScriptState(player, 0)
+                    delayScript(player, 3)
+                } else {
+                    stopExecuting(player)
                 }
             }
         }

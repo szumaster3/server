@@ -5,6 +5,7 @@ import core.game.event.ResourceProducedEvent
 import core.game.interaction.Clocks
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
+import core.game.interaction.QueueStrength
 import core.game.node.entity.player.Player
 import core.game.node.entity.skill.Skills
 import shared.consts.Animations
@@ -26,30 +27,54 @@ class MoltenGlassMakePlugin : InteractionListener {
         onUseWith(IntType.SCENERY, INPUTS, *CraftingObject.FURNACES) { player, _, _ ->
             if (!clockReady(player, Clocks.SKILLING)) return@onUseWith true
 
-            if (!inInventory(player, SODA_ASH, 1)) {
-                sendMessage(player, "You need at least one heap of soda ash to do this.")
-                return@onUseWith true
-            }
+            val sodaAmount = amountInInventory(player, SODA_ASH)
+            val sandAmount = SAND_SOURCES.sumOf { amountInInventory(player, it) }
+            val maxAmount = min(sodaAmount, sandAmount)
 
-            if (!anyInInventory(player, *SAND_SOURCES)) {
-                sendMessage(player, "You need at least one bucket of sand or sandbag to do this.")
+            if (maxAmount <= 0) {
+                sendMessage(player, "You need soda ash and sand to make molten glass.")
                 return@onUseWith true
             }
 
             sendSkillDialogue(player) {
                 withItems(MOLTEN_GLASS)
 
-                create { id, amount ->
-                    delayClock(player, Clocks.SKILLING, 3)
-                    handleMoltenGlassProcess(player, id, amount)
+                create { productId, amount ->
+                    var remaining = amount
+
+                    queueScript(player, 0, QueueStrength.WEAK) {
+                        if (remaining <= 0 || !clockReady(player, Clocks.SKILLING)) return@queueScript stopExecuting(player)
+                        if (!inInventory(player, SODA_ASH) || !anyInInventory(player, *SAND_SOURCES)) return@queueScript stopExecuting(player)
+
+                        animate(player, Animations.HUMAN_FURNACE_SMELT_3243)
+                        sendMessage(player, "You heat the sand and soda ash in the furnace to make glass.")
+                        delayClock(player, Clocks.SKILLING, 3)
+
+                        removeItem(player, SODA_ASH)
+                        when {
+                            inInventory(player, BUCKET_OF_SAND) -> {
+                                removeItem(player, BUCKET_OF_SAND)
+                                addItem(player, Items.BUCKET_1925)
+                            }
+                            inInventory(player, SANDBAG) -> {
+                                removeItem(player, SANDBAG)
+                                addItem(player, Items.EMPTY_SACK_5418)
+                            }
+                        }
+
+                        addItem(player, productId)
+                        rewardXP(player, Skills.CRAFTING, 20.0)
+                        player.dispatch(ResourceProducedEvent(productId, 1, player))
+
+                        remaining--
+                        if (remaining > 0) {
+                            setCurrentScriptState(player, 0)
+                            delayScript(player, 2)
+                        } else stopExecuting(player)
+                    }
                 }
 
-                calculateMaxAmount {
-                    min(
-                        amountInInventory(player, SODA_ASH),
-                        SAND_SOURCES.sumOf { amountInInventory(player, it) }
-                    )
-                }
+                calculateMaxAmount { maxAmount }
             }
 
             return@onUseWith true

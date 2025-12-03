@@ -1,7 +1,6 @@
 package content.global.skill.crafting
 
 import core.api.*
-import core.game.component.Component
 import core.game.interaction.Clocks
 import core.game.interaction.QueueStrength
 import core.game.node.entity.player.Player
@@ -53,7 +52,7 @@ object JewelleryUtils {
             val meetsRequirements = getStatLevel(player, Skills.CRAFTING) >= item.level
 
             val itemToSend = when {
-                hasAllItems && hasMould && meetsRequirements -> item.sendItem
+                hasAllItems && hasMould && meetsRequirements -> item.productId
                 hasMould -> getPlaceholder(item.name)
                 else -> -1
             }
@@ -113,7 +112,7 @@ object JewelleryUtils {
     private fun handleJewelleryCrafting(player: Player, type: CraftingDefinition.JewelleryItem, amount: Int) {
         var remaining = amount
 
-        queueScript(player, 1, QueueStrength.WEAK) { stage ->
+        queueScript(player, 0, QueueStrength.NORMAL) {
             if (remaining <= 0 || !clockReady(player, Clocks.SKILLING)) {
                 return@queueScript stopExecuting(player)
             }
@@ -123,38 +122,29 @@ object JewelleryUtils {
                 return@queueScript stopExecuting(player)
             }
 
-            val reqItems = type.items
-            if (!allInInventory(player, *reqItems)) {
+            if (!allInInventory(player, *type.items)) {
                 sendMessage(player, "You have run out of materials.")
                 return@queueScript stopExecuting(player)
             }
 
-            when (stage) {
-                0 -> {
-                    animate(player, Animations.HUMAN_FURNACE_SMELT_3243)
-                    playAudio(player, Sounds.FURNACE_2725)
-                    delayScript(player, 3)
-                }
-                else -> {
-                    delayClock(player, Clocks.SKILLING, 3)
-                    if (!removeItem(player, reqItems)) {
-                        return@queueScript stopExecuting(player)
-                    }
+            animate(player, Animations.HUMAN_FURNACE_SMELT_3243)
+            playAudio(player, Sounds.FURNACE_2725)
 
-                    addItem(player, type.sendItem, 1)
-                    rewardXP(player, Skills.CRAFTING, type.experience)
+            delayClock(player, Clocks.SKILLING, 3)
 
-                    remaining--
-                    if (remaining > 0) {
-                        setCurrentScriptState(player, 0)
-                        delayScript(player, 3)
-                    } else {
-                        stopExecuting(player)
-                    }
-                }
+            if (!removeItem(player, type.items)) {
+                return@queueScript stopExecuting(player)
             }
 
-            return@queueScript true
+            addItem(player, type.productId)
+            rewardXP(player, Skills.CRAFTING, type.experience)
+
+            remaining--
+
+            if (remaining > 0) {
+                setCurrentScriptState(player, 0)
+                delayScript(player, 3)
+            } else stopExecuting(player)
         }
     }
 }

@@ -2,10 +2,7 @@ package content.global.skill.crafting
 
 import core.api.*
 import core.game.container.impl.EquipmentContainer
-import core.game.interaction.IntType
-import core.game.interaction.InteractionListener
-import core.game.interaction.InterfaceListener
-import core.game.interaction.QueueStrength
+import core.game.interaction.*
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.diary.DiaryManager
 import core.game.node.entity.player.link.diary.DiaryType
@@ -54,7 +51,7 @@ class SpinningPlugin : InteractionListener, InterfaceListener {
             var amount = when (opcode) {
                 155 -> 1
                 196 -> 5
-                124 -> player.inventory.getAmount(Item(spin.need))
+                124 -> amountInInventory(player, spin.need)
                 199 -> {
                     sendInputDialogue(player, true, "Enter the amount:") { value: Any ->
                         val valAmount = if (value is String) value.toInt() else value as Int
@@ -72,9 +69,14 @@ class SpinningPlugin : InteractionListener, InterfaceListener {
     }
 
     private fun handleSpinning(player: Player, spin: CraftingDefinition.Spinning, amount: Int) {
+        if (!clockReady(player, Clocks.SKILLING)) return
+
         var remaining = amount
-        queueScript(player, 0, QueueStrength.WEAK) { stage ->
-            if (remaining <= 0) return@queueScript stopExecuting(player)
+
+        queueScript(player, 0, QueueStrength.WEAK) {
+            if (remaining <= 0) return@queueScript false
+
+            if (!clockReady(player, Clocks.SKILLING)) return@queueScript false
 
             var delay = 5
             if (player.achievementDiaryManager.getDiary(DiaryType.SEERS_VILLAGE)?.isComplete(2) == true
@@ -85,45 +87,40 @@ class SpinningPlugin : InteractionListener, InterfaceListener {
                 delay = 2
             }
 
-            when (stage) {
-                0 -> {
-                    animate(player, 894)
-                    playAudio(player, Sounds.SPINNING_2590)
-                    delayScript(player, delay)
-                }
-                else -> {
-                    if (!inInventory(player, spin.need, 1)) {
-                        sendMessage(player, "You have run out of ${getItemName(spin.need)}.")
-                        return@queueScript stopExecuting(player)
-                    }
+            if (!inInventory(player, spin.need, 1)) {
+                sendMessage(player, "You have run out of ${getItemName(spin.need)}.")
+                return@queueScript false
+            }
 
-                    if (removeItem(player, Item(spin.need, 1))) {
-                        addItem(player, spin.product, 1)
-                        rewardXP(player, Skills.CRAFTING, spin.exp)
-                        remaining--
-                    }
+            animate(player, 894)
+            playAudio(player, Sounds.SPINNING_2590)
+            delayClock(player, Clocks.SKILLING, delay)
 
-                    // Seers diary
-                    if (player.viewport.region!!.id == 10806 && !hasDiaryTaskComplete(player, DiaryType.SEERS_VILLAGE, 0, 4)) {
-                        if (player.getAttribute("diary:seers:bowstrings-spun", 0) >= 4) {
-                            setAttribute(player, "/save:diary:seers:bowstrings-spun", 5)
-                            finishDiaryTask(player, DiaryType.SEERS_VILLAGE, 0, 4)
-                        } else {
-                            setAttribute(
-                                player,
-                                "/save:diary:seers:bowstrings-spun",
-                                getAttribute(player, "diary:seers:bowstrings-spun", 0) + 1
-                            )
-                        }
-                    }
+            if (removeItem(player, Item(spin.need, 1))) {
+                addItem(player, spin.product, 1)
+                rewardXP(player, Skills.CRAFTING, spin.exp)
+                remaining--
+            }
 
-                    if (remaining > 0) {
-                        setCurrentScriptState(player, 0)
-                        delayScript(player, delay)
-                    } else stopExecuting(player)
+            // Seers diary.
+            if (player.viewport.region!!.id == 10806 && !hasDiaryTaskComplete(player, DiaryType.SEERS_VILLAGE, 0, 4)) {
+                if (player.getAttribute("diary:seers:bowstrings-spun", 0) >= 4) {
+                    setAttribute(player, "/save:diary:seers:bowstrings-spun", 5)
+                    finishDiaryTask(player, DiaryType.SEERS_VILLAGE, 0, 4)
+                } else {
+                    setAttribute(
+                        player,
+                        "/save:diary:seers:bowstrings-spun",
+                        getAttribute(player, "diary:seers:bowstrings-spun", 0) + 1
+                    )
                 }
             }
+
+            if (remaining > 0) {
+                delayScript(player, delay)
+                setCurrentScriptState(player, 0)
+                true
+            } else false
         }
     }
-
 }

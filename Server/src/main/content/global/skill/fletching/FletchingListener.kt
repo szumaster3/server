@@ -476,44 +476,39 @@ class FletchingListener : InteractionListener {
                 create { _, amount ->
                     var remaining = amount
 
-                    queueScript(player, 0, QueueStrength.WEAK) { stage ->
+                    queueScript(player, 0, QueueStrength.WEAK) {
                         val currentAmount = amountInInventory(player, gem.gem)
                         if (remaining <= 0 || currentAmount <= 0 || !clockReady(player, Clocks.SKILLING))
-                            return@queueScript stopExecuting(player)
+                            return@queueScript false
 
                         if (getStatLevel(player, Skills.FLETCHING) < gem.level) {
                             sendDialogue(player, "You need a Fletching level of ${gem.level} or above to do that.")
-                            return@queueScript stopExecuting(player)
+                            return@queueScript false
                         }
 
-                        when (stage) {
-                            0 -> {
-                                animate(player, gem.animation)
-                                playAudio(player, Sounds.CHISEL_2586)
-                                delayScript(player, 5)
-                            }
-                            else -> {
-                                val rewardAmount =
-                                    when (gem.gem) {
-                                        Items.OYSTER_PEARLS_413,
-                                        Items.ONYX_6573 -> 24
-                                        Items.OYSTER_PEARL_411 -> 6
-                                        else -> 12
-                                    }
+                        animate(player, gem.animation)
+                        playAudio(player, Sounds.CHISEL_2586)
+                        delayClock(player, Clocks.SKILLING, 2)
 
-                                if (removeItem(player, gem.gem)) {
-                                    addItem(player, gem.tip, rewardAmount)
-                                    rewardXP(player, Skills.FLETCHING, gem.xp)
-                                    sendMessage(player, "You use your chisel to fetch small bolt tips.")
-                                    remaining--
-                                }
+                        val rewardAmount = when (gem.gem) {
+                            Items.OYSTER_PEARLS_413, Items.ONYX_6573 -> 24
+                            Items.OYSTER_PEARL_411 -> 6
+                            else -> 12
+                        }
 
-                                if (remaining > 0) {
-                                    delayClock(player, Clocks.SKILLING, 5)
-                                    setCurrentScriptState(player, 0)
-                                    delayScript(player, 5)
-                                } else stopExecuting(player)
-                            }
+                        if (removeItem(player, gem.gem)) {
+                            addItem(player, gem.tip, rewardAmount)
+                            rewardXP(player, Skills.FLETCHING, gem.xp)
+                            sendMessage(player, "You use your chisel to fetch small bolt tips.")
+                            remaining--
+                        }
+
+                        if (remaining > 0) {
+                            delayScript(player, 2)
+                            setCurrentScriptState(player, 0)
+                            return@queueScript true
+                        } else {
+                            return@queueScript false
                         }
                     }
                 }

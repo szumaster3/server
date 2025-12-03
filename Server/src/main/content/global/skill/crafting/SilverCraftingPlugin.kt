@@ -171,7 +171,7 @@ class SilverCraftingPlugin : InteractionListener, InterfaceListener {
             if (removeItem(player, Items.SILVER_BAR_2355)) {
                 animate(player, Animations.HUMAN_FURNACE_SMELT_3243)
                 playAudio(player, Sounds.FURNACE_2725)
-                rewardXP(player, Skills.CRAFTING, product.experience)
+                rewardXP(player, Skills.CRAFTING, product.xp)
 
                 addItem(player, product.product)
 
@@ -188,6 +188,7 @@ class SilverCraftingPlugin : InteractionListener, InterfaceListener {
 
             remaining--
             if (remaining > 0 && amountInInventory(player, Items.SILVER_BAR_2355) > 0) {
+                delayClock(player, Clocks.SKILLING, 5)
                 setCurrentScriptState(player, 0)
                 delayScript(player, 5)
             } else {

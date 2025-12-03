@@ -29,6 +29,7 @@ class PotteryPlugin : InteractionListener {
             val items = CraftingDefinition.Pottery.values().map { it.unfinished }.toTypedArray()
             sendSkillDialogue(player) {
                 withItems(*items)
+
                 create { itemId, amount ->
                     val pottery = CraftingDefinition.Pottery.forId(itemId) ?: run {
                         sendMessage(player, "Invalid pottery selection.")
@@ -39,51 +40,52 @@ class PotteryPlugin : InteractionListener {
                         sendMessage(player, "You need a crafting level of ${pottery.level} to make this.")
                         return@create
                     }
+
                     if (!inInventory(player, Items.SOFT_CLAY_1761)) {
                         sendMessage(player, "You have run out of clay.")
                         return@create
                     }
 
                     var remaining = amount
-                    queueScript(player, 0, QueueStrength.WEAK) { stage ->
-                        if (remaining <= 0) return@queueScript stopExecuting(player)
 
-                        when (stage) {
-                            0 -> {
-                                animate(player, Animations.HUMAN_MAKE_PIZZA_883)
-                                delayScript(player, 5)
-                            }
-                            else -> {
-                                delayClock(player, Clocks.SKILLING, 5)
-                                if (removeItem(player, Items.SOFT_CLAY_1761)) {
-                                    addItem(player, pottery.unfinished.id)
-                                    rewardXP(player, Skills.CRAFTING, pottery.exp)
-                                    val article = if (StringUtils.isPlusN(pottery.unfinished.name)) "an" else "a"
-                                    sendMessage(player, "You make the clay into $article ${pottery.unfinished.name.lowercase(Locale.getDefault())}.")
+                    queueScript(player, 0, QueueStrength.WEAK) {
+                        if (remaining <= 0 || !clockReady(player, Clocks.SKILLING)) return@queueScript stopExecuting(player)
+                        if (!inInventory(player, Items.SOFT_CLAY_1761)) return@queueScript stopExecuting(player)
 
-                                    // Varrock diary.
-                                    when (pottery) {
-                                        CraftingDefinition.Pottery.BOWL -> if (withinDistance(player, Location(3086, 3410, 0))) {
-                                            setAttribute(player, "/save:diary:varrock:spun-bowl", true)
-                                        }
-                                        CraftingDefinition.Pottery.POT -> if (withinDistance(player, Location(3086, 3410, 0))) {
-                                            finishDiaryTask(player, DiaryType.LUMBRIDGE, 0, 7)
-                                        }
-                                        else -> {}
-                                    }
-                                    remaining--
+                        animate(player, 883)
+                        delayClock(player, Clocks.SKILLING, 5)
+                        delayScript(player, 5)
+
+                        if (removeItem(player, Items.SOFT_CLAY_1761)) {
+                            addItem(player, pottery.unfinished.id)
+                            rewardXP(player, Skills.CRAFTING, pottery.exp)
+                            val article = if (StringUtils.isPlusN(pottery.unfinished.name)) "an" else "a"
+                            sendMessage(player, "You make the clay into $article ${pottery.unfinished.name.lowercase(Locale.getDefault())}.")
+
+                            // Varrock & Lumbridge diary.
+                            when (pottery) {
+                                CraftingDefinition.Pottery.BOWL -> if (withinDistance(player, Location(3086, 3410, 0))) {
+                                    setAttribute(player, "/save:diary:varrock:spun-bowl", true)
                                 }
-
-                                if (remaining > 0) {
-                                    setCurrentScriptState(player, 0)
-                                    delayScript(player, 5)
-                                } else stopExecuting(player)
+                                CraftingDefinition.Pottery.POT -> if (withinDistance(player, Location(3086, 3410, 0))) {
+                                    finishDiaryTask(player, DiaryType.LUMBRIDGE, 0, 7)
+                                }
+                                else -> {}
                             }
+
+                            remaining--
                         }
+
+                        if (remaining > 0 && inInventory(player, Items.SOFT_CLAY_1761)) {
+                            setCurrentScriptState(player, 0)
+                            delayScript(player, 5)
+                        } else stopExecuting(player)
                     }
                 }
+
                 calculateMaxAmount { amountInInventory(player, Items.SOFT_CLAY_1761) }
             }
+
             return@onUseWith true
         }
 

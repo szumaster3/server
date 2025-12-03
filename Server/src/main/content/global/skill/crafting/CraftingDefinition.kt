@@ -32,9 +32,14 @@ object CraftingDefinition {
     const val BRACELET_MOULD: Int = Items.BRACELET_MOULD_11065
 
     /**
-     * Represents a gold jewellery items.
+     * Represents a gold jewellery item that can be crafted.
+     * @property level The required crafting level to make this item.
+     * @property experience The xp gained when crafting this item.
+     * @property componentId The interface component id used for selecting product id.
+     * @property productId The item send to interface also product id.
+     * @property items The base items required to craft this jewellery.
      */
-    enum class JewelleryItem(val level: Int, experience: Int, val componentId: Int, val sendItem: Int, vararg val items: Int) {
+    enum class JewelleryItem(val level: Int, experience: Int, val componentId: Int, val productId: Int, vararg val items: Int) {
         GOLD_RING(5, 15, 19, Items.GOLD_RING_1635, Items.GOLD_BAR_2357),
         SAPPHIRE_RING(20, 40, 21, Items.SAPPHIRE_RING_1637, Items.SAPPHIRE_1607, Items.GOLD_BAR_2357),
         EMERALD_RING(27, 55, 23, Items.EMERALD_RING_1639, Items.EMERALD_1605, Items.GOLD_BAR_2357),
@@ -70,18 +75,29 @@ object CraftingDefinition {
         DRAGONSTONE_BRACELET(74, 110, 89, Items.DRAGON_BRACELET_11115, Items.DRAGONSTONE_1615, Items.GOLD_BAR_2357),
         ONYX_BRACELET(84, 125, 91, Items.ONYX_BRACELET_11130, Items.ONYX_6573, Items.GOLD_BAR_2357);
 
+        /**
+         * Converts the integer experience to a double.
+         */
         val experience: Double = experience.toDouble()
 
         companion object {
+            /**
+             * The product map.
+             */
             var productMap = HashMap<Int, JewelleryItem>()
 
             init {
                 val jewelleryArray = values()
                 for (jewelleryItem in jewelleryArray) {
-                    productMap.putIfAbsent(jewelleryItem.sendItem, jewelleryItem)
+                    productMap.putIfAbsent(jewelleryItem.productId, jewelleryItem)
                 }
             }
 
+            /**
+             * Gets a [JewelleryItem] by product item id.
+             * @param id the item id.
+             * @return The matching [JewelleryItem] or null if not found.
+             */
             @JvmStatic
             fun forProduct(id: Int): JewelleryItem? {
                 return productMap[id]
@@ -90,9 +106,15 @@ object CraftingDefinition {
     }
 
     /**
-     * Represents the silver products.
+     * Represents silver crafting products.
+     * @property buttonId The button id.
+     * @property required The base ingredient id.
+     * @property product The product id.
+     * @property amount The amount.
+     * @property level The required crafting level.
+     * @property xp The xp gain per craft.
      */
-    enum class Silver(val buttonId: Int, val required: Int, val product: Int, val amount: Int, val level: Int, val experience: Double) {
+    enum class Silver(val buttonId: Int, val required: Int, val product: Int, val amount: Int, val level: Int, val xp: Double) {
         HOLY(16, Items.HOLY_MOULD_1599, Items.UNSTRUNG_SYMBOL_1714, 1, 16, 50.0),
         UNHOLY(23, Items.UNHOLY_MOULD_1594, Items.UNSTRUNG_EMBLEM_1720, 1, 17, 50.0),
         SICKLE(30, Items.SICKLE_MOULD_2976, Items.SILVER_SICKLE_2961, 1, 18, 50.0),
@@ -104,13 +126,25 @@ object CraftingDefinition {
         DEMONIC_SIGIL(59, Items.DEMONIC_SIGIL_MOULD_6747, Items.DEMONIC_SIGIL_6748, 1, 30, 50.0);
 
         companion object {
+            /**
+             * Find a silver product by item id.
+             */
             fun forId(itemId: Int): Silver? = values().find { it.required == itemId }
+
+            /**
+             * Find a silver product by iface button id.
+             */
             fun forButton(button: Int): Silver? = values().find { it.buttonId == button }
         }
     }
 
     /**
      * Represents different types of gems that can be cut.
+     * @property uncut The uncut gem id.
+     * @property cut The product id.
+     * @property animation The animation.
+     * @property level The required crafting level.
+     * @property xp The xp gain per craft.
      */
     enum class Gem(val uncut: Int, val cut: Int, val animation: Int, val level: Int, val xp: Double) {
         OPAL(Items.UNCUT_OPAL_1625, Items.OPAL_1609, Animations.CUT_OPAL_890, 1, 10.0),
@@ -133,6 +167,11 @@ object CraftingDefinition {
 
     /**
      * Represents different types of glass products that can be crafted.
+     * @property buttonId The interface button id.
+     * @property productId The resulting product item id.
+     * @property amount The amount produced per craft.
+     * @property requiredLevel Required crafting level.
+     * @property experience Experience gained per craft.
      */
     enum class Glass(val buttonId: Int, val productId: Int, val amount: Int, val requiredLevel: Int, val experience: Double) {
         EMPTY_VIAL(38, Items.VIAL_229, 1, 33, 35.0),
@@ -161,7 +200,16 @@ object CraftingDefinition {
     }
 
     /**
-     * Represents the different types of leather.
+     * Represents different types of leather and hides used in crafting.
+     * @property input The base item id required.
+     * @property product The product id.
+     * @property amount The amount produced per craft.
+     * @property level The required crafting level.
+     * @property xp The xp gain per craft.
+     * @property studded Whether the leather is studded.
+     * @property pair Whether crafting produces a pair of items (e.g., gloves/boots).
+     * @property diary Optional diary task completed by crafting this leather.
+     * @property type Type of leather (soft, hard, snakeskin, dragon, etc.).
      */
     enum class Leather(val input: Int, val product: Int, val amount: Int, val level: Int, val xp: Double, val studded: Boolean = false, val pair: Boolean = false, val diary: DiaryTask? = null, val type: Type = Type.SOFT) {
         LEATHER_BODY(Items.LEATHER_1741, Items.LEATHER_BODY_1129, 1, 14, 25.0, type = Type.SOFT),
@@ -212,7 +260,12 @@ object CraftingDefinition {
     }
 
     /**
-     * Represents the different types of spinning.
+     * Represents different types of spinning.
+     * @property button The interface button id.
+     * @property need The item id required for spinning.
+     * @property product The resulting product id.
+     * @property level Required crafting level.
+     * @property exp Experience gained per spin.
      */
     enum class Spinning(val button: Int, val need: Int, val product: Int, val level: Int, val exp: Double) {
         WOOL(19, Items.WOOL_1737, Items.BALL_OF_WOOL_1759, 1, 2.5),
@@ -234,7 +287,11 @@ object CraftingDefinition {
     }
 
     /**
-     * Represents the different types of tanning.
+     * Represents tanning definitions.
+     * @property item Item ID to tan.
+     * @property product The product id.
+     * @property button The button id.
+     * @property costPerItem Coins required per item tanned.
      */
     enum class Tan(val item: Int, val product: Int, val button: Int, val costPerItem: Int) {
         SOFT_LEATHER(Items.COWHIDE_1739, Items.LEATHER_1741, 1, 1),
@@ -288,7 +345,12 @@ object CraftingDefinition {
     }
 
     /**
-     * Represents the pottery data.
+     * Represents pottery definitions.
+     * @property unfinished The item representing the unfired pottery.
+     * @property product The product.
+     * @property level Required crafting level.
+     * @property exp XP gained when creating unfired pottery.
+     * @property fireExp XP gained when firing pottery.
      */
     enum class Pottery(val unfinished: Item, val product: Item, val level: Int, val exp: Double, val fireExp: Double) {
         POT(Item(Items.UNFIRED_POT_1787), Item(Items.EMPTY_POT_1931), 1, 6.3, 6.3),
@@ -300,12 +362,20 @@ object CraftingDefinition {
 
         companion object {
             private val unfinishedMap: Map<Int, Pottery> = Pottery.values().associateBy { it.unfinished.id }
+
+            /**
+             * Get pottery definition by unfired item id.
+             */
             fun forId(id: Int): Pottery? = unfinishedMap[id]
         }
     }
 
     /**
      * Represents weaving items.
+     * @property product The product item id.
+     * @property required The required item id.
+     * @property level The crafting level required.
+     * @property experience The experience gained from crafting.
      */
     enum class Weaving(val product: Item, val required: Item, val level: Int, val experience: Double) {
         SACK(Item(Items.EMPTY_SACK_5418), Item(Items.JUTE_FIBRE_5931, 4), 21, 38.0),
@@ -315,6 +385,8 @@ object CraftingDefinition {
 
     /**
      * Represents the snelm products.
+     * @property shell The shell item id.
+     * @property product The resulting snelm product id.
      */
     enum class SnelmItem(val shell: Int, val product: Int) {
         MYRE_ROUNDED(Items.BLAMISH_MYRE_SHELL_3345, Items.MYRE_SNELM_3327),
@@ -336,6 +408,8 @@ object CraftingDefinition {
 
     /**
      * Represents the feather headdress items.
+     * @property base The base feather item id.
+     * @property product The resulting headdress id.
      */
     enum class FeatherHeaddress(val base: Int, val product: Int) {
         FEATHER_HEADDRESS_BLUE(Items.BLUE_FEATHER_10089, Items.FEATHER_HEADDRESS_12210),
@@ -352,7 +426,12 @@ object CraftingDefinition {
     }
 
     /**
-     * Represents the battlestaves.
+     * Represents battlestaves.
+     * @property required The required orb item id.
+     * @property productId The resulting battlestaff item id.
+     * @property amount The amount produced (default 1).
+     * @property requiredLevel The required crafting level.
+     * @property experience The experience gained.
      */
     enum class Battlestaff(val required: Int, val productId: Int, val amount: Int = 1, val requiredLevel: Int, val experience: Double) {
         WATER_BATTLESTAFF(Items.WATER_ORB_571, Items.WATER_BATTLESTAFF_1395, requiredLevel = 54, experience = 100.0),
@@ -371,7 +450,14 @@ object CraftingDefinition {
     }
 
     /**
-     * Represents light sources.
+     * Represents different types of light sources.
+     * @property level The required level to use the light source.
+     * @property emptyId The id of the empty/unlit item.
+     * @property fullId The id of the full item (optional).
+     * @property litId The id of the lit item.
+     * @property sfxId The sound effect id when lighting.
+     * @property open Whether the light source is openable.
+     * @property interfaceId The interface component associated with darkness.
      */
     enum class LightSources(val level: Int, val emptyId: Int, val fullId: Int = -1, val litId: Int, val sfxId: Int = -1, val open: Boolean = false, val interfaceId: Int = -1) {
         CANDLE(1, 0, Items.CANDLE_36, Items.LIT_CANDLE_33, Sounds.SKILL_LIGHT_CANDLE_3226, true, Components.DARKNESS_MEDIUM_98),

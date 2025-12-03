@@ -78,7 +78,7 @@ class JewelleryCraftingPlugin : InteractionListener, InterfaceListener {
                 val resultId = if (data == CraftingDefinition.JewelleryItem.ONYX_AMULET) {
                     Items.ONYX_AMULET_6581
                 } else {
-                    data.sendItem + 19
+                    data.productId + 19
                 }
 
                 addItem(player, resultId)
@@ -169,7 +169,7 @@ class JewelleryCraftingPlugin : InteractionListener, InterfaceListener {
             if (!clockReady(player, Clocks.SKILLING)) return@on true
 
             val data = buttonMap[buttonID]?.invoke(player) ?: return@on true
-            val name = getItemName(data.sendItem).lowercase()
+            val name = getItemName(data.productId).lowercase()
 
             if (getStatLevel(player, Skills.CRAFTING) < data.level) {
                 val an = if (StringUtils.isPlusN(name)) "an" else "a"
