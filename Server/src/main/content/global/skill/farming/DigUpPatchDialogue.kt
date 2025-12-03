@@ -16,7 +16,7 @@ class DigUpPatchDialogue(player: Player? = null) : Dialogue(player) {
     override fun open(vararg args: Any?): Boolean {
         patch = args[0] as Patch
         if (patch?.isWeedy() == true || patch?.isEmptyAndWeeded() == true) {
-            sendDialogue(player, "There aren't any crops in this patch to dig up.")
+            sendMessage(player, "There aren't any crops in this patch to dig up.")
             stage = 1000
             return true
         }
@@ -29,12 +29,7 @@ class DigUpPatchDialogue(player: Player? = null) : Dialogue(player) {
             }
         }
         setTitle(player, 2)
-        sendOptions(
-            player,
-            "Are you sure you want to dig up this patch?",
-            "Yes, I want to clear it for new crops.",
-            "No, I want to leave it as it is."
-        )
+        sendOptions(player, "Are you sure you want to dig up this patch?", "Yes, I want to clear it for new crops.", "No, I want to leave it as it is.")
         return true
     }
 

@@ -84791,70 +84791,80 @@
     "tradeable": "false",
     "destroy": "true",
     "archery_ticket_price": "0",
-    "id": "9933"
+    "id": "9933",
+    "weight": "0.001"
   },
   {
     "examine": "An origami balloon.",
     "durability": null,
     "name": "Origami balloon",
     "archery_ticket_price": "0",
-    "id": "9934"
+    "id": "9934",
+    "weight": "0.001"
   },
   {
     "examine": "An origami balloon.",
     "durability": null,
     "name": "Yellow balloon",
     "archery_ticket_price": "0",
-    "id": "9935"
+    "id": "9935",
+    "weight": "0.001"
   },
   {
     "examine": "An origami balloon.",
     "durability": null,
     "name": "Blue balloon",
     "archery_ticket_price": "0",
-    "id": "9936"
+    "id": "9936",
+    "weight": "0.001"
   },
   {
     "examine": "An origami balloon.",
     "durability": null,
     "name": "Red balloon",
     "archery_ticket_price": "0",
-    "id": "9937"
+    "id": "9937",
+    "weight": "0.001"
   },
   {
     "examine": "An origami balloon.",
     "durability": null,
     "name": "Orange balloon",
     "archery_ticket_price": "0",
-    "id": "9938"
+    "id": "9938",
+    "weight": "0.001"
   },
   {
     "examine": "An origami balloon.",
     "durability": null,
     "name": "Green balloon",
     "archery_ticket_price": "0",
-    "id": "9939"
+    "id": "9939",
+    "weight": "0.001"
   },
   {
     "examine": "An origami balloon.",
     "durability": null,
     "name": "Purple balloon",
     "archery_ticket_price": "0",
-    "id": "9940"
+    "id": "9940",
+    "weight": "0.001"
   },
   {
     "examine": "An origami balloon.",
     "durability": null,
     "name": "Pink balloon",
     "archery_ticket_price": "0",
-    "id": "9941"
+    "id": "9941",
+    "weight": "0.001"
   },
   {
     "examine": "An origami balloon.",
     "durability": null,
     "name": "Black balloon",
     "archery_ticket_price": "0",
-    "id": "9942"
+    "id": "9942",
+    "weight": "0.001"
   },
   {
     "examine": "A bag full of sand.",
@@ -84863,7 +84873,7 @@
     "weight": "1",
     "archery_ticket_price": "0",
     "id": "9943",
-    "equipment_slot": "3"
+    "weight": "1.5"
   },
   {
     "destroy_message": "You'll have to visit Auguste on Entrana to get a new jacket.",
@@ -84873,7 +84883,7 @@
     "name": "Bomber jacket",
     "tradeable": "false",
     "destroy": "true",
-    "weight": "1",
+    "weight": "0.001",
     "archery_ticket_price": "0",
     "id": "9944",
     "equipment_slot": "4"
@@ -84888,7 +84898,8 @@
     "destroy": "true",
     "archery_ticket_price": "0",
     "id": "9945",
-    "equipment_slot": "0"
+    "equipment_slot": "0",
+    "weight": "0.001"
   },
   {
     "remove_head": "true",
@@ -84897,7 +84908,8 @@
     "name": "Cap and goggles",
     "archery_ticket_price": "0",
     "id": "9946",
-    "equipment_slot": "0"
+    "equipment_slot": "0",
+    "weight": "0.001"
   },
   {
     "destroy_message": "You can reclaim this item from the place you found it.",

@@ -118,4 +118,5 @@ object Regions {
     const val TEMPLE_KNIGHTS_TESTING_ROOM_9805 = 9805
     const val MISCELLANIA_10044 = 10044
     const val ETCETERIA_10300 = 10300
+    const val ENTRANA_11060 = 11060
 }

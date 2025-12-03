@@ -1,29 +1,23 @@
 package content.region.other.entrana.quest.zep.cutscene
 
-import core.api.face
-import core.api.location
-import core.api.setQuestStage
-import core.api.visualize
+import core.api.*
 import core.game.activity.Cutscene
 import core.game.dialogue.FaceAnim
 import core.game.node.entity.impl.Projectile
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.game.world.map.Direction
-import shared.consts.Animations
-import shared.consts.Graphics
-import shared.consts.NPCs
-import shared.consts.Quests
+import core.game.world.map.Location
+import shared.consts.*
 
-class FirstExperimentCutscene(
-    player: Player,
-) : Cutscene(player) {
+class FirstExperimentCutscene(player: Player) : Cutscene(player) {
+
     override fun setup() {
-        setExit(location(2808, 3355, 0))
+        setExit(Location.create(2810, 3356, 0))
         if (player.settings.isRunToggled) {
             player.settings.toggleRun()
         }
-        loadRegion(11060)
+        loadRegion(Regions.ENTRANA_11060)
     }
 
     override fun runStage(stage: Int) {
@@ -32,73 +26,50 @@ class FirstExperimentCutscene(
                 fadeToBlack()
                 timedUpdate(6)
             }
-
-            2 -> {
-                fadeFromBlack()
-                teleport(player, 56, 27)
-                rotateCamera(55, 25)
-                player.faceLocation(location(184, 26, 0))
+            1 -> {
+                teleport(player, 56, 27,0)
+                faceLocation(player, player.location.transform(Direction.SOUTH))
+                moveCamera(58,30, 350) // 1:1
+                rotateCamera(54, 18, 400) // 1:1
                 addNPC(NPCs.AUGUSTE_5049, 57, 27, Direction.SOUTH_WEST)
-                timedUpdate(3)
+                fadeFromBlack()
+                timedUpdate(6)
             }
-
-            3 -> {
+            2 -> {
                 visualize(player, Animations.BALLOON_FLY_5142, Graphics.BALLOON_FLY_UPWARDS_880)
                 timedUpdate(2)
             }
-
-            4 -> {
+            3 -> {
                 Projectile
-                    .create(player, null, Graphics.BALLOON_FLOATING_881, 45, 45, 1, 70, 0)
+                    .create(player, null, Graphics.BALLOON_PROJECTILE_882, 45, 45, 1, 70, 0)
                     .transform(player, player.location.transform(Direction.SOUTH, player.direction.ordinal + 1), false, 70, 140).send()
+                //playAudio(player, Sounds.ZEP_BALLOON_FLOAT_3245)
                 timedUpdate(3)
             }
-
+            //4 -> {
+                // playAudio(player, Sounds.ZEP_BALLOON_MOVE_3246)
+                // moveCamera(63, 27, 400)
+                // rotateCamera(55,23,400)
+                // timedUpdate(4)
+            //}
+            4 -> {
+                //playAudio(player, Sounds.ZEP_BALLOON_BURNS_3243)
+                moveCamera(63, 29, 600)
+                rotateCamera(55, 23, 600, 2)
+                timedUpdate(3)
+            }
             5 -> {
-                moveCamera(55, 22)
-                rotateCamera(54, 27)
-                timedUpdate(4)
+                face(getNPC(AUGUSTE.id)!!, player, 2)
+                face(player,getNPC(AUGUSTE.id)!!,  2)
+                timedUpdate(2)
             }
-
-            6 -> {
-                face(player, AUGUSTE, 2)
-                timedUpdate(1)
-            }
-
-            7 -> {
-                face(AUGUSTE, player, 2)
-                timedUpdate(1)
-            }
-
-            8 -> {
-                dialogueUpdate(NPCs.AUGUSTE_5049, FaceAnim.HAPPY, "That was perfect. My hypothesis was right!")
-            }
-
-            9 -> {
-                playerDialogueUpdate(FaceAnim.SCARED, "Did you not see the burning?")
-            }
-
-            10 -> {
-                dialogueUpdate(NPCs.AUGUSTE_5049, FaceAnim.HAPPY, "One more test. Then we shall proceed.")
-            }
-
-            11 -> {
-                playerDialogueUpdate(FaceAnim.SCARED, "Burning? Fire? Hello?")
-            }
-
+            6  -> dialogueUpdate(NPCs.AUGUSTE_5049, FaceAnim.HAPPY, "That was perfect. My hypothesis was right!")
+            7  -> playerDialogueUpdate(FaceAnim.SCARED, "Did you not see the burning?")
+            8  -> dialogueUpdate(NPCs.AUGUSTE_5049, FaceAnim.HAPPY, "One more test. Then we shall proceed.")
+            9 -> playerDialogueUpdate(FaceAnim.SCARED, "Burning? Fire? Hello?")
+            10 -> dialogueUpdate(NPCs.AUGUSTE_5049, FaceAnim.HAPPY, "We shall meekly go! No...no...it needs to sound grander. We shall cautiously go...")
+            11 -> playerDialogueUpdate(FaceAnim.SCARED, "We're doomed.")
             12 -> {
-                dialogueUpdate(
-                    NPCs.AUGUSTE_5049,
-                    FaceAnim.HAPPY,
-                    "We shall meekly go! No...no...it needs to sound grander. We shall cautiously go...",
-                )
-            }
-
-            13 -> {
-                playerDialogueUpdate(FaceAnim.SCARED, "We're doomed.")
-            }
-
-            14 -> {
                 end()
                 setQuestStage(player, Quests.ENLIGHTENED_JOURNEY, 4)
             }
