@@ -3,7 +3,7 @@ package core.game.shops
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 import com.google.gson.reflect.TypeToken
-import content.global.skill.crafting.TanningPlugin.Tan
+import content.global.skill.crafting.CraftingDefinition
 import core.ServerConstants
 import core.api.*
 import core.game.dialogue.FaceAnim
@@ -174,7 +174,7 @@ class Shops : StartupListener, TickListener, InteractionListener, InterfaceListe
         on(IntType.NPC, "trade", "shop") { player, node ->
             val npc = node as NPC
             if (npc.id == NPCs.ELLIS_2824 || npc.id == NPCs.SBOTT_1041 || npc.id == NPCs.TANNER_804) {
-                Tan.open(player, npc.id)
+                CraftingDefinition.Tan.open(player, npc.id)
                 return@on true
             }
             if (npc.id == NPCs.REGGIE_7601) {

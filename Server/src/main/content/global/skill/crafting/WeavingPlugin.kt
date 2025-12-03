@@ -8,24 +8,12 @@ import core.game.interaction.InteractionListener
 import core.game.interaction.QueueStrength
 import core.game.node.entity.player.link.diary.DiaryType
 import core.game.node.entity.skill.Skills
-import core.game.node.item.Item
 import core.game.world.map.Location
 import shared.consts.Animations
 import shared.consts.Components
-import shared.consts.Items
 import shared.consts.Sounds
 
 class WeavingPlugin : InteractionListener {
-
-    /**
-     * Represents weaving items.
-     */
-    enum class Weaving(val product: Item, val required: Item, val level: Int, val experience: Double) {
-        SACK(Item(Items.EMPTY_SACK_5418), Item(Items.JUTE_FIBRE_5931, 4), 21, 38.0),
-        BASKET(Item(Items.BASKET_5376), Item(Items.WILLOW_BRANCH_5933, 6), 36, 56.0),
-        CLOTH(Item(Items.STRIP_OF_CLOTH_3224), Item(Items.BALL_OF_WOOL_1759, 4), 10, 12.0),
-    }
-
     override fun defineListeners() {
 
         /*
@@ -36,13 +24,13 @@ class WeavingPlugin : InteractionListener {
             object : SkillDialogueHandler(
                 player,
                 SkillDialogue.THREE_OPTION,
-                Weaving.SACK.product,
-                Weaving.BASKET.product,
-                Weaving.CLOTH.product
+                CraftingDefinition.Weaving.SACK.product,
+                CraftingDefinition.Weaving.BASKET.product,
+                CraftingDefinition.Weaving.CLOTH.product
             ) {
                 override fun create(amount: Int, index: Int) {
 
-                    val type = Weaving.values()[index]
+                    val type = CraftingDefinition.Weaving.values()[index]
                     val required = type.required
                     val product = type.product
 
@@ -58,8 +46,8 @@ class WeavingPlugin : InteractionListener {
                         if (!inInventory(player, required.id, required.amount)) {
                             val reqName = type.required.name.lowercase()
                             val suffix = when (type) {
-                                Weaving.SACK -> "s"
-                                Weaving.CLOTH -> ""
+                                CraftingDefinition.Weaving.SACK -> "s"
+                                CraftingDefinition.Weaving.CLOTH -> ""
                                 else -> "es"
                             }
                             val reqLower = reqName.replace("ball", "balls")
@@ -88,8 +76,8 @@ class WeavingPlugin : InteractionListener {
 
                             val reqName = required.name.lowercase().replace("ball", "balls")
                             val suffix = when (type) {
-                                Weaving.SACK -> "s"
-                                Weaving.CLOTH -> ""
+                                CraftingDefinition.Weaving.SACK -> "s"
+                                CraftingDefinition.Weaving.CLOTH -> ""
                                 else -> "es"
                             }
                             val a = if (product.name.lowercase().matches(Regex("^[aeiou].*"))) "an" else "a"
@@ -99,8 +87,8 @@ class WeavingPlugin : InteractionListener {
                                 "You weave the ${reqName}${suffix} into $a ${product.name.lowercase()}."
                             )
 
-                            // diary
-                            if (type == Weaving.BASKET &&
+                            // Falador diary.
+                            if (type == CraftingDefinition.Weaving.BASKET &&
                                 node.id == 8717 &&
                                 withinDistance(player, Location(3039, 3287, 0))
                                 && !hasDiaryTaskComplete(player, DiaryType.FALADOR, 1, 0)

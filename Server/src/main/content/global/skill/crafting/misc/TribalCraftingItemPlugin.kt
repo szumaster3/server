@@ -1,6 +1,7 @@
-package content.global.skill.crafting.items.armour
+package content.global.skill.crafting.misc
 
 import content.global.skill.construction.items.NailType
+import content.global.skill.crafting.CraftingDefinition
 import core.api.*
 import core.game.dialogue.DialogueFile
 import core.game.dialogue.Topic
@@ -14,22 +15,15 @@ import shared.consts.Animations
 import shared.consts.Items
 import kotlin.math.min
 
-class BroodooShieldMakePlugin : InteractionListener {
-
-    private val products = mapOf(
-        Items.TRIBAL_MASK_6335 to Items.BROODOO_SHIELD_10_6215,
-        Items.TRIBAL_MASK_6337 to Items.BROODOO_SHIELD_10_6237,
-        Items.TRIBAL_MASK_6339 to Items.BROODOO_SHIELD_10_6259
-    )
+class TribalCraftingItemPlugin : InteractionListener {
 
     private val snakeskin = Items.SNAKESKIN_6289
     private val nailsRequired = 8
 
     override fun defineListeners() {
-
-        onUseWith(IntType.ITEM, Items.HAMMER_2347, *products.keys.toIntArray()) { player, _, with ->
+        onUseWith(IntType.ITEM, Items.HAMMER_2347, *CraftingDefinition.TRIBAL_ITEM_IDS.keys.toIntArray()) { player, _, with ->
             val maskId = with.id
-            val shieldId = products[maskId] ?: return@onUseWith false
+            val shieldId = CraftingDefinition.TRIBAL_ITEM_IDS[maskId] ?: return@onUseWith false
 
             if (getStatLevel(player, Skills.CRAFTING) < 35) {
                 sendMessage(player, "You don't have the crafting level needed to do that.")

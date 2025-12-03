@@ -1,6 +1,5 @@
-package content.global.skill.crafting.jewellery
+package content.global.skill.crafting
 
-import content.global.skill.crafting.CraftingObject
 import core.api.*
 import core.game.dialogue.InputType
 import core.game.event.ResourceProducedEvent
@@ -74,15 +73,15 @@ class SilverCraftingPlugin : InteractionListener, InterfaceListener {
     override fun defineInterfaceListeners() {
         onOpen(Components.CRAFTING_SILVER_CASTING_438) { p, c ->
             val slots = listOf(
-                17 to Silver.HOLY,
-                24 to Silver.UNHOLY,
-                31 to Silver.SICKLE,
-                38 to Silver.LIGHTNING_ROD,
-                45 to Silver.TIARA,
-                53 to Silver.SILVTHRILL_ROD,
-                60 to Silver.DEMONIC_SIGIL,
-                67 to Silver.CROSSBOW_BOLTS,
-                74 to Silver.SILVTHRIL_CHAIN
+                17 to CraftingDefinition.Silver.HOLY,
+                24 to CraftingDefinition.Silver.UNHOLY,
+                31 to CraftingDefinition.Silver.SICKLE,
+                38 to CraftingDefinition.Silver.LIGHTNING_ROD,
+                45 to CraftingDefinition.Silver.TIARA,
+                53 to CraftingDefinition.Silver.SILVTHRILL_ROD,
+                60 to CraftingDefinition.Silver.DEMONIC_SIGIL,
+                67 to CraftingDefinition.Silver.CROSSBOW_BOLTS,
+                74 to CraftingDefinition.Silver.SILVTHRIL_CHAIN
             )
 
             slots.forEach { (slot, silver) ->
@@ -108,7 +107,7 @@ class SilverCraftingPlugin : InteractionListener, InterfaceListener {
                     }
                     sendInterfaceConfig(p, c.id, slot + 2, false)
                 }
-                /* adj
+                /*
                  * sendString(p, "<col=ffaa44>You need a<br><col=ffaa44>chain mould<br><col=ffaa44>to make<br><col=ffaa44>this item.", c.id, 75)
                  */
             }
@@ -117,7 +116,7 @@ class SilverCraftingPlugin : InteractionListener, InterfaceListener {
 
         on(Components.CRAFTING_SILVER_CASTING_438) { player, _, opcode, buttonID, _, _ ->
             if (!clockReady(player, Clocks.SKILLING)) return@on true
-            val product = Silver.forButton(buttonID) ?: return@on true
+            val product = CraftingDefinition.Silver.forButton(buttonID) ?: return@on true
             val productName = getItemName(product.product).lowercase()
             if (!inInventory(player, Items.SILVER_BAR_2355)) {
                 sendDialogue(player, "You need silver bar to make $productName.")
@@ -150,7 +149,7 @@ class SilverCraftingPlugin : InteractionListener, InterfaceListener {
         }
     }
 
-    private fun handleSilverCrafting(player: Player, product: Silver, amount: Int) {
+    private fun handleSilverCrafting(player: Player, product: CraftingDefinition.Silver, amount: Int) {
         var remaining = amount
         closeInterface(player)
         queueScript(player, 0, QueueStrength.WEAK) {

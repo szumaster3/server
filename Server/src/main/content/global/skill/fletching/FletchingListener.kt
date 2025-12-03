@@ -8,6 +8,7 @@ import core.game.interaction.Clocks
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.interaction.QueueStrength
+import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.diary.DiaryType
 import core.game.node.entity.skill.Skills
 import core.game.node.item.Item
@@ -107,7 +108,7 @@ class FletchingListener : InteractionListener {
 
                             remaining--
                             if (remaining <= 0 || amountInInventory(player, with.id) <= 0) return@queueScript stopExecuting(player)
-
+                            // setCurrentScriptState(player, 0)
                             delayScript(player, 2)
                         }
                     }

@@ -2,7 +2,10 @@ package content.global.skill.crafting
 
 import core.api.*
 import core.game.container.impl.EquipmentContainer
-import core.game.interaction.*
+import core.game.interaction.IntType
+import core.game.interaction.InteractionListener
+import core.game.interaction.InterfaceListener
+import core.game.interaction.QueueStrength
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.diary.DiaryManager
 import core.game.node.entity.player.link.diary.DiaryType
@@ -15,29 +18,6 @@ import shared.consts.Items
 import shared.consts.Sounds
 
 class SpinningPlugin : InteractionListener, InterfaceListener {
-    /**
-     * Represents spinning definition.
-     */
-    enum class Spinning(val button: Int, val need: Int, val product: Int, val level: Int, val exp: Double) {
-        WOOL(19, Items.WOOL_1737, Items.BALL_OF_WOOL_1759, 1, 2.5),
-        FLAX(17, Items.FLAX_1779, Items.BOW_STRING_1777, 10, 15.0),
-        ROOT(23, Items.MAGIC_ROOTS_6051, Items.MAGIC_STRING_6038, 19, 30.0),
-        ROOT_OAK(23, Items.OAK_ROOTS_6043, Items.MAGIC_STRING_6038, 19, 30.0),
-        ROOT_WILLOW(23, Items.WILLOW_ROOTS_6045, Items.MAGIC_STRING_6038, 19, 30.0),
-        ROOT_MAPLE(23, Items.MAPLE_ROOTS_6047, Items.MAGIC_STRING_6038, 19, 30.0),
-        ROOT_YEW(23, Items.YEW_ROOTS_6049, Items.MAGIC_STRING_6038, 19, 30.0),
-        ROOT_SPIRIT(23, Items.SPIRIT_ROOTS_6053, Items.MAGIC_STRING_6038, 19, 30.0),
-        SINEW(27, Items.SINEW_9436, Items.CROSSBOW_STRING_9438, 10, 15.0),
-        TREE_ROOTS(31, Items.OAK_ROOTS_6043, Items.CROSSBOW_STRING_9438, 10, 15.0),
-        YAK(35, Items.HAIR_10814, Items.ROPE_954, 30, 25.0),
-        ;
-
-        companion object {
-            private val buttonMap: Map<Int, Spinning> = values().associateBy { it.button }
-            fun forId(id: Int): Spinning? = buttonMap[id]
-        }
-    }
-
     override fun defineListeners() {
 
         /*
@@ -65,7 +45,7 @@ class SpinningPlugin : InteractionListener, InterfaceListener {
 
     override fun defineInterfaceListeners() {
         on(Components.CRAFTING_SPINNING_459) { player, _, opcode, buttonID, _, _ ->
-            val spin = Spinning.forId(buttonID) ?: return@on true
+            val spin = CraftingDefinition.Spinning.forId(buttonID) ?: return@on true
             if (!inInventory(player, spin.need, 1)) {
                 sendMessage(player, "You need ${getItemName(spin.need).lowercase()} to make this.")
                 return@on true
@@ -91,7 +71,7 @@ class SpinningPlugin : InteractionListener, InterfaceListener {
         }
     }
 
-    private fun handleSpinning(player: Player, spin: Spinning, amount: Int) {
+    private fun handleSpinning(player: Player, spin: CraftingDefinition.Spinning, amount: Int) {
         var remaining = amount
         queueScript(player, 0, QueueStrength.WEAK) { stage ->
             if (remaining <= 0) return@queueScript stopExecuting(player)

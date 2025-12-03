@@ -1,6 +1,6 @@
 package content.region.kandarin.guild.ranging.dialogue
 
-import content.global.skill.crafting.TanningPlugin.Tan
+import content.global.skill.crafting.CraftingDefinition
 import core.game.dialogue.Dialogue
 import core.game.node.entity.player.Player
 import core.plugin.Initializable
@@ -28,7 +28,7 @@ class LeatherWorkerDialogue(player: Player? = null) : Dialogue(player) {
             }
             3 -> npc("Well, I can cure plain cowhides into pieces of leather", "ready for crafting.").also { stage++ }
             4 -> npc("I work with ordinary, hard or dragonhide leather and", "also snakeskin.").also { stage++ }
-            5 -> end().also { Tan.open(player, npc.id) }
+            5 -> end().also { CraftingDefinition.Tan.open(player, npc.id) }
             6 -> npc("Suit yourself.").also { stage = END_DIALOGUE }
         }
         return true

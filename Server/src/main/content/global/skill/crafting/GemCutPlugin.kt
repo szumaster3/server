@@ -1,4 +1,4 @@
-package content.global.skill.crafting.gem
+package content.global.skill.crafting
 
 import core.api.*
 import core.game.interaction.Clocks
@@ -22,7 +22,7 @@ class GemCutPlugin : InteractionListener {
 
         onUseWith(IntType.ITEM, Items.CHISEL_1755, *UNCUT_Gem) { player, used, with ->
             if (!clockReady(player, Clocks.SKILLING)) return@onUseWith true
-            val gem = Gem.forId(if (used.id == Items.CHISEL_1755) with.id else used.id) ?: return@onUseWith true
+            val gem = CraftingDefinition.Gem.forId(if (used.id == Items.CHISEL_1755) with.id else used.id) ?: return@onUseWith true
             val invAmount = amountInInventory(player, gem.uncut)
 
             fun cutGem(amount: Int) {
@@ -164,24 +164,24 @@ class GemCutPlugin : InteractionListener {
          * Represents the uncut gems.
          */
         private val UNCUT_Gem = intArrayOf(
-            Gem.OPAL.uncut,
-            Gem.JADE.uncut,
-            Gem.RED_TOPAZ.uncut,
-            Gem.SAPPHIRE.uncut,
-            Gem.EMERALD.uncut,
-            Gem.RUBY.uncut,
-            Gem.DIAMOND.uncut,
-            Gem.DRAGONSTONE.uncut,
-            Gem.ONYX.uncut,
+            CraftingDefinition.Gem.OPAL.uncut,
+            CraftingDefinition.Gem.JADE.uncut,
+            CraftingDefinition.Gem.RED_TOPAZ.uncut,
+            CraftingDefinition.Gem.SAPPHIRE.uncut,
+            CraftingDefinition.Gem.EMERALD.uncut,
+            CraftingDefinition.Gem.RUBY.uncut,
+            CraftingDefinition.Gem.DIAMOND.uncut,
+            CraftingDefinition.Gem.DRAGONSTONE.uncut,
+            CraftingDefinition.Gem.ONYX.uncut,
         )
 
         /**
          * Represents the low tier gems.
          */
         private val SEMIPRECIOUS_Gem = intArrayOf(
-            Gem.OPAL.uncut,
-            Gem.JADE.uncut,
-            Gem.RED_TOPAZ.uncut
+            CraftingDefinition.Gem.OPAL.uncut,
+            CraftingDefinition.Gem.JADE.uncut,
+            CraftingDefinition.Gem.RED_TOPAZ.uncut
         )
 
         /**

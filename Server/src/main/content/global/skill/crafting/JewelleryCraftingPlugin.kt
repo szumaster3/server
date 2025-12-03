@@ -1,6 +1,5 @@
-package content.global.skill.crafting.jewellery
+package content.global.skill.crafting
 
-import content.global.skill.crafting.CraftingObject
 import content.global.skill.slayer.SlayerManager
 import core.api.*
 import core.game.interaction.Clocks
@@ -32,7 +31,7 @@ class JewelleryCraftingPlugin : InteractionListener , InterfaceListener {
                     return@onUseWith false
                 }
 
-                Jewellery.open(player)
+                JewelleryUtils.open(player)
 
                 val hasRuby = inInventory(player, Items.RUBY_1603)
 
@@ -48,7 +47,7 @@ class JewelleryCraftingPlugin : InteractionListener , InterfaceListener {
                 return@onUseWith true
             }
 
-            Jewellery.open(player)
+            JewelleryUtils.open(player)
             return@onUseWith true
         }
 
@@ -59,14 +58,14 @@ class JewelleryCraftingPlugin : InteractionListener , InterfaceListener {
         onUseWith(IntType.ITEM, amuletId, Items.BALL_OF_WOOL_1759) { player, used, with ->
             val amuletItem = used.asItem()
             val productId = if (amuletItem.id == Items.ONYX_AMULET_6579) Items.ONYX_AMULET_6579 else amuletItem.id
-            val data = Jewellery.JewelleryItem.forProduct(productId) ?: return@onUseWith false
+            val data = CraftingDefinition.JewelleryItem.forProduct(productId) ?: return@onUseWith false
             if (getStatLevel(player, Skills.CRAFTING) < data.level) {
                 sendMessage(player, "You need a crafting level of at least ${data.level} to do that.")
                 return@onUseWith false
             }
 
             if (removeItem(player, amuletItem) && removeItem(player, with.asItem())) {
-                val resultId = if (data == Jewellery.JewelleryItem.ONYX_AMULET) {
+                val resultId = if (data == CraftingDefinition.JewelleryItem.ONYX_AMULET) {
                     Items.ONYX_AMULET_6581
                 } else {
                     data.sendItem + 19
@@ -107,54 +106,54 @@ class JewelleryCraftingPlugin : InteractionListener , InterfaceListener {
         on(Components.CRAFTING_GOLD_446) { player, _, opcode, buttonID, _, itemID ->
             if (!clockReady(player, Clocks.SKILLING)) return@on true
             var amount = 0
-            var data: Jewellery.JewelleryItem? = null
+            var data: CraftingDefinition.JewelleryItem? = null
             when (buttonID) {
-                20 -> data = Jewellery.JewelleryItem.GOLD_RING
-                22 -> data = Jewellery.JewelleryItem.SAPPHIRE_RING
-                24 -> data = Jewellery.JewelleryItem.EMERALD_RING
+                20 -> data = CraftingDefinition.JewelleryItem.GOLD_RING
+                22 -> data = CraftingDefinition.JewelleryItem.SAPPHIRE_RING
+                24 -> data = CraftingDefinition.JewelleryItem.EMERALD_RING
                 26 ->
                     data =
-                        if (inInventory(player, Jewellery.PERFECT_GOLD_BAR)) {
-                            Jewellery.JewelleryItem.PERFECT_RING
+                        if (inInventory(player, CraftingDefinition.PERFECT_GOLD_BAR)) {
+                            CraftingDefinition.JewelleryItem.PERFECT_RING
                         } else {
-                            Jewellery.JewelleryItem.RUBY_RING
+                            CraftingDefinition.JewelleryItem.RUBY_RING
                         }
 
-                28 -> data = Jewellery.JewelleryItem.DIAMOND_RING
-                30 -> data = Jewellery.JewelleryItem.DRAGONSTONE_RING
-                32 -> data = Jewellery.JewelleryItem.ONYX_RING
-                35 -> data = Jewellery.JewelleryItem.SLAYER_RING
+                28 -> data = CraftingDefinition.JewelleryItem.DIAMOND_RING
+                30 -> data = CraftingDefinition.JewelleryItem.DRAGONSTONE_RING
+                32 -> data = CraftingDefinition.JewelleryItem.ONYX_RING
+                35 -> data = CraftingDefinition.JewelleryItem.SLAYER_RING
             }
 
             when (buttonID - 3) {
-                39 -> data = Jewellery.JewelleryItem.GOLD_NECKLACE
-                41 -> data = Jewellery.JewelleryItem.SAPPHIRE_NECKLACE
-                43 -> data = Jewellery.JewelleryItem.EMERALD_NECKLACE
+                39 -> data = CraftingDefinition.JewelleryItem.GOLD_NECKLACE
+                41 -> data = CraftingDefinition.JewelleryItem.SAPPHIRE_NECKLACE
+                43 -> data = CraftingDefinition.JewelleryItem.EMERALD_NECKLACE
                 45 ->
                     data =
-                        if (inInventory(player, Jewellery.PERFECT_GOLD_BAR)) {
-                            Jewellery.JewelleryItem.PERFECT_NECKLACE
+                        if (inInventory(player, CraftingDefinition.PERFECT_GOLD_BAR)) {
+                            CraftingDefinition.JewelleryItem.PERFECT_NECKLACE
                         } else {
-                            Jewellery.JewelleryItem.RUBY_NECKLACE
+                            CraftingDefinition.JewelleryItem.RUBY_NECKLACE
                         }
 
-                47 -> data = Jewellery.JewelleryItem.DIAMOND_NECKLACE
-                49 -> data = Jewellery.JewelleryItem.DRAGONSTONE_NECKLACE
-                51 -> data = Jewellery.JewelleryItem.ONYX_NECKLACE
-                58 -> data = Jewellery.JewelleryItem.GOLD_AMULET
-                60 -> data = Jewellery.JewelleryItem.SAPPHIRE_AMULET
-                62 -> data = Jewellery.JewelleryItem.EMERALD_AMULET
-                64 -> data = Jewellery.JewelleryItem.RUBY_AMULET
-                66 -> data = Jewellery.JewelleryItem.DIAMOND_AMULET
-                68 -> data = Jewellery.JewelleryItem.DRAGONSTONE_AMULET
-                70 -> data = Jewellery.JewelleryItem.ONYX_AMULET
-                77 -> data = Jewellery.JewelleryItem.GOLD_BRACELET
-                79 -> data = Jewellery.JewelleryItem.SAPPHIRE_BRACELET
-                81 -> data = Jewellery.JewelleryItem.EMERALD_BRACELET
-                83 -> data = Jewellery.JewelleryItem.RUBY_BRACELET
-                85 -> data = Jewellery.JewelleryItem.DIAMOND_BRACELET
-                87 -> data = Jewellery.JewelleryItem.DRAGONSTONE_BRACELET
-                89 -> data = Jewellery.JewelleryItem.ONYX_BRACELET
+                47 -> data = CraftingDefinition.JewelleryItem.DIAMOND_NECKLACE
+                49 -> data = CraftingDefinition.JewelleryItem.DRAGONSTONE_NECKLACE
+                51 -> data = CraftingDefinition.JewelleryItem.ONYX_NECKLACE
+                58 -> data = CraftingDefinition.JewelleryItem.GOLD_AMULET
+                60 -> data = CraftingDefinition.JewelleryItem.SAPPHIRE_AMULET
+                62 -> data = CraftingDefinition.JewelleryItem.EMERALD_AMULET
+                64 -> data = CraftingDefinition.JewelleryItem.RUBY_AMULET
+                66 -> data = CraftingDefinition.JewelleryItem.DIAMOND_AMULET
+                68 -> data = CraftingDefinition.JewelleryItem.DRAGONSTONE_AMULET
+                70 -> data = CraftingDefinition.JewelleryItem.ONYX_AMULET
+                77 -> data = CraftingDefinition.JewelleryItem.GOLD_BRACELET
+                79 -> data = CraftingDefinition.JewelleryItem.SAPPHIRE_BRACELET
+                81 -> data = CraftingDefinition.JewelleryItem.EMERALD_BRACELET
+                83 -> data = CraftingDefinition.JewelleryItem.RUBY_BRACELET
+                85 -> data = CraftingDefinition.JewelleryItem.DIAMOND_BRACELET
+                87 -> data = CraftingDefinition.JewelleryItem.DRAGONSTONE_BRACELET
+                89 -> data = CraftingDefinition.JewelleryItem.ONYX_BRACELET
             }
 
             if (data == null) {
@@ -171,16 +170,16 @@ class JewelleryCraftingPlugin : InteractionListener , InterfaceListener {
 
             var flag = false
 
-            if (name.contains("ring") && !player.inventory.contains(Jewellery.RING_MOULD, 1)) {
+            if (name.contains("ring") && !player.inventory.contains(CraftingDefinition.RING_MOULD, 1)) {
                 flag = true
             }
-            if (name.contains("necklace") && !player.inventory.contains(Jewellery.NECKLACE_MOULD, 1)) {
+            if (name.contains("necklace") && !player.inventory.contains(CraftingDefinition.NECKLACE_MOULD, 1)) {
                 flag = true
             }
-            if (name.contains("amulet") && !player.inventory.contains(Jewellery.AMULET_MOULD, 1)) {
+            if (name.contains("amulet") && !player.inventory.contains(CraftingDefinition.AMULET_MOULD, 1)) {
                 flag = true
             }
-            if (name.contains("bracelet") && !player.inventory.contains(Jewellery.BRACELET_MOULD, 1)) {
+            if (name.contains("bracelet") && !player.inventory.contains(CraftingDefinition.BRACELET_MOULD, 1)) {
                 flag = true
             }
 
@@ -194,12 +193,12 @@ class JewelleryCraftingPlugin : InteractionListener , InterfaceListener {
                 196 -> amount = 5
                 124 -> {
                     amount =
-                        if (itemID == Jewellery.GOLD_BAR) {
-                            player.inventory.getAmount(Item(Jewellery.GOLD_BAR))
+                        if (itemID == CraftingDefinition.GOLD_BAR) {
+                            player.inventory.getAmount(Item(CraftingDefinition.GOLD_BAR))
                         } else if (itemID ==
-                            Jewellery.PERFECT_GOLD_BAR
+                            CraftingDefinition.PERFECT_GOLD_BAR
                         ) {
-                            player.inventory.getAmount(Item(Jewellery.PERFECT_GOLD_BAR))
+                            player.inventory.getAmount(Item(CraftingDefinition.PERFECT_GOLD_BAR))
                         } else {
                             val first = player.inventory.getAmount(Item(data.items[0]))
                             val second = player.inventory.getAmount(Item(data.items[1]))
@@ -215,26 +214,20 @@ class JewelleryCraftingPlugin : InteractionListener , InterfaceListener {
                 }
 
                 199 -> {
-                    val d: Jewellery.JewelleryItem = data
+                    val d: CraftingDefinition.JewelleryItem = data
                     sendInputDialogue(player, true, "Enter the amount:") { value: Any ->
-                        Jewellery.make(player, d, value as Int)
+                        JewelleryUtils.make(player, d, value as Int)
                     }
                     return@on true
                 }
             }
 
-            if (!SlayerManager.getInstance(player).flags.isRingUnlocked() &&
-                data == Jewellery.JewelleryItem.SLAYER_RING
-            ) {
-                sendMessages(
-                    player,
-                    "You don't know how to make this. Talk to any Slayer master in order to learn the",
-                    "ability that creates Slayer rings.",
-                )
+            if (!SlayerManager.getInstance(player).flags.isRingUnlocked() && data == CraftingDefinition.JewelleryItem.SLAYER_RING) {
+                sendMessages(player, "You don't know how to make this. Talk to any Slayer master in order to learn the", "ability that creates Slayer rings.")
                 return@on true
             }
 
-            Jewellery.make(player, data, amount)
+            JewelleryUtils.make(player, data, amount)
             return@on true
         }
     }

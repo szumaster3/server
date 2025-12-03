@@ -1,6 +1,6 @@
 package content.global.skill.summoning.familiar.npc
 
-import content.global.skill.crafting.jewellery.Jewellery
+import content.global.skill.crafting.JewelleryUtils
 import content.global.skill.firemaking.FireMakingPlugin
 import content.global.skill.firemaking.items.Log
 import content.global.skill.summoning.familiar.Familiar
@@ -55,7 +55,7 @@ class PyrelordNPC @JvmOverloads constructor(owner: Player? = null, id: Int = NPC
         }
         lock(owner, 1)
         visualize(Animation.create(8081), Graphics.create(shared.consts.Graphics.RAINING_FLAMES_1463))
-        Jewellery.open(owner)
+        JewelleryUtils.open(owner)
         return true
     }
 

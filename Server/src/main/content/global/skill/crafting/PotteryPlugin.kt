@@ -1,12 +1,14 @@
 package content.global.skill.crafting
 
 import core.api.*
-import core.game.interaction.*
+import core.game.interaction.Clocks
+import core.game.interaction.IntType
+import core.game.interaction.InteractionListener
+import core.game.interaction.QueueStrength
 import core.game.node.Node
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.diary.DiaryType
 import core.game.node.entity.skill.Skills
-import core.game.node.item.Item
 import core.game.world.map.Location
 import core.tools.StringUtils
 import shared.consts.Animations
@@ -15,33 +17,7 @@ import shared.consts.Quests
 import shared.consts.Scenery
 import java.util.*
 
-private const val SOFT_CLAY = Items.SOFT_CLAY_1761
-private val UNFIRED_POTTERY_ID = intArrayOf(
-    Items.UNFIRED_POT_1787,
-    Items.UNFIRED_PIE_DISH_1789,
-    Items.UNFIRED_BOWL_1791,
-    Items.UNFIRED_PLANT_POT_5352,
-    Items.UNFIRED_POT_LID_4438
-)
-
 class PotteryPlugin : InteractionListener {
-
-    /**
-     * Represents the different pottery crafting.
-     */
-    enum class Pottery(val unfinished: Item, val product: Item, val level: Int, val exp: Double, val fireExp: Double) {
-        POT(Item(Items.UNFIRED_POT_1787), Item(Items.EMPTY_POT_1931), 1, 6.3, 6.3),
-        DISH(Item(Items.UNFIRED_PIE_DISH_1789), Item(Items.PIE_DISH_2313), 7, 15.0, 10.0),
-        BOWL(Item(Items.UNFIRED_BOWL_1791), Item(Items.BOWL_1923), 8, 18.0, 15.0),
-        PLANT(Item(Items.UNFIRED_PLANT_POT_5352), Item(Items.PLANT_POT_5350), 19, 20.0, 17.5),
-        LID(Item(Items.UNFIRED_POT_LID_4438), Item(Items.POT_LID_4440), 25, 20.0, 20.0),
-        ;
-
-        companion object {
-            private val unfinishedMap: Map<Int, Pottery> = values().associateBy { it.unfinished.id }
-            fun forId(id: Int): Pottery? = unfinishedMap[id]
-        }
-    }
 
     override fun defineListeners() {
 
@@ -49,12 +25,12 @@ class PotteryPlugin : InteractionListener {
          * Handles crafting on pottery wheel.
          */
 
-        onUseWith(IntType.ITEM, SOFT_CLAY, *CraftingObject.POTTERY_WHEELS) { player, _, _ ->
-            val items = Pottery.values().map { it.unfinished }.toTypedArray()
+        onUseWith(IntType.ITEM, Items.SOFT_CLAY_1761, *CraftingObject.POTTERY_WHEELS) { player, _, _ ->
+            val items = CraftingDefinition.Pottery.values().map { it.unfinished }.toTypedArray()
             sendSkillDialogue(player) {
                 withItems(*items)
                 create { itemId, amount ->
-                    val pottery = Pottery.forId(itemId) ?: run {
+                    val pottery = CraftingDefinition.Pottery.forId(itemId) ?: run {
                         sendMessage(player, "Invalid pottery selection.")
                         return@create
                     }
@@ -63,7 +39,7 @@ class PotteryPlugin : InteractionListener {
                         sendMessage(player, "You need a crafting level of ${pottery.level} to make this.")
                         return@create
                     }
-                    if (!inInventory(player, SOFT_CLAY)) {
+                    if (!inInventory(player, Items.SOFT_CLAY_1761)) {
                         sendMessage(player, "You have run out of clay.")
                         return@create
                     }
@@ -79,7 +55,7 @@ class PotteryPlugin : InteractionListener {
                             }
                             else -> {
                                 delayClock(player, Clocks.SKILLING, 5)
-                                if (removeItem(player, SOFT_CLAY)) {
+                                if (removeItem(player, Items.SOFT_CLAY_1761)) {
                                     addItem(player, pottery.unfinished.id)
                                     rewardXP(player, Skills.CRAFTING, pottery.exp)
                                     val article = if (StringUtils.isPlusN(pottery.unfinished.name)) "an" else "a"
@@ -87,10 +63,10 @@ class PotteryPlugin : InteractionListener {
 
                                     // Varrock diary.
                                     when (pottery) {
-                                        Pottery.BOWL -> if (withinDistance(player, Location(3086, 3410, 0))) {
+                                        CraftingDefinition.Pottery.BOWL -> if (withinDistance(player, Location(3086, 3410, 0))) {
                                             setAttribute(player, "/save:diary:varrock:spun-bowl", true)
                                         }
-                                        Pottery.POT -> if (withinDistance(player, Location(3086, 3410, 0))) {
+                                        CraftingDefinition.Pottery.POT -> if (withinDistance(player, Location(3086, 3410, 0))) {
                                             finishDiaryTask(player, DiaryType.LUMBRIDGE, 0, 7)
                                         }
                                         else -> {}
@@ -106,7 +82,7 @@ class PotteryPlugin : InteractionListener {
                         }
                     }
                 }
-                calculateMaxAmount { amountInInventory(player, SOFT_CLAY) }
+                calculateMaxAmount { amountInInventory(player, Items.SOFT_CLAY_1761) }
             }
             return@onUseWith true
         }
@@ -115,7 +91,7 @@ class PotteryPlugin : InteractionListener {
          * Handles firing in ovens.
          */
 
-        fun firePottery(player: Player, pottery: Pottery, oven: Node): Boolean {
+        fun firePottery(player: Player, pottery: CraftingDefinition.Pottery, oven: Node): Boolean {
             if (oven.id == Scenery.POTTERY_OVEN_4308 && !isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS)) {
                 sendMessage(player, "Only Fremenniks may use this ${oven.name.lowercase(Locale.getDefault())}.")
                 return false
@@ -157,11 +133,11 @@ class PotteryPlugin : InteractionListener {
 
                                     // Varrock diary.
                                     when (pottery) {
-                                        Pottery.BOWL -> if (withinDistance(player, Location(3085, 3408, 0)) &&
+                                        CraftingDefinition.Pottery.BOWL -> if (withinDistance(player, Location(3085, 3408, 0)) &&
                                             getAttribute(player, "diary:varrock:spun-bowl", false)) {
                                             finishDiaryTask(player, DiaryType.VARROCK, 0, 9)
                                         }
-                                        Pottery.POT -> if (withinDistance(player, Location(3085, 3408, 0))) {
+                                        CraftingDefinition.Pottery.POT -> if (withinDistance(player, Location(3085, 3408, 0))) {
                                             finishDiaryTask(player, DiaryType.LUMBRIDGE, 0, 8)
                                         }
                                         else -> {}
@@ -182,8 +158,8 @@ class PotteryPlugin : InteractionListener {
             return true
         }
 
-        onUseWith(IntType.ITEM, UNFIRED_POTTERY_ID, *CraftingObject.POTTERY_OVENS) { player, used, oven ->
-            val pottery = Pottery.forId(used.id) ?: return@onUseWith false
+        onUseWith(IntType.ITEM, CraftingDefinition.UNFIRED_POTTERY_ITEM_IDS, *CraftingObject.POTTERY_OVENS) { player, used, oven ->
+            val pottery = CraftingDefinition.Pottery.forId(used.id) ?: return@onUseWith false
             firePottery(player, pottery, oven)
             return@onUseWith true
         }
@@ -195,11 +171,11 @@ class PotteryPlugin : InteractionListener {
         on(CraftingObject.POTTERY_OVENS, IntType.SCENERY, "fire") { player, node ->
             sendSkillDialogue(player) {
                 val potteryMap = mapOf(
-                    Items.UNFIRED_POT_1787 to Pottery.POT,
-                    Items.UNFIRED_PIE_DISH_1789 to Pottery.DISH,
-                    Items.UNFIRED_BOWL_1791 to Pottery.BOWL,
-                    Items.UNFIRED_PLANT_POT_5352 to Pottery.PLANT,
-                    Items.UNFIRED_POT_LID_4438 to Pottery.LID
+                    Items.UNFIRED_POT_1787 to CraftingDefinition.Pottery.POT,
+                    Items.UNFIRED_PIE_DISH_1789 to CraftingDefinition.Pottery.DISH,
+                    Items.UNFIRED_BOWL_1791 to CraftingDefinition.Pottery.BOWL,
+                    Items.UNFIRED_PLANT_POT_5352 to CraftingDefinition.Pottery.PLANT,
+                    Items.UNFIRED_POT_LID_4438 to CraftingDefinition.Pottery.LID
                 )
 
                 withItems(*potteryMap.keys.toIntArray())

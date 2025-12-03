@@ -2,6 +2,9 @@ package content.global.skill.crafting
 
 import shared.consts.Scenery
 
+/**
+ * Scenery object ids for crafting interactions.
+ */
 object CraftingObject {
     val FURNACES = intArrayOf(
         Scenery.FURNACE_4304, Scenery.FURNACE_6189, Scenery.LAVA_FORGE_9390, Scenery.FURNACE_11010,

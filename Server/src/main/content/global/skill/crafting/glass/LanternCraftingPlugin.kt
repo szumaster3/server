@@ -1,16 +1,19 @@
-package content.global.skill.crafting.items.lamps
+package content.global.skill.crafting.glass
 
-import core.api.*
-import core.game.interaction.InteractionListener
+import core.api.addItem
+import core.api.addItemOrDrop
+import core.api.removeItem
+import core.api.sendMessage
 import core.game.interaction.IntType
+import core.game.interaction.InteractionListener
 import core.game.node.entity.player.Player
-import shared.consts.Items
 import core.game.node.item.Item
+import shared.consts.Items
 
 /**
  * Handles lantern crafting interactions.
  */
-class LanternCraftingListener : InteractionListener {
+class LanternCraftingPlugin : InteractionListener {
 
     override fun defineListeners() {
 

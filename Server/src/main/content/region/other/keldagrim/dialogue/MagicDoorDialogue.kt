@@ -1,6 +1,6 @@
 package content.region.other.keldagrim.dialogue
 
-import content.global.skill.crafting.gem.Gem
+import content.global.skill.crafting.CraftingDefinition
 import core.api.removeItem
 import core.api.sendMessage
 import core.game.dialogue.Dialogue
@@ -38,7 +38,7 @@ class MagicDoorDialogue(player: Player? = null) : Dialogue(player) {
                 3 -> player(FaceAnim.HALF_GUILTY,"I haven't brought my diamonds with me.").also { stage = 30 }
                 4 -> player(FaceAnim.HALF_ASKING,"What do you do with all the diamonds you get?").also { stage = 40 }
             }
-            10 -> if (!removeItem(player, Gem.DIAMOND.cut)) {
+            10 -> if (!removeItem(player, CraftingDefinition.Gem.DIAMOND.cut)) {
                 player(FaceAnim.HALF_GUILTY, "...but...")
                 stage++
             } else {

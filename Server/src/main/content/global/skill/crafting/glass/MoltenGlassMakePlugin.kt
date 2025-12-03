@@ -8,7 +8,6 @@ import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.node.entity.player.Player
 import core.game.node.entity.skill.Skills
-import core.game.system.task.Pulse
 import shared.consts.Animations
 import shared.consts.Items
 import kotlin.math.min
@@ -33,64 +32,72 @@ class MoltenGlassMakePlugin : InteractionListener {
                 return@onUseWith true
             }
 
-            var hasSand = false
-            for (sandId in SAND_SOURCES) {
-                if (inInventory(player, sandId)) {
-                    hasSand = true
-                    break
-                }
-            }
-
-            if (!hasSand) {
+            if (!anyInInventory(player, *SAND_SOURCES)) {
                 sendMessage(player, "You need at least one bucket of sand or sandbag to do this.")
                 return@onUseWith true
             }
 
             sendSkillDialogue(player) {
                 withItems(MOLTEN_GLASS)
+
                 create { id, amount ->
                     delayClock(player, Clocks.SKILLING, 3)
-                    submitIndividualPulse(player, GlassMakePulse(player, id, amount))
+                    handleMoltenGlassProcess(player, id, amount)
                 }
-                calculateMaxAmount { _ ->
-                    min(amountInInventory(player, SODA_ASH), SAND_SOURCES.sumOf { amountInInventory(player, it) })
+
+                calculateMaxAmount {
+                    min(
+                        amountInInventory(player, SODA_ASH),
+                        SAND_SOURCES.sumOf { amountInInventory(player, it) }
+                    )
                 }
             }
 
             return@onUseWith true
         }
     }
-}
 
-/**
- * Handles crafting molten glass.
- */
-private class GlassMakePulse(private val player: Player, val product: Int, private var amount: Int) : Pulse() {
 
-    private val SAND_SOURCES = MoltenGlassMakePlugin.SAND_SOURCES
+    private fun handleMoltenGlassProcess(player: Player, productId: Int, amount: Int) {
+        var remaining = amount
 
-    override fun pulse(): Boolean {
-        if (amount < 1) return true
+        queueScript(player, 0) { stage ->
+            if (!clockReady(player, Clocks.SKILLING)) return@queueScript stopExecuting(player)
+            if (remaining <= 0) return@queueScript stopExecuting(player)
 
-        if (!inInventory(player, MoltenGlassMakePlugin.SODA_ASH) || !anyInInventory(player, *SAND_SOURCES)) {
-            return true
+            if (!inInventory(player, SODA_ASH) || !anyInInventory(player, *SAND_SOURCES)) {
+                return@queueScript stopExecuting(player)
+            }
+
+            when (stage) {
+                0 -> {
+                    delayClock(player, Clocks.SKILLING, 3)
+                    delayScript(player, 2)
+                }
+
+                else -> {
+                    animate(player, Animations.HUMAN_FURNACE_SMELT_3243)
+                    sendMessage(player, "You heat the sand and soda ash in the furnace to make glass.")
+
+                    if (!removeItem(player, SODA_ASH) || !removeSand(player)) {
+                        return@queueScript stopExecuting(player)
+                    }
+
+                    addItem(player, productId)
+                    rewardXP(player, Skills.CRAFTING, 20.0)
+                    player.dispatch(ResourceProducedEvent(productId, 1, player))
+
+                    remaining--
+
+                    if (remaining > 0) {
+                        setCurrentScriptState(player, 0)
+                        delayScript(player, 2)
+                    } else {
+                        stopExecuting(player)
+                    }
+                }
+            }
         }
-
-        lock(player, 3)
-        animate(player, Animations.HUMAN_FURNACE_SMELT_3243)
-        sendMessage(player, "You heat the sand and soda ash in the furnace to make glass.")
-
-        if (removeItem(player, MoltenGlassMakePlugin.SODA_ASH) && removeSand(player)) {
-            addItem(player, MoltenGlassMakePlugin.MOLTEN_GLASS)
-            rewardXP(player, Skills.CRAFTING, 20.0)
-            player.dispatch(ResourceProducedEvent(product, amount, player))
-        } else {
-            return true
-        }
-
-        amount--
-        delay = 3
-        return false
     }
 
     /**
@@ -98,18 +105,20 @@ private class GlassMakePulse(private val player: Player, val product: Int, priva
      */
     private fun removeSand(player: Player): Boolean {
         return when {
-            inInventory(player, MoltenGlassMakePlugin.BUCKET_OF_SAND) -> {
-                if (removeItem(player, MoltenGlassMakePlugin.BUCKET_OF_SAND)) {
+            inInventory(player, BUCKET_OF_SAND) -> {
+                if (removeItem(player, BUCKET_OF_SAND)) {
                     addItem(player, Items.BUCKET_1925)
                     true
                 } else false
             }
-            inInventory(player, MoltenGlassMakePlugin.SANDBAG) -> {
-                if (removeItem(player, MoltenGlassMakePlugin.SANDBAG)) {
+
+            inInventory(player, SANDBAG) -> {
+                if (removeItem(player, SANDBAG)) {
                     addItem(player, Items.EMPTY_SACK_5418)
                     true
                 } else false
             }
+
             else -> false
         }
     }

@@ -1,10 +1,10 @@
-package content.global.skill.crafting.items.lamps
+package content.global.skill.crafting.glass
 
+import content.global.skill.crafting.CraftingDefinition
 import core.api.*
-import core.game.container.Container
 import core.game.event.LitLightSourceEvent
-import core.game.interaction.InteractionListener
 import core.game.interaction.IntType
+import core.game.interaction.InteractionListener
 import core.game.node.entity.player.Player
 import core.game.node.entity.skill.Skills
 import core.game.node.item.Item
@@ -19,9 +19,9 @@ class LightSourceLighter : InteractionListener {
          * Handles using a tinderbox on any lightable light-source.
          */
 
-        onUseWith(IntType.ITEM, Items.TINDERBOX_590, *LIGHTABLE_ITEM_IDS) { player, _, with ->
+        onUseWith(IntType.ITEM, Items.TINDERBOX_590, *CraftingDefinition.LIGHTABLE_ITEM_IDS) { player, _, with ->
             val item = with.asItem()
-            val light = LightSources.forId(item.id) ?: return@onUseWith true
+            val light = CraftingDefinition.LightSources.forId(item.id) ?: return@onUseWith true
 
             if (!light(player, item, light)) {
                 sendMessage(player, "You need a Firemaking level of at least ${light.level} to light this.")
@@ -35,7 +35,7 @@ class LightSourceLighter : InteractionListener {
          */
 
         on(IntType.ITEM, "extinguish") { player, node ->
-            val lightSources = LightSources.forLitId(node.id)
+            val lightSources = CraftingDefinition.LightSources.forLitId(node.id)
 
             lightSources ?: return@on false.also {
                 log(this::class.java, Log.WARN, "UNHANDLED EXTINGUISH OPTION: ID = ${node.id}")
@@ -46,7 +46,7 @@ class LightSourceLighter : InteractionListener {
         }
     }
 
-    private fun light(player: Player, item: Item, data: LightSources): Boolean {
+    private fun light(player: Player, item: Item, data: CraftingDefinition.LightSources): Boolean {
         val requiredLevel = data.level
         val playerLevel = getStatLevel(player, Skills.FIREMAKING)
 
@@ -68,26 +68,5 @@ class LightSourceLighter : InteractionListener {
         sendMessage(player, "You light the ${getItemName(data.litId).lowercase()}.")
 
         return true
-    }
-
-    companion object {
-        val LIGHTABLE_ITEM_IDS = intArrayOf(
-            // Brightness 1
-            Items.CANDLE_36,               // candle
-            Items.BLACK_CANDLE_38,         // black candle
-            Items.UNLIT_TORCH_596,         // torch
-            Items.CANDLE_LANTERN_4529,     // candle lantern (full)
-            Items.CANDLE_LANTERN_4532,     // black candle lantern (full)
-
-            // Brightness 2
-            Items.OIL_LAMP_4522,           // oil lamp (full)
-            Items.OIL_LANTERN_4537,        // oil lantern (full)
-            Items.SAPPHIRE_LANTERN_4701,   // sapphire lantern (full)
-            Items.MINING_HELMET_5014,      // mining helmet
-
-            // Brightness 3
-            Items.BULLSEYE_LANTERN_4548,   // bullseye lantern (full)
-            Items.EMERALD_LANTERN_9064     // emerald lantern (full)
-        )
     }
 }

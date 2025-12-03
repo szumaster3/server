@@ -1,6 +1,6 @@
 package core.game.world.map.zone.impl
 
-import content.global.skill.crafting.items.lamps.LightSources
+import content.global.skill.crafting.CraftingDefinition
 import core.api.*
 import core.game.component.Component
 import core.game.event.EventHook
@@ -64,7 +64,7 @@ class DarkZone : MapZone("Dark zone", true), EventHook<UseWithEvent> {
     override fun interact(entity: Entity, target: Node, option: Option): Boolean {
         if (target !is Item) return false
         val player = entity.asPlayer()
-        val product = LightSources.forLitId(target.id) ?: return false
+        val product = CraftingDefinition.LightSources.forLitId(target.id) ?: return false
         val action = option.name.lowercase(Locale.getDefault())
         val itemName = getItemName(product.litId).lowercase()
 
@@ -81,7 +81,7 @@ class DarkZone : MapZone("Dark zone", true), EventHook<UseWithEvent> {
         if (entity is Player) {
             val player = entity.asPlayer()
 
-            val source = LightSources.getAnyActiveLightSource(player)
+            val source = CraftingDefinition.LightSources.getAnyActiveLightSource(player)
 
             if (source != null && source.interfaceId > 0) {
                 player.interfaceManager.openOverlay(Component(source.interfaceId))
@@ -112,7 +112,7 @@ class DarkZone : MapZone("Dark zone", true), EventHook<UseWithEvent> {
      * @param player The player.
      */
     fun updateOverlay(player: Player) {
-        val source = LightSources.getAnyActiveLightSource(player)
+        val source = CraftingDefinition.LightSources.getAnyActiveLightSource(player)
 
         var overlay = -1
         if (player.interfaceManager.overlay != null) {
@@ -176,7 +176,7 @@ class DarkZone : MapZone("Dark zone", true), EventHook<UseWithEvent> {
          * in the Lumbridge Swamp Caves.
          */
         private fun checkGasExplosion(player: Player) {
-            val source = LightSources.getActiveLightSource(player) ?: return
+            val source = CraftingDefinition.LightSources.getActiveLightSource(player) ?: return
             //https://oldschool.runescape.wiki/w/Light_sources#/media/File:Lumbridge_swamp_caves_hazards.png
             val gasExplosionArea =
             inBorders(player, 3155, 9579, 3174, 9596) ||
@@ -198,7 +198,7 @@ class DarkZone : MapZone("Dark zone", true), EventHook<UseWithEvent> {
                     sendMessage(player, "Your ${source.name.lowercase()} has gone out!")
                 }
 
-                if (!LightSources.hasActiveLightSource(player)) {
+                if (!CraftingDefinition.LightSources.hasActiveLightSource(player)) {
                     sendMessage(player, "Tiny insects begin to bite you in the darkness!")
                     startInsectAttack(player)
                 }
@@ -212,7 +212,7 @@ class DarkZone : MapZone("Dark zone", true), EventHook<UseWithEvent> {
             Pulser.submit(object : Pulse(2, player) { // 2 tick delay
                 var ticks = 0
                 override fun pulse(): Boolean {
-                    if (LightSources.hasActiveLightSource(player)) return true
+                    if (CraftingDefinition.LightSources.hasActiveLightSource(player)) return true
                     ticks++
                     if (ticks >= 30) return true  // 30 ticks ~ 18s
                     impact(player, 1, HitsplatType.NORMAL)
