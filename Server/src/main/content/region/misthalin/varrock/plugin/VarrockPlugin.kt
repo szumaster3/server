@@ -145,7 +145,7 @@ class VarrockPlugin : InteractionListener {
          */
 
         on(Scenery.CLOSED_CHEST_24203, IntType.SCENERY, "open") { player, node ->
-            val inGuild = inBorders(player, getRegionBorders(CHAMPIONS_GUILD_REGION))
+            val inGuild = inBorders(player, getRegionBorders(Regions.VARROCK_CHAMPIONS_GUILD_12596))
             val hasClue = inInventory(player, Items.CLUE_SCROLL_10222, 1)
             val hasKey = inInventory(player, Items.KEY_2834, 1)
 
@@ -549,7 +549,6 @@ class VarrockPlugin : InteractionListener {
         private var COUNTER = 0
         private val BERRIES = intArrayOf(Scenery.CADAVA_BUSH_23625, Scenery.CADAVA_BUSH_23626, Scenery.CADAVA_BUSH_23627, Scenery.REDBERRY_BUSH_23628, Scenery.REDBERRY_BUSH_23629, Scenery.REDBERRY_BUSH_23630)
         private const val SAWMILL_OPERATOR = NPCs.SAWMILL_OPERATOR_4250
-        private const val CHAMPIONS_GUILD_REGION = 12596
         private val VARROCK_GATES = intArrayOf(Scenery.GATE_2050, Scenery.GATE_2051)
     }
 }

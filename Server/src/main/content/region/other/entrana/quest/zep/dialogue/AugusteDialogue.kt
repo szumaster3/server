@@ -127,9 +127,9 @@ class AugusteDialogue(player: Player? = null) : Dialogue(player) {
                 }
                 10 -> {
                     val missing = buildList {
-                        if (!hasCandle) add("an unlit candle")
-                        if (!hasWool) add("a ball of wool")
-                        if (!hasPapyrus) add("three sheets of papyrus")
+                        if (!hasCandle)   add("an unlit candle")
+                        if (!hasWool)     add("a ball of wool")
+                        if (!hasPapyrus)  add("three sheets of papyrus")
                         if (!hasPotatoes) add("a full sack of potatoes")
                     }
 
@@ -235,20 +235,33 @@ class AugusteDialogue(player: Player? = null) : Dialogue(player) {
                     3 -> playerl(FaceAnim.FRIENDLY, "I have lost my willow sapling. Can I buy a replacement?").also { stage = 20 }
                     else -> end()
                 }
-                3 -> showTopics(
-                    IfTopic("Dye", 5, !hasGiven(player, "ej-dye"), true),
-                    IfTopic("Sandbags", 12, !hasGiven(player, "ej-sandbags"), true),
-                    IfTopic("Silk", 15, !hasGiven(player, "ej-silk"), true),
-                    IfTopic("Bowl", 16, !hasGiven(player, "ej-bowl"), true),
-                    Topic("Never mind.", END_DIALOGUE, true)
-                )
-
+                3 ->
+                    if(hasGiven(player, "ej-dye-red") &&
+                        hasGiven(player, "ej-dye-yellow") &&
+                        hasGiven(player, "ej-silk") &&
+                        hasGiven(player, "ej-bowl") &&
+                        hasGiven(player, "ej-sandbags"))
+                    {
+                        npcl(FaceAnim.FRIENDLY, "That's the last of it!")
+                        setQuestStage(player, Quests.ENLIGHTENED_JOURNEY, 7)
+                        removeAttributes(player, "ej-dye","ej-dye-red","ej-dye-yellow","ej-silk","ej-bowl","ej-sandbags")
+                        stage = 28
+                    }
+                    else
+                    {
+                        showTopics(
+                            IfTopic("Dye", 5, !hasGiven(player, "ej-dye"), true),
+                            IfTopic("Sandbags", 12, !hasGiven(player, "ej-sandbags"), true),
+                            IfTopic("Silk", 15, !hasGiven(player, "ej-silk"), true),
+                            IfTopic("Bowl", 16, !hasGiven(player, "ej-bowl"), true),
+                            Topic("Never mind.", END_DIALOGUE, true)
+                        )
+                    }
                 5 -> {
                     val gaveYellow = hasGiven(player, "ej-dye-yellow")
                     val gaveRed = hasGiven(player, "ej-dye-red")
                     val hasYellow = inInventory(player, Items.YELLOW_DYE_1765, 1)
                     val hasRed = inInventory(player, Items.RED_DYE_1763, 1)
-
                     if (inInventory(player, Items.YELLOW_DYE_1766, 1) || inInventory(player, Items.RED_DYE_1764, 1)) {
                         npc(FaceAnim.SAD, "What am I supposed to do with a note?? I can't make ", "a balloon from notes!")
                         stage = END_DIALOGUE
@@ -257,38 +270,37 @@ class AugusteDialogue(player: Player? = null) : Dialogue(player) {
                         removeItem(player, Item(Items.RED_DYE_1763, 1))
                         setGiven(player, "ej-dye-yellow")
                         setGiven(player, "ej-dye-red")
+                        setGiven(player, "ej-dye")
                         npcl(FaceAnim.FRIENDLY, "Ah, wonderful - the red and yellow dye. Thank you.")
-                        stage = 6
+                        stage = 3
                     } else if (hasYellow && !gaveYellow) {
                         removeItem(player, Item(Items.YELLOW_DYE_1765, 1))
                         setGiven(player, "ej-dye-yellow")
                         npcl(FaceAnim.FRIENDLY, "Ah, wonderful, yellow dye. Thank you.")
-                        stage = if (hasGiven(player, "ej-red-dye")) 6 else 7
+                        stage = if (hasGiven(player, "ej-red-dye")) 3 else 7
                     } else if (hasRed && !gaveRed) {
                         removeItem(player, Item(Items.RED_DYE_1763, 1))
                         setGiven(player, "ej-dye-red")
                         npcl(FaceAnim.FRIENDLY, "Red dye! Thank you.")
-                        stage = if (hasGiven(player, "ej-yellow-dye")) 6 else 8
+                        stage = if (hasGiven(player, "ej-yellow-dye")) 3 else 8
                     } else if (!hasYellow && !hasRed) {
                         when {
                             !gaveYellow && !gaveRed -> npcl(FaceAnim.FRIENDLY, "You don't have any dye with you.").also { stage = 9 }
-                            gaveYellow && !gaveRed -> npcl(FaceAnim.FRIENDLY, "You don't have any dye with you.").also { stage = 10 }
-                            !gaveYellow && gaveRed -> npcl(FaceAnim.FRIENDLY, "You don't have any dye with you.").also { stage = 11 }
+                             gaveYellow && !gaveRed -> npcl(FaceAnim.FRIENDLY, "You don't have any dye with you.").also { stage = 10 }
+                             !gaveYellow && gaveRed -> npcl(FaceAnim.FRIENDLY, "You don't have any dye with you.").also { stage = 11 }
                         }
                     }
                 }
-
                 6 -> {
                     npcl(FaceAnim.FRIENDLY, "That's the last of it!")
                     setQuestStage(player, Quests.ENLIGHTENED_JOURNEY, 7)
                     stage = 28
                 }
-                7 -> npcl(FaceAnim.FRIENDLY, "I still need red dye for the balloon.").also { stage = 3 }
-                8 -> npcl(FaceAnim.FRIENDLY, "I still need yellow dye for the balloon.").also { stage = 3 }
-                9 -> npcl(FaceAnim.FRIENDLY, "I need red and yellow dye for the balloon.").also { stage = 3 }
-                10 -> npcl(FaceAnim.FRIENDLY, "I still need red dye for the balloon.").also { stage = 3 }
-                11 -> npcl(FaceAnim.FRIENDLY, "I still need yellow dye for the balloon.").also { stage = 3 }
-
+                7 -> npcl(FaceAnim.FRIENDLY, "I still need red dye for the balloon.").also { stage = END_DIALOGUE }
+                8 -> npcl(FaceAnim.FRIENDLY, "I still need yellow dye for the balloon.").also { stage = END_DIALOGUE }
+                9 -> npcl(FaceAnim.FRIENDLY, "I need red and yellow dye for the balloon.").also { stage = END_DIALOGUE }
+                10 -> npcl(FaceAnim.FRIENDLY, "I still need red dye for the balloon.").also { stage = END_DIALOGUE }
+                11 -> npcl(FaceAnim.FRIENDLY, "I still need yellow dye for the balloon.").also { stage = END_DIALOGUE }
                 12 -> {
                     val neededSandbags = 8
                     if (hasGiven(player, "ej-sandbags")) {
@@ -302,8 +314,7 @@ class AugusteDialogue(player: Player? = null) : Dialogue(player) {
                     }
                 }
                 13 -> npcl(FaceAnim.FRIENDLY, "Sandbags can be made by getting empty sacks and filling them at the sandpit here on Entrana.").also { stage++ }
-                14 -> npcl(FaceAnim.FRIENDLY, "However, there are other sand pits around the world that will work as well.").also { stage = 3 }
-
+                14 -> npcl(FaceAnim.FRIENDLY, "However, there are other sand pits around the world that will work as well.").also { stage = END_DIALOGUE }
                 15 -> {
                     val neededSilk = 10
                     if (hasGiven(player, "ej-silk")) {
@@ -316,28 +327,23 @@ class AugusteDialogue(player: Player? = null) : Dialogue(player) {
                         setGiven(player, "ej-silk")
                         npcl(FaceAnim.FRIENDLY, "Silk for the balloon, thank you.").also { stage = 3 }
                     } else {
-                        npcl(FaceAnim.FRIENDLY, "You don't have enough silk. Please bring me ten pieces.").also { stage = 3 }
+                        npcl(FaceAnim.FRIENDLY, "You don't have enough silk. Please bring me ten pieces.").also { stage = END_DIALOGUE }
                     }
                 }
-
                 16 -> {
-                    val alreadyGivenBowl = hasGiven(player, "ej-bowl")
-                    if (alreadyGivenBowl) {
+                    if (hasGiven(player, "ej-bowl")) {
                         npcl(FaceAnim.FRIENDLY, "You have already given the bowl.").also { stage = 3 }
                     } else if (inInventory(player, Items.UNFIRED_BOWL_1792, 1)) {
                         npc(FaceAnim.SAD, "What am I supposed to do with a note?? I can't make ", "a baloon from notes!")
                         stage = END_DIALOGUE
                     } else if (!hasBowl) {
-                        npcl(FaceAnim.FRIENDLY, "I need a plain clay-fired bowl; they're quite easy to come by.").also { stage = 3 }
-                    } else if (hasGiven(player, "ej-dye") && hasGiven(player, "ej-sandbags") && hasGiven(player, "ej-silk")) {
+                        npcl(FaceAnim.FRIENDLY, "I need a plain clay-fired bowl; they're quite easy to come by.").also { stage = END_DIALOGUE }
+                    } else {
                         removeItem(player, Item(Items.UNFIRED_BOWL_1791, 1))
                         setGiven(player, "ej-bowl")
-                        npcl(FaceAnim.FRIENDLY, "Ah the bowl. This will be used to hold the fuel while it heats the air in the balloon.").also { stage = 6 }
-                    } else {
-                        npcl(FaceAnim.FRIENDLY, "You must bring me the dyes, sandbags and silk before I can accept the bowl.").also { stage = 3 }
+                        npcl(FaceAnim.FRIENDLY, "Ah the bowl. This will be used to hold the fuel while it heats the air in the balloon.").also { stage = 3 }
                     }
                 }
-
                 17 -> npcl(FaceAnim.FRIENDLY, "What do you need help with?").also { stage++ }
                 18 -> showTopics(
                     Topic("Dye", 19, true),
@@ -393,7 +399,7 @@ class AugusteDialogue(player: Player? = null) : Dialogue(player) {
                 3 -> npcl(FaceAnim.FRIENDLY, "It will cost you 30,000 gold coins to replace it, do you want to pay that?").also { stage++ }
                 4 -> options("Yes.", "No way!").also { stage++ }
                 5 -> when (buttonID) {
-                    1 -> playerl(FaceAnim.FRIENDLY, "Yes.").also { stage = 6 }
+                    1 -> playerl(FaceAnim.FRIENDLY, "Yes.").also { stage++ }
                     2 -> playerl(FaceAnim.FRIENDLY, "No way!").also { stage = END_DIALOGUE }
                 }
                 6 -> if (!hasSapling && !removeItem(player, Item(Items.COINS_995, 30000))) {
@@ -401,16 +407,14 @@ class AugusteDialogue(player: Player? = null) : Dialogue(player) {
                 } else if (freeSlots(player) < 2) {
                     npcl(FaceAnim.FRIENDLY, "Looks like you don't have enough room in your inventory for the basket and the sapling. Come back when you do.").also { stage = END_DIALOGUE }
                 } else if (!hasSapling && removeItem(player, Item(Items.COINS_995, 30000))) {
-                    npcl(FaceAnim.FRIENDLY, "Here you go. Now be very careful not to lose it again!").also { stage = 7 }
+                    end()
+                    npcl(FaceAnim.FRIENDLY, "Here you go. Now be very careful not to lose it again!")
+                    addItemOrDrop(player, Items.AUGUSTES_SAPLING_9932, 1)
+                    addItemOrDrop(player, Items.APPLES5_5386, 1)
                 } else {
                     npcl(FaceAnim.FRIENDLY, "You already have one! Don't be greedy.").also { stage = END_DIALOGUE }
                 }
-                7 -> {
-                    end()
-                    addItemOrDrop(player, Items.AUGUSTES_SAPLING_9932)
-                    npcl(FaceAnim.FRIENDLY, "Use the willow sapling I gave you to grow a willow tree. Cut twelve branches from it using secateurs. Use the branches on the platform here.")
-                    stage = END_DIALOGUE
-                }
+                7 -> npcl(FaceAnim.FRIENDLY, "Use the willow sapling I gave you to grow a willow tree. Cut twelve branches from it using secateurs. Use the branches on the platform here.").also { stage = END_DIALOGUE }
             }
 
             8 -> when (stage) {
@@ -512,9 +516,8 @@ class AugusteDialogue(player: Player? = null) : Dialogue(player) {
         return true
     }
 
-    fun hasGiven(player: Player, key: String) = getAttribute(player, key, false)
-    fun setGiven(player: Player, key: String) = setAttribute(player, key, true)
-    fun clearGiven(player: Player, key: String) = removeAttribute(player, key)
+    private fun hasGiven(player: Player, key: String) = getAttribute(player, key, false)
+    private fun setGiven(player: Player, key: String) = setAttribute(player, "/save:$key", true)
 
     override fun getIds(): IntArray = intArrayOf(NPCs.AUGUSTE_5049)
 }

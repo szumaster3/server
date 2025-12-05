@@ -18,6 +18,7 @@ import core.plugin.Plugin
 import core.tools.RandomFunction
 import shared.consts.Animations
 import shared.consts.Items
+import shared.consts.Regions
 
 /**
  * Represents the Desert zone.
@@ -33,33 +34,33 @@ class DesertZone : MapZone(DESERT_ZONE, true), Plugin<Any?> {
     override fun fireEvent(identifier: String, vararg args: Any): Any? = null
 
     override fun configure() {
-        register(getRegionBorders(12589))
-        register(getRegionBorders(12590))
-        register(getRegionBorders(12591))
-        register(getRegionBorders(12843))
-        register(getRegionBorders(12844))
-        register(getRegionBorders(12845))
-        register(getRegionBorders(12847))
-        register(getRegionBorders(12848))
-        register(getRegionBorders(13100))
-        register(getRegionBorders(13101))
-        register(getRegionBorders(13102))
-        register(getRegionBorders(13103))
-        register(getRegionBorders(13355))
-        register(getRegionBorders(13356))
-        register(getRegionBorders(13357))
-        register(getRegionBorders(13359))
-        register(getRegionBorders(13360))
-        register(getRegionBorders(13361))
-        register(getRegionBorders(13611))
-        register(getRegionBorders(13612))
-        register(getRegionBorders(13613))
-        register(getRegionBorders(13614))
-        register(getRegionBorders(13615))
-        register(getRegionBorders(13616))
-        register(getRegionBorders(13617))
-        register(getRegionBorders(13872))
-        register(getRegionBorders(13873))
+        register(getRegionBorders(Regions.DESERT_12589))
+        register(getRegionBorders(Regions.DESERT_BANDITS_12590))
+        register(getRegionBorders(Regions.DESERT_12591))
+        register(getRegionBorders(Regions.DESERT_12843))
+        register(getRegionBorders(Regions.DESERT_12844))
+        register(getRegionBorders(Regions.DESERT_12845))
+        register(getRegionBorders(Regions.DESERT_12847))
+        register(getRegionBorders(Regions.DESERT_12848))
+        register(getRegionBorders(Regions.DESERT_13100))
+        register(getRegionBorders(Regions.DESERT_13101))
+        register(getRegionBorders(Regions.DESERT_13102))
+        register(getRegionBorders(Regions.DESERT_13103))
+        register(getRegionBorders(Regions.DESERT_13355))
+        register(getRegionBorders(Regions.DESERT_13356))
+        register(getRegionBorders(Regions.DESERT_13357))
+        register(getRegionBorders(Regions.DESERT_13359))
+        register(getRegionBorders(Regions.DESERT_13360))
+        register(getRegionBorders(Regions.DESERT_13361))
+        register(getRegionBorders(Regions.DESERT_13611))
+        register(getRegionBorders(Regions.DESERT_13612))
+        register(getRegionBorders(Regions.DESERT_13613))
+        register(getRegionBorders(Regions.DESERT_13614))
+        register(getRegionBorders(Regions.DESERT_13615))
+        register(getRegionBorders(Regions.DESERT_13616))
+        register(getRegionBorders(Regions.DESERT_13617))
+        register(getRegionBorders(Regions.DESERT_13872))
+        register(getRegionBorders(Regions.DESERT_13873))
         register(ZoneBorders(3264, 3072, 3327, 3116))
         pulse.stop()
     }
