@@ -130,7 +130,7 @@ class EvilBobPlugin :
 
                         2 -> {
                             sendMessage(player, "Welcome back to ${GameWorld.settings!!.name}.")
-                            teleport(player, getAttribute(player, RandomEvent.save(), Location.create(3222, 3219, 0)), TeleportManager.TeleportType.NORMAL)
+                            teleport(player, getAttribute(player, RandomEvent.save(), Location.create(3222, 3219, 0)), TeleportManager.TeleportType.RANDOM_EVENT_OLD)
                             EvilBobUtils.cleanup(player)
                             EvilBobUtils.reward(player)
                             return@queueScript delayScript(player, 2)

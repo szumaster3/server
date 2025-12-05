@@ -53,6 +53,8 @@ object EvilBobUtils {
      * @param player The player.
      */
     fun cleanup(player: Player) {
+        if(inInventory(player, Items.SMALL_FISHING_NET_303))
+            removeItem(player, Items.SMALL_FISHING_NET_303)
         player.locks.unlockTeleport()
         player.properties.teleportLocation = getAttribute(player, RandomEvent.save(), null)
         removeAttributes(
@@ -65,7 +67,6 @@ object EvilBobUtils {
             GameAttributes.RE_BOB_DIAL_INDEX,
             GameAttributes.RE_BOB_START,
         )
-        removeItem(player, Items.SMALL_FISHING_NET_303)
         removeAll(player, Items.FISHLIKE_THING_6202)
         removeAll(player, Items.FISHLIKE_THING_6202, Container.BANK)
         removeAll(player, Items.FISHLIKE_THING_6206)

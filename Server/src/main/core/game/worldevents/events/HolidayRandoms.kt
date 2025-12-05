@@ -57,8 +57,10 @@ class HolidayRandoms :
             entity.timers.removeTimer(this)
             return
         }
-
         val player = entity.asPlayer()
+        if(getVarp(player,281) < 1000 || player.isArtificial){
+            return
+        }
         when (checkIfHoliday()) {
             "halloween" -> {
                 sendMessage(player, colorize("%OA chill goes down your spine..."))
