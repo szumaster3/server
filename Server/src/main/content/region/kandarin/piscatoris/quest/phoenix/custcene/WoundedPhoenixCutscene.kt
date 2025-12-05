@@ -1,6 +1,7 @@
 package content.region.kandarin.piscatoris.quest.phoenix.custcene
 
 import content.region.kandarin.piscatoris.quest.phoenix.InPyreNeed
+import core.api.resetAnimator
 import core.api.setVarbit
 import core.game.activity.Cutscene
 import core.game.node.entity.player.Player
@@ -28,6 +29,7 @@ class WoundedPhoenixCutscene(
 
             1 -> {
                 teleport(player, 13, 20)
+                resetAnimator(player)
                 moveCamera(11, 16, 400)
                 rotateCamera(20, 9, 300)
                 timedUpdate(2)

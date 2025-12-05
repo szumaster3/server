@@ -1,6 +1,7 @@
 package content.region.kandarin.piscatoris.quest.phoenix.custcene
 
 import content.region.kandarin.piscatoris.quest.phoenix.InPyreNeed
+import core.api.resetAnimator
 import core.api.sendGraphics
 import core.api.setVarbit
 import core.game.activity.Cutscene
@@ -22,6 +23,7 @@ class FuneralPyreCutscene(player: Player) : Cutscene(player) {
         when (stage) {
             0 -> {
                 teleport(player, 13, 20, 0)
+                resetAnimator(player)
                 timedUpdate(2)
             }
 

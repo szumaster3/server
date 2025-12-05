@@ -1,6 +1,7 @@
 package content.global.activity.phoenix
 
 import core.api.registerLogoutListener
+import core.api.resetAnimator
 import core.api.sendGraphics
 import core.game.activity.Cutscene
 import core.game.node.entity.player.Player
@@ -24,6 +25,7 @@ class SpawnPhoenix (player: Player) : Cutscene(player) {
         {
             0 -> {
                 teleport(player, 13, 20, 0)
+                resetAnimator(player)
                 timedUpdate(2)
             }
             1 -> {
