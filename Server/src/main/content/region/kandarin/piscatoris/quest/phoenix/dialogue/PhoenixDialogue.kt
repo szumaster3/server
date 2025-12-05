@@ -20,12 +20,17 @@ class PhoenixDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any): Boolean {
         npc = args[0] as NPC
+        val activityReward = getAttribute(player, GameAttributes.PHOENIX_LAIR_ACTIVITY_REWARD, false)
         if (isQuestComplete(player, Quests.IN_PYRE_NEED)) {
             npcl(FaceAnim.OLD_NORMAL, "(Welcome back, " + player.username + ". It is good to see you are enthusiastic, as ever. Heh heh heh!)")
             stage = 40
+        } else if(activityReward){
+            sendItemDialogue(player, Items.PHOENIX_QUILL_14616, "The phoenix plucks five large quills from its wings and gives them to you.")
+            removeAttribute(player, GameAttributes.PHOENIX_LAIR_ACTIVITY_REWARD)
+            addItemOrDrop(player, Items.PHOENIX_QUILL_14616, 5)
+            stage = 35
         } else {
             player(FaceAnim.SCARED, "H...hello?")
-            stage = 0
         }
         return true
     }
@@ -287,6 +292,11 @@ class PhoenixDialogue(player: Player? = null) : Dialogue(player) {
                 player(FaceAnim.FRIENDLY, "Farewell!")
                 setVarbit(player, Vars.VARBIT_QUEST_IN_PYRE_NEED_PROGRESS_5761, 10, true)
                 stage = END_DIALOGUE
+            }
+
+            35 -> {
+                npcl(FaceAnim.OLD_NORMAL, "(Welcome back, " + player.username + ". It is good to see you are enthusiastic, as ever. Heh heh heh!)")
+                stage = 41
             }
 
             40 -> {

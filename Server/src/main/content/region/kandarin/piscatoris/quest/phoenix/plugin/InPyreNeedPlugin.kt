@@ -1,11 +1,15 @@
 package content.region.kandarin.piscatoris.quest.phoenix.plugin
 
+import com.google.gson.JsonObject
 import content.data.GameAttributes
+import content.global.activity.phoenix.SpawnPhoenix
 import content.region.kandarin.piscatoris.quest.phoenix.InPyreNeed
 import content.region.kandarin.piscatoris.quest.phoenix.custcene.FuneralPyreCutscene
 import content.region.kandarin.piscatoris.quest.phoenix.custcene.GetLostCutscene
 import content.region.kandarin.piscatoris.quest.phoenix.custcene.WoundedPhoenixCutscene
 import content.region.kandarin.piscatoris.quest.phoenix.dialogue.PhoenixEgglingDialogue
+import core.ServerStore
+import core.ServerStore.Companion.getBoolean
 import core.api.*
 import core.api.utils.PlayerCamera
 import core.game.dialogue.FaceAnim
@@ -198,22 +202,49 @@ class InPyreNeedPlugin : InteractionListener {
          */
 
         onUseWith(IntType.SCENERY, InPyreNeed.RIBBON_ID, Scenery.PYRE_41908) { player, _, _ ->
-            if (getVarbit(player, Vars.VARBIT_QUEST_IN_PYRE_NEED_PROGRESS_5761) >= 5) {
-                animate(
-                    player, if (inInventory(
-                            player, Items.MAGIC_SECATEURS_7409
-                        )
-                    ) Animations.PRUNE_WITH_MAGIC_SECATEURS_11089 else Animations.PRUNE_WITH_SECATEURS_11088
-                )
-                sendMessage(
-                    player, "You weave a large basket from the five wooden ribbons and add it to the pyre base."
-                )
-                InPyreNeed.RIBBON_ID.forEach {
-                    removeItem(player, Item(it, 1), Container.INVENTORY)
+            if (!isQuestComplete(player, Quests.IN_PYRE_NEED)) {
+                val progress = getVarbit(player, Vars.VARBIT_QUEST_IN_PYRE_NEED_PROGRESS_5761)
+                if (progress < 5) {
+                    sendMessage(player, "Nothing interesting happens.")
+                    return@onUseWith true
                 }
+            } else {
+                if (getStoreFile().getBoolean(player.username.lowercase())) {
+                    sendMessage(player, "This can only be done once per day.")
+                    return@onUseWith true
+                }
+            }
 
+            val missingRibbon = InPyreNeed.RIBBON_ID.firstOrNull { !inInventory(player, it) }
+            if (missingRibbon != null) {
+                sendMessage(player, "You need all 5 types of wooden ribbons to weave the basket.")
+                return@onUseWith true
+            }
+
+            val anim = if (inInventory(player, Items.MAGIC_SECATEURS_7409))
+                Animations.PRUNE_WITH_MAGIC_SECATEURS_11089
+            else
+                Animations.PRUNE_WITH_SECATEURS_11088
+
+            animate(player, anim)
+            sendMessage(player, "You weave a large basket from the five wooden ribbons and add it to the pyre base.")
+
+            for (ribbonId in InPyreNeed.RIBBON_ID) {
+                if (inInventory(player, ribbonId)) {
+                    removeItem(player, Item(ribbonId, 1), Container.INVENTORY)
+                } else {
+                    sendMessage(player, "You need all types of wooden ribbons.")
+                    return@onUseWith true
+                }
+            }
+
+            if (isQuestComplete(player, Quests.IN_PYRE_NEED) && !getAttribute(player, "phoenix-spawned", false)) {
+                setAttribute(player, "phoenix-spawned", true)
+                SpawnPhoenix(player).start(true)
+            } else {
                 WoundedPhoenixCutscene(player).start(true)
             }
+
             return@onUseWith true
         }
 
@@ -222,15 +253,29 @@ class InPyreNeedPlugin : InteractionListener {
          */
 
         onUseWith(IntType.SCENERY, Items.TINDERBOX_590, Scenery.PYRE_41908) { player, _, _ ->
+            if(isQuestComplete(player, Quests.IN_PYRE_NEED))
+                return@onUseWith true
+
             if (getStatLevel(player, Skills.FIREMAKING) < 55) {
                 sendMessage(player, "You need at least 55 Firemaking to light the funeral pyre.")
                 return@onUseWith true
             }
-            if (getVarbit(player, Vars.VARBIT_QUEST_IN_PYRE_NEED_PROGRESS_5761) >= 5) {
-                lock(player, 3)
-                animate(player, Animations.HUMAN_LIGHT_FIRE_WITH_TINDERBOX_733)
-                FuneralPyreCutscene(player).start()
+
+            val progress = getVarbit(player, Vars.VARBIT_QUEST_IN_PYRE_NEED_PROGRESS_5761)
+            if (progress < 5) {
+                sendMessage(player, "You are not ready to light the pyre yet.")
+                return@onUseWith true
             }
+
+            lock(player, 3)
+            animate(player, Animations.HUMAN_LIGHT_FIRE_WITH_TINDERBOX_733)
+
+            InPyreNeed.RIBBON_ID.forEach { ribbonId ->
+                removeItem(player, Item(ribbonId, 1), Container.INVENTORY)
+            }
+
+            FuneralPyreCutscene(player).start()
+
             return@onUseWith true
         }
 
@@ -342,5 +387,9 @@ class InPyreNeedPlugin : InteractionListener {
             }
             return@on true
         }
+    }
+
+    companion object {
+        private fun getStoreFile(): JsonObject = ServerStore.getArchive("daily-phoenix-lair-activity")
     }
 }

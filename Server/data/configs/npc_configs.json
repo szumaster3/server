@@ -130414,6 +130414,7 @@
   },
   {
     "examine": "Goodness, gracious, great bird of fire!",
+    "combat_style": "2",
     "melee_animation": "11076",
     "range_animation": "11076",
     "attack_speed": "6",
@@ -130422,7 +130423,7 @@
     "defence_animation": "11077",
     "weakness": "9",
     "magic_animation": "11076",
-    "death_animation": "11078",
+    "death_animation": "11108",
     "defence_level": "60",
     "poison_immune": "true",
     "name": "Phoenix",
