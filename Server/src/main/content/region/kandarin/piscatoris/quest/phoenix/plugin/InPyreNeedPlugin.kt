@@ -109,6 +109,9 @@ class InPyreNeedPlugin : InteractionListener {
 
             if (InPyreNeed.CHANCE_TO_RECEIVE_PET == 0) {
                 val largeEgg = core.game.node.entity.npc.NPC.create(NPCs.LARGE_EGG_8552, Location.create(3567, 5230, 0))
+                registerLogoutListener(player, "large-egg") {
+                    largeEgg.clear()
+                }
                 largeEgg.init()
                 LostCutscene(player).start()
                 return@on true
