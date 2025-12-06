@@ -1,7 +1,7 @@
 package content.global.activity.warriors_guild.plugin
 
 import content.global.activity.warriors_guild.dialogue.ClaimTokenDialogue
-import content.global.activity.warriors_guild.plugin.rooms.CatapultRoomPlugin
+import content.global.activity.warriors_guild.plugin.room.CatapultRoomPlugin
 import core.api.*
 import core.game.component.Component
 import core.game.container.impl.EquipmentContainer

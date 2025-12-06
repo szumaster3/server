@@ -1,4 +1,4 @@
-package content.global.activity.warriors_guild.plugin.rooms
+package content.global.activity.warriors_guild.plugin.room
 
 import core.api.animate
 import core.api.removeAttribute
