@@ -2,7 +2,7 @@ package content.global.activity.phoenix
 
 import core.api.registerLogoutListener
 import core.api.resetAnimator
-import core.api.sendGraphics
+import core.api.visualize
 import core.game.activity.Cutscene
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.TeleportManager
@@ -30,8 +30,7 @@ class SpawnPhoenix (player: Player) : Cutscene(player) {
             }
             1 -> {
                 rotateCamera(16, 13)
-                //sendGraphics(1982, Location.create(398, 13))
-                sendGraphics(1982, getNPC(PHOENIX)!!.location)
+                visualize(getNPC(PHOENIX)!!, -1, 1982)
                 timedUpdate(6)
             }
 

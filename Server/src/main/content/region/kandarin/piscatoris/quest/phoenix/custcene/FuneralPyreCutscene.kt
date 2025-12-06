@@ -4,12 +4,14 @@ import content.region.kandarin.piscatoris.quest.phoenix.InPyreNeed
 import core.api.resetAnimator
 import core.api.sendGraphics
 import core.api.setVarbit
+import core.api.visualize
 import core.game.activity.Cutscene
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.TeleportManager
 import core.game.world.map.Direction
 import core.game.world.map.Location
 import shared.consts.NPCs
+import shared.consts.Regions
 
 class FuneralPyreCutscene(player: Player) : Cutscene(player) {
 
@@ -31,28 +33,30 @@ class FuneralPyreCutscene(player: Player) : Cutscene(player) {
                 rotateCamera(16, 23, 1)
                 moveCamera(13, 16, 600, 1)
                 setVarbit(player, 5774, 3, true)
-                sendGraphics(1978, getNPC(PHOENIX)!!.location)
+                visualize(getNPC(PHOENIX)!!, -1, 1978)
                 timedUpdate(6)
             }
 
             2 -> {
                 moveCamera(12, 18, 600, 1)
                 rotateCamera(16, 13, 300, 1)
-                timedUpdate(6)
+                getNPC(PHOENIX)!!.transform(NPCs.PHOENIX_8548)
+                // Inside
+                teleport(getNPC(PHOENIX)!!, 15, 14)
+                visualize(getNPC(PHOENIX)!!, 11072, 1983)
+                timedUpdate(3)
             }
 
             3 -> {
+                visualize(getNPC(PHOENIX)!!, -1, 1984)
                 rotateCamera(14, 15, 300, 1)
-                teleport(getNPC(PHOENIX)!!, 15, 14)
-                // Inside
-                getNPC(PHOENIX)!!.transform(NPCs.PHOENIX_8548)
                 // Outside
                 InPyreNeed.WOUNDED_PHOENIX_ID.transform(NPCs.PHOENIX_8548)
                 InPyreNeed.WOUNDED_PHOENIX_ID.teleporter.send(
                     Location.create(3535, 5198, 0), TeleportManager.TeleportType.INSTANT
                 )
                 setVarbit(player, 5774, 4, true)
-                timedUpdate(1)
+                timedUpdate(3)
             }
 
             4 -> {
@@ -66,6 +70,6 @@ class FuneralPyreCutscene(player: Player) : Cutscene(player) {
 
     companion object {
         private const val PHOENIX = NPCs.WOUNDED_PHOENIX_8547
-        private const val REGION = 14161
+        private const val REGION = Regions.PHOENIX_LAIR_14161
     }
 }

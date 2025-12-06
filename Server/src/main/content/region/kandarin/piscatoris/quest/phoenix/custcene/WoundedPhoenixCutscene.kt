@@ -9,11 +9,11 @@ import core.game.node.entity.player.link.TeleportManager
 import core.game.world.map.Direction
 import core.game.world.map.Location
 import shared.consts.NPCs
+import shared.consts.Regions
 import shared.consts.Vars
 
-class WoundedPhoenixCutscene(
-    player: Player,
-) : Cutscene(player) {
+class WoundedPhoenixCutscene(player: Player) : Cutscene(player) {
+
     override fun setup() {
         setExit(Location.create(3533, 5204, 0))
         loadRegion(REGION)
@@ -68,6 +68,6 @@ class WoundedPhoenixCutscene(
 
     companion object {
         private const val PHOENIX = NPCs.WOUNDED_PHOENIX_8547
-        private const val REGION = 14161
+        private const val REGION = Regions.PHOENIX_LAIR_14161
     }
 }

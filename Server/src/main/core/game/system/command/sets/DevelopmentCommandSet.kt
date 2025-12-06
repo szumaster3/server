@@ -3,9 +3,12 @@ package core.game.system.command.sets
 import content.data.GameAttributes
 import content.data.RespawnPoint
 import content.global.activity.jobs.JobManager
+import content.global.activity.phoenix.SpawnPhoenix
 import content.global.skill.summoning.SummoningPouch
 import content.region.other.tutorial_island.plugin.TutorialStage
 import content.region.kandarin.baxtorian.BarbarianTraining
+import content.region.kandarin.piscatoris.quest.phoenix.custcene.FuneralPyreCutscene
+import content.region.kandarin.piscatoris.quest.phoenix.custcene.WoundedPhoenixCutscene
 import core.api.*
 import core.cache.def.impl.NPCDefinition
 import core.cache.def.impl.VarbitDefinition
@@ -35,6 +38,16 @@ import shared.consts.Items
 class DevelopmentCommandSet : CommandSet(Privilege.ADMIN) {
 
     override fun defineCommands() {
+
+        define("phoenix1",privilege = Privilege.ADMIN)  { player, args ->
+            WoundedPhoenixCutscene(player).start()
+        }
+        define("phoenix2",privilege = Privilege.ADMIN)  { player, args ->
+            FuneralPyreCutscene(player).start()
+        }
+        define("phoenix3",privilege = Privilege.ADMIN)  { player, args ->
+            SpawnPhoenix(player).start()
+        }
 
         /*
          * Command for allowing to load a dynamic region and move to it.

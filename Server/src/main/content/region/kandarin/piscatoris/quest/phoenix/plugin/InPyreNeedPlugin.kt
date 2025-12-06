@@ -5,7 +5,7 @@ import content.data.GameAttributes
 import content.global.activity.phoenix.SpawnPhoenix
 import content.region.kandarin.piscatoris.quest.phoenix.InPyreNeed
 import content.region.kandarin.piscatoris.quest.phoenix.custcene.FuneralPyreCutscene
-import content.region.kandarin.piscatoris.quest.phoenix.custcene.GetLostCutscene
+import content.region.kandarin.piscatoris.quest.phoenix.custcene.LostCutscene
 import content.region.kandarin.piscatoris.quest.phoenix.custcene.WoundedPhoenixCutscene
 import content.region.kandarin.piscatoris.quest.phoenix.dialogue.PhoenixEgglingDialogue
 import core.ServerStore
@@ -110,7 +110,7 @@ class InPyreNeedPlugin : InteractionListener {
             if (InPyreNeed.CHANCE_TO_RECEIVE_PET == 0) {
                 val largeEgg = core.game.node.entity.npc.NPC.create(NPCs.LARGE_EGG_8552, Location.create(3567, 5230, 0))
                 largeEgg.init()
-                GetLostCutscene(player).start()
+                LostCutscene(player).start()
                 return@on true
             }
 
