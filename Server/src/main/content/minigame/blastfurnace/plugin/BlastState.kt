@@ -43,13 +43,13 @@ class BlastState {
     var ticksElapsed = 0
 
     /**
-     * Current stove temperature (0–100).
+     * Current stove temperature (0-100).
      */
     var stoveTemp = 0
         private set
 
     /**
-     * Current furnace temperature (0–100).
+     * Current furnace temperature (0-100).
      */
     var furnaceTemp = 0
         private set

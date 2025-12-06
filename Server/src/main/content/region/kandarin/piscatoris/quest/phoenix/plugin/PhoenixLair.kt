@@ -32,7 +32,6 @@ class PhoenixLair : MapArea {
 
     init {
         respawnTreesGlobal()
-        // InPyreNeed.WOUNDED_PHOENIX_ID.init()
     }
 
 
@@ -66,9 +65,9 @@ class PhoenixLair : MapArea {
 
         if (!isQuestComplete(player, Quests.IN_PYRE_NEED)) {
 
-            if (!spawnedNPC.any { it.id == InPyreNeed.WOUNDED_PHOENIX_ID.id })
-            {
+            if (!spawnedNPC.any { it.id == InPyreNeed.WOUNDED_PHOENIX_ID.id }) {
                 val wounded = InPyreNeed.WOUNDED_PHOENIX_ID
+
                 wounded.apply {
                     isNeverWalks = true
                     isWalks = false
@@ -77,7 +76,6 @@ class PhoenixLair : MapArea {
                 }
 
                 wounded.init()
-
                 registerLogoutListener(player, InPyreNeed.LOGOUT_LISTENER) {
                     wounded.clear()
                     spawnedNPC.remove(wounded)
@@ -87,13 +85,16 @@ class PhoenixLair : MapArea {
             }
         }
 
-        if(getAttribute(player, GameAttributes.PHOENIX_LAIR_ACTIVITY_REWARD, false)) {
-            val npc = NPC.create(NPCs.PHOENIX_8548,Location.create(3536, 5197, 0))
-            registerLogoutListener(player, InPyreNeed.LOGOUT_LISTENER) {
-                npc.clear()
+        if (getAttribute(player, GameAttributes.PHOENIX_LAIR_ACTIVITY_REWARD, false)) {
+            if (!spawnedNPC.any { it.id == NPCs.PHOENIX_8548 }) {
+
+                val rewardNPC = NPC.create(NPCs.PHOENIX_8548, Location.create(3536, 5197, 0))
+
+                rewardNPC.init()
+                spawnedNPC.add(rewardNPC)
             }
-            npc.init()
         }
+
 
         val npcIdsToSpawn = if (!isQuestComplete(player, Quests.IN_PYRE_NEED)) {
             listOf(
@@ -126,7 +127,7 @@ class PhoenixLair : MapArea {
             spawnedNPC.add(npc)
         }
 
-        player.incrementAttribute(GameAttributes.PHOENIX_LAIR_VISITED)
+        player.setAttribute(GameAttributes.PHOENIX_LAIR_VISITED, true)
     }
 
     override fun areaLeave(entity: Entity, logout: Boolean) {

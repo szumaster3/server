@@ -230,7 +230,7 @@ class LottieDialogue(player: Player? = null) : Dialogue(player) {
             25 -> {
                 npcl(
                     FaceAnim.NEUTRAL,
-                    "Well, if you'd use your eyes, you could tell it is – I know this is going to be difficult to believe – A basement."
+                    "Well, if you'd use your eyes, you could tell it is - I know this is going to be difficult to believe - A basement."
                 )
                 stage++
             }

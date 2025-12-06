@@ -34,23 +34,16 @@ class InPyreNeedPlugin : InteractionListener {
             val familiar = player.familiarManager.familiar
 
             if (player.familiarManager.hasFamiliar() && familiar != null) {
-                if (familiar.id == NPCs.PHOENIX_8575 || familiar.id == NPCs.PHOENIX_8576) {
-                    sendNPCDialogue(
-                        player,
-                        familiar.id,
-                        "${player.username}, this is my lair. You must dismiss my summoned form if you wish to enter; I will only duel you when I am at full strength.",
-                        FaceAnim.FAMILIAR_NEUTRAL
-                    )
-                    return@on true
-                }
-                if (familiar.id == NPCs.PHOENIX_EGGLING_8577 || familiar.id == NPCs.PHOENIX_EGGLING_8578) {
-                    sendNPCDialogue(
-                        player,
-                        familiar.id,
-                        "Why am you bringing me here? I no want to see you fight my mummy! Put me in your bag if you want to go in.",
-                        FaceAnim.FAMILIAR_NEUTRAL
-                    )
-                    return@on true
+                when (familiar.id) {
+                    NPCs.PHOENIX_8575, NPCs.PHOENIX_8576 -> {
+                        sendNPCDialogue(player, familiar.id, "${player.username}, this is my lair. You must dismiss my summoned form if you wish to enter; I will only duel you when I am at full strength.", FaceAnim.FAMILIAR_NEUTRAL)
+                        return@on true
+                    }
+
+                    NPCs.PHOENIX_EGGLING_8577, NPCs.PHOENIX_EGGLING_8578 -> {
+                        sendNPCDialogue(player, familiar.id, "Why am you bringing me here? I no want to see you fight my mummy! Put me in your bag if you want to go in.", FaceAnim.FAMILIAR_NEUTRAL)
+                        return@on true
+                    }
                 }
             }
 
@@ -69,80 +62,72 @@ class InPyreNeedPlugin : InteractionListener {
          * Handles random cave teleportation logic.
          */
 
-        on(
-            intArrayOf(Scenery.CAVE_ENTRANCE_41901, Scenery.CAVE_ENTRANCE_41902), IntType.SCENERY, "look-at", "enter"
-        ) { player, _ ->
-            val locations = arrayOf(
+        on(intArrayOf(Scenery.CAVE_ENTRANCE_41901, Scenery.CAVE_ENTRANCE_41902), IntType.SCENERY, "look-at", "enter") { player, _ ->
+            val caveLocations = arrayOf(
                 Location.create(3466, 5213, 0),
                 Location.create(3493, 5186, 0), // Sassafras
                 Location.create(3543, 5218, 0),
                 Location.create(3476, 5186, 0),
-                Location.create(3516, 5224, 0), // Authentic
+                Location.create(3516, 5224, 0) // Authentic
             )
+
+            fun crawlIntoCave(targetLocation: Location) {
+                lock(player, 3)
+                openInterface(player, Components.FADE_TO_BLACK_120)
+                player.animate(Animation.create(Animations.HUMAN_CRAWL_INTO_CAVE_11042), 1)
+                queueScript(player, 3, QueueStrength.SOFT) {
+                    teleport(player, targetLocation)
+                    resetAnimator(player)
+                    openInterface(player, Components.FADE_FROM_BLACK_170)
+                    return@queueScript stopExecuting(player)
+                }
+            }
 
             registerLogoutListener(player, InPyreNeed.LOGOUT_LISTENER) { p ->
                 player.location = InPyreNeed.CAVE_EXIT_LOCATION
             }
 
-            if (player.location == InPyreNeed.PHOENIX_CHAMBER || player.location == Location.create(3535, 5186, 0)) {
+            val inPhoenixChamber = player.location.equals(InPyreNeed.PHOENIX_CHAMBER) ||
+                    player.location.equals(Location.create(3535, 5186, 0))
+
+            if (inPhoenixChamber) {
                 setTitle(player, 2)
                 sendOptions(player, "Are you sure you want to leave?", "Yes", "No")
                 addDialogueAction(player) { _, button ->
                     val targetLocation = when (button) {
-                        2 -> Location(3566, 5224, 0).also { sendMessage(player, "You make your way back to the phoenix's roost.") }
-                        3 -> locations.random()
+                        2 -> {
+                            sendMessage(player, "You make your way back to the phoenix's roost.")
+                            if(player.location != Location.create(3566, 5224, 0)) Location(3566, 5224, 0) else Location.create(2294, 3626, 0)
+                        }
+                        3 -> caveLocations.random()
                         else -> null
                     }
-
-                    if (targetLocation != null) {
-                        lock(player, 3)
-                        openInterface(player, Components.FADE_TO_BLACK_120)
-                        player.animate(Animation.create(Animations.HUMAN_CRAWL_INTO_CAVE_11042), 1)
-                        queueScript(player, 3, QueueStrength.SOFT) {
-                            teleport(player, targetLocation)
-                            resetAnimator(player)
-                            openInterface(player, Components.FADE_FROM_BLACK_170)
-                            return@queueScript stopExecuting(player)
-                        }
-                    } else {
-                        closeDialogue(player)
-                    }
+                    targetLocation?.let { crawlIntoCave(it) } ?: closeDialogue(player)
                 }
                 return@on true
             }
 
             if (InPyreNeed.CHANCE_TO_RECEIVE_PET == 0) {
                 val largeEgg = core.game.node.entity.npc.NPC.create(NPCs.LARGE_EGG_8552, Location.create(3567, 5230, 0))
-                largeEgg.init().also {
-                    GetLostCutscene(player).start()
-                }
+                largeEgg.init()
+                GetLostCutscene(player).start()
                 return@on true
             }
 
             val newLocation = when {
-                getVarbit(
-                    player, Vars.VARBIT_QUEST_IN_PYRE_NEED_PROGRESS_5761
-                ) == 10 -> InPyreNeed.CAVE_EXIT_LOCATION
-
+                getVarbit(player, Vars.VARBIT_QUEST_IN_PYRE_NEED_PROGRESS_5761) == 10 -> InPyreNeed.CAVE_EXIT_LOCATION
                 allInInventory(player, *InPyreNeed.TWIG_ID) -> Location.create(3535, 5186, 0)
-                else -> locations.random()
+                else -> caveLocations.random()
             }
 
-            openInterface(player, Components.FADE_TO_BLACK_120)
-            player.animate(Animation.create(Animations.HUMAN_CRAWL_INTO_CAVE_11042), 1)
-            lock(player, 3)
-            queueScript(player, 3, QueueStrength.SOFT) {
-                teleport(player, newLocation)
-                if (newLocation == Location(3535, 5186, 0)) {
-                    player.musicPlayer?.let { music ->
-                        if (!music.hasUnlocked(Music.THE_PHOENIX_596)) {
-                            music.unlock(Music.THE_PHOENIX_596)
-                        }
+            crawlIntoCave(newLocation)
+
+            if (newLocation.equals(Location.create(3535, 5186, 0))) {
+                player.musicPlayer?.let { music ->
+                    if (!music.hasUnlocked(Music.THE_PHOENIX_596)) {
+                        music.unlock(Music.THE_PHOENIX_596)
                     }
                 }
-                resetAnimator(player)
-                openInterface(player, Components.FADE_FROM_BLACK_170)
-                return@queueScript stopExecuting(player)
             }
 
             return@on true
@@ -152,9 +137,7 @@ class InPyreNeedPlugin : InteractionListener {
          * Handles escaping from the Phoenix lair.
          */
 
-        on(
-            intArrayOf(Scenery.CAVE_ENTRANCE_41901, Scenery.CAVE_ENTRANCE_41902), IntType.SCENERY, "escape"
-        ) { player, _ ->
+        on(intArrayOf(Scenery.CAVE_ENTRANCE_41901, Scenery.CAVE_ENTRANCE_41902), IntType.SCENERY, "escape") { player, _ ->
             lock(player, 3)
             openInterface(player, Components.FADE_TO_BLACK_120)
             animate(player, Animations.HUMAN_CRAWL_INTO_CAVE_11042)
@@ -175,11 +158,7 @@ class InPyreNeedPlugin : InteractionListener {
 
         on(InPyreNeed.itemMap.keys.toIntArray(), IntType.SCENERY, "harvest-twigs") { player, node ->
             val item = InPyreNeed.itemMap[node.id] ?: Items.MASTIC_TWIGS_14610
-            val itemAnimation = if (inInventory(
-                    player,
-                    Items.MAGIC_SECATEURS_7409
-                )
-            ) Animation(Animations.PRUNE_WITH_MAGIC_SECATEURS_11089)
+            val itemAnimation = if (inInventory(player, Items.MAGIC_SECATEURS_7409)) Animation(Animations.PRUNE_WITH_MAGIC_SECATEURS_11089)
             else Animation(Animations.PRUNE_WITH_SECATEURS_11088)
 
             if (!player.inventory.contains(item, 1)) {
@@ -202,21 +181,19 @@ class InPyreNeedPlugin : InteractionListener {
          */
 
         onUseWith(IntType.SCENERY, InPyreNeed.RIBBON_ID, Scenery.PYRE_41908) { player, _, _ ->
-            if (!isQuestComplete(player, Quests.IN_PYRE_NEED)) {
-                val progress = getVarbit(player, Vars.VARBIT_QUEST_IN_PYRE_NEED_PROGRESS_5761)
-                if (progress < 5) {
-                    sendMessage(player, "Nothing interesting happens.")
-                    return@onUseWith true
-                }
-            } else {
-                if (getStoreFile().getBoolean(player.username.lowercase())) {
-                    sendMessage(player, "This can only be done once per day.")
-                    return@onUseWith true
-                }
+            val progress = getVarbit(player, Vars.VARBIT_QUEST_IN_PYRE_NEED_PROGRESS_5761)
+
+            if (!isQuestComplete(player, Quests.IN_PYRE_NEED) && progress < 5) {
+                sendMessage(player, "Nothing interesting happens.")
+                return@onUseWith true
             }
 
-            val missingRibbon = InPyreNeed.RIBBON_ID.firstOrNull { !inInventory(player, it) }
-            if (missingRibbon != null) {
+            if (isQuestComplete(player, Quests.IN_PYRE_NEED) && getStoreFile().getBoolean(player.username.lowercase())) {
+                sendMessage(player, "This can only be done once per day.")
+                return@onUseWith true
+            }
+
+            if (InPyreNeed.RIBBON_ID.any { !inInventory(player, it) }) {
                 sendMessage(player, "You need all 5 types of wooden ribbons to weave the basket.")
                 return@onUseWith true
             }
@@ -229,13 +206,8 @@ class InPyreNeedPlugin : InteractionListener {
             animate(player, anim)
             sendMessage(player, "You weave a large basket from the five wooden ribbons and add it to the pyre base.")
 
-            for (ribbonId in InPyreNeed.RIBBON_ID) {
-                if (inInventory(player, ribbonId)) {
-                    removeItem(player, Item(ribbonId, 1), Container.INVENTORY)
-                } else {
-                    sendMessage(player, "You need all types of wooden ribbons.")
-                    return@onUseWith true
-                }
+            InPyreNeed.RIBBON_ID.forEach {
+                removeItem(player, Item(it, 1), Container.INVENTORY)
             }
 
             if (isQuestComplete(player, Quests.IN_PYRE_NEED) && !getAttribute(player, "phoenix-spawned", false)) {
@@ -253,8 +225,10 @@ class InPyreNeedPlugin : InteractionListener {
          */
 
         onUseWith(IntType.SCENERY, Items.TINDERBOX_590, Scenery.PYRE_41908) { player, _, _ ->
-            if(isQuestComplete(player, Quests.IN_PYRE_NEED))
+            if (isQuestComplete(player, Quests.IN_PYRE_NEED)) {
+                sendMessage(player, "You have already completed the quest.")
                 return@onUseWith true
+            }
 
             if (getStatLevel(player, Skills.FIREMAKING) < 55) {
                 sendMessage(player, "You need at least 55 Firemaking to light the funeral pyre.")
@@ -264,6 +238,11 @@ class InPyreNeedPlugin : InteractionListener {
             val progress = getVarbit(player, Vars.VARBIT_QUEST_IN_PYRE_NEED_PROGRESS_5761)
             if (progress < 5) {
                 sendMessage(player, "You are not ready to light the pyre yet.")
+                return@onUseWith true
+            }
+
+            if (InPyreNeed.RIBBON_ID.any { !inInventory(player, it) }) {
+                sendMessage(player, "You need all 5 ribbons to light the pyre.")
                 return@onUseWith true
             }
 

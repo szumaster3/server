@@ -80,18 +80,23 @@ class PhoenixSwingHandler : CombatSwingHandler(CombatStyle.MAGIC) {
         {
             if (target is Player)
             {
-                val duration = DUST_DURATION_TICKS
 
-                SkillEffect(Skills.ATTACK, base = 0.0, bonus = -0.5).activate(target)
-                SkillEffect(Skills.RANGE,  base = 0.0, bonus = -0.5).activate(target)
-                SkillEffect(Skills.MAGIC,  base = 0.0, bonus = -0.5).activate(target)
-
-                GameWorld.Pulser.submit(object : Pulse(duration, target)
+                fun drainSkill(skill: Int)
                 {
-                    override fun pulse(): Boolean
-                    {
-                        if (target.isActive)
-                        {
+                    val drain = (3 + target.skills.getLevel(skill) / 14).coerceAtMost(10)
+                    target.skills.updateLevel(
+                        skill, -drain, target.skills.getStaticLevel(skill) - drain
+                    )
+                }
+
+                drainSkill(Skills.ATTACK)
+                drainSkill(Skills.RANGE)
+                drainSkill(Skills.MAGIC)
+
+                GameWorld.Pulser.submit(object : Pulse(DUST_DURATION_TICKS, target)
+                {
+                    override fun pulse(): Boolean {
+                        if (target.isActive) {
                             RestoreEffect(base = 0.0, bonus = 0.0, skills = false).activate(target)
                         }
                         return true

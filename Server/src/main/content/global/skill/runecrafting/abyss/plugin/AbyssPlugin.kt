@@ -350,7 +350,7 @@ class AbyssLocation(val radius: Double, val angle: Double) {
     /**
      * Computes the obstacle segment id for this location.
      *
-     * @return Segment id (0–11).
+     * @return Segment id (0-11).
      */
     fun getSegment(): Int {
         val segments = 12

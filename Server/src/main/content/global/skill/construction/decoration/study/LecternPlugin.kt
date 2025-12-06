@@ -27,7 +27,7 @@ import shared.consts.Scenery
 class LecternPlugin : OptionHandler() {
 
     /**
-     * Represents all teleport–tablet buttons inside the lectern interface.
+     * Represents all teleport-tablet buttons inside the lectern interface.
      */
     private enum class TeleportTabButton(val buttonId: Int, val requiredLevel: Int, val xp: Double, val tabItem: Int, val requiredDecorations: Array<Decoration>, vararg requiredItems: Item) {
         ARDOUGNE(2, 51, 61.0, Items.ARDOUGNE_TP_8011, arrayOf(Decoration.TEAK_EAGLE_LECTERN, Decoration.MAHOGANY_EAGLE_LECTERN), SOFT_CLAY, Item(Items.LAW_RUNE_563, 2), Item(Items.WATER_RUNE_555, 2)),

@@ -103,7 +103,7 @@ class GodBookOptionPlugin : OptionHandler() {
     }
 
     /**
-     * Converts a page number (1–4) to a string for dialogue.
+     * Converts a page number (1-4) to a string for dialogue.
      */
     private fun getNumberName(i: Int): String = when (i) {
         1 -> "first"

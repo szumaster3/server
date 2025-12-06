@@ -2,11 +2,10 @@ package content.global.activity.phoenix
 
 import com.google.gson.JsonObject
 import content.data.GameAttributes
+import content.region.kandarin.piscatoris.quest.phoenix.InPyreNeed
 import core.ServerStore
-import core.api.getStatLevel
-import core.api.rewardXP
-import core.api.sendMessage
-import core.api.setAttribute
+import core.ServerStore.Companion.getBoolean
+import core.api.*
 import core.game.node.entity.Entity
 import core.game.node.entity.combat.CombatStyle
 import core.game.node.entity.combat.CombatSwingHandler
@@ -106,27 +105,31 @@ class PhoenixNPC (id: Int = 0, location: Location? = null) : AbstractNPC(id, loc
 
     override fun finalizeDeath(killer: Entity?)
     {
-        if (killer is Player)
+        super.finalizeDeath(killer)
+
+        if (killer !is Player) return
+        val player = killer.asPlayer()
+        val username = player.username.lowercase()
+        val store = getStoreFile()
+
+        if (!store.getBoolean(username))
         {
-            val player = killer.asPlayer()
-            val store = getStoreFile()
-            val username = player?.username?.lowercase() ?: return
             store.addProperty(username, true)
-            val npc = NPC.create(NPCs.PHOENIX_8548,Location.create(3536, 5197, 0))
+            val npc = NPC.create(NPCs.PHOENIX_8548, Location.create(3536, 5197, 0))
             setAttribute(player, GameAttributes.PHOENIX_LAIR_ACTIVITY_REWARD, true)
-
-            val firstKill = player.getAttribute(GameAttributes.PHOENIX_LAIR_FIRST_KILL, false)
-
-            if (!firstKill) {
-                rewardXP(player, Skills.SLAYER, 5000.0)
-                setAttribute(player, GameAttributes.PHOENIX_LAIR_FIRST_KILL, true)
-            } else {
-                rewardXP(player, Skills.SLAYER, 500.0)
-            }
-
             npc.init()
         }
-        clear()
+
+        val firstKill = player.getAttribute(GameAttributes.PHOENIX_LAIR_FIRST_KILL, false)
+        if (!firstKill)
+        {
+            rewardXP(player, Skills.SLAYER, 5000.0)
+            setAttribute(player, GameAttributes.PHOENIX_LAIR_FIRST_KILL, true)
+        }
+        else
+        {
+            rewardXP(player, Skills.SLAYER, 500.0)
+        }
     }
 
     override fun construct(id: Int, location: Location, vararg objects: Any?): AbstractNPC

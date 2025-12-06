@@ -97,11 +97,7 @@ private class PriestDialogueFile : DialogueFile() {
             }
 
             8 -> {
-                npc(
-                    FaceAnim.HALF_GUILTY,
-                    "It is related because it is the phoenix that is in need of",
-                    "your assistance."
-                )
+                npc(FaceAnim.HALF_GUILTY, "It is related because it is the phoenix that is in need of", "your assistance.")
                 stage++
             }
 
@@ -121,20 +117,12 @@ private class PriestDialogueFile : DialogueFile() {
             }
 
             12 -> {
-                npc(
-                    FaceAnim.HALF_GUILTY,
-                    "I have been studying the phoenix for some time now,",
-                    "out of curiosity and admiration."
-                )
+                npc(FaceAnim.HALF_GUILTY, "I have been studying the phoenix for some time now,", "out of curiosity and admiration.")
                 stage++
             }
 
             13 -> {
-                npc(
-                    FaceAnim.HALF_GUILTY,
-                    "While not truly immortal, the phoenix has the capacity",
-                    "to live forever if certain...conditions...are met."
-                )
+                npc(FaceAnim.HALF_GUILTY, "While not truly immortal, the phoenix has the capacity", "to live forever if certain...conditions...are met.")
                 stage++
             }
 
@@ -144,51 +132,27 @@ private class PriestDialogueFile : DialogueFile() {
             }
 
             15 -> {
-                npc(
-                    FaceAnim.HALF_GUILTY,
-                    "The phoenix has a natural lifespan of 500 years. There",
-                    "is a set ritual it must go through when its life is ending,",
-                    "in order for it to be reborn and live for another five",
-                    "centuries."
-                )
+                npc(FaceAnim.HALF_GUILTY, "The phoenix has a natural lifespan of 500 years. There", "is a set ritual it must go through when its life is ending,", "in order for it to be reborn and live for another five", "centuries.")
                 stage++
             }
 
             16 -> {
-                npc(
-                    FaceAnim.HALF_GUILTY,
-                    "The end of the phoenix's current lifespan is nigh and it",
-                    "has returned to its roost to complete this ritual. I came",
-                    "here to witness this once in a lifetime event."
-                )
+                npc(FaceAnim.HALF_GUILTY, "The end of the phoenix's current lifespan is nigh and it", "has returned to its roost to complete this ritual. I came", "here to witness this once in a lifetime event.")
                 stage++
             }
 
             17 -> {
-                player(
-                    FaceAnim.FRIENDLY,
-                    "So, the phoenix has returned to its roost and you came",
-                    "to watch it be reborn. I fail to see the problem."
-                )
+                player(FaceAnim.FRIENDLY, "So, the phoenix has returned to its roost and you came", "to watch it be reborn. I fail to see the problem.")
                 stage++
             }
 
             18 -> {
-                npc(
-                    FaceAnim.HALF_GUILTY,
-                    "The phoenix was gravely wounded on its way back to",
-                    "its roost. It barely managed to reach its lair."
-                )
+                npc(FaceAnim.HALF_GUILTY, "The phoenix was gravely wounded on its way back to", "its roost. It barely managed to reach its lair.")
                 stage++
             }
 
             19 -> {
-                npc(
-                    FaceAnim.HALF_GUILTY,
-                    "It now rests there, slowly slipping from this world and",
-                    "soon it will be gone forever, incapable of completing its",
-                    "rebirth ritual owing to its wounds."
-                )
+                npc(FaceAnim.HALF_GUILTY, "It now rests there, slowly slipping from this world and", "soon it will be gone forever, incapable of completing its", "rebirth ritual owing to its wounds.")
                 stage++
             }
 
@@ -198,39 +162,22 @@ private class PriestDialogueFile : DialogueFile() {
             }
 
             21 -> {
-                npc(
-                    FaceAnim.HALF_GUILTY,
-                    "I know the ritual that must be completed. To save the",
-                    "phoenix, you must go into the cave and perform it."
-                )
+                npc(FaceAnim.HALF_GUILTY, "I know the ritual that must be completed. To save the", "phoenix, you must go into the cave and perform it.")
                 stage++
             }
 
             22 -> {
-                npc(
-                    FaceAnim.HAPPY,
-                    "Completing the ritual before the phoenix takes its last",
-                    "breath will ensure its revival, and continue the",
-                    "potentially eternal life of this magnificent beast."
-                )
+                npc(FaceAnim.HAPPY, "Completing the ritual before the phoenix takes its last", "breath will ensure its revival, and continue the", "potentially eternal life of this magnificent beast.")
                 stage++
             }
 
             23 -> {
-                player(
-                    FaceAnim.FRIENDLY,
-                    "If you know the ritual, why can't you venture forth",
-                    "and help the phoenix yourself?"
-                )
+                player(FaceAnim.FRIENDLY, "If you know the ritual, why can't you venture forth", "and help the phoenix yourself?")
                 stage++
             }
 
             24 -> {
-                npc(
-                    FaceAnim.HALF_GUILTY,
-                    "Because I am an old man whose mind and fingers lack",
-                    "the necessary skill to complete the ritual..."
-                )
+                npc(FaceAnim.HALF_GUILTY, "Because I am an old man whose mind and fingers lack", "the necessary skill to complete the ritual...")
                 stage++
             }
 
@@ -245,12 +192,7 @@ private class PriestDialogueFile : DialogueFile() {
             }
 
             27 -> {
-                npc(
-                    FaceAnim.HALF_GUILTY,
-                    "The task I ask of you will not take long, and you will",
-                    "be well rewarded for your efforts. Will you please",
-                    "complete the phoenix's ritual?"
-                )
+                npc(FaceAnim.HALF_GUILTY, "The task I ask of you will not take long, and you will", "be well rewarded for your efforts. Will you please", "complete the phoenix's ritual?")
                 stage++
             }
 
@@ -275,19 +217,12 @@ private class PriestDialogueFile : DialogueFile() {
             }
 
             30 -> {
-                npc(
-                    FaceAnim.STRUGGLE,
-                    "Well, I can't force you. If you change your mind, hurry back. The phoenix's life could fade at any moment."
-                )
+                npc(FaceAnim.STRUGGLE, "Well, I can't force you. If you change your mind, hurry back. The phoenix's life could fade at any moment.")
                 stage++
             }
 
             31 -> {
-                npc(
-                    FaceAnim.HAPPY,
-                    "You'll help? Oh, praise be to Guthix! I knew I could",
-                    "trust you from the moment I saw you."
-                )
+                npc(FaceAnim.HAPPY, "You'll help? Oh, praise be to Guthix! I knew I could", "trust you from the moment I saw you.")
                 stage++
             }
 
@@ -302,16 +237,12 @@ private class PriestDialogueFile : DialogueFile() {
             }
 
             34 -> {
-                npc(
-                    FaceAnim.FRIENDLY,
-                    "Well, " + player?.username + ", it's nice to meet you. No doubt you",
-                    "have questions about the task at hand."
-                )
+                npc(FaceAnim.FRIENDLY, "Well, " + player?.username + ", it's nice to meet you. No doubt you", "have questions about the task at hand.")
                 stage++
             }
 
             35 -> {
-                npc(FaceAnim.FRIENDLY, "What would you like to ask about?")
+                npc(FaceAnim.HALF_ASKING, "What would you like to ask about?")
                 stage++
             }
 
@@ -346,50 +277,27 @@ private class PriestDialogueFile : DialogueFile() {
             }
 
             38 -> {
-                npc(
-                    FaceAnim.FRIENDLY,
-                    "The phoenix is an ancient creature - older than either",
-                    "of us can comprehend."
-                )
+                npc(FaceAnim.FRIENDLY, "The phoenix is an ancient creature - older than either", "of us can comprehend.")
                 stage++
             }
 
             39 -> {
-                npc(
-                    FaceAnim.FRIENDLY,
-                    "It is a large, powerful avian creature, surrounded by",
-                    "flames and covered in a fiery plumage. It also has",
-                    "strong magical abilities."
-                )
+                npc(FaceAnim.FRIENDLY, "It is a large, powerful avian creature, surrounded by", "flames and covered in a fiery plumage. It also has", "strong magical abilities.")
                 stage++
             }
 
             40 -> {
-                npc(
-                    FaceAnim.FRIENDLY,
-                    "Every five hundred years, as it reaches the limits of its",
-                    "lifespan, it returns to its roost to complete a ritual and",
-                    "be reborn."
-                )
+                npc(FaceAnim.FRIENDLY, "Every five hundred years, as it reaches the limits of its", "lifespan, it returns to its roost to complete a ritual and", "be reborn.")
                 stage++
             }
 
             41 -> {
-                npc(
-                    FaceAnim.FRIENDLY,
-                    "You see, while not truly immortal, the phoenix can be",
-                    "reborn any number of times, so long as it completes its",
-                    "rebirth ritual."
-                )
+                npc(FaceAnim.FRIENDLY, "You see, while not truly immortal, the phoenix can be", "reborn any number of times, so long as it completes its", "rebirth ritual.")
                 stage++
             }
 
             42 -> {
-                npc(
-                    FaceAnim.SAD,
-                    "But, thanks to its wounds, the phoenix could soon be",
-                    "gone from this world forever."
-                )
+                npc(FaceAnim.SAD, "But, thanks to its wounds, the phoenix could soon be", "gone from this world forever.")
                 stage++
             }
 
@@ -672,11 +580,7 @@ private class PriestDialogueFile : DialogueFile() {
             }
 
             79 -> {
-                npc(
-                    FaceAnim.HALF_GUILTY,
-                    "Please, help the phoenix. Such a wondrous creature",
-                    "should not be taken from this world in this way."
-                )
+                npc(FaceAnim.HALF_GUILTY, "Please, help the phoenix. Such a wondrous creature", "should not be taken from this world in this way.")
                 stage++
             }
 
@@ -687,10 +591,7 @@ private class PriestDialogueFile : DialogueFile() {
             }
 
             81 -> {
-                player(
-                    FaceAnim.HALF_ASKING,
-                    "I'm a little unsure on what I have to do next. Could I ask you some questions?"
-                )
+                player(FaceAnim.HALF_ASKING, "I'm a little unsure on what I have to do next. Could I ask you some questions?")
                 stage = 35
             }
 
@@ -700,29 +601,17 @@ private class PriestDialogueFile : DialogueFile() {
             }
 
             101 -> {
-                npc(
-                    FaceAnim.FRIENDLY,
-                    "The phoenix is saved and you, " + player?.username + ", are a hero",
-                    "of nature! As an added bonus, I got to see it. My 50",
-                    "years of waiting were not in vain after all!"
-                )
+                npc(FaceAnim.FRIENDLY, "The phoenix is saved and you, " + player?.username + ", are a hero", "of nature! As an added bonus, I got to see it. My 50", "years of waiting were not in vain after all!")
                 stage++
             }
 
             102 -> {
-                player(
-                    "Yes, I'm glad you watched all my hard work from a",
-                    "comfortable vantage point outside of the lair."
-                )
+                player("Yes, I'm glad you watched all my hard work from a", "comfortable vantage point outside of the lair.")
                 stage++
             }
 
             103 -> {
-                npc(
-                    FaceAnim.SAD,
-                    "Come now, Player. It wasn't like that. I'm a frail",
-                    "old man! What possible good could I have done?"
-                )
+                npc(FaceAnim.SAD, "Come now, Player. It wasn't like that. I'm a frail", "old man! What possible good could I have done?")
                 stage++
             }
 
@@ -737,35 +626,22 @@ private class PriestDialogueFile : DialogueFile() {
             }
 
             106 -> {
-                player(
-                    "Oh, that reminds me – she also said to thank you for",
-                    "the shrine, and asks when you plan to return her",
-                    "trinkets."
-                )
+                player("Oh, that reminds me - she also said to thank you for", "the shrine, and asks when you plan to return her", "trinkets.")
                 stage++
             }
 
             107 -> {
-                npc(FaceAnim.FRIENDLY, "She...she knew about me?")
+                npc(FaceAnim.HALF_ASKING, "She...she knew about me?")
                 stage++
             }
 
             108 -> {
-                npc(
-                    FaceAnim.SAD,
-                    "I should have known. Had I not been welcome in the",
-                    "lair, I would have ended up like the rest of them. I was",
-                    "a fool to think it was my skill that kept me alive."
-                )
+                npc(FaceAnim.SAD, "I should have known. Had I not been welcome in the", "lair, I would have ended up like the rest of them. I was", "a fool to think it was my skill that kept me alive.")
                 stage++
             }
 
             109 -> {
-                npc(
-                    FaceAnim.FRIENDLY,
-                    "Anyway, " + player?.username + ", I wouldn't expect you to help for",
-                    "mere thanks. Here is your reward!"
-                )
+                npc(FaceAnim.FRIENDLY, "Anyway, " + player?.username + ", I wouldn't expect you to help for", "mere thanks. Here is your reward!")
                 stage++
             }
 
@@ -780,7 +656,7 @@ private class PriestDialogueFile : DialogueFile() {
 
             112 -> playerl(FaceAnim.NEUTRAL, "I'm doing okay, thanks. Could I ask you some questions?").also { stage++ }
 
-            113 -> npcl(FaceAnim.FRIENDLY, "What would you like to ask about?").also { stage++ }
+            113 -> npcl(FaceAnim.HALF_ASKING, "What would you like to ask about?").also { stage++ }
 
             114 -> options("The phoenix.", "The ritual.", "The phoenix's lair.", "Going back inside.", "No more questions.").also { stage++ }
 
@@ -827,7 +703,7 @@ private class PriestDialogueFile : DialogueFile() {
             }
 
             119 -> {
-                npcl(FaceAnim.FRIENDLY, "Thanks to you, the phoenix will live on!")
+                npcl(FaceAnim.HAPPY, "Thanks to you, the phoenix will live on!")
                 stage++
             }
 
@@ -927,7 +803,7 @@ private class PriestDialogueFile : DialogueFile() {
             }
 
             139 -> {
-                npcl(FaceAnim.FRIENDLY, "What would you like to ask about?")
+                npcl(FaceAnim.HALF_ASKING, "What would you like to ask about?")
                 stage = 114
             }
 
@@ -982,7 +858,7 @@ private class PriestDialogueFile : DialogueFile() {
             }
 
             150 -> {
-                npcl(FaceAnim.FRIENDLY, "What would you like to ask about?")
+                npcl(FaceAnim.HALF_ASKING, "What would you like to ask about?")
                 stage = 114
             }
 

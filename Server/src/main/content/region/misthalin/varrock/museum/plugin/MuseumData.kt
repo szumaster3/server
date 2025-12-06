@@ -464,7 +464,7 @@ object MuseumData {
         "A fine example of an incredibly old star chart.",
         "Not much is known about it, but the positions of",
         "the stars indicate that it was made around the",
-        "years of 31–60 of the 4th Age.",
+        "years of 31-60 of the 4th Age.",
     )
 
     val text30 = arrayOf(
