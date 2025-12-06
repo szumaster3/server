@@ -115,7 +115,6 @@ class ShopNPC(id: Int = 0, location: Location? = null) : AbstractNPC(id, locatio
             NPCs.MIKE_3166,
             NPCs.ROMILY_WEAKLAX_3205,
             NPCs.SAWMILL_OPERATOR_4250,
-            NPCs.LIDIO_4293,
             NPCs.BABA_YAGA_4513,
             NPCs.ARTIMEUS_5109,
             NPCs.ALECK_5110,

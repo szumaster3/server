@@ -1,4 +1,4 @@
-package content.region.asgarnia.burthope.npc
+package content.global.activity.warriors_guild.plugin
 
 import core.game.node.entity.npc.AbstractNPC
 import core.game.world.map.Location

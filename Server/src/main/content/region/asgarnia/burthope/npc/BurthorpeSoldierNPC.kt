@@ -10,9 +10,10 @@ import core.game.world.map.RegionManager.getLocalNpcs
 import core.game.world.update.flag.context.Animation
 import core.plugin.Initializable
 import core.tools.RandomFunction
+import shared.consts.NPCs
 
 @Initializable
-class BurthorpeTrainNPC : AbstractNPC {
+class BurthorpeSoldierNPC : AbstractNPC {
     private var delay: Long = 0
 
     constructor() : super(0, null)
@@ -41,7 +42,7 @@ class BurthorpeTrainNPC : AbstractNPC {
         id: Int,
         location: Location,
         vararg objects: Any,
-    ): AbstractNPC = BurthorpeTrainNPC(id, location)
+    ): AbstractNPC = BurthorpeSoldierNPC(id, location)
 
     override fun tick() {
         if (delay < System.currentTimeMillis()) {
@@ -107,7 +108,7 @@ class BurthorpeTrainNPC : AbstractNPC {
                 Pulser.submit(
                     object : Pulse(2) {
                         override fun pulse(): Boolean {
-                            val soldiers = getLocalNpcs(this@BurthorpeTrainNPC, 12)
+                            val soldiers = getLocalNpcs(this@BurthorpeSoldierNPC, 12)
                             for (n in soldiers) {
                                 if (n.id != 1064) {
                                     continue
@@ -123,7 +124,7 @@ class BurthorpeTrainNPC : AbstractNPC {
     }
 
     companion object {
-        private val IDS = intArrayOf(1063, 1061, 1066, 1067, 1068, 1062, 1064, 1073, 1074, 1076, 1077)
+        private val IDS = intArrayOf(NPCs.SOLDIER_1063, NPCs.SERGEANT_1061, NPCs.SOLDIER_1066, NPCs.SOLDIER_1067, NPCs.SOLDIER_1068, NPCs.SERGEANT_1062, NPCs.SOLDIER_1064, NPCs.ARCHER_1073, NPCs.ARCHER_1074, NPCs.GUARD_1076, NPCs.GUARD_1077)
         private val PUNCH = Animation(422)
         private val KICK = Animation(423)
         private val DEFEND = Animation(424)
