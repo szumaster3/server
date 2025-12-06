@@ -28,23 +28,22 @@ class KharidianDesertPlugin : InteractionListener {
             }
 
             val failed = RandomFunction.random(3) == 1
+
             if (failed) {
                 sendMessage(player, "You fail to cut the cactus correctly and it gives you no water this time.")
             } else {
                 val waterskin = getWaterSkin(player)
                 if (waterskin == null || !removeItem(player, waterskin)) {
                     sendMessage(player, "You have no empty waterskins to put the water in.")
+                    return@on true
                 } else {
                     addItem(player, waterskin.id - 2)
                     sendMessage(player, "You top up your skin with water from the cactus.")
+
+                    lock(player, 3)
+                    animate(player, ANIMATION)
+                    rewardXP(player, Skills.WOODCUTTING, 10.0)
                 }
-            }
-
-            lock(player, 3)
-            animate(player, ANIMATION)
-
-            if (!failed) {
-                rewardXP(player, Skills.WOODCUTTING, 10.0)
             }
 
             replaceScenery(
@@ -52,6 +51,7 @@ class KharidianDesertPlugin : InteractionListener {
                 DRY_CACTUS,
                 SPAWN_DELAY + RandomFunction.random(getLocalPlayers(player).size / 2),
             )
+
             return@on true
         }
     }

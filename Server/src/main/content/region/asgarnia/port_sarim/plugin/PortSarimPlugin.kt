@@ -17,6 +17,13 @@ class PortSarimPlugin : InteractionListener {
         private val DOORS = intArrayOf(Scenery.CELL_DOOR_9563, Scenery.DOOR_9565)
         private val MONKS_OF_ENTRANA = intArrayOf(NPCs.MONK_OF_ENTRANA_2728, NPCs.MONK_OF_ENTRANA_657, NPCs.MONK_OF_ENTRANA_2729, 2730, NPCs.MONK_OF_ENTRANA_2731, NPCs.MONK_OF_ENTRANA_658)
         private val SEAMAN = intArrayOf(NPCs.CAPTAIN_TOBIAS_376, NPCs.SEAMAN_LORRIS_377, NPCs.SEAMAN_THRESNOR_378)
+        private val GUARD_FORCE_CHAT =
+            arrayOf(
+                "Hmph... heh heh heh...",
+                "Mmmm... big pint of beer... kebab...",
+                "Mmmmmm... donuts...",
+                "Guh.. mwww... zzzzzz...",
+            )
     }
 
     override fun defineListeners() {
@@ -63,12 +70,6 @@ class PortSarimPlugin : InteractionListener {
          */
 
         on(Scenery.CRATE_2071, IntType.SCENERY, "search") { player, _ ->
-            if (freeSlots(player) == 0) {
-                sendMessage(player, "Not enough inventory space.")
-                return@on true
-            }
-
-            lock(player, 2)
             sendMessage(player, "There are lots of bananas in the crate.")
 
             if (!player.getAttribute("wydin-rum", false)) {
@@ -77,16 +78,26 @@ class PortSarimPlugin : InteractionListener {
                 addDialogueAction(player) { _, option ->
                     closeDialogue(player)
                     if (option == 2) {
+                        if (freeSlots(player) == 0) {
+                            sendMessage(player, "Not enough inventory space to take a banana.")
+                            return@addDialogueAction
+                        }
+                        lock(player, 2)
                         animate(player, Animations.HUMAN_MULTI_USE_832)
-                        addItem(player, Items.BANANA_1963)
                         sendMessage(player, "You take a banana.")
+                        addItem(player, Items.BANANA_1963)
                     }
                 }
             } else {
-                animate(player, Animations.HUMAN_MULTI_USE_832)
-                addItem(player, Items.KARAMJAN_RUM_431)
-                removeAttributes(player, "wydin-rum", "stashed-rum")
-                sendMessage(player, "You find your bottle of rum in amongst the bananas.")
+                if (freeSlots(player) == 0) {
+                    sendMessage(player, "Not enough inventory space to take your rum.")
+                } else {
+                    lock(player, 2)
+                    animate(player, Animations.HUMAN_MULTI_USE_832)
+                    sendMessage(player, "You find your bottle of rum in amongst the bananas.")
+                    addItem(player, Items.KARAMJAN_RUM_431)
+                    removeAttributes(player, "wydin-rum", "stashed-rum")
+                }
             }
 
             return@on true
@@ -124,18 +135,10 @@ class PortSarimPlugin : InteractionListener {
          */
 
         on(NPCs.GUARD_2704, IntType.NPC, "talk-to") { player, node ->
-            val forceChat =
-                arrayOf(
-                    "Hmph... heh heh heh...",
-                    "Mmmm... big pint of beer... kebab...",
-                    "Mmmmmm... donuts...",
-                    "Guh.. mwww... zzzzzz...",
-                )
+            sendChat((node as NPC), GUARD_FORCE_CHAT[RandomFunction.random(GUARD_FORCE_CHAT.size)])
             lock(player, 2)
-            sendChat((node as NPC), forceChat[RandomFunction.random(forceChat.size)])
-            queueScript(player, 1, QueueStrength.SOFT) {
+            runTask(player, 1) {
                 sendPlayerDialogue(player, "Maybe I should let him sleep.")
-                return@queueScript stopExecuting(player)
             }
             return@on true
         }

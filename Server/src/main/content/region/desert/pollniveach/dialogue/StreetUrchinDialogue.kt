@@ -30,9 +30,9 @@ class StreetUrchinDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
-            0 -> npc(FaceAnim.CHILD_FRIENDLY, "I'm not little and if you say that again I'll gut you.").also { stage++ }
+            0 -> npcl(FaceAnim.CHILD_FRIENDLY, "I'm not little and if you say that again I'll gut you.").also { stage++ }
             1 -> player("Easy there, I didn't mean to offend.").also { stage++ }
-            2 -> npc(FaceAnim.CHILD_FRIENDLY,"I'll let you off this once. Well what do you want? Information?").also { stage++ }
+            2 -> npcl(FaceAnim.CHILD_FRIENDLY,"I'll let you off this once. Well what do you want? Information?").also { stage++ }
             3 -> player("Yes, tell me about...").also { stage++ }
             4 -> options("The Menaphites", "The bandits", "The Mayor", "The town", "No thanks.").also { stage++ }
             5 -> when (buttonId) {
@@ -50,18 +50,18 @@ class StreetUrchinDialogue(player: Player? = null) : Dialogue(player) {
             9 -> npc(FaceAnim.CHILD_FRIENDLY,"Well do you need any other information then?").also { stage = 4 }
             // Tell me about the mayor.
             10 -> npcl(FaceAnim.CHILD_FRIENDLY, "The mayor is a spineless coward. The current state of the town is all his fault. He didn't stand up to the Menaphites when they first came to town. When he finally realised his mistake he hired a group of thugs to try get rid of them.").also { stage++ }
-            11 -> npc(FaceAnim.CHILD_FRIENDLY,"When they discovered him to be weak they turned against him too. Thus causing an even larger mess.").also { stage++ }
+            11 -> npcl(FaceAnim.CHILD_FRIENDLY,"When they discovered him to be weak they turned against him too. Thus causing an even larger mess.").also { stage++ }
             12 -> npc(FaceAnim.CHILD_FRIENDLY,"Well do you need any other information then?").also { stage = 4 }
             // Tell me about the town.
-            13 -> npc(FaceAnim.CHILD_FRIENDLY,"Not much to say about it. Pollivneach is a small town located between Al Kharid and Menaphos " + "and has a particularly bad crime problem. Besides that nothing much happens here.").also { stage++ }
-            14 -> npc(FaceAnim.CHILD_FRIENDLY,"Well do you need any other information then?").also { stage = 4 }
+            13 -> npcl(FaceAnim.CHILD_FRIENDLY,"Not much to say about it. Pollivneach is a small town located between Al Kharid and Menaphos " + "and has a particularly bad crime problem. Besides that nothing much happens here.").also { stage++ }
+            14 -> npcl(FaceAnim.CHILD_FRIENDLY,"Well do you need any other information then?").also { stage = 4 }
             // No, thanks.
             15 -> npc(FaceAnim.CHILD_FRIENDLY,"Come back if you need any info about anything in the town.").also { stage++ }
             16 -> player("I will do, thanks.").also { stage = END_DIALOGUE }
             17 -> npcl(FaceAnim.CHILD_FRIENDLY, "What do you want? Information?").also { stage++ }
             18 -> player("What would you know?").also { stage++ }
             19 -> npc(FaceAnim.CHILD_FRIENDLY,"No one knows what's going on in the streets better", "than me. I live, sleep, eat and drink here. The fact that", "I'm so small means that people tend to ignore me which", "helps even more.").also { stage++ }
-            20 -> npc(FaceAnim.CHILD_FRIENDLY,"Well do you need any other information then?").also { stage++ }
+            20 -> npcl(FaceAnim.CHILD_FRIENDLY,"Well do you need any other information then?").also { stage++ }
             21 -> options("Yes, tell me about...", "No thanks.").also { stage++ }
             22 -> when (buttonId) {
                 1 -> player("Yes, tell me about...").also { stage = 25 }
@@ -89,7 +89,7 @@ class StreetUrchinDialogue(player: Player? = null) : Dialogue(player) {
             28 -> npc(FaceAnim.CHILD_FRIENDLY,"There's not much really to say about them, they're just a group of local thugs", "led by the largest amongst them. They don't harbour the ambitions of the Menaphites.").also { stage = 21 }
             // Tell me about the mayor.
             29 -> npcl(FaceAnim.CHILD_NORMAL, "The mayor is a spineless coward. The current state of the town is all his fault. He didn't stand up to the Menaphites when they first came to town. When he finally realised his mistake he hired a group of thugs to try get rid of them.").also { stage++ }
-            30 -> npc(FaceAnim.CHILD_FRIENDLY,"When they discovered him to be weak they turned against him too. Thus causing an even larger mess.").also { stage = 21 }
+            30 -> npcl(FaceAnim.CHILD_FRIENDLY,"When they discovered him to be weak they turned against him too. Thus causing an even larger mess.").also { stage = 21 }
             // Tell me about nephew.
             31 -> npc(FaceAnim.CHILD_FRIENDLY,"He was ok, although he used to kick us when he caught", "any of us stealing from his stall.").also { stage++ }
             32 -> player("Do you know where he is now then?").also { stage++ }
@@ -100,7 +100,7 @@ class StreetUrchinDialogue(player: Player? = null) : Dialogue(player) {
                 stage = 21
             }
             // Tell me about the town.
-            35 -> npc(FaceAnim.CHILD_FRIENDLY,"Not much to say about it. Pollivneach is a small town located between Al Kharid and Menaphos " + "and has a particularly bad crime problem. Besides that nothing much happens here.").also { stage = 21 }
+            35 -> npcl(FaceAnim.CHILD_FRIENDLY,"Not much to say about it. Pollivneach is a small town located between Al Kharid and Menaphos " + "and has a particularly bad crime problem. Besides that nothing much happens here.").also { stage = 21 }
 
         }
         return true

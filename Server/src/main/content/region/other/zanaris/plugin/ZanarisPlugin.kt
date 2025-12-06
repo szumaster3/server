@@ -100,36 +100,27 @@ class ZanarisPlugin : InteractionListener {
          * Handles using raw chicken & egg on chicken shrine.
          */
 
-        onUseWith(
-            IntType.SCENERY,
-            intArrayOf(Items.RAW_CHICKEN_2138, Items.EGG_1944),
-            Scenery.CHICKEN_SHRINE_12093
-        ) { player, used, _ ->
+        onUseWith(IntType.SCENERY, intArrayOf(Items.RAW_CHICKEN_2138, Items.EGG_1944), Scenery.CHICKEN_SHRINE_12093) { player, used, _ ->
             if (used.id != Items.RAW_CHICKEN_2138) {
                 sendMessage(player, "Nice idea, but nothing interesting happens.")
                 return@onUseWith false
             }
+
             if (!removeItem(player, used.asItem())) {
                 sendMessage(player, "Nothing interesting happens.")
-            } else {
-                lock(player, 3)
-                queueScript(player, 1, QueueStrength.SOFT) { stage: Int ->
-                    when (stage) {
-                        0 -> {
-                            animate(player, Animations.DISAPPEAR_2755)
-                            return@queueScript keepRunning(player)
-                        }
-
-                        1 -> {
-                            teleport(player, Location(2461, 4356, 0))
-                            animate(player, Animations.APPEAR_2757)
-                            return@queueScript stopExecuting(player)
-                        }
-
-                        else -> return@queueScript stopExecuting(player)
-                    }
-                }
+                return@onUseWith false
             }
+
+            val animDuration = animationDuration(Animation(Animations.DISAPPEAR_2755))
+
+            lock(player, 3)
+            player.animate(Animation(Animations.DISAPPEAR_2755))
+            queueScript(player, animDuration, QueueStrength.SOFT) {
+                teleport(player, Location(2461, 4356, 0))
+                player.animate(Animation(Animations.APPEAR_2757))
+                return@queueScript stopExecuting(player)
+            }
+
             return@onUseWith true
         }
 
@@ -138,20 +129,25 @@ class ZanarisPlugin : InteractionListener {
          */
 
         on(Scenery.PORTAL_12260, IntType.SCENERY, "use") { player, _ ->
-            teleport(player, Location(2453, 4476, 0), TeleportManager.TeleportType.INSTANT)
+            val animDuration = animationDuration(Animation(Animations.DISAPPEAR_2755))
+
+            lock(player, 3)
+            player.animate(Animation(Animations.DISAPPEAR_2755))
+            queueScript(player, animDuration, QueueStrength.SOFT) {
+                teleport(player, Location(2453, 4476, 0))
+                player.animate(Animation(Animations.APPEAR_2757))
+                return@queueScript stopExecuting(player)
+            }
             return@on true
         }
 
-        onUseWith(IntType.SCENERY, Items.ROPE_954, Scenery.TUNNEL_ENTRANCE_12253) { player, used, _ ->
+        onUseWith(IntType.SCENERY, Items.ROPE_954, Scenery.TUNNEL_ENTRANCE_12253) { player, used, with ->
             if (!removeItem(player, used.asItem())) {
                 sendMessage(player, "Nothing interesting happens.")
-            } else {
-                replaceScenery(
-                    core.game.node.scenery.Scenery(Scenery.TUNNEL_ENTRANCE_12253, location(2455, 4380, 0)),
-                    Scenery.TUNNEL_ENTRANCE_12254,
-                    80
-                )
+                return@onUseWith false
             }
+
+            replaceScenery(with.asScenery(), Scenery.TUNNEL_ENTRANCE_12254, 80)
             return@onUseWith true
         }
 

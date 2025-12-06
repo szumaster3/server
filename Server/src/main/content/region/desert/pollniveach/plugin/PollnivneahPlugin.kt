@@ -37,14 +37,16 @@ class PollnivneahPlugin : InteractionListener {
          */
 
         on(Scenery.TABLE_6246, IntType.SCENERY, "take-beer") { player, node ->
-            if (freeSlots(player) < 1) {
+            if (freeSlots(player) == 0) {
                 sendDialogue(player, "You don't have enough inventory space.")
-            } else {
-                lock(player, 1)
-                animate(player, Animations.HUMAN_MULTI_USE_832)
-                replaceScenery(node.asScenery(), 602, 1500)
-                addItem(player, Items.BEER_1917)
+                return@on true
             }
+
+            lock(player, 1)
+            animate(player, Animations.HUMAN_MULTI_USE_832)
+            replaceScenery(node.asScenery(), 602, 80)
+            addItem(player, Items.BEER_1917)
+
             return@on true
         }
 

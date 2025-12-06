@@ -36,30 +36,20 @@ class MosLeHarmlessPlugin : InteractionListener {
          */
 
         onUseWith(IntType.NPC, BERET_AND_MASK, NPCs.PATCHY_4359) { player, used, _ ->
+            if (!inInventory(player, used.id)) {
+                sendNPCDialogue(player, NPCs.PATCHY_4359, "Sorry, I can't do anythin' with that.", FaceAnim.SAD)
+                return@onUseWith false
+            }
+
             if (freeSlots(player) < 2) {
-                sendNPCDialogueLines(
-                    player,
-                    NPCs.PATCHY_4359,
-                    FaceAnim.STRUGGLE,
-                    false,
-                    "Ye don't seem te have enough free space few the two items.",
-                    "Ye might want te visit the bank.",
-                )
+                sendNPCDialogueLines(player, NPCs.PATCHY_4359, FaceAnim.STRUGGLE, false, "Ye don't seem te have enough free space few the two items.", "Ye might want te visit the bank.")
                 return@onUseWith false
             }
 
-            if (!removeItem(player, Items.BERET_AND_MASK_11282)) {
-                sendNPCDialogue(
-                    player,
-                    NPCs.PATCHY_4359,
-                    "Sorry, I can't do anythin' with that.",
-                    FaceAnim.SAD
-                )
-                return@onUseWith false
+            if(removeItem(player, Items.BERET_AND_MASK_11282)) {
+                addItemOrDrop(player, Items.BLACK_BERET_2635)
+                addItemOrDrop(player, Items.MIME_MASK_3057)
             }
-
-            addItemOrDrop(player, Items.BLACK_BERET_2635)
-            addItemOrDrop(player, Items.MIME_MASK_3057)
             return@onUseWith true
         }
 
