@@ -1,6 +1,6 @@
 package content.region.other.dorgeshuun.dialogue
 
-import content.global.skill.crafting.CraftingDefinition
+import content.data.LightSources
 import core.api.*
 import core.game.dialogue.DialogueFile
 import core.game.dialogue.FaceAnim
@@ -55,7 +55,7 @@ class CaveGoblinsDialogueFile : DialogueFile() {
                     140 -> npcl(FaceAnim.OLD_NORMAL, "Yes, it's always nice!").also { stage = END_DIALOGUE }
                 }
             }
-        } else if (CraftingDefinition.LightSources.hasActiveLightSource(p)) {
+        } else if (LightSources.hasActiveLightSource(p)) {
             // Player has any lit source (torches, lanterns, etc.).
             npcl(FaceAnim.OLD_NORMAL, "Watch out! You don't want to let a naked flame near swamp gas! Look out for the warning marks.").also { stage = END_DIALOGUE }
         } else if (anyInInventory(p, Items.LIT_BLACK_CANDLE_32, Items.LIT_CANDLE_33)) {

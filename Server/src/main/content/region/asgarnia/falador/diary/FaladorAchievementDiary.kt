@@ -1,6 +1,6 @@
 package content.region.asgarnia.falador.diary
 
-import content.global.skill.crafting.CraftingDefinition
+import content.data.LightSources
 import content.global.travel.FairyRing
 import content.global.skill.farming.FarmingPatch
 import content.region.asgarnia.falador.dialogue.RisingSunInnBartenderDialogue
@@ -298,7 +298,7 @@ class FaladorAchievementDiary : DiaryEventHookBase(DiaryType.FALADOR) {
         event: LitLightSourceEvent,
     ) {
         when {
-            inBorders(player, CHEMIST_AREA) && (event.litLightSourceId == CraftingDefinition.LightSources.BULLSEYE_LANTERN.litId) -> {
+            inBorders(player, CHEMIST_AREA) && (event.litLightSourceId == LightSources.BULLSEYE_LANTERN.litId) -> {
                 finishTask(
                     player,
                     DiaryLevel.MEDIUM,

@@ -1,6 +1,6 @@
 package content.region.asgarnia.falador.npc;
 
-import content.global.skill.crafting.CraftingDefinition;
+import content.data.LightSources;
 import core.cache.def.impl.SceneryDefinition;
 import core.game.global.action.DigAction;
 import core.game.global.action.DigSpadeHandler;
@@ -118,7 +118,7 @@ public final class GiantMoleNPC extends AbstractNPC {
     private void splatterMud(Location hole) {
         for (Player p : RegionManager.getLocalPlayers(getCenterLocation(), (size() >> 1) + 2)) {
             PacketRepository.send(Interface.class, new InterfaceContext(p, 548, 77, 226, true));
-            CraftingDefinition.LightSources s = CraftingDefinition.LightSources.getActiveLightSource(p);
+            LightSources s = LightSources.getActiveLightSource(p);
             if (s == null || s.getOpen()) {
                 if (s != null) {
                     p.getPacketDispatch().sendMessage("Your " + s.name() + " seems to have been extinguished by the mud.");
@@ -192,7 +192,7 @@ public final class GiantMoleNPC extends AbstractNPC {
         DigAction action = new DigAction() {
             @Override
             public void run(Player player) {
-                if (!CraftingDefinition.LightSources.hasActiveLightSource(player)) {
+                if (!LightSources.hasActiveLightSource(player)) {
                     player.getPacketDispatch().sendMessage("It's going to be dark down there, I should bring a light source.");
                     return;
                 }

@@ -1,5 +1,6 @@
 package content.global.skill.crafting
 
+import content.data.LightSources
 import core.api.*
 import core.game.event.LitLightSourceEvent
 import core.game.interaction.IntType
@@ -20,7 +21,7 @@ class LightSourceLighter : InteractionListener {
 
         onUseWith(IntType.ITEM, Items.TINDERBOX_590, *CraftingDefinition.LIGHTABLE_ITEM_IDS) { player, _, with ->
             val item = with.asItem()
-            val light = CraftingDefinition.LightSources.forId(item.id) ?: return@onUseWith true
+            val light = LightSources.forId(item.id) ?: return@onUseWith true
 
             if (!light(player, item, light)) {
                 sendMessage(player, "You need a Firemaking level of at least ${light.level} to light this.")
@@ -34,7 +35,7 @@ class LightSourceLighter : InteractionListener {
          */
 
         on(IntType.ITEM, "extinguish") { player, node ->
-            val lightSources = CraftingDefinition.LightSources.forLitId(node.id)
+            val lightSources = LightSources.forLitId(node.id)
 
             lightSources ?: return@on false.also {
                 log(this::class.java, Log.WARN, "UNHANDLED EXTINGUISH OPTION: ID = ${node.id}")
@@ -45,7 +46,7 @@ class LightSourceLighter : InteractionListener {
         }
     }
 
-    private fun light(player: Player, item: Item, data: CraftingDefinition.LightSources): Boolean {
+    private fun light(player: Player, item: Item, data: LightSources): Boolean {
         val requiredLevel = data.level
         val playerLevel = getStatLevel(player, Skills.FIREMAKING)
 

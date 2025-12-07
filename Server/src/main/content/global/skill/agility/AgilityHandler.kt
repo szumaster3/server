@@ -1,6 +1,6 @@
 package content.global.skill.agility
 
-import content.global.skill.crafting.CraftingDefinition
+import content.data.LightSources
 import core.api.*
 import core.game.container.impl.EquipmentContainer
 import core.game.interaction.MovementPulse
@@ -278,7 +278,7 @@ object AgilityHandler {
      */
     @JvmStatic
     fun extinguishLightOnWater(player: Player) {
-        val source = CraftingDefinition.LightSources.getActiveLightSource(player) ?: return
+        val source = LightSources.getActiveLightSource(player) ?: return
         if (player.inventory.contains(source.litId, 1)) {
             player.inventory.remove(Item(source.litId))
             if (source.emptyId > 0) player.inventory.add(Item(source.emptyId))
