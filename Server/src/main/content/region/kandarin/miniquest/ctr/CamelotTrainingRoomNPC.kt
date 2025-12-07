@@ -61,12 +61,11 @@ class CamelotTrainingRoomNPC : AbstractNPC {
      * Called when the NPC dies to handle transformation to the next wave.
      */
     override fun finalizeDeath(killer: Entity?) {
+        super.finalizeDeath(killer)
         if (killer == player) {
             this.asNpc().isInvisible = true
             (type ?: return poofClear(this)).transform(this, player)
             timer = 0
-        } else {
-            super.finalizeDeath(killer)
         }
     }
 

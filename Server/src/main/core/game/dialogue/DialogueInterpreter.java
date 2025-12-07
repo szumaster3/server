@@ -220,7 +220,7 @@ public final class DialogueInterpreter {
             }
         } else {
             if (!player.isArtificial()) {
-                TutorialStage.load(player, Math.max(tutorialStage, 0), false);
+                TutorialStage.load(player, tutorialStage, false);
             }
         }
 
