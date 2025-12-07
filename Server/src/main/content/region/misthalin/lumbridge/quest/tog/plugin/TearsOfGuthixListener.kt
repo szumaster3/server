@@ -76,7 +76,7 @@ class TearsOfGuthixListener : InteractionListener {
         onUseWith(IntType.NPC, Items.SAPPHIRE_LANTERN_4702, NPCs.LIGHT_CREATURE_2021) { player, _, npc ->
             val target = npc as NPC
 
-            if (!hasRequirement(player, Quests.WHILE_GUTHIX_SLEEPS)) {
+            if (!hasRequirement(player, Quests.WHILE_GUTHIX_SLEEPS, false)) {
                 crossTheChasm(player, target)
             } else {
                 sendOptions(player, "Select an Option", "Across the Chasm.", "Into the Chasm.")

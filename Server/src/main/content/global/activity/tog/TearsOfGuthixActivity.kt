@@ -133,15 +133,13 @@ class TearsOfGuthixActivity :
             setVarbit(player, varbitTimeBar, 10)
             setVarbit(player, varbitPoints, 0)
 
-            replaceSlot(player, EquipmentSlot.WEAPON.ordinal, Item(Items.STONE_BOWL_4704), null, Container.EQUIPMENT)
-            player.appearance.setAnimations(Animation(357))
-            refreshAppearance(player)
+            player.appearance.holdTogBowl()
 
             queueScript(player, 0, QueueStrength.SOFT) { stage: Int ->
                 when (stage) {
                     0 -> {
                         val distance = player.location.getDistance(Location(3251, 9516, 2)).toInt() + 1 // Per tick?
-                        forceMove(player, player.location, Location(3251, 9516, 2), 0, distance * 15, null, 2041)
+                        forceMove(player, player.location, Location(3251, 9516, 2), 0, distance * 15, null, 8997)
                         return@queueScript delayScript(player, distance)
                     }
 
@@ -156,7 +154,7 @@ class TearsOfGuthixActivity :
 
                     2 -> {
                         val distance = player.location.getDistance(Location(3253, 9516, 2)).toInt() + 1 // Per tick?
-                        forceMove(player, player.location, Location(3253, 9516, 2), 0, distance * 15, null, 2041)
+                        forceMove(player, player.location, Location(3253, 9516, 2), 0, distance * 15, null, 8997)
                         return@queueScript delayScript(player, distance)
                     }
 
@@ -167,7 +165,7 @@ class TearsOfGuthixActivity :
 
                     4 -> {
                         val distance = player.location.getDistance(Location(3253, 9517, 2)).toInt() + 1 // Per tick?
-                        forceMove(player, player.location, Location(3253, 9517, 2), 0, distance * 15, null, 2041)
+                        forceMove(player, player.location, Location(3253, 9517, 2), 0, distance * 15, null, 8997)
                         return@queueScript delayScript(player, distance)
                     }
 
@@ -178,7 +176,7 @@ class TearsOfGuthixActivity :
 
                     6 -> {
                         val distance = player.location.getDistance(Location(3257, 9517, 2)).toInt() + 1 // Per tick?
-                        forceMove(player, player.location, Location(3257, 9517, 2), 0, distance * 15, null, 2041)
+                        forceMove(player, player.location, Location(3257, 9517, 2), 0, distance * 15, null, 8997)
                         return@queueScript delayScript(player, distance)
                     }
 
@@ -198,7 +196,7 @@ class TearsOfGuthixActivity :
                     0 -> {
                         sendMessage(player, "Your time in the cave is up.")
                         val distance = player.location.getDistance(Location(3253, 9517, 2)).toInt() + 1 // Per tick?
-                        forceMove(player, player.location, Location(3253, 9517, 2), 0, distance * 15, null, 2041)
+                        forceMove(player, player.location, Location(3253, 9517, 2), 0, distance * 15, null, 8997)
                         return@queueScript delayScript(player, distance)
                     }
 
@@ -209,7 +207,7 @@ class TearsOfGuthixActivity :
 
                     2 -> {
                         val distance = player.location.getDistance(Location(3253, 9516, 2)).toInt() + 1 // Per tick?
-                        forceMove(player, player.location, Location(3253, 9516, 2), 0, distance * 15, null, 2041)
+                        forceMove(player, player.location, Location(3253, 9516, 2), 0, distance * 15, null, 8997)
                         return@queueScript delayScript(player, distance)
                     }
 
@@ -224,7 +222,7 @@ class TearsOfGuthixActivity :
 
                     4 -> {
                         val distance = player.location.getDistance(Location(3251, 9516, 2)).toInt() + 1 // Per tick?
-                        forceMove(player, player.location, Location(3251, 9516, 2), 0, distance * 15, null, 2041)
+                        forceMove(player, player.location, Location(3251, 9516, 2), 0, distance * 15, null, 8997)
                         return@queueScript delayScript(player, distance)
                     }
 
@@ -263,34 +261,18 @@ class TearsOfGuthixActivity :
         }
     }
 
-    override fun process(
-        entity: Entity,
-        event: TickEvent,
-    ) {
+    override fun process(entity: Entity, event: TickEvent) {
         if (entity is Player) {
             if (getAttribute(entity, attributeTicksRemaining, -1) > 0) {
                 setAttribute(entity, attributeTicksRemaining, getAttribute(entity, attributeTicksRemaining, 0) - 1)
-                setVarbit(
-                    entity,
-                    varbitTimeBar,
-                    (getAttribute(entity, attributeTicksRemaining, 0) * 10 / getQuestPoints(entity)),
-                    false,
-                )
+                setVarbit(entity, varbitTimeBar, (getAttribute(entity, attributeTicksRemaining, 0) * 10 / getQuestPoints(entity)), false)
                 if (getAttribute(entity, attributeIsCollecting, 0) != 0) {
                     val currentArrayIndex = getAttribute(entity, attributeIsCollecting, 0)
                     val currentTearState = TearsOfGuthixListener.globalWallState[currentArrayIndex]
                     if (currentTearState == 1) {
-                        setAttribute(
-                            entity,
-                            attributeTearsCollected,
-                            getAttribute(entity, attributeTearsCollected, 0) + 1,
-                        )
+                        setAttribute(entity, attributeTearsCollected, getAttribute(entity, attributeTearsCollected, 0) + 1)
                     } else if (currentTearState == 2 && getAttribute(entity, attributeTearsCollected, 0) > 0) {
-                        setAttribute(
-                            entity,
-                            attributeTearsCollected,
-                            getAttribute(entity, attributeTearsCollected, 0) - 1,
-                        )
+                        setAttribute(entity, attributeTearsCollected, getAttribute(entity, attributeTearsCollected, 0) - 1)
                     }
                     setVarbit(entity, varbitPoints, getAttribute(entity, attributeTearsCollected, 0))
                 }
@@ -303,13 +285,7 @@ class TearsOfGuthixActivity :
 
     override fun defineAreaBorders(): Array<ZoneBorders> = arrayOf(ZoneBorders(3253, 9513, 3262, 9522, 2))
 
-    override fun getRestrictions(): Array<ZoneRestriction> =
-        arrayOf(
-            ZoneRestriction.RANDOM_EVENTS,
-            ZoneRestriction.CANNON,
-            ZoneRestriction.FOLLOWERS,
-            ZoneRestriction.TELEPORT,
-        )
+    override fun getRestrictions(): Array<ZoneRestriction> = arrayOf(ZoneRestriction.RANDOM_EVENTS, ZoneRestriction.CANNON, ZoneRestriction.FOLLOWERS, ZoneRestriction.TELEPORT)
 
     override fun areaEnter(entity: Entity) {
         if (entity is Player) {
@@ -322,10 +298,7 @@ class TearsOfGuthixActivity :
         }
     }
 
-    override fun areaLeave(
-        entity: Entity,
-        logout: Boolean,
-    ) {
+    override fun areaLeave(entity: Entity, logout: Boolean) {
         if (entity is Player) {
             entity.unhook(this)
             if (logout) {
@@ -337,11 +310,7 @@ class TearsOfGuthixActivity :
         }
     }
 
-    override fun entityStep(
-        entity: Entity,
-        location: Location,
-        lastLocation: Location,
-    ) {
+    override fun entityStep(entity: Entity, location: Location, lastLocation: Location) {
         if (entity is Player) {
             entity.hook(Event.Tick, this)
             setAttribute(entity, attributeIsCollecting, 0)
