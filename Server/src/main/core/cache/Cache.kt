@@ -154,4 +154,11 @@ object Cache {
         val lastContainerId = getIndexes()[19]?.containersSize?.minus(1) ?: 0
         return lastContainerId * 256 + (getIndexes()[19]?.getFilesSize(lastContainerId) ?: 0)
     }
+
+    @JvmStatic
+    fun getRenderAnimationDefinitionsSize(): Int {
+        val idx = 2
+        val containerId = 32
+        return getIndexes()[idx]?.getFilesSize(containerId) ?: 0
+    }
 }

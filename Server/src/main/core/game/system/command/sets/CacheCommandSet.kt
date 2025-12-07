@@ -383,6 +383,63 @@ class CacheCommandSet : CommandSet(Privilege.ADMIN) {
                 player.debug("Saved $found objects with option '$option' -> ${dump.path}")
             }
         }
+        define(
+            name = "dumprenderanims",
+            privilege = Privilege.ADMIN,
+            usage = "::dumprenderanims",
+            description = "Dumps render anims to a JSON file."
+        ) { player, _ ->
+
+            val gson = GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create()
+            val exportDir = File("dumps")
+            if (!exportDir.exists()) exportDir.mkdirs()
+
+            val timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM_HH-mm"))
+            val dumpFile = File(exportDir, "render_animation_definitions_$timestamp.json")
+
+            GlobalScope.launch {
+                val allDefs = mutableListOf<Map<String, Any?>>()
+                for (id in 0 until Cache.getRenderAnimationDefinitionsSize()) {
+                    val def = RenderAnimationDefinition.forId(id) ?: continue
+                    val usedByItemIds = (0 until Cache.getItemDefinitionsSize()).filter { itemId ->
+                        val itemDef = ItemDefinition.forId(itemId) ?: return@filter false
+                        itemDef.renderAnimationId == id
+                    }
+
+                    if (usedByItemIds.isEmpty()) continue
+
+                    val defMap = mutableMapOf<String, Any?>(
+                        "usedByItems" to usedByItemIds
+                    )
+
+                    for (prop in def::class.memberProperties) {
+                        prop.isAccessible = true
+                        try {
+                            val value = prop.getter.call(def)
+                            defMap[prop.name] = when (value) {
+                                is Array<*> -> value.map { it?.toString() ?: "null" }
+                                is IntArray -> value.toList()
+                                is ShortArray -> value.toList().map { it.toInt() }
+                                is ByteArray -> value.toList()
+                                is BooleanArray -> value.toList()
+                                else -> value
+                            }
+                        } catch (e: Exception) {
+                            defMap[prop.name] = "Error: ${e.message}"
+                        }
+                    }
+
+                    allDefs.add(defMap)
+                }
+
+                try {
+                    dumpFile.writeText(gson.toJson(allDefs))
+                    player.debug("Render anims dumped to ${dumpFile.path}")
+                } catch (e: Exception) {
+                    player.debug("Failed to dump render anims: ${e.message}")
+                }
+            }
+        }
 
         define(
             name = "droptabledesc",
