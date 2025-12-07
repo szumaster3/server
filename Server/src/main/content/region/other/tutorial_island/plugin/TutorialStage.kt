@@ -1238,14 +1238,14 @@ object TutorialStage {
     fun completeTutorial(player: Player) {
         if (player.rights != Rights.ADMINISTRATOR) {
             queueScript(player, 1, QueueStrength.SOFT) {
-                setAttribute(player, "/save:${GameAttributes.TUTORIAL_STAGE}", 71)
+                setAttribute(player, GameAttributes.TUTORIAL_STAGE, 71)
                 load(player, 71)
                 player.teleporter.send(Location.create(3141, 3089, 0))
                 return@queueScript stopExecuting(player)
             }
         } else {
-            setAttribute(player, "/save:${GameAttributes.TUTORIAL_STAGE}", 73)
-            setAttribute(player, "/save:tutorial:complete", true)
+            setAttribute(player, GameAttributes.TUTORIAL_STAGE, 73)
+            setAttribute(player, GameAttributes.TUTORIAL_COMPLETE, true)
             setVarbit(player, FLASHING_ICON, 0)
             setVarp(player, 281, 1000, true)
             setVarbit(player, 4895, 0, true)
