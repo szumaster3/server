@@ -340,21 +340,6 @@ public final class Appearance {
     }
 
     /**
-     * Hold tog bowl.
-     */
-    public void holdTogBowl() {
-        player.animate(Animation.create(8998));
-        player.getEquipment().replace(new Item(4704), 3);
-        player.getAppearance().setStandAnimation(8998);
-        player.getAppearance().setWalkAnimation(8997);
-        player.getAppearance().setRunAnimation(9004);
-        player.getAppearance().setTurn180(9004);
-        player.getAppearance().setTurn90ccw(9004);
-        player.getAppearance().setTurn90cw(9004);
-        player.getAppearance().setStandTurnAnimation(9004);
-    }
-
-    /**
      * Gets player.
      *
      * @return the player

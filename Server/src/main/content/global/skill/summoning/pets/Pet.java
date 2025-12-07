@@ -104,9 +104,6 @@ public final class Pet extends Familiar {
         if (newItemId == -1) {
             return;
         }
-        if (pet.isKitten(itemId)) {
-            owner.incrementAttribute("/save:stats_manager:cats_raised");
-        }
         owner.getFamiliarManager().removeDetails(this.getItemIdHash());
         owner.getFamiliarManager().dismiss();
         owner.getPacketDispatch().sendMessage("<col=ff0000>Your pet has grown larger.</col>");

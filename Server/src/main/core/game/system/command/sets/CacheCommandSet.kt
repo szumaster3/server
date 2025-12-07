@@ -383,6 +383,11 @@ class CacheCommandSet : CommandSet(Privilege.ADMIN) {
                 player.debug("Saved $found objects with option '$option' -> ${dump.path}")
             }
         }
+
+        /*
+         * Command for finding anim for items.
+         */
+
         define(
             name = "dumprenderanims",
             privilege = Privilege.ADMIN,
