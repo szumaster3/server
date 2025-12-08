@@ -64,11 +64,7 @@ class ZavisticRarveDialogues : DialogueFile() {
 
                 canStartMiniQuest -> showTopics(
                     Topic("I'm here about the sicks...err Zogres", 13, true),
-                    if (miniquestComplete) {
-                        Topic("I have a rather sandy problem that I'd like to palm off on you.",  18)
-                    } else {
-                        Topic("I have a rather sandy problem that I'd like to palm off on you.",  16)
-                    }
+                    Topic("I have a rather sandy problem that I'd like to palm off on you.",  if (miniquestComplete) 18 else 16)
                 )
 
                 hasMiniQuestDiaryItem -> {
