@@ -19,6 +19,7 @@ class ConstructGroundItem : OutgoingPacket<BuildItemContext> {
     }
 
     companion object {
+        @JvmStatic
         fun write(buffer: IoBuffer, item: Item): IoBuffer {
             val l = item.location
             buffer.put(33)

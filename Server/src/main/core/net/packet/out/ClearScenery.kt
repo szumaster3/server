@@ -19,6 +19,7 @@ class ClearScenery : OutgoingPacket<BuildSceneryContext> {
     }
 
     companion object {
+        @JvmStatic
         fun write(buffer: IoBuffer, scenery: Scenery): IoBuffer {
             val location = scenery.location
             return buffer.put(195) // Opcode

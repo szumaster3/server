@@ -19,6 +19,7 @@ class UpdateGroundItemAmount : OutgoingPacket<BuildItemContext> {
     }
 
     companion object {
+        @JvmStatic
         fun write(buffer: IoBuffer, item: Item, oldAmount: Int): IoBuffer {
             val l = item.location
             buffer.put(14).put((l.chunkOffsetX shl 4) or (l.chunkOffsetY and 0x7)).putShort(item.id).putShort(oldAmount).putShort(item.amount)

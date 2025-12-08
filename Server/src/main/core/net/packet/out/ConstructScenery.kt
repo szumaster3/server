@@ -19,6 +19,7 @@ class ConstructScenery : OutgoingPacket<BuildSceneryContext> {
     }
 
     companion object {
+        @JvmStatic
         fun write(buffer: IoBuffer, scenery: Scenery): IoBuffer {
             val l = scenery.location
             buffer.put(179).putA((scenery.type shl 2) or (scenery.rotation and 0x3))
