@@ -11,6 +11,7 @@ import core.game.world.map.Location
 import shared.consts.*
 
 class TribalTotemPlugin : InteractionListener {
+
     override fun defineListeners() {
 
         /*

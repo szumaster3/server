@@ -16,6 +16,7 @@ import shared.consts.Items
  * Represents the ancient pages.
  */
 class AncientPagePlugin : InteractionListener {
+
     override fun defineListeners() {
 
         /*

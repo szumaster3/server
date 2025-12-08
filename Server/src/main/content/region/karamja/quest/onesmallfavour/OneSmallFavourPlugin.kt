@@ -6,6 +6,7 @@ import core.game.interaction.InteractionListener
 import shared.consts.Items
 
 class OneSmallFavourPlugin : InteractionListener {
+
     override fun defineListeners() {
         on(Items.WEATHER_REPORT_4435, IntType.ITEM, "read") { player, _ ->
             sendDialogue(

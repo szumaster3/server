@@ -31,7 +31,7 @@ import shared.consts.Quests
  */
 class DragonSlayerPlugin : OptionHandler() {
     @Throws(Throwable::class)
-    override fun newInstance(arg: Any): Plugin<Any> {
+    override fun newInstance(arg: Any?): Plugin<Any> {
         // door.
         NPCDefinition.forId(747).handlers["option:trade"] = this
         SceneryDefinition.forId(2595).handlers["option:open"] = this
@@ -50,12 +50,6 @@ class DragonSlayerPlugin : OptionHandler() {
         // door.
         SceneryDefinition.forId(1747).handlers["option:climb-up"] = this
         SceneryDefinition.forId(25045).handlers["option:climb-down"] = this
-        // door.
-        SceneryDefinition.forId(2603).handlers["option:open"] = this
-        // chest.
-        SceneryDefinition.forId(2604).handlers["option:search"] = this
-        // chest.
-        SceneryDefinition.forId(2604).handlers["option:close"] = this
         // chest.
         SceneryDefinition.forId(1755).handlers["option:climb-up"] = this
         // dwarv mine
@@ -215,22 +209,6 @@ class DragonSlayerPlugin : OptionHandler() {
     private fun handleMelzarMaze(player: Player, node: Node, option: String, id: Int, quest: Quest): Boolean {
         when (id) {
             2605 -> climb(player, Animation(827), Location.create(2933, 9640, 0))
-            2604 ->
-                when (option) {
-                    "search" ->
-                        if (!player.inventory.containsItem(DragonSlayer.MAZE_PIECE)) {
-                            if (!player.inventory.add(DragonSlayer.MAZE_PIECE)) {
-                                GroundItemManager.create(DragonSlayer.MAZE_PIECE, player)
-                            }
-                            player.dialogueInterpreter.sendItemMessage(DragonSlayer.MAZE_PIECE.getId(), "You find a map piece in the chest.")
-                        } else {
-                            player.packetDispatch.sendMessage("You find nothing in the chest.")
-                        }
-                    "close" -> {
-                        player.packetDispatch.sendMessage("You shut the chest.")
-                        SceneryBuilder.replace((node as Scenery), node.transform(2603))
-                    }
-                }
             25045 -> {
                 if (player.location.getDistance(Location(2925, 3259, 1)) < 3) {
                     climb(player, Animation(828), Location.create(2924, 3258, 0))

@@ -35,186 +35,184 @@ class DragonSlayer : Quest(Quests.DRAGON_SLAYER, 18, 17, 2, Vars.VARP_QUEST_DRAG
 
     override fun drawJournal(player: Player, stage: Int) {
         super.drawJournal(player, stage)
-        when (getStage(player)) {
-            0 -> {
-                line(player, BLUE + "I can start this quest by speaking to the " + RED + "Guildmaster " + BLUE + "in",4 + 7)
-                line(player,BLUE + "the " + RED + "Champions' Guild" + BLUE + " , south-west of Varrock.", 5 + 7)
-                line(player,BLUE + "I will need to be able to defeat a " + RED + "level 83 dragon.",  6 + 7)
-                if (player.questRepository.points < 32) {
-                    line(player,BLUE + "To enter the Champions' Guild I need" + RED + " 32 Quest Points.", 7 + 7)
-                } else {
-                    line(player,"<str>To enter the Champions' Guild I need 32 Quest Points.", 7 + 7)
-                }
+        var line = 11
+
+        if (stage == 0) {
+            line(player, "I can start this quest by speaking to the !!Guildmaster?? in", line++)
+            line(player, "the !!Champions' Guild??, south-west of !!Varrock??.", line++)
+            line(player, "I will need to be able to defeat a !!level 83 dragon??.", line++)
+
+            if (player.questRepository.points < 32) {
+                line(player, "To enter the Champions' Guild I need !!32 Quest Points??.", line++)
+            } else {
+                line(player, "To enter the Champions' Guild I need 32 Quest Points.", line++, true)
+            }
+            line++
+        }
+
+        if (stage == 10) {
+            line(player, "The Guildmaster of the Champions' Guild said I could earn", line++, true)
+            line(player, "the right to wear rune armour if I went on a quest for", line++, true)
+            line(player, "!!Oziach??, who makes the armour.", line++, true)
+            line(player, "I should speak to !!Oziach??, who lives by the cliffs to the", line++)
+            line(player, "west of !!Edgeville??.", line++)
+            line++
+        }
+
+        if (stage == 15) {
+            line(player, "The Guildmaster of the Champions' Guild said I could earn", line++, true)
+            line(player, "the right to wear rune armour if I went on a quest for", line++, true)
+            line(player, "Oziach, who makes the armour.", line++, true)
+            line(player, "I spoke to Oziach in !!Edgeville??. He told me to slay the", line++, true)
+            line(player, "!!dragon?? of !!Crandor island??.", line++, true)
+            line(player, "I should return to the !!Champions' Guild Guildmaster?? for", line++)
+            line(player, "more detailed instructions.", line++)
+            line++
+        }
+
+        if (stage == 20) {
+            line(player, "The Guildmaster of the Champions' Guild said I could earn", line++, true)
+            line(player, "the right to wear rune armour if I went on a quest for", line++, true)
+            line(player, "Oziach, who makes the armour.", line++, true)
+            line(player, "I spoke to Oziach in Edgeville. He told me to slay the", line++, true)
+            line(player, "dragon of Crandor island.", line++, true)
+            line(player, "The Champions' Guild Guildmaster gave me more detailed", line++, true)
+            line(player, "instructions.", line++, true)
+            line(player, "To defeat the dragon I will need to find a !!map?? to !!Crandor??,", line++)
+            line(player, "a !!ship??, a !!captain?? to take me there and some kind of", line++)
+            line(player, "!!protection?? against the dragon's breath.", line++)
+
+            // Map pieces.
+            if (!player.inventory.containsItem(MAZE_PIECE) && !player.bank.containsItem(MAZE_PIECE)) {
+                line(player, "One-third of the map is in !!Melzar's Maze?? near !!Rimmington??.", line++)
+            } else {
+                line(player, "I found the piece of the map hidden in !!Melzar's Maze??.", line++, true)
             }
 
-            10 -> {
-                line(player, "<str>The Guildmaster of the Champions' Guild said I could earn", 4 + 7)
-                line(player, "<str>the right to wear rune armour if I went on a quest for", 5 + 7)
-                line(player, "<str>Oziach, who makes the armour.", 6 + 7)
-                line(player, BLUE + "I should speak to " + RED + "Oziach" + BLUE + ", who lives by the cliffs to the", 7 + 7)
-                line(player, BLUE + "west of " + RED + "Edgeville.", 8 + 7)
+            // Oracle Ice mountain.
+            if (!player.inventory.containsItem(MAGIC_PIECE) && !player.bank.containsItem(MAGIC_PIECE)) {
+                line(player, "One-third of the map is hidden and only the !!Oracle?? on", line++)
+                line(player, "!!Ice Mountain?? will know where it is.", line++)
+            } else {
+                line(player, "I found the piece of the map that was hidden beneath !!Ice", line++, true)
+                line(player, "Mountain??.", line++, true)
             }
 
-            15 -> {
-                line(player, "<str>The Guildmaster of the Champions' Guild said I could earn", 4 + 7)
-                line(player, "<str>the right to wear rune armour if I went on a quest for", 5 + 7)
-                line(player, "<str>Oziach, who makes the armour.", 6 + 7)
-                line(player, "<str>I spoke to Oziach in Edgeville. He told me to slay the", 7 + 7)
-                line(player, "<str>dragon of Crandor island.", 8 + 7)
-                line(player, BLUE + "I should return to the " + RED + "Champions' Guild Guildmaster " + BLUE + "for", 9 + 7)
-                line(player, BLUE + "more detailed instructions.", 10 + 7)
+            // Goblin Wormbrain.
+            if (!player.inventory.containsItem(WORMBRAIN_PIECE) && !player.bank.containsItem(WORMBRAIN_PIECE)) {
+                line(player, "One-third of the map was stolen by a !!goblin?? from the", line++)
+                line(player, "!!Goblin Village??.", line++)
+            } else {
+                line(player, "I found the piece of the map that the goblin !!Wormbrain??", line++, true)
+                line(player, "stole.", line++, true)
             }
 
-            20 -> {
-                line(player, "<str>The Guildmaster of the Champions' Guild said I could earn", 4 + 7)
-                line(player, "<str>the right to wear rune armour if I went on a quest for", 5 + 7)
-                line(player, "<str>Oziach, who makes the armour.", 6 + 7)
-                line(player, "<str>I spoke to Oziach in Edgeville. He told me to slay the", 7 + 7)
-                line(player, "<str>dragon of Crandor island.", 8 + 7)
-                line(player, "<str>The Champions' Guild Guildmaster gave me more detailed", 9 + 7)
-                line(player, "<str>instructions.", 10 + 7)
-                line(player, BLUE + "To defeat the dragon I will need to find a " + RED + "map " + BLUE + "to Crandor, a", 11 + 7)
-                line(player, RED + "ship" + BLUE + ", a " + RED + "captain " + BLUE + "to take me there and some kind of", 12 + 7)
-                line(player, RED + "protection " + BLUE + "against the dragon's breath.", 13 + 7)
-                if (!player.inventory.containsItem(MAZE_PIECE) && !player.bank.containsItem(MAZE_PIECE)) {
-                    line(player, BLUE + "One-third of the map is in " + RED + "Melzar's Maze" + BLUE + ", near", 14 + 7)
-                    line(player, RED + "Rimmington" + ".", 15 + 7)
-                } else {
-                    line(player, "<str>I found the piece of the map that was hidden in Melzar's", 14 + 7)
-                    line(player, "<str>Maze.", 15 + 7)
-                }
-                if (!player.inventory.containsItem(MAGIC_PIECE) && !player.bank.containsItem(MAGIC_PIECE)) {
-                    line(player, BLUE + "One-third of the map is hidden and only the " + RED + "Oracle " + BLUE + "on " + RED + "Ice", 16 + 7)
-                    line(player, RED + "Mountain" + BLUE + " will know where it is.", 17 + 7)
-                } else {
-                    line(player, "<str>I found the piece of the map that was hidden beneath Ice", 16 + 7)
-                    line(player, "<str>Mountain.", 18 + 7)
-                }
-                if (!player.inventory.containsItem(WORMBRAIN_PIECE) && !player.bank.containsItem(WORMBRAIN_PIECE)) {
-                    line(player, BLUE + "One-third of the map was stolen by a " + RED + "goblin " + BLUE + "from the", 18 + 7)
-                    line(player, RED + "Goblin Village.", 19 + 7)
-                } else {
-                    line(player, "<str>I found the piece of the map that the goblin, Wormbrain,", 18 + 7)
-                    line(player, "<str>stole.", 19 + 7)
-                }
-                if (!player.inventory.containsItem(SHIELD) && !player.bank.containsItem(SHIELD)) {
-                    line(player, BLUE + "I should ask the " + RED + "Duke of Lumbridge " + BLUE + "for an " + RED + "anti-", 20 + 7)
-                    line(player, RED + "dragonbreath shield.", 21 + 7)
-                } else {
-                    line(player, "<str>The Duke of Lumbridge gave me an anti-dragonbreath", 20 + 7)
-                    line(player, "<str>shield.", 21 + 7)
-                }
-                if (!player.savedData.questData.getDragonSlayerAttribute("ship")) {
-                    line(player, BLUE + "I should see if there is a " + RED + "ship " + BLUE + "for sale in " + RED + "Port Sarim", 22 + 7)
-                } else {
-                    line(player, "<str>I bought a ship in Port Sarim called the Lady Lumbridge.", 22 + 7)
-                    if (!player.savedData.questData.getDragonSlayerAttribute("repaired")) {
-                        line(player, "<str>I need to repair the hole in bottom of the ship.", 23 + 7)
-                    } else {
-                        line(player, "<str>I have repaired my ship using wooden planks and steel", 23 + 7)
-                        line(player, "<str>nails.", 24 + 7)
-                    }
-                }
+            // Anti-dragon shield.
+            if (!player.inventory.containsItem(SHIELD) && !player.bank.containsItem(SHIELD)) {
+                line(player, "I should ask the !!Duke of Lumbridge?? for an !!anti-dragon", line++)
+                line(player, "shield??.", line++)
+            } else {
+                line(player, "The Duke of Lumbridge gave me an !!anti-dragonbreath shield??.", line++, true)
             }
 
-            30 -> {
-                line(player, "<str>The Guildmaster of the Champions' Guild said I could earn", 4 + 7)
-                line(player, "<str>the right to wear rune armour if I went on a quest for", 5 + 7)
-                line(player, "<str>Oziach, who makes the armour.", 6 + 7)
-                line(player, "<str>I spoke to Oziach in Edgeville. He told me to slay the", 7 + 7)
-                line(player, "<str>dragon of Crandor island.", 8 + 7)
-                line(player, "<str>The Champions' Guild Guildmaster told me I had to find", 9 + 7)
-                line(player, "<str>three pieces of a map to Crandor, a ship, a captain to take", 10 + 7)
-                line(player, "<str>me there and a shield to protect me from the dragon's", 11 + 7)
-                line(player, "<str>breath.", 12 + 7)
-                line(player, "<str>I found the piece of the map that was hidden in Melzar's", 13 + 7)
-                line(player, "<str>Maze.", 14 + 7)
-                line(player, "<str>I found the piece of the map that was hidden beneath Ice", 15 + 7)
-                line(player, "<str>Mountain.", 16 + 7)
-                line(player, "<str>I found the piece of the map that the goblin, Wormbrain,", 17 + 7)
-                line(player, "<str>stole.", 18 + 7)
-                line(player, "<str>The Duke of Lumbridge gave me an anti-dragonbreath", 19 + 7)
-                line(player, "<str>shield.", 20 + 7)
-                line(player, "<str>I bought a ship in Port Sarim called the Lady Lumbridge", 21 + 7)
-                line(player, "<str>I have repaired my ship using wooden planks and steel", 22 + 7)
-                line(player, "<str>nails.", 23 + 7)
-                line(player, "<str>Captain Ned from Draynor Village has agreed to sail the", 24 + 7)
-                line(player, "<str>ship to Crandor for me.", 25 + 7)
-                line(player, BLUE + "Now I should go to my ship in " + RED + "Port Sarim " + BLUE + "and set sail for", 26 + 7)
-                line(player, RED + "Crandor" + BLUE + "!", 27 + 7)
-            }
-
-            40 -> {
-                line(player, "<str>The Guildmaster of the Champions' Guild said I could earn", 4 + 7)
-                line(player, "<str>the right to wear rune armour if I went on a quest for", 5 + 7)
-                line(player, "<str>Oziach, who makes the armour.", 6 + 7)
-                line(player, "<str>I spoke to Oziach in Edgeville. He told me to slay the", 7 + 7)
-                line(player, "<str>dragon of Crandor island.", 8 + 7)
-                line(player, "<str>The Champions' Guild Guildmaster told me I had to find", 9 + 7)
-                line(player, "<str>three pieces of a map to Crandor, a ship, a captain to take", 10 + 7)
-                line(player, "<str>me there and a shield to protect me from the dragon's", 11 + 7)
-                line(player, "<str>breath.", 12 + 7)
-                line(player, "<str>I found the piece of the map that was hidden in Melzar's", 13 + 7)
-                line(player, "<str>Maze.", 14 + 7)
-                line(player, "<str>I found the piece of the map that was hidden beneath Ice", 15 + 7)
-                line(player, "<str>Mountain.", 16 + 7)
-                line(player, "<str>I found the piece of the map that the goblin, Wormbrain,", 17 + 7)
-                line(player, "<str>stole.", 18 + 7)
-                line(player, "<str>The Duke of Lumbridge gave me an anti-dragonbreath", 19 + 7)
-                line(player, "<str>shield.", 20 + 7)
-                if (!player.getAttribute("demon-slayer:memorize", false)) {
-                    if (!inInventory(player, Items.ELVARGS_HEAD_11279)) {
-                        line(player, BLUE + "Now all I need to do is kill the " + RED + "dragon" + BLUE + "!", 21 + 7)
-                    } else {
-                        line(
-                            player, BLUE + "I have slain the dragon! Now I just need to tell " + RED + "Oziach.", 21 + 7
-                        )
-                    }
+            // Buy, repair ship.
+            if (!player.savedData.questData.getDragonSlayerAttribute("ship")) {
+                line(player, "I should see if there is a !!ship?? for sale in !!Port Sarim??.", line++)
+            } else {
+                line(player, "I bought a ship in !!Port Sarim?? called the !!Lady Lumbridge??.", line++, true)
+                if (!player.savedData.questData.getDragonSlayerAttribute("repaired")) {
+                    line(player, "I need to repair the hole in the bottom of the ship.", line++, true)
                 } else {
-                    line(player, "<str>I have found a secret passage leading from Karamja to", 21 + 7)
-                    line(player, "<str>Crandor, so I no longer need to worry about finding a", 22 + 7)
-                    line(player, "<str>seaworthy ship and captain to take me there.", 23 + 7)
-                    if (!inInventory(player, Items.ELVARGS_HEAD_11279)) {
-                        line(player, BLUE + "Now all I need to do is kill the " + RED + "dragon" + BLUE + "!", 24 + 7)
-                    } else {
-                        line(player, BLUE + "I have slain the dragon! Now I just need to tell " + RED + "Oziach.", 24 + 7)
-                    }
+                    line(player, "I have repaired my ship using !!wooden planks?? and !!steel nails??.", line++, true)
                 }
             }
+            line++
+        }
 
-            100 -> {
-                line(player, "<str>The Guildmaster of the Champions' Guild said I could earn", 4 + 7)
-                line(player, "<str>the right to wear rune armour if I went on a quest for", 5 + 7)
-                line(player, "<str>Oziach, who makes the armour.", 6 + 7)
-                line(player, "<str>I spoke to Oziach in Edgeville. He told me to slay the", 7 + 7)
-                line(player, "<str>dragon of Crandor island.", 8 + 7)
-                line(player, "<str>The Champions' Guild Guildmaster told me I had to find", 9 + 7)
-                line(player, "<str>three pieces of a map to Crandor, a ship, a captain to take", 10 + 7)
-                line(player, "<str>me there and a shield to protect me from the dragon's", 11 + 7)
-                line(player, "<str>breath.", 12 + 7)
-                line(player, "<str>I found the piece of the map that was hidden in Melzar's", 13 + 7)
-                line(player, "<str>Maze.", 14 + 7)
-                line(player, "<str>I found the piece of the map that was hidden beneath Ice", 15 + 7)
-                line(player, "<str>Mountain.", 16 + 7)
-                line(player, "<str>I found the piece of the map that the goblin, Wormbrain,", 17 + 7)
-                line(player, "<str>stole.", 18 + 7)
-                line(player, "<str>The Duke of Lumbridge gave me an anti-dragonbreath", 19 + 7)
-                line(player, "<str>shield.", 20 + 7)
-                line(player, "<str>I have found a secret passage leading from Karamja to", 21 + 7)
-                line(player, "<str>Crandor, so I no longer need to worry about finding a", 22 + 7)
-                line(player, "<str>seaworthy ship and captain to take me there.", 23 + 7)
-                line(player, "<str>I sailed to Crandor and killed the dragon. I am not a true", 24 + 7)
-                line(player, "<str>champion and have proved myself worthy to wear rune", 25 + 7)
-                line(player, "<str>platemail!", 26 + 7)
-                line(player, "<col=FF0000>QUEST COMPLETE!</col>", 28 + 7)
-                line(player, BLUE + "I gained " + RED + "2 Quest Points" + BLUE + ", " + RED + "18,650 Strength XP" + BLUE + ", " + RED + "18,650", 29 + 7)
-                line(player, RED + "Defence XP " + BLUE + "and the right to wear " + RED + "rune platebodies.", 30 + 7)
+        if (stage == 30) {
+            line(player, "The Guildmaster said I had to find three pieces of a map,", line++, true)
+            line(player, "a ship, a captain and a shield to protect me.", line++, true)
+            line(player, "I found the piece of the map hidden in Melzar's Maze.", line++, true)
+            line(player, "I found the piece hidden beneath Ice Mountain.", line++, true)
+            line(player, "I found the piece stolen by !!Wormbrain??.", line++, true)
+            line(player, "The Duke of Lumbridge gave me an anti-dragonbreath shield.", line++, true)
+            line(player, "I bought a ship in Port Sarim called the Lady Lumbridge.", line++, true)
+            line(player, "I repaired the ship using wooden planks and steel nails.", line++, true)
+            line(player, "!!Captain Ned?? has agreed to sail the ship to !!Crandor?? for me.", line++, true)
+            line(player, "Now I should go to my ship in !!Port Sarim?? and set sail for", line++)
+            line(player, "!!Crandor??!", line++)
+            line++
+        }
+
+        if (stage == 40) {
+            line(player, "I found all three map pieces and obtained a dragon shield.", line++, true)
+
+            if (!player.getAttribute("demon-slayer:memorize", false)) {
+                if (!inInventory(player, Items.ELVARGS_HEAD_11279)) {
+                    line(player, "Now all I need to do is kill the !!dragon??!", line++)
+                } else {
+                    line(player, "I have slain the !!dragon??! Now I should tell !!Oziach??.", line++)
+                }
+            } else {
+                line(player, "I found a !!secret passage?? between !!Karamja?? and !!Crandor??,", line++, true)
+                line(player, "so I no longer need a seaworthy ship to get there.", line++, true)
+
+                if (!inInventory(player, Items.ELVARGS_HEAD_11279)) {
+                    line(player, "Now all I need to do is kill the !!dragon??!", line++)
+                } else {
+                    line(player, "I have slain the !!dragon??! Now I should tell !!Oziach??.", line++)
+                }
             }
+            line++
+        }
+
+        if (stage == 100) {
+            line(player, "According to the !!Guildmaster of the Champions' Guild??,", line++, true)
+            line(player, "I could earn the right to wear !!rune armour?? if I went on a quest", line++, true)
+            line(player, "for !!Oziach??, who makes the armour.", line++, true)
+            line(player, "I spoke to !!Oziach?? in !!Edgeville??. He told me to slay the", line++, true)
+            line(player, "!!dragon of Crandor island??.", line++, true)
+            line(player, "The Champions' Guild Guildmaster told me I had to find three pieces", line++, true)
+            line(player, "of a !!map?? to !!Crandor??, a !!ship??, a !!captain?? to take me there,", line++, true)
+            line(player, "and a !!shield?? to protect me from the dragon's breath.", line++, true)
+
+            line(player, "I found the piece of the map that was hidden in !!Melzar's Maze??.", line++, true)
+            line(player, "I found the piece of the map that was hidden beneath !!Ice Mountain??.", line++, true)
+            line(player, "I found the piece of the map that the goblin, !!Wormbrain??, stole.", line++, true)
+            line(player, "The !!Duke of Lumbridge?? gave me an !!anti-dragonbreath shield??.", line++, true)
+
+            line(player, "I have found a secret passage leading from !!Karamja?? to !!Crandor??,", line++, true)
+            line(player, "so I no longer need to worry about finding a seaworthy ship and captain.", line++, true)
+            line(player, "I sailed to !!Crandor?? and killed the !!dragon??. I am not a true", line++, true)
+            line(player, "champion and have proved myself worthy to wear !!rune platebody??.", line++, true)
+
+            line(player, "<col=FF0000>QUEST COMPLETE!</col>", line++, false)
+            line(player, "I gained !!2 Quest Points??, !!18,650 Strength XP??, !!18,650 Defence XP??", line++, false)
+            line(player, "and the right to wear !!rune platebodies??.", line++, false)
         }
     }
 
-    override fun newInstance(arg: Any?): Quest {
-        definePlugins(DragonSlayerPlugin(), MagicDoorPlugin(), DragonSlayerCutscene(), MazeDemonNPC(), MazeGhostNPC(), MazeSkeletonNPC(), MazeZombieNPC(), MelzarTheMadNPC(), WormbrainNPC(), ZombieRatNPC(), GuildmasterDialogue(), ElvargNPC(), WormbrainDialogue(), OziachDialogue(), DukeHoracioDialogue(), CabinBoyDialogue())
+
+    @Throws(Throwable::class)
+    override fun newInstance(`object`: Any?): Quest {
+        definePlugins(
+            DragonSlayerPlugin(),
+            MagicDoorPlugin(),
+            DragonSlayerCutscene(),
+            MazeDemonNPC(),
+            MazeGhostNPC(),
+            MazeSkeletonNPC(),
+            MazeZombieNPC(),
+            MelzarTheMadNPC(),
+            WormbrainNPC(),
+            ZombieRatNPC(),
+            GuildmasterDialogue(),
+            ElvargNPC(),
+            WormbrainDialogue(),
+            OziachDialogue(),
+            DukeHoracioDialogue(),
+            CabinBoyDialogue()
+        )
         return this
     }
 

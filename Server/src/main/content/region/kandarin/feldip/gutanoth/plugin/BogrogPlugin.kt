@@ -13,6 +13,7 @@ import shared.consts.NPCs
  * Handles Bogrog npc.
  */
 class BogrogPlugin : InteractionListener {
+
     override fun defineListeners() {
 
         /*

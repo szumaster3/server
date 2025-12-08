@@ -10,6 +10,7 @@ import core.game.node.entity.player.Player
 import shared.consts.Items
 
 class NulodionsNotes : InteractionListener {
+
     companion object {
         private val TITLE = "Nulodion's notes"
         private val CONTENTS =

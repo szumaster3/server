@@ -15,6 +15,7 @@ import shared.consts.Items
 import shared.consts.Quests
 
 class HarralanderTarMakePlugin : InteractionListener {
+
     override fun defineListeners() {
         onUseWith(IntType.ITEM, tar, Items.SWAMP_TAR_1939) { player, used, _ ->
             var tar = TarItem.forId(used.id)

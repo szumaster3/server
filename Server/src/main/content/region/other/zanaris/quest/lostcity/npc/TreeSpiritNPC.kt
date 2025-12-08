@@ -12,17 +12,10 @@ import shared.consts.NPCs
 import shared.consts.Quests
 
 @Initializable
-class TreeSpiritNPC(
-    id: Int = 0,
-    location: Location? = null,
-) : AbstractNPC(id, location) {
+class TreeSpiritNPC(id: Int = 0, location: Location? = null) : AbstractNPC(id, location) {
     var target: Player? = null
 
-    override fun construct(
-        id: Int,
-        location: Location,
-        vararg objects: Any,
-    ): AbstractNPC = TreeSpiritNPC(id, location)
+    override fun construct(id: Int, location: Location, vararg objects: Any): AbstractNPC = TreeSpiritNPC(id, location)
 
     override fun getIds(): IntArray = intArrayOf(NPCs.TREE_SPIRIT_655)
 

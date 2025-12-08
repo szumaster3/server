@@ -18,7 +18,6 @@ import shared.consts.Scenery
 /**
  * A plugin that handles the magic door used in the dragon slayer.
  */
-@Initializable
 class MagicDoorPlugin : UseWithHandler(*IDS) {
 
     companion object {

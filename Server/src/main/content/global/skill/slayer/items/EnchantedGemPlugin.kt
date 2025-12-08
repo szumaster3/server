@@ -15,6 +15,7 @@ import shared.consts.Items
 import shared.consts.NPCs
 
 class EnchantedGemPlugin : InteractionListener {
+
     override fun defineListeners() {
         /*
          * Handles interaction with enchanted gem.

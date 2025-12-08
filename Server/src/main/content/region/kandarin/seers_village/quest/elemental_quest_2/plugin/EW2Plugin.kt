@@ -13,6 +13,7 @@ import core.game.world.map.Location
 import shared.consts.*
 
 class EW2Plugin : InteractionListener {
+
     init {
         EW2Utils.JigCartNPC.init()
     }

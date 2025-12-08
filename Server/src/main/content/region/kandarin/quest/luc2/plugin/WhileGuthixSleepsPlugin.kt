@@ -11,6 +11,7 @@ import core.game.world.update.flag.context.Animation
 import shared.consts.*
 
 class WhileGuthixSleepsPlugin : InteractionListener {
+
     override fun defineListeners() {
         on(NPCs.KHAZARD_LAUNDERER_8428, IntType.NPC, "talk-to") { player, _ ->
             openDialogue(player, KhazardLaundererDialogue())

@@ -10,6 +10,7 @@ import core.game.node.entity.player.Player
 import shared.consts.Items
 
 class DMCManual : InteractionListener {
+
     companion object {
         private val TITLE = "Dwarf multicannon manual"
         private val CONTENTS =

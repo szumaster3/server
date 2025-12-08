@@ -19,6 +19,7 @@ import shared.consts.Graphics
 import shared.consts.Items
 
 class TrickOrTreatHandler : InteractionListener {
+
     override fun defineListeners() {
         on(IntType.NPC, "trick-or-treat") { player, node ->
             val hasDone5 = getDailyTrickOrTreats(player) == 5

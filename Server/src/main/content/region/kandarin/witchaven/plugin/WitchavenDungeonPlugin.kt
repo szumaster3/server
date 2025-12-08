@@ -9,7 +9,6 @@ import shared.consts.Scenery
 
 class WitchavenDungeonPlugin : InteractionListener {
 
-
     override fun defineListeners() {
 
         /*

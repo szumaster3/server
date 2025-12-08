@@ -71,8 +71,14 @@ class ModernSpellbookTeleport : SpellListener("modern") {
 
         onCast(ModernSpells.CAMELOT_TELEPORT, NONE) { player, _ ->
             requires(player = player, magicLevel = 45, runes = arrayOf(Item(Items.AIR_RUNE_556, 5), Item(Items.LAW_RUNE_563)))
-            val alternateTeleport = getAttribute(player, GameAttributes.ATTRIBUTE_CAMELOT_ALT_TELE, false)
-            val dest = if (alternateTeleport) Location.create(2731, 3485, 0) else Location.create(2758, 3478, 0)
+            val alternateTeleport = getAttribute(player, GameAttributes.ATTRIBUTE_CAMELOT_ALT_TELE, false) ||
+                    inEquipment(player, Items.SEERS_HEADBAND_3_14641)
+            val dest = if (alternateTeleport) {
+                Location.create(2731, 3485, 0)
+                    .transform(Location.getRandomLocation(player.location, 1, true))
+            } else {
+                Location.create(2758, 3478, 0)
+            }
             sendTeleport(player = player, xp = 55.5, location = dest)
             finishDiaryTask(player, DiaryType.SEERS_VILLAGE, 1, 5)
         }

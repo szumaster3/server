@@ -9,6 +9,7 @@ import core.game.interaction.InteractionListener
 import core.game.node.scenery.Scenery
 
 class ThievingOptionPlugin : InteractionListener {
+
     override fun defineListeners() {
 
         /*

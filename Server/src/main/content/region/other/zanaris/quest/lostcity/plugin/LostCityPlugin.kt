@@ -17,12 +17,10 @@ import core.game.node.scenery.Scenery
 import core.game.system.task.Pulse
 import core.game.world.GameWorld
 import core.game.world.map.Location
-import core.plugin.Initializable
 import shared.consts.Items
 import shared.consts.NPCs
 import shared.consts.Quests
 
-@Initializable
 class LostCityPlugin : InteractionListener {
     init {
         SHAMUS.init()

@@ -5,11 +5,9 @@ import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.node.entity.player.Player
 import core.game.node.item.Item
-import core.plugin.Initializable
 import shared.consts.Items
 import shared.consts.Scenery
 
-@Initializable
 class ImplingJarCreationPlugin : InteractionListener {
 
     companion object {

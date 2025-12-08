@@ -12,6 +12,7 @@ import shared.consts.Quests
 import shared.consts.Scenery
 
 class MurderMysteryListeners : InteractionListener {
+
     override fun defineListeners() {
         class PaperInSackDialogue : DialogueFile() {
             override fun handle(

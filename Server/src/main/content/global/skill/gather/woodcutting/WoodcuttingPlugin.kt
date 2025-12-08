@@ -238,45 +238,58 @@ class WoodcuttingPlugin : InteractionListener {
     private fun calculateRewardAmount(player: Player, reward: Int): Int {
         var amount = 1
 
+        // Bark drop chance.
         if (reward == Items.BARK_3239 && RandomFunction.random(100) >= 10) {
             amount = 0
         }
 
+        // Bonus for Seers' Village diary and region.
         if (reward == Items.LOGS_1511 &&
-            isDiaryComplete(player, DiaryType.SEERS_VILLAGE, 1) &&
-            player.viewport.region!!.id == 10806)
-        {
+            (0..2).any { level -> isDiaryComplete(player, DiaryType.SEERS_VILLAGE, level) } &&
+            player.viewport.region?.id == 10806
+        ) {
             amount = 2
         }
+
+        // Bonus if wearing Seers' headband.
+        if (reward == Items.LOGS_1511 &&
+            inEquipment(player, Items.SEERS_HEADBAND_3_14641)
+        ) {
+            amount += 1
+        }
+
         return amount
     }
 
     private fun calculateExperience(player: Player, resource: WoodcuttingNode, amount: Int): Double {
-        var amount = amount
+        var actualAmount = amount
         var experience: Double = resource.experience
         val reward = resource.reward
-        if (player.location.regionId == 10300) {
-            return 1.0
-        }
 
+        // Minimal XP in restricted region
+        if (player.location.regionId == 10300) return 1.0
+
+        // Special case for Bark
         if (reward == Items.BARK_3239) {
-            if (amount >= 1) {
-                experience = 275.2
-            } else {
-                amount = 1
-            }
+            if (actualAmount >= 1) experience = 275.2 else actualAmount = 1
         }
 
+        // Bonus for Maple logs & Seers headband & diary
         if (reward == Items.MAPLE_LOGS_1517 &&
-            player.achievementDiaryManager
-                .getDiary(DiaryType.SEERS_VILLAGE)!!
-                .isComplete(1) &&
-            player.equipment.get(EquipmentContainer.SLOT_HAT) != null &&
-            DiaryManager(player).hasHeadband()
+            player.equipment.get(EquipmentContainer.SLOT_HAT)?.id == Items.SEERS_HEADBAND_3_14641 &&
+            isDiaryComplete(player, DiaryType.SEERS_VILLAGE, 1)
         ) {
             experience *= 1.10
         }
-        return experience * amount
+
+        // Extra bonus for Seers headband on normal logs/
+        if (reward == Items.LOGS_1511 &&
+            inEquipment(player, Items.SEERS_HEADBAND_3_14641)
+        ) {
+            experience *= 1.05
+        }
+
+        return experience * actualAmount
     }
 
     private fun WoodcuttingNode.isJungleTree() = this.identifier.toInt() == 4

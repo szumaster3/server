@@ -10,6 +10,7 @@ import core.game.world.map.Location
 import shared.consts.*
 
 class PiscatorisPlugin : InteractionListener {
+
     companion object {
         private const val NET_SCENERY = Scenery.NET_14973
         private const val EMPTY_NET_SCENERY = Scenery.NET_14972
