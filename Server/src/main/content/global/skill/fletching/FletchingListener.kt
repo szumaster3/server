@@ -453,7 +453,7 @@ class FletchingListener : InteractionListener {
 
                         remaining -= batch
                         if (remaining > 0) {
-                            delayScript(player, 2)
+                            delayClock(player, Clocks.SKILLING, 2)
                             setCurrentScriptState(player, 0)
                             delayScript(player, 2)
                         } else stopExecuting(player)

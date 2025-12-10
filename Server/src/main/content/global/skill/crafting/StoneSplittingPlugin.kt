@@ -121,6 +121,7 @@ class StoneSplittingPlugin : InteractionListener {
                             return@queueScript false
                         }
 
+                        playAudio(player, Sounds.SPLIT_ROCK_1708)
                         animate(player, Animations.CHISEL_OYSTER_PEARL_4470)
                         delayClock(player, Clocks.SKILLING, 2)
 
@@ -141,6 +142,7 @@ class StoneSplittingPlugin : InteractionListener {
                         }
 
                         return@queueScript if (remaining > 0 && inInventory(player, with.id)) {
+                            delayClock(player, Clocks.SKILLING, 2)
                             setCurrentScriptState(player, 0)
                             delayScript(player, 2)
                             true

@@ -81,6 +81,7 @@ class WeavingPlugin : InteractionListener {
                         remaining--
 
                         if (remaining > 0 && inInventory(player, required.id, required.amount)) {
+                            delayClock(player, Clocks.SKILLING, 5)
                             setCurrentScriptState(player, 0)
                             delayScript(player, 5)
                         } else {

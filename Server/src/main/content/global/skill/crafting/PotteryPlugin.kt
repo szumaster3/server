@@ -144,6 +144,7 @@ class PotteryPlugin : InteractionListener {
                         }
 
                         if (remaining > 0 && inInventory(player, pottery.unfinished.id)) {
+                            delayClock(player, Clocks.SKILLING, 5)
                             setCurrentScriptState(player, 0)
                             delayScript(player, 5)
                             return@queueScript true
