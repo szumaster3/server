@@ -70,7 +70,7 @@ class JewelleryCraftingPlugin : InteractionListener, InterfaceListener {
             val productId = if (amuletItem.id == Items.ONYX_AMULET_6579) Items.ONYX_AMULET_6579 else amuletItem.id
             val data = CraftingDefinition.JewelleryItem.forProduct(productId) ?: return@onUseWith false
             if (getStatLevel(player, Skills.CRAFTING) < data.level) {
-                sendMessage(player, "You need a crafting level of at least ${data.level} to do that.")
+                sendMessage(player, "You need a Crafting level of at least ${data.level} to do that.")
                 return@onUseWith false
             }
 
@@ -173,7 +173,7 @@ class JewelleryCraftingPlugin : InteractionListener, InterfaceListener {
 
             if (getStatLevel(player, Skills.CRAFTING) < data.level) {
                 val an = if (StringUtils.isPlusN(name)) "an" else "a"
-                sendMessage(player, "You need a crafting level of ${data.level} to craft $an $name.")
+                sendMessage(player, "You need a Crafting level of ${data.level} to craft $an $name.")
                 return@on true
             }
 

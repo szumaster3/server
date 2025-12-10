@@ -217,7 +217,7 @@ class WoodcuttingPlugin : InteractionListener {
             return false
         }
         if (getStatLevel(player, Skills.WOODCUTTING) < resource.level) {
-            sendMessage(player, "You need a woodcutting level of " + resource.level + " to chop this tree.")
+            sendMessage(player, "You need a Woodcutting level of " + resource.level + " to chop this tree.")
             return false
         }
         if (SkillingTool.getAxe(player) == null) {

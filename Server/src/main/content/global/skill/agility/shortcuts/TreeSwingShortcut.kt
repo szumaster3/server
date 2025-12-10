@@ -50,7 +50,7 @@ class TreeSwingShortcut : OptionHandler() {
                     }
 
                     if (getStatLevel(player, Skills.AGILITY) < 10) {
-                        sendDialogue(player, "You need an agility level of 10 to negotiate this obstacle.")
+                        sendDialogue(player, "You need an Agility level of 10 to negotiate this obstacle.")
                         return true
                     }
 

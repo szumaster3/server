@@ -101,6 +101,7 @@ class MerlinDialogue(player: Player? = null) : Dialogue(player) {
                         rewardXP(player!!, Skills.DEFENCE, 20.000)
                         setAttribute(player!!, GameAttributes.KW_COMPLETE, true)
                     }
+                    stage = END_DIALOGUE
                 }
                 // Changing the Respawn point.
                 200 -> if (player.properties.spawnLocation == ServerConstants.HOME_LOCATION) {

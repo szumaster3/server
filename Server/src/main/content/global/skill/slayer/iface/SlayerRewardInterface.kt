@@ -198,7 +198,7 @@ class SlayerRewardInterface : InterfaceListener {
         val mgr = SlayerManager.getInstance(player)
 
         if (mgr.slayerPoints < amount) {
-            sendMessage(player, "You need $amount slayer points in order to purchase this reward.")
+            sendMessage(player, "You need $amount Slayer points in order to purchase this reward.")
             return false
         }
 

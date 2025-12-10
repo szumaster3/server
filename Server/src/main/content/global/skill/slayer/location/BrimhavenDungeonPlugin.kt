@@ -83,7 +83,7 @@ class BrimhavenDungeonPlugin : InteractionListener {
 
         on(LOG_BALANCE, IntType.SCENERY, "walk-across") { player, node ->
             if (getStatLevel(player, Skills.AGILITY) < 30) {
-                sendMessage(player, "You need an agility level of 30 to cross this.")
+                sendMessage(player, "You need an Agility level of 30 to cross this.")
                 return@on true
             }
 

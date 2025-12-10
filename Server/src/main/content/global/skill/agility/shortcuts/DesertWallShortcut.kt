@@ -28,7 +28,7 @@ class DesertWallShortcut : OptionHandler() {
 
     override fun handle(player: Player, node: Node, option: String): Boolean {
         if (getStatLevel(player, Skills.AGILITY) < REQUIRED_AGILITY_LEVEL) {
-            sendMessage(player, "You need an agility level of at least $REQUIRED_AGILITY_LEVEL to do this.")
+            sendMessage(player, "You need an Agility level of at least $REQUIRED_AGILITY_LEVEL to do this.")
             return true
         }
 

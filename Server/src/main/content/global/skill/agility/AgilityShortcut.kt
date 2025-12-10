@@ -72,7 +72,7 @@ abstract class AgilityShortcut(
             return false
         }
         if (getStatLevel(player, Skills.AGILITY) < level) {
-            sendMessage(player, "You need an agility level of at least $level to negotiate this obstacle.")
+            sendMessage(player, "You need an Agility level of at least $level to negotiate this obstacle.")
             return false
         }
         return true

@@ -119,7 +119,7 @@ class KaqemeexDialogue(player: Player? = null) : Dialogue(player) {
             30 -> {
                 npc(
                     FaceAnim.FRIENDLY,
-                    "What, personally? No, ofcourse I didn't. However, our",
+                    "What, personally? No, of course I didn't. However, our",
                     "four fathers did. The first Druids of Guthix built many",
                     "stone circles across these lands over eight hundred",
                     "years ago.",
@@ -337,7 +337,7 @@ class KaqemeexDialogue(player: Player? = null) : Dialogue(player) {
             }
 
             1009 -> {
-                npc("Drink this poition to increase your Attack level.")
+                npc("Drink this potion to increase your Attack level.")
                 stage = 1010
             }
 
@@ -350,7 +350,7 @@ class KaqemeexDialogue(player: Player? = null) : Dialogue(player) {
                 npc(
                     "Once again, check the instructions found on the",
                     "Council's website for the levels needed to make a",
-                    "particulur potion.",
+                    "particular potion.",
                 )
                 stage = 1012
             }

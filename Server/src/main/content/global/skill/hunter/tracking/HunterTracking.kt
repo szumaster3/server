@@ -263,7 +263,7 @@ abstract class HunterTracking : OptionHandler() {
             "inspect", "search" -> {
                 if (!hasTrail(player)) {
                     if (player.skills.getLevel(Skills.HUNTER) < requiredLevel) {
-                        sendDialogue(player, "You need a hunter level of $requiredLevel to track these.")
+                        sendDialogue(player, "You need a Hunter level of $requiredLevel to track these.")
                         return true
                     }
                     generateTrail(node.asScenery(), player)

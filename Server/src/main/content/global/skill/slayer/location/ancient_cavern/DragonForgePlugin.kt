@@ -23,7 +23,7 @@ class DragonForgePlugin : InteractionListener {
             if (!hasRequirement(player, Quests.WHILE_GUTHIX_SLEEPS)) return@onUseWith false
 
             if (getStatLevel(player, Skills.SMITHING) < 92) {
-                sendMessage(player, "You need at least 92 smithing level to do this.")
+                sendMessage(player, "You need at least 92 Smithing level to do this.")
                 return@onUseWith false
             }
 

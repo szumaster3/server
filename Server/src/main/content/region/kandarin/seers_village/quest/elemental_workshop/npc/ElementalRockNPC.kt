@@ -47,7 +47,7 @@ class ElementalRockNPC(
             }
 
             if (player.skills.getStaticLevel(Skills.MINING) < 20) {
-                sendDialogue(player, "You need a mining level of at least 20 to mine elemental ore.")
+                sendDialogue(player, "You need a Mining level of at least 20 to mine elemental ore.")
                 return@on true
             }
 

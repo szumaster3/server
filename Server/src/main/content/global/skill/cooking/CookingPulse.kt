@@ -76,7 +76,7 @@ open class CookingPulse(
             }
 
             if (getStatLevel(player, Skills.COOKING) < properties!!.level) {
-                sendDialogue(player, "You need a cooking level of " + properties!!.level + " to cook this.")
+                sendDialogue(player, "You need a Cooking level of " + properties!!.level + " to cook this.")
                 return false
             }
 

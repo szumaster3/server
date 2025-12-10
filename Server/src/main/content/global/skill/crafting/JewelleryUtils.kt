@@ -85,7 +85,7 @@ object JewelleryUtils {
         val finalAmount = min(amount, amt)
 
         if (getStatLevel(player, Skills.CRAFTING) < data.level) {
-            sendMessage(player, "You need a crafting level of ${data.level} to craft this.")
+            sendMessage(player, "You need a Crafting level of ${data.level} to craft this.")
             return
         }
 

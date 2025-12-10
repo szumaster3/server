@@ -41,7 +41,7 @@ class LogSplittingPlugin : InteractionListener {
      */
     private fun logCutting(player: Player) {
         if (getStatLevel(player, Skills.WOODCUTTING) < 54) {
-            sendMessage(player, "You need a woodcutting level of 54 in order to do this.")
+            sendMessage(player, "You need a Woodcutting level of 54 in order to do this.")
             return
         }
 

@@ -154,7 +154,7 @@ class BrimhavenCourse : OptionHandler() {
     companion object {
         private fun handleHandHolds(player: Player, scenery: Scenery) {
             if (player.getSkills().getLevel(Skills.AGILITY) < 20) {
-                player.packetDispatch.sendMessage("You need an agility of at least 20 to get past this obstacle!")
+                player.packetDispatch.sendMessage("You need an Agility of at least 20 to get past this obstacle!")
                 return
             }
             var mod = 0

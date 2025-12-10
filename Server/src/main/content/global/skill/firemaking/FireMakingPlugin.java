@@ -94,7 +94,7 @@ public final class FireMakingPlugin extends SkillPulse<Item> {
 
         int requiredLevel = barbarianMode ? fire.getBarbarianLevel() : fire.getDefaultLevel();
         if (player.getSkills().getLevel(Skills.FIREMAKING) < requiredLevel) {
-            player.getPacketDispatch().sendMessage("You need a firemaking level of " + requiredLevel + " to light this log.");
+            player.getPacketDispatch().sendMessage("You need a Firemaking level of " + requiredLevel + " to light this log.");
             return false;
         }
 

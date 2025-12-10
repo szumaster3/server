@@ -35,7 +35,7 @@ class GlassblowingPlugin : InteractionListener, InterfaceListener {
             }
 
             if (!hasLevelDyn(player, Skills.CRAFTING, product.requiredLevel)) {
-                sendMessage(player, "You need a crafting level of ${product.requiredLevel} to make this.")
+                sendMessage(player, "You need a Crafting level of ${product.requiredLevel} to make this.")
                 return@on true
             }
 

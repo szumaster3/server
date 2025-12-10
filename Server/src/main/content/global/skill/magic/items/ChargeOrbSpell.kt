@@ -154,7 +154,7 @@ class ChargeOrbSpell : SpellListener("modern") {
                 var crafted = 0
                 queueScript(player, 0) {
                     if (!hasLevelDyn(player, Skills.MAGIC, spell.level)) {
-                        sendMessage(player, "You need a magic level of ${spell.level} to cast this spell.")
+                        sendMessage(player, "You need a Magic level of ${spell.level} to cast this spell.")
                         return@queueScript stopExecuting(player)
                     }
                     for (i in spell.requiredRunes.indices) {

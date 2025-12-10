@@ -227,10 +227,7 @@ class SmithingPlugin : InteractionListener {
                 return@onUseWith false
             }
             if (getStatLevel(player, Skills.SMITHING) < bar.level) {
-                sendDialogue(
-                    player,
-                    "You need a smithing level of at least " + bar.level + " to work " + getItemName(bar.product.id).lowercase() + "s.",
-                )
+                sendDialogue(player, "You need a Smithing level of at least " + bar.level + " to work " + getItemName(bar.product.id).lowercase() + "s.")
                 return@onUseWith false
             }
 

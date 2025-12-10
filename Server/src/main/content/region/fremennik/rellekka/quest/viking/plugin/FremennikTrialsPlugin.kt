@@ -166,7 +166,7 @@ class FremennikTrialsPlugin : InteractionListener {
 
         onUseWith(IntType.ITEM, UNSTRUNG_LYRE, GOLDEN_WOOL) { player, _, _ ->
             if (player.getSkills().getLevel(Skills.FLETCHING) < 25) {
-                sendDialogue(player, "You need 25 fletching to do this!")
+                sendDialogue(player, "You need 25 Fletching level to do this!")
                 return@onUseWith false
             }
 

@@ -401,7 +401,7 @@ class MiningPlugin : InteractionListener {
 
     fun checkRequirements(player: Player, resource: MiningNode, node: Node): Boolean {
         if (getDynLevel(player, Skills.MINING) < resource.level) {
-            sendMessage(player, "You need a mining level of ${resource.level} to mine this rock.")
+            sendMessage(player, "You need a Mining level of ${resource.level} to mine this rock.")
             return false
         }
         if (SkillingTool.getPickaxe(player) == null) {

@@ -233,7 +233,7 @@ class ElementalWorkshopPlugin : InteractionListener {
         onUseWith(IntType.SCENERY, Items.ELEMENTAL_METAL_2893, Scenery.WORKBENCH_3402) { player, used, workbench ->
 
             if (player.skills.getLevel(Skills.SMITHING) < 20) {
-                sendMessage(player, "You need a smithing level of 20 to create an elemental shield.")
+                sendMessage(player, "You need a Smithing level of 20 to create an elemental shield.")
                 return@onUseWith true
             }
 
@@ -339,7 +339,7 @@ class ElementalWorkshopPlugin : InteractionListener {
             player.faceLocation(Location.create(2726, 9875, 0))
 
             if (player.skills.getLevel(Skills.SMITHING) < 20) {
-                sendMessage(player, "You need a smithing level of 20 to smelt elemental ore.")
+                sendMessage(player, "You need a Smithing level of 20 to smelt elemental ore.")
                 return@onUseWith true
             }
 
@@ -498,7 +498,7 @@ class ElementalWorkshopPlugin : InteractionListener {
             }
 
             if (player.skills.getLevel(Skills.CRAFTING) < 20) {
-                sendMessage(player, "You need a crafting level of 20 to fix the bellows.")
+                sendMessage(player, "You need a Crafting level of 20 to fix the bellows.")
                 return@on true
             }
 

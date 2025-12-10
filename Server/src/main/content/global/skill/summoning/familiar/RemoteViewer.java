@@ -11,32 +11,46 @@ import core.net.packet.context.CameraContext;
 import core.net.packet.out.CameraViewPacket;
 
 /**
- * The type Remote viewer.
+ * Handles the remote viewing functionality for a player's familiar.
  */
 public final class RemoteViewer {
 
     /**
-     * The constant DIALOGUE_NAME.
+     * The dialogue name used to open the remote viewer interface.
      */
     public static final String DIALOGUE_NAME = "remote-view";
 
     /**
-     * The constant HEIGHT.
+     * The fixed camera height used for viewing.
      */
     public static final int HEIGHT = 1000;
 
+    /**
+     * The player using the remote viewer.
+     */
     private final Player player;
+
+    /**
+     * The familiar being sent to view remotely.
+     */
     private final Familiar familiar;
+
+    /**
+     * The animation performed by the familiar when viewing.
+     */
     private final Animation animation;
+
+    /**
+     * The type of view (direction or straight up).
+     */
     private final ViewType type;
 
     /**
-     * Instantiates a new Remote viewer.
-     *
-     * @param player    the player
-     * @param familiar  the familiar
-     * @param animation the animation
-     * @param type      the type
+     * Constructs a new RemoteViewer instance.
+     * @param player the player initiating the remote view.
+     * @param familiar the familiar to be sent.
+     * @param animation the animation to play for the familiar.
+     * @param type the direction or type of view.
      */
     public RemoteViewer(Player player, Familiar familiar, Animation animation, ViewType type) {
         this.player = player;
@@ -46,26 +60,25 @@ public final class RemoteViewer {
     }
 
     /**
-     * Create remote viewer.
-     *
-     * @param player    the player
-     * @param familiar  the familiar
-     * @param animation the animation
-     * @param type      the type
-     * @return the remote viewer
+     * Creates a new RemoteViewer instance.
+     * @param player the player initiating the remote view.
+     * @param familiar the familiar to be sent.
+     * @param animation the animation to play for the familiar.
+     * @param type the direction or type of view.
+     * @return a new RemoteViewer instance.
      */
     public static RemoteViewer create(final Player player, Familiar familiar, Animation animation, ViewType type) {
         return new RemoteViewer(player, familiar, animation, type);
     }
 
     /**
-     * Start viewing.
+     * Starts the remote viewing process.
      */
     public void startViewing() {
         player.lock();
         familiar.animate(animation);
         player.getPacketDispatch().sendMessage("You send the " + familiar.getName().toLowerCase() + " to fly " +
-            (type == ViewType.STRAIGHT_UP ? "directly up" : "to the " + type.name().toLowerCase()) + "...");
+                (type == ViewType.STRAIGHT_UP ? "directly up" : "to the " + type.name().toLowerCase()) + "...");
 
         GameWorld.getPulser().submit(new Pulse(5) {
             @Override
@@ -76,12 +89,14 @@ public final class RemoteViewer {
         });
     }
 
+    /**
+     * Handles the camera view logic and schedules a reset pulse.
+     */
     private void view() {
         if (!canView()) {
             return;
         }
         sendCamera(type.getXOffset(), type.getYOffset(), type.getXRot(), type.getYRot());
-
         GameWorld.getPulser().submit(new Pulse(13) {
             @Override
             public boolean pulse() {
@@ -91,101 +106,86 @@ public final class RemoteViewer {
         });
     }
 
+    /**
+     * Checks if the familiar can perform the remote view.
+     * @return true if the familiar is active and can fly, false otherwise
+     */
     private boolean canView() {
         player.getPacketDispatch().sendMessage("There seems to be an obstruction in the direction; the familiar cannot fly there");
         return familiar.isActive();
     }
 
+    /**
+     * Resets the camera, calls the familiar back, and unlocks the player.
+     */
     private void reset() {
         familiar.call();
         player.unlock();
         PacketRepository.send(CameraViewPacket.class, new CameraContext(player, CameraContext.CameraType.RESET, 0, 0, HEIGHT, 1, 100));
     }
 
+    /**
+     * Sends the camera position and rotation to the client.
+     * @param xOffset the x-axis offset from the familiar's target location
+     * @param yOffset the y-axis offset from the familiar's target location
+     * @param xRot the x-axis rotation
+     * @param yRot the y-axis rotation
+     */
     private void sendCamera(int xOffset, int yOffset, final int xRot, final int yRot) {
         final Location location = type.getLocationTransform(player);
         final int x = location.getX() + xOffset;
         final int y = location.getY() + yOffset;
 
         PacketRepository.send(CameraViewPacket.class, new CameraContext(player, CameraContext.CameraType.POSITION, x, y, HEIGHT, 1, 100));
-
         PacketRepository.send(CameraViewPacket.class, new CameraContext(player, CameraContext.CameraType.ROTATION, x + xRot, y + yRot, HEIGHT, 1, 90));
     }
 
     /**
-     * Open dialogue.
-     *
-     * @param player   the player
-     * @param familiar the familiar
+     * Opens the remote view dialogue for a player and their familiar.
+     * @param player the player opening the dialogue
+     * @param familiar the familiar to use
      */
     public static void openDialogue(final Player player, final Familiar familiar) {
         player.getDialogueInterpreter().open(DIALOGUE_NAME, familiar);
     }
 
     /**
-     * Gets player.
-     *
-     * @return the player
+     * @return the player using the remote viewer
      */
     public Player getPlayer() {
         return player;
     }
 
     /**
-     * Gets familiar.
-     *
-     * @return the familiar
+     * @return the familiar being used for remote viewing
      */
     public Familiar getFamiliar() {
         return familiar;
     }
 
     /**
-     * Gets animation.
-     *
-     * @return the animation
+     * @return the animation played by the familiar
      */
     public Animation getAnimation() {
         return animation;
     }
 
     /**
-     * Gets type.
-     *
-     * @return the type
+     * @return the type of view (direction or straight up)
      */
     public ViewType getType() {
         return type;
     }
 
     /**
-     * The enum View type.
+     * Represents the type of remote view (directional or straight up).
      */
     public enum ViewType {
 
-        /**
-         * North view type.
-         */
         NORTH(Direction.NORTH, 0, 0, 0, 0),
-
-        /**
-         * East view type.
-         */
         EAST(Direction.WEST, 0, 0, 0, 0),
-
-        /**
-         * South view type.
-         */
         SOUTH(Direction.SOUTH, 0, 0, 0, 0),
-
-        /**
-         * West view type.
-         */
         WEST(Direction.EAST, 0, 0, 0, 0),
-
-        /**
-         * Straight up view type.
-         */
         STRAIGHT_UP(null, 0, 0, 0, 0);
 
         private final Direction direction;
@@ -197,10 +197,9 @@ public final class RemoteViewer {
         }
 
         /**
-         * Gets location transform.
-         *
-         * @param player the player
-         * @return the location transform
+         * Computes the target location for this view type relative to the player.
+         * @param player the player performing the remote view
+         * @return the target location for the camera
          */
         public Location getLocationTransform(final Player player) {
             if (this == STRAIGHT_UP) {
@@ -210,54 +209,42 @@ public final class RemoteViewer {
         }
 
         /**
-         * Gets direction.
-         *
-         * @return the direction
+         * @return the direction associated with this view type
          */
         public Direction getDirection() {
             return direction;
         }
 
         /**
-         * Gets x offset.
-         *
-         * @return the x offset
+         * @return the x-axis offset for the camera
          */
         public int getXOffset() {
             return data[0];
         }
 
         /**
-         * Gets y offset.
-         *
-         * @return the y offset
+         * @return the y-axis offset for the camera
          */
         public int getYOffset() {
             return data[1];
         }
 
         /**
-         * Gets x rot.
-         *
-         * @return the x rot
+         * @return the x-axis rotation for the camera
          */
         public int getXRot() {
             return data[2];
         }
 
         /**
-         * Gets y rot.
-         *
-         * @return the y rot
+         * @return the y-axis rotation for the camera
          */
         public int getYRot() {
             return data[3];
         }
 
         /**
-         * Get data int [ ].
-         *
-         * @return the int [ ]
+         * @return the raw data array for offsets and rotations
          */
         public int[] getData() {
             return data;

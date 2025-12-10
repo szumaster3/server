@@ -31,7 +31,7 @@ class PressurePad : MovementHook {
                     if (AgilityHandler.hasFailed(player, 20, 0.25)) {
                         if (player.getSkills().getLevel(Skills.AGILITY) < 20) {
                             player.packetDispatch.sendMessage(
-                                "You need an agility of at least 20 to get past this trap!",
+                                "You need an Agility of at least 20 to get past this trap!",
                             )
                         }
                         var hit = player.getSkills().lifepoints / 12

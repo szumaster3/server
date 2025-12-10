@@ -223,7 +223,7 @@ public final class FamiliarManager {
             return false;
         }
         if (player.getSkills().getStaticLevel(Skills.SUMMONING) < pets.summoningLevel) {
-            player.getDialogueInterpreter().sendDialogue("You need a summoning level of " + pets.summoningLevel + " to summon this.");
+            player.getDialogueInterpreter().sendDialogue("You need a Summoning level of " + pets.summoningLevel + " to summon this.");
             return false;
         }
 

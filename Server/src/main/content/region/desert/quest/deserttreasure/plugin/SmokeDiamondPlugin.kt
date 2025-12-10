@@ -123,7 +123,7 @@ class SmokeDiamondPlugin : InteractionListener {
             Scenery.STANDING_TORCH_6413,
         ) { player, _, _ ->
             if (getDynLevel(player, Skills.FIREMAKING) < 50) {
-                sendMessage(player, "You need a firemaking level of 50 to light this torch.")
+                sendMessage(player, "You need a Firemaking level of 50 to light this torch.")
                 return@onUseWith true
             }
             setVarbit(player, DesertTreasure.varbitStandingTorchNorthEast, 1)
@@ -146,7 +146,7 @@ class SmokeDiamondPlugin : InteractionListener {
             Scenery.STANDING_TORCH_6414,
         ) { player, _, _ ->
             if (getDynLevel(player, Skills.FIREMAKING) < 50) {
-                sendMessage(player, "You need a firemaking level of 50 to light this torch.")
+                sendMessage(player, "You need a Firemaking level of 50 to light this torch.")
                 return@onUseWith true
             }
             setVarbit(player, DesertTreasure.varbitStandingTorchSouthEast, 1)
@@ -169,7 +169,7 @@ class SmokeDiamondPlugin : InteractionListener {
             Scenery.STANDING_TORCH_6415,
         ) { player, _, _ ->
             if (getDynLevel(player, Skills.FIREMAKING) < 50) {
-                sendMessage(player, "You need a firemaking level of 50 to light this torch.")
+                sendMessage(player, "You need a Firemaking level of 50 to light this torch.")
                 return@onUseWith true
             }
             setVarbit(player, DesertTreasure.varbitStandingTorchSouthWest, 1)
@@ -192,7 +192,7 @@ class SmokeDiamondPlugin : InteractionListener {
             Scenery.STANDING_TORCH_6416,
         ) { player, _, _ ->
             if (getDynLevel(player, Skills.FIREMAKING) < 50) {
-                sendMessage(player, "You need a firemaking level of 50 to light this torch.")
+                sendMessage(player, "You need a Firemaking level of 50 to light this torch.")
                 return@onUseWith true
             }
             setVarbit(player, DesertTreasure.varbitStandingTorchNorthWest, 1)

@@ -31,7 +31,7 @@ class SpinningBlades : MovementHook {
                     if (AgilityHandler.hasFailed(player, 40, 0.15)) {
                         if (player.getSkills().getLevel(Skills.AGILITY) < 40) {
                             player.packetDispatch.sendMessage(
-                                "You need an agility of at least 40 to get past this trap!",
+                                "You need an Agility of at least 40 to get past this trap!",
                             )
                         }
                         var hit = player.getSkills().lifepoints / 12

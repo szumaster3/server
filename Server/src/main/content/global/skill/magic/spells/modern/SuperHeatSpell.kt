@@ -57,7 +57,7 @@ class SuperHeatSpell : SpellListener("modern") {
             var bar = returnBar(player, item) ?: return@onCast
 
             if (getStatLevel(player, Skills.SMITHING) < bar.level) {
-                sendMessage(player, "You need a smithing level of ${bar.level} to superheat that ore.")
+                sendMessage(player, "You need a Smithing level of ${bar.level} to superheat that ore.")
                 return@onCast
             }
 

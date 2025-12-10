@@ -38,7 +38,7 @@ class DartTrap : MovementHook {
                     if (++count == 1) {
                         if (AgilityHandler.hasFailed(player, 40, 0.15).also { failed = it }) {
                             if (player.getSkills().getLevel(Skills.AGILITY) < 40) {
-                                player.packetDispatch.sendMessage("You need an agility of at least 40 to get past this trap!")
+                                player.packetDispatch.sendMessage("You need an Agility of at least 40 to get past this trap!")
                             }
                             Projectile.create(startProj, l, 270, 0, 10, 46, 85, 5, 11).send()
                             delay = 3

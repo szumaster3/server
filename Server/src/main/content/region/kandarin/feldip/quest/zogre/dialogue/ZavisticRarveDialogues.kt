@@ -197,7 +197,7 @@ class ZavisticRarveDialogues : DialogueFile() {
 
             8 -> npcl(FaceAnim.HALF_GUILTY, "This is the finest wizards' establishment in the land. We have magic portals to the other towers of wizardry around Gielinor. We have a particularly wide collection of runes in our rune shop.").also { stage++ }
             9 -> npcl(FaceAnim.HALF_GUILTY, "We sell some of the finest mage robes in the land and we have a training area full of zombies for you to practice your magic on.").also { stage = 5 }
-            10 -> npcl(FaceAnim.HALF_GUILTY, "You need a magic level of 66, the high magic energy level is too dangerous for anyone below that level.").also { stage = 5 }
+            10 -> npcl(FaceAnim.HALF_GUILTY, "You need a Magic level of 66, the high magic energy level is too dangerous for anyone below that level.").also { stage = 5 }
             11 -> npcl(FaceAnim.HALF_GUILTY, "I'm the Grand Secretary for the Wizards' Guild, I have lots of correspondence to keep up with, as well as attending to the discipline of the more problematic guild members.").also { stage = 5 }
 
             // 12 -> showTopics(

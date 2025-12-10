@@ -45,7 +45,7 @@ class WerewolfCourse : AgilityCourse {
 
     private fun checkRequirements(p: Player, level: Int = 60): Boolean {
         if (getStatLevel(p, Skills.AGILITY) < level) {
-            sendMessage(p, "You need an agility level of $level to do this.")
+            sendMessage(p, "You need an Agility level of $level to do this.")
             return false
         }
         if (!anyInEquipment(p, Items.RING_OF_CHAROS_4202, Items.RING_OF_CHAROSA_6465)) {

@@ -279,7 +279,7 @@ class LunarSpell : SpellListener("lunar") {
                     return@onCast
                 }
                 if (10 >= player.skills.lifepoints) {
-                    sendMessage(player, "You need more hitpoints to cast this spell.")
+                    sendMessage(player, "You need more Hitpoints to cast this spell.")
                     return@onCast
                 }
                 requires(player, 91, arrayOf(
@@ -374,7 +374,7 @@ class LunarSpell : SpellListener("lunar") {
             val elevenPercent = (maxHp * 0.11).toInt()
 
             if (player.skills.lifepoints < elevenPercent) {
-                sendMessage(player, "You need at least 11 percent of your original hitpoints in order to do this.")
+                sendMessage(player, "You need at least 11 percent of your original Hitpoints in order to do this.")
                 return@onCast
             }
             if (DeathTask.isDead(other)) {
@@ -425,7 +425,7 @@ class LunarSpell : SpellListener("lunar") {
             val elevenPercent = (maxHp * 0.11).toInt()
 
             if (player.skills.lifepoints < elevenPercent) {
-                sendMessage(player, "You need at least 11 percent of your original hitpoints in order to do this.")
+                sendMessage(player, "You need at least 11 percent of your original Hitpoints in order to do this.")
                 return@onCast
             }
 

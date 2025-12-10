@@ -6,6 +6,9 @@ import core.game.interaction.InterfaceListener
 import core.game.node.entity.player.Player
 import shared.consts.Components
 
+/**
+ * Handles the Summoning skill interface.
+ */
 class SummoningInterface : InterfaceListener {
 
     override fun defineInterfaceListeners() {
@@ -17,17 +20,14 @@ class SummoningInterface : InterfaceListener {
         }
     }
 
+    /**
+     * Handles interaction events on the Summoning interface components.
+     */
     private fun handleSummoningInterface(
-        player: Player,
-        component: Component,
-        opcode: Int,
-        button: Int,
-        slot: Int,
-        itemId: Int
-    ): Boolean {
+        player: Player, component: Component, opcode: Int, button: Int, slot: Int, itemId: Int): Boolean
+    {
         when (button) {
-            17,
-            18 -> {
+            17, 18 -> {
                 closeInterface(player)
                 SummoningCreator.configure(player, button == 17)
                 return true
@@ -35,10 +35,7 @@ class SummoningInterface : InterfaceListener {
         }
 
         when (opcode) {
-            155,
-            196,
-            124,
-            199 -> {
+            155, 196, 124, 199 -> {
                 val pouch = getPouch(component, slot)
                 SummoningCreator.create(player, getItemAmount(opcode), pouch)
                 return true
@@ -49,10 +46,7 @@ class SummoningInterface : InterfaceListener {
                     if (value is Int && value > 0) {
                         SummoningCreator.create(player, value, pouch)
                     } else {
-                        sendMessage(
-                            player,
-                            "Please enter a valid integer amount greater than zero."
-                        )
+                        sendMessage(player, "Please enter a valid integer amount greater than zero.")
                     }
                 }
                 return true
@@ -73,10 +67,23 @@ class SummoningInterface : InterfaceListener {
         return true
     }
 
+    /**
+     * Returns the Summoning pouch or scroll corresponding to the clicked component and slot.
+     *
+     * @param component The interface component clicked.
+     * @param slot The slot index clicked.
+     * @return The corresponding [SummoningPouch] or [SummoningScroll] object.
+     */
     private fun getPouch(component: Component, slot: Int) =
         if (component.id == Components.SUMMONING_POUCHES_669) SummoningPouch.forSlot(slot)
         else SummoningScroll.forId(slot)
 
+    /**
+     * Maps opcodes to the corresponding default item amount to create.
+     *
+     * @param opcode The action opcode triggered by the player.
+     * @return The default number of items to create for this opcode, or -1 if invalid.
+     */
     private fun getItemAmount(opcode: Int) =
         when (opcode) {
             155 -> 1

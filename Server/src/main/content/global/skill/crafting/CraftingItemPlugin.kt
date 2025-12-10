@@ -30,7 +30,7 @@ class CraftingItemPlugin : InteractionListener {
             val productName = getItemName(productId).lowercase()
 
             if (!hasLevelDyn(player, Skills.CRAFTING, 15)) {
-                sendDialogue(player, "You need a crafting level of at least 15 in order to do this.")
+                sendDialogue(player, "You need a Crafting level of at least 15 in order to do this.")
                 return@onUseWith true
             }
 
@@ -80,7 +80,7 @@ class CraftingItemPlugin : InteractionListener {
             if (!clockReady(player, Clocks.SKILLING)) return@onUseWith true
 
             if (!hasLevelDyn(player, Skills.CRAFTING, 79)) {
-                sendMessage(player, "You need a crafting level of at least 79 in order to do this.")
+                sendMessage(player, "You need a Crafting level of at least 79 in order to do this.")
                 return@onUseWith true
             }
 
@@ -130,7 +130,7 @@ class CraftingItemPlugin : InteractionListener {
             if (!clockReady(player, Clocks.SKILLING)) return@onUseWith true
 
             if (!hasLevelDyn(player, Skills.CRAFTING, 15)) {
-                sendMessage(player, "You need a crafting level of at least 15 to do this.")
+                sendMessage(player, "You need a Crafting level of at least 15 to do this.")
                 return@onUseWith true
             }
 
@@ -181,7 +181,7 @@ class CraftingItemPlugin : InteractionListener {
             if (!clockReady(player, Clocks.SKILLING)) return@onUseWith true
 
             if (!hasLevelDyn(player, Skills.CRAFTING, product.requiredLevel)) {
-                sendMessage(player, "You need a crafting level of ${product.requiredLevel} to make this.")
+                sendMessage(player, "You need a Crafting level of ${product.requiredLevel} to make this.")
                 return@onUseWith true
             }
 

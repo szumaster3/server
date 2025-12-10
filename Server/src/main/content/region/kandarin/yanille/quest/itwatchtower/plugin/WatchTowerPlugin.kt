@@ -556,7 +556,7 @@ class WatchTowerPlugin : InteractionListener {
             }
 
             if(getStatLevel(player, Skills.MINING) < 40) {
-                sendMessage(player, "You need a mining level of 40 to mine this rock.")
+                sendMessage(player, "You need a Mining level of 40 to mine this rock.")
                 return@on true
             }
 

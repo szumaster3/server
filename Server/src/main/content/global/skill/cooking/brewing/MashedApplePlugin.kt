@@ -19,7 +19,7 @@ class MashedApplePlugin : InteractionListener {
     override fun defineListeners() {
         onUseWith(IntType.SCENERY, Items.COOKING_APPLE_1955, Scenery.APPLE_BARREL_7403) { player, _, _ ->
             if (getStatLevel(player, Skills.COOKING) < 14) {
-                sendMessage(player, "You need a cooking level of 14 in order to do that.")
+                sendMessage(player, "You need a Cooking level of 14 in order to do that.")
                 return@onUseWith false
             }
             if (!inInventory(player, Items.BUCKET_1925)) {
@@ -117,7 +117,7 @@ private class AppleMushPulse(
 
     override fun checkRequirements(): Boolean {
         if (getStatLevel(player, Skills.COOKING) < 14) {
-            sendMessage(player, "You need a cooking level of 14 to do this.")
+            sendMessage(player, "You need a Cooking level of 14 to do this.")
             return false
         }
         if (!inInventory(player, Items.BUCKET_1925)) {

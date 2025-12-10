@@ -36,7 +36,7 @@ class PotteryPlugin : InteractionListener {
                     }
 
                     if (getStatLevel(player, Skills.CRAFTING) < pottery.level) {
-                        sendMessage(player, "You need a crafting level of ${pottery.level} to make this.")
+                        sendMessage(player, "You need a Crafting level of ${pottery.level} to make this.")
                         return@create
                     }
 
@@ -99,7 +99,7 @@ class PotteryPlugin : InteractionListener {
             }
 
             if (getStatLevel(player, Skills.CRAFTING) < pottery.level) {
-                sendMessage(player, "You need a crafting level of ${pottery.level} to do this.")
+                sendMessage(player, "You need a Crafting level of ${pottery.level} to do this.")
                 return false
             }
             if (!inInventory(player, pottery.unfinished.id)) {

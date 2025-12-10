@@ -33,7 +33,7 @@ class WeavingPlugin : InteractionListener {
                         if (remaining <= 0) return@queueScript stopExecuting(player)
 
                         if (getStatLevel(player, Skills.CRAFTING) < type.level) {
-                            sendMessage(player, "You need a crafting level of at least ${type.level} to do this.")
+                            sendMessage(player, "You need a Crafting level of at least ${type.level} to do this.")
                             return@queueScript stopExecuting(player)
                         }
 

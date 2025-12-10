@@ -107,7 +107,7 @@ object BrimhavenUtils {
     fun handleVines(player: Player, node: Scenery) {
         val level: Int = 10 + (node.id - 5103) * 6
         if (player.skills.getLevel(Skills.WOODCUTTING) < level) {
-            sendMessage(player, "You need a woodcutting level of $level to chop down this vine.")
+            sendMessage(player, "You need a Woodcutting level of $level to chop down this vine.")
             return
         }
         val tool = SkillingTool.getAxe(player)

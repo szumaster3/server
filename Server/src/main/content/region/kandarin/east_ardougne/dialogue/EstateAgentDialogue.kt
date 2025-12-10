@@ -189,7 +189,7 @@ class EstateAgentDialogue(player: Player? = null) : Dialogue(player) {
     private fun redecorate(style: HousingStyle) {
         when {
             !style.hasLevel(player) -> {
-                npc("You need a construction level of " + style.levelRequirement + " to buy this style.")
+                npc("You need a Construction level of " + style.levelRequirement + " to buy this style.")
                 stage = 31
                 return
             }

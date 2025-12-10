@@ -58,7 +58,7 @@ class RunecraftPulse(
             return false
         }
         if (!altar.isOurania() && getStatLevel(player, Skills.RUNECRAFTING) < rune.level) {
-            sendMessage(player, "You need a runecrafting level of at least " + rune.level + " to craft this rune.")
+            sendMessage(player, "You need a Runecrafting level of at least " + rune.level + " to craft this rune.")
             return false
         }
         if (!altar.isOurania() && rune.isNormal && !inInventory(player, PURE_ESSENCE) && !inInventory(
@@ -73,7 +73,7 @@ class RunecraftPulse(
             return false
         }
         if (combination && getStatLevel(player, Skills.RUNECRAFTING) < combo!!.level) {
-            sendMessage(player, "You need a runecrafting level of at least " + combo.level + " to combine this rune.")
+            sendMessage(player, "You need a Runecrafting level of at least " + combo.level + " to combine this rune.")
             return false
         }
         if (node != null) {

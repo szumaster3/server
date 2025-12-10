@@ -162,7 +162,7 @@ class SilverCraftingPlugin : InteractionListener, InterfaceListener {
         queueScript(player, 0, QueueStrength.WEAK) {
             if (remaining <= 0) return@queueScript stopExecuting(player)
             if (getStatLevel(player, Skills.CRAFTING) < product.level) {
-                sendMessage(player, "You need a crafting level of ${product.level} to make this.")
+                sendMessage(player, "You need a Crafting level of ${product.level} to make this.")
                 return@queueScript stopExecuting(player)
             }
 

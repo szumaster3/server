@@ -30,7 +30,7 @@ class SteppingStoneShortcut : OptionHandler() {
         player ?: return false
         val stone = stones[player.location] ?: return false
         if (getStatLevel(player, Skills.AGILITY) < stone.requirements) {
-            sendMessage(player, "You need an agility level of ${stone.requirements} for this shortcut.")
+            sendMessage(player, "You need an Agility level of ${stone.requirements} for this shortcut.")
             return true
         }
 

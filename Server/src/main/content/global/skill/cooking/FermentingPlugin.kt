@@ -22,7 +22,7 @@ class FermentingPlugin : InteractionListener {
         onUseWith(IntType.ITEM, Items.JUG_OF_WATER_1937, Items.GRAPES_1987) { player, used, with ->
             val itemSlot = used.asItem().slot
             if (getStatLevel(player, Skills.COOKING) < 35) {
-                sendDialogue(player, "You need a cooking level of 35 to do this.")
+                sendDialogue(player, "You need a Cooking level of 35 to do this.")
                 return@onUseWith false
             }
             if (removeItem(player, with.asItem())) {

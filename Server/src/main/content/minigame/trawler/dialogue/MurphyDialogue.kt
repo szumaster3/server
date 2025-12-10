@@ -53,7 +53,7 @@ class MurphyDialogue(player: Player? = null) : Dialogue(player) {
             9 -> playerl(FaceAnim.FRIENDLY, "Oh, so I suppose you can't go out for a while?").also { stage++ }
             10 -> npcl(FaceAnim.FRIENDLY, "Oh no, I don't let a few holes stop an experienced sailor like me. I could sail these seas in a barrel, I'll be going out soon enough.").also { stage = 5 }
             11 -> npcl(FaceAnim.FRIENDLY, "Well of course you can! I'll warn you though, the seas are merciless and without fishing experience you won't catch much.").also { stage++ }
-            12 -> npcl(FaceAnim.FRIENDLY, "You need a fishing level of 15 or above to catch any fish on the trawler.").also { stage++ }
+            12 -> npcl(FaceAnim.FRIENDLY, "You need a Fishing level of 15 or above to catch any fish on the trawler.").also { stage++ }
             13 -> npcl(FaceAnim.FRIENDLY, "On occasions the net rips, so you'll need some rope to repair it.").also { stage++ }
             14 -> npcl(FaceAnim.FRIENDLY, "Repairing the net is difficult in the harsh conditions so you'll find it easier with a higher Crafting level.").also { stage++ }
             15 -> playerl(FaceAnim.WORRIED, "Right...ok.").also { stage++ }

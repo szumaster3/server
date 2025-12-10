@@ -149,7 +149,7 @@ class LostCityPlugin : InteractionListener {
 
         onUseWith(IntType.ITEM, Items.KNIFE_946, Items.DRAMEN_BRANCH_771) { player, _, _ ->
             if (getStatLevel(player, Skills.CRAFTING) < 31) {
-                sendDialogue(player, "You need a crafting level of 31 to do this.")
+                sendDialogue(player, "You need a Crafting level of 31 to do this.")
                 return@onUseWith false
             }
 

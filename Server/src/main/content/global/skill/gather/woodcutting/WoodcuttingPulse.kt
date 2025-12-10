@@ -84,7 +84,7 @@ class WoodcuttingPulse(private val player: Player, private val node: Scenery) : 
 
     fun checkRequirements(): Boolean {
         if (getStatLevel(player, Skills.WOODCUTTING) < resource!!.level) {
-            sendMessage(player, "You need a woodcutting level of " + resource!!.level + " to chop this tree.")
+            sendMessage(player, "You need a Woodcutting level of " + resource!!.level + " to chop this tree.")
             return false
         }
         if (getAxe(player) == null) {

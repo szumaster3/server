@@ -47,7 +47,7 @@ class PitfallPlugin : InteractionListener {
         on(shared.consts.Scenery.PIT_19227, IntType.SCENERY, "trap") { player, node ->
             val pit = node as Scenery
             if (getStatLevel(player, Skills.HUNTER) < 31) {
-                sendMessage(player, "You need a hunter level of 31 to set a pitfall trap.")
+                sendMessage(player, "You need a Hunter level of 31 to set a pitfall trap.")
                 return@on true
             }
 
@@ -143,7 +143,7 @@ class PitfallPlugin : InteractionListener {
             val entity = node as Entity
             val hunterReq = Pitfall.HUNTER_REQS[entity.name] ?: return@on true
             if (getStatLevel(player, Skills.HUNTER) < hunterReq) {
-                sendMessage(player, "You need a hunter level of $hunterReq to hunt ${entity.name.lowercase()}s.")
+                sendMessage(player, "You need a Hunter level of $hunterReq to hunt ${entity.name.lowercase()}s.")
                 return@on true
             }
             if (!inInventory(player, teasingStick)) {

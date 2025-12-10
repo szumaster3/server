@@ -59,7 +59,7 @@ abstract class SpellListener(
         if (player.getAttribute("tablet-spell", false)) return
 
         if (player.skills.getLevel(Skills.MAGIC) < magicLevel) {
-            sendMessage(player, "You need a magic level of $magicLevel to cast this spell.")
+            sendMessage(player, "You need a Magic level of $magicLevel to cast this spell.")
             throw IllegalStateException("Insufficient magic level.")
         }
 

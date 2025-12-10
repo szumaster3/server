@@ -27,7 +27,7 @@ class WhiteWolfMountainPlugin : InteractionListener {
             }
 
             if (getDynLevel(player, Skills.MINING) < 50) {
-                sendMessage(player, "You need a mining level of 50 to mine this rock slide.")
+                sendMessage(player, "You need a Mining level of 50 to mine this rock slide.")
                 return@on true
             }
 

@@ -52,7 +52,7 @@ class SlayerTowerPlugin : InteractionListener {
         on(SPIKEY_CHAIN_IDS, IntType.SCENERY, "climb-up", "climb-down") { player, node ->
             val level = if (player.location.z == 0) 61 else 71
             if (node.id == Scenery.SPIKEY_CHAIN_9319 && getStatLevel(player, Skills.AGILITY) < level) {
-                sendMessage(player, "You need an agility level of at least $level in order to do this.")
+                sendMessage(player, "You need an Agility level of at least $level in order to do this.")
             }
             return@on true
         }

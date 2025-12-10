@@ -75,7 +75,7 @@ class AbbotLangleyDialogue(player: Player? = null) : Dialogue(player) {
             }
 
             27 -> {
-                sendMessage(player, "You need a prayer level of 31 to join the order.")
+                sendMessage(player, "You need a Prayer level of 31 to join the order.")
                 end()
             }
 

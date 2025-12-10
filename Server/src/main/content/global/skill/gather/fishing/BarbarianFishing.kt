@@ -61,7 +61,7 @@ class BarbarianFishing : InteractionListener {
 
             when {
                 fishingLevel < 48 -> {
-                    sendMessage(player, "You need a fishing level of at least 48 to fish here.")
+                    sendMessage(player, "You need a Fishing level of at least 48 to fish here.")
                     return@onUseWith true
                 }
 
