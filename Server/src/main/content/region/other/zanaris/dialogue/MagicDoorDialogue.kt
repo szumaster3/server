@@ -1,4 +1,4 @@
-package content.region.other.keldagrim.dialogue
+package content.region.other.zanaris.dialogue
 
 import content.global.skill.crafting.CraftingDefinition
 import core.api.removeItem

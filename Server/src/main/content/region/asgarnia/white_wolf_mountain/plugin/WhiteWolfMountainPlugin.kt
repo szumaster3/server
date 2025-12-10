@@ -1,4 +1,4 @@
-package content.region.asgarnia.white_wolf_mountain
+package content.region.asgarnia.white_wolf_mountain.plugin
 
 import content.data.skill.SkillingTool
 import core.api.*

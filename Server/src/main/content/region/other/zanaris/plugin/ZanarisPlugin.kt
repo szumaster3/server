@@ -1,7 +1,7 @@
 package content.region.other.zanaris.plugin
 
 import content.global.travel.FairyRingInterface
-import content.region.other.keldagrim.dialogue.MagicDoorDialogue
+import content.region.other.zanaris.dialogue.MagicDoorDialogue
 import core.api.*
 import core.game.global.action.ClimbActionHandler
 import core.game.global.action.DoorActionHandler

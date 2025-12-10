@@ -1,8 +1,7 @@
-package content.region.asgarnia.white_wolf_mountain
+package content.region.asgarnia.white_wolf_mountain.dialogue
 
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
-import core.game.dialogue.Topic
 import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import core.tools.END_DIALOGUE

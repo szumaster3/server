@@ -1,4 +1,4 @@
-package content.region.asgarnia.white_wolf_mountain
+package content.region.asgarnia.white_wolf_mountain.dialogue
 
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim

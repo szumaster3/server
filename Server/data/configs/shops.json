@@ -1544,8 +1544,8 @@
     "currency": "995",
     "general_store": "false",
     "id": "175",
-    "title": "Irksol",
-    "stock": "{1641,5,100}"
+    "title": "Irksol's Ruby Rings",
+    "stock": "{1641,10,100}"
   },
   {
     "npcs": "904",

@@ -1,4 +1,4 @@
-package content.region.asgarnia.white_wolf_mountain
+package content.region.asgarnia.white_wolf_mountain.dialogue
 
 import core.api.*
 import core.game.dialogue.Dialogue
