@@ -2,7 +2,6 @@ package content.region.kandarin.camelot.quest.arthur.dialogue
 
 import content.data.GameAttributes
 import core.api.*
-import core.api.setQuestStage
 import core.game.dialogue.DialogueFile
 import core.game.dialogue.FaceAnim
 import core.game.interaction.QueueStrength

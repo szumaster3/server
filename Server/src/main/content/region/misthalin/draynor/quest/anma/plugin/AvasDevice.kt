@@ -2,7 +2,6 @@ package content.region.misthalin.draynor.quest.anma.plugin
 
 import content.data.GameAttributes
 import core.api.*
-import core.api.isQuestComplete
 import core.game.container.impl.EquipmentContainer
 import core.game.event.EventHook
 import core.game.event.TickEvent

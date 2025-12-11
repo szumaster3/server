@@ -1,6 +1,5 @@
 package core.game.worldevents.events.christmas
 
-import core.api.addItem
 import core.api.addItemOrDrop
 import core.api.sendItemDialogue
 import core.game.dialogue.Dialogue

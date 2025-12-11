@@ -12,11 +12,11 @@ import core.game.node.entity.skill.Skills
 import core.game.world.map.Direction
 import core.game.world.map.Location
 import core.game.world.update.flag.context.Animation
+import core.tools.cyclesToTicks
 import shared.consts.Animations
 import shared.consts.Scenery
 import shared.consts.Sounds
 import shared.consts.Graphics as Gfx
-import core.tools.cyclesToTicks
 
 /**
  * Handles the east Ardougne log balance.

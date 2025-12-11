@@ -1,13 +1,15 @@
 package content.region.kandarin.dialogue
 
-import core.api.*
+import core.api.hasAwaitingGrandExchangeCollections
+import core.api.openBankPinSettings
+import core.api.openInterface
+import core.api.setAttribute
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
 import core.game.dialogue.Topic
 import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import core.tools.END_DIALOGUE
-import core.tools.START_DIALOGUE
 import shared.consts.Components
 import shared.consts.NPCs
 

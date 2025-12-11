@@ -1,10 +1,10 @@
 package content.minigame.pest_control
 
+import content.minigame.pest_control.bots.PestControlTestBot
+import content.minigame.pest_control.bots.PestControlTestBot2
 import core.game.node.entity.player.Player
 import core.game.world.map.Location
 import core.game.world.map.zone.ZoneBorders
-import content.minigame.pest_control.bots.PestControlTestBot
-import content.minigame.pest_control.bots.PestControlTestBot2
 import kotlin.random.Random
 
 

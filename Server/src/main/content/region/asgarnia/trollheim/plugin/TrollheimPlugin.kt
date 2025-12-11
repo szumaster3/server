@@ -1,7 +1,6 @@
 package content.region.asgarnia.trollheim.plugin
 
 import core.api.*
-import core.cache.def.impl.NPCDefinition
 import core.cache.def.impl.SceneryDefinition
 import core.game.activity.ActivityManager
 import core.game.activity.ActivityPlugin

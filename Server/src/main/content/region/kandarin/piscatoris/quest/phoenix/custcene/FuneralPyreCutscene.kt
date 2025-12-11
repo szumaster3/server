@@ -2,7 +2,6 @@ package content.region.kandarin.piscatoris.quest.phoenix.custcene
 
 import content.region.kandarin.piscatoris.quest.phoenix.InPyreNeed
 import core.api.resetAnimator
-import core.api.sendGraphics
 import core.api.setVarbit
 import core.api.visualize
 import core.game.activity.Cutscene

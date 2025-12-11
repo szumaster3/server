@@ -1,10 +1,8 @@
 package content.region.misthalin.lumbridge.dialogue
 
 import core.api.isQuestComplete
-import core.api.sendGraphics
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
-import core.game.dialogue.IfTopic
 import core.game.dialogue.Topic
 import core.game.node.entity.player.Player
 import core.plugin.Initializable

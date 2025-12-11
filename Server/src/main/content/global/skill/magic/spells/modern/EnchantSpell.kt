@@ -1,7 +1,7 @@
 package content.global.skill.magic.spells.modern
 
-import content.minigame.mage_training.plugin.rooms.EnchantmentChamberPlugin
 import content.minigame.mage_training.plugin.MTAType
+import content.minigame.mage_training.plugin.rooms.EnchantmentChamberPlugin
 import core.api.*
 import core.game.node.Node
 import core.game.node.entity.Entity

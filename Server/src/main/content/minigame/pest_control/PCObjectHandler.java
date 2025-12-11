@@ -1,16 +1,16 @@
 package content.minigame.pest_control;
 
 import core.cache.def.impl.SceneryDefinition;
-import core.game.world.GameWorld;
 import core.game.activity.ActivityManager;
+import core.game.bots.PvMBotsBuilder;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.player.Player;
-import core.game.bots.PvMBotsBuilder;
 import core.game.node.entity.player.info.Rights;
 import core.game.node.item.Item;
 import core.game.node.scenery.Scenery;
 import core.game.node.scenery.SceneryBuilder;
+import core.game.world.GameWorld;
 import core.game.world.map.Direction;
 import core.game.world.map.Location;
 import core.game.world.map.RegionManager;

@@ -3,7 +3,8 @@ package content.region.misthalin.lumbridge.dialogue
 import content.data.skill.RepairableSkillingTool
 import content.data.skill.RepairableSkillingTool.Companion.forId
 import content.global.plugins.item.equipment.BarrowsEquipmentRegister.Companion.TICKS
-import core.api.*
+import core.api.openNpcShop
+import core.api.sendNPCDialogue
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
 import core.game.dialogue.Topic

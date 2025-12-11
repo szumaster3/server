@@ -4,15 +4,14 @@ import content.data.GameAttributes
 import content.global.skill.magic.TeleportMethod
 import content.global.skill.magic.spells.ModernSpells
 import content.region.kandarin.east_ardougne.dialogue.market.TownCrierDialogue
+import content.region.misthalin.draynor.cutscene.TelescopeCutscene.EndDialogue
 import content.region.misthalin.draynor.dialogue.WiseOldManDialogue
 import content.region.misthalin.lumbridge.dialogue.DoomsayerDialogue
 import content.region.misthalin.lumbridge.dialogue.DukeHoracioDialogue
 import content.region.misthalin.lumbridge.dialogue.LumbridgeGuideDialogue
-import content.region.misthalin.draynor.cutscene.TelescopeCutscene.EndDialogue
-import content.region.misthalin.varrock.quest.dragon.dialogue.DukeDragonSlayerDialogue
 import content.region.misthalin.lumbridge.quest.priest.dialogue.FatherUhrneyDialogue
+import content.region.misthalin.varrock.quest.dragon.dialogue.DukeDragonSlayerDialogue
 import core.api.*
-import core.api.getQuestStage
 import core.game.diary.DiaryAreaTask
 import core.game.diary.DiaryEventHookBase
 import core.game.diary.DiaryLevel

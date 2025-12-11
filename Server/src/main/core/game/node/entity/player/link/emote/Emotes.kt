@@ -1,6 +1,5 @@
 package core.game.node.entity.player.link.emote
 
-import content.data.GameAttributes
 import core.api.*
 import core.game.container.impl.EquipmentContainer
 import core.game.node.entity.player.Player

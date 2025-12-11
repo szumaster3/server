@@ -6,12 +6,12 @@ import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.node.Node
 import core.game.node.entity.player.Player
+import core.game.node.entity.skill.Skills
 import core.game.node.item.Item
 import core.game.system.task.Pulse
 import core.game.world.update.flag.context.Animation
 import shared.consts.Animations
 import shared.consts.Items
-import core.game.node.entity.skill.Skills
 import shared.consts.Quests
 
 class GodBookPreachOptionPlugin : InteractionListener {

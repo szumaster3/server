@@ -3,7 +3,6 @@ package content.minigame.gnomecooking.plugin
 import core.api.*
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
-import core.game.interaction.QueueStrength
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.game.node.entity.skill.Skills

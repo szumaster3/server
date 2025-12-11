@@ -1,17 +1,16 @@
 package content.region.kandarin.feldip.gutanoth.plugin
 
-import core.api.getAttribute
+import core.api.*
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
-import core.game.node.scenery.Scenery
-import core.game.world.GameWorld
-import core.api.*
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.game.node.item.GroundItemManager
 import core.game.node.item.Item
+import core.game.node.scenery.Scenery
 import core.game.node.scenery.SceneryBuilder
 import core.game.system.task.Pulse
+import core.game.world.GameWorld
 import shared.consts.Animations
 import shared.consts.Items
 import shared.consts.NPCs

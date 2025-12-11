@@ -2,7 +2,9 @@ package content.region.kandarin.witchaven.quest.seaslug.dialogue
 
 import content.region.kandarin.witchaven.plugin.FishingPlatformBoat
 import content.region.kandarin.witchaven.plugin.Travel
-import core.api.*
+import core.api.getQuestStage
+import core.api.isQuestComplete
+import core.api.sendDialogue
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
 import core.game.node.entity.npc.NPC

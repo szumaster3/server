@@ -1,6 +1,7 @@
 package content.global.plugins.item.equipment.fog_gloves
 
-import core.api.*
+import core.api.sendMessage
+import core.api.toIntArray
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import shared.consts.Items

@@ -4,9 +4,9 @@ import core.cache.def.impl.NPCDefinition;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.player.Player;
+import core.plugin.ClassScanner;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
-import core.plugin.ClassScanner;
 
 /**
  * Represents the option plugin used to handle the pc island related nodes.

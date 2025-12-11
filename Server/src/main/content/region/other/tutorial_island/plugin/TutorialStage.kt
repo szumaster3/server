@@ -18,7 +18,10 @@ import core.game.world.map.Location
 import core.game.world.repository.Repository
 import core.worker.ManagementEvents
 import proto.management.JoinClanRequest
-import shared.consts.*
+import shared.consts.Components
+import shared.consts.Items
+import shared.consts.NPCs
+import shared.consts.Vars
 import java.util.*
 
 object TutorialStage {

@@ -8,7 +8,6 @@ import core.game.interaction.QueueStrength
 import core.game.node.entity.Entity
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.TeleportManager
-import core.game.system.task.Pulse
 import core.game.world.map.Location
 import core.game.world.map.zone.ZoneBorders
 import core.game.world.repository.Repository

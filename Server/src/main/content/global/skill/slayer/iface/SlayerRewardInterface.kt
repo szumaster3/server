@@ -2,7 +2,9 @@ package content.global.skill.slayer.iface
 
 import content.global.skill.slayer.SlayerManager
 import content.global.skill.slayer.Tasks
-import core.api.*
+import core.api.sendInterfaceConfig
+import core.api.sendMessage
+import core.api.sendString
 import core.game.component.Component
 import core.game.interaction.InterfaceListener
 import core.game.node.entity.player.Player

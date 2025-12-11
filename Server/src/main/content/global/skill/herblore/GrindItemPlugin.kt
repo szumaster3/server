@@ -9,7 +9,6 @@ import core.game.interaction.QueueStrength
 import core.game.node.item.Item
 import core.game.world.update.flag.context.Animation
 import shared.consts.Animations
-import shared.consts.Components
 import shared.consts.Items
 
 class GrindItemPlugin : InteractionListener {

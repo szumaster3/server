@@ -6,7 +6,10 @@ import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.node.entity.player.link.TeleportManager
 import core.game.world.map.Location
-import shared.consts.*
+import shared.consts.Components
+import shared.consts.Items
+import shared.consts.NPCs
+import shared.consts.Scenery
 
 class KeldagrimPlugin : InteractionListener {
 

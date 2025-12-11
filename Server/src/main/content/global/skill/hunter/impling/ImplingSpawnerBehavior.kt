@@ -6,7 +6,6 @@ import core.game.node.entity.npc.NPCBehavior
 import core.game.world.map.path.ClipMaskSupplier
 import core.tools.Log
 import core.tools.secondsToTicks
-import shared.consts.Sounds
 
 class ImplingSpawnerBehavior : NPCBehavior(*ImplingSpawner.getIds()) {
     override fun onCreation(self: NPC) {

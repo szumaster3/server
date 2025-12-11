@@ -1,7 +1,5 @@
 package content.minigame.pest_control.monsters;
 
-import java.util.ArrayList;
-
 import content.minigame.pest_control.PestControlSession;
 import core.game.node.entity.Entity;
 import core.game.node.entity.combat.BattleState;
@@ -18,6 +16,8 @@ import core.game.world.map.RegionManager;
 import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
 import core.tools.RandomFunction;
+
+import java.util.ArrayList;
 
 /**
  * Handles the pest control splatter NPC.

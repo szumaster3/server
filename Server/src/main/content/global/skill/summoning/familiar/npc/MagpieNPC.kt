@@ -1,10 +1,10 @@
 package content.global.skill.summoning.familiar.npc
 
 import content.global.skill.crafting.CraftingDefinition
-import core.api.asItem
 import content.global.skill.summoning.familiar.Familiar
 import content.global.skill.summoning.familiar.FamiliarSpecial
 import content.global.skill.summoning.familiar.Forager
+import core.api.asItem
 import core.game.node.entity.player.Player
 import core.game.node.entity.skill.SkillBonus
 import core.game.node.entity.skill.Skills

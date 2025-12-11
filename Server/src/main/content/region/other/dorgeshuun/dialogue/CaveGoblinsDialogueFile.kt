@@ -1,7 +1,10 @@
 package content.region.other.dorgeshuun.dialogue
 
 import content.data.LightSources
-import core.api.*
+import core.api.addItemOrDrop
+import core.api.anyInInventory
+import core.api.isQuestComplete
+import core.api.sendMessage
 import core.game.dialogue.DialogueFile
 import core.game.dialogue.FaceAnim
 import core.game.node.entity.npc.NPC

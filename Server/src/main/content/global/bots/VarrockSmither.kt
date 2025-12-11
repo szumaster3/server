@@ -1,7 +1,7 @@
 package content.global.bots
 
-import content.global.skill.smithing.items.Bars
 import content.global.skill.smithing.SmithingPulse
+import content.global.skill.smithing.items.Bars
 import core.game.bots.Script
 import core.game.bots.SkillingBotAssembler
 import core.game.interaction.DestinationFlag

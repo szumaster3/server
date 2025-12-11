@@ -4,7 +4,6 @@ import content.data.Dyes
 import content.region.other.entrana.quest.zep.cutscene.ExperimentCutscene
 import core.api.*
 import core.game.dialogue.*
-import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.game.node.entity.skill.Skills
 import core.game.node.item.Item

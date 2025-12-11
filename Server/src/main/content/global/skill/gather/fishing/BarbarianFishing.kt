@@ -1,20 +1,20 @@
 package content.global.skill.gather.fishing
 
+import content.region.kandarin.baxtorian.BarbarianTraining
 import core.api.*
 import core.game.interaction.Clocks
 import core.game.interaction.IntType
+import core.game.interaction.InteractionListener
 import core.game.interaction.QueueStrength
 import core.game.node.entity.player.Player
 import core.game.node.entity.skill.Skills
 import core.game.node.item.Item
+import core.game.world.update.flag.context.Animation
 import core.tools.RandomFunction
+import core.tools.RandomUtils
 import shared.consts.Animations
 import shared.consts.Items
 import shared.consts.NPCs
-import content.region.kandarin.baxtorian.BarbarianTraining
-import core.game.interaction.InteractionListener
-import core.game.world.update.flag.context.Animation
-import core.tools.RandomUtils
 import shared.consts.Scenery
 
 class BarbarianFishing : InteractionListener {

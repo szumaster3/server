@@ -1,6 +1,5 @@
 package content.global.activity.warriors_guild.plugin.room
 
-import core.api.addItem
 import core.api.clearLogoutListener
 import core.api.removeAttribute
 import core.api.sendMessage

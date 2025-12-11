@@ -3,10 +3,10 @@ package content.region.kandarin.port_khazard.quest.arena.npc
 import content.data.GameAttributes
 import content.region.kandarin.port_khazard.quest.arena.dialogue.JeremyServilDialogueFile
 import content.region.kandarin.port_khazard.quest.arena.plugin.FightArenaPlugin.Companion.General
-import core.api.openDialogue
 import core.api.getQuestStage
-import core.api.setQuestStage
+import core.api.openDialogue
 import core.api.setAttribute
+import core.api.setQuestStage
 import core.game.node.entity.Entity
 import core.game.node.entity.npc.AbstractNPC
 import core.game.node.entity.player.Player

@@ -5,10 +5,10 @@ import content.data.RespawnPoint
 import content.global.activity.jobs.JobManager
 import content.global.activity.phoenix.SpawnPhoenix
 import content.global.skill.summoning.SummoningPouch
-import content.region.other.tutorial_island.plugin.TutorialStage
 import content.region.kandarin.baxtorian.BarbarianTraining
 import content.region.kandarin.piscatoris.quest.phoenix.custcene.FuneralPyreCutscene
 import content.region.kandarin.piscatoris.quest.phoenix.custcene.WoundedPhoenixCutscene
+import content.region.other.tutorial_island.plugin.TutorialStage
 import core.api.*
 import core.cache.def.impl.NPCDefinition
 import core.cache.def.impl.VarbitDefinition

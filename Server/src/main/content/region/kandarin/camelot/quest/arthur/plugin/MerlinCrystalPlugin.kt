@@ -4,8 +4,6 @@ import content.data.GameAttributes
 import content.region.kandarin.camelot.quest.arthur.cutscene.CrateCutscene
 import content.region.kandarin.camelot.quest.arthur.dialogue.*
 import core.api.*
-import core.api.getQuestStage
-import core.api.isQuestComplete
 import core.game.dialogue.DialogueFile
 import core.game.global.action.DoorActionHandler
 import core.game.global.action.DropListener

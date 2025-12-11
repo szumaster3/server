@@ -1,13 +1,13 @@
 package content.global.skill.magic.items
 
+import content.global.skill.magic.spells.modern.EnchantSpellEffect
 import core.api.*
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
-import core.game.node.entity.player.Player
 import core.game.node.Node
+import core.game.node.entity.player.Player
 import core.game.world.update.flag.context.Animation
 import core.game.world.update.flag.context.Graphics
-import content.global.skill.magic.spells.modern.EnchantSpellEffect
 import shared.consts.Animations
 import shared.consts.Sounds
 

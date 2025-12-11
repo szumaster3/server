@@ -1,7 +1,5 @@
 package content.minigame.pest_control;
 
-import java.util.*;
-
 import core.game.component.Component;
 import core.game.dialogue.FaceAnim;
 import core.game.node.entity.npc.NPC;
@@ -13,8 +11,10 @@ import core.game.world.map.RegionPlane;
 import core.game.world.map.build.DynamicRegion;
 import core.tools.RandomFunction;
 
+import java.util.*;
+
 import static content.minigame.pest_control.PestControlActivityPlugin.MAX_TEAM_SIZE;
-import static core.api.ContentAPIKt.*;
+import static core.api.ContentAPIKt.setVarp;
 
 /**
  * Represents a pest control session.

@@ -1,11 +1,7 @@
 package content.region.kandarin.camelot.quest.arthur
 
 import content.data.GameAttributes
-import core.api.inInventory
-import core.api.updateQuestTab
-import core.api.sendItemZoomOnInterface
-import core.api.sendString
-import core.api.setVarbit
+import core.api.*
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.quest.Quest
 import core.plugin.Initializable

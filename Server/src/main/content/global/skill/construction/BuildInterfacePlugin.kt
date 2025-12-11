@@ -1,8 +1,6 @@
 package content.global.skill.construction
 
-import core.api.amountInInventory
 import core.api.log
-import core.api.sendString
 import core.cache.def.impl.ItemDefinition
 import core.game.component.Component
 import core.game.component.ComponentDefinition
@@ -14,7 +12,6 @@ import core.plugin.Initializable
 import core.plugin.Plugin
 import core.tools.Log
 import shared.consts.Components
-import shared.consts.Items
 
 @Initializable
 class BuildInterfacePlugin : ComponentPlugin() {

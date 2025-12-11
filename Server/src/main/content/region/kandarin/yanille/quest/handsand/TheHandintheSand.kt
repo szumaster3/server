@@ -5,7 +5,6 @@ import content.data.GameAttributes
 import core.ServerStore
 import core.api.displayQuestItem
 import core.api.hasLevelStat
-import shared.consts.Vars
 import core.api.rewardXP
 import core.api.setVarbit
 import core.game.node.entity.player.Player
@@ -14,6 +13,7 @@ import core.game.node.entity.skill.Skills
 import core.plugin.Initializable
 import shared.consts.Items
 import shared.consts.Quests
+import shared.consts.Vars
 
 /**
  * Represents the Hand in the Sand quest journal.

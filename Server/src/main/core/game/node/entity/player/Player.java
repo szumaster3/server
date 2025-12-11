@@ -1,6 +1,5 @@
 package core.game.node.entity.player;
 
-import content.data.GameAttributes;
 import content.data.RespawnPoint;
 import content.global.plugins.item.equipment.EquipmentDegrade;
 import content.global.plugins.item.equipment.bolt_pouch.BoltPouchManager;
@@ -11,7 +10,6 @@ import content.global.skill.summoning.familiar.FamiliarManager;
 import content.global.skill.summoning.items.EnchantedHeadgearManager;
 import core.GlobalStatistics;
 import core.ServerConstants;
-import core.api.EquipmentSlot;
 import core.cache.def.impl.ItemDefinition;
 import core.game.component.Component;
 import core.game.container.Container;

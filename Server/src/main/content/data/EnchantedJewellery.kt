@@ -2,7 +2,6 @@ package content.data
 
 import content.global.skill.magic.TeleportMethod
 import content.global.skill.slayer.SlayerManager
-import core.ServerConstants
 import core.Util
 import core.api.*
 import core.game.dialogue.FaceAnim

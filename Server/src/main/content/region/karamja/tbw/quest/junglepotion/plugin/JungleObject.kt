@@ -7,8 +7,8 @@ import core.game.node.entity.player.Player
 import core.game.world.update.flag.context.Animation
 import core.tools.RandomFunction
 import shared.consts.Animations
-import shared.consts.Scenery
 import shared.consts.Items
+import shared.consts.Scenery
 
 /**
  * Represents a search objects in the Jungle Potion quest.

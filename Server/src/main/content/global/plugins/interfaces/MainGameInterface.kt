@@ -1,14 +1,16 @@
 package content.global.plugins.interfaces
 
 import content.data.GameAttributes
-import core.api.*
+import core.api.getAttribute
+import core.api.openInterface
+import core.api.sendMessage
 import core.game.component.CloseEvent
 import core.game.component.Component
+import core.game.interaction.InterfaceListener
 import core.game.node.entity.combat.equipment.WeaponInterface
 import core.game.node.entity.combat.equipment.WeaponInterface.WeaponInterfaces
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.info.Rights
-import core.game.interaction.InterfaceListener
 import shared.consts.Components
 
 class MainGameInterface : InterfaceListener {

@@ -8,11 +8,8 @@ import core.game.dialogue.FaceAnim
 import core.game.interaction.QueueStrength
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
-import core.game.system.task.Pulse
-import core.game.world.map.Location
 import core.plugin.Initializable
 import core.tools.END_DIALOGUE
-import shared.consts.Components
 import shared.consts.NPCs
 import shared.consts.Quests
 import shared.consts.Sounds

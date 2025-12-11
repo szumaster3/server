@@ -6,12 +6,12 @@ import core.game.dialogue.FaceAnim
 import core.game.dialogue.Topic
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
-import core.plugin.Initializable
-import shared.consts.NPCs
-import core.game.node.item.Item
 import core.game.node.entity.skill.Skills
+import core.game.node.item.Item
+import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.Items
+import shared.consts.NPCs
 
 /**
  * Represents the Dwarf (Mining guild) dialogue.

@@ -1,6 +1,5 @@
 package core.game.node.entity.player.info;
 
-import core.ServerConstants;
 import core.game.node.entity.player.Player;
 
 /**

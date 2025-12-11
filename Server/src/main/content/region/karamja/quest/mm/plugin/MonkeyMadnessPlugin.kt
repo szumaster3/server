@@ -1,9 +1,9 @@
 package content.region.karamja.quest.mm.plugin
 
+import content.region.karamja.quest.mm.dialogue.*
 import content.region.other.ape_atoll.dialogue.ZooknockAfterBattleDialogueFile
 import content.region.other.ape_atoll.dialogue.ZooknockDialogue
 import content.region.other.ape_atoll.dialogue.ZooknockDialogueFile
-import content.region.karamja.quest.mm.dialogue.*
 import core.api.*
 import core.game.dialogue.FaceAnim
 import core.game.global.action.DoorActionHandler

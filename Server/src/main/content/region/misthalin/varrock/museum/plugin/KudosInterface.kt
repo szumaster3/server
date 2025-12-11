@@ -1,12 +1,10 @@
 package content.region.misthalin.varrock.museum.plugin
 
 import core.api.getVarbit
-import core.api.playAudio
 import core.api.sendString
 import core.game.interaction.InterfaceListener
 import core.tools.colorize
 import shared.consts.Components
-import shared.consts.Sounds
 import shared.consts.Vars
 
 class KudosInterface : InterfaceListener {

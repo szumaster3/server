@@ -1,6 +1,5 @@
 package core.game.activity
 
-import content.data.getRespawnLocation
 import core.ServerConstants
 import core.api.*
 import core.api.utils.CameraShakeType

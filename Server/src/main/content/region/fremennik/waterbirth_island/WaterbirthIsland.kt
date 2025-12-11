@@ -1,6 +1,8 @@
 package content.region.fremennik.waterbirth_island
 
-import core.api.*
+import core.api.MapArea
+import core.api.closeOverlay
+import core.api.openOverlay
 import core.game.node.entity.Entity
 import core.game.node.entity.player.Player
 import core.game.world.map.zone.ZoneBorders

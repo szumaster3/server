@@ -1,8 +1,8 @@
 package content.region.fremennik.rellekka.dialogue
 
 import content.region.fremennik.rellekka.quest.viking.FremennikTrials
-import core.api.openNpcShop
 import core.api.isQuestComplete
+import core.api.openNpcShop
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
 import core.game.node.entity.npc.NPC

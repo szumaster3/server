@@ -2,23 +2,22 @@ package core.game.node.entity.player.link;
 
 import core.game.node.entity.player.Player;
 import core.game.node.scenery.Scenery;
-import core.game.world.map.Point;
-import core.tools.Log;
 import core.game.system.task.Pulse;
 import core.game.world.GameWorld;
 import core.game.world.map.Location;
 import core.game.world.map.RegionManager;
+import core.game.world.update.flag.EntityFlag;
 import core.game.world.update.flag.chunk.AnimateObjectUpdateFlag;
 import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
-import core.game.world.update.flag.EntityFlag;
 import core.net.packet.PacketRepository;
 import core.net.packet.context.*;
 import core.net.packet.context.DisplayModelContext.ModelType;
 import core.net.packet.out.*;
+import core.tools.Log;
 
 import static core.api.ContentAPIKt.log;
-import static core.api.ContentAPIKt.*;
+import static core.api.ContentAPIKt.setVarp;
 
 /**
  * Represents the class used to dispatching packets.

@@ -9,9 +9,9 @@ import core.game.node.entity.skill.Skills
 import core.game.world.map.Location
 import core.game.world.update.flag.context.Graphics
 import shared.consts.Animations
-import shared.consts.Graphics as Gfx
 import shared.consts.Items
 import shared.consts.Scenery
+import shared.consts.Graphics as Gfx
 
 /**
  * Handles access to Armadyl's Eyrie.

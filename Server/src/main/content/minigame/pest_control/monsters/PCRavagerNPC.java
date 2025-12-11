@@ -1,5 +1,6 @@
 package content.minigame.pest_control.monsters;
 
+import content.minigame.pest_control.PestControlSession;
 import core.game.interaction.MovementPulse;
 import core.game.node.Node;
 import core.game.node.entity.Entity;
@@ -17,7 +18,6 @@ import core.game.world.map.MapDistance;
 import core.game.world.map.path.Pathfinder;
 import core.game.world.map.zone.ZoneBorders;
 import core.tools.RandomFunction;
-import content.minigame.pest_control.PestControlSession;
 
 /**
  * Handles the Ravager pest control NPC.

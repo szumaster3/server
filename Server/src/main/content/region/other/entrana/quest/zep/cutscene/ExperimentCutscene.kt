@@ -8,7 +8,10 @@ import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.game.world.map.Direction
 import core.game.world.map.Location
-import shared.consts.*
+import shared.consts.Animations
+import shared.consts.NPCs
+import shared.consts.Quests
+import shared.consts.Regions
 
 class ExperimentCutscene(player: Player) : Cutscene(player) {
 

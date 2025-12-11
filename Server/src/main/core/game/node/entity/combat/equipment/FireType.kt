@@ -10,7 +10,6 @@ import core.game.node.entity.player.Player
 import core.game.system.task.NodeTask
 import core.game.world.update.flag.context.Animation
 import core.tools.RandomFunction
-import shared.consts.Animations
 import shared.consts.Graphics
 
 /**

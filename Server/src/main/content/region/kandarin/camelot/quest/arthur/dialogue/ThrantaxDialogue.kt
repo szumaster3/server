@@ -2,10 +2,10 @@ package content.region.kandarin.camelot.quest.arthur.dialogue
 
 import content.data.GameAttributes
 import content.region.kandarin.camelot.quest.arthur.npc.ThrantaxTheMightyNPC
-import core.api.setQuestStage
 import core.api.sendDialogue
 import core.api.sendOptions
 import core.api.setAttribute
+import core.api.setQuestStage
 import core.game.dialogue.DialogueFile
 import core.game.dialogue.FaceAnim
 import core.game.node.entity.npc.NPC

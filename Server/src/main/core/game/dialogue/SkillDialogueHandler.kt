@@ -8,7 +8,6 @@ import core.game.node.item.Item
 import core.net.packet.PacketRepository
 import core.net.packet.context.ChildPositionContext
 import core.net.packet.out.RepositionChild
-import core.tools.DARK_RED
 import core.tools.StringUtils
 import shared.consts.Components
 

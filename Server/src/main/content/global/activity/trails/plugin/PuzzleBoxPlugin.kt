@@ -9,10 +9,10 @@ import core.game.node.item.Item
 import core.net.packet.PacketRepository
 import core.net.packet.context.ContainerContext
 import core.net.packet.out.ContainerPacket
-import kotlin.math.absoluteValue
 import shared.consts.Components
 import shared.consts.Items
 import shared.consts.Scenery
+import kotlin.math.absoluteValue
 
 /**
  * Handles puzzle box interactions.

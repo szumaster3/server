@@ -1,7 +1,10 @@
 package content.global.skill.agility.shortcuts
 
 import content.global.skill.agility.AgilityShortcut
-import core.api.*
+import core.api.animate
+import core.api.forceMove
+import core.api.playAudio
+import core.api.sendMessage
 import core.game.node.entity.player.Player
 import core.game.node.scenery.Scenery
 import core.game.world.map.Location

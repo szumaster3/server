@@ -1,7 +1,5 @@
 package content.minigame.bounty_hunter.plugin
 
-import content.data.getRespawnLocation
-import core.ServerConstants
 import core.api.*
 import core.cache.def.impl.SceneryDefinition
 import core.game.component.CloseEvent

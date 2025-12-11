@@ -4,7 +4,6 @@ import content.region.fremennik.plugin.FremennikBoat
 import content.region.fremennik.plugin.Travel
 import content.region.fremennik.rellekka.quest.viking.FremennikTrials
 import core.api.*
-import core.api.isQuestComplete
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
 import core.game.dialogue.Topic

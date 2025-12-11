@@ -1,8 +1,7 @@
 package content.minigame.pest_control;
 
-import java.util.Random;
-
 import content.minigame.pest_control.monsters.PCRavagerNPC;
+import content.minigame.pest_control.monsters.PCSpinnerNPC;
 import core.game.node.entity.Entity;
 import core.game.node.entity.combat.BattleState;
 import core.game.node.entity.npc.AbstractNPC;
@@ -13,7 +12,8 @@ import core.game.world.map.Location;
 import core.game.world.map.RegionPlane;
 import core.game.world.update.flag.context.Animation;
 import core.tools.RandomFunction;
-import content.minigame.pest_control.monsters.PCSpinnerNPC;
+
+import java.util.Random;
 
 /**
  * Handles the portal NPC.

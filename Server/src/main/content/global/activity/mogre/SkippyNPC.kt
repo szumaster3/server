@@ -1,6 +1,7 @@
 package content.global.activity.mogre
 
 import core.api.*
+import core.game.interaction.QueueStrength
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.npc.NPCBehavior
 import core.game.world.map.Direction
@@ -10,7 +11,6 @@ import shared.consts.Animations
 import shared.consts.Graphics
 import shared.consts.NPCs
 import shared.consts.Sounds
-import core.game.interaction.QueueStrength
 
 /**
  * Represents Skippy NPC for Mogre lore activity.

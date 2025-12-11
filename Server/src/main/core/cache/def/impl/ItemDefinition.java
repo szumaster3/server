@@ -19,7 +19,8 @@ import shared.consts.Items;
 import java.nio.ByteBuffer;
 import java.util.*;
 
-import static core.api.ContentAPIKt.*;
+import static core.api.ContentAPIKt.equipSlot;
+import static core.api.ContentAPIKt.log;
 
 /**
  * Represents an item's definitions.

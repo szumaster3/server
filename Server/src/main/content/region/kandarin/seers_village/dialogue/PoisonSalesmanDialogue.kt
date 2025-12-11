@@ -3,8 +3,8 @@ package content.region.kandarin.seers_village.dialogue
 import content.region.fremennik.rellekka.quest.viking.FremennikTrials
 import content.region.kandarin.seers_village.quest.murder.dialogue.PoisonSalesmanDialogueFile
 import core.api.addItemOrDrop
-import core.api.openDialogue
 import core.api.getQuestStage
+import core.api.openDialogue
 import core.api.removeItem
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim

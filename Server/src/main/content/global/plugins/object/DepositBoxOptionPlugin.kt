@@ -1,6 +1,9 @@
 package content.global.plugins.`object`
 
-import core.api.*
+import core.api.dumpContainer
+import core.api.getUsedOption
+import core.api.removeTabs
+import core.api.sendString
 import core.game.component.CloseEvent
 import core.game.component.Component
 import core.game.container.access.InterfaceContainer.generateItems

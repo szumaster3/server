@@ -1,7 +1,6 @@
 package content.global.activity.phoenix
 
 import content.data.consumables.effects.RestoreEffect
-import content.data.consumables.effects.SkillEffect
 import core.game.node.entity.Entity
 import core.game.node.entity.combat.BattleState
 import core.game.node.entity.combat.CombatStyle

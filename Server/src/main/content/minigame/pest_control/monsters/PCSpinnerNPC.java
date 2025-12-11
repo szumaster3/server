@@ -19,7 +19,7 @@ import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
 import core.tools.RandomFunction;
 
-import static core.api.ContentAPIKt.*;
+import static core.api.ContentAPIKt.applyPoison;
 
 /**
  * Handles a pest control spinner NPC.

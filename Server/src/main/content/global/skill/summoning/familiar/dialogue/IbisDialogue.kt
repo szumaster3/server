@@ -7,7 +7,6 @@ import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.NPCs
-import kotlin.random.Random
 
 /**
  * Represents the Ibis familiar dialogues.

@@ -10,7 +10,6 @@ import core.game.world.update.flag.context.Animation
 import core.tools.END_DIALOGUE
 import shared.consts.Animations
 import shared.consts.NPCs
-import shared.consts.Quests
 import shared.consts.Sounds
 
 class SandpitCutscene(player: Player) : Cutscene(player) {

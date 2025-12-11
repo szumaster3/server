@@ -1,11 +1,9 @@
 package content.global.skill.magic.spells.teleport
 
 import content.data.GameAttributes
-import content.data.getRespawnLocation
 import content.global.skill.magic.SpellListener
 import content.global.skill.magic.TeleportMethod
 import content.global.skill.magic.spells.ModernSpells
-import core.ServerConstants
 import core.api.*
 import core.game.event.TeleportEvent
 import core.game.node.entity.player.Player

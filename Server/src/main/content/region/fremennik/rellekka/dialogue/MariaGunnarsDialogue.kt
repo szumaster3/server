@@ -2,12 +2,7 @@ package content.region.fremennik.rellekka.dialogue
 
 import content.region.fremennik.plugin.FremennikBoat
 import content.region.fremennik.plugin.Travel
-import core.api.findLocalNPC
-import core.api.getAttribute
-import core.api.isQuestComplete
-import core.api.requireQuest
-import core.api.sendChat
-import core.api.sendNPCDialogue
+import core.api.*
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
 import core.game.node.entity.npc.NPC

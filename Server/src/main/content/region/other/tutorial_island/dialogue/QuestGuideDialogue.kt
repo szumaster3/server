@@ -2,7 +2,10 @@ package content.region.other.tutorial_island.dialogue
 
 import content.data.GameAttributes
 import content.region.other.tutorial_island.plugin.TutorialStage
-import core.api.*
+import core.api.getAttribute
+import core.api.sendItemDialogue
+import core.api.sendPlainDialogue
+import core.api.setAttribute
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
 import core.game.node.entity.npc.NPC

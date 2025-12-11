@@ -1,7 +1,10 @@
 package content.global.activity.godwars
 
 import content.data.God
-import core.api.*
+import core.api.getAttribute
+import core.api.hasGodItem
+import core.api.sendString
+import core.api.setAttribute
 import core.game.node.entity.player.Player
 import shared.consts.Components
 import shared.consts.NPCs

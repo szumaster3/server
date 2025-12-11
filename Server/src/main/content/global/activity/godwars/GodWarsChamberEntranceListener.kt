@@ -1,13 +1,15 @@
 package content.global.activity.godwars
 
-import core.api.*
+import core.api.getAttribute
+import core.api.log
+import core.api.sendMessage
 import core.game.global.action.DoorActionHandler
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
-import core.game.world.map.Direction
-import core.tools.StringUtils
 import core.game.node.scenery.Scenery
+import core.game.world.map.Direction
 import core.tools.Log
+import core.tools.StringUtils
 import shared.consts.Scenery as Objects
 
 /**

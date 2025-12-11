@@ -4,7 +4,6 @@ import content.global.skill.gather.mining.MiningNode
 import content.global.skill.summoning.familiar.Familiar
 import content.global.skill.summoning.familiar.FamiliarSpecial
 import content.global.skill.summoning.familiar.Forager
-import core.api.playAudio
 import core.api.playGlobalAudio
 import core.api.sendMessage
 import core.cache.def.impl.NPCDefinition

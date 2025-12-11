@@ -77,11 +77,7 @@ import core.game.world.update.flag.context.Animation
 import core.game.world.update.flag.context.ForceMoveCtx
 import core.game.world.update.flag.context.Graphics
 import core.net.packet.PacketRepository
-import core.net.packet.context.AccessMaskContext
-import core.net.packet.context.ChildPositionContext
-import core.net.packet.context.DefaultContext
-import core.net.packet.context.MinimapStateContext
-import core.net.packet.context.MusicContext
+import core.net.packet.context.*
 import core.net.packet.out.*
 import core.tools.Log
 import core.tools.SystemLogger

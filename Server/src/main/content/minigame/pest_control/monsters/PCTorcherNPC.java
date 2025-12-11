@@ -2,10 +2,8 @@ package content.minigame.pest_control.monsters;
 
 import content.minigame.pest_control.PestControlSession;
 import core.game.node.entity.Entity;
-import core.game.node.entity.combat.BattleState;
+import core.game.node.entity.combat.*;
 import core.game.node.entity.combat.spell.CombatSpell;
-import core.game.node.entity.combat.CombatStyle;
-import core.game.node.entity.combat.InteractionType;
 import core.game.node.entity.combat.spell.SpellType;
 import core.game.node.entity.impl.Animator.Priority;
 import core.game.node.entity.impl.Projectile;
@@ -18,8 +16,6 @@ import core.game.world.map.MapDistance;
 import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
 import core.plugin.Plugin;
-import core.game.node.entity.combat.CombatSwingHandler;
-import core.game.node.entity.combat.MagicSwingHandler;
 
 /**
  * Handles the torcher pest control NPC.

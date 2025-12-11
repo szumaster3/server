@@ -4,7 +4,7 @@ package content.region.kandarin.gnome_stronghold.quest.makinghistory.plugin
 import core.api.*
 import core.game.node.entity.player.Player
 import core.game.world.map.Location
-import shared.consts.*
+import shared.consts.Items
 import kotlin.random.Random
 
 /**

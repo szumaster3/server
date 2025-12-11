@@ -1,14 +1,12 @@
 package content.region.misthalin.varrock.quest.dragon.plugin
 
 import content.region.misthalin.varrock.quest.dragon.DragonSlayer
-import core.api.sendMessage
 import core.api.removeItem
+import core.api.sendMessage
 import core.game.global.action.DoorActionHandler.handleAutowalkDoor
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
-import core.game.node.item.Item
 import shared.consts.Music
-import shared.consts.Quests
 
 class DragonSlayerKeyDoorPlugin : InteractionListener {
 

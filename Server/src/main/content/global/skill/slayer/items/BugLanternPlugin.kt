@@ -1,8 +1,8 @@
 package content.global.skill.slayer.items
 
 import core.api.getStatLevel
-import core.api.sendMessage
 import core.api.replaceSlot
+import core.api.sendMessage
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.node.entity.skill.Skills

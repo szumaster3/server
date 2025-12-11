@@ -3,8 +3,6 @@ package content.region.fremennik.rellekka.plugin
 import content.global.skill.agility.AgilityHandler
 import content.region.fremennik.rellekka.quest.viking.FremennikTrials
 import core.api.*
-import core.api.openNpcShop
-import core.api.isQuestComplete
 import core.game.dialogue.FaceAnim
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener

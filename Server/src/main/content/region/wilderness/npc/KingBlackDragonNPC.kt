@@ -13,7 +13,6 @@ import core.game.node.entity.impl.Animator.Priority
 import core.game.node.entity.impl.Projectile
 import core.game.node.entity.npc.AbstractNPC
 import core.game.node.entity.npc.NPC
-import core.game.node.entity.player.Player
 import core.game.world.map.Location
 import core.game.world.update.flag.context.Animation
 import core.plugin.Initializable

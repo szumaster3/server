@@ -1,6 +1,5 @@
 package core.game.node.entity.player.info.login
 
-import content.data.getRespawnLocation
 import core.api.LoginListener
 import core.api.reinitVarps
 import core.auth.AuthResponse

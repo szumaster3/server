@@ -5,16 +5,15 @@ import content.region.morytania.port_phasmatys.quest.ahoy.npc.GiantLobsterNPC.Co
 import content.region.morytania.port_phasmatys.quest.ahoy.plugin.GhostsAhoyUtils.jumpRockPath
 import core.api.*
 import core.game.dialogue.DialogueFile
-import core.game.global.action.DoorActionHandler
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.interaction.InterfaceListener
-import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
-import core.game.node.scenery.Scenery
 import core.game.world.map.Location
-import core.tools.END_DIALOGUE
-import shared.consts.*
+import shared.consts.Animations
+import shared.consts.Components
+import shared.consts.Items
+import shared.consts.Quests
 import shared.consts.Scenery as Objects
 
 class GhostsAhoyListener : InteractionListener, InterfaceListener {

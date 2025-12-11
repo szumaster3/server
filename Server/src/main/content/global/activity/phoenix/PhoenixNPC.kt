@@ -2,10 +2,12 @@ package content.global.activity.phoenix
 
 import com.google.gson.JsonObject
 import content.data.GameAttributes
-import content.region.kandarin.piscatoris.quest.phoenix.InPyreNeed
 import core.ServerStore
 import core.ServerStore.Companion.getBoolean
-import core.api.*
+import core.api.getStatLevel
+import core.api.rewardXP
+import core.api.sendMessage
+import core.api.setAttribute
 import core.game.node.entity.Entity
 import core.game.node.entity.combat.CombatStyle
 import core.game.node.entity.combat.CombatSwingHandler

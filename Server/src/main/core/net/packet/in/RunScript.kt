@@ -1,6 +1,7 @@
 package core.net.packet.`in`
 
-import core.api.*
+import core.api.removeAttribute
+import core.api.sendDialogue
 import core.game.dialogue.InputType
 import core.game.node.entity.player.Player
 

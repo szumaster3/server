@@ -6,10 +6,8 @@ import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.interaction.QueueStrength
 import core.game.node.entity.player.Player
-import core.game.node.entity.skill.SkillPulse
 import core.game.node.entity.skill.Skills
 import core.game.node.item.Item
-import core.game.system.task.Pulse
 import core.tools.RandomUtils
 import shared.consts.Animations
 import shared.consts.Items

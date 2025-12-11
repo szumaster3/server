@@ -1,14 +1,10 @@
 package content.minigame.pest_control;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.PriorityQueue;
-
 import content.minigame.pest_control.monsters.*;
 import core.ServerConstants;
-import core.game.component.Component;
 import core.game.activity.ActivityManager;
 import core.game.activity.ActivityPlugin;
+import core.game.component.Component;
 import core.game.interaction.Option;
 import core.game.node.Node;
 import core.game.node.entity.Entity;
@@ -24,12 +20,17 @@ import core.game.world.map.build.DynamicRegion;
 import core.game.world.map.zone.RegionZone;
 import core.game.world.map.zone.ZoneBuilder;
 import core.game.world.map.zone.ZoneRestriction;
-import core.plugin.Initializable;
 import core.plugin.ClassScanner;
+import core.plugin.Initializable;
 import core.tools.RandomFunction;
 import core.tools.StringUtils;
 
-import static core.api.ContentAPIKt.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.PriorityQueue;
+
+import static core.api.ContentAPIKt.curePoison;
+import static core.api.ContentAPIKt.isPoisoned;
 
 
 /**

@@ -1,6 +1,5 @@
 package content.global.skill.gather.mining
 
-import content.data.GameAttributes
 import content.data.skill.SkillingTool
 import content.global.activity.star.ShootingStarBonus
 import core.api.*

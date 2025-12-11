@@ -1,7 +1,10 @@
 package content.region.kandarin.gnome_stronghold.quest.makinghistory.dialogue
 
 import content.region.kandarin.gnome_stronghold.quest.makinghistory.MHUtils
-import core.api.*
+import core.api.getQuestStage
+import core.api.getVarbit
+import core.api.sendMessage
+import core.api.setVarbit
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
 import core.game.node.entity.player.Player

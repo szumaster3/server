@@ -10,7 +10,6 @@ import core.game.node.entity.player.Player
 import core.tools.DARK_PURPLE
 import shared.consts.Components
 import shared.consts.Scenery
-import shared.consts.Vars
 
 class WarningManager : InteractionListener, InterfaceListener {
 
