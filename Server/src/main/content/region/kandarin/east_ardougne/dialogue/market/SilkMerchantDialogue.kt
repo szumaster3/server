@@ -1,52 +1,28 @@
 package content.region.kandarin.east_ardougne.dialogue.market
 
-import core.api.sendChat
+import content.global.skill.thieving.ThievingDefinition
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.game.node.item.Item
-import core.game.system.task.Pulse
-import core.game.world.GameWorld.Pulser
-import core.game.world.map.RegionManager.getLocalNpcs
 import core.plugin.Initializable
 import core.tools.END_DIALOGUE
+import shared.consts.Items
 import shared.consts.NPCs
 
 @Initializable
 class SilkMerchantDialogue(player: Player? = null) : Dialogue(player) {
 
-    private val silk = Item(950)
-    private val notedSilk = Item(951)
-
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        if (player.getSavedData().globalData.getSilkSteal() > System.currentTimeMillis()) {
-            end()
-            for (npc in getLocalNpcs(player.location, 8)) {
-                if (!npc.properties.combatPulse.isAttacking && npc.id == 32) {
-                    sendChat(npc, "Hey! Get your hands off there!")
-                    npc.attack(player)
-                    break
-                }
-            }
-            Pulser.submit(
-                object : Pulse(1) {
-                    var count: Int = 0
-
-                    override fun pulse(): Boolean {
-                        if (count == 0) sendChat(npc, "You're the one who stole something from me!")
-                        if (count == 2) {
-                            sendChat(npc, "Thief! Thief! Thief!")
-                            return true
-                        }
-                        count++
-                        return false
-                    }
-                },
-            )
-            return false
-        }
+        val canTrade = ThievingDefinition.Stall.handleStallCooldown(
+            player = player,
+            stallName = "SILK_STALL",
+            shopNpc = npc,
+            guardNpcIds = listOf(NPCs.GUARD_32)
+        )
+        if (!canTrade) return false
         npc(FaceAnim.HAPPY, "I buy silk. If you ever want to", "sell any silk, bring it here.").also { stage = 0 }
         return true
     }
@@ -141,9 +117,14 @@ class SilkMerchantDialogue(player: Player? = null) : Dialogue(player) {
             return
         }
         if (player.inventory.remove(remove)) {
-            player.inventory.add(Item(995, price * amt))
+            player.inventory.add(Item(Items.COINS_995, price * amt))
         }
     }
 
     override fun getIds(): IntArray = intArrayOf(NPCs.SILK_MERCHANT_574)
+
+    companion object {
+        private val silk = Item(Items.SILK_950)
+        private val notedSilk = Item(Items.SILK_951)
+    }
 }

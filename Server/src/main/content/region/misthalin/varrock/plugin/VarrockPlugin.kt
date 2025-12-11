@@ -1,5 +1,6 @@
 package content.region.misthalin.varrock.plugin
 
+import content.global.skill.thieving.ThievingDefinition
 import content.region.kandarin.east_ardougne.quest.biohazard.dialogue.GuidorsWifeQuestDialogue
 import content.region.misthalin.varrock.dialogue.KnockatDoorDialogue
 import content.region.misthalin.varrock.dialogue.SawmillOperatorDialogue
@@ -17,8 +18,6 @@ import core.game.node.Node
 import core.game.node.entity.Entity
 import core.game.node.item.GroundItem
 import core.game.node.item.GroundItemManager
-import core.game.system.task.Pulse
-import core.game.world.GameWorld.Pulser
 import core.game.world.map.Location
 import core.game.world.map.zone.MapZone
 import core.game.world.map.zone.ZoneBorders
@@ -516,30 +515,13 @@ class VarrockPlugin : InteractionListener {
          */
 
         on(NPCs.TEA_SELLER_595, IntType.NPC, "trade") { player, node ->
-            val npc = node.asNpc()
-            val caughtUntil = player.getSavedData().globalData.getTeaSteal()
-
-            if (caughtUntil > System.currentTimeMillis()) {
-
-                Pulser.submit(object : Pulse(1) {
-                    var count = 0
-
-                    override fun pulse(): Boolean {
-                        when (count) {
-                            0 -> sendChat(npc, "You're the one who stole something from me!")
-                            2 -> {
-                                sendChat(npc, "Guards guards!")
-                                return true
-                            }
-                        }
-                        count++
-                        return false
-                    }
-                })
-
-                return@on false
-            }
-
+            val canTrade = ThievingDefinition.Stall.handleStallCooldown(
+                player = player,
+                stallName = "TEA_STALL",
+                shopNpc = node.asNpc(),
+                guardNpcIds = listOf(NPCs.GUARD_32)
+            )
+            if (!canTrade) return@on false
             openNpcShop(player, NPCs.TEA_SELLER_595)
             return@on true
         }

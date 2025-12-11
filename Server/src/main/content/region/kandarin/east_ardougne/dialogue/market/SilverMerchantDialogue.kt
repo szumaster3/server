@@ -1,5 +1,6 @@
 package content.region.kandarin.east_ardougne.dialogue.market
 
+import content.global.skill.thieving.ThievingDefinition
 import content.region.kandarin.gnome_stronghold.quest.makinghistory.MHUtils
 import content.region.kandarin.gnome_stronghold.quest.makinghistory.plugin.EnchantedKeyTreasures
 import core.api.*
@@ -9,9 +10,6 @@ import core.game.dialogue.FaceAnim
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.game.node.item.Item
-import core.game.system.task.Pulse
-import core.game.world.GameWorld.Pulser
-import core.game.world.map.RegionManager.getLocalNpcs
 import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.Items
@@ -24,37 +22,13 @@ class SilverMerchantDialogue(player: Player? = null) : Dialogue(player) {
     override fun open(vararg args: Any?): Boolean {
         val baker = args[0] as NPC
         npc = baker
-
-        val stealCooldown = player.getSavedData().globalData.getBakerSteal()
-        if (stealCooldown > System.currentTimeMillis()) {
-            end()
-            val guard = getLocalNpcs(player.location, 8)
-                .firstOrNull { it.id == NPCs.GUARD_32 && !it.properties.combatPulse.isAttacking }
-
-            guard?.let {
-                sendChat(it, "Hey! Get your hands off there!")
-                it.attack(player)
-            }
-
-            Pulser.submit(object : Pulse(1) {
-                var count = 0
-
-                override fun pulse(): Boolean {
-                    when (count) {
-                        0 -> sendChat(baker, "You're the one who stole something from me!")
-                        2 -> {
-                            sendChat(baker, "Guards, guards!")
-                            return true
-                        }
-                    }
-                    count++
-                    return false
-                }
-            })
-
-            return false
-        }
-
+        val canTrade = ThievingDefinition.Stall.handleStallCooldown(
+            player = player,
+            stallName = "SILVER_STALL",
+            shopNpc = npc,
+            guardNpcIds = listOf(NPCs.GUARD_32)
+        )
+        if (!canTrade) return false
         npc(FaceAnim.HAPPY, "Silver! Silver! Best prices for buying and selling in all", "Kandarin!")
         return true
     }

@@ -43,10 +43,14 @@ class GlobalData {
     private var runReplenishDelay: Long = 0
     private var lowAlchemyDelay: Long = 0
     private var minigameTeleportDelay: Long = 0
-    private var silkSteal: Long = 0
-    private var teaSteal: Long = 0
-    private var bakerSteal: Long = 0
-    private var fishSteal: Long = 0
+
+    /**
+     * Map storing theft timers for each stall.
+     * - Key = stall name `(example: "SILK_STALL")`
+     * - value = timestamp when theft is possible again.
+     */
+    val stallSteal: MutableMap<String, Long> = mutableMapOf()
+
     private var zaffTime: Long = 0
     private var doubleExpDelay: Long = 0
     private var dropDelay: Long = 0
@@ -95,8 +99,13 @@ class GlobalData {
         tutorClaim = data["tutorClaim"]?.asLong ?: 0L
         luthasTask = data["luthasTask"]?.asBoolean ?: false
         karamjaBananas = data["karamjaBananas"]?.asInt ?: 0
-        silkSteal = data["silkSteal"]?.asLong ?: 0L
-        teaSteal = data["teaSteal"]?.asLong ?: 0L
+
+        val stallObjects = data["stallSteal"]?.asJsonObject
+
+        stallObjects?.entrySet()?.forEach { (stall, value) ->
+            stallSteal[stall] = value.asLong
+        }
+
         zaffAmount = data["zafAmount"]?.asInt ?: 0
         zaffTime = data["zafTime"]?.asLong ?: 0L
         fritzGlass = data["fritzGlass"]?.asBoolean ?: false
@@ -285,28 +294,17 @@ class GlobalData {
         this.karamjaBananas = karamjaBannanas
     }
 
-    fun getTeaSteal(): Long = teaSteal
+    /**
+     * Returns the cooldown time for a given stall.
+     */
+    fun getStallSteal(stall: String): Long =
+        stallSteal[stall] ?: 0L
 
-    fun setTeaSteal(teaSteal: Long) {
-        this.teaSteal = teaSteal
-    }
-
-    fun getSilkSteal(): Long = silkSteal
-
-    fun setSilkSteal(silkSteal: Long) {
-        this.silkSteal = silkSteal
-    }
-
-    fun getBakerSteal(): Long = bakerSteal
-
-    fun setBakerSteal(bakerSteal: Long) {
-        this.bakerSteal = bakerSteal
-    }
-
-    fun getFishSteal(): Long = fishSteal
-
-    fun setFishSteal(fishSteal: Long) {
-        this.fishSteal = fishSteal
+    /**
+     * Sets the cooldown for a given stall.
+     */
+    fun setStallSteal(stall: String, time: Long) {
+        stallSteal[stall] = time
     }
 
     fun getZaffAmount(): Int = zaffAmount

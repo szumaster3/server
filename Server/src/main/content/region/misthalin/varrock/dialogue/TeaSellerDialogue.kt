@@ -1,13 +1,11 @@
 package content.region.misthalin.varrock.dialogue
 
+import content.global.skill.thieving.ThievingDefinition
 import core.api.openNpcShop
-import core.api.sendChat
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
-import core.game.system.task.Pulse
-import core.game.world.GameWorld.Pulser
 import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.NPCs
@@ -20,27 +18,13 @@ class TeaSellerDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        if (player.getSavedData().globalData.getTeaSteal() > System.currentTimeMillis()) {
-            end()
-
-            Pulser.submit(object : Pulse(1) {
-                var count = 0
-
-                override fun pulse(): Boolean {
-                    when (count) {
-                        0 -> sendChat(npc, "You're the one who keeps stealing from me!")
-                        2 -> {
-                            sendChat(npc, "Guards, Guards!")
-                            return true
-                        }
-                    }
-                    count++
-                    return false
-                }
-            })
-
-            return false
-        }
+        val canTrade = ThievingDefinition.Stall.handleStallCooldown(
+            player = player,
+            stallName = "TEA_STALL",
+            shopNpc = npc,
+            guardNpcIds = listOf(NPCs.GUARD_32)
+        )
+        if (!canTrade) return false
 
         if (args.size > 1) {
             npc(FaceAnim.FURIOUS, "Hey! Put that back! Those are for display only!")

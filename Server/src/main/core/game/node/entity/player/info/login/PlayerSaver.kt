@@ -338,10 +338,14 @@ class PlayerSaver(val player: Player) {
         globalData.addProperty("tutorClaim", player.savedData.globalData.getTutorClaim().toString())
         globalData.addProperty("luthasTask", player.savedData.globalData.isLuthasTask())
         globalData.addProperty("karamjaBananas", player.savedData.globalData.getKaramjaBananas().toString())
-        globalData.addProperty("silkSteal", player.savedData.globalData.getSilkSteal().toString())
-        globalData.addProperty("teaSteal", player.savedData.globalData.getTeaSteal().toString())
-        globalData.addProperty("bakerSteal", player.savedData.globalData.getBakerSteal().toString())
-        globalData.addProperty("fishSteal", player.savedData.globalData.getFishSteal().toString())
+
+        val stallObjects = JsonObject()
+        player.savedData.globalData.stallSteal.forEach { (stall, time) ->
+            stallObjects.addProperty(stall, time)
+        }
+
+        globalData.add("stallSteal", stallObjects)
+
         globalData.addProperty("zafAmount", player.savedData.globalData.getZaffAmount().toString())
         globalData.addProperty("zafTime", player.savedData.globalData.getZaffTime().toString())
         globalData.addProperty("fritzGlass", player.savedData.globalData.isFritzGlass())

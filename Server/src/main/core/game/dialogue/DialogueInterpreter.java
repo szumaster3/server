@@ -388,21 +388,15 @@ public final class DialogueInterpreter {
         if (messages == null || messages.length == 0) {
             throw new IllegalArgumentException("Messages cannot be null or empty.");
         }
-
         String combinedMessage = String.join("<br>", messages);
-
         player.getInterfaceManager().openChatbox(Components.DOUBLEOBJBOX_131);
         player.getPacketDispatch().sendString(combinedMessage, Components.DOUBLEOBJBOX_131, 1);
-
         ItemDefinition itemDef = ItemDefinition.forId(itemId);
         if (itemDef == null) {
             throw new IllegalArgumentException("Invalid itemId: " + itemId);
         }
-
         player.getPacketDispatch().sendItemOnInterface(itemId, 1, Components.DOUBLEOBJBOX_131, 2);
-
         player.getPacketDispatch().sendAngleOnInterface(Components.DOUBLEOBJBOX_131, 2, (int) (itemDef.getModelZoom() / 1.1337), itemDef.getModelRotationX(), itemDef.getModelRotationY());
-
         return player.getInterfaceManager().chatbox;
     }
 

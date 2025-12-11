@@ -10,6 +10,7 @@ import core.game.node.Node
 import core.game.node.entity.combat.DeathTask
 import core.game.node.entity.combat.ImpactHandler
 import core.game.node.entity.impl.Animator
+import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.diary.DiaryType
 import core.game.node.entity.skill.Skills
@@ -146,31 +147,12 @@ object ThievingDefinition {
 
                     player.inventory.add(item)
                     rewardXP(player, Skills.THIEVING, stall.experience)
-                    when (stall) {
-                        SILK_STALL      ->
-                            player.getSavedData().globalData.setSilkSteal(System.currentTimeMillis() + 1800000)
-                        TEA_STALL       ->
-                            player.getSavedData().globalData.setTeaSteal(System.currentTimeMillis() + 1800000)
-                        BAKER_STALL     ->
-                            player.getSavedData().globalData.setBakerSteal(System.currentTimeMillis() + 1800000)
-                        FISH_STALL      ->
-                            player.getSavedData().globalData.setFishSteal(System.currentTimeMillis() + 1800000)
-                        CRAFTING_STALL      -> TODO()
-                        WINE_STALL          -> TODO()
-                        MARKET_SEED_STALL   -> TODO()
-                        FUR_STALL           -> TODO()
-                        CROSSBOW_STALL      -> TODO()
-                        SILVER_STALL        -> TODO()
-                        SPICE_STALL         -> TODO()
-                        GEM_STALL           -> TODO()
-                        SCIMITAR_STALL      -> TODO()
-                        MAGIC_STALL         -> TODO()
-                        GENERAL_STALL       -> TODO()
-                        FOOD_STALL          -> TODO()
-                        CANDLES             -> TODO()
-                        COUNTER             -> TODO()
-                        VEGETABLE_STALL     -> TODO()
-                    }
+
+                    player.savedData.globalData.setStallSteal(
+                        stall.name,
+                        System.currentTimeMillis() + 1_800_000
+                    )
+
                     if (node.isActive) {
                         replaceScenery(node, node.transform(stall.getEmpty(node.id)).id, stall.delay)
                     }
@@ -185,6 +167,49 @@ object ThievingDefinition {
                     delayClock(player, Clocks.SKILLING, 2)
                     return@queueScript stopExecuting(player)
                 }
+            }
+
+            /**
+             * Handles the stall steal cooldown.
+             * @param player The player.
+             * @param stallName The name of the stall.
+             * @param shopNpcId The shop owner id.
+             * @param npcIds A list of npc ids that can attack player.
+             * @param range The maximum distance to search for npc (default is 8 tiles).
+             * @return `true` if the player is allowed to trade, `false` if still on cooldown.
+             */
+            fun handleStallCooldown(player: Player, stallName: String, shopNpc: NPC, guardNpcIds: List<Int>, range: Int = 8): Boolean {
+                val stealCooldown = player.getSavedData().globalData.getStallSteal(stallName)
+                if (stealCooldown > System.currentTimeMillis()) {
+                    closeDialogue(player)
+
+                    val guard = RegionManager.getLocalNpcs(player.location, range)
+                        .firstOrNull { it.id in guardNpcIds && !it.properties.combatPulse.isAttacking }
+
+                    guard?.let {
+                        sendChat(it, "Hey! Get your hands off there!")
+                        it.attack(player)
+                    }
+
+                    queueScript(shopNpc, 1) { stage ->
+                        when (stage) {
+                            0 -> {
+                                sendChat(shopNpc, "You're the one who stole something from me!")
+                                false
+                            }
+                            1 -> false
+                            2 -> {
+                                sendChat(shopNpc, "Thief! Thief! Thief!")
+                                true
+                            }
+                            else -> true
+                        }
+                    }
+
+                    return false
+                }
+
+                return true
             }
         }
     }

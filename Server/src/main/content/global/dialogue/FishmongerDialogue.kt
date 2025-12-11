@@ -1,9 +1,8 @@
 package content.global.dialogue
 
+import content.global.skill.thieving.ThievingDefinition
 import content.region.fremennik.rellekka.quest.viking.FremennikTrials
-import core.api.hasRequirement
-import core.api.isQuestComplete
-import core.api.openNpcShop
+import core.api.*
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
 import core.game.node.entity.player.Player
@@ -22,7 +21,7 @@ class FishmongerDialogue(player: Player? = null) : Dialogue(player) {
         when (stage) {
             0 -> when (npc.id) {
                 NPCs.FISHMONGER_1393 -> {
-                    if (player.savedData.globalData.getFishSteal() > System.currentTimeMillis()) {
+                    if (player.getSavedData().globalData.getStallSteal("FISH_STALL")  > System.currentTimeMillis()) {
                         npc.sendChat("Get away from me!")
                         npc.sendChat("Guards, guards!", 2)
                         return true
@@ -39,6 +38,13 @@ class FishmongerDialogue(player: Player? = null) : Dialogue(player) {
                     if (!isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS)) {
                         npc(FaceAnim.ANNOYED, "I don't sell to outlanders.").also { stage = END_DIALOGUE }
                     } else {
+                        val canTrade = ThievingDefinition.Stall.handleStallCooldown(
+                            player = player,
+                            stallName = "FISH_STALL",
+                            shopNpc = npc,
+                            guardNpcIds = listOf(NPCs.MARKET_GUARD_1317, NPCs.WARRIOR_1318)
+                        )
+                        if (!canTrade) return false
                         npcl(FaceAnim.HALF_ASKING, "Hello there, ${FremennikTrials.getFremennikName(player)}. Looking for fresh fish?")
                         stage = 3
                     }
