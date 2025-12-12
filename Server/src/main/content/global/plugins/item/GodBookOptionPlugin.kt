@@ -207,6 +207,58 @@ class GodBookOptionPlugin : InteractionListener {
             )
         )
 
+        private val standardTexts = mapOf(
+            "Weddings" to mapOf(
+                BookType.SARADOMIN to listOf(
+                    "In the name of Saradomin,",
+                    "Protector of us all,",
+                    "I now join you in the eyes of Saradomin."
+                ),
+                BookType.ZAMORAK to listOf(
+                    "Two great warriors, joined by hand,",
+                    "to spread destruction across the land.",
+                    "In Zamorak's name, now two are one."
+                ),
+                BookType.GUTHIX to listOf(
+                    "Light and dark, day and night,",
+                    "Balance arises from contrast.",
+                    "I unify thee in the name of Guthix."
+                )
+            ),
+            "Last Rites" to mapOf(
+                BookType.SARADOMIN to listOf(
+                    "Thy cause was false, thy skills did lack;",
+                    "See you in Lumbridge when you get back."
+                ),
+                BookType.ZAMORAK to listOf(
+                    "The weak deserve to die,",
+                    "So the strong may flourish.",
+                    "This is the creed of Zamorak."
+                ),
+                BookType.GUTHIX to listOf(
+                    "Thy death was not in vain,",
+                    "For it brought some balance to the world.",
+                    "May Guthix bring you rest."
+                )
+            ),
+            "Blessings" to mapOf(
+                BookType.SARADOMIN to listOf(
+                    "Go in peace in the name of Saradomin;",
+                    "May his glory shine upon you like the sun."
+                ),
+                BookType.ZAMORAK to listOf(
+                    "May your bloodthirst never be sated,",
+                    "and may all your battles be glorious.",
+                    "Zamorak bring you strength."
+                ),
+                BookType.GUTHIX to listOf(
+                    "May you walk the path, and never fall,",
+                    "For Guthix walks beside thee on thy journey.",
+                    "May Guthix bring you peace."
+                )
+            )
+        )
+
         /**
          * Handles the dialogue component interactions.
          */
@@ -215,13 +267,13 @@ class GodBookOptionPlugin : InteractionListener {
                 0 -> options("Weddings", "Last Rites", "Blessings", "Preaching").also { stage++ }
                 1 -> {
                     val msgList = when (buttonID) {
-                        1 -> preachings[book]
-                        2 -> preachings[book]
-                        3 -> preachings[book]
-                        4 -> preachings[book]?.random()?.let { listOf(it) }
+                        1 -> standardTexts["Weddings"]?.get(book)
+                        2 -> standardTexts["Last Rites"]?.get(book)
+                        3 -> standardTexts["Blessings"]?.get(book)
+                        4 -> preachings[book]?.random()
                         else -> null
-                    }?.flatten() ?: return end()
-                    preach(player!!, msgList, book)
+                    } ?: return end()
+                    preach(player!!, msgList, book, buttonID == 4)
                     end()
                 }
             }
@@ -230,7 +282,7 @@ class GodBookOptionPlugin : InteractionListener {
         /**
          * Preaches lines with animation and timing for the player.
          */
-        private fun preach(player: Player, lines: List<String>, book: BookType) {
+        private fun preach(player: Player, lines: List<String>, book: BookType, end: Boolean) {
             val anim = Animation(book.anim)
             lock(player, 100)
 
@@ -246,12 +298,20 @@ class GodBookOptionPlugin : InteractionListener {
                     }
 
                     if (tick % 3 == 0) {
-                        if (index < lines.size) {
-                            sendChat(player, lines[index++])
-                        } else {
-                            sendChat(player, book.text)
-                            unlock(player)
-                            return true
+                        when {
+                            index < lines.size -> {
+                                sendChat(player, lines[index++])
+                            }
+
+                            end && index == lines.size -> {
+                                sendChat(player, book.text)
+                                index++
+                            }
+
+                            else -> {
+                                unlock(player)
+                                return true
+                            }
                         }
                     }
 
