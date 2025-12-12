@@ -125,7 +125,7 @@ class LalliDialogue(player: Player? = null) : Dialogue(player) {
                 stage = END_DIALOGUE
             }
             65 -> npcl(FaceAnim.OLD_HAPPY, "Your soup very tasty, human! But me still not want trade golden apples for your stone. Me think pet rock get jealous.").also { stage++ }
-            66 -> playerl(FaceAnim.ANGRY, "I. DON'T. WANT. ANY. GOLDEN. APPLES. ALL. I. WANT. IS. A. GOLDEN. FLEECE.").also { stage++ }
+            66 -> player(FaceAnim.ANGRY, "I. DON'T. WANT. ANY. GOLDEN. APPLES.", "ALL. I. WANT. IS. A. GOLDEN. FLEECE.").also { stage++ }
             67 -> npcl(FaceAnim.OLD_ALMOST_CRYING, "Gee, sorry human, all you have do is ask, me not need you to shout. You act like you think Lalli am stupid or something...").also {
                 stage = if (player.inventory.isFull) {
                     68

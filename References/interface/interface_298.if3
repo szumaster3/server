@@ -586,13 +586,13 @@ colour=0xff981f
 
 [com48]
 type=graphic
-x=3
+x=470
+y=28
 width=26
 height=23
-xmode=abs_right
-ymode=abs_centre
-layer=com9
 graphic="close_buttons,0"
+transmitop1=yes
+op1=Close
 onmouseover=script44(event_com, "close_buttons,1")
 onmouseleave=script44(event_com, "close_buttons,0")
 onop=script29

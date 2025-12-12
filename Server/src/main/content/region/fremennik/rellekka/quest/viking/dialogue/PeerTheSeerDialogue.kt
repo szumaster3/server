@@ -168,20 +168,10 @@ class PeerTheSeerDialogue(player: Player? = null) : Dialogue(player) {
             78 -> playerl(FaceAnim.ASKING, "And what is that?").also { stage++ }
             79 -> npcl(FaceAnim.HAPPY, "I can store all the weapons, armour and items that you have upon you directly into your bank account.").also { stage++ }
             80 -> npcl(FaceAnim.HAPPY, "This will tax what little magic I possess however, so you will have to travel to the bank to withdraw them again.").also { stage++ }
-            81 -> npcl(FaceAnim.HAPPY, "What say you outerlander? Do you wish me to do this for you?").also { stage++ }
+            81 -> npc(FaceAnim.HALF_ASKING, "What say you outerlander? you wish me to do this for", "you?").also { stage++ }
             82 -> options("Yes", "No").also { stage++ }
             83 -> when (buttonId) {
-                1 -> {
-                    val slotAmount = player.inventory.itemCount() + player.equipment.itemCount()
-                    if (slotAmount < player.bank.freeSlots()) {
-                        dumpContainer(player, player.inventory)
-                        dumpContainer(player, player.equipment)
-                        stage = 1000
-                    } else {
-                        npcl(FaceAnim.SAD, "I am sorry outerlander, the spell is not working.")
-                        stage = 1000
-                    }
-                }
+                1 -> player(FaceAnim.HAPPY, "Yes, thank you!").also { stage = 121 }
                 2 -> playerl(FaceAnim.HAPPY, "No thanks. Nobody touches my stuff but me!").also { stage++ }
             }
             84 -> npcl(FaceAnim.HAPPY, "As you wish, outerlander.").also { stage++ }
@@ -191,6 +181,18 @@ class PeerTheSeerDialogue(player: Player? = null) : Dialogue(player) {
             102 -> npcl(FaceAnim.HAPPY, "Would you like me to perform this small spell upon you, outerlander?").also { stage = 82 }
             110 -> npcl(FaceAnim.HAPPY, "That is correct outerlander. Be warned it is not as easy as it may at first sound...").also { stage = 1000 }
             120 -> npcl(FaceAnim.HAPPY, "Absolutely, outerlander. Your wisdom in passing my test marks you as worthy in my eyes.").also { stage = 1000 }
+            121 -> {
+                val slotAmount = player.inventory.itemCount() + player.equipment.itemCount()
+                if (slotAmount < player.bank.freeSlots()) {
+                    dumpContainer(player, player.inventory)
+                    dumpContainer(player, player.equipment)
+                    npc(FaceAnim.CALM_TALK, "The task is done. I wish you luck with your test,", "outerlander.")
+                    end()
+                } else {
+                    npcl(FaceAnim.SAD, "I am sorry outerlander, the spell is not working.")
+                    end()
+                }
+            }
 
             /*
              * After quest dialogues.
@@ -232,21 +234,21 @@ class PeerTheSeerDialogue(player: Player? = null) : Dialogue(player) {
                     160
                 }
             }
-            164 -> npc(FaceAnim.HALF_ASKING, "I am afraid it will cost you ${selectedArmour!!.coinAmount} coins to make that for you... Is that okay?").also { stage++ }
+            164 -> npc(FaceAnim.HALF_ASKING, "I am afraid it will cost you ${selectedArmour!!.price} coins to make that for you... Is that okay?").also { stage++ }
             165 -> options("YES", "NO") .also { stage++ }
             166 -> when (buttonId) {
                 1 -> {
                     val armour = selectedArmour!!
                     val hasMaterials = player!!.inventory.containsItems(
-                        Item(Items.COINS_995, armour.coinAmount),
+                        Item(Items.COINS_995, armour.price),
                         Item(Items.DAGANNOTH_HIDE_6155, armour.hideAmount),
                         Item(armour.boneItem, 1)
                     )
                     if (!hasMaterials) {
-                        npc(FaceAnim.HALF_GUILTY, "My apologies ${FremennikTrials.getFremennikName(player!!)}. You need ${armour.hideAmount} daggermouth hides, 1 ${getItemName(armour.boneItem).lowercase()}, and ${armour.coinAmount} coins.")
+                        npc(FaceAnim.HALF_GUILTY, "My apologies ${FremennikTrials.getFremennikName(player!!)}. You need ${armour.hideAmount} daggermouth hides, 1 ${getItemName(armour.boneItem).lowercase()}, and ${armour.price} coins.")
                         stage = 1000
                     } else {
-                        removeItem(player!!, Item(Items.COINS_995, armour.coinAmount))
+                        removeItem(player!!, Item(Items.COINS_995, armour.price))
                         removeItem(player!!, Item(Items.DAGANNOTH_HIDE_6155, armour.hideAmount))
                         removeItem(player!!, Item(armour.boneItem, 1))
                         addItem(player!!, armour.product, 1)
@@ -270,7 +272,7 @@ class PeerTheSeerDialogue(player: Player? = null) : Dialogue(player) {
     override fun getIds(): IntArray = intArrayOf(NPCs.PEER_THE_SEER_1288)
 }
 
-private enum class BoneArmour(val product: Int, val hideAmount: Int, val boneItem: Int, val coinAmount: Int) {
+private enum class BoneArmour(val product: Int, val hideAmount: Int, val boneItem: Int, val price: Int) {
     HELM(Items.SKELETAL_HELM_6137, 1, Items.SKULL_PIECE_6163, 5000),
     TOP(Items.SKELETAL_TOP_6139, 3, Items.RIBCAGE_PIECE_6165, 10000),
     LEGS(Items.SKELETAL_BOTTOMS_6141, 2, Items.FIBULA_PIECE_6167, 7500)

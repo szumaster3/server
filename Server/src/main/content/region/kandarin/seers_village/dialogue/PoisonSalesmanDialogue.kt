@@ -38,8 +38,8 @@ class PoisonSalesmanDialogue(player: Player? = null) : Dialogue(player) {
         val fremennikTrialQuestStage = getQuestStage(player, Quests.THE_FREMENNIK_TRIALS)
         when (stage) {
             START_DIALOGUE -> when (buttonId) {
-                1 -> player("Hello.").also { stage = 1 }
-                2 -> player("Hello.").also { stage = 10 }
+                1 -> player(FaceAnim.FRIENDLY, "Hello.").also { stage = 1 }
+                2 -> player(FaceAnim.FRIENDLY,"Hello.").also { stage = 10 }
             }
             1 -> {
                 end()

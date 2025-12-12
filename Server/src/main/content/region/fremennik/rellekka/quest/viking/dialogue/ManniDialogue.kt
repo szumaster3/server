@@ -11,6 +11,7 @@ import core.game.node.entity.player.Player
 import core.game.node.item.Item
 import core.game.system.task.Pulse
 import core.game.world.GameWorld.Pulser
+import core.game.world.map.Location
 import core.game.world.update.flag.context.Animation
 import core.plugin.Initializable
 import core.tools.END_DIALOGUE
@@ -28,7 +29,10 @@ import shared.consts.Quests
 @Initializable
 class ManniDialogue(player: Player? = null) : Dialogue(player) {
 
+    private var currentNPC: NPC? = NPC(0,Location(0,0,0))
+
     override fun open(vararg args: Any?): Boolean {
+        currentNPC = args[0] as? NPC
         val questStage = getQuestStage(player, Quests.THE_FREMENNIK_TRIALS)
 
         if (questStage > 0) {
@@ -59,20 +63,19 @@ class ManniDialogue(player: Player? = null) : Dialogue(player) {
                 }
 
                 getAttribute(player, GameAttributes.QUEST_VIKING_MANI_START, false) -> {
-                    val kegAvailable =
-                        inInventory(player, Items.LOW_ALCOHOL_KEG_3712) || inInventory(player, Items.KEG_OF_BEER_3711)
+                    val kegAvailable = anyInInventory(player, Items.LOW_ALCOHOL_KEG_3712, Items.KEG_OF_BEER_3711)
                     if (kegAvailable) {
-                        npc("Ah, I see you have your keg of beer. Are ye ready to", "drink against each other?")
+                        npc(FaceAnim.FRIENDLY,"Ah, I see you have your keg of beer. Are ye ready to", "drink against each other?")
                         stage = 101
                     } else {
-                        npc("Come back when you're ready to begin", "the contest.")
-                        stage = 1000
+                        npc(FaceAnim.FRIENDLY,"Come back when you're ready to begin", "the contest.")
+                        stage = END_DIALOGUE
                     }
                 }
 
                 getAttribute(player, GameAttributes.QUEST_VIKING_MANI_VOTE, false) -> {
-                    npc("You have my vote!")
-                    stage = 1000
+                    npc(FaceAnim.HAPPY, "So I can rely on your vote at the council?")
+                    stage = 203
                 }
 
                 isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS) -> {
@@ -80,10 +83,7 @@ class ManniDialogue(player: Player? = null) : Dialogue(player) {
                     stage = 190
                 }
 
-                else -> {
-                    player("Hello there!")
-                    stage = 0
-                }
+                else -> player(FaceAnim.FRIENDLY,"Hello there!")
             }
             return true
         } else {
@@ -95,36 +95,35 @@ class ManniDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
-            0 -> npc("Hello outerlander. I overheard your conversation with", "Brundt just now. You wish to become a member of the", "Fremennik?").also { stage++ }
-            1 -> player("That's right! Why, are you on the counsel?").also { stage++ }
-            2 -> npc("Do not let my drink-ssussed appearance fool you, I", "earnt my place on the council many years past.I am", "always glad to see new blood enter our tribe, and will", "happily vote for you.").also { stage++ }
-            3 -> player("Great!").also { stage++ }
-            4 -> npc("Providing you can pass a little test for me. As a", "Fremennik, you will need to show cunning, stamina,", "fastitude, and an iron constitution. I know of only one", "way to test all of these.").also { stage++ }
-            5 -> player("And what's that?").also { stage++ }
-            6 -> npc("Why, a drinking contest!").also { stage++ }
-            7 -> npc("The task is simple enough! You versus me, a stiff drink", "each, last man standing wins the trial. So what say you?").also { stage++ }
+            0 -> npc(FaceAnim.FRIENDLY,"Hello outerlander. I overheard your conversation with", "Brundt just now. You wish to become a member of the", "Fremennik?").also { stage++ }
+            1 -> player(FaceAnim.HAPPY,"That's right! Why, are you on the counsel?").also { stage++ }
+            2 -> npc(FaceAnim.FRIENDLY,"Do not let my drink-ssussed appearance fool you, I", "earnt my place on the council many years past.I am", "always glad to see new blood enter our tribe, and will", "happily vote for you.").also { stage++ }
+            3 -> player(FaceAnim.HAPPY,"Great!").also { stage++ }
+            4 -> npc(FaceAnim.FRIENDLY,"Providing you can pass a little test for me. As a", "Fremennik, you will need to show cunning, stamina,", "fastitude, and an iron constitution. I know of only one", "way to test all of these.").also { stage++ }
+            5 -> player(FaceAnim.HALF_ASKING,"And what's that?").also { stage++ }
+            6 -> npc(FaceAnim.HAPPY,"Why, a drinking contest!").also { stage++ }
+            7 -> npc(FaceAnim.HAPPY,"The task is simple enough! You versus me, a stiff drink", "each, last man standing wins the trial. So what say you?").also { stage++ }
             8 -> options("Yes", "No").also { stage++ }
             9 -> when (buttonId) {
-                1 -> player("A drinking contest? Easy. Set them up, and I'll knock", "them back.").also { stage++ }
-                2 -> player("I don't like the sound of that.").also { stage = 12 }
+                1 -> player(FaceAnim.HALF_ASKING,"A drinking contest? Easy. Set them up, and I'll knock", "them back.").also { stage++ }
+                2 -> player(FaceAnim.NEUTRAL,"I don't like the sound of that.").also { stage = 12 }
             }
-            10 -> npc("When you are ready to begin, go and pick up a keg", "from that table over there, and come back here.").also { stage++ }
+            10 -> npc(FaceAnim.HAPPY,"When you are ready to begin, go and pick up a keg", "from that table over there, and come back here.").also { stage++ }
             11 -> {
-                npc("We start when you have your keg of beer with you", "and finish when one of us can drink no more and", "yields.")
+                npc(FaceAnim.HAPPY,"We start when you have your keg of beer with you", "and finish when one of us can drink no more and", "yields.")
                 stage = END_DIALOGUE
                 setAttribute(player, GameAttributes.QUEST_VIKING_MANI_START, true)
             }
-            12 -> npc("That's a shame.").also { stage = END_DIALOGUE }
+            12 -> npc(FaceAnim.THINKING,"That's a shame.").also { stage = END_DIALOGUE }
             101 -> options("Yes", "No").also { stage++ }
             102 -> when (buttonId) {
-                1 -> player("Yes, let's start this drinking contest!").also { stage++ }
-                2 -> player("No, I don't think I am.").also { stage = END_DIALOGUE }
+                1 -> player(FaceAnim.HAPPY,"Yes, let's start this drinking contest!").also { stage++ }
+                2 -> player(FaceAnim.NEUTRAL,"No, I don't think I am.").also { stage = END_DIALOGUE }
             }
-            103 -> npc("As you wish outerlander; I will drink first, then you will", "drink.").also { stage++ }
+            103 -> npc(FaceAnim.HAPPY,"As you wish outerlander; I will drink first, then you will", "drink.").also { stage++ }
             104 -> {
                 sendMessage(player, "The Fremennik drinks his tankard first. He staggers a little bit.")
-                Pulser.submit(DrinkingPulse(player, findLocalNPC(player, npc.id), getAttribute(player, GameAttributes.QUEST_VIKING_MANI_KEG, false)))
-                end()
+                Pulser.submit(DrinkingPulse(player,currentNPC,player.getAttribute(GameAttributes.QUEST_VIKING_MANI_KEG, false)));end()
             }
             150 -> npcl(FaceAnim.HAPPY, "As a matter of fact, I do. I have one right here. I earnt my place here at the longhall for surviving over 5000 battles and raiding parties.").also { stage++ }
             151 -> npcl(FaceAnim.HAPPY, "Due to my contribution to the tribe, I am now permitted to spend my days here in the longhall listening to the epic tales of the bard, and drinking beer.").also { stage++ }
@@ -145,10 +144,7 @@ class ManniDialogue(player: Player? = null) : Dialogue(player) {
             162 -> npcl(FaceAnim.ANNOYED, "Uh... yes, the longhall barkeep has it. So could you get me my drink now please?").also { stage = END_DIALOGUE }
             165 -> npcl(FaceAnim.ANNOYED, "Not me, no.").also { stage = END_DIALOGUE }
             170 -> {
-                npcl(
-                    FaceAnim.AMAZED,
-                    "...It is true! The legendary cocktail! I have waited for this day ever since I first started drinking!",
-                )
+                npcl(FaceAnim.AMAZED, "...It is true! The legendary cocktail! I have waited for this day ever since I first started drinking!")
                 removeItem(player, Items.LEGENDARY_COCKTAIL_3707)
                 addItemOrDrop(player, Items.CHAMPIONS_TOKEN_3706, 1)
                 stage++
@@ -168,98 +164,93 @@ class ManniDialogue(player: Player? = null) : Dialogue(player) {
                 addItem(player, Items.BEER_1917)
                 stage++
             }
-
-            191 -> npcl(FaceAnim.HAPPY, "There ya go! Anyone who can drink like you earns my respect!").also {
-                stage = END_DIALOGUE
-            }
+            191 -> npcl(FaceAnim.HAPPY, "There ya go! Anyone who can drink like you earns my respect!").also { stage = END_DIALOGUE }
             200 -> npcl(FaceAnim.HAPPY, "Do not think me rude outerlander, but our customs forbid me talking to you. All contact with outlanders must be vetted by our chieftain, Brundt.").also { stage++ }
             201 -> playerl(FaceAnim.ASKING, "Where is this Brundt?").also { stage++ }
             202 -> npcl(FaceAnim.HAPPY, "He is standing just over there. He will speak for the tribe.").also { stage = END_DIALOGUE }
+            203 -> npcl(FaceAnim.DRUNK, "Absholutely! (hic) You're one mighty drinker!").also { stage = END_DIALOGUE }
         }
         return true
     }
 
     /**
-     * Represents pulse used to drinking the keg in Fremennik trials.
+     * Represents pulse used to drinking the keg in [FremennikTrials].
      */
-    private class DrinkingPulse(val player: Player?, val npc: NPC?, private val lowAlcohol: Boolean? = false) : Pulse() {
-        var counter = 0
+    class DrinkingPulse(private val player: Player?, private val npc: NPC?, private val lowAlcohol: Boolean = false) : Pulse() {
+
+        private var counter = 0
+
+        private val stages: Map<Int, () -> Unit> by lazy {
+            if (!lowAlcohol) {
+                mapOf(
+                    0  to { lock() },
+                    1  to { face() },
+                    3  to { npc?.animator?.animate(Animation(Animations.DRINK_BEER_1327, Animator.Priority.HIGH)); player?.sendMessages("The Fremennik drinks his tankard first. He staggers a little bit.")},
+                    5  to { drinkAnimation() },
+                    7  to { player?.sendMessages("You drink from your keg. You feel extremely drunk..."); player?.dialogueInterpreter?.sendDialogues(player, FaceAnim.DRUNK, "Ish no fair!! I canna drink another drop! I alsho", "feel veddy, veddy ill...") },
+                    15 to { player?.dialogueInterpreter?.sendDialogues(npc, FaceAnim.DRUNK, "I guessh I win then ouddaladder! (hic) Niche try,", "anyway!") },
+                    16 to { unlock(); end() }
+                )
+            } else {
+                mapOf(
+                    0  to { lock() },
+                    1  to { face() },
+                    3  to { npc?.animator?.animate(Animation(Animations.DRINK_BEER_1327, Animator.Priority.HIGH)) },
+                    5  to { drinkAnimation() },
+                    7  to { player?.sendMessages("You drink from your keg. You don't feel at all drunk."); player?.dialogueInterpreter?.sendDialogues(player, FaceAnim.HAPPY, "Aaaah, lovely stuff. So you want to get the next round", "in, or shall I? You don't look so good there!") },
+                    15 to { player?.dialogueInterpreter?.sendDialogues(npc, FaceAnim.DRUNK, "Wassha? Guh? You drank that whole keg! But it dinnna", "affect you at all! I conshede! You can probably", "outdrink me!") },
+                    21 to { player?.dialogueInterpreter?.sendDialogues(npc, FaceAnim.DRUNK, "I jusht can't (hic) believe it! Thatsh shome might fine", "drinking legs you got! Anyone who can drink like", "THAT getsh my vote atta somsh.... coumah... gets my", "vote!") },
+                    22 to { finish(); end() }
+                )
+            }
+        }
 
         override fun pulse(): Boolean {
-            if (!lowAlcohol!!) {
-                when (counter++) {
-                    0 -> {
-                        player?.lock()
-                        npc?.lock()
-                        npc?.isNeverWalks = true
-                    }
-
-                    1 -> {
-                        player?.face(npc)
-                        npc?.face(player)
-                    }
-
-                    3 -> npc?.animator?.animate(Animation(Animations.DRINK_KEG_1330, Animator.Priority.HIGH))
-                    5 -> {
-                        player?.animator?.animate(Animation(Animations.DRINK_KEG_1330, Animator.Priority.HIGH))
-                        player?.inventory?.remove(Item(Items.KEG_OF_BEER_3711))
-                        sendMessage(player!!, "You drink from your keg. You feel extremely drunk...")
-                    }
-                    7 -> player?.dialogueInterpreter?.sendDialogues(player, FaceAnim.DRUNK, "Ish no fair!! I canna drink another drop! I alsho", "feel veddy, veddy ill...")
-                    15 -> player?.dialogueInterpreter?.sendDialogues(npc, FaceAnim.DRUNK, "I guessh I win then ouddaladder! (hic) Niche try,", "anyway!")
-                    16 -> {
-                        player?.unlock()
-                        npc?.unlock()
-                        player?.face(player)
-                        npc?.face(npc)
-                        npc?.isNeverWalks = false
-                        return true
-                    }
-                }
-            } else {
-                when (counter++) {
-                    0 -> {
-                        player?.lock()
-                        npc?.lock()
-                        npc?.isNeverWalks = true
-                    }
-
-                    1 -> {
-                        player?.face(npc)
-                        npc?.face(player)
-                    }
-
-                    3 -> npc?.animator?.animate(Animation(Animations.DRINK_KEG_1330, Animator.Priority.HIGH))
-                    5 -> {
-                        player?.animator?.animate(Animation(Animations.DRINK_KEG_1330, Animator.Priority.HIGH))
-                        player?.inventory?.remove(Item(Items.KEG_OF_BEER_3711))
-                        sendMessage(player!!, "You drink from your keg. You don't feel at all drunk.")
-                    }
-
-                    7 -> player?.dialogueInterpreter?.sendDialogues(player, FaceAnim.HAPPY, "Aaaah, lovely stuff. So you want to get the next round", "in, or shall I? You don't look so good there!")
-                    15 -> player?.dialogueInterpreter?.sendDialogues(npc, FaceAnim.DRUNK, "Wassha? Guh? You drank that whole keg! But it dinnna", "affect you at all! I conshede! You can probably", "outdrink me!")
-                    21 -> player?.dialogueInterpreter?.sendDialogues(npc, FaceAnim.DRUNK, "I jusht can't (hic) believe it! Thatsh shome might fine", "drinking legs you got! Anyone who can drink like", "THAT getsh my vote atta somsh.... coumah... gets my", "vote!")
-
-                    22 -> {
-                        player?.unlock()
-                        npc?.unlock()
-                        player?.face(player)
-                        npc?.face(npc)
-                        npc?.isNeverWalks = false
-                        /*
-                         * End of Revellers trial.
-                         */
-                        removeAttributes(player!!, GameAttributes.QUEST_VIKING_MANI_BOMB, GameAttributes.QUEST_VIKING_MANI_START, GameAttributes.QUEST_VIKING_MANI_KEG)
-                        setAttribute(player, GameAttributes.QUEST_VIKING_MANI_VOTE, true)
-                        setAttribute(player, GameAttributes.QUEST_VIKING_VOTES, getAttribute(player, GameAttributes.QUEST_VIKING_VOTES, 0) + 1)
-                        sendMessage(player, "Congratulations! You have completed the Revellers' trial.")
-                        return true
-                    }
-                }
-            }
+            stages[counter++]?.invoke()
             return false
         }
+
+        private fun lock() {
+            player?.lock()
+            npc?.lock()
+            npc?.isNeverWalks = true
+        }
+
+        private fun face() {
+            player?.face(npc)
+            npc?.face(player)
+        }
+
+        private fun drinkAnimation() {
+            player?.animator?.animate(Animation(Animations.DRINK_KEG_1330, Animator.Priority.HIGH))
+            player?.inventory?.remove(Item(Items.KEG_OF_BEER_3711))
+        }
+
+        private fun unlock() {
+            player?.unlock()
+            npc?.unlock()
+            player?.face(player)
+            npc?.face(npc)
+            npc?.isNeverWalks = false
+        }
+
+        /**
+         * End of Revellers trial.
+         */
+        private fun finish() {
+            unlock()
+            player?.removeAttribute(GameAttributes.QUEST_VIKING_MANI_BOMB)
+            player?.removeAttribute(GameAttributes.QUEST_VIKING_MANI_START)
+            player?.removeAttribute(GameAttributes.QUEST_VIKING_MANI_KEG)
+            player?.setAttribute(GameAttributes.QUEST_VIKING_MANI_VOTE, true)
+            player?.setAttribute(GameAttributes.QUEST_VIKING_VOTES, player.getAttribute(GameAttributes.QUEST_VIKING_VOTES, 0) + 1)
+            player?.sendMessages("Congratulations! You have completed the Revellers' trial.")
+        }
+
+        private fun end(): Boolean = true
     }
+
+    override fun newInstance(player: Player?): Dialogue = ManniDialogue(player)
 
     override fun getIds(): IntArray = intArrayOf(NPCs.MANNI_THE_REVELLER_1286)
 }

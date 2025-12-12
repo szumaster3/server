@@ -27,7 +27,7 @@ import java.util.*
 import java.util.stream.Collectors
 
 /**
- * Woodcutting skill pulse
+ * Woodcutting skill pulse.
  *
  * @author Ceikry
  */
@@ -150,8 +150,6 @@ class WoodcuttingPulse(private val player: Player, private val node: Scenery) : 
             reward = calculateReward(reward) // Calculate rewards
             rewardAmount = calculateRewardAmount(reward) // Calculate amount
 
-            // SkillingPets.checkPetDrop(player, SkillingPets.BEAVER); // roll for pet
-
             // Add experience
             val experience = calculateExperience(resource!!.reward, rewardAmount)
 
@@ -164,6 +162,12 @@ class WoodcuttingPulse(private val player: Player, private val node: Scenery) : 
             } else {
                 sendMessage(player, "You get some " + forId(reward).name.lowercase(Locale.getDefault()) + ".")
             }
+
+            if(resource == WoodcuttingNode.SWAYING_TREE) {
+                sendMessage(player, "You cut a branch from the strangely musical tree.")
+                stop()
+            }
+
             // Reward
             addItem(player, reward, rewardAmount)
             player.dispatch(ResourceProducedEvent(reward, rewardAmount, node, -1))

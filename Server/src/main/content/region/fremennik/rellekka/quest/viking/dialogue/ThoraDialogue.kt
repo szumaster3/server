@@ -8,6 +8,7 @@ import core.game.dialogue.FaceAnim
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.plugin.Initializable
+import core.tools.END_DIALOGUE
 import shared.consts.Items
 import shared.consts.NPCs
 import shared.consts.Quests
@@ -86,7 +87,7 @@ class ThoraDialogue(player: Player? = null) : Dialogue(player) {
                 player.incrementAttribute(GameAttributes.QUEST_VIKING_SIGMUND_PROGRESS, 1)
                 stage = 1000
             }
-            20 -> npcl(FaceAnim.ANNOYED, "Well, as I say, you should talk to him about that. Knowing the little runt as I do though He'll probably do it for the cash.").also { stage++ }
+            20 -> npcl(FaceAnim.ANNOYED, "Well, as I say, you should talk to him about that. Knowing the little runt as I do though He'll probably do it for the cash.").also { stage = END_DIALOGUE }
             25 -> npcl(FaceAnim.AMAZED, "What?!?! I can't believe you... Let me look at that... Askeladden would NEVER... Gosh. It looks legitimate.").also {
                 removeItem(player, Items.PROMISSORY_NOTE_3709)
                 addItemOrDrop(player, Items.LEGENDARY_COCKTAIL_3707, 1)

@@ -135,7 +135,7 @@ class SkulgrimenDialogue(player: Player? = null) : Dialogue(player) {
                 }
 
                 if (selectedArmour != null) {
-                    npcl(FaceAnim.HALF_ASKING, "It'll cost ${selectedArmour!!.coinAmount} coins. That ok?").also { stage = 106 }
+                    npcl(FaceAnim.HALF_ASKING, "It'll cost ${selectedArmour!!.price} coins. That ok?").also { stage = 106 }
                 } else {
                     npcl(FaceAnim.FRIENDLY, "As you wish.").also { stage = END_DIALOGUE }
                 }
@@ -146,15 +146,15 @@ class SkulgrimenDialogue(player: Player? = null) : Dialogue(player) {
                 1 -> {
                     val armour = selectedArmour!!
                     val hasMaterials = player!!.inventory.containsItems(
-                        Item(Items.COINS_995, armour.coinAmount),
+                        Item(Items.COINS_995, armour.price),
                         Item(Items.DAGANNOTH_HIDE_6155, armour.hideAmount),
                         Item(armour.shellItem, 1)
                     )
 
                     if (!hasMaterials) {
-                        npcl(FaceAnim.HALF_GUILTY, "Sorry. You need ${armour.hideAmount} daggermouth hides, 1 ${getItemName(armour.shellItem).lowercase()}, and ${armour.coinAmount} coins. Come back when you got it.").also { stage = END_DIALOGUE }
+                        npcl(FaceAnim.HALF_GUILTY, "Sorry. You need ${armour.hideAmount} daggermouth hides, 1 ${getItemName(armour.shellItem).lowercase()}, and ${armour.price} coins. Come back when you got it.").also { stage = END_DIALOGUE }
                     } else {
-                        removeItem(player!!, Item(Items.COINS_995, armour.coinAmount))
+                        removeItem(player!!, Item(Items.COINS_995, armour.price))
                         removeItem(player!!, Item(Items.DAGANNOTH_HIDE_6155, armour.hideAmount))
                         removeItem(player!!, Item(armour.shellItem, 1))
                         addItemOrDrop(player!!, armour.product)
@@ -172,7 +172,7 @@ class SkulgrimenDialogue(player: Player? = null) : Dialogue(player) {
     override fun getIds(): IntArray = intArrayOf(NPCs.SKULGRIMEN_1303)
 }
 
-private enum class RockShellArmour(val product: Int, val hideAmount: Int, val shellItem: Int, val coinAmount: Int) {
+private enum class RockShellArmour(val product: Int, val hideAmount: Int, val shellItem: Int, val price: Int) {
     HELM(Items.ROCK_SHELL_HELM_6128, 1, Items.ROCK_SHELL_CHUNK_6157, 5000),
     TOP(Items.ROCK_SHELL_PLATE_6129, 3, Items.ROCK_SHELL_SHARD_6159, 10000),
     LEGS(Items.ROCK_SHELL_LEGS_6130, 2, Items.ROCK_SHELL_SPLINTER_6161, 7500)

@@ -35,11 +35,10 @@ class FremennikTrials : Quest(Quests.THE_FREMENNIK_TRIALS, 64, 63, 3, Vars.VARP_
             line(player, "I can start this quest by speaking to !!Chieftan Brundt?? in", line++)
             line(player, "the !!Fremennik Longhall??, which is in the town of !!Rellekka?? to", line++)
             line(player, "the north of !!Sinclair Mansion??.", line)
-        } else if (started && stage != 100) {
+        } else if (stage != 100) {
             line(player, "In order to join the Fremenniks, I need to", line++)
             line(player, "!!earn the approval?? of !!7 members?? of the elder council.", line++)
             line(player, "I've written down the members who I can try to help:", line++)
-
             line(player, "Manni the Reveller", line++, getAttribute(player, GameAttributes.QUEST_VIKING_MANI_VOTE, false))
             line(player, "Swensen the Navigator", line++, getAttribute(player, GameAttributes.QUEST_VIKING_SWENSEN_VOTE, false))
             line(player, "Sigli the Huntsman", line++, getAttribute(player, GameAttributes.QUEST_VIKING_SIGLI_VOTE, false))
@@ -53,9 +52,9 @@ class FremennikTrials : Quest(Quests.THE_FREMENNIK_TRIALS, 64, 63, 3, Vars.VARP_
             if (voteCount == 1) {
                 voteText = "1 vote"
             }
-            line(player, "So far I have gotten $voteText.", line++)
+            line(player, "So far I have gotten $voteText.", line)
 
-        } else if (stage == 100) {
+        } else {
             line(player, "I made my way to the far north of !!Kandarin?? and found", line++)
             line(player, "the Barbarian hometown of !!Rellekka??. The tribe that live", line++)
             line(player, "there call themselves the !!Fremennik??, and offered me the", line++)
@@ -75,7 +74,7 @@ class FremennikTrials : Quest(Quests.THE_FREMENNIK_TRIALS, 64, 63, 3, Vars.VARP_
     override fun finish(player: Player) {
         super.finish(player)
         var ln = 10
-        sendItemZoomOnInterface(player, Components.QUEST_COMPLETE_SCROLL_277, 5, Items.FREMENNIK_HELM_3748, 235)
+        displayQuestItem(player, Items.FREMENNIK_HELM_3748, 240)
         drawReward(player, "3 Quest points, 2.8k XP in:", ln++)
         drawReward(player, "Strength, Defence, Attack,", ln++)
         drawReward(player, "Hitpoints, Fishing, Thieving,", ln++)

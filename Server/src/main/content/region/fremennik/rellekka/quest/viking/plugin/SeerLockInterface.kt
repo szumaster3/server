@@ -38,6 +38,7 @@ class SeerLockInterface : InterfaceListener {
 
     override fun defineInterfaceListeners() {
         onOpen(doorLockInterface) { player, _ ->
+            if (player.interfaceManager.isResizable) openOverlay(player, Components.BLACK_OVERLAY_333)
             resetPlayerAttributes(player)
             return@onOpen true
         }

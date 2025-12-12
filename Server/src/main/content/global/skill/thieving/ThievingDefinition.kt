@@ -296,6 +296,12 @@ object ThievingDefinition {
                 animate(player, Animation(Animations.HUMAN_PICKPOCKETING_881, Animator.Priority.HIGH))
                 sendMessage(player, "You attempt to pick the $npcName's pocket.")
 
+                if (npc.id in ThievingLootTable.FREMENNIK_IDS && !isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS)) {
+                    npc.sendChat("You stay away from me outerlander!")
+                    sendMessage(player, "They are too suspicious of you for you to get close enough to steal from them.")
+                    return true
+                }
+
                 val lootTable = pickpocketRoll(player, pocketData.low, pocketData.high, pocketData.table)
 
                 if (lootTable == null) {
@@ -328,6 +334,7 @@ object ThievingDefinition {
                     sendMessage(player, if (npc.id == NPCs.CURATOR_HAIG_HALEN_646) "You steal a tiny key." else "You pick the $npcName's pocket.")
                     rewardXP(player, Skills.THIEVING, pocketData.experience)
                 }
+
                 return true
             }
 

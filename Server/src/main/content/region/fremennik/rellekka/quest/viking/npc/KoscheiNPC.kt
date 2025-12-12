@@ -2,6 +2,8 @@ package content.region.fremennik.rellekka.quest.viking.npc
 
 import content.data.GameAttributes
 import core.api.addItemOrDrop
+import core.api.clearHintIcon
+import core.api.registerHintIcon
 import core.game.node.entity.Entity
 import core.game.node.entity.combat.BattleState
 import core.game.node.entity.combat.CombatStyle
@@ -12,17 +14,14 @@ import core.game.world.GameWorld.Pulser
 import core.game.world.map.Location
 import core.game.world.repository.Repository
 import core.game.world.update.flag.context.Animation
+import shared.consts.Animations
 import shared.consts.Items
 import shared.consts.NPCs
 
 /**
  * Represents Koschei the Deathless NPC.
  */
-class KoscheiNPC(
-    id: Int = 0,
-    location: Location? = null,
-    session: KoscheiSession? = null,
-) : AbstractNPC(id, location) {
+class KoscheiNPC(id: Int = 0, location: Location? = null, session: KoscheiSession? = null) : AbstractNPC(id, location) {
     val session: KoscheiSession?
     var type: KoscheiType?
     var isCommenced = false
@@ -36,7 +35,7 @@ class KoscheiNPC(
 
     override fun init() {
         super.init()
-        if (session?.player?.location?.getRegionId() == 10653) {
+        if (session?.player?.location?.regionId == 10653) {
             Pulser.submit(KoscheiSpawnPulse(session.player, this))
         } else {
             session?.close()
@@ -57,19 +56,17 @@ class KoscheiNPC(
         }
     }
 
-    override fun startDeath(killer: Entity) {
+    override fun startDeath(killer: Entity?) {
         if (killer === session!!.player) {
             if (type !== KoscheiType.FOURTH_FORM) {
                 type!!.transform(this, session!!.player)
             } else {
                 session?.player?.sendMessage("Congratulations! You have completed the warriors trial!")
                 session?.player?.setAttribute(GameAttributes.QUEST_VIKING_THORVALD_VOTE, true)
-                session?.player?.setAttribute(
-                    GameAttributes.QUEST_VIKING_VOTES,
-                    session.player.getAttribute(GameAttributes.QUEST_VIKING_VOTES, 0) + 1,
-                )
+                session?.player?.setAttribute(GameAttributes.QUEST_VIKING_VOTES, session.player.getAttribute(GameAttributes.QUEST_VIKING_VOTES, 0) + 1)
                 session?.player?.removeAttribute(GameAttributes.QUEST_VIKING_THORVALD_START)
                 addItemOrDrop(session?.player!!, Items.FREMENNIK_BLADE_3757, 1)
+                clearHintIcon(session.player)
                 session.close()
             }
             return
@@ -91,17 +88,9 @@ class KoscheiNPC(
         super.sendImpact(state)
     }
 
-    override fun construct(
-        id: Int,
-        location: Location,
-        vararg objects: Any,
-    ): AbstractNPC = KoscheiNPC(id, location, null)
+    override fun construct(id: Int, location: Location, vararg objects: Any): AbstractNPC = KoscheiNPC(id, location, null)
 
-    override fun isAttackable(
-        entity: Entity,
-        style: CombatStyle,
-        message: Boolean,
-    ): Boolean {
+    override fun isAttackable(entity: Entity, style: CombatStyle, message: Boolean): Boolean {
         if (session == null) {
             return false
         }
@@ -192,6 +181,9 @@ class KoscheiNPC(
                     koschei.attack(player).also {
                         if (koschei.type?.appearMessage?.isNotEmpty() == true) {
                             koschei.sendChat(koschei.type?.appearMessage)
+                            if (player != null) {
+                                registerHintIcon(player, koschei)
+                            }
                         }
                     }
             }
@@ -207,14 +199,14 @@ class KoscheiNPC(
 
         override fun pulse(): Boolean {
             when (counter++) {
-                0 -> player?.lock().also { player?.animate(Animation(1332)).also { player?.sendMessage("Oh dear you are...") } }
+                0 -> player?.lock().also { player?.animate(Animation(Animations.GET_OFF_KNEES_1332)).also { player?.sendMessage("Oh dear you are...") } }
                 1 -> player?.setAttribute(GameAttributes.QUEST_VIKING_THORVALD_VOTE, true).also {
-                        player?.setAttribute(
-                            GameAttributes.QUEST_VIKING_VOTES,
-                            player.getAttribute(GameAttributes.QUEST_VIKING_VOTES, 0) + 1,
-                        )
-                        player?.removeAttribute(GameAttributes.QUEST_VIKING_THORVALD_START)
-                    }
+                    player?.setAttribute(
+                        GameAttributes.QUEST_VIKING_VOTES,
+                        player.getAttribute(GameAttributes.QUEST_VIKING_VOTES, 0) + 1,
+                    )
+                    player?.removeAttribute(GameAttributes.QUEST_VIKING_THORVALD_START)
+                }
 
                 3 -> player?.teleport(Location.create(2666, 3694, 1)).also { koschei.session?.close() }
                 4 -> player?.sendMessage("...still alive somehow?")
