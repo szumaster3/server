@@ -1,6 +1,8 @@
 package content.global.plugins.item
 
 import core.api.hasRequirement
+import core.api.isQuestComplete
+import core.api.sendMessage
 import core.game.interaction.InteractionListener
 import core.game.node.entity.player.link.quest.QuestRepository
 import shared.consts.Items
@@ -21,7 +23,7 @@ class QuestItemRequirementPlugin : InteractionListener {
     private val initiateArmour = intArrayOf(Items.INITIATE_SALLET_5574, Items.INITIATE_HAUBERK_5575, Items.INITIATE_CUISSE_5576)
     private val proselyteArmour = intArrayOf(Items.PROSELYTE_SALLET_9672, Items.PROSELYTE_HAUBERK_9674, Items.PROSELYTE_CUISSE_9676, Items.PROSELYTE_TASSET_9678)
     private val spiritShields = intArrayOf(Items.SPIRIT_SHIELD_13734, Items.BLESSED_SPIRIT_SHIELD_13736, Items.ARCANE_SPIRIT_SHIELD_13738, Items.DIVINE_SPIRIT_SHIELD_13740, Items.ELYSIAN_SPIRIT_SHIELD_13742, Items.SPECTRAL_SPIRIT_SHIELD_13744)
-
+    private val dagonHaiRobes = intArrayOf(Items.DAGONHAI_HAT_14499, Items.DAGONHAI_ROBE_TOP_14497, Items.DAGONHAI_ROBE_BOTTOM_14501)
     override fun defineListeners() {
         onEquip(fremennikTrialsEquipment) { player, _ ->
             return@onEquip hasRequirement(player, Quests.THE_FREMENNIK_TRIALS)
@@ -41,6 +43,27 @@ class QuestItemRequirementPlugin : InteractionListener {
 
         onEquip(Items.CAPE_OF_LEGENDS_1052) { player, _ ->
             return@onEquip hasRequirement(player, Quests.LEGENDS_QUEST)
+        }
+
+        onEquip(dagonHaiRobes) { player, _ ->
+            val miniQuestCompleted = player.getSavedData().activityData.hasKilledBork()
+            val questCompleted = isQuestComplete(player, Quests.WHAT_LIES_BELOW)
+
+            when {
+                !miniQuestCompleted && !questCompleted -> {
+                    sendMessage(player, "You need to finish What Lies Below and kill Bork once in order to wear any of the Dagon'hai armour.")
+                    return@onEquip false
+                }
+                !miniQuestCompleted -> {
+                    sendMessage(player, "You need to kill Bork once in order to wear any of the Dagon'hai armour.")
+                    return@onEquip false
+                }
+                !questCompleted -> {
+                    sendMessage(player, "You need to finish the quest 'What Lies Below' in order to wear any of the Dagon'hai armour.")
+                    return@onEquip false
+                }
+            }
+            return@onEquip true
         }
 
         onEquip(questCapes) { player, _ ->
