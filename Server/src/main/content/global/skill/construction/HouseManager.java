@@ -180,8 +180,6 @@ public final class HouseManager {
     private void openLoadInterface(Player player) {
         openInterface(player, Components.POH_HOUSE_LOADING_SCREEN_399);
         PacketRepository.send(MinimapState.class, new MinimapStateContext(player, 2));
-        playAudio(player, Sounds.POH_TP_984);
-
         GameWorld.getPulser().submit(new Pulse(6, player) {
             @Override
             public boolean pulse() {

@@ -4,6 +4,7 @@ import core.api.*
 import core.game.node.entity.player.Player
 import core.game.system.task.Pulse
 import core.game.world.map.Location
+import shared.consts.Graphics
 
 class KolodionSession(val player: Player) {
     private val kolodion =
@@ -33,12 +34,13 @@ class KolodionSession(val player: Player) {
             player,
             object : Pulse(1, player) {
                 var count: Int = 0
-
                 override fun pulse(): Boolean {
                     when (++count) {
                         3 -> resetAnimator(player)
-                        5 -> sendGraphics(86, Location(3106, 3934, 0))
-                        6 -> kolodion.init().also { face(kolodion, player, 1) }
+                        5 -> kolodion.init().also {
+                            visualize(this@KolodionSession.kolodion, -1, Graphics.RE_PUFF_86)
+                            face(kolodion, player, 1)
+                        }
                         7 -> sendChat(kolodion, "You must prove yourself... now!")
                         9 -> {
                             unlock(player)

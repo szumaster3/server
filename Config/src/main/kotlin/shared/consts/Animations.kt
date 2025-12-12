@@ -528,9 +528,9 @@ object Animations {
     const val CAST_SPELL_711 = 711
     const val HUMAN_CAST_LOW_ALCHEMY_SPELL_712 = 712
     const val HIGH_ALCHEMY_713 = 713
-    const val RANDOM_TP_OLD_714 = 714
-    const val ANIMATION_715 = 715
-    const val ANIMATION_716 = 716
+    const val TELEPORT_A_714 = 714
+    const val TELEPORT_B_715 = 715
+    const val CAST_SPELL_716 = 716
     const val CAST_SPELL_717 = 717
     const val CAST_SPELL_718 = 718
     const val ENCHANT_JEWEL_719 = 719
@@ -618,7 +618,7 @@ object Animations {
     const val HAZEEL_CULT_EXIT_801 = 801
     const val FLAPPY_CHEER_802 = 802
     const val GROW_NOTHING_803 = 803
-    const val SHRINK_NOTHING_804 = 804
+    const val HUMAN_SHRINK_804 = 804
     const val LOCK_DOOR_805 = 805
     const val HUMAN_THROW_DART_806 = 806
     const val JUMP_OBSTACLE_807 = 807
@@ -4437,7 +4437,7 @@ object Animations {
     const val ANIMATION_4620 = 4620
     const val ANIMATION_4621 = 4621
     const val OZAN_IDLE_4622 = 4622
-    const val ANIMATION_4623 = 4623
+    const val MAGE_ARENA_DEMON_SPAWN_4623 = 4623
     const val ANIMATION_4624 = 4624
     const val ANIMATION_4625 = 4625
     const val ANIMATION_4626 = 4626
@@ -5138,7 +5138,7 @@ object Animations {
     const val ANIMATION_5321 = 5321
     const val ANIMATION_5322 = 5322
     const val ANIMATION_5323 = 5323
-    const val ANIMATION_5324 = 5324
+    const val MAGE_ARENA_SPIDER_SPAWN_5324 = 5324
     const val ANIMATION_5325 = 5325
     const val ANIMATION_5326 = 5326
     const val ANIMATION_5327 = 5327

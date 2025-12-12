@@ -11,9 +11,11 @@ import core.game.node.entity.player.link.SpellBookManager.SpellBook
 import core.game.world.map.Location
 import core.game.world.update.flag.context.Animation
 import core.game.world.update.flag.context.Graphics
+import core.plugin.Initializable
 import core.tools.RandomFunction
 import shared.consts.NPCs
 
+@Initializable
 class BattleMageNPC : AbstractNPC {
     private val type: GodType?
 
@@ -26,11 +28,7 @@ class BattleMageNPC : AbstractNPC {
         this.type = GodType.forId(id)
     }
 
-    override fun construct(
-        id: Int,
-        location: Location,
-        vararg objects: Any,
-    ): AbstractNPC = BattleMageNPC(id, location)
+    override fun construct(id: Int, location: Location, vararg objects: Any): AbstractNPC = BattleMageNPC(id, location)
 
     override fun init() {
         super.init()

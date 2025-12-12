@@ -15,6 +15,7 @@ import core.game.system.config.GroundSpawnLoader
 import core.game.world.GameWorld
 import core.game.world.map.RegionManager
 import core.game.world.update.flag.context.Animation
+import core.tools.Log
 import shared.consts.Animations
 import shared.consts.Items
 import shared.consts.NPCs
@@ -32,13 +33,10 @@ object PickupHandler {
      * @return `true` if the item was successfully picked up or if the conditions were not met.
      */
     @JvmStatic
-    fun take(
-        player: Player,
-        item: GroundItem,
-    ): Boolean {
+    fun take(player: Player, item: GroundItem): Boolean {
         // Check if the item's location is valid.
         if (item.location == null) {
-            sendMessage(player, "Invalid ground item!")
+            log(this.javaClass, Log.WARN, "Invalid ground item!")
             return true
         }
 
@@ -110,11 +108,7 @@ object PickupHandler {
      * @return `true` if the player can pick up the item, otherwise `false`.
      */
     @JvmStatic
-    fun canTake(
-        player: Player,
-        item: GroundItem,
-        type: Int,
-    ): Boolean {
+    fun canTake(player: Player, item: GroundItem, type: Int): Boolean {
         // Check if the item was dropped by another player and if the player is restricted from picking it up.
         if (item.dropper != null && !item.droppedBy(player)) {
             return false
@@ -132,8 +126,8 @@ object PickupHandler {
         }
 
         // Check if the item is a sacred cape and if the player already owns one.
-        if (GodType.forCape(item) != null) {
-            if (GodType.hasAny(player)) {
+        if (GodType.forCape(item.id) != null) {
+            if (GodType.hasCape(player)) {
                 sendDialogueLines(
                     player,
                     "You may only possess one sacred cape at a time.",

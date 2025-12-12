@@ -1,9 +1,7 @@
 package content.minigame.mage_arena.dialogue
 
 import content.data.GodType
-import core.api.hasSpaceFor
-import core.api.openNpcShop
-import core.api.sendItemDialogue
+import core.api.*
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
 import core.game.node.entity.npc.NPC
@@ -26,7 +24,7 @@ class ChamberGuardianDialogue(player: Player? = null) : Dialogue(player) {
             player(FaceAnim.FRIENDLY, "Hello again.")
             return true
         } else if (player.getSavedData().activityData.hasKilledKolodion()) {
-            npc(FaceAnim.FRIENDLY, "Hello adventurer, have you made your choice?")
+            npc(FaceAnim.HALF_ASKING, "Hello adventurer, have you made your choice?")
             return true
         }
         npc(FaceAnim.ANNOYED, "YOU SHOULD NOT BE IN HERE!")
@@ -52,20 +50,22 @@ class ChamberGuardianDialogue(player: Player? = null) : Dialogue(player) {
                     if (godType == null) {
                         player(FaceAnim.HALF_GUILTY, "Sorry, I'm still looking.").also { stage = END_DIALOGUE }
                     } else {
-                        player(FaceAnim.NEUTRAL, "I have.").also { stage += 2 }
+                        player(FaceAnim.NEUTRAL, "I have.").also { stage++ }
                     }
                 }
-                2 -> npc(FaceAnim.FRIENDLY, "Good, good, I hope you have chosen well. I will now", "present you with a magic staff. This, along with the", "cape awarded to you by your chosen god, are all the", "weapons and armour you will need here.").also { stage++ }
-                3 -> {
+                1 -> npc(FaceAnim.FRIENDLY, "Good, good, I hope you have chosen well. I will now", "present you with a magic staff. This, along with the", "cape awarded to you by your chosen god, are all the", "weapons and armour you will need here.").also { stage++ }
+                2 -> {
                     end()
-                    if (!hasSpaceFor(player, godType!!.staff)) {
-                        player(FaceAnim.HALF_GUILTY, "Sorry, I don't have enough inventory space.").also { stage = 1 }
+                    if (!hasSpaceFor(player, godType!!.staffId.asItem())) {
+                        player(FaceAnim.HALF_GUILTY, "Sorry, I don't have enough inventory space.")
                         return true
                     }
-                    if (player.inventory.containsItem(godType!!.cape) || player.equipment.containsItem(godType!!.cape)) {
-                        player.inventory.add(godType!!.staff)
-                        player.getSavedData().activityData.kolodionStage = 3
-                        sendItemDialogue(player, godType!!.staff, "The guardian hands you an ornate magic staff.")
+                    godType?.let { god ->
+                        if (inEquipmentOrInventory(player, god.capeId)) {
+                            addItem(player, god.staffId, 1)
+                            player.getSavedData().activityData.kolodionStage = 3
+                            sendItemDialogue(player, god.staffId, "The guardian hands you an ornate magic staff.")
+                        }
                     }
                 }
             }

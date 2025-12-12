@@ -1,15 +1,15 @@
 package content.region.fremennik.lighthouse.dialogue
 
 import content.data.GodBook
-import core.api.addItemOrDrop
-import core.api.hasAnItem
-import core.api.removeItem
+import core.api.*
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
+import core.game.dialogue.Topic
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.game.node.item.Item
 import core.plugin.Initializable
+import core.tools.END_DIALOGUE
 import shared.consts.Items
 import shared.consts.NPCs
 import java.util.*
@@ -28,44 +28,38 @@ class JossikDialogue : Dialogue {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        npc("Hello again, adventurer.", "What brings you this way?")
-        stage = 0
+        npc(FaceAnim.FRIENDLY,"Hello again, adventurer.", "What brings you this way?")
         return true
     }
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
-            0 -> {
-                options("Can I see your wares?", "Have you found any prayerbooks?")
-                stage++
+            0 -> showTopics(
+                Topic("Can I see your wares?", 1),
+                Topic("Have you found any prayerbooks?", 3),
+            )
+            1 -> npc(FaceAnim.HAPPY,"Sure thing!", "I think you'll agree, my prices are remarkable!").also {stage++ }
+            2 -> {
+                end()
+                openNpcShop(player, npc.id)
             }
 
-            1 -> {
-                if (buttonId == 1) {
-                    player("Can I see your wares?")
-                    stage = 10
-                } else {
-                    player("Have you found any prayerbooks?")
-                    stage = 20
-                }
-            }
-
-            20 -> {
+            3 -> {
                 var missing = false
                 for (book in GodBook.values()) {
-                    if (player.savedData.globalData.hasCompletedGodBook(book) && hasAnItem(player, book.book.id).container == null) {
+                    if (player.savedData.globalData.hasCompletedGodBook(book) && hasAnItem(player, book.bookId).container == null) {
                         missing = true
-                        addItemOrDrop(player, book.book.id, 1)
+                        addItemOrDrop(player, book.bookId, 1)
                     }
                 }
                 val damaged = player.savedData.globalData.godBook
-                if (damaged != -1 && hasAnItem(player, GodBook.values()[damaged].damagedBook.id).container == null) {
+                if (damaged != -1 && hasAnItem(player, GodBook.values()[damaged].damagedBookId).container == null) {
                     missing = true
-                    addItemOrDrop(player, GodBook.values()[damaged].damagedBook.id, 1)
+                    addItemOrDrop(player, GodBook.values()[damaged].damagedBookId, 1)
                 }
                 if (missing) {
-                    npc("As a matter of fact, I did! This book washed up on the", "beach, and I recognised it as yours!")
-                    stage = 23
+                    npc(FaceAnim.HAPPY, "As a matter of fact, I did! This book washed up on the", "beach, and I recognised it as yours!")
+                    stage = END_DIALOGUE
                     return true
                 }
                 uncompleted = mutableListOf()
@@ -74,62 +68,47 @@ class JossikDialogue : Dialogue {
                         uncompleted!!.add(book)
                     }
                 }
-                val hasUncompleted = GodBook.values().any { hasAnItem(player, it.damagedBook.id).container != null }
+                val hasUncompleted = GodBook.values().any { hasAnItem(player, it.damagedBookId).container != null }
                 if (uncompleted!!.isEmpty() || hasUncompleted) {
-                    npc("No, sorry adventurer, I haven't.")
-                    stage = 23
+                    npc(FaceAnim.HALF_GUILTY, "No, sorry adventurer, I haven't.")
+                    stage = END_DIALOGUE
                     return true
                 }
-                npc(
-                    "Funnily enough I have! I found some books in caskets",
-                    "just the other day! I'll sell one to you for 5000 coins;",
-                    "what do you say?",
-                )
+                npc(FaceAnim.FRIENDLY, "Funnily enough I have! I found some books in caskets", "just the other day! I'll sell one to you for 5000 coins;", "what do you say?")
                 stage++
             }
 
-            21 -> {
+            4 -> {
                 val names = uncompleted!!.map { it.name.lowercase().replace("_", " ", ignoreCase = true).replaceFirstChar { ch -> ch.titlecase(Locale.getDefault()) } }.toMutableList()
                 names.add("Don't buy anything.")
                 options(*names.toTypedArray())
                 stage++
             }
 
-            22 -> {
+            5 -> {
                 if (buttonId - 1 > uncompleted!!.size - 1) {
                     end()
                     return true
                 }
-                if (!player.inventory.contains(Items.COINS_995, 5000)) {
-                    player("Sorry, I don't seem to have enough coins.")
-                    stage = 23
+                if (freeSlots(player) == 0) {
+                    player("Sorry, I don't have enough inventory space.")
+                    stage = END_DIALOGUE
                     return true
                 }
-                if (player.inventory.freeSlots() == 0) {
-                    player("Sorry, I don't have enough inventory space.")
-                    stage = 23
+                if (!inInventory(player, Items.COINS_995, 5000)) {
+                    player("Sorry, I don't seem to have enough coins.")
+                    stage = END_DIALOGUE
                     return true
                 }
                 val purchase = uncompleted!![buttonId - 1]
-                if (player.inventory.remove(Item(Items.COINS_995, 5000))) {
-                    npc("Here you go!")
+                if (removeItem(player, Item(Items.COINS_995, 5000))) {
+                    npc(FaceAnim.HAPPY,"Here you go!")
                     player.savedData.globalData.godBook = purchase.ordinal
-                    player.inventory.add(purchase.damagedBook, player)
-                    stage = 23
+                    addItem(player, purchase.damagedBookId)
+                    stage = END_DIALOGUE
                 } else {
                     end()
                 }
-            }
-
-            23 -> end()
-            10 -> {
-                npc("Sure thing!", "I think you'll agree, my prices are remarkable!")
-                stage++
-            }
-
-            11 -> {
-                npc.openShop(player)
-                end()
             }
 
             /*

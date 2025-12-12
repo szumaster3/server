@@ -10,14 +10,16 @@ import core.game.node.entity.player.Player
 import core.game.world.map.Direction
 import core.game.world.map.Location
 import shared.consts.Animations
+import shared.consts.Scenery
 
 /**
  * Handles the various stile shortcuts.
  * @author Ceikry
  */
 class StileShortcut : InteractionListener {
-    val ids = intArrayOf(993, 3730, 7527, 12982, 19222, 22302, 29460, 33842, 34776, 39508, 39509, 39510)
-    private val FALCONRY_STILE = 19222
+    // TODO: Wooden stile 849 with sfx.
+    val ids = intArrayOf(Scenery.STILE_993, Scenery.STILE_3730, Scenery.STILE_7527, Scenery.STILE_12982, Scenery.STILE_19222, Scenery.STILE_22302, Scenery.STILE_29460, Scenery.STILE_33842, Scenery.STILE_34776, Scenery.STILE_39508, Scenery.STILE_39509, Scenery.STILE_39510)
+    private val FALCONRY_STILE = Scenery.STILE_19222
 
     override fun defineListeners() {
         on(ids, IntType.SCENERY, "climb-over") { p, n ->

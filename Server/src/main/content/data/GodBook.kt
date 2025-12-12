@@ -1,109 +1,118 @@
 package content.data
 
+import core.api.asItem
 import core.api.isQuestComplete
 import core.api.removeItem
 import core.api.sendMessage
 import core.game.node.entity.player.Player
-import core.game.node.item.Item
 import shared.consts.Items
 import shared.consts.Quests
 
 /**
- * God Books.
+ * Represents the god books.
  */
-enum class GodBook(val bookName: String, val book: Item, val damagedBook: Item, val blessItem: Array<Item>, val pages: Array<Item>) {
-    HOLY_BOOK("Holy Book of Saradomin", Item(Items.HOLY_BOOK_3840), Item(Items.DAMAGED_BOOK_3839), arrayOf(Item(Items.HOLY_SYMBOL_1718)), arrayOf(Item(Items.SARADOMIN_PAGE_1_3827), Item(Items.SARADOMIN_PAGE_2_3828), Item(Items.SARADOMIN_PAGE_3_3829), Item(Items.SARADOMIN_PAGE_4_3830)),),
-    BOOK_OF_BALANCE("Guthix's Book of Balance", Item(Items.BOOK_OF_BALANCE_3844), Item(Items.DAMAGED_BOOK_3843), arrayOf(Item(Items.HOLY_SYMBOL_1718), Item(Items.UNHOLY_SYMBOL_1724)), arrayOf(Item(Items.GUTHIX_PAGE_1_3835), Item(Items.GUTHIX_PAGE_2_3836), Item(Items.GUTHIX_PAGE_3_3837), Item(Items.GUTHIX_PAGE_4_3838)),),
-    UNHOLY_BOOK("Unholy Book of Zamorak", Item(Items.UNHOLY_BOOK_3842), Item(Items.DAMAGED_BOOK_3841), arrayOf(Item(Items.UNHOLY_SYMBOL_1724)), arrayOf(Item(Items.ZAMORAK_PAGE_1_3831), Item(Items.ZAMORAK_PAGE_2_3832), Item(Items.ZAMORAK_PAGE_3_3833), Item(Items.ZAMORAK_PAGE_4_3834)),),
-    ;
+enum class GodBook(val bookId: Int, val damagedBookId: Int, val blessItemIds: IntArray, val pageIds: IntArray) {
+    HOLY_BOOK(Items.HOLY_BOOK_3840, Items.DAMAGED_BOOK_3839, intArrayOf(Items.HOLY_SYMBOL_1718), intArrayOf(Items.SARADOMIN_PAGE_1_3827, Items.SARADOMIN_PAGE_2_3828, Items.SARADOMIN_PAGE_3_3829, Items.SARADOMIN_PAGE_4_3830)),
+    BOOK_OF_BALANCE(Items.BOOK_OF_BALANCE_3844, Items.DAMAGED_BOOK_3843, intArrayOf(Items.HOLY_SYMBOL_1718, Items.UNHOLY_SYMBOL_1724), intArrayOf(Items.GUTHIX_PAGE_1_3835, Items.GUTHIX_PAGE_2_3836, Items.GUTHIX_PAGE_3_3837, Items.GUTHIX_PAGE_4_3838)),
+    UNHOLY_BOOK(Items.UNHOLY_BOOK_3842, Items.DAMAGED_BOOK_3841, intArrayOf(Items.UNHOLY_SYMBOL_1724), intArrayOf(Items.ZAMORAK_PAGE_1_3831, Items.ZAMORAK_PAGE_2_3832, Items.ZAMORAK_PAGE_3_3833, Items.ZAMORAK_PAGE_4_3834));
 
     /**
-     * Checks if the player has a God Book in their inventory.
+     * Inserts a page into this [GodBook].
+     *
+     * @param player The player who is inserting the page.
+     * @param bookId The id of the damaged book to insert the page into.
+     * @param pageId The id of the page being inserted.
      */
-    fun hasGodBook(player: Player, both: Boolean): Boolean = player.inventory.containsItems(*if (both) arrayOf(book, damagedBook) else arrayOf(book))
-
-    /**
-     * Inserts a page into the given God Book.
-     */
-    fun insertPage(player: Player, book: Item, page: Item) {
+    fun insertPage(player: Player, bookId: Int, pageId: Int) {
         if (!isQuestComplete(player, Quests.HORROR_FROM_THE_DEEP)) {
             sendMessage(player, "You need to complete The Horror from the Deep quest to do this.")
             return
         }
-        if (hasPage(player, book, page)) {
+
+        val pageIndex = getPageIndex(pageId)
+        if (pageIndex !in 1..pageIds.size) {
+            sendMessage(player, "This page cannot be used with this book.")
+            return
+        }
+
+        if (hasPage(player, bookId, pageIndex)) {
             sendMessage(player, "The book already has that page.")
             return
         }
-        if (removeItem(player, page.id)) {
-            setPageHash(player, book, getPageIndex(page))
+
+        if (removeItem(player, pageId)) {
+            setPageHash(player, bookId, pageIndex)
             sendMessage(player, "You add the page to the book...")
-            if (isComplete(player, book)) {
+
+            if (isComplete(player, bookId)) {
                 player.savedData.globalData.apply {
-                    godPages = BooleanArray(4)
+                    godPages = BooleanArray(pageIds.size)
                     godBook = -1
                 }
-                player.inventory.replace(this.book, book.slot)
-                player.savedData.globalData.godBook = this.book.id
+                player.inventory.replace(this@GodBook.bookId.asItem(), bookId)
+                player.savedData.globalData.godBook = this@GodBook.bookId
                 sendMessage(player, "The book is now complete!")
-                val message =
-                    when (this) {
-                        UNHOLY_BOOK -> "unholy symbols"
-                        HOLY_BOOK -> "holy symbols"
-                        else -> "unblessed holy symbols"
-                    }
+
+                val message = when (this) {
+                    UNHOLY_BOOK -> "unholy symbols"
+                    HOLY_BOOK -> "holy symbols"
+                    else -> "unblessed holy symbols"
+                }
                 sendMessage(player, "You can now use it to bless $message!")
             }
         }
     }
 
     /**
-     * Checks if the given item is a page belonging to this book.
+     * Checks if a given page id belongs to this book.
+     * @param pageId The id of the page to check.
+     * @return True if the page belongs to this book, false otherwise.
      */
-    fun isPage(asItem: Item): Boolean = pages.any { it.id == asItem.id }
+    fun isPage(pageId: Int): Boolean = pageIds.contains(pageId)
 
     /**
-     * Checks if the given book is complete.
+     * Checks if the book is complete (all pages inserted) for the player.
+     * @param player The player to check.
+     * @param bookId The id of the book.
+     * @return True if all pages are inserted, false otherwise.
      */
-    fun isComplete(player: Player, book: Item): Boolean = (1..4).all { hasPage(player, book, it) }
+    fun isComplete(player: Player, bookId: Int): Boolean = (1..4).all { hasPage(player, bookId, it) }
 
     /**
-     * Checks if a specific page is present in the book.
+     * Marks a specific page as inserted in the book for the player.
+     * @param player The player updating the book.
+     * @param bookId The id of the book.
+     * @param pageIndex The index of the page to mark as inserted (1-4).
      */
-    private fun hasPage(player: Player, book: Item, page: Item): Boolean = hasPage(player, book, getPageIndex(page))
-
-    /**
-     * Marks a specific page as inserted in the book.
-     */
-    private fun setPageHash(player: Player, book: Item, pageId: Int) {
-        player.savedData.globalData.godPages[pageId - 1] = true
+    private fun setPageHash(player: Player, bookId: Int, pageIndex: Int) {
+        player.savedData.globalData.godPages[pageIndex - 1] = true
     }
 
     /**
-     * Checks if a page with the given id is present in the book.
+     * Checks if a page is already in the player book.
+     * @param player The player to check.
+     * @param bookId The id of the book.
+     * @param pageIndex The page index to check (1-4).
+     * @return True if the page is present, false otherwise.
      */
-    fun hasPage(player: Player, book: Item, pageId: Int): Boolean = player.savedData.globalData.godPages[pageId - 1]
+    fun hasPage(player: Player, bookId: Int, pageIndex: Int): Boolean =
+        player.savedData.globalData.godPages[pageIndex - 1]
 
     /**
-     * Retrieves the charge hash of a book.
+     * Gets the 1-based index of a page in this book.
+     * @param pageId The id of the page.
+     * @return The index of the page (1-4), or 0 if not found.
      */
-    fun getHash(book: Item): Int = book.charge - 1000
-
-    /**
-     * Gets the index of the given page in the book.
-     */
-    private fun getPageIndex(page: Item): Int = pages.indexOfFirst { it.id == page.id } + 1
+    private fun getPageIndex(pageId: Int): Int = pageIds.indexOf(pageId) + 1
 
     companion object {
         /**
-         * Finds the God Book for the given item.
+         * Finds the [GodBook] for the item id.
+         * @param itemId The item id to check.
+         * @param damaged True to search for a damaged book, false for the completed book.
+         * @return The matching [GodBook] or null if none found.
          */
-        @JvmStatic
-        fun forItem(item: Item, damaged: Boolean): GodBook? = values().find { if (damaged) it.damagedBook.id == item.id else it.book.id == item.id }
-
-        /**
-         * Finds the God Book for the given page.
-         */
-        @JvmStatic
-        fun forPage(page: Item): GodBook? = values().find { godBook -> godBook.pages.any { it.id == page.id } }
+        fun forItem(itemId: Int, damaged: Boolean): GodBook? =
+            values().find { if (damaged) it.damagedBookId == itemId else it.bookId == itemId }
     }
 }

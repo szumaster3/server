@@ -1,9 +1,9 @@
 package content.global.skill.magic.spells.modern
 
 import content.global.skill.magic.spells.ModernSpells
+import core.api.getItemName
 import core.api.playGlobalAudio
 import core.api.sendMessage
-import core.cache.def.impl.ItemDefinition
 import core.game.container.impl.EquipmentContainer
 import core.game.node.Node
 import core.game.node.entity.Entity
@@ -101,11 +101,11 @@ class GodSpell private constructor(
             return false
         }
 
-        val hasCorrectStaff =
-            staffId == data.staffId || (data == GodSpellDefinition.GUTHIX && staffId == Items.VOID_KNIGHT_MACE_8841)
+        val hasCorrectStaff = staffId == data.staffId || (data == GodSpellDefinition.GUTHIX && staffId == Items.VOID_KNIGHT_MACE_8841)
+        val staffName = getItemName(data.staffId)
         if (!hasCorrectStaff) {
             if (message) {
-                sendMessage(caster, "You need to wear a ${ItemDefinition.forId(data.staffId).name} to cast this spell.")
+                sendMessage(caster, "You need to wear a $staffName to cast this spell.")
             }
             return false
         }
@@ -139,7 +139,7 @@ class GodSpell private constructor(
 
     companion object {
         private val ANIMATION = Animation(Animations.HUMAN_CAST_SPELL_LONG_811, Priority.HIGH)
-        private val SPLASH_GRAPHIC = Graphics(85, 0, 100)
+        private val SPLASH_GRAPHIC = Graphics(shared.consts.Graphics.SPELL_SPLASH_85, 0, 100)
         private val GOD_SPELLS = enumValues<GodSpellDefinition>()
         private val INDEX_CACHE = mutableMapOf<GodSpellDefinition, Int>()
     }

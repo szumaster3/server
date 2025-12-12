@@ -3,15 +3,16 @@ package content.minigame.mage_arena.dialogue
 import content.minigame.mage_arena.npc.KolodionSession
 import core.api.animate
 import core.api.getStatLevel
-import core.api.visualize
+import core.api.runTask
+import core.api.teleport
 import core.game.dialogue.Dialogue
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
+import core.game.node.entity.player.link.TeleportManager
 import core.game.node.entity.skill.Skills
 import core.game.world.GameWorld.settings
 import core.game.world.map.Location
 import core.game.world.update.flag.context.Animation
-import core.game.world.update.flag.context.Graphics
 import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.Animations
@@ -97,7 +98,11 @@ class KolodionDialogue(player: Player? = null) : Dialogue(player) {
             15 -> npc("I must first check that you are up to scratch.").also { stage++ }
             16 -> player("You don't need to worry about that.").also { stage++ }
             17 -> npc("Not just any magician can enter - only the most", "powerful and most feared. Before you can use the", "power of this arena, you must prove yourself against", "me.").also { stage++ }
-            18 -> end().also { startFight(player) }
+            18 -> {
+                end()
+                player.lock()
+                startFight(player)
+            }
             19 -> npc("They want to crown themselves the best", "mage in all of " + settings!!.name + "!").also { stage = END_DIALOGUE }
         }
         return true
@@ -105,15 +110,12 @@ class KolodionDialogue(player: Player? = null) : Dialogue(player) {
 
     private fun startFight(player: Player) {
         player.getSavedData().activityData.kolodionStage = 1
-        player.lock()
-        animate(npc, Animation.create(Animations.HUMAN_CAST_SPELL_LONG_811))
-        player.teleport(Location.create(3105, 3934, 0), 3)
-        visualize(
-            player,
-            Animation.create(Animations.OLD_SHRINK_AND_RISE_UP_TP_1816),
-            Graphics.create(shared.consts.Graphics.LIGHT_TP_GRAPHIC_301, 50),
-        )
-        KolodionSession.create(player).start()
+        runTask(player, 1) {
+            npc.face(player)
+            animate(npc, Animation.create(Animations.HUMAN_CAST_SPELL_LONG_811))
+            teleport(player, Location.create(3105, 3934, 0), TeleportManager.TeleportType.NORMAL)
+            KolodionSession.create(player).start()
+        }
     }
 
     override fun getIds(): IntArray = intArrayOf(NPCs.KOLODION_905)

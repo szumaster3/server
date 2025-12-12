@@ -796,7 +796,6 @@ public class Player extends Entity {
         return value;
     }
 
-    @Deprecated
     @Override
     public void setLocation(Location location) {
         super.setLocation(location);
