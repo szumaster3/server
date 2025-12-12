@@ -72,6 +72,22 @@ enum class SkillingTool(val id: Int, val level: Int, val ratio: Double, val anim
     RED_TOPAZ_MACHETE(Items.RED_TOPAZ_MACHETE_6317, 1, 0.38, Animations.SWING_WITH_RED_TOPAZ_MACHETE_6087),
     ;
 
+    /**
+     * Returns mining delay for pickaxes.
+     */
+    fun getMiningDelay(): Int {
+        return when (this) {
+            BRONZE_PICKAXE -> 6
+            IRON_PICKAXE -> 6
+            STEEL_PICKAXE -> 5
+            MITHRIL_PICKAXE -> 4
+            ADAMANT_PICKAXE -> 3
+            RUNE_PICKAXE -> 2
+            INFERNO_ADZE2 -> (1..2).random()
+            else -> 6
+        }
+    }
+
     companion object {
         /**
          * Finds tool by item id.

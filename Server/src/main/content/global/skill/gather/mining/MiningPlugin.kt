@@ -19,6 +19,7 @@ import core.game.system.task.Pulse
 import core.game.world.GameWorld
 import core.game.world.map.zone.ZoneBorders
 import core.tools.RandomFunction
+import core.tools.colorize
 import core.tools.prependArticle
 import shared.consts.Items
 import shared.consts.Quests
@@ -150,12 +151,10 @@ class MiningPlugin : InteractionListener {
      * Handles mining a rock [node] by the [player].
      */
     private fun handleMining(player: Player, node: Node, state: Int): Boolean {
-        val resource = MiningNode.forId(node.id) ?: return true
-        val tool = SkillingTool.getPickaxe(player) ?: return true
+        val resource = MiningNode.forId(node.id)
+        val tool = SkillingTool.getPickaxe(player)
 
-        if (!finishedMoving(player)) return true
-
-        val isEssence = resource.id in intArrayOf(
+        val isEssence = resource!!.id in intArrayOf(
             Objects.RUNE_ESSENCE_2491,
             /*
              * Lunar essence rock.
@@ -180,12 +179,14 @@ class MiningPlugin : InteractionListener {
                 if (isObsidian) "You swing your pick at the wall." else "You swing your pickaxe at the rock."
             )
 
-            anim(player, resource, tool)
-            return delayScript(player, getDelay())
+            anim(player, resource, tool!!)
+            return delayScript(player, getDelay(player, resource, tool))
         }
 
-        anim(player, resource, tool)
-        if (!checkReward(player, resource, tool)) return delayScript(player, getDelay())
+        anim(player, resource, tool!!)
+        if (!checkReward(player, resource, tool)) {
+            return delayScript(player, getDelay(player, resource, tool))
+        }
 
         var reward = calculateReward(player, resource, isEssence, isGems, resource.reward)
         val rewardAmount = calculateRewardAmount(player, isEssence, reward)
@@ -251,7 +252,10 @@ class MiningPlugin : InteractionListener {
                 result += value shl 1
                 rewardXP(player, Skills.MINING, value * 10.0)
             }
-            isMiningEssence && getDynLevel(player, Skills.MINING) >= 30 -> result = Items.PURE_ESSENCE_7936
+            isMiningEssence &&
+                    // !GameWorld.settings!!.isMembers
+                    getDynLevel(player, Skills.MINING) >= 30 -> result = Items.PURE_ESSENCE_7936
+
             isMiningGems -> result = RandomFunction.rollWeightedChanceTable(MiningNode.GEM_ROCK_REWARD).id
         }
         return result
@@ -271,12 +275,31 @@ class MiningPlugin : InteractionListener {
     /**
      * Gets the mining delay.
      */
-    fun getDelay(): Int = 1
+    fun getDelay(player: Player, resource: MiningNode, pickaxe: SkillingTool): Int {
+        if (resource.id in intArrayOf(Objects.RUNE_ESSENCE_2491, Objects.ROCK_16684)) {
+            return 1
+        }
+
+        val playerLevel = player.getSkills().getLevel(Skills.MINING)
+        val oreLevel = resource.level
+
+        var delay = pickaxe.getMiningDelay()
+
+        val levelDifference = playerLevel - oreLevel
+        if (levelDifference > 0) {
+            delay -= levelDifference / 10
+        }
+
+        if (delay < 1) delay = 1
+
+        player.debug(colorize("Resource Level: [%DG$oreLevel</col>], Mining Level: [%B$playerLevel</col>], Delay: [%R$delay</col>]"))
+        return delay
+    }
 
     /**
      * Plays the mining animation for [player] on [resource] with [tool].
      */
-    fun anim(player: Player, resource: MiningNode?, tool: SkillingTool) {
+    fun anim(player: Player, resource: MiningNode, tool: SkillingTool) {
         val anim = when (resource?.identifier) {
             14.toByte() -> tool.animation + 6128
             19.toByte() -> tool.animation + 9718
@@ -289,23 +312,39 @@ class MiningPlugin : InteractionListener {
      * Checks all requirements for mining a [resource] by [player].
      */
     fun checkRequirements(player: Player, resource: MiningNode, node: Node): Boolean {
-        if (getDynLevel(player, Skills.MINING) < resource.level) {
-            sendMessage(player, "You need a Mining level of ${resource.level} to mine this rock.")
-            return false
+        val allPickaxes = SkillingTool.values().filter {
+            inEquipmentOrInventory(player, it.id)
         }
-        val pickaxe = SkillingTool.getPickaxe(player)
-        if (pickaxe == null) {
+
+        if (allPickaxes.isEmpty()) {
             sendMessage(player, "You do not have a pickaxe to use.")
             return false
         }
+
+        if (player.getSkills().getLevel(Skills.MINING) < resource.level) {
+            sendMessage(player, "You need a Mining level of ${resource.level} to mine this rock.")
+            return false
+        }
+
+        val usablePickaxe = allPickaxes
+            .filter { player.getSkills().getLevel(Skills.MINING) >= it.level }
+            .maxByOrNull { it.level }
+
+        if (usablePickaxe == null) {
+            sendMessage(player, "You need a pickaxe to mine this rock. You do not have a pickaxe which you have the Mining level to use.")
+            return false
+        }
+
         if (resource.identifier == 19.toByte() && !hasRequirement(player, Quests.TOKTZ_KET_DILL)) {
             sendDialogue(player, "You do not know the technique to mine stone slabs.")
             return false
         }
-        if (resource.identifier == 19.toByte() && pickaxe in listOf(SkillingTool.INFERNO_ADZE, SkillingTool.INFERNO_ADZE2)) {
+
+        if (resource.identifier == 19.toByte() && usablePickaxe in listOf(SkillingTool.INFERNO_ADZE, SkillingTool.INFERNO_ADZE2)) {
             sendDialogue(player, "I don't think I should use the Inferno Adze in here.")
             return false
         }
+
         if (freeSlots(player) == 0) {
             val prefix = "Your inventory is too full to hold any more"
             val message = when (resource.identifier) {

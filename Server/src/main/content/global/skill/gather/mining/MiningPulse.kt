@@ -103,8 +103,26 @@ class MiningPulse(private val player: Player, private val node: Node) : Pulse(1,
             return false
         }
 
-        val pickaxe = SkillingTool.getPickaxe(player) ?: run {
+        val allPickaxes = SkillingTool.values().filter {
+            inEquipmentOrInventory(player, it.id)
+        }
+
+        if (allPickaxes.isEmpty()) {
             sendMessage(player, "You do not have a pickaxe to use.")
+            return false
+        }
+
+        if (player.getSkills().getLevel(Skills.MINING) < resource!!.level) {
+            sendMessage(player, "You need a Mining level of ${resource!!.level} to mine this rock.")
+            return false
+        }
+
+        val usablePickaxe = allPickaxes
+            .filter { player.getSkills().getLevel(Skills.MINING) >= it.level }
+            .maxByOrNull { it.level }
+
+        if (usablePickaxe == null) {
+            sendMessage(player, "You need a pickaxe to mine this rock. You do not have a pickaxe which you have the Mining level to use.")
             return false
         }
 
@@ -113,7 +131,7 @@ class MiningPulse(private val player: Player, private val node: Node) : Pulse(1,
             return false
         }
 
-        if (resource!!.identifier == 19.toByte() && pickaxe in listOf(SkillingTool.INFERNO_ADZE, SkillingTool.INFERNO_ADZE2)) {
+        if (resource!!.identifier == 19.toByte() && usablePickaxe in listOf(SkillingTool.INFERNO_ADZE, SkillingTool.INFERNO_ADZE2)) {
             sendDialogue(player, "I don't think I should use the Inferno Adze in here.")
             return false
         }

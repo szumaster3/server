@@ -10,25 +10,20 @@ import core.game.node.entity.player.Player
 import core.game.node.item.Item
 import core.plugin.Initializable
 import core.tools.END_DIALOGUE
-import core.tools.RandomFunction
-import core.tools.colorize
+import shared.consts.Items
 import shared.consts.NPCs
+import kotlin.math.roundToInt
 
 /**
  * Represents the Star Sprite dialogue.
  */
 @Initializable
 class StarSpriteDialogue(player: Player? = null) : Dialogue(player) {
-    val COSMIC_RUNE = 564
-    val ASTRAL_RUNE = 9075
-    val GOLD_ORE = 445
-    val COINS = 995
-    val AMPLIFIER = 1.0
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         if (getStoreFile().getBoolean(player.username.lowercase()) || !inInventory(player, ShootingStarPlugin.STAR_DUST, 1)) {
-            npc("Hello, strange creature.").also { stage = 0 }
+            npc("Hello, strange creature.")
         } else {
             npc("Thank you for helping me out of here.").also { stage = 50 }
         }
@@ -84,10 +79,10 @@ class StarSpriteDialogue(player: Player? = null) : Dialogue(player) {
                     val cosmicRunes = (Math.ceil(0.76 * dust) * AMPLIFIER).toInt()
                     val astralRunes = (Math.ceil(0.26 * dust) * AMPLIFIER).toInt()
                     val goldOre = (Math.ceil(0.1 * dust) * AMPLIFIER).toInt()
-                    val coins = (Math.ceil(250.0 * dust) * AMPLIFIER).toInt()
+                    val coins = (Math.ceil(250.01 * dust) * AMPLIFIER).roundToInt()
                     player.inventory.add(Item(COSMIC_RUNE, cosmicRunes), player)
                     player.inventory.add(Item(ASTRAL_RUNE, astralRunes), player)
-                    player.inventory.add(Item(GOLD_ORE, goldOre), player)
+                    player.inventory.add(Item(NOTED_GOLD_ORE, goldOre), player)
                     player.inventory.add(Item(COINS, coins), player)
                     npc(
                         "I have rewarded you by making it so you can mine",
@@ -111,24 +106,13 @@ class StarSpriteDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun getIds(): IntArray = intArrayOf(NPCs.STAR_SPRITE_8091)
 
-
-    fun rollForRingBonus(
-        player: Player,
-        bonusId: Int,
-        bonusBaseAmt: Int,
-    ) {
-        if (RandomFunction.roll(3)) {
-            var bonus = getOrStartTimer<ShootingStarBonus>(player)
-            bonus.ticksLeft += 500
-            sendMessage(player, colorize("%RYour ring shines dimly as if imbued with energy."))
-        } else if (RandomFunction.roll(5)) {
-            addItem(player, bonusId, bonusBaseAmt)
-            sendMessage(player, colorize("%RYour ring shines brightly as if surging with energy and then fades out."))
-        } else if (RandomFunction.roll(25)) {
-            getStoreFile().addProperty(player.username.lowercase(), false)
-            sendMessage(player, colorize("%RYour ring vibrates briefly as if surging with power, and then stops."))
-        }
-    }
-
     fun getStoreFile(): JsonObject = ServerStore.getArchive("daily-shooting-star")
+
+    companion object {
+        private const val COSMIC_RUNE = Items.COSMIC_RUNE_564
+        private const val ASTRAL_RUNE = Items.ASTRAL_RUNE_9075
+        private const val NOTED_GOLD_ORE = Items.GOLD_ORE_445
+        private const val COINS = Items.COINS_995
+        private const val AMPLIFIER = 1.0
+    }
 }
