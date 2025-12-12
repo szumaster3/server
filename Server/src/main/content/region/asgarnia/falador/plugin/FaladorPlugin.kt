@@ -235,11 +235,6 @@ class FaladorPlugin : InteractionListener {
             return@on true
         }
 
-        on(NPCs.ORACLE_746, IntType.NPC, "talk-to") { player, node ->
-            openDialogue(player, OracleDialogue(), node.id)
-            return@on true
-        }
-
         on(intArrayOf(NPCs.EMILY_736, NPCs.KAYLEE_3217, NPCs.TINA_3218), IntType.NPC, "talk-to") { player, node ->
             openDialogue(player, RisingSunInnBartenderDialogue(), node.id)
             return@on true
