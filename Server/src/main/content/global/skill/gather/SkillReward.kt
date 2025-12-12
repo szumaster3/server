@@ -8,6 +8,7 @@ import core.api.getFamiliarBoost
 import core.game.node.entity.player.Player
 import core.game.node.entity.skill.Skills
 import core.tools.RandomFunction
+import kotlin.math.ceil
 import kotlin.random.Random
 
 /**
@@ -85,5 +86,19 @@ object SkillReward {
     fun rollSuccess(player: Player, low: Double, high: Double, skill: Int): Boolean {
         val chance = getSuccessChance(player, low, high, skill)
         return RandomFunction.randomDouble(100.0) < chance
+    }
+
+    /**
+     * Calculates whether an action succeeds based on the player skill level.
+     * @param player The player whose skill level is used for the calculation.
+     * @param skill The id of the skill to check (e.g., Mining, Thieving, etc.).
+     * @return `true` if the action succeeds, `false` otherwise.
+     */
+    fun success(player: Player, skill: Int): Boolean {
+        val level = player.getSkills().getLevel(skill).toDouble()
+        val req = 30.0
+        val successChance = ceil((level * 50 - req) / req / 3 * 4)
+        val roll = RandomFunction.random(99)
+        return successChance >= roll
     }
 }

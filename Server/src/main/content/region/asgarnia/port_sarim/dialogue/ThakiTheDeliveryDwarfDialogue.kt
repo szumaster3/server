@@ -1,33 +1,20 @@
 package content.region.asgarnia.port_sarim.dialogue
 
-import core.game.dialogue.Dialogue
+import core.game.dialogue.DialogueFile
 import core.game.dialogue.FaceAnim
-import core.game.node.entity.npc.NPC
-import core.game.node.entity.player.Player
-import core.plugin.Initializable
 import core.tools.END_DIALOGUE
-import shared.consts.NPCs
 
 /**
  * Represents the Thaki The Delivery Dwarf dialogue.
  */
-@Initializable
-class ThakiTheDeliveryDwarfDialogue(player: Player? = null) : Dialogue(player) {
+class ThakiTheDeliveryDwarfDialogue : DialogueFile() {
 
-    override fun open(vararg args: Any?): Boolean {
-        npc = args[0] as NPC
-        npc(FaceAnim.OLD_NORMAL, "Arrr!")
-        return true
-    }
-
-    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
+    override fun handle(componentID: Int, buttonID: Int) {
         when (stage) {
-            0 -> player(FaceAnim.HAPPY, "Hi little fellow.").also { stage++ }
-            1 -> npc(FaceAnim.OLD_ANGRY1, "What did you just say to me!?").also { stage++ }
-            2 -> player(FaceAnim.GUILTY, "Arrr! nothing, nothing at all..").also { stage = END_DIALOGUE }
+            0 -> npc(FaceAnim.OLD_NORMAL, "Arrr!").also { stage++ }
+            1 -> player(FaceAnim.LAUGH, "Hi, little fellow.").also { stage++ }
+            2 -> npc(FaceAnim.OLD_ANGRY1, "What did you just say to me!?").also { stage++ }
+            3 -> player(FaceAnim.GUILTY, "Arrr! nothing, nothing at all..").also { stage = END_DIALOGUE }
         }
-        return true
     }
-
-    override fun getIds(): IntArray = intArrayOf(NPCs.THAKI_THE_DELIVERY_DWARF_7115)
 }

@@ -1,39 +1,28 @@
 package content.region.asgarnia.falador.dialogue
 
 import core.api.openNpcShop
-import core.api.sendOptions
-import core.game.dialogue.Dialogue
-import core.game.node.entity.player.Player
-import core.plugin.Initializable
+import core.game.dialogue.DialogueFile
+import core.game.dialogue.Topic
 import core.tools.END_DIALOGUE
 import shared.consts.NPCs
 
 /**
- * Represents the Garden Supplier (Falador) dialogue.
+ * Represents the Falador Garden Supplier dialogue.
  */
-@Initializable
-class GardenSupplierDialogue(player: Player? = null) : Dialogue(player) {
+class GardenSupplierDialogue : DialogueFile() {
 
-    override fun open(vararg args: Any?): Boolean {
-        npc("Hello, I sell many plants. Would you like", "to see what I have?")
-        return true
-    }
-
-    override fun handle(componentId: Int, buttonId: Int): Boolean {
+    override fun handle(componentID: Int, buttonID: Int) {
         when (stage) {
-            0 -> sendOptions(player, "Select one", "Yes, please!", "No, thanks.").also { stage++ }
-            1 -> when (buttonId) {
-                1 -> player("Yes, please!").also { stage++ }
-                2 -> player("No, thanks.").also { stage = END_DIALOGUE }
-            }
-
+            0 -> npc("Hello, I sell many plants. Would you like", "to see what I have?").also { stage++ }
+            1 -> showTopics(
+                Topic("Yes, please!", 2),
+                Topic("No, thanks.", END_DIALOGUE),
+                title = "Select one"
+            )
             2 -> {
                 end()
-                openNpcShop(player, NPCs.GARDEN_SUPPLIER_4251)
+                openNpcShop(player!!, NPCs.GARDEN_SUPPLIER_4251)
             }
         }
-        return true
     }
-
-    override fun getIds(): IntArray = intArrayOf(NPCs.GARDEN_SUPPLIER_4251)
 }

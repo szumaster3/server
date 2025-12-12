@@ -1,5 +1,8 @@
 package content.region.asgarnia.goblin_village.plugin
 
+import content.region.asgarnia.falador.dialogue.ZandarHorfyreDialogue
+import content.region.asgarnia.goblin_village.dialogue.GoblinVillageGuardDialogue
+import core.api.openDialogue
 import core.api.sendNPCDialogue
 import core.api.sendPlainDialogue
 import core.game.dialogue.FaceAnim
@@ -36,6 +39,15 @@ class GoblinVillagePlugin: InteractionListener {
                 }
                 sendPlainDialogue(player, false, "Welcome to Goblin Village.", "Current population: $population")
             }
+            return@on true
+        }
+
+        /*
+         * Handles talking to NPCs around village.
+         */
+
+        on(NPCs.GUARD_3241, IntType.NPC, "talk-to") { player, node ->
+            openDialogue(player, GoblinVillageGuardDialogue(), node)
             return@on true
         }
     }

@@ -1,33 +1,20 @@
 package content.region.asgarnia.falador.dialogue
 
-import core.game.dialogue.Dialogue
+import core.game.dialogue.DialogueFile
 import core.game.dialogue.FaceAnim
-import core.game.node.entity.npc.NPC
-import core.game.node.entity.player.Player
-import core.plugin.Initializable
 import core.tools.END_DIALOGUE
-import shared.consts.NPCs
 
 /**
  * Represents the Narfs dialogue.
  */
-@Initializable
-class NarfsDialogue(player: Player? = null) : Dialogue(player) {
+class NarfsDialogue : DialogueFile() {
 
-    override fun open(vararg args: Any?): Boolean {
-        npc = args[0] as NPC
-        playerl(FaceAnim.HALF_GUILTY, "That's a funny name you've got.")
-        return true
-    }
-
-    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
+    override fun handle(componentID: Int, buttonID: Int) {
         when (stage) {
-            0 -> npc(FaceAnim.HALF_GUILTY, "'Narf'? You think that's funny?", "At least I Don't call myself '" + player.username + "' ", "Where did you get a name like that?").also { stage++ }
-            1 -> player(FaceAnim.HALF_GUILTY, "It seemed like a good idea at the time!").also { stage++ }
-            2 -> npc(FaceAnim.HALF_GUILTY, "Bah!").also { stage = END_DIALOGUE }
+            0 -> playerl(FaceAnim.LAUGH, "That's a funny name you've got.").also { stage++ }
+            1 -> npc(FaceAnim.ASKING, "'Narf'? You think that's funny?", "At least I Don't call myself '" + player?.username + "' ", "Where did you get a name like that?").also { stage++ }
+            2 -> player(FaceAnim.FRIENDLY, "It seemed like a good idea at the time!").also { stage++ }
+            3 -> npc(FaceAnim.ANGRY, "Bah!").also { stage = END_DIALOGUE }
         }
-        return true
     }
-
-    override fun getIds(): IntArray = intArrayOf(NPCs.NARF_3238)
 }

@@ -1,38 +1,25 @@
 package content.region.asgarnia.falador.dialogue
 
-import core.game.dialogue.Dialogue
+import core.game.dialogue.DialogueFile
 import core.game.dialogue.FaceAnim
-import core.game.node.entity.npc.NPC
-import core.game.node.entity.player.Player
-import core.plugin.Initializable
 import core.tools.END_DIALOGUE
-import shared.consts.NPCs
 
 /**
  * Represents the Rusty dialogue.
  */
-@Initializable
-class RustyDialogue(player: Player? = null) : Dialogue(player) {
+class RustyDialogue : DialogueFile() {
 
-    override fun open(vararg args: Any?): Boolean {
-        npc = args[0] as NPC
-        npc(FaceAnim.HALF_GUILTY, "Hiya. Are you carrying anything valuable?")
-        return true
-    }
-
-    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
+    override fun handle(componentID: Int, buttonID: Int) {
         when (stage) {
-            0 -> player(FaceAnim.HALF_GUILTY, "Why are you asking?").also { stage++ }
-            1 -> npc(FaceAnim.HALF_GUILTY, "Um... It's a quiz. I'm asking everyone I meet if they're", "carrying anything valuable.").also { stage++ }
-            2 -> player(FaceAnim.HALF_GUILTY, "What would you do if I said I had loads of expensive items", "with me?").also { stage++ }
-            3 -> npc(FaceAnim.HALF_GUILTY, "Ooh, do you? It's been ages since anyone said they'd got", "anything worth stealing.").also { stage++ }
-            4 -> player(FaceAnim.HALF_GUILTY, "'Anything worth stealing'?").also { stage++ }
-            5 -> npc(FaceAnim.HALF_GUILTY, "Um... Not that I'd dream of stealing anything!").also { stage++ }
-            6 -> player(FaceAnim.HALF_GUILTY, "Well, I'll say I'm not carrying anything valuable at all.").also { stage++ }
-            7 -> npc(FaceAnim.HALF_GUILTY, "Oh, what a shame.").also { stage = END_DIALOGUE }
+            0 -> npc(FaceAnim.HALF_ASKING, "Hiya. Are you carrying anything valuable?").also { stage++ }
+            1 -> player(FaceAnim.HALF_ASKING, "Why are you asking?").also { stage++ }
+            2 -> npc(FaceAnim.HALF_GUILTY, "Um... It's a quiz. I'm asking everyone I meet if they're", "carrying anything valuable.").also { stage++ }
+            3 -> player(FaceAnim.HALF_ASKING, "What would you do if I said I had loads of expensive items", "with me?").also { stage++ }
+            4 -> npc(FaceAnim.HALF_THINKING, "Ooh, do you? It's been ages since anyone said they'd got", "anything worth stealing.").also { stage++ }
+            5 -> player(FaceAnim.HALF_ASKING, "'Anything worth stealing'?").also { stage++ }
+            6 -> npc(FaceAnim.STRUGGLE, "Um... Not that I'd dream of stealing anything!").also { stage++ }
+            7 -> player(FaceAnim.HALF_GUILTY, "Well, I'll say I'm not carrying anything valuable at all.").also { stage++ }
+            8 -> npc(FaceAnim.ANGRY, "Oh, what a shame.").also { stage = END_DIALOGUE }
         }
-        return true
     }
-
-    override fun getIds(): IntArray = intArrayOf(NPCs.RUSTY_3239)
 }

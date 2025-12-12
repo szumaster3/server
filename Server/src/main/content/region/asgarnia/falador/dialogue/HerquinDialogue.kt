@@ -1,39 +1,29 @@
 package content.region.asgarnia.falador.dialogue
 
 import core.api.openNpcShop
-import core.game.dialogue.Dialogue
+import core.game.dialogue.DialogueFile
 import core.game.dialogue.FaceAnim
-import core.game.node.entity.npc.NPC
-import core.game.node.entity.player.Player
-import core.plugin.Initializable
+import core.game.dialogue.Topic
 import core.tools.END_DIALOGUE
 import shared.consts.NPCs
 
 /**
  * Represents the Herquin dialogue.
  */
-@Initializable
-class HerquinDialogue(player: Player? = null) : Dialogue(player) {
+class HerquinDialogue : DialogueFile() {
 
-    override fun open(vararg args: Any?): Boolean {
-        npc = args[0] as NPC
-        options("Do you wish to trade?", "Sorry, I don't want to talk to you, actually.").also { stage = 0 }
-        return true
-    }
-
-    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
+    override fun handle(componentID: Int, buttonID: Int) {
         when (stage) {
-            0 -> player(FaceAnim.FRIENDLY, "Do you wish to trade?").also { stage = 3 }
-            1 -> player(FaceAnim.HALF_GUILTY, "Sorry, I don't want to talk to you, actually.").also { stage++ }
-            2 -> npc(FaceAnim.ROLLING_EYES, "Huh, charming.").also { stage = END_DIALOGUE }
-            3 -> npc(FaceAnim.FRIENDLY, "Why, yes, this is a jewel shop after all.").also { stage++ }
-            4 -> {
+            0 -> showTopics(
+                Topic("Do you wish to trade?", 1),
+                Topic("Sorry, I don't want to talk to you, actually.", 3),
+            )
+            1 -> npc(FaceAnim.FRIENDLY, "Why, yes, this is a jewel shop after all.").also { stage++ }
+            2 -> {
                 end()
-                openNpcShop(player, NPCs.HERQUIN_584)
+                openNpcShop(player!!, NPCs.HERQUIN_584)
             }
+            3 -> npc(FaceAnim.ROLLING_EYES, "Huh, charming.").also { stage = END_DIALOGUE }
         }
-        return true
     }
-
-    override fun getIds(): IntArray = intArrayOf(NPCs.HERQUIN_584)
 }

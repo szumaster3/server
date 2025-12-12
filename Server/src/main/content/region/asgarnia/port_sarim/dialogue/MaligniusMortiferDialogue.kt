@@ -1,226 +1,79 @@
 package content.region.asgarnia.port_sarim.dialogue
 
-import core.game.dialogue.Dialogue
-import core.game.node.entity.npc.NPC
-import core.game.node.entity.player.Player
+import core.game.dialogue.DialogueFile
+import core.game.dialogue.FaceAnim
+import core.game.dialogue.Topic
 import core.game.system.task.Pulse
 import core.game.world.GameWorld.Pulser
 import core.game.world.update.flag.context.Animation
 import core.game.world.update.flag.context.Graphics
-import core.plugin.Initializable
-import shared.consts.NPCs
+import core.tools.END_DIALOGUE
 
-/**
- * Represents the Malignius Mortifer dialogue.
- */
-@Initializable
-class MaligniusMortiferDialogue(player: Player? = null) : Dialogue(player) {
+class MaligniusMortiferDialogue : DialogueFile() {
 
-    override fun open(vararg args: Any?): Boolean {
-        npc = args[0] as NPC
-        npc("So, " + player.username + ", your curiosity leads you to speak to me?")
-        return true
-    }
-
-    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
+    override fun handle(componentID: Int, buttonID: Int) {
         when (stage) {
-            0 -> {
-                options(
-                    "Who are you and what are you doing here?",
-                    "Can you teach me something about magic?",
-                    "Where can I get clothes like those?",
-                    "Actually, I don't want to talk to you.",
-                )
-                stage = 1
-            }
+            0 -> npc(FaceAnim.NEUTRAL, "So, ${player!!.username}, your curiosity leads you to speak to me?").also { stage++ }
 
-            1 -> when (buttonId) {
-                1 -> {
-                    player("Who are you and what are you doing here?")
-                    stage = 10
-                }
+            1 -> showTopics(
+                Topic("Who are you and what are you doing here?", 10),
+                Topic("Can you teach me something about magic?", 20),
+                Topic("Where can I get clothes like those?", 30),
+                Topic("Actually, I don't want to talk to you.", 40)
+            )
 
-                2 -> {
-                    player("Can you teach me something about magic?")
-                    stage = 20
-                }
-
-                3 -> {
-                    player("Where can I get clothes like those?")
-                    stage = 30
-                }
-
-                4 -> {
-                    player("Actually, I don't want to talk to you.")
-                    stage = 40
-                }
-            }
-
-            10 -> {
-                npc(
-                    "I am the great Malignius Mortifer, wielder of strange",
-                    "and terrible powers. These lowly followers of mine are",
-                    "dedicated students of the magical arts. Their business is",
-                    "to follow me and learn all they can.",
-                )
-                stage = 11
-            }
-
-            11 -> {
-                player("There don't look very tough.")
-                stage = 12
-            }
-
-            12 -> {
-                npc("You may believe that, but even if you strike one down,", "another will rise up within minutes.")
-                stage = 13
-            }
-
-            13 -> {
-                player("Yeah, right.")
-                stage = 14
-            }
-
-            14 -> {
-                npc(
-                    "Each of my followers is a master of his chosen element.",
-                    "His life becomes bound to that element in a way you",
-                    "could not hope to understand.",
-                )
-                stage = 15
-            }
-
-            15 -> {
-                player("And what do you do?")
-                stage = 16
-            }
-
-            16 -> {
-                npc(
-                    "I am mastering a branch of magic that few dare to",
-                    "attempt: Necromancy! THe fools in the Guild of",
-                    "Wizards shun anyone who practices this art, but there",
-                    "are a few across the lands who know the rudiments.",
-                )
-                stage = 17
-            }
-
-            17 -> {
-                npc(
-                    "Grayzag and Invrigar... Even Melzar studied the",
-                    "methods of necromancy, until an accident affected his",
-                    "mind. Now his spells tend to result in...",
-                )
-                stage = 18
-            }
-
-            18 -> {
-                npc("... well, let us simply say that he does NOT raise", "armies of undead minions.")
-                stage = 19
-            }
-
+            10 -> npc(FaceAnim.FRIENDLY, "I am the great Malignius Mortifer, wielder of strange", "and terrible powers. These lowly followers of mine are", "dedicated students of the magical arts.").also { stage++ }
+            11 -> player("They don't look very tough.").also { stage++ }
+            12 -> npc("You may believe that, but even if you strike one down,", "another will rise up within minutes.").also { stage++ }
+            13 -> player("Yeah, right.").also { stage++ }
+            14 -> npc("Each of my followers is a master of his chosen element.", "His life becomes bound to that element in ways you", "could not understand.").also { stage++ }
+            15 -> player("And what do you do?").also { stage++ }
+            16 -> npc("I am mastering a branch of magic that few dare to", "attempt: Necromancy!").also { stage++ }
+            17 -> npc("Grayzag and Invrigar... Even Melzar studied that art", "until an accident affected his mind.").also { stage++ }
+            18 -> npc("Let us simply say he does NOT raise armies of undead.").also { stage++ }
             19 -> end()
-            20 -> {
-                npc(
-                    "Ah, you are an inquisitive young fellow. I shall speak of",
-                    "the great Wizards' Tower, destroyed by fire many",
-                    "years ago...",
-                )
-                stage = 21
-            }
 
-            21 -> {
-                npc(
-                    "Many say it was the greatest building in the history of",
-                    "Gielinor, a magnificent monument to human ingenuity.",
-                )
-                stage = 22
-            }
-
-            22 -> {
-                npc("Yet when humans are offered great power, they so", "often buy it at the cost of their principles.")
-                stage = 23
-            }
-
-            23 -> {
-                npc(
-                    "Wizards who claimed allegiance to Saradomin began to",
-                    "insist that magic be restriced to the few they deemed",
-                    "'worthy' of such powers.",
-                )
-                stage = 24
-            }
-
-            24 -> {
-                npc(
-                    "Before long, those who did not share their fatuous",
-                    "obsession with Saradomin were excluded from the",
-                    "Tower comletely. This state of affairs could not",
-                    "continue.",
-                )
-                stage = 25
-            }
-
+            20 -> npc("Ah, you are an inquisitive young fellow. I shall speak of", "the great Wizards' Tower, destroyed by fire many years ago.").also { stage++ }
+            21 -> npc("Many say it was the greatest building ever built —", "a monument to human ingenuity.").also { stage++ }
+            22 -> npc("Yet humans often trade their principles for power.").also { stage++ }
+            23 -> npc("Wizards loyal to Saradomin tried to restrict magic", "to those they deemed 'worthy'.").also { stage++ }
+            24 -> npc("Those who disagreed were expelled. This tyranny could", "not continue.").also { stage++ }
             25 -> end()
-            30 -> {
-                npc(
-                    "Bah! Our garments are an outward sign of our",
-                    "dominance of the magical arts. You cannot simply buy",
-                    "them in a shop.",
-                )
-                stage = 31
-            }
 
-            31 -> {
-                player("What happens if I kill you and take them?")
-                stage = 32
-            }
-
-            32 -> {
-                npc("Try it and see!")
-                stage = 33
-            }
-
-            33 -> {
-                player("How about if you teach me enough about magic so I", "can wear those clothes too?")
-                stage = 34
-            }
-
-            34 -> {
-                npc("How about if I turn you into a mushroom to make you", "stop bothering me?")
-                stage = 35
-            }
-
+            30 -> npc("Our garments are symbols of mastery over the magical arts.", "You cannot simply purchase them in a shop.").also { stage++ }
+            31 -> player("What if I kill you and take them?").also { stage++ }
+            32 -> npc("Try it and see!").also { stage++ }
+            33 -> player("How about if you teach me enough about magic so I", "can wear those clothes too?").also { stage++ }
+            34 -> npc("How about if I turn you into a mushroom to stop you", "bothering me?").also { stage = 35 }
             35 -> transform()
-            40 -> {
-                npc("Bah! Then go away!")
-                stage = 41
-            }
 
-            41 -> end()
+            40 -> npc("Bah! Then go away!").also { stage++ }
+            41 -> stage = END_DIALOGUE
         }
-        return true
     }
 
     private fun transform() {
-        interpreter.sendDialogues(player, null, true, "MMMmmph!")
-        npc.animate(Animation.create(811))
-        player.appearance.transformNPC(3345)
-        player.graphics(Graphics.create(453))
-        player.lock(8)
-        player.locks.lockMovement(10000)
-        Pulser.submit(
-            object : Pulse(12) {
-                override fun pulse(): Boolean {
-                    player.walkingQueue.reset()
-                    player.locks.unlockMovement()
-                    player.appearance.transformNPC(-1)
-                    end()
-                    return true
-                }
-            },
-        )
+        val p = player ?: return
+        val n = npc ?: return
+
+        p.dialogueInterpreter.sendDialogues(p, null, true, "MMMmmph!")
+
+        n.animate(Animation.create(811))
+        p.appearance.transformNPC(3345)
+        p.graphics(Graphics.create(453))
+
+        p.lock(8)
+        p.locks.lockMovement(10000)
+
+        Pulser.submit(object : Pulse(12) {
+            override fun pulse(): Boolean {
+                p.walkingQueue.reset()
+                p.locks.unlockMovement()
+                p.appearance.transformNPC(-1)
+                end()
+                return true
+            }
+        })
     }
 
-    override fun getIds(): IntArray = intArrayOf(NPCs.MALIGNIUS_MORTIFER_2713)
 }

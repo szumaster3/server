@@ -1,38 +1,28 @@
 package content.region.asgarnia.falador.dialogue
 
 import core.api.openNpcShop
-import core.game.dialogue.Dialogue
+import core.game.dialogue.DialogueFile
 import core.game.dialogue.FaceAnim
-import core.game.node.entity.npc.NPC
-import core.game.node.entity.player.Player
-import core.plugin.Initializable
+import core.game.dialogue.Topic
+import core.tools.END_DIALOGUE
 import shared.consts.NPCs
 
 /**
  * Represents the Wayne dialogue.
  */
-@Initializable
-class WayneDialogue(player: Player? = null) : Dialogue(player) {
+class WayneDialogue : DialogueFile() {
 
-    override fun open(vararg args: Any?): Boolean {
-        npc = args[0] as NPC
-        npc(FaceAnim.HAPPY, "Welcome to Wayne's Chains. Do you wanna buy or", "sell some chain mail?")
-        return true
-    }
-
-    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
+    override fun handle(componentID: Int, buttonID: Int) {
         when (stage) {
-            0 -> options("Yes please.", "No thanks.").also { stage++ }
-            1 -> when (buttonId) {
-                1 -> {
-                    end()
-                    openNpcShop(player, NPCs.WAYNE_581)
-                }
-                2 -> end()
+            0 -> npc(FaceAnim.HAPPY, "Welcome to Wayne's Chains. Do you wanna buy or", "sell some chain mail?").also { stage++ }
+            1 -> showTopics(
+                Topic("Yes please.", 2),
+                Topic("No, thanks.", END_DIALOGUE)
+            )
+            2 -> {
+                end()
+                openNpcShop(player!!, NPCs.WAYNE_581)
             }
         }
-        return true
     }
-
-    override fun getIds(): IntArray = intArrayOf(NPCs.WAYNE_581)
 }

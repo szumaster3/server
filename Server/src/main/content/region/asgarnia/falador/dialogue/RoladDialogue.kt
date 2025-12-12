@@ -1,34 +1,25 @@
 package content.region.asgarnia.falador.dialogue
 
-import core.game.dialogue.Dialogue
+import core.api.hasRequirement
+import core.game.dialogue.DialogueFile
 import core.game.dialogue.FaceAnim
-import core.game.node.entity.npc.NPC
-import core.game.node.entity.player.Player
-import core.plugin.Initializable
 import core.tools.END_DIALOGUE
-import shared.consts.NPCs
+import shared.consts.Quests
 
 /**
  * Represents the Rolad dialogue.
  */
-@Initializable
-class RoladDialogue(player: Player? = null) : Dialogue(player) {
+class RoladDialogue : DialogueFile() {
 
-    override fun open(vararg args: Any?): Boolean {
-        npc = args[0] as NPC
-        npc(FaceAnim.OLD_NORMAL, "Oh, hello... do I know you?")
-        return true
-    }
-
-    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
+    override fun handle(componentID: Int, buttonID: Int) {
         when (stage) {
-            0 -> player(FaceAnim.HALF_ASKING, "Ehm... well... my name is " + player.username + ", if that rings any bell?").also { stage++ }
-            1 -> npc(FaceAnim.OLD_NORMAL, "No, never heard of you.").also { stage = END_DIALOGUE }
+            0 -> if(!hasRequirement(player!!, Quests.BETWEEN_A_ROCK, false)) {
+                npc(FaceAnim.OLD_NORMAL, "Oh, hello... do I know you?").also { stage++ }
+            } else {
+                npc(FaceAnim.OLD_NORMAL, "Can you leave me alone please? I'm trying to study.").also { stage = END_DIALOGUE }
+            }
+            1 -> player(FaceAnim.HALF_ASKING, "Ehm... well... my name is " + player?.username + ", if that rings any bell?").also { stage++ }
+            2 -> npc(FaceAnim.OLD_NORMAL, "No, never heard of you.").also { stage = END_DIALOGUE }
         }
-        return true
     }
-
-    override fun newInstance(player: Player?): Dialogue = RoladDialogue(player)
-
-    override fun getIds(): IntArray = intArrayOf(NPCs.ROLAD_1841)
 }

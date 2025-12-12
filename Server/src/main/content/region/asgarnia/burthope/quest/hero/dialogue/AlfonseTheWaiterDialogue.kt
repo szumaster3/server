@@ -28,7 +28,6 @@ class AlfonseTheWaiterDialogue(player: Player? = null) : Dialogue(player) {
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         openDialogue(player, AlfonseTheWaiterDialogueFile(), npc)
-
         return true
     }
 

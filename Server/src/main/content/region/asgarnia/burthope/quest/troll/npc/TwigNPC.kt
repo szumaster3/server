@@ -14,23 +14,13 @@ import shared.consts.NPCs
 import shared.consts.Quests
 
 @Initializable
-class TwigNPC(
-    id: Int = 0,
-    location: Location? = null,
-) : AbstractNPC(id, location) {
-    override fun construct(
-        id: Int,
-        location: Location,
-        vararg objects: Any,
-    ): AbstractNPC = TwigNPC(id, location)
+class TwigNPC(id: Int = 0, location: Location? = null) : AbstractNPC(id, location) {
+
+    override fun construct(id: Int, location: Location, vararg objects: Any): AbstractNPC = TwigNPC(id, location)
 
     override fun getIds(): IntArray = intArrayOf(NPCs.TWIG_1126, NPCs.TWIG_1128)
 
-    override fun isAttackable(
-        entity: Entity,
-        style: CombatStyle,
-        message: Boolean,
-    ): Boolean {
+    override fun isAttackable(entity: Entity, style: CombatStyle, message: Boolean): Boolean {
         val attackable = super.isAttackable(entity, style, message)
         if (this.id == NPCs.TWIG_1128) {
             val prevLifePoints = this.skills.lifepoints
@@ -50,12 +40,7 @@ class TwigNPC(
     }
 
     override fun finalizeDeath(killer: Entity?) {
-        if (isQuestInProgress(killer as Player, Quests.TROLL_STRONGHOLD, 8, 10) &&
-            !inInventory(
-                killer,
-                Items.CELL_KEY_1_3136,
-            )
-        ) {
+        if (isQuestInProgress(killer as Player, Quests.TROLL_STRONGHOLD, 8, 10) && !inInventory(killer, Items.CELL_KEY_1_3136)) {
             produceGroundItem(killer, Items.CELL_KEY_1_3136, 1, this.location)
         }
         super.finalizeDeath(killer)

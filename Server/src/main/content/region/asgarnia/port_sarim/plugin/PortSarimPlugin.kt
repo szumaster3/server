@@ -1,5 +1,10 @@
 package content.region.asgarnia.port_sarim.plugin
 
+import content.region.asgarnia.falador.dialogue.AmbassadorSpanfippleDialogue
+import content.region.asgarnia.falador.dialogue.ApprenticeWorkmanDialogue
+import content.region.asgarnia.falador.dialogue.CassieDialogue
+import content.region.asgarnia.falador.dialogue.DrogoDwarfDialogue
+import content.region.asgarnia.port_sarim.dialogue.*
 import core.api.*
 import core.game.dialogue.DialogueFile
 import core.game.global.action.DoorActionHandler
@@ -177,9 +182,61 @@ class PortSarimPlugin : InteractionListener {
             openDialogue(player, EntranceDialogue())
             return@on true
         }
+
+        /*
+         * Handles talking to the npc around port.
+         */
+
+        on(NPCs.BELLEMORDE_2942, IntType.NPC, "talk-to") { player, node ->
+            openDialogue(player, CatBellemordeDialogue(), node.id)
+            return@on true
+        }
+
+        on(NPCs.GRUM_556, IntType.NPC, "talk-to") { player, node ->
+            openDialogue(player, GrumDialogue(), node.id)
+            return@on true
+        }
+
+        on(NPCs.GERRANT_558, IntType.NPC, "talk-to") { player, node ->
+            openDialogue(player, GerrantDialogue(), node.id)
+            return@on true
+        }
+
+        on(NPCs.JACK_SEAGULL_2690, IntType.NPC, "talk-to") { player, node ->
+            openDialogue(player, JackSeagullDialogue(), node.id)
+            return@on true
+        }
+
+        on(NPCs.LONGBOW_BEN_2691, IntType.NPC, "talk-to") { player, node ->
+            openDialogue(player, LongbowBenDialogue(), node.id)
+            return@on true
+        }
+
+        on(NPCs.MALIGNIUS_MORTIFER_2713, IntType.NPC, "talk-to") { player, node ->
+            openDialogue(player, MaligniusMortiferDialogue(), node.id)
+            return@on true
+        }
+
+        on(intArrayOf(
+            NPCs.MONK_OF_ENTRANA_657,
+            NPCs.MONK_OF_ENTRANA_658,
+            NPCs.MONK_OF_ENTRANA_2728,
+            NPCs.MONK_OF_ENTRANA_2729,
+            NPCs.MONK_OF_ENTRANA_2730,
+            NPCs.MONK_OF_ENTRANA_2731,
+        ), IntType.NPC, "talk-to") { player, node ->
+            openDialogue(player, MonkOfEntranaDialogue(), node.id)
+            return@on true
+        }
+
+        on(NPCs.THAKI_THE_DELIVERY_DWARF_7115, IntType.NPC, "talk-to") { player, node ->
+            openDialogue(player, ThakiTheDeliveryDwarfDialogue(), node.id)
+            return@on true
+        }
+
     }
 
-    inner class EntranceDialogue : DialogueFile() {
+    private class EntranceDialogue : DialogueFile() {
         override fun handle(componentID: Int, buttonID: Int) {
             when(stage) {
                 0 -> {

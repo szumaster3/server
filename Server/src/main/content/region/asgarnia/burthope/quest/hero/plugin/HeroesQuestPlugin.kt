@@ -23,6 +23,7 @@ import shared.consts.Quests
 import shared.consts.Scenery
 
 class HeroesQuestPlugin : InteractionListener {
+
     override fun defineListeners() {
         on(Scenery.DOOR_2626, IntType.SCENERY, "open") { player, node ->
             if (getQuestStage(player, Quests.HEROES_QUEST) >= 2 &&
@@ -72,19 +73,11 @@ class HeroesQuestPlugin : InteractionListener {
                         buttonID: Int,
                     ) {
                         when (stage) {
-                            START_DIALOGUE ->
-                                sendNPCDialogue(
-                                    player,
-                                    NPCs.PIRATE_GUARD_799,
-                                    "I don't think Mr Grip will like you opening that. That's his private drinks cabinet.",
-                                ).also {
-                                    stage++
-                                }
-                            1 ->
-                                showTopics(
-                                    Topic(FaceAnim.NEUTRAL, "He won't notice me having a quick look.", 2),
-                                    Topic(FaceAnim.NEUTRAL, "Ok, I'll leave it.", END_DIALOGUE),
-                                )
+                            START_DIALOGUE -> sendNPCDialogue(player, NPCs.PIRATE_GUARD_799, "I don't think Mr Grip will like you opening that. That's his private drinks cabinet.").also { stage++ }
+                            1 -> showTopics(
+                                Topic(FaceAnim.NEUTRAL, "He won't notice me having a quick look.", 2),
+                                Topic(FaceAnim.NEUTRAL, "Ok, I'll leave it.", END_DIALOGUE)
+                            )
                             2 ->
                                 end().also {
                                     val gripNpc = findNPC(NPCs.GRIP_792)
@@ -150,7 +143,7 @@ class HeroesQuestPlugin : InteractionListener {
                 removeGroundItem(groundItem as GroundItem)
             } else {
                 sendChat(player, "Ouch!")
-                player.impactHandler.manualHit(player, 9, ImpactHandler.HitsplatType.NORMAL)
+                impact(player, 9, ImpactHandler.HitsplatType.NORMAL)
                 sendMessage(player, "It is too hot to take. You need something cold to pick it up with.")
             }
             return@on true

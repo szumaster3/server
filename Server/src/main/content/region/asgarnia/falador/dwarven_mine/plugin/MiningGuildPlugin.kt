@@ -1,6 +1,9 @@
-package content.region.asgarnia.falador.dwarven_mines.plugin
+package content.region.asgarnia.falador.dwarven_mine.plugin
 
+import content.region.asgarnia.falador.dwarven_mine.dialogue.DwarvenMineGuardDialogue
+import content.region.asgarnia.falador.dwarven_mine.dialogue.DwarvenMineShopkeeperDialogue
 import core.api.getDynLevel
+import core.api.openDialogue
 import core.api.sendNPCDialogue
 import core.game.dialogue.FaceAnim
 import core.game.global.action.ClimbActionHandler.climb
@@ -56,6 +59,17 @@ class MiningGuildPlugin : InteractionListener {
                 return@on false
             }
             DoorActionHandler.handleAutowalkDoor(player, node.asScenery())
+            return@on true
+        }
+
+
+        on(NPCs.GUARD_206, IntType.NPC, "talk-to") { player, node ->
+            openDialogue(player, DwarvenMineGuardDialogue(), node.id)
+            return@on true
+        }
+
+        on(NPCs.DWARF_582, IntType.NPC, "talk-to") { player, node ->
+            openDialogue(player, DwarvenMineShopkeeperDialogue(), node.id)
             return@on true
         }
     }

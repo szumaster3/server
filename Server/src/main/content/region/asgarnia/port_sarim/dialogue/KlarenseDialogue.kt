@@ -84,11 +84,7 @@ class KlarenseDialogue(player: Player? = null) : Dialogue(player) {
 
                 else -> when (stage) {
                     0 -> end()
-                    1 -> options(
-                        "Do you know when she will be seaworthy?",
-                        "Why is she damaged?",
-                        "Ah, well, never mind.",
-                    ).also { stage++ }
+                    1 -> options("Do you know when she will be seaworthy?", "Why is she damaged?", "Ah, well, never mind.").also { stage++ }
                     2 -> when (buttonId) {
                         1 -> player(FaceAnim.ASKING, "Do you know when she will be seaworthy?").also { stage = 10 }
                         2 -> player(FaceAnim.ASKING, "Why is she damaged?").also { stage = 20 }

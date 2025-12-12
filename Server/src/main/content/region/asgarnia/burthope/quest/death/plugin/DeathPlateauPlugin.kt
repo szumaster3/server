@@ -11,6 +11,7 @@ import core.game.node.entity.Entity
 import core.game.node.entity.player.Player
 import core.game.node.item.GroundItemManager
 import core.game.world.map.zone.ZoneBorders
+import core.tools.END_DIALOGUE
 import shared.consts.Components
 import shared.consts.Items
 import shared.consts.Quests
@@ -102,27 +103,33 @@ class DeathPlateauPlugin : InteractionListener, MapArea {
         val combinationScroll = arrayOf("", "Red is North of Blue. Yellow is South of Purple.", "Green is North of Purple. Blue is West of", "Yellow. Purple is East of Red.", "")
     }
 
-    inner class ScrollDialogue : DialogueFile() {
+    private class ScrollDialogue : DialogueFile() {
         override fun handle(componentID: Int, buttonID: Int) {
             when(stage) {
                 0 -> playerl(FaceAnim.NEUTRAL, "The IOU says that Harold owes me some money.").also { stage++ }
                 1 -> playerl(FaceAnim.EXTREMELY_SHOCKED, "Wait just a minute!").also { stage++ }
                 2 -> playerl(FaceAnim.EXTREMELY_SHOCKED, "The IOU is written on the back of the combination! The stupid guard had it in his back pocket all the time!").also { stage++ }
                 3 -> {
-                    if (!removeItem(player!!, Items.IOU_3103)) {
-                        closeDialogue(player!!)
-                    } else {
-                        addItemOrDrop(player!!, Items.COMBINATION_3102)
-                        setQuestStage(player!!, Quests.DEATH_PLATEAU, 16)
-                        sendItemDialogue(player!!, Items.COMBINATION_3102, "You have found the combination!")
-                        lockInteractions(player!!, 3)
-                        runTask(player!!, 3) {
-                            end()
-                            sendMessage(player!!, "You have found the combination!")
-                            openInterface(player!!, Components.BLANK_SCROLL_222)
-                            sendString(player!!, combinationScroll.joinToString("<br>"), Components.BLANK_SCROLL_222, 4)
-                        }
+                    val p = player ?: return
+                    if (!removeItem(p, Items.IOU_3103)) {
+                        stage = END_DIALOGUE
+                        end()
+                        return
                     }
+
+                    addItemOrDrop(p, Items.COMBINATION_3102)
+                    setQuestStage(p, Quests.DEATH_PLATEAU, 16)
+                    sendItemDialogue(p, Items.COMBINATION_3102, "You have found the combination!")
+                    lockInteractions(p, 3)
+
+                    runTask(p, 3) {
+                        sendMessage(p, "You have found the combination!")
+                        openInterface(p, Components.BLANK_SCROLL_222)
+                        sendString(p, combinationScroll.joinToString("<br>"), Components.BLANK_SCROLL_222, 4)
+                    }
+
+                    stage = END_DIALOGUE
+                    end()
                 }
             }
         }

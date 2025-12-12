@@ -11,7 +11,7 @@ import core.tools.END_DIALOGUE
 import shared.consts.NPCs
 
 /**
- * Represents the Hairdresser (Falador) dialogue.
+ * Represents the Hairdresser dialogue.
  */
 @Initializable
 class HairdresserDialogue(player: Player? = null) : Dialogue(player) {
@@ -23,25 +23,13 @@ class HairdresserDialogue(player: Player? = null) : Dialogue(player) {
                 end()
                 openInterface(player, if (player.isMale) 596 else 592)
             } else if (player.equipment[EquipmentContainer.SLOT_HAT] != null || player.equipment[EquipmentContainer.SLOT_WEAPON] != null || player.equipment[EquipmentContainer.SLOT_SHIELD] != null) {
-                npc(
-                    FaceAnim.SCARED,
-                    (if (player.isMale) "Sir, " else "Madam, ") + "I can't cut your hair with those things pointing",
-                    "at me. Please take them off and speak to me again.",
-                ).also {
-                    stage = END_DIALOGUE
-                }
+                npc(FaceAnim.SCARED, (if (player.isMale) "Sir, " else "Madam, ") + "I can't cut your hair with those things pointing", "at me. Please take them off and speak to me again.").also { stage = END_DIALOGUE }
             } else {
                 player(FaceAnim.SAD, "I don't have 2000 gold coins on me...").also { stage = 8 }
             }
             return true
         }
-        npc(
-            FaceAnim.NEUTRAL,
-            "Good afternoon ${if (player.isMale) "sir" else "madam"}. In need of a haircut are we?",
-            if (player.isMale) "Perhaps a shave too?" else "",
-        ).also {
-            stage = 1
-        }
+        npc(FaceAnim.NEUTRAL, "Good afternoon ${if (player.isMale) "sir" else "madam"}. In need of a haircut are we?", if (player.isMale) "Perhaps a shave too?" else "").also { stage = 1 }
         return true
     }
 

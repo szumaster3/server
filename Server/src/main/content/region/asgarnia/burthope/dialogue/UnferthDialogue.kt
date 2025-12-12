@@ -1,20 +1,16 @@
 package content.region.asgarnia.burthope.dialogue
 
-import core.game.dialogue.Dialogue
+import core.game.dialogue.DialogueFile
 import core.game.dialogue.FaceAnim
-import core.game.node.entity.player.Player
-import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import core.tools.START_DIALOGUE
-import shared.consts.NPCs
 
 /**
  * Represents the Unferth dialogue.
  */
-@Initializable
-class UnferthDialogue(player: Player? = null) : Dialogue(player) {
+class UnferthDialogue : DialogueFile() {
 
-    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
+    override fun handle(componentID: Int, buttonID: Int) {
         /*
          * when (stage) {
          * START_DIALOGUE -> playerl(FaceAnim.FRIENDLY, "Hi Unferth. How are you doing?").also { stage++ }
@@ -31,8 +27,5 @@ class UnferthDialogue(player: Player? = null) : Dialogue(player) {
             1 -> playerl(FaceAnim.FRIENDLY, "What's wrong?").also { stage++ }
             2 -> npcl(FaceAnim.GUILTY, "It's fine. Nothing for you to worry about.").also { stage = END_DIALOGUE }
         }
-        return true
     }
-
-    override fun getIds(): IntArray = intArrayOf(NPCs.UNFERTH_2655)
 }

@@ -1,5 +1,6 @@
 package content.region.asgarnia.burthope.plugin
 
+import content.region.asgarnia.burthope.dialogue.*
 import core.api.*
 import core.game.dialogue.FaceAnim
 import core.game.global.action.ClimbActionHandler
@@ -19,6 +20,7 @@ class BurthopePlugin : InteractionListener {
         private const val STAIRS_1 = Scenery.STAIRS_4624
         private const val STAIRS_2 = Scenery.STAIRS_4627
         private val THIEVING_GUILD_PASSAGE = intArrayOf(Scenery.TRAPDOOR_7257, Scenery.PASSAGEWAY_7258)
+        private val BURTHOPE_CITIZEN_NPC_IDS = intArrayOf(NPCs.BREOCA_1084, NPCs.BERNALD_2580, NPCs.CEOLBURG_1089, NPCs.OCGA_1085, NPCs.HILD_1090, NPCs.HYGD_1088)
     }
 
     override fun defineListeners() {
@@ -172,7 +174,7 @@ class BurthopePlugin : InteractionListener {
         }
 
         /*
-         * Handles dialogue when talking to guards.
+         * Handles talking to guards.
          */
 
         on(NPCs.GUARD_1076, IntType.NPC, "talk-to") { player, _ ->
@@ -183,6 +185,61 @@ class BurthopePlugin : InteractionListener {
             sendDialogue(player, "The guard won't talk whilst on duty.")
             return@on true
         }
+
+        /*
+         * Handles talking to citizens.
+         */
+
+        on(BURTHOPE_CITIZEN_NPC_IDS, IntType.NPC, "talk-to") { player, node ->
+            openDialogue(player, BurthopeNPCDialogue(), node)
+            return@on true
+        }
+
+        on(NPCs.SOLDIER_1065, IntType.NPC, "talk-to") { player, node ->
+            openDialogue(player, BurthorpeSoldierDialogue(), node)
+            return@on true
+        }
+
+        on(NPCs.EADBURG_1072, IntType.NPC, "talk-to") { player, node ->
+            openDialogue(player, EadburgDialogue(), node)
+            return@on true
+        }
+
+        on(NPCs.HELEMOS_797, IntType.NPC, "talk-to") { player, node ->
+            openDialogue(player, HelemosDialogue(), node)
+            return@on true
+        }
+
+        on(NPCs.PENDA_1087, IntType.NPC, "talk-to") { player, node ->
+            openDialogue(player, PendaDialogue(), node)
+            return@on true
+        }
+
+        on(intArrayOf(NPCs.SAM_1357, NPCs.RACHAEL_1358), IntType.NPC, "talk-to") { player, node ->
+            openDialogue(player, RachaelDialogue(), node)
+            return@on true
+        }
+
+        on(NPCs.SERVANT_1081, IntType.NPC, "talk-to") { player, node ->
+            openDialogue(player, ServantDialogue(), node)
+            return@on true
+        }
+
+        on(NPCs.TOSTIG_1079, IntType.NPC, "talk-to") { player, node ->
+            openDialogue(player, TostigDialogue(), node)
+            return@on true
+        }
+
+        on(NPCs.WISTAN_1083, IntType.NPC, "talk-to") { player, node ->
+            openDialogue(player, WistanDialogue(), node)
+            return@on true
+        }
+
+        on(NPCs.UNFERTH_2655, IntType.NPC, "talk-to") { player, node ->
+            openDialogue(player, UnferthDialogue(), node)
+            return@on true
+        }
+
     }
 
 }

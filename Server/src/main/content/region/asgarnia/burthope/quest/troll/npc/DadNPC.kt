@@ -2,6 +2,7 @@ package content.region.asgarnia.burthope.quest.troll.npc
 
 import content.region.asgarnia.burthope.quest.troll.dialogue.DadDialogueFile
 import core.api.*
+import core.game.interaction.QueueStrength
 import core.game.node.entity.Entity
 import core.game.node.entity.combat.BattleState
 import core.game.node.entity.combat.CombatStyle
@@ -13,23 +14,13 @@ import shared.consts.NPCs
 import shared.consts.Quests
 
 @Initializable
-class DadNPC(
-    id: Int = 0,
-    location: Location? = null,
-) : AbstractNPC(id, location) {
-    override fun construct(
-        id: Int,
-        location: Location,
-        vararg objects: Any,
-    ): AbstractNPC = DadNPC(id, location)
+class DadNPC(id: Int = 0, location: Location? = null) : AbstractNPC(id, location) {
+
+    override fun construct(id: Int, location: Location, vararg objects: Any): AbstractNPC = DadNPC(id, location)
 
     override fun getIds(): IntArray = intArrayOf(NPCs.DAD_1125)
 
-    override fun isAttackable(
-        entity: Entity,
-        style: CombatStyle,
-        message: Boolean,
-    ): Boolean {
+    override fun isAttackable(entity: Entity, style: CombatStyle, message: Boolean): Boolean {
         val attackable = super.isAttackable(entity, style, message)
         val player = entity.asPlayer()
 
@@ -55,21 +46,10 @@ class DadNPC(
             if (getQuestStage(player!!.asPlayer(), Quests.TROLL_STRONGHOLD) == 4) {
                 setQuestStage(player.asPlayer(), Quests.TROLL_STRONGHOLD, 5)
             }
-            submitWorldPulse(
-                object : Pulse() {
-                    var counter = 0
-
-                    override fun pulse(): Boolean {
-                        when (counter++) {
-                            1 -> {
-                                openDialogue(player.asPlayer(), DadDialogueFile(3), opponent.asNpc())
-                                return true
-                            }
-                        }
-                        return false
-                    }
-                },
-            )
+            queueScript(player, 3, QueueStrength.SOFT) {
+                openDialogue(player.asPlayer(), DadDialogueFile(3), opponent.asNpc())
+                return@queueScript stopExecuting(player)
+            }
         }
     }
 

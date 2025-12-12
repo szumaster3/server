@@ -3,55 +3,37 @@ package content.region.asgarnia.falador.dialogue
 import core.api.getAttribute
 import core.api.openNpcShop
 import core.api.setAttribute
-import core.game.dialogue.Dialogue
+import core.game.dialogue.DialogueFile
 import core.game.dialogue.FaceAnim
-import core.game.node.entity.npc.NPC
-import core.game.node.entity.player.Player
-import core.plugin.Initializable
+import core.game.dialogue.Topic
 import shared.consts.NPCs
 
 /**
  * Represents the Nurmof dialogue.
  */
-@Initializable
-class NurmofDialogue(player: Player? = null) : Dialogue(player) {
+class NurmofDialogue : DialogueFile() {
 
-    override fun open(vararg args: Any?): Boolean {
-        npc = args[0] as NPC
-        npcl(FaceAnim.OLD_NORMAL, "Greetings and welcome to my pickaxe shop. Do you want to buy my premium quality pickaxes?")
-        return true
-    }
-
-    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
+    override fun handle(componentID: Int, buttonID: Int) {
         when (stage) {
-            0 -> options("Yes, please.", "No, thank you.", "Are your pickaxes better than other pickaxes, then?").also { stage++ }
-            1 -> when (buttonId) {
-                1 -> {
-                    end()
-                    openNpcShop(player, NPCs.NURMOF_594)
-                }
-                2 -> player(FaceAnim.FRIENDLY, "No thank you.").also { stage = 13 }
-                3 -> player(FaceAnim.HALF_ASKING, "Are your pickaxes better than other pickaxes, then?").also { stage = 10 }
+            0 -> npc(FaceAnim.OLD_NORMAL, "Greetings and welcome to my pickaxe shop. Do you want to buy my premium quality pickaxes?").also { stage++ }
+            1 -> showTopics(
+                Topic("Yes, please.", 2),
+                Topic("No, thank you.", 13),
+                Topic("Are your pickaxes better than other pickaxes, then?", 10)
+            )
+            2 -> {
+                end()
+                openNpcShop(player!!, NPCs.NURMOF_594)
             }
-            10 -> npcl(FaceAnim.OLD_NORMAL, "Of course they are! My pickaxes are made of higher grade metal than your ordinary bronze pickaxes, allowing you to mine ore just that little bit faster.").also {
-                if (!getAttribute(player, "pre-dq:said-hi", true)) {
-                    stage++
-                } else {
-                    stage = 13
-                }
+            10 -> npc(FaceAnim.OLD_NORMAL, "Of course they are! My pickaxes are made of higher grade metal than your ordinary bronze pickaxes, allowing you to mine ore just that little bit faster.").also {
+                stage = if (!getAttribute(player!!, "pre-dq:said-hi", true)) 11 else 13
             }
-
-            11 -> playerl(FaceAnim.FRIENDLY, "By the way, Doric says hello!").also { stage++ }
-            12 -> npcl(FaceAnim.OLD_HAPPY, "Oh! Thank you for telling me, adventurer!").also { stage = 13 }
+            11 -> player(FaceAnim.FRIENDLY, "By the way, Doric says hello!").also { stage++ }
+            12 -> npc(FaceAnim.OLD_HAPPY, "Oh! Thank you for telling me, adventurer!").also { stage = 13 }
             13 -> {
-                setAttribute(player, "pre-dq:said-hi", true)
+                setAttribute(player!!, "pre-dq:said-hi", true)
                 end()
             }
         }
-        return true
     }
-
-    override fun newInstance(player: Player?): Dialogue = NurmofDialogue(player)
-
-    override fun getIds(): IntArray = intArrayOf(NPCs.NURMOF_594)
 }

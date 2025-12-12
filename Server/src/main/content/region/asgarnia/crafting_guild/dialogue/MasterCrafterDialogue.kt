@@ -90,11 +90,7 @@ class MasterCrafterDialogue : Dialogue {
                 npcl(FaceAnim.NEUTRAL, "You don't have enough coins for a cape.")
                 stage = END_DIALOGUE
             } else {
-                addItemOrDrop(
-                    player,
-                    if (player.getSkills().masteredSkills >= 1) CRAFTING_SKILL_CAPE_TRIMMED else CRAFTING_SKILL_CAPE,
-                    1
-                )
+                addItemOrDrop(player, if (player.getSkills().masteredSkills >= 1) CRAFTING_SKILL_CAPE_TRIMMED else CRAFTING_SKILL_CAPE, 1)
                 addItemOrDrop(player, SKILL_CAPE_HOOD, 1)
                 npcl(FaceAnim.HAPPY, "There you go! Enjoy.")
                 stage = END_DIALOGUE
@@ -122,9 +118,9 @@ class MasterCrafterDialogue : Dialogue {
     }
 
     companion object {
-        private val CRAFTING_SKILL_CAPE: Int = Items.CRAFTING_CAPE_9780
-        private val CRAFTING_SKILL_CAPE_TRIMMED: Int = Items.CRAFTING_CAPET_9781
-        private val SKILL_CAPE_HOOD: Int = Items.CRAFTING_HOOD_9782
-        private val COINS: Int = Items.COINS_995
+        private const val CRAFTING_SKILL_CAPE: Int = Items.CRAFTING_CAPE_9780
+        private const val CRAFTING_SKILL_CAPE_TRIMMED: Int = Items.CRAFTING_CAPET_9781
+        private const val SKILL_CAPE_HOOD: Int = Items.CRAFTING_HOOD_9782
+        private const val COINS: Int = Items.COINS_995
     }
 }

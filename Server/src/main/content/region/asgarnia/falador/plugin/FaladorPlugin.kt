@@ -1,5 +1,6 @@
 package content.region.asgarnia.falador.plugin
 
+import content.region.asgarnia.falador.dialogue.*
 import core.api.*
 import core.game.global.action.DoorActionHandler
 import core.game.interaction.IntType
@@ -132,6 +133,155 @@ class FaladorPlugin : InteractionListener {
                     }
                 }
             }
+            return@on true
+        }
+
+        /*
+         * Handles talking to NPCs around city.
+         */
+
+        on(NPCs.KNIGHT_660, IntType.NPC, "talk-to") { player, _ ->
+            sendDialogue(player, "He is too busy dancing to talk!")
+            return@on true
+        }
+
+        on(NPCs.AMBASSADOR_SPANFIPPLE_4581, IntType.NPC, "talk-to") { player, node ->
+            openDialogue(player, AmbassadorSpanfippleDialogue(), node.id)
+            return@on true
+        }
+
+        on(NPCs.APPRENTICE_WORKMAN_3235, IntType.NPC, "talk-to") { player, node ->
+            openDialogue(player, ApprenticeWorkmanDialogue(), node.id)
+            return@on true
+        }
+
+        on(NPCs.CASSIE_577, IntType.NPC, "talk-to") { player, node ->
+            openDialogue(player, CassieDialogue(), node.id)
+            return@on true
+        }
+
+        on(NPCs.DROGO_DWARF_579, IntType.NPC, "talk-to") { player, node ->
+            openDialogue(player, DrogoDwarfDialogue(), node.id)
+            return@on true
+        }
+
+        on(NPCs.DRORKAR_7723, IntType.NPC, "talk-to") { player, node ->
+            openDialogue(player, DrorkarDialogue(), node.id)
+            return@on true
+        }
+
+        on(NPCs.DRUNKEN_MAN_3222, IntType.NPC, "talk-to") { player, node ->
+            openDialogue(player, FaladorDrunkenManDialogue(), node.id)
+            return@on true
+        }
+
+        on(intArrayOf(NPCs.GARDENER_1217, NPCs.GARDENER_3234), IntType.NPC, "talk-to") { player, node ->
+            openDialogue(player, FaladorGardenerDialogue(), node.id)
+            return@on true
+        }
+
+        on(NPCs.MAN_3223, IntType.NPC, "talk-to") { player, node ->
+            openDialogue(player, FaladorManDialogue(), node.id)
+            return@on true
+        }
+
+        on(intArrayOf(NPCs.SHOPKEEPER_526, NPCs.SHOP_ASSISTANT_527), IntType.NPC, "talk-to") { player, node ->
+            openDialogue(player, FaladorShopkeeperDialogue(), node.id)
+            return@on true
+        }
+
+        on(NPCs.WOMAN_3226, IntType.NPC, "talk-to") { player, node ->
+            openDialogue(player, FaladorParkWomanDialogue(), node.id)
+            return@on true
+        }
+
+        on(NPCs.FLYNN_580, IntType.NPC, "talk-to") { player, node ->
+            openDialogue(player, FlynnDialogue(), node.id)
+            return@on true
+        }
+
+        on(NPCs.GARDEN_SUPPLIER_4251, IntType.NPC, "talk-to") { player, node ->
+            openDialogue(player, GardenSupplierDialogue(), node.id)
+            return@on true
+        }
+
+        on(NPCs.HERQUIN_584, IntType.NPC, "talk-to") { player, node ->
+            openDialogue(player, HerquinDialogue(), node.id)
+            return@on true
+        }
+
+        on(NPCs.HURA_4563, IntType.NPC, "talk-to") { player, node ->
+            openDialogue(player, HuraDialogue(), node.id)
+            return@on true
+        }
+
+        on(NPCs.JEFF_3240, IntType.NPC, "talk-to") { player, node ->
+            openDialogue(player, JeffDialogue(), node.id)
+            return@on true
+        }
+
+        on(intArrayOf(NPCs.LAKKI_THE_DELIVERY_DWARF_7722, 7728), IntType.NPC, "talk-to") { player, node ->
+            openDialogue(player, LakkiTheDeliveryDwarfDialogue(), node.id)
+            return@on true
+        }
+
+        on(intArrayOf(NPCs.LUCY_662, NPCs.MEGAN_661), IntType.NPC, "talk-to") { player, node ->
+            openDialogue(player, LucyPartyRoomDialogue(), node.id)
+            return@on true
+        }
+
+        on(NPCs.NURMOF_594, IntType.NPC, "talk-to") { player, node ->
+            openDialogue(player, NurmofDialogue(), node.id)
+            return@on true
+        }
+
+        on(NPCs.ORACLE_746, IntType.NPC, "talk-to") { player, node ->
+            openDialogue(player, OracleDialogue(), node.id)
+            return@on true
+        }
+
+        on(intArrayOf(NPCs.EMILY_736, NPCs.KAYLEE_3217, NPCs.TINA_3218), IntType.NPC, "talk-to") { player, node ->
+            openDialogue(player, RisingSunInnBartenderDialogue(), node.id)
+            return@on true
+        }
+
+        on(NPCs.ROLAD_1841, IntType.NPC, "talk-to") { player, node ->
+            openDialogue(player, RoladDialogue(), node.id)
+            return@on true
+        }
+
+        on(NPCs.RUSTY_3239, IntType.NPC, "talk-to") { player, node ->
+            openDialogue(player, RustyDialogue(), node.id)
+            return@on true
+        }
+
+        on(NPCs.SARAH_2304, IntType.NPC, "talk-to") { player, node ->
+            openDialogue(player, SarahFarmingDialogue(), node.id)
+            return@on true
+        }
+
+        on(NPCs.WAYNE_581, IntType.NPC, "talk-to") { player, node ->
+            openDialogue(player, WayneDialogue(), node.id)
+            return@on true
+        }
+
+        on(NPCs.WORKMAN_3236, IntType.NPC, "talk-to") { player, node ->
+            openDialogue(player, FaladorWorkmanDialogue(), node.id)
+            return@on true
+        }
+
+        on(NPCs.NARF_3238, IntType.NPC, "talk-to") { player, node ->
+            openDialogue(player, NarfsDialogue(), node.id)
+            return@on true
+        }
+
+        on(NPCs.CUFFS_3237, IntType.NPC, "talk-to") { player, node ->
+            openDialogue(player, CuffsDialogue(), node)
+            return@on true
+        }
+
+        on(NPCs.ZANDAR_HORFYRE_3308, IntType.NPC, "talk-to") { player, node ->
+            openDialogue(player, ZandarHorfyreDialogue(), node)
             return@on true
         }
     }

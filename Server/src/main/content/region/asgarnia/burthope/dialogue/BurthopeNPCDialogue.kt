@@ -1,23 +1,19 @@
 package content.region.asgarnia.burthope.dialogue
 
 import core.api.isQuestComplete
-import core.game.dialogue.Dialogue
+import core.game.dialogue.DialogueFile
 import core.game.dialogue.FaceAnim
-import core.game.node.entity.player.Player
-import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import core.tools.RandomFunction
 import core.tools.START_DIALOGUE
-import shared.consts.NPCs
 import shared.consts.Quests
 
 /**
- * Represents the Hygd dialogue.
+ * Represents the Burthope dialogues.
  */
-@Initializable
-class HygdDialogue(player: Player? = null) : Dialogue(player) {
+class BurthopeNPCDialogue : DialogueFile() {
 
-    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
+    override fun handle(componentID: Int, buttonID: Int) {
         val random = RandomFunction.random(1, 3)
         if (isQuestComplete(player!!, Quests.DEATH_PLATEAU)) {
             when (stage) {
@@ -35,8 +31,5 @@ class HygdDialogue(player: Player? = null) : Dialogue(player) {
                 4 -> playerl(FaceAnim.FRIENDLY, "Thanks!").also { stage = END_DIALOGUE }
             }
         }
-        return true
     }
-
-    override fun getIds(): IntArray = intArrayOf(NPCs.HYGD_1088)
 }

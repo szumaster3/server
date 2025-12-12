@@ -1,18 +1,28 @@
 package content.region.asgarnia.burthope.dialogue
 
-import core.game.dialogue.Dialogue
+import core.game.dialogue.DialogueFile
 import core.game.dialogue.FaceAnim
-import core.game.node.entity.player.Player
-import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import core.tools.START_DIALOGUE
-import shared.consts.NPCs
 
 /**
  * Represents the Burthorpe Soldiers dialogue.
  */
-@Initializable
-class BurthorpeSoldierDialogue(player: Player? = null) : Dialogue(player) {
+class BurthorpeSoldierDialogue : DialogueFile() {
+
+    override fun handle(componentID: Int, buttonID: Int) {
+        when (stage) {
+            START_DIALOGUE -> playerl(FaceAnim.FRIENDLY, "Hello!").also { stage++ }
+            1 -> npcl(FaceAnim.ANGRY, latinInsults.random()).also { stage = randomStages.random() }
+            10 -> playerl(FaceAnim.THINKING, "What?!").also { stage = END_DIALOGUE }
+            20 -> playerl(FaceAnim.THINKING, "Huh?!").also { stage = END_DIALOGUE }
+            30 -> playerl(FaceAnim.HALF_GUILTY, "Er...").also { stage = END_DIALOGUE }
+            40 -> playerl(FaceAnim.HALF_GUILTY, "OK...").also { stage = END_DIALOGUE }
+            50 -> playerl(FaceAnim.THINKING, "Are you insulting me in Latin?").also { stage++ }
+            51 -> npcl(FaceAnim.FRIENDLY, "Yes!").also { stage++ }
+            52 -> playerl(FaceAnim.HALF_GUILTY, "Hmm...").also { stage = END_DIALOGUE }
+        }
+    }
 
     companion object {
         val latinInsults =
@@ -47,20 +57,4 @@ class BurthorpeSoldierDialogue(player: Player? = null) : Dialogue(player) {
         val randomStages = arrayOf(10, 20, 30, 40, 50)
     }
 
-    override fun handle(interfaceId: Int, buttonId: Int): Boolean {
-        when (stage) {
-            START_DIALOGUE -> playerl(FaceAnim.FRIENDLY, "Hello!").also { stage++ }
-            1 -> npcl(FaceAnim.ANGRY, latinInsults.random()).also { stage = randomStages.random() }
-            10 -> playerl(FaceAnim.THINKING, "What?!").also { stage = END_DIALOGUE }
-            20 -> playerl(FaceAnim.THINKING, "Huh?!").also { stage = END_DIALOGUE }
-            30 -> playerl(FaceAnim.HALF_GUILTY, "Er...").also { stage = END_DIALOGUE }
-            40 -> playerl(FaceAnim.HALF_GUILTY, "OK...").also { stage = END_DIALOGUE }
-            50 -> playerl(FaceAnim.THINKING, "Are you insulting me in Latin?").also { stage++ }
-            51 -> npcl(FaceAnim.FRIENDLY, "Yes!").also { stage++ }
-            52 -> playerl(FaceAnim.HALF_GUILTY, "Hmm...").also { stage = END_DIALOGUE }
-        }
-        return true
-    }
-
-    override fun getIds(): IntArray = intArrayOf(NPCs.SOLDIER_1065)
 }

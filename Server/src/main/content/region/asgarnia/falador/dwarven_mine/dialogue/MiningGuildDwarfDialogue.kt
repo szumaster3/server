@@ -1,4 +1,4 @@
-package content.region.asgarnia.falador.dwarven_mines.dialogue
+package content.region.asgarnia.falador.dwarven_mine.dialogue
 
 import core.api.getStatLevel
 import core.api.sendOptions

@@ -27,19 +27,12 @@ class DadDialogue(player: Player? = null) : Dialogue(player) {
         when (getQuestStage(player!!, Quests.TROLL_STRONGHOLD)) {
             in 3..4 -> {
                 when (stage) {
-                    START_DIALOGUE -> npcl(
-                        FaceAnim.OLD_HAPPY,
-                        "What tiny human do in troll arena? Dad challenge human to fight!",
-                    ).also {
-                        stage++
-                    }
-
+                    START_DIALOGUE -> npcl(FaceAnim.OLD_HAPPY, "What tiny human do in troll arena? Dad challenge human to fight!").also { stage++ }
                     1 -> showTopics(
                         Topic(FaceAnim.THINKING, "Why are you called Dad?", 2),
                         Topic(FaceAnim.FRIENDLY, "I accept your challenge!", 3),
                         Topic(FaceAnim.SCARED, "Eek! No thanks.", END_DIALOGUE),
                     )
-
                     2 -> npcl(FaceAnim.OLD_HAPPY, "Troll named after first thing try to eat!").also { stage = 1 }
                     3 -> npcl(FaceAnim.OLD_HAPPY, "Tiny human brave. Dad squish!").also { stage++ }
                     4 -> npc!!.attack(player).also {
@@ -51,6 +44,7 @@ class DadDialogue(player: Player? = null) : Dialogue(player) {
             }
 
             in 5..100 -> {
+                end()
                 sendMessage(player, "He doesn't seem interested in talking right now.")
             }
         }

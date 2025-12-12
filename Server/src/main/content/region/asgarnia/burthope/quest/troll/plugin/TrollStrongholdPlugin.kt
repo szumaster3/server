@@ -1,5 +1,6 @@
 package content.region.asgarnia.burthope.quest.troll.plugin
 
+import content.global.skill.gather.SkillReward
 import content.region.asgarnia.burthope.quest.troll.dialogue.DadDialogueFile
 import core.api.*
 import core.game.global.action.DoorActionHandler
@@ -83,7 +84,7 @@ class TrollStrongholdPlugin : InteractionListener {
                                 }
                             }
                             3 -> {
-                                val success = success(player, Skills.THIEVING)
+                                val success = SkillReward.success(player, Skills.THIEVING)
                                 if (success) {
                                     if (isQuestInProgress(player, Quests.TROLL_STRONGHOLD, 8, 10)) {
                                         addItem(player, keyItem)
@@ -139,14 +140,6 @@ class TrollStrongholdPlugin : InteractionListener {
             }
             return@on true
         }
-    }
-
-    private fun success(player: Player, skill: Int): Boolean {
-        val level = player.getSkills().getLevel(skill).toDouble()
-        val req = 30.0
-        val successChance = ceil((level * 50 - req) / req / 3 * 4)
-        val roll = RandomFunction.random(99)
-        return successChance >= roll
     }
 
     private fun unlockCellDoor(player: Player, node: Node, keyItem: Int, npcId: Int, questStageMapping: Map<Int, Int>, npcMessage: String) {
