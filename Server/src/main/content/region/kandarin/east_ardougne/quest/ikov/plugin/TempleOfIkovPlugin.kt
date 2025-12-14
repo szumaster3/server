@@ -62,7 +62,7 @@ class TempleOfIkovPlugin : InteractionListener {
                 }
                 DoorActionHandler.handleAutowalkDoor(player, node.asScenery())
             } else {
-                sendMessage(player, "As you reach to open the door a great terror overcomes you!")
+                sendDialogue(player, "As you reach to open the door a great terror overcomes you!")
             }
             return@on true
         }
