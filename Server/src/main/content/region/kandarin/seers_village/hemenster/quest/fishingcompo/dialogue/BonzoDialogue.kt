@@ -44,7 +44,7 @@ class BonzoDialogue(player: Player? = null) : Dialogue(player) {
                 npc("Sorry, $gender, but you need a fishing", "rod to compete.")
                 stage = END_DIALOGUE
             } else {
-                if(!hasFishingTrophy && getAttribute(player, GameAttributes.QUEST_FISHINGCOMPO_WON, false)) {
+                if(!hasFishingTrophy && getAttribute(player, GameAttributes.QUEST_FISHINGCOMPO_WON, false) && !isQuestComplete(player, Quests.FISHING_CONTEST)) {
                     npc(FaceAnim.HAPPY, "Hello champ!")
                     stage = 11
                 } else {

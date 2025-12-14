@@ -15510,5 +15510,9 @@
   {
     "examine": "Lots of things for a growing pup/kitten/fish.",
     "ids": "28357"
+  },
+  {
+    "examine": "Single kitchen unit.",
+    "ids": "17132"
   }
 ]
