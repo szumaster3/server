@@ -93,7 +93,7 @@ class WildernessPlugin : InteractionListener {
                         if (!hasTimerActive(player, GameAttributes.TELEBLOCK_TIMER)) {
                             val destination = destinations[node.id] ?: return@queueScript stopExecuting(player)
                             teleport(player, destination)
-                            sendMessage(player, "...And teleport ${messages[node.id] ?: "somewhere mysterious."}")
+                            sendMessage(player, "...And teleport ${messages[node.id] ?: "somewhere mysterious."}", 5)
                         } else {
                             sendMessage(player, "A magical force has stopped you from teleporting.")
                         }
