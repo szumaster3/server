@@ -20,59 +20,81 @@ class ToolStoragePlugin : InteractionListener {
         }
     }
 
-    private class ToolDialogue(private val tools: List<Int>) : DialogueFile() {
+    private class ToolDialogue(
+        private val tools: List<Int>
+    ) : DialogueFile() {
 
         private val pageSize = 3
         private var page = 0
 
         override fun handle(componentID: Int, buttonID: Int) {
             val p = player ?: return
-            val start = page * pageSize
-            val end = minOf(start + pageSize, tools.size)
-            val pageTools = tools.subList(start, end)
-
-            val hasBack = page > 0
-            val hasMore = end < tools.size
 
             when (stage) {
-                0 -> {
-                    val options = pageTools.map { getItemName(it) }.toMutableList()
-                    if (hasBack) options.add("Back...")
-                    if (hasMore) options.add("More...")
-                    sendOptions(p, "Select a tool", *options.toTypedArray())
-                    stage = 1
-                }
-
-                1 -> {
-                    val selectedIndex = buttonID - 1
-                    val backIndex = pageTools.size
-                    val moreIndex = backIndex + if (hasBack) 1 else 0
-                    val optionsCount = pageTools.size + (if (hasBack) 1 else 0) + (if (hasMore) 1 else 0)
-
-                    if (selectedIndex !in 0 until optionsCount) {
-                        end()
-                        return
-                    }
-
-                    when (selectedIndex) {
-                        backIndex.takeIf { hasBack } -> { page--; stage = 0; handle(componentID, 1) }
-                        moreIndex.takeIf { hasMore } -> { page++; stage = 0; handle(componentID, 1) }
-                        else -> { takeTool(p, pageTools[selectedIndex]); end() }
-                    }
-                }
+                0 -> showPage(p)
+                1 -> handleSelection(p, buttonID - 1)
             }
         }
 
-        private fun takeTool(p: Player, toolId: Int) {
-            val canStack = ItemDefinition.forId(toolId).isStackable
-            val hasInInventory = amountInInventory(p, toolId) > 0
-
-            if (freeSlots(p) == 0 && (!canStack || !hasInInventory)) {
-                sendMessage(p, "You have no space in your inventory.")
-            } else {
-                addItem(p, toolId, 1)
-                sendMessage(p, "You take a ${getItemName(toolId).lowercase()}.")
+        private fun showPage(p: Player) {
+            val pageTools = currentPageTools()
+            val options = buildList {
+                addAll(pageTools.map { getItemName(it) })
+                if (page > 0) add("Back...")
+                if (hasNextPage()) add("More...")
             }
+
+            sendOptions(p, "Select a tool", *options.toTypedArray())
+            stage = 1
+        }
+
+        private fun handleSelection(p: Player, index: Int) {
+            val pageTools = currentPageTools()
+            val backIndex = pageTools.size
+            val moreIndex = backIndex + if (page > 0) 1 else 0
+
+            when {
+                index < 0 -> end()
+                index < pageTools.size -> {
+                    takeTool(p, pageTools[index])
+                    end()
+                }
+                index == backIndex && page > 0 -> {
+                    page--
+                    stage = 0
+                    handle(0, 0)
+                }
+                index == moreIndex && hasNextPage() -> {
+                    page++
+                    stage = 0
+                    handle(0, 0)
+                }
+                else -> end()
+            }
+        }
+
+        private fun currentPageTools(): List<Int> {
+            val from = page * pageSize
+            val to = minOf(from + pageSize, tools.size)
+            return tools.subList(from, to)
+        }
+
+        private fun hasNextPage() =
+            (page + 1) * pageSize < tools.size
+
+        private fun takeTool(p: Player, toolId: Int) {
+            val def = ItemDefinition.forId(toolId)
+            val hasSpace =
+                freeSlots(p) > 0 ||
+                        (def.isStackable && amountInInventory(p, toolId) > 0)
+
+            if (!hasSpace) {
+                sendMessage(p, "You have no space in your inventory.")
+                return
+            }
+
+            addItem(p, toolId, 1)
+            sendMessage(p, "You take a ${getItemName(toolId).lowercase()}.")
             stage = END_DIALOGUE
         }
     }
