@@ -392,19 +392,19 @@ object ThievingDefinition {
      * Represents door data.
      */
     enum class Doors(val locations: Array<Location>, val level: Int, val experience: Double, val isLockpick: Boolean = false, val flipped: Boolean = false) {
-        PORT_SARIM_JAIL(arrayOf(Location.create(3014, 3182)), 1, 0.0),
-        PORT_SARIM_JAIL_MUGGER(arrayOf(Location.create(3018, 3187)), 1, 0.0),
-        ARDOUGNE_MARKET_NORTH_EAST(arrayOf(Location.create(2672, 3308)), 1, 3.8),
-        ARDOUGNE_MARKET_EAST(arrayOf(Location.create(2672, 3301)), 14, 15.0),
-        AROUDGNE_NORTH(arrayOf(Location.create(2610, 3316)), 15, 15.0),
-        ARDOUGNE_CASTLE_NORTH(arrayOf(Location.create(2579, 3307, 1)), 61, 50.0),
-        ARDOUGNE_CASTLE_SOUTH(arrayOf(Location.create(2579, 3286, 1)), 61, 50.0),
-        WILDERNESS_MAGIC_AXE(arrayOf(Location.create(3190, 3957)), 32, 25.0, isLockpick = true),
-        WILDERNESS_PIRATES_HIDEOUT_NORTH(arrayOf(Location.create(3041, 3959)), 39, 35.0, isLockpick = true, flipped = true),
-        WILDERNESS_PIRATES_HIDEOUT_EAST(arrayOf(Location.create(3044, 3956)), 39, 35.0, isLockpick = true, flipped = true),
-        WILDERNESS_PIRATES_HIDEOUT_WEST(arrayOf(Location.create(3038, 3956)), 39, 35.0, isLockpick = true, flipped = true),
-        CHAOS_DRUID(arrayOf(Location.create(2565, 3356)), 46, 37.5),
-        YANILLE_DUNGEON(arrayOf(Location.create(2601, 9482)), 82, 0.0, isLockpick = true);
+        PORT_SARIM_JAIL(arrayOf(Location(3014, 3182)), 1, 0.0),
+        PORT_SARIM_JAIL_MUGGER(arrayOf(Location(3018, 3187)), 1, 0.0),
+        ARDOUGNE_MARKET_NORTH_EAST(arrayOf(Location(2672, 3308)), 1, 3.8),
+        ARDOUGNE_MARKET_EAST(arrayOf(Location(2672, 3301)), 14, 15.0),
+        AROUDGNE_NORTH(arrayOf(Location(2610, 3316)), 15, 15.0),
+        ARDOUGNE_CASTLE_NORTH(arrayOf(Location(2579, 3307, 1)), 61, 50.0),
+        ARDOUGNE_CASTLE_SOUTH(arrayOf(Location(2579, 3286, 1)), 61, 50.0),
+        WILDERNESS_MAGIC_AXE(arrayOf(Location(3190, 3957)), 32, 25.0, isLockpick = true),
+        WILDERNESS_PIRATES_HIDEOUT_NORTH(arrayOf(Location(3041, 3959)), 39, 35.0, isLockpick = true, flipped = true),
+        WILDERNESS_PIRATES_HIDEOUT_EAST(arrayOf(Location(3044, 3956)), 39, 35.0, isLockpick = true, flipped = true),
+        WILDERNESS_PIRATES_HIDEOUT_WEST(arrayOf(Location(3038, 3956)), 39, 35.0, isLockpick = true, flipped = true),
+        CHAOS_DRUID(arrayOf(Location(2565, 3356)), 46, 37.5),
+        YANILLE_DUNGEON(arrayOf(Location(2601, 9482)), 82, 0.0, isLockpick = true);
 
         /**
          * Checks if the player is on the correct side of the door to interact with it.
