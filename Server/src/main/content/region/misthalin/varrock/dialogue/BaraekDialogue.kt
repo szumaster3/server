@@ -22,19 +22,11 @@ class BaraekDialogue(player: Player? = null) : Dialogue(player) {
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         showTopics(
-            IfTopic(
-                "Can you tell me where I can find the Phoenix Gang?",
-                0,
-                getQuestStage(player, Quests.SHIELD_OF_ARRAV) in 30..40
-            ),
+            IfTopic("Can you tell me where I can find the Phoenix Gang?", 0, getQuestStage(player, Quests.SHIELD_OF_ARRAV) in 30..40),
             Topic("Can you sell me some furs?", 11),
             Topic("Hello. I am in search of a quest.", 16),
             IfTopic("Would you like to buy my fur?", 17, inInventory(player, Items.FUR_6814)),
-            IfTopic(
-                "Would you like to buy my grey wolf fur?",
-                24,
-                inInventory(player, Items.GREY_WOLF_FUR_958) && !inInventory(player, Items.FUR_6814),
-            ),
+            IfTopic("Would you like to buy my grey wolf fur?", 24, inInventory(player, Items.GREY_WOLF_FUR_958) && !inInventory(player, Items.FUR_6814)),
         )
         return true
     }

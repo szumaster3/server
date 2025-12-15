@@ -22,6 +22,7 @@ import core.game.world.map.Location
 import core.game.world.map.zone.MapZone
 import core.game.world.map.zone.ZoneBorders
 import core.game.world.update.flag.context.Animation
+import core.tools.END_DIALOGUE
 import core.tools.Log
 import core.tools.RandomFunction
 import shared.consts.*
@@ -30,6 +31,24 @@ class VarrockPlugin : InteractionListener {
 
 
     override fun defineListeners() {
+
+        /*
+         * Handles talking to Iffie in Varrock clothes store.
+         */
+
+        on(NPCs.IFFIE_5914, IntType.NPC, "talk-to") { player, node ->
+            sendNPCDialogueLines(
+                player,
+                node.id,
+                FaceAnim.HALF_GUILTY,
+                false,
+                "Sorry, dearie, if I stop to chat I'll lose count.",
+                "Talk to my sister instead; she likes to chat.",
+                "You'll find her upstairs in the Varrock Church."
+            )
+            return@on true
+        }
+
         /*
          * Handles talking to Thessalia.
          */

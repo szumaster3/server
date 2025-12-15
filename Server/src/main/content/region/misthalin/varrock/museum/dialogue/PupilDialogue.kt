@@ -26,7 +26,7 @@ class PupilDialogue(player: Player? = null) : Dialogue(player) {
                     player,
                     NPCs.TEACHER_AND_PUPIL_5948,
                     "I told you to go before we got here.",
-                    FaceAnim.HALF_GUILTY,
+                    FaceAnim.HALF_GUILTY
                 )
                 stage++
             }
@@ -36,13 +36,18 @@ class PupilDialogue(player: Player? = null) : Dialogue(player) {
                     player,
                     NPCs.SCHOOLBOY_5949,
                     "But sir, I didn't need to go then!",
-                    FaceAnim.CHILD_GUILTY,
+                    FaceAnim.CHILD_GUILTY
                 )
                 stage++
             }
 
             2 -> {
-                sendNPCDialogue(player, NPCs.TEACHER_AND_PUPIL_5948, "Alright, come on then.", FaceAnim.HALF_GUILTY)
+                sendNPCDialogue(
+                    player,
+                    NPCs.TEACHER_AND_PUPIL_5948,
+                    "Alright, come on then.",
+                    FaceAnim.HALF_GUILTY
+                )
                 stage = END_DIALOGUE
             }
         }

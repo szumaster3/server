@@ -24,42 +24,14 @@ class HofutHandDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
-            0 ->
-                npc(
-                    FaceAnim.CHILD_NORMAL,
-                    "What? Oh, hello. I was deep in thought. Did",
-                    "you say something?",
-                ).also { stage++ }
-            1 ->
-                options(
-                    "Do you know about the prices for armour and weapons?",
-                    "I didn't say anything at all.",
-                ).also { stage++ }
-            2 ->
-                when (buttonId) {
-                    1 ->
-                        player(FaceAnim.HALF_GUILTY, "Do you know about the prices for armour and weapons?").also {
-                            stage =
-                                3
-                        }
-                    2 -> player(FaceAnim.HALF_GUILTY, "I didn't say anything at all.").also { stage = END_DIALOGUE }
-                }
-            3 ->
-                npc(
-                    FaceAnim.CHILD_NORMAL,
-                    "I thought you at least said. 'Hello' I must be",
-                    "going mad. Do you think I'm going mad?",
-                ).also {
-                    stage++
-                }
-            4 ->
-                player(
-                    FaceAnim.HALF_GUILTY,
-                    "Oh, most definitely. You should see a doctor before it's",
-                    "too late.",
-                ).also {
-                    stage++
-                }
+            0 -> npc(FaceAnim.CHILD_NORMAL, "What? Oh, hello. I was deep in thought. Did", "you say something?").also { stage++ }
+            1 -> options("Do you know about the prices for armour and weapons?", "I didn't say anything at all.").also { stage++ }
+            2 -> when (buttonId) {
+                1 -> player(FaceAnim.HALF_GUILTY, "Do you know about the prices for armour and weapons?").also { stage = 3 }
+                2 -> player(FaceAnim.HALF_GUILTY, "I didn't say anything at all.").also { stage = END_DIALOGUE }
+            }
+            3 -> npc(FaceAnim.CHILD_NORMAL, "I thought you at least said. 'Hello' I must be", "going mad. Do you think I'm going mad?").also { stage++ }
+            4 -> player(FaceAnim.HALF_GUILTY, "Oh, most definitely. You should see a doctor before it's", "too late.").also { stage++ }
             5 -> {
                 end()
                 GuidePrices.open(player, GuideType.WEAPONS_AND_ARMOUR)

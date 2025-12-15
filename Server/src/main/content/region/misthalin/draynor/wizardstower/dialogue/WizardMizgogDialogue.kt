@@ -17,6 +17,8 @@ import core.tools.END_DIALOGUE
 import shared.consts.*
 
 /**
+ * Represents Wizard Mizgog dialogue.
+ *
  * # Relations [Imp Catcher quest][content.region.misthalin.quest.imp.ImpCatcher]
  */
 @Initializable

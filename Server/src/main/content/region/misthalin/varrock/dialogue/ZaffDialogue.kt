@@ -34,11 +34,7 @@ class ZaffDialogue : OptionHandler() {
         return this
     }
 
-    override fun handle(
-        player: Player,
-        node: Node,
-        option: String,
-    ): Boolean {
+    override fun handle(player: Player, node: Node, option: String): Boolean {
         player.dialogueInterpreter.open(9679)
         return true
     }
@@ -57,11 +53,7 @@ class ZaffDialogue : OptionHandler() {
             if (!GameWorld.settings!!.isMembers || getQuestStage(player, quest!!.name) == 0) {
                 npc(FaceAnim.HALF_GUILTY, "Would you like to buy or sell some staves?")
             } else {
-                npc(
-                    FaceAnim.HALF_GUILTY,
-                    "Would you like to buy or sell some staves or is there",
-                    "something else you need?"
-                )
+                npc(FaceAnim.HALF_GUILTY, "Would you like to buy or sell some staves or is there", "something else you need?")
             }
             return true
         }
@@ -238,16 +230,9 @@ class ZaffDialogue : OptionHandler() {
                     }
                 }
 
-                41 -> npcl(
-                    FaceAnim.NEUTRAL,
-                    "The king was not weak enough and Surok's power over him was still too strong! You must weaken the king further before summoning me. Otherwise, we will fail."
-                ).also { stage++ }
-
+                41 -> npcl(FaceAnim.NEUTRAL, "The king was not weak enough and Surok's power over him was still too strong! You must weaken the king further before summoning me. Otherwise, we will fail.").also { stage++ }
                 42 -> playerl(FaceAnim.HALF_ASKING, "So what do I do now?").also { stage++ }
-                43 -> npcl(
-                    FaceAnim.NEUTRAL, "I am afraid we must try again. We will defeat Surok this time. I am sure of it!"
-                ).also { stage++ }
-
+                43 -> npcl(FaceAnim.NEUTRAL, "I am afraid we must try again. We will defeat Surok this time. I am sure of it!").also { stage++ }
                 44 -> end()
 
                 // Ring
@@ -280,10 +265,7 @@ class ZaffDialogue : OptionHandler() {
                 }
 
                 51 -> end()
-                52 -> npcl(
-                    FaceAnim.NEUTRAL,
-                    "Please bear in mind that this ring has no charges left with which to summon me, however."
-                ).also { stage++ }
+                52 -> npcl(FaceAnim.NEUTRAL, "Please bear in mind that this ring has no charges left with which to summon me, however.").also { stage++ }
 
                 53 -> end()
 
@@ -323,19 +305,11 @@ class ZaffDialogue : OptionHandler() {
                 }
 
                 72 -> {
-                    npc(
-                        "Listen carefully. For the spell to succeed, the king must",
-                        "be made very weak, if his mind is controlled, you will",
-                        "need to fight him until he is all but dead."
-                    ); stage++
+                    npc("Listen carefully. For the spell to succeed, the king must", "be made very weak, if his mind is controlled, you will", "need to fight him until he is all but dead."); stage++
                 }
 
                 73 -> {
-                    npc(
-                        "Then and ONLY then, use your ring to summon me.",
-                        "I will teleport to you and cast the spell that will",
-                        "cure the king."
-                    ); stage++
+                    npc("Then and ONLY then, use your ring to summon me.", "I will teleport to you and cast the spell that will", "cure the king."); stage++
                 }
 
                 74 -> {
@@ -343,11 +317,7 @@ class ZaffDialogue : OptionHandler() {
                 }
 
                 75 -> {
-                    npc(
-                        "I cannot. I must look after my shop here and",
-                        "I have lots to do. Rest assured, I will come when you",
-                        "summon me.",
-                    ); stage++
+                    npc("I cannot. I must look after my shop here and", "I have lots to do. Rest assured, I will come when you", "summon me."); stage++
                 }
 
                 76 -> {
@@ -375,12 +345,7 @@ class ZaffDialogue : OptionHandler() {
                 }
 
                 82 -> {
-                    npc(
-                        "I very much expect so. It may turn nasty, so be on your",
-                        "guard. I hope we can stop him before he can cast his",
-                        "spell!",
-                        "Make sure you have that ring I gave you."
-                    ); stage++
+                    npc("I very much expect so. It may turn nasty, so be on your", "guard. I hope we can stop him before he can cast his", "spell!", "Make sure you have that ring I gave you."); stage++
                 }
 
                 83 -> {
@@ -395,9 +360,7 @@ class ZaffDialogue : OptionHandler() {
 
                 // Surok defeat
                 200 -> {
-                    npc(
-                        "Yes. You have done well, " + player.username + ". You are to be", "commended for you actions!"
-                    ); stage++
+                    npc("Yes. You have done well, " + player.username + ". You are to be", "commended for you actions!"); stage++
                 }
 
                 201 -> {
@@ -409,11 +372,7 @@ class ZaffDialogue : OptionHandler() {
                 }
 
                 203 -> {
-                    npc(
-                        "Well, when I disrupted Surok's spell, he will have been",
-                        "sealed in the library, but we still need to keep an",
-                        "eye on him, just in case."
-                    );stage++
+                    npc("Well, when I disrupted Surok's spell, he will have been", "sealed in the library, but we still need to keep an", "eye on him, just in case.");stage++
                 }
 
                 204 -> {
@@ -465,12 +424,7 @@ class ZaffDialogue : OptionHandler() {
             when (stage) {
                 0 -> {
                     if (ammount >= maxStaffs) {
-                        sendNPCDialogue(
-                            player,
-                            NPCs.ZAFF_546,
-                            "I'm very sorry! I seem to be out of battlestaves at the moment! I expect I'll get some more in by tomorrow, though.",
-                            FaceAnim.HALF_GUILTY
-                        )
+                        sendNPCDialogue(player, NPCs.ZAFF_546, "I'm very sorry! I seem to be out of battlestaves at the moment! I expect I'll get some more in by tomorrow, though.", FaceAnim.HALF_GUILTY)
                         stage = 2
                         return true
                     }
@@ -515,7 +469,7 @@ class ZaffDialogue : OptionHandler() {
             return true
         }
 
-        val maxStaffs: Int
+        private val maxStaffs: Int
             get() {
                 val level = player.achievementDiaryManager.getDiary(DiaryType.VARROCK)!!.level
                 return when (level) {
@@ -531,7 +485,6 @@ class ZaffDialogue : OptionHandler() {
 
     companion object {
         val BEACON_RING = Item(Items.BEACON_RING_11014)
-
         fun getStoreFile(): JsonObject = ServerStore.getArchive("daily-zaff")
     }
 }

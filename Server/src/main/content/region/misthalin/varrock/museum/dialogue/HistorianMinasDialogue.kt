@@ -13,34 +13,17 @@ class HistorianMinasDialogue(player: Player? = null) : Dialogue(player) {
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        player(FaceAnim.HALF_GUILTY, "Hello")
+        player(FaceAnim.HALF_GUILTY, "Hello.")
         return true
     }
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
-            0 -> {
-                npcl(FaceAnim.HALF_GUILTY, "Hello there, welcome to Varrock Museum! Can I help you?")
-                stage++
-            }
+            0 -> npcl(FaceAnim.HALF_GUILTY, "Hello there, welcome to Varrock Museum! Can I help you?").also { stage++ }
+            1 -> playerl(FaceAnim.HALF_GUILTY, "Tell me about the Museum.").also { stage++ }
+            2 -> npcl(FaceAnim.HALF_GUILTY, "Well, as you can see we have recently expanded a great deal to cope with the influx of finds from the Dig Site.").also { stage++ }
+            3 -> npc(FaceAnim.HALF_GUILTY, "Also, of course, to prepare for the new dig we're", "opening soon.").also { stage = END_DIALOGUE }
 
-            1 -> {
-                playerl(FaceAnim.HALF_GUILTY, "Tell me about the Museum.")
-                stage++
-            }
-
-            2 -> {
-                npcl(
-                    FaceAnim.HALF_GUILTY,
-                    "Well, as you can see we have recently expanded a great deal to cope with the influx of finds from the Dig Site.",
-                )
-                stage++
-            }
-
-            3 -> {
-                npc(FaceAnim.HALF_GUILTY, "Also, of course, to prepare for the new dig we're", "opening soon.")
-                stage = END_DIALOGUE
-            }
         }
         return true
     }

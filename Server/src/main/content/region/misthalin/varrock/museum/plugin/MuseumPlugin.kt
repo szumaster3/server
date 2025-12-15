@@ -21,6 +21,22 @@ class MuseumPlugin : InteractionListener{
     override fun defineListeners() {
 
         /*
+         * Handles talking to Archeologists.
+         */
+
+        on(intArrayOf(
+            NPCs.BARNABUS_HURMA_5932,
+            NPCs.MARIUS_GISTE_5933,
+            NPCs.CADEN_AZRO_5934,
+            NPCs.THIAS_LEACKE_5935,
+            NPCs.SINCO_DOAR_5936,
+            NPCs.TINSE_TORPE_5937,
+        ), IntType.NPC, "talk-to") { player, node ->
+            sendNPCDialogue(player, node.id, "Hello there; I see you're qualified. Come to help us out?")
+            return@on true
+        }
+
+        /*
          * Handles Natural history quiz.
          */
 
