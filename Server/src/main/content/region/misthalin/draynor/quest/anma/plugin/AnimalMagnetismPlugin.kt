@@ -47,9 +47,9 @@ class AnimalMagnetismPlugin : OptionHandler() {
         ItemDefinition.forId(Items.ECTOPHIAL_4252).handlers["option:drop"] = this
         NPCDefinition.forId(NPCs.AVA_5198).handlers["option:trade"] = this
         SceneryDefinition.forId(Scenery.MEMORIAL_5167).handlers["option:push"] = this
-        AnimalMagnetism.RESEARCH_NOTES.definition.handlers["option:translate"] = this
-        ItemDefinition.forId(AnimalMagnetism.CRONE_AMULET.id).handlers["option:wear"] = this
-        ItemDefinition.forId(AnimalMagnetism.CRONE_AMULET.id).handlers["option:equip"] = this
+        ItemDefinition.forId(AnimalMagnetism.RESEARCH_NOTES).handlers["option:translate"] = this
+        ItemDefinition.forId(AnimalMagnetism.CRONE_AMULET).handlers["option:wear"] = this
+        ItemDefinition.forId(AnimalMagnetism.CRONE_AMULET).handlers["option:equip"] = this
         return this
     }
 
@@ -68,12 +68,7 @@ class AnimalMagnetismPlugin : OptionHandler() {
             NPCs.AVA_5198,
             NPCs.AVA_5199 -> {
                 if (getQuestStage(player, Quests.ANIMAL_MAGNETISM) == 0) {
-                    player.dialogueInterpreter.sendDialogues(
-                        node as NPC,
-                        null,
-                        "Hello there, I'm busy with my research. Come back in a",
-                        "bit, could you?"
-                    )
+                    player.dialogueInterpreter.sendDialogues(node as NPC, null, "Hello there, I'm busy with my research. Come back in a", "bit, could you?")
                     return true
                 }
                 openNpcShop(player, node.id)
@@ -84,15 +79,11 @@ class AnimalMagnetismPlugin : OptionHandler() {
             Items.BUTTONS_688 -> {
                 lock(player, 1)
                 if (getStatLevel(player, Skills.CRAFTING) < 3) {
-                    sendMessage(
-                        player,
-                        "You need a Crafting level of at least 3 in order to do that.",
-                        null
-                    )
+                    sendMessage(player, "You need a Crafting level of at least 3 in order to do that.", null)
                     return true
                 }
                 rewardXP(player, Skills.CRAFTING, 5.0)
-                player.inventory.replace(AnimalMagnetism.POLISHED_BUTTONS, (node as Item).slot)
+                player.inventory.replace(Item(AnimalMagnetism.POLISHED_BUTTONS), (node as Item).slot)
             }
         }
         return true
@@ -126,7 +117,7 @@ class AnimalMagnetismPlugin : OptionHandler() {
                     }
                 }
             )
-            addHandler(AnimalMagnetism.SELECTED_IRON.id, ITEM_TYPE, this)
+            addHandler(AnimalMagnetism.SELECTED_IRON, ITEM_TYPE, this)
             return this
         }
 
@@ -289,17 +280,13 @@ class AnimalMagnetismPlugin : OptionHandler() {
             val configs = getConfigs(data[0] as Int)
             val quest = player.getQuestRepository().getQuest(Quests.ANIMAL_MAGNETISM)
             player.packetDispatch.sendInterfaceConfig(Components.ANMA_RGB_480, configs[0], !toggled)
-            player.packetDispatch.sendInterfaceConfig(
-                Components.ANMA_RGB_480,
-                data[2] as Int,
-                toggled
-            )
+            player.packetDispatch.sendInterfaceConfig(Components.ANMA_RGB_480, data[2] as Int, toggled)
             if (quest.getStage(player) == 33) {
                 setNoteCache(player, data[0] as Int, !toggled)
                 if (isTranslated(player)) {
-                    if (player.inventory.remove(AnimalMagnetism.RESEARCH_NOTES)) {
+                    if (removeItem(player, AnimalMagnetism.RESEARCH_NOTES)) {
                         player.setAttribute("note-disabled", true)
-                        player.inventory.add(AnimalMagnetism.TRANSLATED_NOTES)
+                        addItem(player, AnimalMagnetism.TRANSLATED_NOTES)
                         playAudio(player, Sounds.ANMA_PUZZLE_COMPLETE_3283)
                         sendMessage(player, "It suddenly all makes sense.", null)
                     }
@@ -373,16 +360,9 @@ class AnimalMagnetismPlugin : OptionHandler() {
         }
     }
 
-    /**
-     * The type Container handler.
-     */
-    class ContainerHandler
-    /**
-     * Instantiates a new Container handler.
-     */
-        : UseWithHandler(Items.POLISHED_BUTTONS_10496, Items.HARD_LEATHER_1743) {
+    class ContainerHandler : UseWithHandler(Items.POLISHED_BUTTONS_10496, Items.HARD_LEATHER_1743) {
         override fun newInstance(arg: Any?): Plugin<Any> {
-            addHandler(AnimalMagnetism.PATTERN.id, ITEM_TYPE, this)
+            addHandler(AnimalMagnetism.PATTERN, ITEM_TYPE, this)
             return this
         }
 
@@ -390,23 +370,23 @@ class AnimalMagnetismPlugin : OptionHandler() {
             event ?: return false
 
             val player = event.player
-            if (!player.inventory.containsItem(AnimalMagnetism.HARD_LEATHER)) {
+            if (!inInventory(player, AnimalMagnetism.HARD_LEATHER)) {
                 sendMessage(player, "You need hard leather as well as these 2 items.", null)
                 return true
             }
-            if (!player.inventory.containsItem(AnimalMagnetism.POLISHED_BUTTONS)) {
+            if (!inInventory(player, AnimalMagnetism.POLISHED_BUTTONS)) {
                 sendMessage(player, "You need polished buttons as well as these 2 items.", null)
                 return true
             }
             if (
                 player.inventory.remove(
-                    AnimalMagnetism.HARD_LEATHER,
-                    AnimalMagnetism.POLISHED_BUTTONS,
-                    AnimalMagnetism.PATTERN
+                    Item(AnimalMagnetism.HARD_LEATHER),
+                    Item(AnimalMagnetism.POLISHED_BUTTONS),
+                    Item(AnimalMagnetism.PATTERN)
                 )
             ) {
                 playAudio(player, Sounds.ANMA_POLISH_BUTTONS_3281)
-                player.inventory.add(AnimalMagnetism.CONTAINER)
+                addItem(player, AnimalMagnetism.CONTAINER)
             }
             return true
         }

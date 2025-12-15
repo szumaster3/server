@@ -1,10 +1,7 @@
 package content.region.misthalin.draynor.quest.anma.dialogue
 
 import content.region.misthalin.draynor.quest.anma.AnimalMagnetism
-import core.api.getStatLevel
-import core.api.inInventory
-import core.api.removeItem
-import core.api.setVarp
+import core.api.*
 import core.game.container.Container
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
@@ -80,11 +77,11 @@ class AvaDialogue(player: Player? = null) : Dialogue(player) {
 
             32 -> player("I'd like to look at those research notes now, unless you", "have translated them without me?")
             33 -> {
-                if (player.inventory.containsItem(AnimalMagnetism.TRANSLATED_NOTES)) {
+                if (inInventory(player, AnimalMagnetism.TRANSLATED_NOTES)) {
                     player("I've translated the notes. See? I'm not just a thuggish", "moron like you seem to think.")
                     stage = 10
                 }
-                if (player.hasItem(AnimalMagnetism.RESEARCH_NOTES)) {
+                if (inInventory(player, AnimalMagnetism.RESEARCH_NOTES)) {
                     player("I have the notes but haven't translated them yet. Any", "hints?")
                 } else {
                     player("I seem to have lost the research notes.")
@@ -93,7 +90,7 @@ class AvaDialogue(player: Player? = null) : Dialogue(player) {
             }
 
             34 -> {
-                if (player.inventory.containsItem(AnimalMagnetism.CONTAINER)) {
+                if (inInventory(player, AnimalMagnetism.CONTAINER)) {
                     npc(
                         "Wow, great, now the arrow manufacturer is ready for",
                         "use...there you are! Talk to me if you need more",
@@ -101,7 +98,7 @@ class AvaDialogue(player: Player? = null) : Dialogue(player) {
                     )
                     stage = 20
                 }
-                if (player.hasItem(AnimalMagnetism.PATTERN)) {
+                if (inInventory(player, AnimalMagnetism.PATTERN)) {
                     player("So what do I do with this pattern again?")
                 } else {
                     player("My pattern seems to have vanished from my pack...not", "my fault, of course.")
@@ -610,7 +607,7 @@ class AvaDialogue(player: Player? = null) : Dialogue(player) {
 
                 4 -> {
                     quest!!.setStage(player, 33)
-                    player.inventory.add(AnimalMagnetism.RESEARCH_NOTES)
+                    addItem(player, AnimalMagnetism.RESEARCH_NOTES)
                     end()
                 }
             }
@@ -636,12 +633,12 @@ class AvaDialogue(player: Player? = null) : Dialogue(player) {
 
                 2 -> end()
                 4 -> {
-                    if (!player.inventory.hasSpaceFor(AnimalMagnetism.RESEARCH_NOTES)) {
+                    if (!hasSpaceFor(player, Item(AnimalMagnetism.RESEARCH_NOTES))) {
                         player("Sorry, I don't have enough inventory space.")
                         stage++
                         return true
                     }
-                    player.inventory.add(AnimalMagnetism.RESEARCH_NOTES)
+                    addItem(player, AnimalMagnetism.RESEARCH_NOTES)
                     npc(
                         "Don't tell me, your cat ate them? You won't get out of",
                         "the job that easily; here are some copies I made.",
@@ -704,8 +701,8 @@ class AvaDialogue(player: Player? = null) : Dialogue(player) {
                     stage++
                 }
 
-                17 -> if (player.inventory.remove(AnimalMagnetism.TRANSLATED_NOTES)) {
-                    player.inventory.add(AnimalMagnetism.PATTERN)
+                17 -> if (removeItem(player, AnimalMagnetism.TRANSLATED_NOTES)) {
+                    addItem(player, AnimalMagnetism.PATTERN)
                     quest!!.setStage(player, 34)
                     end()
                 }
@@ -732,17 +729,17 @@ class AvaDialogue(player: Player? = null) : Dialogue(player) {
                 }
 
                 11 -> {
-                    if (!player.inventory.hasSpaceFor(AnimalMagnetism.PATTERN)) {
+                    if (!hasSpaceFor(player, Item(AnimalMagnetism.PATTERN))) {
                         player("Sorry, I don't have enough room in my backpack.")
                         stage++
                     }
-                    player.inventory.add(AnimalMagnetism.PATTERN)
+                    addItem(player, AnimalMagnetism.PATTERN)
                     npc("Here's a replacement; perhaps if I charged for them,", "you'd be more careful.")
                     stage++
                 }
 
                 12 -> end()
-                20 -> if (player.inventory.remove(AnimalMagnetism.CONTAINER)) {
+                20 -> if (removeItem(player, AnimalMagnetism.CONTAINER)) {
                     quest!!.finish(player)
                     end()
                 }
@@ -956,47 +953,43 @@ class AvaDialogue(player: Player? = null) : Dialogue(player) {
     }
 
     private fun buy(upgrade: Boolean) {
-        val item = if (upgrade) AnimalMagnetism.AVAS_ACCUMULATOR else AnimalMagnetism.AVAS_ATTRACTOR
-        if (!player.inventory.hasSpaceFor(item)) {
-            end()
+        val itemToGive = if (upgrade) AnimalMagnetism.AVAS_ACCUMULATOR else AnimalMagnetism.AVAS_ATTRACTOR
+        val itemToRemove = if (upgrade) AnimalMagnetism.AVAS_ATTRACTOR else AnimalMagnetism.AVAS_ACCUMULATOR
+
+        if (freeSlots(player) == 0) {
             player("Sorry, I don't have enough inventory space.")
+            stage++
+            end()
+            return
+        }
+
+        if (upgrade && !inInventory(player, Items.STEEL_ARROW_886, 75)) {
+            npcl(FaceAnim.HALF_GUILTY, "I need 75 steel arrows for the upgrade process, I'm afraid.")
             stage++
             return
         }
-        val coins = Item(995, 999)
-        if (upgrade) {
-            if (!player.inventory.contains(886, 75)) {
-                npcl(FaceAnim.HALF_GUILTY, "I need 75 steel arrows for the upgrade process, I'm afraid.")
-                stage++
-                return
-            }
-        }
-        if (!player.inventory.containsItem(coins)) {
+
+        if (!inInventory(player, Items.COINS_995, 999)) {
+            npcl(FaceAnim.HALF_GUILTY, "You seem not to have enough cash; you could always sell some of your gear, though.")
             end()
-            npcl(
-                FaceAnim.HALF_GUILTY,
-                "You seem not to have enough cash; you could always sell some of your gear, though.",
-            )
             return
         }
-        if (upgrade) {
-            player.inventory.remove(Item(886, 75))
+
+        if (upgrade) removeItem(player, Item(Items.STEEL_ARROW_886, 75))
+
+        removeAll(player, Item(itemToGive), Item(itemToRemove))
+        removeItem(player, Item(Items.COINS_995, 999))
+
+        val message = if (upgrade) {
+            "Here's your upgraded device; take good care of it."
+        } else {
+            "Here's your device; take good care of your chicken."
         }
+        npc(FaceAnim.HAPPY, message)
         end()
-        removeAll(player, item, if (upgrade) AnimalMagnetism.AVAS_ATTRACTOR else AnimalMagnetism.AVAS_ACCUMULATOR)
-        player.inventory.remove(coins)
-        npc(
-            FaceAnim.HAPPY,
-            if (upgrade) "Here's your upgraded device; take good care of it." else "Here's your device; take good care of your chicken.",
-        )
-        stage++
     }
 
-    private fun removeAll(
-        player: Player,
-        add: Item,
-        remove: Item,
-    ) {
+    private fun removeAll(player: Player, add: Item, remove: Item) {
         val containers: MutableList<Container> = ArrayList(20)
         containers.add(player.inventory)
         containers.add(player.equipment)

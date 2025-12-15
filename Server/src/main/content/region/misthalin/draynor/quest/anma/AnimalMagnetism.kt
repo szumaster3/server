@@ -10,10 +10,8 @@ import core.api.*
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.quest.Quest
 import core.game.node.entity.skill.Skills
-import core.game.node.item.Item
 import core.plugin.ClassScanner.definePlugin
 import core.plugin.Initializable
-import shared.consts.Components
 import shared.consts.Items
 import shared.consts.Quests
 
@@ -30,101 +28,179 @@ class AnimalMagnetism : Quest(Quests.ANIMAL_MAGNETISM, 33, 32, 1) {
         var line = 11
 
         if (stage == 0) {
-            line(player, "<blue>I can start this quest by talking to", line++)
-            line(player, "<red>Ava <blue>who lives in <red>Draynor Manor.", line++)
-            line(player, "<blue>Minimum requirements:", line)
+            line(player, "I can start this quest by talking to !!Ava?? who lives", line++)
+            line(player, "in !!Draynor Manor??.", line++)
+            line(player, "Minimum requirements:", line)
             drawRequirements(player)
         }
 
         if (stage == 10) {
-            line(player, "<red>Ava <blue>has asked me for <red>undead chickens<blue>. One will go toward<br><br><blue>making her bed more comfortable, the other will be used in<br><br><blue>some unexplained reward for me.<br><br><blue>I need to find someone who will supply <red>undead chickens <blue>to<br><br><blue>me. Perhaps the <red>farm near Port Phasmatys <blue>sells them...", 4 + 7)
+            line(player, "!!Ava?? has asked me for !!undead chickens??. One will go toward", line++)
+            line(player, "making her bed more comfortable, the other will be used in", line++)
+            line(player, "some unexplained reward for me.", line++)
+            line(player, "I need to find someone who will supply !!undead chickens?? to", line++)
+            line(player, "me. Perhaps the !!farm near Port Phasmatys?? sells them...", line)
         }
 
         if (stage == 11) {
-            line(player, "<red>Ava <blue>has asked me for <red>undead chickens<blue>. One will go toward<br><br><blue>making her bed more comfortable, the other will be used in<br><br><blue>some unexplained reward for me.<br><br><str>I need to find someone who will supply undead chickens to<br><br><str>me. Perhaps the farm near Port Phasmatys sells them...<br><br><blue>The<red> ghost farmer<blue> wants me to talk to his <red>wife<blue> for him. I<br><br><blue>need to do this before he will sell chickens.", 11)
+            line(player, "The !!ghost farmer?? wants me to talk to his !!wife?? for him. I", line++)
+            line(player, "need to do this before he will sell chickens.", line)
         }
 
         if (stage == 12) {
-            line(player, "<red>Ava <blue>has asked me for <red>undead chickens<blue>. One will go toward<br><br><blue>making her bed more comfortable, the other will be used in<br><br><blue>some unexplained reward for me.<br><br><str>I need to find someone who will supply undead chickens to<br><br><str>me. Perhaps the farm near Port Phasmatys sells them...<br><br><blue>The<red> ghost farmer<blue> wants me to talk to his <red>wife<blue> for him. I<br><br><blue>need to do this before he will sell chickens.<br><br><blue>The <red>ghost farmer<blue>'s <red>wife <blue>needs to know bank information<br><br><blue>that only the farmer can supply.", 11)
+            line(player, "The !!ghost farmer's wife?? needs to know bank information", line++)
+            line(player, "that only the farmer can supply.", line)
         }
 
         if (stage == 13) {
-            line(player, "<red>Ava <blue>has asked me for <red>undead chickens<blue>. One will go toward<br><br><blue>making her bed more comfortable, the other will be used in<br><br><blue>some unexplained reward for me.<br><br><str>I need to find someone who will supply undead chickens to<br><br><str>me. Perhaps the farm near Port Phasmatys sells them...<br><br><str>The ghost farmer wants me to talk to his wife for him. I<br><br><str>need to do this before he will sell chickens.<br><br><blue>The <red>ghost farmer<blue> won't tell me the information his <red>wife <blue>is<br><br><blue>after. Perhaps I should talk to her again.", 11)
+            line(player, "The !!ghost farmer?? won't tell me the information his !!wife?? is", line++)
+            line(player, "after. Perhaps I should talk to her again.", line)
         }
 
         if (stage == 14) {
-            line(player, "<red>Ava <blue>has asked me for <red>undead chickens<blue>. One will go toward<br><br><blue>making her bed more comfortable, the other will be used in<br><br><blue>some unexplained reward for me.<br><br><str>I need to find someone who will supply undead chickens to<br><br><str>me. Perhaps the farm near Port Phasmatys sells them...<br><br><str>The ghost farmer wants me to talk to his wife for him. I<br><br><str>need to do this before he will sell chickens.<br><br><blue>The <red>ghost farmer<blue>'s <red>wife <blue>still needs to know bank<br><br><blue>information that only the farmer can supply.", 11)
-        }
-
-        if (stage == 15) {
-            line(player, "<red>Ava <blue>has asked me for <red>undead chickens<blue>. One will go toward<br><br><blue>making her bed more comfortable, the other will be used in<br><br><blue>some unexplained reward for me.<br><br><str>I need to find someone who will supply undead chickens to<br><br><str>me. Perhaps the farm near Port Phasmatys sells them...<br><br><str>The ghost farmer wants me to talk to his wife for him. I<br><br><str>need to do this before he will sell chickens.<br><br><blue>I still need to find a way to allow the <red>undead farmer<blue> and his<br><br><red>wife <blue>to communicate with each other.", 11)
+            line(player, "The !!ghost farmer's wife?? still needs to know bank", line++)
+            line(player, "information that only the farmer can supply.", line)
         }
 
         if (stage == 16) {
-            line(player, "<red>Ava <blue>has asked me for <red>undead chickens<blue>. One will go toward<br><br><blue>making her bed more comfortable, the other will be used in<br><br><blue>some unexplained reward for me.<br><br><str>I need to find someone who will supply undead chickens to<br><br><str>me. Perhaps the farm near Port Phasmatys sells them...<br><br><str>The ghost farmer wants me to talk to his wife for him. I<br><br><str>need to do this before he will sell chickens.<br><br><blue>I should talk to the <red>crone <blue>west of the undead farm and ask<br><br><blue>about <red>ghostspeak amulet<blue>s. Perhaps she can enable the<br><br><red>ghost farmer<blue> to talk to his <red>wife<blue> directly.", 11)
+            line(player, "I should talk to the !!crone?? west of the undead farm and ask", line++)
+            line(player, "about !!ghostspeak amulets??. Perhaps she can enable the", line++)
+            line(player, "!!ghost farmer?? to talk to his !!wife?? directly.", line)
         }
 
         if (stage == 17) {
-            line(player, "<red>Ava <blue>has asked me for <red>undead chickens<blue>. One will go toward<br><br><blue>making her bed more comfortable, the other will be used in<br><br><blue>some unexplained reward for me.<br><br><str>I need to find someone who will supply undead chickens to<br><br><str>me. Perhaps the farm near Port Phasmatys sells them...<br><br><str>The ghost farmer wants me to talk to his wife for him. I<br><br><str>need to do this before he will sell chickens.<br><br><str>I should talk to the crone west of the undead farm and ask<br><br><str>about ghostspeak amulets. Perhaps she can enable the<br><br><str>ghost farmer to talk to his wife directly.<br><br><blue>I need to talk the <red>crone<blue> while I have a <red>ghostspeak<br><br><red>amulet <blue>so that she can create a new amulet specifically<br><br><blue>for the <red>ghost farmer.", 11)
+            line(player, "I need to talk to the !!crone?? while I have a !!ghostspeak amulet??", line++)
+            line(player, "so that she can create a new amulet specifically for the !!ghost farmer??.", line)
         }
 
         if (stage == 18) {
-            line(player, "<red>Ava <blue>has asked me for <red>undead chickens<blue>. One will go toward<br><br><blue>making her bed more comfortable, the other will be used in<br><br><blue>some unexplained reward for me.<br><br><str>I need to find someone who will supply undead chickens to<br><br><str>me. Perhaps the farm near Port Phasmatys sells them...<br><br><str>The ghost farmer wants me to talk to his wife for him. I<br><br><str>need to do this before he will sell chickens.<br><br><str>I should talk to the crone west of the undead farm and ask<br><br><str>about ghostspeak amulets. Perhaps she can enable the<br><br><str>ghost farmer to talk to his wife directly.<br><br><str>I need to talk the crone while I have a ghostspeak<br><br><str>amulet so that she can create a new amulet specifically<br><br><str>for the ghost farmer.<br><br><blue>I should give the <red>ghost farmer <blue>a <red>crone-made amulet <blue>so<br><br><blue>that he can talk directly to his <red>wife.", 11)
+            line(player, "I should give the !!ghost farmer?? a !!crone-made amulet?? so", line++)
+            line(player, "that he can talk directly to his !!wife??.", line)
         }
 
         if (stage == 19) {
-            line(player, "<red>Ava <blue>has asked me for <red>undead chickens<blue>. One will go toward<br><br><blue>making her bed more comfortable, the other will be used in<br><br><blue>some unexplained reward for me.<br><br><str>I need to find someone who will supply undead chickens to<br><br><str>me. Perhaps the farm near Port Phasmatys sells them...<br><br><str>The ghost farmer wants me to talk to his wife for him. I<br><br><str>need to do this before he will sell chickens.<br><br><str>I should talk to the crone west of the undead farm and ask<br><br><str>about ghostspeak amulets. Perhaps she can enable the<br><br><str>ghost farmer to talk to his wife directly.<br><br><str>I need to talk the crone while I have a ghostspeak<br><br><str>amulet so that she can create a new amulet specifically<br><br><str>for the ghost farmer.<br><br><str>I should give the ghost farmer a crone-made amulet so<br><br><str>that he can talk directly to his wife.<br><br><blue>The <red>farmer <blue>seems friendlier now; I need to talk to him<br><br><blue>about the <red>undead chickens.", 11)
+            line(player, "The !!ghost farmer?? seems friendlier now; I need to talk to him", line++)
+            line(player, "about the !!undead chickens??.", line)
         }
 
         if (stage == 20) {
-            line(player, "<red>Ava <blue>has asked me for <red>undead chickens<blue>. One will go toward<br><br><blue>making her bed more comfortable, the other will be used in<br><br><blue>some unexplained reward for me.<br><br><str>I need to find someone who will supply undead chickens to<br><br><str>me. Perhaps the farm near Port Phasmatys sells them...<br><br><str>The ghost farmer wants me to talk to his wife for him. I<br><br><str>need to do this before he will sell chickens.<br><br><str>I should talk to the crone west of the undead farm and ask<br><br><str>about ghostspeak amulets. Perhaps she can enable the<br><br><str>ghost farmer to talk to his wife directly.<br><br><str>I need to talk the crone while I have a ghostspeak<br><br><str>amulet so that she can create a new amulet specifically<br><br><str>for the ghost farmer.<br><br><str>I should give the ghost farmer a crone-made amulet so<br><br><str>that he can talk directly to his wife.<br><br><str>The farmer seems friendlier now; I need to talk to him<br><br><str>about the undead chickens.<br><br><str>The farmer has agreed to sell chickens; now he needs to<br><br><str>catch one for me.<br><br><blue>The <red>ghost farmer<blue> caught some chickens; now I need to buy<br><br><blue>2 from him and deliver them to Ava.", 11)
+            line(player, "The !!ghost farmer?? has agreed to sell chickens; now he needs to", line++)
+            line(player, "catch one for me.", line)
         }
 
         if (stage == 25) {
-            line(player, "<red>Ava <blue>has asked me for <red>undead chickens<blue>. One will go toward<br><br><blue>making her bed more comfortable, the other will be used in<br><br><blue>some unexplained reward for me.<br><br><str>I need to find someone who will supply undead chickens to<br><br><str>me. Perhaps the farm near Port Phasmatys sells them...<br><br><str>The ghost farmer wants me to talk to his wife for him. I<br><br><str>need to do this before he will sell chickens.<br><br><str>I should talk to the crone west of the undead farm and ask<br><br><str>about ghostspeak amulets. Perhaps she can enable the<br><br><str>ghost farmer to talk to his wife directly.<br><br><str>I need to talk the crone while I have a ghostspeak<br><br><str>amulet so that she can create a new amulet specifically<br><br><str>for the ghost farmer.<br><br><str>I should give the ghost farmer a crone-made amulet so<br><br><str>that he can talk directly to his wife.<br><br><str>The farmer seems friendlier now; I need to talk to him<br><br><str>about the undead chickens.<br><br><str>The farmer has agreed to sell chickens; now he needs to<br><br><str>catch one for me.<br><br><str>The ghost farmer caught some chickens; now I need to buy<br><br><str>2 from him and deliver them to Ava.<br><br><blue>I need to talk to the <red>Witch <blue>in <red>Draynor Manor <blue>about<br><br><red>magically attuned magnets<blue>. Apparently, the <red>undead<br><br><red>chicken <blue>will be using magnets in my reward.", 11)
+            line(player, "The !!ghost farmer?? caught some chickens; now I need to buy", line++)
+            line(player, "2 from him and deliver them to !!Ava??.", line)
         }
 
         if (stage == 26) {
-            line(player, "<red>Ava <blue>has asked me for <red>undead chickens<blue>. One will go toward<br><br><blue>making her bed more comfortable, the other will be used in<br><br><blue>some unexplained reward for me.<br><br><str>I need to find someone who will supply undead chickens to<br><br><str>me. Perhaps the farm near Port Phasmatys sells them...<br><br><str>The ghost farmer wants me to talk to his wife for him. I<br><br><str>need to do this before he will sell chickens.<br><br><str>I should talk to the crone west of the undead farm and ask<br><br><str>about ghostspeak amulets. Perhaps she can enable the<br><br><str>ghost farmer to talk to his wife directly.<br><br><str>I need to talk the crone while I have a ghostspeak<br><br><str>amulet so that she can create a new amulet specifically<br><br><str>for the ghost farmer.<br><br><str>I should give the ghost farmer a crone-made amulet so<br><br><str>that he can talk directly to his wife.<br><br><str>The farmer seems friendlier now; I need to talk to him<br><br><str>about the undead chickens.<br><br><str>The farmer has agreed to sell chickens; now he needs to<br><br><str>catch one for me.<br><br><str>The ghost farmer caught some chickens; now I need to buy<br><br><str>2 from him and deliver them to Ava.<br><br><str>I need to talk to the Witch in Draynor Manor about<br><br><str>magically attuned magnets. Apparently, the undead<br><br><str>chicken will be using magnets in my reward<br><br><blue>I need to deliver 5 <red>iron bars <blue>to the <red>Witch <blue>in <red>Draynor Manor.<br><br><blue>She will select one most suitable for both magnetising and<br><br>mystical use.", 11)
+            line(player, "I need to talk to the !!Witch?? in !!Draynor Manor?? about", line++)
+            line(player, "magically attuned magnets. Apparently, the !!undead chicken??", line++)
+            line(player, "will be using magnets in my reward.", line)
         }
 
         if (stage == 27) {
-            line(player, "<red>Ava <blue>has asked me for <red>undead chickens<blue>. One will go toward<br><br><blue>making her bed more comfortable, the other will be used in<br><br><blue>some unexplained reward for me.<br><br><str>I need to find someone who will supply undead chickens to<br><br><str>me. Perhaps the farm near Port Phasmatys sells them...<br><br><str>The ghost farmer wants me to talk to his wife for him. I<br><br><str>need to do this before he will sell chickens.<br><br><str>I should talk to the crone west of the undead farm and ask<br><br><str>about ghostspeak amulets. Perhaps she can enable the<br><br><str>ghost farmer to talk to his wife directly.<br><br><str>I need to talk the crone while I have a ghostspeak<br><br><str>amulet so that she can create a new amulet specifically<br><br><str>for the ghost farmer.<br><br><str>I should give the ghost farmer a crone-made amulet so<br><br><str>that he can talk directly to his wife.<br><br><str>The farmer seems friendlier now; I need to talk to him<br><br><str>about the undead chickens.<br><br><str>The farmer has agreed to sell chickens; now he needs to<br><br><str>catch one for me.<br><br><str>The ghost farmer caught some chickens; now I need to buy<br><br><str>2 from him and deliver them to Ava.<br><br><str>I need to talk to the Witch in Draynor Manor about<br><br><str>magically attuned magnets. Apparently, the undead<br><br><str>chicken will be using magnets in my reward<br><br><str>I need to deliver 5 iron bars to the Witch in Draynor Manor.<br><br><str>She will select one most suitable for both magnetising and<br><br><str>mystical use.<br><br><blue>I need to make a <red>magnet <blue>by hammering the <red>selected iron<br><br><blue>bar while facing north in <red>Rimmington mines. <blue>I then need<br><br><blue>to pass this magnet to <red>Ava.", 11)
+            line(player, "I need to deliver 5 !!iron bars?? to the !!Witch?? in !!Draynor Manor??.", line++)
+            line(player, "She will select one most suitable for both magnetising and mystical use.", line)
         }
 
         if (stage == 28) {
-            line(player, "<red>Ava <blue>has asked me for <red>undead chickens<blue>. One will go toward<br><br><blue>making her bed more comfortable, the other will be used in<br><br><blue>some unexplained reward for me.<br><br><str>I need to find someone who will supply undead chickens to<br><br><str>me. Perhaps the farm near Port Phasmatys sells them...<br><br><str>The ghost farmer wants me to talk to his wife for him. I<br><br><str>need to do this before he will sell chickens.<br><br><str>I should talk to the crone west of the undead farm and ask<br><br><str>about ghostspeak amulets. Perhaps she can enable the<br><br><str>ghost farmer to talk to his wife directly.<br><br><str>I need to talk the crone while I have a ghostspeak<br><br><str>amulet so that she can create a new amulet specifically<br><br><str>for the ghost farmer.<br><br><str>I should give the ghost farmer a crone-made amulet so<br><br><str>that he can talk directly to his wife.<br><br><str>The farmer seems friendlier now; I need to talk to him<br><br><str>about the undead chickens.<br><br><str>The farmer has agreed to sell chickens; now he needs to<br><br><str>catch one for me.<br><br><str>The ghost farmer caught some chickens; now I need to buy<br><br><str>2 from him and deliver them to Ava.<br><br><str>I need to talk to the Witch in Draynor Manor about<br><br><str>magically attuned magnets. Apparently, the undead<br><br><str>chicken will be using magnets in my reward<br><br><str>I need to deliver 5 iron bars to the Witch in Draynor Manor.<br><br><str>She will select one most suitable for both magnetising and<br><br><str>mystical use.<br><br><str>I need to make a magnet by hammering the selected iron<br><br><str>bar while facing north in Rimmington mines. I then need<br><br><str>to pass this magnet to Ava.<br><br><blue>I need to chop some wood from the <red>undead trees <blue>near<br><br><red>Draynor Manor. Ava <blue>can use this wood as a source of<br><br><blue>unending arrow shafts in my reward. She suggested that I<br><br><blue>use a Woodcutting axe made of nothing less powerful than<br><br><blue>mithril.", 11)
+            line(player, "I need to make a magnet by hammering the selected !!iron bar?? while", line++)
+            line(player, "facing north in !!Rimmington mines??. I then need to pass this magnet to !!Ava??.", line)
         }
 
         if (stage == 29) {
-            line(player, "<red>Ava <blue>has asked me for <red>undead chickens<blue>. One will go toward<br><br><blue>making her bed more comfortable, the other will be used in<br><br><blue>some unexplained reward for me.<br><br><str>I need to find someone who will supply undead chickens to<br><br><str>me. Perhaps the farm near Port Phasmatys sells them...<br><br><str>The ghost farmer wants me to talk to his wife for him. I<br><br><str>need to do this before he will sell chickens.<br><br><str>I should talk to the crone west of the undead farm and ask<br><br><str>about ghostspeak amulets. Perhaps she can enable the<br><br><str>ghost farmer to talk to his wife directly.<br><br><str>I need to talk the crone while I have a ghostspeak<br><br><str>amulet so that she can create a new amulet specifically<br><br><str>for the ghost farmer.<br><br><str>I should give the ghost farmer a crone-made amulet so<br><br><str>that he can talk directly to his wife.<br><br><str>The farmer seems friendlier now; I need to talk to him<br><br><str>about the undead chickens.<br><br><str>The farmer has agreed to sell chickens; now he needs to<br><br><str>catch one for me.<br><br><str>The ghost farmer caught some chickens; now I need to buy<br><br><str>2 from him and deliver them to Ava.<br><br><str>I need to talk to the Witch in Draynor Manor about<br><br><str>magically attuned magnets. Apparently, the undead<br><br><str>chicken will be using magnets in my reward<br><br><str>I need to deliver 5 iron bars to the Witch in Draynor Manor.<br><br><str>She will select one most suitable for both magnetising and<br><br><str>mystical use.<br><br><str>I need to make a magnet by hammering the selected iron<br><br><str>bar while facing north in Rimmington mines. I then need<br><br><str>to pass this magnet to Ava.<br><br><blue>I need to find some way of chopping the <red>undead trees<br><br><blue>near <red>Draynor Manor <blue>so that <red>Ava <blue>can use this wood as a<br><br><blue>source of unending arrow shafts.<br><br><blue>Perhaps <red>Ava<blue> could give me some advice...", 11)
+            line(player, "I need to chop some wood from the !!undead trees?? near !!Draynor Manor??.", line++)
+            line(player, "!!Ava?? can use this wood as a source of unending arrow shafts in my reward.", line)
         }
 
         if (stage in 30..31) {
-            line(player, "<red>Ava <blue>has asked me for <red>undead chickens<blue>. One will go toward<br><br><blue>making her bed more comfortable, the other will be used in<br><br><blue>some unexplained reward for me.<br><br><str>I need to find someone who will supply undead chickens to<br><br><str>me. Perhaps the farm near Port Phasmatys sells them...<br><br><str>The ghost farmer wants me to talk to his wife for him. I<br><br><str>need to do this before he will sell chickens.<br><br><str>I should talk to the crone west of the undead farm and ask<br><br><str>about ghostspeak amulets. Perhaps she can enable the<br><br><str>ghost farmer to talk to his wife directly.<br><br><str>I need to talk the crone while I have a ghostspeak<br><br><str>amulet so that she can create a new amulet specifically<br><br><str>for the ghost farmer.<br><br><str>I should give the ghost farmer a crone-made amulet so<br><br><str>that he can talk directly to his wife.<br><br><str>The farmer seems friendlier now; I need to talk to him<br><br><str>about the undead chickens.<br><br><str>The farmer has agreed to sell chickens; now he needs to<br><br><str>catch one for me.<br><br><str>The ghost farmer caught some chickens; now I need to buy<br><br><str>2 from him and deliver them to Ava.<br><br><str>I need to talk to the Witch in Draynor Manor about<br><br><str>magically attuned magnets. Apparently, the undead<br><br><str>chicken will be using magnets in my reward<br><br><str>I need to deliver 5 iron bars to the Witch in Draynor Manor.<br><br><str>She will select one most suitable for both magnetising and<br><br><str>mystical use.<br><br><str>I need to make a magnet by hammering the selected iron<br><br><str>bar while facing north in Rimmington mines. I then need<br><br><str>to pass this magnet to Ava.<br><br><str>I need to find some way of chopping the undead trees<br><br><str>near Draynor Manor so that Ava can use this wood as a<br><br><str>source of unending arrow shafts.<br><br><str>Ava suspects that Turael, the Slayer Master in Burthorpe,<br><br><str>might be able to help.<br><br><blue>I need to collect a <red>holy symbol of Saradomin<blue> and a <red>mithril<br><br><red>axe. Turael<blue>, the Burthorpe Slayer, can use these to<br><br><blue> construct a new axe for my undead tree cutting.", 11)
+            line(player, "I need to collect a !!holy symbol of Saradomin?? and a !!mithril axe??.", line)
+            line(player, "!!Turael??, the !!Burthorpe Slayer??, can use these to construct a new axe for my undead tree cutting.", line)
         }
 
         if (stage == 32) {
-            line(player, "<red>Ava <blue>has asked me for <red>undead chickens<blue>. One will go toward<br><br><blue>making her bed more comfortable, the other will be used in<br><br><blue>some unexplained reward for me.<br><br><str>I need to find someone who will supply undead chickens to<br><br><str>me. Perhaps the farm near Port Phasmatys sells them...<br><br><str>The ghost farmer wants me to talk to his wife for him. I<br><br><str>need to do this before he will sell chickens.<br><br><str>I should talk to the crone west of the undead farm and ask<br><br><str>about ghostspeak amulets. Perhaps she can enable the<br><br><str>ghost farmer to talk to his wife directly.<br><br><str>I need to talk the crone while I have a ghostspeak<br><br><str>amulet so that she can create a new amulet specifically<br><br><str>for the ghost farmer.<br><br><str>I should give the ghost farmer a crone-made amulet so<br><br><str>that he can talk directly to his wife.<br><br><str>The farmer seems friendlier now; I need to talk to him<br><br><str>about the undead chickens.<br><br><str>The farmer has agreed to sell chickens; now he needs to<br><br><str>catch one for me.<br><br><str>The ghost farmer caught some chickens; now I need to buy<br><br><str>2 from him and deliver them to Ava.<br><br><str>I need to talk to the Witch in Draynor Manor about<br><br><str>magically attuned magnets. Apparently, the undead<br><br><str>chicken will be using magnets in my reward<br><br><str>I need to deliver 5 iron bars to the Witch in Draynor Manor.<br><br><str>She will select one most suitable for both magnetising and<br><br><str>mystical use.<br><br><str>I need to make a magnet by hammering the selected iron<br><br><str>bar while facing north in Rimmington mines. I then need<br><br><str>to pass this magnet to Ava.<br><br><str>I need to find some way of chopping the undead trees<br><br><str>near Draynor Manor so that Ava can use this wood as a<br><br><str>source of unending arrow shafts.<br><br><str>Ava suspects that Turael, the Slayer Master in Burthorpe,<br><br><str>might be able to help.<br><br><str>I need to collect a holy symbol of Saradomin and a mithril<br><br><str>axe. Turael, the Burthorpe Slayer, can use these to<br><br><str> construct a new axe for my undead tree cutting.<br><br><str>I need to chop some undead wood with the silver-edged<br><br><str>mithril axe. Then Ava will want the wood for constructing<br><br><str>my reward.<br><br><blue>I should ask <red>Ava <blue>for the <red>garbled research notes <blue>that she<br><br><blue>cannot translate. When translated, these notes will tell<br><br><blue>her how to combine the <red>undead wood, undead chicken <blue>and<br><br><red>magnet <blue>into some bizarre device.", 11)
+            line(player, "I need to chop some undead wood with the silver-edged !!mithril axe??.", line)
+            line(player, "Then !!Ava?? will want the wood for constructing my reward.", line)
         }
 
         if (stage == 33) {
-            if (!player.hasItem(TRANSLATED_NOTES)) {
-                line(player, "<red>Ava <blue>has asked me for <red>undead chickens<blue>. One will go toward<br><br><blue>making her bed more comfortable, the other will be used in<br><br><blue>some unexplained reward for me.<br><br><str>I need to find someone who will supply undead chickens to<br><br><str>me. Perhaps the farm near Port Phasmatys sells them...<br><br><str>The ghost farmer wants me to talk to his wife for him. I<br><br><str>need to do this before he will sell chickens.<br><br><str>I should talk to the crone west of the undead farm and ask<br><br><str>about ghostspeak amulets. Perhaps she can enable the<br><br><str>ghost farmer to talk to his wife directly.<br><br><str>I need to talk the crone while I have a ghostspeak<br><br><str>amulet so that she can create a new amulet specifically<br><br><str>for the ghost farmer.<br><br><str>I should give the ghost farmer a crone-made amulet so<br><br><str>that he can talk directly to his wife.<br><br><str>The farmer seems friendlier now; I need to talk to him<br><br><str>about the undead chickens.<br><br><str>The farmer has agreed to sell chickens; now he needs to<br><br><str>catch one for me.<br><br><str>The ghost farmer caught some chickens; now I need to buy<br><br><str>2 from him and deliver them to Ava.<br><br><str>I need to talk to the Witch in Draynor Manor about<br><br><str>magically attuned magnets. Apparently, the undead<br><br><str>chicken will be using magnets in my reward<br><br><str>I need to deliver 5 iron bars to the Witch in Draynor Manor.<br><br><str>She will select one most suitable for both magnetising and<br><br><str>mystical use.<br><br><str>I need to make a magnet by hammering the selected iron<br><br><str>bar while facing north in Rimmington mines. I then need<br><br><str>to pass this magnet to Ava.<br><br><str>I need to find some way of chopping the undead trees<br><br><str>near Draynor Manor so that Ava can use this wood as a<br><br><str>source of unending arrow shafts.<br><br><str>Ava suspects that Turael, the Slayer Master in Burthorpe,<br><br><str>might be able to help.<br><br><str>I need to collect a holy symbol of Saradomin and a mithril<br><br><str>axe. Turael, the Burthorpe Slayer, can use these to<br><br><str> construct a new axe for my undead tree cutting.<br><br><str>I need to chop some undead wood with the silver-edged<br><br><str>mithril axe. Then Ava will want the wood for constructing<br><br><str>my reward.<br><br><str>I should ask Ava for the garbled research notes that she<br><br><str>cannot translate. When translated, these notes will tell<br><br><str>her how to combine the undead wood, undead chicken and<br><br><str>magnet into some bizarre device.<br><br><blue>The <red>research notes <blue>must be translated. I should try to<br><br><blue>decipher them even though they look like total gibberish.<br><br><blue>to me.", 11)
-            } else {
-                line(player, "<red>Ava <blue>has asked me for <red>undead chickens<blue>. One will go toward<br><br><blue>making her bed more comfortable, the other will be used in<br><br><blue>some unexplained reward for me.<br><br><str>I need to find someone who will supply undead chickens to<br><br><str>me. Perhaps the farm near Port Phasmatys sells them...<br><br><str>The ghost farmer wants me to talk to his wife for him. I<br><br><str>need to do this before he will sell chickens.<br><br><str>I should talk to the crone west of the undead farm and ask<br><br><str>about ghostspeak amulets. Perhaps she can enable the<br><br><str>ghost farmer to talk to his wife directly.<br><br><str>I need to talk the crone while I have a ghostspeak<br><br><str>amulet so that she can create a new amulet specifically<br><br><str>for the ghost farmer.<br><br><str>I should give the ghost farmer a crone-made amulet so<br><br><str>that he can talk directly to his wife.<br><br><str>The farmer seems friendlier now; I need to talk to him<br><br><str>about the undead chickens.<br><br><str>The farmer has agreed to sell chickens; now he needs to<br><br><str>catch one for me.<br><br><str>The ghost farmer caught some chickens; now I need to buy<br><br><str>2 from him and deliver them to Ava.<br><br><str>I need to talk to the Witch in Draynor Manor about<br><br><str>magically attuned magnets. Apparently, the undead<br><br><str>chicken will be using magnets in my reward<br><br><str>I need to deliver 5 iron bars to the Witch in Draynor Manor.<br><br><str>She will select one most suitable for both magnetising and<br><br><str>mystical use.<br><br><str>I need to make a magnet by hammering the selected iron<br><br><str>bar while facing north in Rimmington mines. I then need<br><br><str>to pass this magnet to Ava.<br><br><str>I need to find some way of chopping the undead trees<br><br><str>near Draynor Manor so that Ava can use this wood as a<br><br><str>source of unending arrow shafts.<br><br><str>Ava suspects that Turael, the Slayer Master in Burthorpe,<br><br><str>might be able to help.<br><br><str>I need to collect a holy symbol of Saradomin and a mithril<br><br><str>axe. Turael, the Burthorpe Slayer, can use these to<br><br><str> construct a new axe for my undead tree cutting.<br><br><str>I need to chop some undead wood with the silver-edged<br><br><str>mithril axe. Then Ava will want the wood for constructing<br><br><str>my reward.<br><br><str>I should ask Ava for the garbled research notes that she<br><br><str>cannot translate. When translated, these notes will tell<br><br><str>her how to combine the undead wood, undead chicken and<br><br><str>magnet into some bizarre device.<br><br><str>The research notes must be translated. I should try to<br><br><str>decipher them even though they look like total gibberish.<br><br><str>to me.<br><br><blue>The notes look less confusing now. <red>Ava <blue>will want to see<br><br><blue>these <red>translated research notes.", 11)
-            }
+            line(player, "I should ask !!Ava?? for the garbled research notes that she cannot translate.", line)
+            line(player, "When translated, these notes will tell her how to combine the !!undead wood??,", line++)
+            line(player, "!!undead chicken?? and !!magnet?? into some bizarre device.", line)
         }
 
         if (stage == 34) {
-            line(player, "<red>Ava <blue>has asked me for <red>undead chickens<blue>. One will go toward<br><br><blue>making her bed more comfortable, the other will be used in<br><br><blue>some unexplained reward for me.<br><br><str>I need to find someone who will supply undead chickens to<br><br><str>me. Perhaps the farm near Port Phasmatys sells them...<br><br><str>The ghost farmer wants me to talk to his wife for him. I<br><br><str>need to do this before he will sell chickens.<br><br><str>I should talk to the crone west of the undead farm and ask<br><br><str>about ghostspeak amulets. Perhaps she can enable the<br><br><str>ghost farmer to talk to his wife directly.<br><br><str>I need to talk the crone while I have a ghostspeak<br><br><str>amulet so that she can create a new amulet specifically<br><br><str>for the ghost farmer.<br><br><str>I should give the ghost farmer a crone-made amulet so<br><br><str>that he can talk directly to his wife.<br><br><str>The farmer seems friendlier now; I need to talk to him<br><br><str>about the undead chickens.<br><br><str>The farmer has agreed to sell chickens; now he needs to<br><br><str>catch one for me.<br><br><str>The ghost farmer caught some chickens; now I need to buy<br><br><str>2 from him and deliver them to Ava.<br><br><str>I need to talk to the Witch in Draynor Manor about<br><br><str>magically attuned magnets. Apparently, the undead<br><br><str>chicken will be using magnets in my reward<br><br><str>I need to deliver 5 iron bars to the Witch in Draynor Manor.<br><br><str>She will select one most suitable for both magnetising and<br><br><str>mystical use.<br><br><str>I need to make a magnet by hammering the selected iron<br><br><str>bar while facing north in Rimmington mines. I then need<br><br><str>to pass this magnet to Ava.<br><br><str>I need to find some way of chopping the undead trees<br><br><str>near Draynor Manor so that Ava can use this wood as a<br><br><str>source of unending arrow shafts.<br><br><str>Ava suspects that Turael, the Slayer Master in Burthorpe,<br><br><str>might be able to help.<br><br><str>I need to collect a holy symbol of Saradomin and a mithril<br><br><str>axe. Turael, the Burthorpe Slayer, can use these to<br><br><str> construct a new axe for my undead tree cutting.<br><br><str>I need to chop some undead wood with the silver-edged<br><br><str>mithril axe. Then Ava will want the wood for constructing<br><br><str>my reward.<br><br><str>I should ask Ava for the garbled research notes that she<br><br><str>cannot translate. When translated, these notes will tell<br><br><str>her how to combine the undead wood, undead chicken and<br><br><str>magnet into some bizarre device.<br><br><str>The research notes must be translated. I should try to<br><br><str>decipher them even though they look like total gibberish.<br><br><str>to me.<br><br><str>The notes look less confusing now. Ava will want to see<br><br><str>these translated research notes.<br><br><blue>Almost finished! I must combine the <red>pattern <blue>which Ava<br><br><blue>gave to me with some <red>polished buttons <blue>and a bit of <red>hard<br><br><red>leather. Ava <blue>tells me that the <red>H.A.M hideout <blue>is a good<br><br>place to obtain <red>buttons.", 11)
+            line(player, "Almost finished! I must combine the !!pattern?? which !!Ava?? gave to me", line++)
+            line(player, "with some !!polished buttons?? and a bit of !!hard leather??.", line)
+            line(player, "!!Ava?? wants the completed container. She can then combine it with", line++)
+            line(player, "the !!undead chicken??, !!undead wood?? and !!magnet??.", line)
         }
 
         if (stage == 100) {
-            line(player, "<str>Ava has asked me for undead chickens. One will go<n><str>towards making her bed more comfortable, the other will<n><str>be used in some unexplained reward for me.<n><str>I need to find someone who will supply undead chickens to<n><str>me. Perhaps the farm near Port Phasmatys sells them...<n><str>The ghost farmer wants me to talk to his wife for him. I<n><str>need to do this before he will sell the chickens.<n><str>I should talk to the crone west of the undead farm and ask<n><str>about ghostspeak amulets. Perhaps she can enable the<n><str>ghost farmer to talk to his wife directly.<n><str>I need to talk to the crone while I have a ghostspeak<n><str>amulet so that she can create a new amulet specifically<n><str>for the ghost farmer.<n><str>I should give the ghost farmer a crone-made amulet so<n><str>that he can talk directly to his wife.<n><str>The farmer seems friendlier now; I need to talk to him<n><str>about the undead chickens.<n><str>The farmer has agreed to sell chickens; now he needs to<n><str>catch one for me.<n><str>The ghost farmer caught some chickens;now I need to buy<n><str>2 and deliver them to Ava.<n><str>I need to talk to the Witch in Draynor Manor about<n><str>magically attuned magnets. Apparently, the undead<n><str>chicken will be using magnets in my reward.<n><str>I need to deliver 5 iron bars to the Witch in Draynor Manor.<n><str>She will select one most suitable for both magnetising and<n><str>mystical use.<n><str>I need to make a magnet by hammering the selected iron<n><str>bar while facing north in Rimmington mines. I then need<n><str>to pass this magnet to Ava.<n><str>I need to find some way of chopping the undead trees<n><str>near Draynor manor so that Ava can use this wood as a<n><str>source of unending arrow shafts.<n><str>Ava suspects that Turael, the Slayer Master in Burthorpe,<n><str>might be able to help.<n><str>I need to collect a holy symbol of Saradomin and a mithril<n><str>axe. Turael, the Burthorpe Slayer, can use these to<n><str>construct a new axe for my undead tree cutting.<n><str>I need to chop some undead wood with the silver edged<n><str>mithril axe. Then Ava will want the wood for constructing<n><str>my reward.<n><str>I should ask Ava for the garbled research notes that she<n><str>cannot translate. When translated, these notes will tell<n><str>her how to combine the undead wood, undead chicken and<n><str>magnet into some bizarre device.<n><str>The research notes must be translated. I should try to<n><str>decipher them even though they look like total gibberish<n><str>to me.<n><str>The notes look less confusing now. Ava will want to see", 11)
-            line(player, "<str>these translated research notes.<n><str>Almost finished!I must combine the pattern which Ava<n><str>gave to me with some polished buttons and a bit of hard<n><str>leather.<n><str>Ava wants the completed container. She can then combine<n><str>it with the undead chicken, undead wood and magnet.<n>", 61)
-            line(player, "<col=FF0000>QUEST COMPLETE!</col>", 62)
-            line(player, "<red>Ava's reward for me is an arrow attracting and creating<n><red>backpack.<n><blue>The method is this: the <red>undead chicken<blue> can attract lost,<n><blue>stray arrowheads with a magnet, add wood from the<n><blue>undead twigs and then finish the arrows using its own<n><blue>feathers. This will give me an unending source of arrows.<n><blue>The cunning bird will also attract some of the arrows which I<n><blue>have fired, preventing these arrows from falling upon the<n><blue>ground.<n><blue>If I lost my device, I can talk to <red>Ava<blue> for a new one,<n><blue>although it will cost me around 1000 gold.<n><blue>Once I achieve a Ranger level of 50 or more, I can upgrade<n><blue>the attractor if I give <red>Ava <blue>75 steel arrows.", 63)
+            line(player, "Ava has asked me for undead chickens. One will go", line++, true)
+            line(player, "towards making her bed more comfortable, the other will", line++, true)
+            line(player, "be used in some unexplained reward for me.", line++, true)
+            line(player, "I need to find someone who will supply undead chickens to", line++, true)
+            line(player, "me. Perhaps the farm near Port Phasmatys sells them...", line++, true)
+            line(player, "The ghost farmer wants me to talk to his wife for him.", line++, true)
+            line(player, "I need to do this before he will sell the chickens.", line++, true)
+            line(player, "I should talk to the crone west of the undead farm and ask", line++, true)
+            line(player, "about ghostspeak amulets. Perhaps she can enable the", line++, true)
+            line(player, "ghost farmer to talk to his wife directly.", line++, true)
+            line(player, "I need to talk to the crone while I have a ghostspeak amulet", line++, true)
+            line(player, "so that she can create a new amulet specifically for the ghost farmer.", line++, true)
+            line(player, "I should give the ghost farmer a crone-made amulet so", line++, true)
+            line(player, "that he can talk directly to his wife.", line++, true)
+            line(player, "The ghost farmer seems friendlier now; I need to talk to him", line++, true)
+            line(player, "about the undead chickens.", line++, true)
+            line(player, "The ghost farmer has agreed to sell chickens; now he needs to", line++, true)
+            line(player, "catch one for me.", line++, true)
+            line(player, "The ghost farmer caught some chickens; now I need to buy", line++, true)
+            line(player, "2 and deliver them to Ava.", line++, true)
+            line(player, "I need to talk to the Witch in Draynor Manor about", line++, true)
+            line(player, "magically attuned magnets. Apparently, the undead chicken", line++, true)
+            line(player, "will be using magnets in my reward.", line++, true)
+            line(player, "I need to deliver 5 iron bars to the Witch in Draynor Manor.", line++, true)
+            line(player, "She will select one most suitable for both magnetising", line++, true)
+            line(player, "and mystical use.", line++, true)
+            line(player, "I need to make a magnet by hammering the selected iron bar", line++, true)
+            line(player, "while facing north in Rimmington mines.", line++, true)
+            line(player, "I then need to pass this magnet to Ava.", line++, true)
+            line(player, "I need to find some way of chopping the undead trees", line++, true)
+            line(player, "near Draynor Manor so that Ava can use this wood as a source", line++, true)
+            line(player, "of unending arrow shafts. Ava suspects that Turael,", line++, true)
+            line(player, "the Slayer Master in Burthorpe, might be able to help.", line++, true)
+            line(player, "I need to collect a holy symbol of Saradomin and a mithril axe.", line++, true)
+            line(player, "Turael can use these to construct a new axe for", line++, true)
+            line(player, "my undead tree cutting.", line++, true)
+            line(player, "I need to chop some undead wood with the silver-edged mithril axe.", line++, true)
+            line(player, "Then Ava will want the wood for constructing my reward.", line++, true)
+            line(player, "I should ask Ava for the garbled research notes that", line++, true)
+            line(player, "she cannot translate.", line++, true)
+            line(player, "When translated, these notes will tell her how to combine the", line++, true)
+            line(player, "undead wood, undead chicken and magnet into some bizarre device.", line++, true)
+            line(player, "The research notes must be translated.", line++, true)
+            line(player, "I should try to decipher them even though they look like total", line++, true)
+            line(player, "gibberish to me. The notes look less confusing now.", line++, true)
+            line(player, "Ava will want to see these translated research notes.", line++, true)
+            line(player, "Almost finished! I must combine the pattern which Ava gave to me", line++, true)
+            line(player, "with some polished buttons and a bit of hard leather.", line++, true)
+            line(player, "Ava wants the completed container. She can then combine it with the", line++, true)
+            line(player, "undead chicken, undead wood and magnet.", line++, true)
+            line++
+            line(player, "<col=FF0000>QUEST COMPLETE!</col>", line++)
+            line(player, "!!Ava??'s reward for me is an arrow attracting and creating backpack.", line++)
+            line(player, "The method is this: the !!undead chicken?? can attract lost, stray", line++)
+            line(player, "arrowheads with a magnet, add wood from the !!undead twigs?? and", line++)
+            line(player, "then finish the arrows using its own feathers.", line++)
+            line(player, "This will give me an unending source of arrows.", line++)
+            line(player, "The cunning bird will also attract some of the arrows which I", line++)
+            line(player, "have fired, preventing these arrows from falling upon the ground.", line++)
+            line(player, "If I lost my device, I can talk to !!Ava?? for a new one, although it", line++)
+            line(player, "will cost me around 1000 gold.", line++)
+            line(player, "Once I achieve a Ranger level of 50 or more,", line++)
+            line(player, "I can upgrade the attractor if I give !!Ava?? 75 steel arrows.", line)
         }
     }
 
@@ -132,7 +208,7 @@ class AnimalMagnetism : Quest(Quests.ANIMAL_MAGNETISM, 33, 32, 1) {
         hasRequirements(player)
         var line = 8 + 7
         for (i in requirements.indices) {
-            line(player, (if (requirements[i]) "<str>" else "<red>") + REQS[i], line++)
+            line(player, "!!" + REQS[i], line++, requirements[i])
         }
     }
 
@@ -156,19 +232,30 @@ class AnimalMagnetism : Quest(Quests.ANIMAL_MAGNETISM, 33, 32, 1) {
         super.finish(player)
         var ln = 10
         val item = if (getStatLevel(player, Skills.RANGE) >= 50) AVAS_ACCUMULATOR else AVAS_ATTRACTOR
+
+        displayQuestItem(player,  item)
         drawReward(player, "1000 XP in each of Crafting,", ln++)
         drawReward(player, "Fletching and Slayer", ln++)
         drawReward(player, "2500 Woodcutting XP", ln++)
         drawReward(player, "1 Quest Point", ln++)
         drawReward(player, "Ava's device", ln)
-        sendItemZoomOnInterface(player, Components.QUEST_COMPLETE_SCROLL_277, 5,  item.id, 235)
+
         rewardXP(player, Skills.CRAFTING, 1000.0)
         rewardXP(player, Skills.SLAYER, 1000.0)
         rewardXP(player, Skills.FLETCHING, 1000.0)
         rewardXP(player, Skills.WOODCUTTING, 2500.0)
-        addItem(player, item.id)
+
+        addItem(player, item)
+
         updateQuestTab(player)
     }
+
+    /*
+      stage < 1     -> 0
+      stage 1..27   -> 10
+      stage 28..99  -> 150
+      stage >= 100  -> 240
+     */
 
     override fun getConfig(player: Player, stage: Int): IntArray {
         if (getStage(player) >= 28 && getStage(player) != 100) {
@@ -192,16 +279,16 @@ class AnimalMagnetism : Quest(Quests.ANIMAL_MAGNETISM, 33, 32, 1) {
     }
 
     companion object {
-        val CRONE_AMULET: Item = Item(Items.CRONE_MADE_AMULET_10500)
-        val SELECTED_IRON: Item = Item(Items.SELECTED_IRON_10488)
-        val RESEARCH_NOTES: Item = Item(Items.RESEARCH_NOTES_10492)
-        val TRANSLATED_NOTES: Item = Item(Items.TRANSLATED_NOTES_10493)
-        val PATTERN: Item = Item(Items.A_PATTERN_10494)
-        val CONTAINER: Item = Item(Items.A_CONTAINER_10495)
-        val POLISHED_BUTTONS: Item = Item(Items.POLISHED_BUTTONS_10496)
-        val HARD_LEATHER: Item = Item(Items.HARD_LEATHER_1743)
-        val AVAS_ATTRACTOR: Item = Item(Items.AVAS_ATTRACTOR_10498)
-        val AVAS_ACCUMULATOR: Item = Item(Items.AVAS_ACCUMULATOR_10499)
+        const val CRONE_AMULET = Items.CRONE_MADE_AMULET_10500
+        const val SELECTED_IRON  = Items.SELECTED_IRON_10488
+        const val RESEARCH_NOTES =  Items.RESEARCH_NOTES_10492
+        const val TRANSLATED_NOTES = Items.TRANSLATED_NOTES_10493
+        const val PATTERN = Items.A_PATTERN_10494
+        const val CONTAINER = Items.A_CONTAINER_10495
+        const val POLISHED_BUTTONS = Items.POLISHED_BUTTONS_10496
+        const val HARD_LEATHER = Items.HARD_LEATHER_1743
+        const val AVAS_ATTRACTOR = Items.AVAS_ATTRACTOR_10498
+        const val AVAS_ACCUMULATOR = Items.AVAS_ACCUMULATOR_10499
         private val REQS = arrayOf("I must have completed Restless Ghost.", "I must have completed Ernest the Chicken", "I must have completed Priest in Peril.", "Level 30 Ranged", "Level 18 Slayer", "Level 19 Crafting", "Level 35 Woodcutting")
     }
 }

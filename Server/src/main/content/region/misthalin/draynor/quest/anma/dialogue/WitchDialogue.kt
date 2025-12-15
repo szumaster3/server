@@ -1,6 +1,8 @@
 package content.region.misthalin.draynor.quest.anma.dialogue
 
 import content.region.misthalin.draynor.quest.anma.AnimalMagnetism
+import core.api.addItemOrDrop
+import core.api.inInventory
 import core.api.setQuestStage
 import core.game.dialogue.Dialogue
 import core.game.node.entity.player.Player
@@ -25,7 +27,7 @@ class WitchDialogue(player: Player? = null) : Dialogue(player) {
                 npc("Great, you'll go far! I made some nice painted metal", "toys for you, smookums.")
             }
 
-            27 -> if (player.hasItem(AnimalMagnetism.SELECTED_IRON)) {
+            27 -> if (inInventory(player, AnimalMagnetism.SELECTED_IRON)) {
                 npc("You were sent to try my patience, weren't you? Go", "away and make that magnet, then hand it to Ava.").also { stage = END_DIALOGUE }
             } else {
                 player("I have lost the selected iron...").also { stage++ }
@@ -60,7 +62,7 @@ class WitchDialogue(player: Player? = null) : Dialogue(player) {
                 2 -> npc("Oh, forget it, then. If you won't react to kindness, I'm", "back to luring infants into my oven. You'll have it on", "your conscience.").also { stage++ }
                 3 -> npc("Go to the iron mine just north-east of Rimmington and", "hit the bar with a plain old smithing hammer while facing", "north. Then take your new magnet to Ava. Poor girl,", "having to deal with whippersnappers like you.").also { stage++ }
                 4 -> if (player.inventory.remove(IRON_BARS)) {
-                    player.inventory.add(AnimalMagnetism.SELECTED_IRON)
+                    addItemOrDrop(player,AnimalMagnetism.SELECTED_IRON)
                     setQuestStage(player, Quests.ANIMAL_MAGNETISM, 27)
                     end()
                 }
@@ -77,7 +79,7 @@ class WitchDialogue(player: Player? = null) : Dialogue(player) {
                         player("Okay, I'll go get some.")
                     }
                     if (player.inventory.remove(IRON_BARS)) {
-                        player.inventory.add(AnimalMagnetism.SELECTED_IRON)
+                        addItemOrDrop(player, AnimalMagnetism.SELECTED_IRON)
                     }
                 }
             }

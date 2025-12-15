@@ -20,6 +20,7 @@ import shared.consts.Quests
 class AvasDevice : InteractionListener, EventHook<TickEvent> {
 
     override fun defineListeners() {
+
         onEquip(devices) { player, _ ->
             if (!isQuestComplete(player, Quests.ANIMAL_MAGNETISM)) {
                 sendMessage(player, "You need to complete Animal Magnetism to equip this.")
@@ -33,22 +34,18 @@ class AvasDevice : InteractionListener, EventHook<TickEvent> {
             setAttribute(player, LAST_TICK, getWorldTicks())
             return@onEquip true
         }
+
         onUnequip(devices) { player, _ ->
             if (attractEnabled(player)) {
                 player.unhook(this)
             }
             return@onUnequip true
         }
+
         on(devices, IntType.ITEM, "operate") { player, _ ->
             val attract = !attractEnabled(player)
             setAttribute(player, ATTRACT_ENABLED, attract)
-            sendMessage(
-                player,
-                colorize(
-                    "Ava's device will ${if (attract) "now" else "no longer"} randomly collect loot for you.",
-                    "990000",
-                ),
-            )
+            sendMessage(player, colorize("Ava's device will ${if (attract) "now" else "no longer"} randomly collect loot for you.", "990000"))
             if (attract) {
                 player.hook(Event.Tick, this)
             } else {
@@ -94,14 +91,11 @@ class AvasDevice : InteractionListener, EventHook<TickEvent> {
             }
         }
 
-        if (!getAttribute(
-                entity,
-                GameAttributes.ITEM_AVA_DEVICE,
-                false
-            ) && entity.houseManager.isInHouse(entity) && entity.houseManager.isBuildingMode && entity.equipment[EquipmentContainer.SLOT_ARROWS] != null && freeSlots(
-                entity
-            ) == 0
-        ) {
+        if (!getAttribute(entity, GameAttributes.ITEM_AVA_DEVICE, false) &&
+            entity.houseManager.isInHouse(entity) &&
+            entity.houseManager.isBuildingMode &&
+            entity.equipment[EquipmentContainer.SLOT_ARROWS] != null && freeSlots(entity) == 0)
+        {
             sendMessage(entity, "Ava's contraption makes an odd burping sound.")
             setAttribute(entity, GameAttributes.ITEM_AVA_DEVICE, true)
         }

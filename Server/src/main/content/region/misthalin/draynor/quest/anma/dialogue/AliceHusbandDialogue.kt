@@ -2,6 +2,8 @@ package content.region.misthalin.draynor.quest.anma.dialogue
 
 import content.region.misthalin.draynor.quest.anma.AnimalMagnetism
 import content.region.misthalin.draynor.quest.anma.cutscene.AnimalMagnetismCutscene
+import core.api.inInventory
+import core.api.removeItem
 import core.game.dialogue.Dialogue
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
@@ -285,7 +287,7 @@ class AliceHusbandDialogue(player: Player? = null) : Dialogue(player) {
                     }
 
                     1 -> {
-                        if (player.inventory.containsItem(AnimalMagnetism.CRONE_AMULET)) {
+                        if (inInventory(player, AnimalMagnetism.CRONE_AMULET)) {
                             player(
                                 "Well... oh, never mind. I'm desperate enough for those",
                                 "chickens to let that pass.",
@@ -325,7 +327,7 @@ class AliceHusbandDialogue(player: Player? = null) : Dialogue(player) {
                     }
 
                     7 -> {
-                        if (player.inventory.remove(AnimalMagnetism.CRONE_AMULET)) {
+                        if (removeItem(player, AnimalMagnetism.CRONE_AMULET)) {
                             quest.setStage(player, 19)
                             end()
                         }
