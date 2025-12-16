@@ -1,4 +1,4 @@
-package content.global.travel
+package content.global.travel.balloon
 
 import content.data.GameAttributes
 import core.api.*
@@ -23,7 +23,7 @@ import shared.consts.*
 /**
  * Handles the balloon travel system.
  */
-class BalloonTravelPlugin : InterfaceListener, InteractionListener {
+class BalloonTravelHandler : InterfaceListener, InteractionListener {
 
     /**
      * Represents balloon travel data.
@@ -196,29 +196,35 @@ class BalloonTravelPlugin : InterfaceListener, InteractionListener {
                 return
             }
 
-            lock(player, 5)
-            lockInteractions(player, 5)
-
             val animationId = Balloon.getAnimationId(origin, destination)
-            val animationTime = animationDuration(Animation(animationId))
+            val animationDelay = animationDuration(Animation(animationId))
+
+            registerLogoutListener(player, "balloon-flight") { p ->
+                p.location = player.location
+            }
+
 
             playJingle(player, 118)
-            openOverlay(player, 333)
-            lock(player, 1000)
-            lockInteractions(player, 1000)
             setMinimapState(player, 2)
+            openOverlay(player, Components.BLACK_OVERLAY_333)
+
             openInterface(player, Components.ZEP_BALLOON_MAP_469)
             setComponentVisibility(player, Components.ZEP_BALLOON_MAP_469, 12, false)
             animateInterface(player, Components.ZEP_BALLOON_MAP_469, 12, animationId)
+
             sendMessage(player, "You board the balloon and fly to ${destination.areaName}.")
+
             player.teleport(destination.destination)
-            queueScript(player, animationTime, QueueStrength.SOFT) {
+
+            queueScript(player, animationDelay, QueueStrength.SOFT) {
                 unlock(player)
                 closeInterface(player)
                 setMinimapState(player, 0)
                 openOverlay(player, Components.FADE_FROM_BLACK_170)
                 removeAttribute(player, GameAttributes.BALLOON_ORIGIN)
                 sendDialogue(player, "You arrive safely in ${destination.areaName}.")
+                if (destination == Balloon.VARROCK)
+                    finishDiaryTask(player, DiaryType.VARROCK, 2, 17)
                 return@queueScript stopExecuting(player)
             }
         }
@@ -228,25 +234,20 @@ class BalloonTravelPlugin : InterfaceListener, InteractionListener {
         on(Components.ZEP_BALLOON_MAP_469) { player, _, _, buttonID, _, _ ->
             val destination = Balloon.fromButtonId(buttonID) ?: return@on true
             val isAdmin = player.rights == Rights.ADMINISTRATOR
-
+            val origin = player.getAttribute<Balloon>(GameAttributes.BALLOON_ORIGIN)
             //TODO: You can open new locations from Entrana.
-
             if (!hasLevelStat(player, Skills.FIREMAKING, destination.requiredLevel)) {
-                sendDialogue(
-                    player,
-                    "You require a Firemaking level of ${destination.requiredLevel} to travel to ${destination.areaName}."
-                )
+                sendDialogue(player, "You require a Firemaking level of ${destination.requiredLevel} to travel to ${destination.areaName}.")
                 return@on true
             }
 
-            val origin = player.getAttribute<Balloon>(GameAttributes.BALLOON_ORIGIN)
             if (origin == destination) {
                 sendDialogue(player, "You can't fly to the same location.")
                 return@on true
             }
 
-            if (player.familiarManager.hasFamiliar()) {
-                sendMessage(player, "You can't take a follower on a ride.")
+            if (player.familiarManager.hasFamiliar() || player.familiarManager.hasPet()) {
+                sendMessage(player, "You can't take a follower or pet on a ride.")
                 return@on true
             }
 
@@ -255,13 +256,12 @@ class BalloonTravelPlugin : InterfaceListener, InteractionListener {
                 return@on true
             }
 
-            if (destination == Balloon.ENTRANA) {
-                if (!isAdmin && !ItemDefinition.canEnterEntrana(player)) {
+            if (destination == Balloon.ENTRANA && !isAdmin) {
+                if (!ItemDefinition.canEnterEntrana(player)) {
                     sendDialogue(player, "You can't take flight with weapons and armour to Entrana.")
                     return@on true
-                } else {
-                    sendMessage(player, "You are quickly searched.")
                 }
+                sendMessage(player, "You are quickly searched.")
             }
 
             if (isAdmin) {
@@ -269,15 +269,17 @@ class BalloonTravelPlugin : InterfaceListener, InteractionListener {
                 return@on true
             }
 
-            if (removeItem(player, Item(destination.logId, 1))) {
-                handleFlight(player, destination)
-                if (destination == Balloon.VARROCK) {
-                    finishDiaryTask(player, DiaryType.VARROCK, 2, 17)
-                }
-            } else {
-                val requiredItem = getItemName(destination.logId).lowercase().removeSuffix("s").trim()
+            if (!removeItem(player, Item(destination.logId, 1))) {
+                val requiredItem = getItemName(destination.logId)
+                    .lowercase()
+                    .removeSuffix("s")
+                    .trim()
+
                 sendDialogue(player, "You need at least one $requiredItem.")
+                return@on true
             }
+
+            handleFlight(player, destination)
             return@on true
         }
     }

@@ -465,6 +465,7 @@ class AugusteDialogue(player: Player? = null) : Dialogue(player) {
                             }
                         }
                     })
+
                     // lock(player, 1000)
                     // setMinimapState(player, 2)
                     // openOverlay(player, Components.ZEP_INTERFACE_470)
