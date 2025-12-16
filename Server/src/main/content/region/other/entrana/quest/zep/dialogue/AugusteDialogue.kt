@@ -23,7 +23,6 @@ class AugusteDialogue(player: Player? = null) : Dialogue(player) {
         val hasPotatoes = inInventory(player!!, Items.POTATOES10_5438, 1)
 
         val hasDyedBalloon = Dyes.values().map { it.origamiBallonId }.toIntArray()
-        val hasDye = (inInventory(player!!, Items.YELLOW_DYE_1765, 1) && inInventory(player!!, Items.RED_DYE_1763, 1))
         val hasPlain = inInventory(player, Items.ORIGAMI_BALLOON_9934)
         val hasDyed = anyInInventory(player, *hasDyedBalloon)
 
@@ -446,31 +445,14 @@ class AugusteDialogue(player: Player? = null) : Dialogue(player) {
                 20 -> npcl(FaceAnim.FRIENDLY, "If we get into tribb...beg your pardon, trouble, in all likelihood we will crash. But do not fear! We should be fine. Just make sure you come back to Entrana so we can try again.").also { stage++ }
                 21 -> npcl(FaceAnim.FRIENDLY, "If it all goes horribly wrong, you can always bail. If we're still over Entrana, we can land quickly and try again. However, once past the island, we will crash.").also { stage++ }
                 22 -> npcl(FaceAnim.FRIENDLY, "Are you ready to go?").also { stage++ }
-                23 -> {
+                23 -> player("Okay.").also { stage++ }
+                24 -> {
                     end()
-                    teleport(player, Location(2940, 3420, 0))
-                    openDialogue(player, object : DialogueFile() {
-                        override fun handle(componentID: Int, buttonID: Int) {
-                            npc = core.game.node.entity.npc.NPC(NPCs.AUGUSTE_5049)
-                            when (stage) {
-                                0 -> playerl(FaceAnim.FRIENDLY, "So what are you going to do now?").also { stage++ }
-                                1 -> npcl(FaceAnim.FRIENDLY, "I am considering starting a balloon enterprise. People all over ${GameWorld.settings?.name} will be able to travel in a new, exciting way.").also { stage++ }
-                                2 -> npcl(FaceAnim.FRIENDLY, "As my first assistant, you will always be welcome to use a balloon. You'll have to bring your own fuel, though.").also { stage++ }
-                                3 -> playerl(FaceAnim.FRIENDLY, "Thanks!").also { stage++ }
-                                4 -> npcl(FaceAnim.FRIENDLY, "I will base my operations in Entrana. If you'd like to travel to new places, come see me there.").also { stage++ }
-                                5 -> {
-                                    end()
-                                    finishQuest(player!!, Quests.ENLIGHTENED_JOURNEY)
-                                }
-                            }
-                        }
-                    })
-
-                    // lock(player, 1000)
-                    // setMinimapState(player, 2)
-                    // openOverlay(player, Components.ZEP_INTERFACE_470)
-                    // openSingleTab(player, Components.ZEP_INTERFACE_SIDE_471)
-                    // openDialogue(player, AugusteDialogueFile())
+                    lock(player, 3)
+                    sendDialogue(player, "You board the balloon.")
+                    setMinimapState(player, 2)
+                    openInterface(player, Components.ZEP_INTERFACE_470)
+                    stage = END_DIALOGUE
                 }
             }
 

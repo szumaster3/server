@@ -55,9 +55,9 @@ class BalloonFlightInterface : InterfaceListener {
             val progressAttr = "zep_sequence_progress_${currentRouteId}_$currentStep"
             val index = player.getAttribute<Int>(progressAttr) ?: 0
 
-            // X // amount of sandbags? // Timer? // it seems to have a life of its own.
+            // X
             setVarbit(player, 2880, amountInInventory(player, Items.SANDBAG_9943))
-            // Y // amount of logs? // Timer? // it seems to have a life of its own.
+            // Y
             setVarbit(player, 2881, amountInInventory(player, Items.LOGS_1511))
 
             val requiredSequence = when (currentStep) {
@@ -163,12 +163,8 @@ class BalloonFlightInterface : InterfaceListener {
             sendModelOnInterface(player, Components.ZEP_INTERFACE_470, newTop, 19517)
             sendModelOnInterface(player, Components.ZEP_INTERFACE_470, newBottom, 19518)
 
-            // Save the new positions back to player attributes.
             player.setAttribute("zep_balloon_top_${routeId}_$stage", newTop)
             player.setAttribute("zep_balloon_bottom_${routeId}_$stage", newBottom)
-
-            // player.debug("Top draw at=[$newTop]")
-            // player.debug("Bottom draw at=[$newBottom]")
         }
     }
 }

@@ -61,7 +61,7 @@ class SandSourcePlugin : InteractionListener {
 
         val (animation, filledItem, itemName) = when (containerId) {
             Items.BUCKET_1925 -> Triple(Animations.FILL_BUCKET_SAND_895, Items.BUCKET_OF_SAND_1783, "bucket")
-            Items.EMPTY_SACK_5418 -> Triple(Animations.ENLIGHTENED_SANDBAG_5155, Items.SANDBAG_9943, "sandbag")
+            Items.EMPTY_SACK_5418 -> Triple(Animations.ENLIGHTENED_SANDBAG_5155, Items.SANDBAG_9943, "bag")
             else -> return
         }
 
