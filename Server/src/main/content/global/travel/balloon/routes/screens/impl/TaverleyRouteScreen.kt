@@ -7,7 +7,7 @@ import core.game.node.entity.player.Player
 
 object TaverleyRouteScreen {
 
-    fun first(p: Player, c: Int) {
+    fun firstStage(p: Player, c: Int) {
         // Floor.
         sendModelOnInterface(p,c,40,19558)
         sendModelOnInterface(p,c,45,19559)
@@ -98,7 +98,7 @@ object TaverleyRouteScreen {
         sendModelOnInterface(p,c,78,19572)
     }
 
-    fun second(p: Player, c: Int) {
+    fun secondStage(p: Player, c: Int) {
         // Floor.
         sendModelOnInterface(p,c,40,19562)
         sendModelOnInterface(p,c,45,19563)
@@ -181,7 +181,7 @@ object TaverleyRouteScreen {
         sendModelOnInterface(p,c,188,19526)
     }
 
-    fun third(p: Player, c: Int) {
+    fun thirdStage(p: Player, c: Int) {
         // Floor.
         sendModelOnInterface(p,c,40,19566)
         sendModelOnInterface(p,c,45,19554)

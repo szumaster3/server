@@ -2,22 +2,17 @@ package content.global.travel.balloon
 
 import content.global.travel.balloon.routes.BalloonRoutes
 import core.api.*
-import core.game.dialogue.DialogueFile
-import core.game.dialogue.FaceAnim
 import core.game.interaction.InterfaceListener
 import core.game.node.entity.player.Player
-import core.game.world.GameWorld
-import core.game.world.map.Location
 import shared.consts.Components
 import shared.consts.Items
-import shared.consts.NPCs
-import shared.consts.Quests
 
 class BalloonFlightInterface : InterfaceListener {
 
     override fun defineInterfaceListeners() {
 
         onClose(Components.ZEP_INTERFACE_470) { player, _ ->
+            openInterface(player, Components.FADE_FROM_BLACK_170)
             closeSingleTab(player)
             return@onClose true
         }
@@ -25,42 +20,37 @@ class BalloonFlightInterface : InterfaceListener {
         onOpen(Components.ZEP_INTERFACE_470) { player, _ ->
             openSingleTab(player, Components.ZEP_INTERFACE_SIDE_471)
 
-            val currentRouteId = player.getAttribute<Int>("zep_current_route") ?: 1
-            player.setAttribute("zep_current_route", currentRouteId)
+            val routeId = getAttribute(player, "zep_current_route", 1)
+            setAttribute(player, "zep_current_route", routeId)
 
-            if (player.getAttribute<Int>("zep_current_step_$currentRouteId") == null) {
-                player.setAttribute("zep_current_step_$currentRouteId", 1)
-            }
+            val currentId = "zep_current_step_$routeId"
+            val step = getAttribute(player, currentId, 1)
+            setAttribute(player, currentId, step)
 
-            val routeData = BalloonRoutes.routes[currentRouteId] ?: return@onOpen true
+            BalloonHelper.drawBaseBalloon(player, routeId, step)
+            BalloonRoutes.routes[routeId]
+                ?.firstOverlay
+                ?.invoke(player, Components.ZEP_INTERFACE_470)
 
-            val stage = 1
-            val base = routeData.startPosition[stage - 1]
-
-            player.setAttribute("zep_balloon_top_${currentRouteId}_$stage", base.top)
-            player.setAttribute("zep_balloon_bottom_${currentRouteId}_$stage", base.bottom)
-
-            sendModelOnInterface(player, Components.ZEP_INTERFACE_470, base.top, 19517)    // top
-            sendModelOnInterface(player, Components.ZEP_INTERFACE_470, base.bottom, 19518) // bottom
-
-            routeData.firstOverlay.invoke(player, Components.ZEP_INTERFACE_470)
             return@onOpen true
         }
 
         on(Components.ZEP_INTERFACE_SIDE_471) { player: Player, _, _, buttonID: Int, _, _ ->
-            val currentRouteId = player.getAttribute<Int>("zep_current_route") ?: 1
-            val routeData = BalloonRoutes.routes[currentRouteId] ?: return@on true
+            val routeId = getAttribute(player, "zep_current_route", -1)
+            if (routeId == -1) return@on true
 
-            val currentStep = player.getAttribute<Int>("zep_current_step_$currentRouteId") ?: 1
-            val progressAttr = "zep_sequence_progress_${currentRouteId}_$currentStep"
-            val index = player.getAttribute<Int>(progressAttr) ?: 0
+            val routeData = BalloonRoutes.routes[routeId] ?: return@on true
 
-            // X
+            val stepAttribute = "zep_current_step_$routeId"
+            val step = getAttribute(player, stepAttribute, 1)
+
+            val sequenceProgressAttribute = "zep_sequence_progress_${routeId}_$step"
+            val index = getAttribute(player, sequenceProgressAttribute, 0)
+
             setVarbit(player, 2880, amountInInventory(player, Items.SANDBAG_9943))
-            // Y
             setVarbit(player, 2881, amountInInventory(player, Items.LOGS_1511))
 
-            val requiredSequence = when (currentStep) {
+            val sequence = when (step) {
                 1 -> routeData.firstSequence
                 2 -> routeData.secondSequence
                 3 -> routeData.thirdSequence
@@ -68,103 +58,35 @@ class BalloonFlightInterface : InterfaceListener {
             }
 
             val delta = when (buttonID) {
-                4 -> 41    // sandbag  -> moves NE +2
-                9 -> 20    // logs     -> moves NE +1
-                5 -> 1     // relax    -> moves E  +1
-                6 -> -19   // rope     -> moves SE +1
-                10 -> -38  // red rope -> moves SE +2
-                else -> 0
+                4 -> 41   // sandbag  -> moves NE +2
+                9 -> 20   // logs     -> moves NE +1
+                5 -> 1    // relax    -> moves E  +1
+                6 -> -19  // rope     -> moves SE +1
+                10 -> -38 // red rope -> moves SE +2
+                else -> 8 // Close interface.
             }
 
-            // If the button does NOT match the sequence -> reset.
-            if (buttonID != requiredSequence.getOrNull(index) || /*Bail button*/buttonID == 8)
+            if (buttonID == 8 || buttonID != sequence.getOrNull(index))
             {
+                BalloonHelper.clearBalloonState(player, routeId, step)
                 closeInterface(player)
                 closeSingleTab(player)
-                removeAttribute(player,"zep_current_route")
-                removeAttribute(player,"zep_current_step_$currentRouteId")
-                removeAttribute(player,progressAttr)
-                removeAttribute(player,"zep_balloon_top_${currentRouteId}_$currentStep")
-                removeAttribute(player,"zep_balloon_bottom_${currentRouteId}_$currentStep")
                 return@on true
             }
 
-           drawBalloon(player, delta, currentRouteId, currentStep)
+            BalloonHelper.drawBalloon(player, delta, routeId, step)
 
-            if (buttonID == requiredSequence.getOrNull(index)) {
-                val newIndex = index + 1
-                player.setAttribute(progressAttr, newIndex)
+            val newIndex = index + 1
+            setAttribute(player, sequenceProgressAttribute, newIndex)
 
-                if (newIndex >= requiredSequence.size) {
-                    player.removeAttribute(progressAttr)
-
-                    when (currentStep) {
-                        1 -> {
-                            player.setAttribute("zep_current_step_$currentRouteId", 2)
-                            routeData.secondOverlay(player, Components.ZEP_INTERFACE_470)
-                        }
-                        2 -> {
-                            player.setAttribute("zep_current_step_$currentRouteId", 3)
-                            routeData.thirdOverlay(player, Components.ZEP_INTERFACE_470)
-                        }
-                        3 -> {
-                            player.removeAttribute("zep_current_step_$currentRouteId")
-                            closeInterface(player)
-                            teleport(player, Location(2940, 3420, 0))
-                            openDialogue(player, object : DialogueFile() {
-                                override fun handle(componentID: Int, buttonID: Int) {
-                                    npc = core.game.node.entity.npc.NPC(NPCs.AUGUSTE_5049)
-                                    when (stage) {
-                                        0 -> playerl(FaceAnim.FRIENDLY, "So what are you going to do now?").also { stage++ }
-                                        1 -> npcl(FaceAnim.FRIENDLY, "I am considering starting a balloon enterprise. People all over ${GameWorld.settings?.name} will be able to travel in a new, exciting way.").also { stage++ }
-                                        2 -> npcl(FaceAnim.FRIENDLY, "As my first assistant, you will always be welcome to use a balloon. You'll have to bring your own fuel, though.").also { stage++ }
-                                        3 -> playerl(FaceAnim.FRIENDLY, "Thanks!").also { stage++ }
-                                        4 -> npcl(FaceAnim.FRIENDLY, "I will base my operations in Entrana. If you'd like to travel to new places, come see me there.").also { stage++ }
-                                        5 -> {
-                                            end()
-                                            finishQuest(player, Quests.ENLIGHTENED_JOURNEY)
-                                        }
-                                    }
-                                }
-                            })
-                        }
-                    }
-                }
+            if (newIndex >= sequence.size)
+            {
+                removeAttribute(player, sequenceProgressAttribute)
+                openInterface(player, Components.ZEP_INTERFACE_470)
+                BalloonHelper.updateScreen(player, routeId, step, routeData)
             }
 
             return@on true
-        }
-    }
-
-    companion object {
-        /**
-         * Draws the balloon in the new position and removes the old one.
-         */
-        fun drawBalloon(player: Player, delta: Int, routeId: Int, stage: Int) {
-            val routeData = BalloonRoutes.routes[routeId] ?: return
-            val base = routeData.startPosition[stage - 1]
-
-            // Get the last positions of the balloon.
-            val lastTop = player.getAttribute<Int>("zep_balloon_top_${routeId}_$stage") ?: base.top
-            val lastBottom = player.getAttribute<Int>("zep_balloon_bottom_${routeId}_$stage") ?: base.bottom
-
-            // Remove the old balloon.
-            sendModelOnInterface(player, Components.ZEP_INTERFACE_470, lastTop, -1)
-            sendModelOnInterface(player, Components.ZEP_INTERFACE_470, lastBottom, -1)
-
-            // Apply +1 offset to top only on the first click
-            val offsetTop = if (lastTop == base.top) 1 else 0
-
-            // Calculate the new positions.
-            val newTop = lastTop + delta + offsetTop
-            val newBottom = lastBottom + delta
-
-            // Draw the new balloon.
-            sendModelOnInterface(player, Components.ZEP_INTERFACE_470, newTop, 19517)
-            sendModelOnInterface(player, Components.ZEP_INTERFACE_470, newBottom, 19518)
-
-            player.setAttribute("zep_balloon_top_${routeId}_$stage", newTop)
-            player.setAttribute("zep_balloon_bottom_${routeId}_$stage", newBottom)
         }
     }
 }

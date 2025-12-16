@@ -321,9 +321,7 @@ class UseWithPatchHandler : InteractionListener {
                         sendMessage(
                             player,
                             "You need ${plantItem.amount} $seedPlural to plant ${
-                                prependArticle(
-                                    patch.type.displayName(),
-                                )
+                                prependArticle(patch.type.displayName())
                             }.",
                         )
                         return@onUseWith true
@@ -340,7 +338,7 @@ class UseWithPatchHandler : InteractionListener {
                         else -> Items.SEED_DIBBER_5343
                     }
                     if (requiredItem != null && !inInventory(player, requiredItem)) {
-                        sendMessage(player, "You need ${prependArticle(requiredItem.asItem().name.lowercase())} to plant that.")
+                        sendMessage(player, "You need ${prependArticle(requiredItem.asItem().name.lowercase())} to do that.")
                         return@onUseWith true
                     }
                     player.lock()
@@ -366,11 +364,7 @@ class UseWithPatchHandler : InteractionListener {
                             player,
                             object : Pulse(delay) {
                                 override fun pulse(): Boolean {
-                                    if (plantable == Plantable.JUTE_SEED && patch == FarmingPatch.MCGRUBOR_HOPS && !player.achievementDiaryManager.hasCompletedTask(
-                                            DiaryType.SEERS_VILLAGE,
-                                            0,
-                                            7,
-                                        )
+                                    if (plantable == Plantable.JUTE_SEED && patch == FarmingPatch.MCGRUBOR_HOPS && !player.achievementDiaryManager.hasCompletedTask(DiaryType.SEERS_VILLAGE, 0, 7)
                                     ) {
                                         player.achievementDiaryManager.finishTask(player, DiaryType.SEERS_VILLAGE, 0, 7)
                                     }
@@ -397,10 +391,17 @@ class UseWithPatchHandler : InteractionListener {
                                         )
                                     }
                                     val patchName = p.patch.type.displayName()
-                                    if (plantable == Plantable.SCARECROW) {
-                                        sendMessage(player, "You place the scarecrow in the $patchName.")
-                                    } else {
-                                        sendMessage(player, "You plant $itemAmount $itemName in the $patchName.")
+                                    when (plantable) {
+                                        Plantable.SCARECROW -> {
+                                            sendMessage(player, "You place the scarecrow in the $patchName.")
+                                        }
+                                        Plantable.AUGUSTE_SAPLING -> {
+                                            sendMessage(player, "You have now planted Auguste's sapling. He will not give you any more.")
+                                            sendMessage(player, "You plant the special willow sapling in the tree patch.")
+                                        }
+                                        else -> {
+                                            sendMessage(player, "You plant $itemAmount $itemName in the $patchName.")
+                                        }
                                     }
 
                                     player.unlock()

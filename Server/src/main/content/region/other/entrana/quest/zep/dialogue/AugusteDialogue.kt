@@ -421,7 +421,7 @@ class AugusteDialogue(player: Player? = null) : Dialogue(player) {
                 1 -> options("Wait; tell me what we're doing.", "Okay.", "No, I'm not ready.").also { stage++ }
                 2 -> when (buttonID) {
                     1 -> playerl(FaceAnim.FRIENDLY, "Wait; tell me what we're doing.").also { stage = 3 }
-                    2 -> playerl(FaceAnim.FRIENDLY, "Okay.").also { stage = 23 }
+                    2 -> playerl(FaceAnim.HAPPY, "Okay.").also { stage = 23 }
                     3 -> playerl(FaceAnim.FRIENDLY, "No, I'm not ready.").also { stage = END_DIALOGUE }
                 }
 
@@ -445,13 +445,32 @@ class AugusteDialogue(player: Player? = null) : Dialogue(player) {
                 20 -> npcl(FaceAnim.FRIENDLY, "If we get into tribb...beg your pardon, trouble, in all likelihood we will crash. But do not fear! We should be fine. Just make sure you come back to Entrana so we can try again.").also { stage++ }
                 21 -> npcl(FaceAnim.FRIENDLY, "If it all goes horribly wrong, you can always bail. If we're still over Entrana, we can land quickly and try again. However, once past the island, we will crash.").also { stage++ }
                 22 -> npcl(FaceAnim.FRIENDLY, "Are you ready to go?").also { stage++ }
-                23 -> player("Okay.").also { stage++ }
-                24 -> {
+                23 -> {
                     end()
-                    lock(player, 3)
-                    sendDialogue(player, "You board the balloon.")
-                    setMinimapState(player, 2)
-                    openInterface(player, Components.ZEP_INTERFACE_470)
+                    if(player.familiarManager.hasFamiliar() || player.familiarManager.hasPet()) {
+                        npcl(FaceAnim.HALF_GUILTY, "You need to put your pet into your inventory before the flight.")
+                        return true
+                    }
+                    if(player.settings.weight > 40) {
+                        npcl(FaceAnim.HALF_GUILTY, "You have too much weight in your bag. You may only bring 40kg of weight.")
+                        return true
+                    }
+                    if(!inInventory(player, Items.LOGS_1511, 10)) {
+                        npcl(FaceAnim.HALF_GUILTY, "You don't have enough logs. You need ten normal logs.")
+                        return true
+                    }
+                    if(!inInventory(player, Items.TINDERBOX_590, 1)) {
+                        npcl(FaceAnim.HALF_GUILTY, "You need a tinderbox.")
+                        return true
+                    }
+                    if(removeItem(player, Item(Items.LOGS_1511, 10))) {
+                        lock(player, 3)
+                        val musicID = Music.FLOATING_FREE_206
+                        setMinimapState(player, 2)
+                        openInterface(player, Components.ZEP_INTERFACE_470)
+                        if(!player.musicPlayer.hasUnlocked(musicID))
+                            player.musicPlayer.unlock(musicID)
+                    }
                     stage = END_DIALOGUE
                 }
             }

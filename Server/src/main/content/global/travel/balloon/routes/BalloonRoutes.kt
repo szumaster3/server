@@ -29,15 +29,26 @@ data class RouteData(
     val startPosition: List<BalloonBasePosition>
 )
 
+// Sequences map:
+// Logs - 9
+// Sandbag - 4
+// Relax - 5
+// Rope - 6
+// Red rope - 10
+
 object BalloonRoutes {
 
+    // TODO: Decouple stage progress from hardcoded sequences.
+    // https://runescape.wiki/w/Balloon_transport_system#Walkthrough
+
+
     val taverleyRoute = RouteData(
-        firstSequence = listOf(4, 4, 9, 5, 5, 5, 5, 5, 10, 9, 5, 5, 10, 5, 5, 9, 9, 5, 5, 5),
-        secondSequence = listOf(9, 5, 5, 10, 6, 5, 5, 5, 5, 5, 5, 5, 4, 5, 5, 10, 9, 6, 5),
-        thirdSequence = listOf(9, 5, 5, 6, 5, 5, 5, 9, 10, 5, 5, 5, 5, 4, 10, 5, 5, 6),
-        firstOverlay = TaverleyRouteScreen::first,
-        secondOverlay = TaverleyRouteScreen::second,
-        thirdOverlay = TaverleyRouteScreen::third,
+        firstSequence = listOf(9, 4, 5, 5, 5, 5, 5, 5, 5, 5, 6, 6, 6, 5, 5, 5, 5, 5, 5), // Aug 8, 2008
+        secondSequence = listOf(9, 5, 5, 5, 5, 5, 5, 4, 5, 5, 5, 5, 5, 5, 5, 5),
+        thirdSequence = listOf(5, 5, 5, 5, 5, 5, 10, 6, 5, 5, 5, 9, 5, 5, 5, 6),
+        firstOverlay = TaverleyRouteScreen::firstStage,
+        secondOverlay = TaverleyRouteScreen::secondStage,
+        thirdOverlay = TaverleyRouteScreen::thirdStage,
         startPosition = listOf(
             BalloonBasePosition(top = 118, bottom = 99),  // first stage
             BalloonBasePosition(top = 120, bottom = 100), // second stage
