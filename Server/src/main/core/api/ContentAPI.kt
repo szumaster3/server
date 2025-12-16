@@ -3845,17 +3845,6 @@ fun setMinimapState(
 ) = PacketRepository.send(MinimapState::class.java, MinimapStateContext(player, state))
 
 /**
- * Show/Hide the minimap using a boolean flag.
- *
- * @param player The player whose minimap state is being updated.
- * @param hidden True to hide the minimap, false to make it visible.
- */
-fun toggleMinimap(player: Player, hidden: Boolean) {
-    val state = if (hidden) 2 else 0
-    PacketRepository.send(MinimapState::class.java, MinimapStateContext(player, state))
-}
-
-/**
  * Show (unhide) the minimap.
  */
 fun showMinimap(player: Player) {

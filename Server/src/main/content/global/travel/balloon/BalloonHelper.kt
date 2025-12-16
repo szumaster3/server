@@ -103,7 +103,6 @@ object BalloonHelper {
                 val destination = balloonDestination.destination
 
                 removeAttribute(player, "zep_current_step_$routeId")
-                closeInterface(player)
                 teleport(player, destination)
                 if(!isQuestComplete(player, Quests.ENLIGHTENED_JOURNEY))
                     FinishEnligtenedJourneyQuestDialogue()
@@ -210,4 +209,11 @@ object BalloonHelper {
         }
     }
 
+    private val allChildren = (0..230).toSet()
+
+    fun reset(p: Player, c: Int) {
+        allChildren.forEach { child ->
+            sendModelOnInterface(p, c, child, -1)
+        }
+    }
 }

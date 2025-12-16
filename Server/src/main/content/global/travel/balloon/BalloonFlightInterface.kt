@@ -6,13 +6,13 @@ import core.game.interaction.InterfaceListener
 import core.game.node.entity.player.Player
 import shared.consts.Components
 import shared.consts.Items
+import shared.consts.Sounds
 
 class BalloonFlightInterface : InterfaceListener {
 
     override fun defineInterfaceListeners() {
 
         onClose(Components.ZEP_INTERFACE_470) { player, _ ->
-            openInterface(player, Components.FADE_FROM_BLACK_170)
             closeSingleTab(player)
             return@onClose true
         }
@@ -26,16 +26,14 @@ class BalloonFlightInterface : InterfaceListener {
             val currentId = "zep_current_step_$routeId"
             val step = getAttribute(player, currentId, 1)
             setAttribute(player, currentId, step)
-
             BalloonHelper.drawBaseBalloon(player, routeId, step)
             BalloonRoutes.routes[routeId]
                 ?.firstOverlay
                 ?.invoke(player, Components.ZEP_INTERFACE_470)
-
             return@onOpen true
         }
 
-        on(Components.ZEP_INTERFACE_SIDE_471) { player: Player, _, _, buttonID: Int, _, _ ->
+        on(Components.ZEP_INTERFACE_SIDE_471) { player: Player, c, _, buttonID: Int, _, _ ->
             val routeId = getAttribute(player, "zep_current_route", -1)
             if (routeId == -1) return@on true
 
@@ -74,6 +72,16 @@ class BalloonFlightInterface : InterfaceListener {
                 return@on true
             }
 
+            val buttonSounds = mapOf(
+                4  to Sounds.ZEP_DROP_BALLAST_3249,
+                9  to Sounds.ZEP_USE_LOGS_3251,
+                5  to Sounds.ZEP_BREEZE_3247,
+                6  to Sounds.ZEP_HAMMERING_1_3250,
+                10 to Sounds.ZEP_CONSTRUCT_3248
+            )
+
+            buttonSounds[buttonID]?.let { playAudio(player, it) }
+
             BalloonHelper.drawBalloon(player, delta, routeId, step)
 
             val newIndex = index + 1
@@ -81,8 +89,8 @@ class BalloonFlightInterface : InterfaceListener {
 
             if (newIndex >= sequence.size)
             {
+                BalloonHelper.reset(player,Components.ZEP_INTERFACE_470)
                 removeAttribute(player, sequenceProgressAttribute)
-                openInterface(player, Components.ZEP_INTERFACE_470)
                 BalloonHelper.updateScreen(player, routeId, step, routeData)
             }
 
