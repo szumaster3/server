@@ -104,12 +104,9 @@ class ScriptProcessor(val entity: Entity) {
      *
      * @return `true` if all scripts were skipped.
      */
-    fun processQueue(): Boolean {
-        var strongInQueue = false
-        var softInQueue = false
+    fun processQueue() : Boolean {
         var anyExecuted = false
-        strongInQueue = hasTypeInQueue(QueueStrength.STRONG)
-        softInQueue = hasTypeInQueue(QueueStrength.SOFT)
+        val strongInQueue = hasTypeInQueue(QueueStrength.STRONG)
 
         if (strongInQueue) {
             if (entity is Player) {

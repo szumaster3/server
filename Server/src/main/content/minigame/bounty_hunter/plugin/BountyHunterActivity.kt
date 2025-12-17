@@ -192,8 +192,8 @@ class BountyHunterActivity
                 }
                 findTarget(player)
                 entry.updatePenalty(player, true)
-                player.interaction.set(Option.P_ATTACK)
-                player.interaction.remove(Option.P_ASSIST)
+                player.interaction.set(Option._P_ATTACK)
+                player.interaction.remove(Option._P_ASSIST)
                 player.skullManager.isSkullCheckDisabled = true
                 player.skullManager.isWilderness = true
                 setAttribute(player, "bh_joined", ticks + 10)
@@ -384,8 +384,8 @@ class BountyHunterActivity
             }
             player.appearance.skullIcon = -1
             refreshAppearance(player)
-            player.interaction.remove(Option.P_ATTACK)
-            player.interaction.set(Option.P_ASSIST)
+            player.interaction.remove(Option._P_ATTACK)
+            player.interaction.set(Option._P_ASSIST)
             player.skullManager.isSkullCheckDisabled = false
             player.skullManager.isWilderness = false
             player.interfaceManager.closeOverlay()

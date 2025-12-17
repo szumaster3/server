@@ -70,7 +70,7 @@ class TzhaarFightPitPlugin : ActivityPlugin("fight pits", false, true, true, Zon
             player.skullManager.isSkullCheckDisabled = false
             player.skullManager.isWilderness = false
             player.interfaceManager.closeOverlay()
-            player.interaction.remove(Option.P_ATTACK)
+            player.interaction.remove(Option._P_ATTACK)
             if (player.appearance.skullIcon == SKULL_ID) {
                 player.appearance.skullIcon = -1
                 player.updateAppearance()
@@ -303,7 +303,7 @@ class TzhaarFightPitPlugin : ActivityPlugin("fight pits", false, true, true, Zon
                     p.skullManager.isWilderness = true
                     setVarp(p, 560, size)
                     p.properties.teleportLocation = zoneDestination
-                    p.interaction.set(Option.P_ATTACK)
+                    p.interaction.set(Option._P_ATTACK)
                     tokkulAmount += p.properties.currentCombatLevel
                 }
                 it.remove()

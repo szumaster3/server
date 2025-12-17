@@ -14,7 +14,7 @@ import core.plugin.Plugin
 class FollowOptionPlugin : OptionHandler() {
     @Throws(Throwable::class)
     override fun newInstance(arg: Any?): Plugin<Any> {
-        Option.P_FOLLOW.setHandler(this)
+        Option._P_FOLLOW.setHandler(this)
         return this
     }
 

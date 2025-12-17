@@ -23,7 +23,7 @@ class AttackOptionPlugin : OptionHandler() {
 
     @Throws(Throwable::class)
     override fun newInstance(arg: Any?): Plugin<Any> {
-        Option.P_ATTACK.setHandler(this)
+        Option._P_ATTACK.setHandler(this)
         NPCDefinition.setOptionHandler("attack", this)
         return this
     }

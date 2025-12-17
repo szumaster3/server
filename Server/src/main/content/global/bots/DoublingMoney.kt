@@ -220,7 +220,7 @@ class DoublingMoney : Script() {
                     }
                 }
                 stateString = "Sending trade request to ${playerOwed!!.name} to give them $debtOwed coins"
-                playerOwed!!.interaction.handle(bot, Option.P_TRADE)
+                playerOwed!!.interaction.handle(bot, Option._P_TRADE)
                 InteractionListeners.run(-1, IntType.PLAYER, "trade with", bot, playerOwed!!)
                 sentTradeRequest = true
             },

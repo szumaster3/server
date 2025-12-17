@@ -154,7 +154,7 @@ public class WhatLiesBelowCutscene extends CutscenePlugin {
                     }
                     return true;
                 case 11014:
-                    if (option.name.equalsIgnoreCase("operate") || option.name.equalsIgnoreCase("summon")) {
+                    if (option.getName().equalsIgnoreCase("operate") || option.getName().equalsIgnoreCase("summon")) {
                         if (KING.getAttribute("message", false)) {
                             summonZaff();
                             return true;

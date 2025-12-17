@@ -188,7 +188,7 @@ class ClanWarsActivityPlugin : ActivityPlugin("Clan wars", true, false, true) {
         if (e is Player) {
             val player = e
             player.interaction.set(ATTACK_OPTION)
-            player.interaction.remove(Option.P_ASSIST)
+            player.interaction.remove(Option._P_ASSIST)
             player.skullManager.isSkullCheckDisabled = true
             player.skullManager.isWilderness = true
             player.interfaceManager.openOverlay(Component(265))

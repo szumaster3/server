@@ -88,7 +88,7 @@ class CombatTabInterface : ComponentPlugin() {
 
     companion object {
         private fun handleInstantSpec(player: Player, handler: CombatSwingHandler, plugin: Plugin<Any>) {
-            handler.swing(player, player.properties.combatPulse.victim, null)
+            handler.swing(player, player.properties.combatPulse.getVictim(), null)
         }
     }
 }

@@ -64,13 +64,13 @@ class PhoenixNPC (id: Int = 0, location: Location? = null) : AbstractNPC(id, loc
     {
         val pulse = properties.combatPulse
         if (pulse.isAttacking) {
-            val e = pulse.victim ?: return
+            val e = pulse.getVictim() ?: return
             if (!targetFocus)
             {
                 val target = impactHandler.getMostDamageEntity(e)
                 if (target != null && target != e && target is Player)
                 {
-                    pulse.victim = target
+                    pulse.setVictim(target)
                 }
             }
             if (!CHAMBER.insideBorder(e.location))

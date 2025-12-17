@@ -39,7 +39,7 @@ class GoblinVillageNPC(id: Int = 0, location: Location? = null) : AbstractNPC(id
         else
         {
             if (RandomFunction.random(3) != 1) return
-            val enemy = properties.combatPulse.victim as? NPC ?: return
+            val enemy = properties.combatPulse.getVictim() as? NPC ?: return
             if (enemy.location.getDistance(getLocation()) > 4) return
 
             if ((if (green) RED_GOBLINS else GREEN_GOBLINS).contains(enemy.id) && (0..3).random() == 2)

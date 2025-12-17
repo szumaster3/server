@@ -33,7 +33,7 @@ open class MeleeSwingHandler(
         var type = InteractionType.STILL_INTERACT
         var goodRange = canMelee(entity, victim, distance)
         if (!goodRange &&
-            victim.properties.combatPulse.victim !== entity &&
+            victim.properties.combatPulse.getVictim() !== entity &&
             victim.walkingQueue.isMoving &&
             entity.size() == 1
         ) {
@@ -212,7 +212,7 @@ open class MeleeSwingHandler(
 
         val victimName =
             entity.properties.combatPulse
-                .victim
+                .getVictim()
                 ?.name ?: "none"
 
         // attack bonus for specialized equipments (salve amulets, slayer equips)
@@ -225,7 +225,7 @@ open class MeleeSwingHandler(
             } else if (getSlayerTask(entity)?.npcs?.contains(
                     (
                         entity.properties.combatPulse
-                            ?.victim
+                            ?.getVictim()
                             ?.id ?: 0
                     ),
                 ) == true
@@ -268,7 +268,7 @@ open class MeleeSwingHandler(
             getSlayerTask(entity)?.npcs?.contains(
                 (
                     entity.properties.combatPulse
-                        ?.victim
+                        ?.getVictim()
                         ?.id ?: 0
                 ),
             ) == true
@@ -418,7 +418,7 @@ open class MeleeSwingHandler(
                         victim.location,
                         1,
                     ) &&
-                    victim.properties.combatPulse.victim === entity &&
+                    victim.properties.combatPulse.getVictim() === entity &&
                     entity.index < victim.index
             }
             return entity.centerLocation.withinDistance(

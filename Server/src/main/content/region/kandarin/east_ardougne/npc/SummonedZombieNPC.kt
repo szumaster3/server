@@ -55,7 +55,7 @@ class SummonedZombieNPC @JvmOverloads constructor(id: Int = NPCs.SUMMONED_ZOMBIE
 
         if (ticks % 3 != 0) return
 
-        val victim = owner?.properties?.combatPulse?.victim ?: return
+        val victim = owner?.properties?.combatPulse?.getVictim() ?: return
 
         if (victim.viewport.currentPlane != viewport.currentPlane) return
 

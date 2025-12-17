@@ -83,8 +83,8 @@ class NechryaelNPC : NPCBehavior(*Tasks.NECHRYAELS.npcs) {
         victim: Entity,
     ): Boolean {
         val list = getSpawns(self)
-        return victim == self.properties.combatPulse.victim ||
-            list.contains(victim.properties.combatPulse.victim)
+        return victim == self.properties.combatPulse.getVictim() ||
+            list.contains(victim.properties.combatPulse.getVictim())
     }
 }
 

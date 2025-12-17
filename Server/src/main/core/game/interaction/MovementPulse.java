@@ -11,6 +11,7 @@ import core.game.system.task.Pulse;
 import core.game.world.map.Direction;
 import core.game.world.map.Location;
 import core.game.world.map.Point;
+import core.game.world.map.RegionManager;
 import core.game.world.map.path.Path;
 import core.game.world.map.path.Pathfinder;
 import core.net.packet.PacketRepository;
@@ -80,7 +81,7 @@ public abstract class MovementPulse extends Pulse {
      */
     private boolean near;
 
-    private Function2<Entity, Node, Location> overrideMethod;
+    private Function2<Entity,Node,Location> overrideMethod;
 
     private Location previousLoc;
 
@@ -152,8 +153,8 @@ public abstract class MovementPulse extends Pulse {
         this.destinationFlag = destinationFlag;
     }
 
-    public MovementPulse(Entity mover, Node destination, DestinationFlag destinationFlag, Function2<Entity, Node, Location> method) {
-        this(mover, destination, null, false);
+    public MovementPulse(Entity mover, Node destination, DestinationFlag destinationFlag, Function2<Entity,Node,Location> method){
+        this(mover,destination,null,false);
         this.destinationFlag = destinationFlag;
         this.overrideMethod = method;
     }
@@ -174,7 +175,7 @@ public abstract class MovementPulse extends Pulse {
             if (mover instanceof Player) {
                 this.pathfinder = Pathfinder.SMART;
             } else if (mover instanceof NPC) {
-                NPC npc = (NPC) mover;
+                NPC npc = (NPC)mover;
                 NPCBehavior behavior = npc.behavior;
                 Pathfinder pf = behavior != null ? behavior.getPathfinderOverride(npc) : null;
                 this.pathfinder = pf != null ? pf : Pathfinder.DUMB;
@@ -229,7 +230,7 @@ public abstract class MovementPulse extends Pulse {
     private boolean tryInteract() {
         Location ml = mover.getLocation();
         // Allow being within 1 square of moving entities to interact with them.
-        int radius = destination instanceof Entity && ((Entity) destination).getWalkingQueue().hasPath() ? 1 : 0;
+        int radius = destination instanceof Entity && ((Entity)destination).getWalkingQueue().hasPath() ? 1 : 0;
         if (interactLocation == null)
             return false;
         if (Math.max(Math.abs(ml.getX() - interactLocation.getX()), Math.abs(ml.getY() - interactLocation.getY())) <= radius) {
@@ -244,7 +245,7 @@ public abstract class MovementPulse extends Pulse {
                     stop();
                     return true;
                 }
-            } catch (Exception e) {
+            } catch (Exception e){
                 e.printStackTrace();
                 stop();
             }
@@ -273,12 +274,11 @@ public abstract class MovementPulse extends Pulse {
      */
     private boolean usingTruncatedPath = false;
     private boolean isMoveNearSet = false;
-
     public void updatePath() {
         if (mover instanceof NPC && mover.asNpc().isNeverWalks()) {
             return;
         }
-        if (destination == null || destination.getLocation() == null) {
+        if(destination == null || destination.getLocation() == null){
             return;
         }
 
@@ -286,18 +286,20 @@ public abstract class MovementPulse extends Pulse {
 
         if (optionHandler != null) {
             loc = optionHandler.getDestination(mover, destination);
-        } else if (useHandler != null) {
+        }
+        else if (useHandler != null) {
             loc = useHandler.getDestination((Player) mover, destination);
-        } else if (isInsideEntity(mover.getLocation())) {
+        }
+        else if (isInsideEntity(mover.getLocation())) {
             loc = findBorderLocation();
         }
 
         if (loc == null && destinationFlag != null && overrideMethod == null) {
             loc = destinationFlag.getDestination(mover, destination);
-        } else if (loc == null && overrideMethod != null) {
-            loc = overrideMethod.invoke(mover, destination);
-            if (loc == destination.getLocation() && destinationFlag != null)
-                loc = destinationFlag.getDestination(mover, destination);
+        }
+        else if(loc == null && overrideMethod != null){
+            loc = overrideMethod.invoke(mover,destination);
+            if(loc == destination.getLocation() && destinationFlag != null) loc = destinationFlag.getDestination(mover,destination);
             else if (loc == destination.getLocation()) loc = null;
         }
 
@@ -375,47 +377,52 @@ public abstract class MovementPulse extends Pulse {
         return canMove;
     }
 
-    private Location checkForEntityPathInterrupt(Location loc) {
-        Location ml = mover.getLocation();
-        Location dl = destination.getLocation();
-        // Lead the target if they're walking/running, unless they're already within interaction range
-        if (loc != null && destination instanceof Entity) {
-            WalkingQueue wq = ((Entity) destination).getWalkingQueue();
-            if (wq.hasPath()) {
-                Point[] points = wq.getQueue().toArray(new Point[0]);
-                if (points.length > 0) {
-                    Point p = points[0];
-                    Point predictiveIntersection = null;
-                    for (int i = 0; i < points.length; i++) {
-                        Location closestBorder = getClosestBorderToPoint(points[i], loc.getZ());
+	private Location checkForEntityPathInterrupt(Location loc) {
+		Location ml = mover.getLocation();
+		Location dl = destination.getLocation();
+		// Lead the target if they're walking/running, unless they're already within interaction range
+		if (loc != null && destination instanceof Entity) {
+			WalkingQueue wq = ((Entity) destination).getWalkingQueue();
+			if (wq.hasPath()) {
+				Point[] points = wq.getQueue().toArray(new Point[0]);
+				if (points.length > 0) {
+					Point p = points[0];
+					Point predictiveIntersection = null;
+					for (int i = 0; i < points.length; i++) {
+						Location closestBorder = getClosestBorderToPoint(points[i], loc.getZ());
 
-                        int moverDist = Math.max(Math.abs(ml.getX() - closestBorder.getX()), Math.abs(ml.getY() - closestBorder.getY()));
-                        float movementRatio = moverDist / (float) ((i + 1) / (mover.getWalkingQueue().isRunning() ? 2 : 1));
-                        if (predictiveIntersection == null && movementRatio <= 1.0) { //try to predict an intersection point on the path if possible
-                            predictiveIntersection = points[i];
-                            break;
-                        }
+						if (!RegionManager.isTeleportPermitted(closestBorder)) { // A nasty hack to discard invalid intersection points
+							continue;
+						}
+						int moverDist = Math.max(Math.abs(ml.getX() - closestBorder.getX()), Math.abs(ml.getY() - closestBorder.getY()));
+						float movementRatio = moverDist / (float) ((i + 1) / (mover.getWalkingQueue().isRunning() ? 2 : 1));
+						if (predictiveIntersection == null && movementRatio <= 1.0) { //try to predict an intersection point on the path if possible
+							predictiveIntersection = points[i];
+							break;
+						}
+						// Otherwise, we target the farthest point along target's planned movement that's within 1 tick's running,
+						// this ensures the player will run to catch up to the target if able.
+						if (moverDist <= 2) {
+							p = points[i];
+						}
+					}
+					if (predictiveIntersection != null)
+						p = predictiveIntersection;
 
-                        // Otherwise, we target the farthest point along target's planned movement that's within 1 tick's running,
-                        // this ensures the player will run to catch up to the target if able.
-                        if (moverDist <= 2) {
-                            p = points[i];
-                        }
-                    }
+					Location endLoc = getClosestBorderToPoint(p, loc.getZ());
 
-                    if (predictiveIntersection != null)
-                        p = predictiveIntersection;
+					if (!RegionManager.isTeleportPermitted(endLoc)) { // Basically a prayer
+						return loc;
+					}
+					return endLoc;
+				}
+			}
+		}
+		return loc;
+	}
 
-                    Location endLoc = getClosestBorderToPoint(p, loc.getZ());
-                    return endLoc;
-                }
-            }
-        }
-        return loc;
-    }
-
-    private Location getClosestBorderToPoint(Point p, int plane) {
-        Vector pathDiff = Vector.betweenLocs(destination.getLocation(), Location.create(p.getX(), p.getY(), plane));
+    private Location getClosestBorderToPoint (Point p, int plane) {
+        Vector pathDiff = Vector.betweenLocs (destination.getLocation(), Location.create(p.getX(), p.getY(), plane));
         Location predictedCenterPos = (destination.getMathematicalCenter().plus(pathDiff)).toLocation(plane);
         Vector toPlayerNormalized = Vector.betweenLocs(predictedCenterPos, mover.getCenterLocation()).normalized();
         return predictedCenterPos.transform(toPlayerNormalized.times(destination.size() + 1));

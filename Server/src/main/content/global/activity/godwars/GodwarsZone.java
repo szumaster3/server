@@ -168,19 +168,19 @@ public final class GodwarsZone extends MapZone implements Plugin<java.lang.Objec
                 return true;
             }
             if (scenery.getId() == 26286) {
-                handleAltar((Player) e, option.name, GodWarsFaction.ZAMORAK, Location.create(2925, 5332, 2));
+                handleAltar((Player) e, option.getName(), GodWarsFaction.ZAMORAK, Location.create(2925, 5332, 2));
                 return true;
             }
             if (scenery.getId() == 26287) {
-                handleAltar((Player) e, option.name, GodWarsFaction.SARADOMIN, Location.create(2908, 5265, 0));
+                handleAltar((Player) e, option.getName(), GodWarsFaction.SARADOMIN, Location.create(2908, 5265, 0));
                 return true;
             }
             if (scenery.getId() == 26288) {
-                handleAltar((Player) e, option.name, GodWarsFaction.ARMADYL, Location.create(2839, 5295, 2));
+                handleAltar((Player) e, option.getName(), GodWarsFaction.ARMADYL, Location.create(2839, 5295, 2));
                 return true;
             }
             if (scenery.getId() == 26289) {
-                handleAltar((Player) e, option.name, GodWarsFaction.BANDOS, Location.create(2863, 5354, 2));
+                handleAltar((Player) e, option.getName(), GodWarsFaction.BANDOS, Location.create(2863, 5354, 2));
                 return true;
             }
         }

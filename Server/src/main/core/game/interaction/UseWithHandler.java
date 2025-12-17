@@ -21,73 +21,65 @@ import java.util.Map;
 import static core.api.ContentAPIKt.log;
 
 /**
- * Abstract base class for handling "use item with" interactions in the game.
+ * Handles the "use {@code node a} with {@code node b}" option.
+ *
+ * @author Emperor
  */
 public abstract class UseWithHandler implements Plugin<Object> {
 
     /**
-     * Represents an item node type.
+     * The item type.
      */
     public static final int ITEM_TYPE = 0;
 
     /**
-     * Represents an NPC node type.
+     * The NPC type.
      */
     public static final int NPC_TYPE = 1;
 
     /**
-     * Represents an object/scenery node type.
+     * The object type.
      */
     public static final int OBJECT_TYPE = 2;
 
     /**
-     * Represents a player node type.
+     * The player type.
      */
     public static final int PLAYER_TYPE = 3;
 
     /**
-     * Mapping of combined node type and id to a list of applicable handlers.
+     * The handlers.
      */
     private static final Map<Integer, List<UseWithHandler>> HANDLERS = new HashMap<>();
 
     /**
-     * The node ids this handler supports (if not dynamic).
+     * The allowed node ids.
      */
     private int[] allowedNodes;
 
     /**
-     * Creates a handler for specific node ids.
+     * Constructs a new {@code UseWithHandler.java} {@code Object}.
      *
-     * @param allowedNodes The node ids this handler applies to.
+     * @param allowedNodes
      */
     public UseWithHandler(int... allowedNodes) {
         this.allowedNodes = allowedNodes;
     }
 
-    /**
-     * Creates a handler for specific node ids (using a list).
-     *
-     * @param allowedNodes The node ids this handler applies to.
-     */
-    public UseWithHandler(ArrayList<Integer> allowedNodes) {
+    public UseWithHandler(ArrayList<Integer> allowedNodes){
+        this.allowedNodes = allowedNodes.stream().mapToInt(i -> i).toArray();
+    }
+
+    public void setAllowedNodes(ArrayList<Integer> allowedNodes){
         this.allowedNodes = allowedNodes.stream().mapToInt(i -> i).toArray();
     }
 
     /**
-     * Updates the allowed node list for this handler.
+     * Adds a handler.
      *
-     * @param allowedNodes List of new allowed node ids.
-     */
-    public void setAllowedNodes(ArrayList<Integer> allowedNodes) {
-        this.allowedNodes = allowedNodes.stream().mapToInt(i -> i).toArray();
-    }
-
-    /**
-     * Registers a new handler for a specific node id and type.
-     *
-     * @param id      The node id (item, object, etc.).
-     * @param type    The type of node (ITEM_TYPE, NPC_TYPE, etc.).
-     * @param handler The handler to register.
+     * @param id      The node id.
+     * @param type    The node type (0=item, 1=NPC, 2=object, 3=player).
+     * @param handler The handler.
      */
     public static void addHandler(int id, int type, UseWithHandler handler) {
         int key = id | type << 16;
@@ -109,9 +101,9 @@ public abstract class UseWithHandler implements Plugin<Object> {
     }
 
     /**
-     * Executes a "use with" interaction based on the event.
+     * Runs the event.
      *
-     * @param event The interaction event.
+     * @param event The event.
      */
     public static void run(final NodeUsageEvent event) {
         try {
@@ -120,9 +112,8 @@ public abstract class UseWithHandler implements Plugin<Object> {
             }
             Node n = event.getUsedWith();
             List<UseWithHandler> handler = null;
-
             if (n instanceof Item) {
-                handler = HANDLERS.get(((Item) event.getUsed()).getId());
+                handler = HANDLERS.get(((Item) event.getUsed()).getId());// fixed.
                 if (handler == null) {
                     handler = HANDLERS.get(((Item) event.getUsedWith()).getId());
                 }
@@ -135,7 +126,6 @@ public abstract class UseWithHandler implements Plugin<Object> {
             } else {
                 handler = HANDLERS.get(((NPC) n).getId() | NPC_TYPE << 16);
             }
-
             if (handler == null) {
                 if (n instanceof Item && !(event.getUsed() instanceof Player)) {
                     event.getPlayer().getPulseManager().runUnhandledAction(event.getPlayer(), PulseType.STANDARD);
@@ -143,18 +133,16 @@ public abstract class UseWithHandler implements Plugin<Object> {
                     event.getPlayer().getPulseManager().run(new MovementPulse(event.getPlayer(), event.getUsedWith()) {
                         @Override
                         public boolean pulse() {
-                            Player player = event.getPlayer();
-                            player.debug("Unhandled use with interaction: ");
-                                    player.debug("item used =" + event.getUsed().getName()  + " [" + event.getUsed().getId() + "]");
-                            player.debug("with =" + event.getUsedWith().getName()   + " [" + event.getUsedWith().getId() + "]");
-                            player.getPacketDispatch().sendMessage("Nothing interesting happens.");
+                            event.getPlayer().debug("Unhandled use with interaction:");
+                            event.getPlayer().debug("Used: " + event.getUsed());
+                            event.getPlayer().debug("With: " + event.getUsedWith());
+                            event.getPlayer().getPacketDispatch().sendMessage("Nothing interesting happens.");
                             return true;
                         }
                     }, PulseType.STANDARD);
                 }
                 return;
             }
-
             final List<UseWithHandler> handlers = handler;
             if (n instanceof Item && !(event.getUsed() instanceof Player)) {
                 event.getPlayer().getPulseManager().run(new Pulse(1, event.getPlayer(), event.getUsed(), event.getUsedWith()) {
@@ -166,12 +154,11 @@ public abstract class UseWithHandler implements Plugin<Object> {
                             event.getPlayer().getInterfaceManager().close();
                         }
                         for (UseWithHandler h : handlers) {
-                            if (!h.nodeAllowed(((Item) event.getUsedWith()).getId()) && !h.nodeAllowed(event.getUsedItem().getId()) || !h.handle(event)) {
+                            if (!h.nodeAllowed(((Item) event.getUsedWith()).getId()) && !h.nodeAllowed(event.getUsedItem().getId()) || !h.handle(event)) {// fixed,
                                 continue;
                             }
-                            event.getPlayer().debug("Handler=" + h.getClass().getSimpleName() +
-                                    ", used item=" + event.getUsedItem().getName() + " [" + event.getUsedItem().getId() + "]" +
-                                    ", used with=" + event.getUsedWith().getName() + " [" + event.getUsedWith().getId() + "]");                            handled = true;
+                            event.getPlayer().debug("Handler=" + h.getClass().getSimpleName() + ", used item=" + event.getUsedItem() + ", used with=" + event.getUsedWith());
+                            handled = true;
                             break;
                         }
                         if (!handled) {
@@ -184,7 +171,6 @@ public abstract class UseWithHandler implements Plugin<Object> {
                 }, PulseType.STANDARD);
                 return;
             }
-
             event.getPlayer().getPulseManager().run(new MovementPulse(event.getPlayer(), event.getUsedWith(), handler.get(0)) {
                 @Override
                 public boolean pulse() {
@@ -207,34 +193,30 @@ public abstract class UseWithHandler implements Plugin<Object> {
                     return true;
                 }
             }, PulseType.STANDARD);
-
-        } catch (Exception e) {
+        } catch (Exception e){
             e.printStackTrace();
         }
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
-    public java.lang.Object fireEvent(String identifier, java.lang.Object... args) {
+    public Object fireEvent(String identifier, Object... args) {
         return null;
     }
 
     /**
-     * Returns a list of all child object ids linked to a wrapper object, based on its config.
+     * Gets the valid children for the wrapper id.
      *
-     * @param wrapper The wrapper object id.
-     * @return Array of valid child object ids.
+     * @param wrapper the wrapper id.
+     * @return the valid children.
      */
     public int[] getValidChildren(int wrapper) {
         final SceneryDefinition definition = SceneryDefinition.forId(wrapper);
         final List<Integer> list = new ArrayList<>(20);
-        if (definition.childrenIds == null) {
-            log(this.getClass(), Log.ERR, "Null child wrapper in option handler wrapperId=" + wrapper);
+        if (definition.getChildrenIds() == null) {
+            log(this.getClass(), Log.ERR,  "Null child wrapper in option handler wrapperId=" + wrapper);
             return new int[]{wrapper};
         }
-        for (int child : definition.childrenIds) {
+        for (int child : definition.getChildrenIds()) {
             if (child != -1 && !list.contains(child)) {
                 list.add(child);
             }
@@ -247,21 +229,21 @@ public abstract class UseWithHandler implements Plugin<Object> {
     }
 
     /**
-     * Determines the destination a player should move to before executing the action.
+     * Method used to get the destination to go to, leave null to go to proper
+     * one.
      *
-     * @param player The player.
-     * @param with   The target node.
-     * @return The destination location, or null if no movement required.
+     * @param player the player.
+     * @return the location.
      */
     public Location getDestination(Player player, Node with) {
         return null;
     }
 
     /**
-     * Checks whether a given node id is allowed for this handler.
+     * Checks if the node is allowed to be used with the base node.
      *
      * @param nodeId The node id.
-     * @return True if allowed or if handler is dynamic; false otherwise.
+     * @return {@code True} if so.
      */
     public boolean nodeAllowed(int nodeId) {
         if (isDynamic()) {
@@ -276,17 +258,17 @@ public abstract class UseWithHandler implements Plugin<Object> {
     }
 
     /**
-     * Handles the actual interaction logic.
+     * Handles the interaction option.
      *
-     * @param event The interaction event.
-     * @return True if the interaction was handled; false otherwise.
+     * @param event The node usage event.
+     * @return {@code True} if successful.
      */
     public abstract boolean handle(NodeUsageEvent event);
 
     /**
-     * Determines if this handler dynamically accepts any node id.
+     * Checks if the handler excepts all dynamic items.
      *
-     * @return True if dynamic; false if node list restricted.
+     * @return {@code True} if so.
      */
     public boolean isDynamic() {
         return false;

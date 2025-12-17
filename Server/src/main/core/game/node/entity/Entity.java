@@ -79,7 +79,7 @@ public abstract class Entity extends Node {
     /**
      * The pulse manager.
      */
-    private final PulseManager pulseManager = new PulseManager();
+    private final PulseManager pulseManager = new PulseManager(this);
 
     /**
      * The impact handler.

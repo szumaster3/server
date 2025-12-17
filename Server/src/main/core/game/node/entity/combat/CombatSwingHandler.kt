@@ -1,31 +1,30 @@
 package core.game.node.entity.combat
 
-import content.global.skill.summoning.familiar.Familiar
-import core.api.log
-import core.api.playGlobalAudio
 import core.game.component.Component
 import core.game.container.impl.EquipmentContainer
 import core.game.node.Node
 import core.game.node.entity.Entity
-import core.game.node.entity.combat.equipment.ArmourSet
-import core.game.node.entity.combat.equipment.DegradableEquipment
-import core.game.node.entity.combat.equipment.WeaponInterface
+import core.game.node.entity.combat.equipment.*
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.audio.Audio
 import core.game.node.entity.player.link.prayer.PrayerType
 import core.game.node.entity.skill.Skills
-import core.game.system.config.ItemConfigParser
+import content.global.skill.summoning.familiar.Familiar
+import core.api.log
+import core.api.playGlobalAudio
 import core.game.world.map.Direction
 import core.game.world.map.Location
 import core.game.world.map.RegionManager
 import core.game.world.map.RegionManager.getClippingFlag
 import core.game.world.map.path.Pathfinder.*
 import core.game.world.update.flag.context.Animation
-import core.tools.Log
 import core.tools.RandomFunction
+import core.game.system.config.ItemConfigParser
+import core.tools.Log
 import shared.consts.Items
 import shared.consts.Sounds
+import java.util.*
 
 /**
  * Handles a combat swing.
@@ -176,9 +175,7 @@ abstract class CombatSwingHandler(var type: CombatStyle?) {
      * @param defenceMod The defence modifier.
      * @return `True` if the hit is accurate.
      */
-    fun isAccurateImpact(
-        entity: Entity?, victim: Entity?, style: CombatStyle?, accuracyMod: Double, defenceMod: Double
-    ): Boolean {
+    fun isAccurateImpact(entity: Entity?, victim: Entity?, style: CombatStyle?, accuracyMod: Double, defenceMod: Double): Boolean {
         var mod = 1.0
         if (victim == null || style == null) {
             return false
@@ -222,10 +219,10 @@ abstract class CombatSwingHandler(var type: CombatStyle?) {
             if (stepType != InteractionType.STILL_INTERACT) return stepType
         }
 
-        val comp = entity.getAttribute("autocast_component", null) as Component?
-        if ((comp != null || type == CombatStyle.MAGIC) && (entity.properties.autocastSpell == null || entity.properties.autocastSpell!!.spellId == 0) && entity is Player) {
+        val comp = entity.getAttribute("autocast_component",null) as Component?
+        if((comp != null || type == CombatStyle.MAGIC) && (entity.properties.autocastSpell == null || entity.properties.autocastSpell!!.spellId == 0) && entity is Player){
             val weapEx = entity.getExtension<Any>(WeaponInterface::class.java) as WeaponInterface?
-            if (comp != null) {
+            if(comp != null){
                 entity.interfaceManager.close(comp)
                 if (weapEx != null) {
                     entity.interfaceManager.openTab(weapEx)
@@ -238,7 +235,7 @@ abstract class CombatSwingHandler(var type: CombatStyle?) {
             entity.debug("Adjusting attack style")
         }
         if (entity.location == victim.location) {
-            return if (entity is Player && victim is Player && entity.clientIndex < victim.clientIndex && victim.properties.combatPulse.victim === entity) {
+            return if (entity is Player && victim is Player && entity.clientIndex < victim.clientIndex && victim.properties.combatPulse.getVictim() === entity) {
                 InteractionType.STILL_INTERACT
             } else InteractionType.NO_INTERACT
         }
@@ -275,41 +272,42 @@ abstract class CombatSwingHandler(var type: CombatStyle?) {
     }
 
     private fun checkStepInterval(
-        dir: Direction, next: Location
+        dir: Direction,
+        next: Location
     ): InteractionType {
         val components = next.getStepComponents(dir)
 
         when (dir) {
             Direction.NORTH -> if (getClippingFlag(next) and PREVENT_NORTH != 0) return InteractionType.NO_INTERACT
-            Direction.EAST -> if (getClippingFlag(next) and PREVENT_EAST != 0) return InteractionType.NO_INTERACT
+            Direction.EAST  -> if (getClippingFlag(next) and PREVENT_EAST  != 0) return InteractionType.NO_INTERACT
             Direction.SOUTH -> if (getClippingFlag(next) and PREVENT_SOUTH != 0) return InteractionType.NO_INTERACT
-            Direction.WEST -> if (getClippingFlag(next) and PREVENT_WEST != 0) return InteractionType.NO_INTERACT
+            Direction.WEST  -> if (getClippingFlag(next) and PREVENT_WEST  != 0) return InteractionType.NO_INTERACT
 
             Direction.NORTH_EAST -> {
-                if (getClippingFlag(components[0]) and PREVENT_EAST != 0 || getClippingFlag(components[1]) and PREVENT_NORTH != 0 || getClippingFlag(
-                        next
-                    ) and PREVENT_NORTHEAST != 0
+                if (getClippingFlag(components[0]) and PREVENT_EAST != 0
+                    || getClippingFlag(components[1]) and PREVENT_NORTH != 0
+                    || getClippingFlag(next) and PREVENT_NORTHEAST != 0
                 ) return InteractionType.NO_INTERACT
             }
 
             Direction.NORTH_WEST -> {
-                if (getClippingFlag(components[0]) and PREVENT_WEST != 0 || getClippingFlag(components[1]) and PREVENT_NORTH != 0 || getClippingFlag(
-                        next
-                    ) and PREVENT_NORTHWEST != 0
+                if (getClippingFlag(components[0]) and PREVENT_WEST != 0
+                    || getClippingFlag(components[1]) and PREVENT_NORTH != 0
+                    || getClippingFlag(next) and PREVENT_NORTHWEST != 0
                 ) return InteractionType.NO_INTERACT
             }
 
             Direction.SOUTH_EAST -> {
-                if (getClippingFlag(components[0]) and PREVENT_EAST != 0 || getClippingFlag(components[1]) and PREVENT_SOUTH != 0 || getClippingFlag(
-                        next
-                    ) and PREVENT_SOUTHEAST != 0
+                if (getClippingFlag(components[0]) and PREVENT_EAST != 0
+                    || getClippingFlag(components[1]) and PREVENT_SOUTH != 0
+                    || getClippingFlag(next) and PREVENT_SOUTHEAST != 0
                 ) return InteractionType.NO_INTERACT
             }
 
             Direction.SOUTH_WEST -> {
-                if (getClippingFlag(components[0]) and PREVENT_WEST != 0 || getClippingFlag(components[1]) and PREVENT_SOUTH != 0 || getClippingFlag(
-                        next
-                    ) and PREVENT_SOUTHWEST != 0
+                if (getClippingFlag(components[0]) and PREVENT_WEST != 0
+                    || getClippingFlag(components[1]) and PREVENT_SOUTH != 0
+                    || getClippingFlag(next) and PREVENT_SOUTHWEST != 0
                 ) return InteractionType.NO_INTERACT
             }
 
@@ -480,11 +478,12 @@ abstract class CombatSwingHandler(var type: CombatStyle?) {
         if (entity == null || (victim is Player && entity is Player)) {
             return
         }
-        val player: Player
-        val attStyle: Int
-        val style: CombatStyle
+        var player: Player
+        var attStyle: Int
+        var style: CombatStyle
 
-        when (entity) {
+        when(entity)
+        {
             is Familiar -> {
                 player = entity.owner
                 attStyle = player.properties.attackStyle!!.style

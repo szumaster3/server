@@ -1,10 +1,13 @@
 package content.global.skill.slayer
 
 import core.api.*
+import core.game.global.action.ClimbActionHandler
 import core.game.global.action.DoorActionHandler
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.node.entity.skill.Skills
+import core.game.world.map.Location
+import core.game.world.update.flag.context.Animation
 import shared.consts.Animations
 import shared.consts.Scenery
 
@@ -51,8 +54,17 @@ class SlayerTowerPlugin : InteractionListener {
 
         on(SPIKEY_CHAIN_IDS, IntType.SCENERY, "climb-up", "climb-down") { player, node ->
             val level = if (player.location.z == 0) 61 else 71
-            if (node.id == Scenery.SPIKEY_CHAIN_9319 && getStatLevel(player, Skills.AGILITY) < level) {
+            if (getStatLevel(player, Skills.AGILITY) < level) {
                 sendMessage(player, "You need an Agility level of at least $level in order to do this.")
+            }
+            val opt = getUsedOption(player)
+            if(opt == "climb-down") when(node.location.z) {
+                2 -> ClimbActionHandler.climb(player, Animation(827), Location(3447, 3575, 1))
+                1 -> ClimbActionHandler.climb(player, Animation(827), Location(3423, 3550, 0))
+            }
+            if(opt == "climb-up") when(node.location.z) {
+                0 -> ClimbActionHandler.climb(player, Animation(828), Location(3423, 3550, 1))
+                1 -> ClimbActionHandler.climb(player, Animation(828), Location(3447, 3575, 2))
             }
             return@on true
         }

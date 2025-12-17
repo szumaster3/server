@@ -25,7 +25,7 @@ class SkeletalWyvernNPC : NPCBehavior(*Tasks.SKELETAL_WYVERN.npcs) {
     private val SHIELDS = intArrayOf(Items.DRAGONFIRE_SHIELD_11283, Items.DRAGONFIRE_SHIELD_11285, Items.ELEMENTAL_SHIELD_2890, Items.MIND_SHIELD_9731)
 
     override fun getSwingHandlerOverride(self: NPC, original: CombatSwingHandler): CombatSwingHandler {
-        val victim = self.properties.combatPulse.victim ?: return original
+        val victim = self.properties.combatPulse.getVictim() ?: return original
         if (victim !is Player) return original
 
         return if (victim.location.getDistance(self.location) >= 5)

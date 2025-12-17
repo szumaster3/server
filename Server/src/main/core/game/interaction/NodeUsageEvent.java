@@ -5,68 +5,91 @@ import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
 
 /**
- * Event triggered when a node is used on another node.
+ * Represents a node use-with (other node) option.
+ * @author Emperor
  */
 public final class NodeUsageEvent {
 
-    private final Player player;
-    private final int componentId;
-    private final Node used, with;
+	/**
+	 * The player.
+	 */
+	private final Player player;
 
-    /**
-     * Creates a new usage event.
-     *
-     * @param player      the player using the item.
-     * @param componentId interface component id.
-     * @param used        the node being used.
-     * @param with        the target node.
-     */
-    public NodeUsageEvent(Player player, int componentId, Node used, Node with) {
-        this.player = player;
-        this.componentId = componentId;
-        this.used = used;
-        this.with = with;
-    }
+	/**
+	 * The component id.
+	 */
+	private final int componentId;
 
-    /**
-     * @return the player
-     */
-    public Player getPlayer() {
-        return player;
-    }
+	/**
+	 * The used node.
+	 */
+	private final Node used;
 
-    /**
-     * @return the interface component id.
-     */
-    public int getComponentId() {
-        return componentId;
-    }
+	/**
+	 * The node we used the other node on.
+	 */
+	private final Node with;
 
-    /**
-     * @return the node being used.
-     */
-    public Node getUsed() {
-        return used;
-    }
+	/**
+	 * Constructs a new {@code NodeUsageEvent} {@code Object}.
+	 * @param player The player.
+	 * @param componentId The component id.
+	 * @param used The used node.
+	 * @param with The node the other node is used on.
+	 */
+	public NodeUsageEvent(Player player, int componentId, Node used, Node with) {
+		this.player = player;
+		this.componentId = componentId;
+		this.used = used;
+		this.with = with;
+	}
 
-    /**
-     * @return the target node.
-     */
-    public Node getUsedWith() {
-        return with;
-    }
+	/**
+	 * Gets the base item.
+	 * @return The base item.
+	 */
+	public Item getBaseItem() {
+		return with instanceof Item ? (Item) with : null;
+	}
 
-    /**
-     * @return the used node as item, or null if not an item.
-     */
-    public Item getUsedItem() {
-        return used instanceof Item ? (Item) used : null;
-    }
+	/**
+	 * Gets the used item.
+	 * @return The used item.
+	 */
+	public Item getUsedItem() {
+		return used instanceof Item ? (Item) used : null;
+	}
 
-    /**
-     * @return the target node as item, or null if not an item.
-     */
-    public Item getBaseItem() {
-        return with instanceof Item ? (Item) with : null;
-    }
+	/**
+	 * Gets the player.
+	 * @return The player.
+	 */
+	public Player getPlayer() {
+		return player;
+	}
+
+	/**
+	 * Gets the componentId.
+	 * @return The componentId.
+	 */
+	public int getComponentId() {
+		return componentId;
+	}
+
+	/**
+	 * Gets the used.
+	 * @return The used.
+	 */
+	public Node getUsed() {
+		return used;
+	}
+
+	/**
+	 * The node the other node is used on.
+	 * @return The node.
+	 */
+	public Node getUsedWith() {
+		return with;
+	}
+
 }

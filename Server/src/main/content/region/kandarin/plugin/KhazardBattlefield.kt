@@ -31,7 +31,7 @@ class KhazardBattlefield(id: Int = 0, location: Location? = null) : AbstractNPC(
         val currentTime = System.currentTimeMillis()
         if (currentTime < nextActionTime) return
 
-        val victim = properties.combatPulse.victim
+        val victim = properties.combatPulse.getVictim()
 
         if (victim == null) {
             findAndAttackEnemy()
@@ -51,7 +51,7 @@ class KhazardBattlefield(id: Int = 0, location: Location? = null) : AbstractNPC(
     }
 
     private fun chatDuringCombat() {
-        val enemy = properties.combatPulse.victim ?: return
+        val enemy = properties.combatPulse.getVictim() ?: return
         if (enemy.location.getDistance(location) > 4) return
 
         val shouldChat = (enemy as? NPC)?.id?.let { getOpposingFaction().contains(it) } ?: true

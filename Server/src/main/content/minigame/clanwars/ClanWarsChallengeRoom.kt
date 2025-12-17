@@ -26,7 +26,7 @@ class ClanWarsChallengeRoom :
             p.skullManager.isWildernessDisabled = true
             p.skullManager.isWilderness = false
             p.interfaceManager.closeOverlay()
-            p.interaction.remove(Option.P_ASSIST)
+            p.interaction.remove(Option._P_ASSIST)
             p.interaction.set(CWChallengeOptionHandler.OPTION)
         }
         return super.enter(e)
@@ -40,7 +40,7 @@ class ClanWarsChallengeRoom :
             val p = e
             p.skullManager.isWildernessDisabled = false
             p.interaction.remove(CWChallengeOptionHandler.OPTION)
-            p.interaction.set(Option.P_ASSIST)
+            p.interaction.set(Option._P_ASSIST)
             if (WildernessZone.isInZone(e)) {
                 WildernessZone.show(p)
                 p.skullManager.isWilderness = true
