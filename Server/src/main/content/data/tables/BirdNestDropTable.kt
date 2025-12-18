@@ -11,21 +11,31 @@ import core.tools.StringUtils
 import shared.consts.Items
 import shared.consts.Sounds
 
+/**
+ * Represents possible bird nest drop tables.
+ */
 enum class BirdNestDropTable(
+    /**
+     * The bird nest item dropped on the ground.
+     */
     val nest: ChanceItem,
-    vararg loot: ChanceItem,
+
+    /**
+     * Possible loot obtained when searching the nest.
+     */
+    vararg loot: ChanceItem
 ) {
     RED(
         ChanceItem(Items.BIRDS_NEST_5070, 1, 5),
-        ChanceItem(Items.BIRDS_EGG_5076),
+        ChanceItem(Items.BIRDS_EGG_5076)
     ),
     GREEN(
         ChanceItem(Items.BIRDS_NEST_5071, 1, 5),
-        ChanceItem(Items.BIRDS_EGG_5078),
+        ChanceItem(Items.BIRDS_EGG_5078)
     ),
     BLUE(
         ChanceItem(Items.BIRDS_NEST_5072, 1, 5),
-        ChanceItem(Items.BIRDS_EGG_5077),
+        ChanceItem(Items.BIRDS_EGG_5077)
     ),
     SEED(
         ChanceItem(Items.BIRDS_NEST_5073, 1, 65),
@@ -52,6 +62,7 @@ enum class BirdNestDropTable(
         ChanceItem(Items.RUBY_RING_1641, 1, NPCDropTables.DROP_RATES[0]),
         ChanceItem(Items.DIAMOND_RING_1643, 1, NPCDropTables.DROP_RATES[2]),
     ),
+
     WYSON(
         ChanceItem(Items.BIRDS_NEST_7413, 1, 1),
         ChanceItem(Items.POTATO_SEED_5318, 14, NPCDropTables.DROP_RATES[0]),
@@ -73,67 +84,104 @@ enum class BirdNestDropTable(
     RAVEN(
         ChanceItem(Items.BIRDS_NEST_11966, 1, 5),
         ChanceItem(Items.RAVEN_EGG_11964),
-    ),
-    ;
+    );
 
+    /**
+     * Internal loot array used for random selection.
+     */
     val loot: Array<ChanceItem> = loot as Array<ChanceItem>
 
+    /**
+     * Searches the bird nest and awards the appropriate loot to the player.
+     *
+     * @param player the player searching the nest
+     * @param item the nest item being searched
+     */
     fun search(player: Player, item: Item) {
         if (freeSlots(player) < 1) {
             sendMessage(player, "You don't have enough inventory space.")
             return
         }
-        val loot = if (ordinal > 1 && this != WYSON) loot[0] else RandomFunction.getChanceItem(loot)
-        val name = loot.name.lowercase()
-        val input = (if (StringUtils.isPlusN(name)) "an" else "a") + " " + name
+
+        val reward = if (ordinal > 1 && this != WYSON) {
+            loot.first()
+        } else {
+            RandomFunction.getChanceItem(loot)
+        }
+
+        val name = reward.name.lowercase()
+        val article = if (StringUtils.isPlusN(name)) "an" else "a"
 
         lock(player, 1)
-        addItem(player, loot.id)
-        player.inventory.replace(EMPTY, item.slot)
-        sendMessage(player, "You take $input out of the bird's nest.")
+        addItem(player, reward.id)
+        player.inventory.replace(EMPTY_NEST, item.slot)
+        sendMessage(player, "You take $article $name out of the bird's nest.")
     }
 
     companion object {
-        private val NESTS = arrayOfNulls<ChanceItem>(6)
-        private val EMPTY = Item(Items.BIRDS_NEST_5075)
+        /**
+         * Cached array of nest ChanceItems used for random rolling.
+         */
+        private val NESTS: Array<ChanceItem?> = arrayOfNulls(6)
 
+        /**
+         * Empty bird nest item left after searching.
+         */
+        private val EMPTY_NEST = Item(Items.BIRDS_NEST_5075)
+
+        /**
+         * Rolls and drops a random bird nest near the player.
+         *
+         * Plays the falling nest sound and sends a chat notification.
+         */
         @JvmStatic
         fun drop(player: Player) {
-            val nest = getRandomNest(false)
+            val nest = getRandomNest(node = false)
             playAudio(player, Sounds.CUCKOO_1_1997)
-            GroundItemManager.create(nest!!.nest, player)
-            sendMessage(player, "<col=FF0000>A bird's nest falls out of the tree.")
+
+            nest?.let {
+                GroundItemManager.create(it.nest, player)
+            }
+
+            player.packetDispatch.sendMessage(
+                "<col=FF0000>A bird's nest falls out of the tree."
+            )
         }
 
+        /**
+         * Returns a random bird nest type.
+         *
+         * @param node whether the source is a bird nest node (Wyson logic)
+         * @return the rolled [BirdNestDropTable] or null if none matched
+         */
         @JvmStatic
         fun getRandomNest(node: Boolean): BirdNestDropTable? {
-            val item = RandomFunction.getChanceItem(NESTS)
-            for (n in values()) {
-                if (n.nest == item) {
-                    if (node && n == SEED) {
-                        return WYSON
-                    } else if (!node && n == WYSON) {
-                        return SEED
-                    }
-                    return n
+            val rolled = RandomFunction.getChanceItem(NESTS)
+
+            return values().firstOrNull { it.nest == rolled }?.let {
+                when {
+                    node && it == SEED -> WYSON
+                    !node && it == WYSON -> SEED
+                    else -> it
                 }
             }
-            return null
         }
 
+        /**
+         * Resolves a [BirdNestDropTable] by its nest item.
+         *
+         * @param nest the nest item
+         * @return matching drop table or null if none exists
+         */
         @JvmStatic
-        fun forNest(nest: Item): BirdNestDropTable? {
-            for (n in values()) {
-                if (n.nest.id == nest.id) {
-                    return n
-                }
-            }
-            return null
-        }
+        fun forNest(nest: Item): BirdNestDropTable? =
+            values().firstOrNull { it.nest.id == nest.id }
 
         init {
-            for (i in NESTS.indices) {
-                NESTS[i] = values()[i].nest
+            values().forEachIndexed { index, table ->
+                if (index < NESTS.size) {
+                    NESTS[index] = table.nest
+                }
             }
         }
     }
