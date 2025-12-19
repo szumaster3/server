@@ -19,96 +19,82 @@ import static core.api.ContentAPIKt.sendGraphics;
 
 /**
  * Represents a Hunter NPC used in the Hunter skill.
+ * Handles imp behaviour including periodic teleporting.
  */
 public final class HunterNPC extends AbstractNPC {
 
-    /** Chance for an imp to teleport when hit (percentage). */
-    private static final int IMP_TELEPORT_CHANCE_ON_HIT = 10;
+    /**
+     * Percentage chance for an imp to teleport when the check occurs.
+     */
+    private static final int IMP_TELEPORT_CHANCE = 25;
 
-    /** Chance for an imp to teleport each tick (percentage). */
-    private static final int IMP_TELEPORT_CHANCE_ON_TICK = 1000;
+    /**
+     * Minimum interval between teleport checks (seconds).
+     */
+    private static final int IMP_MIN_INTERVAL = 30;
 
-    /** The trap type associated with this NPC. */
+    /**
+     * Maximum interval between teleport checks (seconds).
+     */
+    private static final int IMP_MAX_INTERVAL = 120;
+
+    /**
+     * Attribute key storing the next teleport check tick.
+     */
+    private static final String NEXT_IMP_TELEPORT = "imp:next_teleport";
+
+    /**
+     * The trap type associated with this NPC.
+     */
     private final Traps trap;
 
-    /** The node/type of this NPC for trap catching logic. */
+    /**
+     * The node/type of this NPC for trap catching logic.
+     */
     private final TrapNode type;
 
-    /**
-     * Default constructor for a generic Hunter NPC.
-     */
     public HunterNPC() {
         this(0, null, null, null);
-        this.setWalks(true);
+        setWalks(true);
     }
 
-    /**
-     * Constructs a Hunter NPC with an id, location, trap, and type.
-     *
-     * @param id the NPC id
-     * @param location the spawn location
-     * @param trap the associated trap
-     * @param type the trap node type
-     */
     public HunterNPC(int id, Location location, Traps trap, TrapNode type) {
         super(id, location);
         this.trap = trap;
         this.type = type;
     }
 
-    /**
-     * Constructs a new Hunter NPC instance for a given id and location.
-     *
-     * @param id the NPC id
-     * @param location the spawn location
-     * @param objects optional additional objects
-     * @return a new HunterNPC instance
-     */
     @Override
     public AbstractNPC construct(int id, Location location, Object... objects) {
         Object[] data = Traps.getNode(id);
         return new HunterNPC(id, location, (Traps) data[0], (TrapNode) data[1]);
     }
 
-    /**
-     * Updates the NPC location and checks for trap interactions.
-     *
-     * @param last the previous location
-     */
     @Override
     public void updateLocation(Location last) {
-        final TrapWrapper wrapper = trap.getByHook(getLocation());
+        TrapWrapper wrapper = trap.getByHook(getLocation());
         if (wrapper != null) {
             wrapper.getType().catchNpc(wrapper, this);
         }
     }
 
-    /**
-     * Determines a movement destination for the NPC.
-     * Chooses a trap hook location if available and valid.
-     *
-     * @return the movement destination
-     */
     @Override
     protected Location getMovementDestination() {
-        if (trap.getHooks().size() == 0 || RandomFunction.random(170) > 5) {
+        if (trap.getHooks().isEmpty() || RandomFunction.random(170) > 5) {
             return super.getMovementDestination();
         }
+
         TrapHook hook = trap.getHooks().get(RandomFunction.random(trap.getHooks().size()));
         if (hook == null || !type.canCatch(hook.getWrapper(), this)) {
             return super.getMovementDestination();
         }
+
         Location destination = hook.getChanceLocation();
-        return destination != null && destination.getDistance(getLocation()) <= 24 ? destination : super.getMovementDestination();
+        return destination != null && destination.getDistance(getLocation()) <= 24
+                ? destination
+                : super.getMovementDestination();
     }
 
-    /**
-     * Handles drops when the NPC dies.
-     * Prevents multiple drops if already caught or processed.
-     *
-     * @param p the player who killed the NPC
-     * @param killer the entity that killed the NPC
-     */
     @Override
     public void handleDrops(Player p, Entity killer) {
         int ticks = getAttribute("hunter", 0);
@@ -117,11 +103,6 @@ public final class HunterNPC extends AbstractNPC {
         }
     }
 
-    /**
-     * Returns all NPC IDs associated with Hunter traps.
-     *
-     * @return array of Hunter NPC IDs
-     */
     @Override
     public int[] getIds() {
         List<Integer> ids = new ArrayList<>(10);
@@ -132,72 +113,70 @@ public final class HunterNPC extends AbstractNPC {
                 }
             }
         }
-        int[] array = new int[ids.size()];
-        for (int i = 0; i < array.length; i++) {
-            array[i] = ids.get(i);
-        }
-        return array;
+        return ids.stream().mapToInt(Integer::intValue).toArray();
     }
 
-    /**
-     * Checks the impact of combat on the NPC.
-     * Imps may randomly teleport when hit.
-     *
-     * @param state the battle state
-     */
-    @Override
-    public void checkImpact(BattleState state) {
-        super.checkImpact(state);
-
-        if (this.getId() == NPCs.IMP_708 || this.getId() == NPCs.IMP_709 || this.getId() == NPCs.IMP_1531) {
-            if (RandomFunction.roll(IMP_TELEPORT_CHANCE_ON_HIT)) {
-                getRandomLocAndTeleport();
-            }
-        }
-    }
-
-    /**
-     * Ticks the NPC each game cycle.
-     * Imps may randomly teleport each tick.
-     */
     @Override
     public void tick() {
         super.tick();
 
-        if (this.getId() == NPCs.IMP_708 || this.getId() == NPCs.IMP_709 || this.getId() == NPCs.IMP_1531) {
-            if (RandomFunction.roll(IMP_TELEPORT_CHANCE_ON_TICK)) {
-                getRandomLocAndTeleport();
-            }
+        if (!isImp()) {
+            return;
         }
+
+        long now = GameWorld.getTicks();
+        long nextCheck = getAttribute(NEXT_IMP_TELEPORT, 0L);
+
+        if (now < nextCheck) {
+            return;
+        }
+
+        if (RandomFunction.random(100) < IMP_TELEPORT_CHANCE) {
+            teleportImp();
+        }
+
+        int delaySeconds = RandomFunction.random(IMP_MIN_INTERVAL, IMP_MAX_INTERVAL);
+        long delayTicks = delaySeconds * 1000L / 600L;
+
+        setAttribute(NEXT_IMP_TELEPORT, now + delayTicks);
     }
 
-    /**
-     * Gets the type of this NPC for trap logic.
-     *
-     * @return the trap node type
-     */
+    private void teleportImp() {
+        Location teleportLocation = getPathableRandomLocalCoordinate(
+                this,
+                walkRadius,
+                getProperties().getSpawnLocation(),
+                3
+        );
+
+        if (teleportLocation == null || teleportLocation.equals(getLocation())) {
+            return;
+        }
+
+        sendGraphics(1119, getLocation());
+
+        ContentAPIKt.teleport(this, teleportLocation, TeleportManager.TeleportType.INSTANT);
+
+        getProperties().getCombatPulse().stop();
+        removeAttribute("combat-time");
+        getWalkingQueue().reset();
+        face(null);
+
+        setAttribute("no_combat", GameWorld.getTicks() + 5);
+    }
+
+    private boolean isImp() {
+        int id = getId();
+        return id == NPCs.IMP_708
+                || id == NPCs.IMP_709
+                || id == NPCs.IMP_1531;
+    }
+
     public TrapNode getType() {
         return type;
     }
 
-    /**
-     * Gets the trap associated with this NPC.
-     *
-     * @return the trap
-     */
     public Traps getTrap() {
         return trap;
-    }
-
-    /**
-     * Teleports the NPC to a random nearby pathable location and displays graphics.
-     */
-    private void getRandomLocAndTeleport() {
-        Location teleportLocation = getPathableRandomLocalCoordinate(this, walkRadius, getProperties().getSpawnLocation(), 3);
-
-        if (getLocation() != teleportLocation) {
-            sendGraphics(1119, getLocation());
-            ContentAPIKt.teleport(this, teleportLocation, TeleportManager.TeleportType.INSTANT);
-        }
     }
 }

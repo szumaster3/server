@@ -350,9 +350,9 @@ object PacketProcessor {
             }
 
             is Packet.TrackingAfkTimeout -> {
-                if (ServerConstants.AFK_LOGOUT_DISABLED || pkt.player.details.rights == Rights.ADMINISTRATOR) return
-
-                pkt.player.isAfkLogout = true
+                if (ServerConstants.AFK_LOGOUT_DISABLED) {
+                    return
+                }
                 pkt.player.packetDispatch.sendLogout()
             }
 
