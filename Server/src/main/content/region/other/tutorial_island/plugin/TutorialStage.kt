@@ -86,6 +86,8 @@ object TutorialStage {
             }
 
             39 -> {
+                hideTabs(player, login)
+                removeHintIcon(player)
                 setMinimapState(player, 0)
                 registerHintIcon(player, Repository.findNPC(NPCs.RUNESCAPE_GUIDE_945)!!)
                 Component.setUnclosable(
