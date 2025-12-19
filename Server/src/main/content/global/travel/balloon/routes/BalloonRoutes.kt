@@ -41,8 +41,8 @@ object BalloonRoutes {
         RouteData(
             firstSequence =
             listOf(9, 4, 5, 5, 5, 5, 5, 5, 5, 5, 6, 6, 6, 5, 5, 5, 5, 5, 5), // Aug 8, 2008
-            secondSequence = listOf(9, 5, 9, 5, 5, 5, 5, 5, 4, 5, 5, 5, 5, 5, 5, 5, 5),
-            thirdSequence = listOf(5, 5, 5, 5, 5, 5, 10, 6, 5, 5, 5, 9, 5, 5, 5, 6),
+            secondSequence = listOf(9, 5, 9, 5, 5, 5, 5, 5, 5, 4, 5, 5, 5, 5, 5, 5, 5, 5),
+            thirdSequence = listOf(5, 5, 5, 5, 5, 5, 10, 6, 5, 5, 5, 9, 5, 5, 5, 6, 5 ,5, 5, 10),
             firstOverlay = TaverleyRouteScreen::firstStage,
             secondOverlay = TaverleyRouteScreen::secondStage,
             thirdOverlay = TaverleyRouteScreen::thirdStage,

@@ -13,6 +13,7 @@ import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.TeleportManager
 import core.game.node.entity.player.link.diary.DiaryType
 import core.game.node.entity.skill.Skills
+import core.game.world.GameWorld
 import core.game.world.update.flag.context.Animation
 import shared.consts.Components
 import shared.consts.NPCs
@@ -42,6 +43,10 @@ object BalloonUtils {
 
         sendModelOnInterface(player, Components.ZEP_INTERFACE_470, top, -1)
         sendModelOnInterface(player, Components.ZEP_INTERFACE_470, bottom, -1)
+
+        if (bottom == 98) {
+            bottom += 2
+        }
 
         repeat(move.dx) {
             top = moveEast(top)
@@ -106,7 +111,7 @@ object BalloonUtils {
         }
     }
 
-    fun unlockDestination(player: Player, destination: BalloonDefinition) {
+    private fun unlockDestination(player: Player, destination: BalloonDefinition) {
         if (getVarbit(player, destination.varbitId) != 1) {
             setVarbit(player, destination.varbitId, 1, true)
             val xp = 2000
@@ -146,28 +151,22 @@ object BalloonUtils {
 
                 removeAttribute(player, "zep_current_step_$routeId")
                 teleport(player, balloonDestination.destination)
+                unlockDestination(player, balloonDestination)
                 if (!isQuestComplete(player, Quests.ENLIGHTENED_JOURNEY))
-                    FinishEnligtenedJourneyQuestDialogue()
+                    openDialogue(player, FinishEnligtenedJourneyQuestDialogue())
             }
         }
     }
 
-    private fun normalize(child: Int) =
-        when (child) {
-            98 -> 99
-            99 -> 98
-            else -> child
-        }
+    private fun moveEast(child: Int) = child + 1
 
-    private fun moveEast(child: Int) = normalize(child + 1)
+    private fun moveNorth(child: Int) = child + if (child >= 118) 20 else 19
 
-    private fun moveNorth(child: Int) = normalize(child + if (child >= 118) 20 else 19)
-
-    private fun moveSouth(child: Int) = normalize(child - 19)
+    private fun moveSouth(child: Int) = child - 19
 
     enum class BalloonMove(val dx: Int, val dy: Int) {
-        LOGS(1, -1),
         SANDBAG(1, -2),
+        LOGS(1, -1),
         RELAX(1, 0),
         TUG(0, 1),
         EMERGENCY_TUG(0, 2)
@@ -195,7 +194,7 @@ object BalloonUtils {
         return true
     }
 
-    fun getStorage(player: Player, varbit: Int): Int =
+    private fun getStorage(player: Player, varbit: Int): Int =
         getVarbit(player, varbit).coerceIn(0, STORAGE_CAPACITY)
 
     fun getSoundForButton(player: Player, buttonID: Int) {
@@ -225,7 +224,7 @@ object BalloonUtils {
 
     private fun keyBottom(routeId: Int, step: Int) = "zep_balloon_bottom_${routeId}_$step"
 
-    private val allChildren = (0..230).toSet()
+    private val allChildren = (78..230).toSet()
 
     fun reset(player: Player, component: Int) {
         allChildren.forEach { sendModelOnInterface(player, component, it, -1) }
@@ -235,16 +234,11 @@ object BalloonUtils {
         override fun handle(componentID: Int, buttonID: Int) {
             npc = NPC(NPCs.AUGUSTE_5049)
             when (stage) {
-                0 -> playerl(FaceAnim.FRIENDLY, "So what are you going to do now?").also { stage++ }
-                1 ->
-                    npcl(FaceAnim.FRIENDLY, "I am considering starting a balloon enterprise.")
-                        .also { stage++ }
-                2 ->
-                    npcl(FaceAnim.FRIENDLY, "You will always be welcome to use a balloon.").also {
-                        stage++
-                    }
-                3 -> playerl(FaceAnim.FRIENDLY, "Thanks!").also { stage++ }
-                4 -> npcl(FaceAnim.FRIENDLY, "Come see me in Entrana.").also { stage++ }
+                0 -> playerl(FaceAnim.HALF_ASKING, "So what are you going to do now?").also { stage++ }
+                1 -> npcl(FaceAnim.FRIENDLY, "I am considering starting a balloon enterprise. People all over ${GameWorld.settings?.name} will be able to travel in a new, exciting way.").also { stage++ }
+                2 -> npcl(FaceAnim.HAPPY, "As my first assistant, you will always be welcome to use a balloon. You'll have to bring your own fuel, though.").also { stage++ }
+                3 -> playerl(FaceAnim.HAPPY, "Thanks!").also { stage++ }
+                4 -> npcl(FaceAnim.HAPPY, "I will base my operations in Entrana. If you'd like to travel to new places, come see me there.").also { stage++ }
                 5 -> {
                     end()
                     finishQuest(player!!, Quests.ENLIGHTENED_JOURNEY)

@@ -7,9 +7,11 @@ import core.cache.def.impl.ItemDefinition
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.interaction.InterfaceListener
+import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.info.Rights
 import core.game.node.entity.skill.Skills
 import core.game.node.item.Item
+import core.game.world.map.Location
 import shared.consts.Components
 import shared.consts.NPCs
 import shared.consts.Quests
@@ -19,8 +21,33 @@ import shared.consts.Scenery
 class BalloonFlightHandler : InterfaceListener, InteractionListener {
 
     companion object {
+        /**
+         * Represents the assistant npc.
+         */
         private val BALLOON_SERVICE_NPC_IDS = intArrayOf(NPCs.AUGUSTE_5050, NPCs.ASSISTANT_SERF_5053, NPCs.ASSISTANT_BROCK_5054, NPCs.ASSISTANT_MARROW_5055, NPCs.ASSISTANT_LE_SMITH_5056, NPCs.ASSISTANT_STAN_5057, 5063, 5065)
+
+        /**
+         * Represents the basket ids.
+         */
         private val BASKET_OBJECT_IDS = intArrayOf(Scenery.BASKET_19128, Scenery.BASKET_19129)
+
+        /**
+         * Represents assistant npcs and their spawn locations.
+         */
+        private val assistants = mapOf(
+            NPCs.ASSISTANT_SERF_5053 to Location.create(3298, 3484, 0),
+            NPCs.ASSISTANT_LE_SMITH_5056 to Location.create(2480, 3458, 0),
+            NPCs.ASSISTANT_STAN_5057 to Location.create(2938, 3424, 0)
+        )
+    }
+
+    init {
+        assistants.forEach { (npcId, location) ->
+            NPC(npcId, location).apply {
+                init()
+                isWalks = true
+            }
+        }
     }
 
     override fun defineInterfaceListeners() {
@@ -28,6 +55,7 @@ class BalloonFlightHandler : InterfaceListener, InteractionListener {
             val destination = BalloonDefinition.fromButtonId(buttonID) ?: return@on true
             val isAdmin = player.rights == Rights.ADMINISTRATOR
             val origin = player.getAttribute<BalloonDefinition>(GameAttributes.BALLOON_ORIGIN)
+
             if (!hasLevelStat(player, Skills.FIREMAKING, destination.requiredLevel)) {
                 sendDialogue(player, "You require a Firemaking level of ${destination.requiredLevel} to travel to ${destination.destName}.")
                 return@on true
@@ -44,10 +72,7 @@ class BalloonFlightHandler : InterfaceListener, InteractionListener {
             }
 
             if (player.settings.weight > 40.0) {
-                sendDialogue(
-                    player,
-                    "You're carrying too much weight to fly. Try reducing your weight below 40 kg."
-                )
+                sendDialogue(player, "You're carrying too much weight to fly. Try reducing your weight below 40 kg.")
                 return@on true
             }
 
@@ -64,10 +89,26 @@ class BalloonFlightHandler : InterfaceListener, InteractionListener {
                 return@on true
             }
 
-            if (!removeItem(player, Item(destination.logId, 1))) {
-                val requiredItem =
-                    getItemName(destination.logId).lowercase().removeSuffix("s").trim()
+            val routeId = when (destination) {
+                BalloonDefinition.TAVERLEY -> 1
+                BalloonDefinition.CRAFT_GUILD -> 2
+                BalloonDefinition.VARROCK -> 3
+                BalloonDefinition.CASTLE_WARS -> 4
+                BalloonDefinition.GRAND_TREE -> 5
+                BalloonDefinition.ENTRANA -> -1
+            }
 
+            val isUnlocked = getVarbit(player, destination.varbitId) == 1
+            if (!isUnlocked && destination != BalloonDefinition.ENTRANA) {
+                closeInterface(player)
+                setAttribute(player, "zep_current_route", routeId)
+                setAttribute(player, "zep_current_step_$routeId", 1)
+                openInterface(player, Components.ZEP_INTERFACE_470)
+                return@on true
+            }
+
+            if (!removeItem(player, Item(destination.logId, 1))) {
+                val requiredItem = getItemName(destination.logId).lowercase().removeSuffix("s").trim()
                 sendDialogue(player, "You need at least one $requiredItem.")
                 return@on true
             }
