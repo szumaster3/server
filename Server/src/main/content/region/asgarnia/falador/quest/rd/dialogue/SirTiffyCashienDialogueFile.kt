@@ -26,10 +26,10 @@ class SirTiffyCashienDialogueFile : DialogueFile() {
             4 -> npcl(FaceAnim.FRIENDLY, "A top-notch filly like yourself is just the right sort we've been looking for for our organisation.").also { stage++ }
             5 -> npcl(FaceAnim.FRIENDLY, "So, are you ready to begin testing?").also { stage++ }
             6 -> showTopics(
-                Topic("Testing..?",1),
+                Topic("Testing..?",7),
                 Topic("Organisation?",1),
-                Topic("Yes, let's go!",1),
-                Topic("No, I've changed my mind.",1),
+                Topic("Yes, let's go!",33, true),
+                Topic("No, I've changed my mind.", END_DIALOGUE),
             )
             7  -> playerl(FaceAnim.THINKING, "Testing? What exactly do you mean by testing?").also { stage++ }
             8  -> npcl(FaceAnim.FRIENDLY, "Jolly bad show! Varze was supposed to have informed you about all this before sending you here!").also { stage++ }
