@@ -18,16 +18,15 @@ class GoblinVillageNPC(id: Int = 0, location: Location? = null) : AbstractNPC(id
         green = id !in RED_GOBLINS
     }
 
-    override fun tick(){
+    override fun tick() {
         super.tick()
-        if (delay < System.currentTimeMillis() && !properties.combatPulse.isAttacking)
-        {
-            if((1..4).random() == 2)
-            {
+        if (delay < System.currentTimeMillis() && !properties.combatPulse.isAttacking) {
+            if ((1..4).random() == 2) {
                 val surround = getLocalNpcs(this, 10)
-                val enemies = surround.filter {
-                    n -> n.id != id && !n.properties.combatPulse.isAttacking &&
-                        (if (green) RED_GOBLINS else GREEN_GOBLINS).contains(n.id)
+                val enemies = surround.filter { n ->
+                    n.id != id && !n.properties.combatPulse.isAttacking && (if (green) RED_GOBLINS else GREEN_GOBLINS).contains(
+                        n.id
+                    )
                 }
                 enemies.forEach {
                     it.lock(5)
@@ -35,22 +34,20 @@ class GoblinVillageNPC(id: Int = 0, location: Location? = null) : AbstractNPC(id
                 }
             }
             delay = System.currentTimeMillis() + 5000
-        }
-        else
-        {
+        } else {
             if (RandomFunction.random(3) != 1) return
             val enemy = properties.combatPulse.getVictim() as? NPC ?: return
             if (enemy.location.getDistance(getLocation()) > 4) return
 
-            if ((if (green) RED_GOBLINS else GREEN_GOBLINS).contains(enemy.id) && (0..3).random() == 2)
-            {
+            if ((if (green) RED_GOBLINS else GREEN_GOBLINS).contains(enemy.id) && (0..3).random() == 2) {
                 val messages = if (green) GREEN_MESSAGES else RED_MESSAGES
                 sendChat(messages[RandomFunction.random(messages.size)])
             }
         }
     }
 
-    override fun construct(id: Int, location: Location, vararg objects: Any): AbstractNPC = GoblinVillageNPC(id, location)
+    override fun construct(id: Int, location: Location, vararg objects: Any): AbstractNPC =
+        GoblinVillageNPC(id, location)
 
     override fun getIds(): IntArray = ID
 

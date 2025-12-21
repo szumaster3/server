@@ -1,6 +1,5 @@
 package content.region.asgarnia.falador.quest.rd
 
-import content.region.asgarnia.falador.quest.rd.plugin.RDUtils
 import core.api.MapArea
 import core.api.getRegionBorders
 import core.game.node.entity.Entity

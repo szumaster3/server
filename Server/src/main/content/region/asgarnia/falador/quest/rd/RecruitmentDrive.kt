@@ -30,19 +30,13 @@ class RecruitmentDrive : Quest(Quests.RECRUITMENT_DRIVE, 103, 102, 1, 496, 0, 1,
         super.drawJournal(player, stage)
         var line = 11
         var stage = getStage(player)
-
         var started = getQuestStage(player, Quests.RECRUITMENT_DRIVE) > 0
 
         if (!started) {
             line(player, "I can start this quest by speaking to !!Sir Amik Varze??,", line++)
             line(player, "upstairs in !!Falador Castle??.", line++)
             if (isQuestComplete(player, Quests.DRUIDIC_RITUAL)) {
-                line(
-                    player,
-                    "with the ${Quests.DRUIDIC_RITUAL} Quest completed,",
-                    line++,
-                    isQuestComplete(player, Quests.DRUIDIC_RITUAL),
-                )
+                line(player, "with the ${Quests.DRUIDIC_RITUAL} Quest completed,", line++, isQuestComplete(player, Quests.DRUIDIC_RITUAL))
             } else {
                 line(player, "I have to completed the !!${Quests.DRUIDIC_RITUAL} Quest??,", line++)
             }

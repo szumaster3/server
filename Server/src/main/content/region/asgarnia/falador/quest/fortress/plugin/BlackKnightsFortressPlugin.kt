@@ -13,8 +13,8 @@ import shared.consts.*
 
 class BlackKnightsFortressPlugin : InteractionListener {
 
-    val LARGE_DOOR_ID = intArrayOf(Scenery.LARGE_DOOR_74, Scenery.LARGE_DOOR_73)
-    val CABBAGE_ID = intArrayOf(Items.CABBAGE_1965, Items.CABBAGE_1967)
+    private val LARGE_DOOR_ID = intArrayOf(Scenery.LARGE_DOOR_74, Scenery.LARGE_DOOR_73)
+    private val CABBAGE_ID = intArrayOf(Items.CABBAGE_1965, Items.CABBAGE_1967)
 
     override fun defineListeners() {
         on(LARGE_DOOR_ID, IntType.SCENERY, "open") { player, node ->
@@ -75,7 +75,7 @@ class BlackKnightsFortressPlugin : InteractionListener {
             return@onUseWith true
         }
 
-        on(2342, IntType.SCENERY, "listen-at") { player, _ ->
+        on(Scenery.GRILL_2342, IntType.SCENERY, "listen-at") { player, _ ->
             if (getQuestStage(player, Quests.BLACK_KNIGHTS_FORTRESS) < 1) {
                 sendPlayerDialogue(player, "Why exactly would I want to do that?")
                 return@on true
