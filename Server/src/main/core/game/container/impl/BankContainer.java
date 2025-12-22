@@ -440,7 +440,7 @@ public final class BankContainer extends Container {
 	 * @return If items have to be noted {@code true}.
 	 */
 	public boolean isNoteItems() {
-		return getVarbit(player, Vars.VARP_IFACE_BANK_NOTE_MODE_115) == 1;
+		return getVarp(player, Vars.VARP_IFACE_BANK_NOTE_MODE_115) == 1;
 	}
 
 	/**
@@ -448,7 +448,7 @@ public final class BankContainer extends Container {
 	 * @param noteItems If items have to be noted {@code true}.
 	 */
 	public void setNoteItems(boolean noteItems) {
-		setVarbit(player, Vars.VARP_IFACE_BANK_NOTE_MODE_115, noteItems ? 1 : 0, true);
+		setVarp(player, Vars.VARP_IFACE_BANK_NOTE_MODE_115, noteItems ? 1 : 0, true);
 	}
 
 	/**
