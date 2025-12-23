@@ -13824,7 +13824,7 @@
     "attack_level": "1"
   },
   {
-"examine": "She's wearing a blue top and red trousers.",
+    "examine": "She's wearing a blue top and red trousers.",
     "name": "Carol",
     "defence_level": "1",
     "safespot": null,
@@ -13836,7 +13836,7 @@
     "attack_level": "1"
   },
   {
-"examine": "He's dressed all in green.",
+    "examine": "He's dressed all in green.",
     "name": "David",
     "defence_level": "1",
     "safespot": null,
@@ -13848,7 +13848,7 @@
     "attack_level": "1"
   },
   {
-  "examine": "She's wearing a green top and blue trousers.",
+    "examine": "She's wearing a green top and blue trousers.",
     "name": "Elizabeth",
     "defence_level": "1",
     "safespot": null,
@@ -13860,7 +13860,7 @@
     "attack_level": "1"
   },
   {
-  "examine": "He's dressed all in blue.",
+    "examine": "He's dressed all in blue.",
     "name": "Frank",
     "defence_level": "1",
     "safespot": null,
