@@ -17,6 +17,8 @@
   <a href="#license">License</a>
 </div>
 
+___
+
 > [!TIP]
 > **Play the game**
 >
