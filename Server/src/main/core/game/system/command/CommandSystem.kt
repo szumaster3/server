@@ -2,6 +2,7 @@ package core.game.system.command
 
 import core.api.sendMessage
 import core.game.node.entity.player.Player
+import core.game.node.entity.player.info.Rights
 import core.tools.colorize
 
 /**
@@ -20,14 +21,30 @@ class CommandSystem {
         val arguments = message.split(" ").toTypedArray()
         val command = CommandMapping.get(arguments[0])
 
+        val isAdmin = player.rights == Rights.ADMINISTRATOR
+
         if (command == null) {
             for (set in CommandSet.values()) {
                 if (set.interpret(player, arguments[0], *arguments)) {
-                    sendMessage(player, colorize("-->%Y${arguments[0]}: Deprecated command"))
+
+                    if (isAdmin) {
+                        sendMessage(
+                            player,
+                            colorize("-->%Y${arguments[0]}: Deprecated command")
+                        )
+                    }
+
                     return true
                 }
             }
-            sendMessage(player, colorize("-->%R${arguments[0]}: command not found"))
+
+            if (isAdmin) {
+                sendMessage(
+                    player,
+                    colorize("-->%R${arguments[0]}: command not found")
+                )
+            }
+
         } else {
             try {
                 command.attemptHandling(player, arguments)
