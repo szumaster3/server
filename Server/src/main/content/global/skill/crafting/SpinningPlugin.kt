@@ -21,7 +21,7 @@ class SpinningPlugin : InteractionListener, InterfaceListener {
          * Handles interaction with spinning wheel.
          */
 
-        on(CraftingObject.SPINNING_WHEEL, IntType.SCENERY, "spin") { player, _ ->
+        on(CraftingDefinition.SPINNING_WHEEL, IntType.SCENERY, "spin") { player, _ ->
             openInterface(player, Components.CRAFTING_SPINNING_459)
             return@on true
         }
@@ -30,7 +30,7 @@ class SpinningPlugin : InteractionListener, InterfaceListener {
          * Handles creating golden wool.
          */
 
-        onUseWith(IntType.SCENERY, Items.GOLDEN_FLEECE_3693, *CraftingObject.SPINNING_WHEEL) { player, _, _ ->
+        onUseWith(IntType.SCENERY, Items.GOLDEN_FLEECE_3693, *CraftingDefinition.SPINNING_WHEEL) { player, _, _ ->
             if (removeItem(player, Items.GOLDEN_FLEECE_3693)) {
                 addItem(player, Items.GOLDEN_WOOL_3694)
                 animate(player, Animations.OLD_COOK_RANGE_896)

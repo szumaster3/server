@@ -1,5 +1,6 @@
-package content.region.kandarin.seers_village.quest.murder
+package content.region.kandarin.seers_village.quest.murder.plugin
 
+import content.region.kandarin.seers_village.quest.murder.MurderMystery
 import content.region.kandarin.seers_village.quest.murder.dialogue.FlypaperDialogue
 import content.region.kandarin.seers_village.quest.murder.dialogue.FountainDialogue
 import core.api.*

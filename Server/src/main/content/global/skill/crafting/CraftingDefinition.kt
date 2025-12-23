@@ -2,12 +2,14 @@ package content.global.skill.crafting
 
 import core.api.*
 import core.game.component.Component
+import core.game.interaction.Clocks
+import core.game.interaction.QueueStrength
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.diary.DiaryType
+import core.game.node.entity.skill.Skills
 import core.game.node.item.Item
-import shared.consts.Animations
-import shared.consts.Components
-import shared.consts.Items
+import shared.consts.*
+import kotlin.math.min
 
 object CraftingDefinition {
     /**
@@ -31,14 +33,23 @@ object CraftingDefinition {
     const val BRACELET_MOULD: Int = Items.BRACELET_MOULD_11065
 
     /**
-     * Represents a gold jewellery item that can be crafted.
+     * The crafting scenery objects.
+     */
+    val FURNACES = intArrayOf(Scenery.FURNACE_4304, Scenery.FURNACE_6189, Scenery.LAVA_FORGE_9390, Scenery.FURNACE_11010, Scenery.FURNACE_11666, Scenery.FURNACE_12100, Scenery.FURNACE_12809, Scenery.FURNACE_18497, Scenery.FURNACE_26814, Scenery.FURNACE_30021, Scenery.FURNACE_30510, Scenery.FURNACE_36956, Scenery.FURNACE_37651)
+    val POTTERY_OVENS = intArrayOf(Scenery.POTTERY_OVEN_2643, Scenery.POTTERY_OVEN_4308, Scenery.POTTERY_OVEN_11601, Scenery.POTTERY_OVEN_34802)
+    val POTTERY_WHEELS = intArrayOf(Scenery.POTTER_S_WHEEL_2642, Scenery.POTTER_S_WHEEL_4310, Scenery.POTTER_S_WHEEL_20375, Scenery.POTTER_S_WHEEL_34801)
+    val RANGE = intArrayOf(Scenery.COOKING_RANGE_114, Scenery.COOKING_RANGE_2859, Scenery.COOKING_RANGE_4172, Scenery.COOKING_RANGE_5275, Scenery.COOKING_RANGE_8750, Scenery.COOKING_RANGE_16893, Scenery.COOKING_RANGE_22154, Scenery.COOKING_RANGE_34565, Scenery.COOKING_RANGE_34410, Scenery.RANGE_2728, Scenery.RANGE_2729, Scenery.RANGE_2730, Scenery.RANGE_2731, Scenery.RANGE_3039, Scenery.RANGE_9682, Scenery.RANGE_12102, Scenery.RANGE_14919, Scenery.RANGE_21792, Scenery.RANGE_22713, Scenery.RANGE_22714, Scenery.RANGE_24283, Scenery.RANGE_24284, Scenery.RANGE_25730, Scenery.RANGE_33500, Scenery.RANGE_34495, Scenery.RANGE_34546, Scenery.RANGE_36973, Scenery.RANGE_37629)
+    val SPINNING_WHEEL = intArrayOf(Scenery.SPINNING_WHEEL_2644, Scenery.SPINNING_WHEEL_4309, Scenery.SPINNING_WHEEL_8748, Scenery.SPINNING_WHEEL_20365, Scenery.SPINNING_WHEEL_21304, Scenery.SPINNING_WHEEL_25824, Scenery.SPINNING_WHEEL_26143, Scenery.SPINNING_WHEEL_34497, Scenery.SPINNING_WHEEL_36970, Scenery.SPINNING_WHEEL_37476)
+
+    /**
+     * Represents a jewellery item craftable with gold.
      * @property level The required crafting level to make this item.
      * @property experience The xp gained when crafting this item.
      * @property componentId The interface component id used for selecting product id.
      * @property productId The item send to interface also product id.
      * @property items The base items required to craft this jewellery.
      */
-    enum class JewelleryItem(val level: Int, experience: Int, val componentId: Int, val productId: Int, vararg val items: Int) {
+    enum class Jewellery(val level: Int, experience: Int, val componentId: Int, val productId: Int, vararg val items: Int) {
         GOLD_RING(5, 15, 19, Items.GOLD_RING_1635, Items.GOLD_BAR_2357),
         SAPPHIRE_RING(20, 40, 21, Items.SAPPHIRE_RING_1637, Items.SAPPHIRE_1607, Items.GOLD_BAR_2357),
         EMERALD_RING(27, 55, 23, Items.EMERALD_RING_1639, Items.EMERALD_1605, Items.GOLD_BAR_2357),
@@ -83,7 +94,7 @@ object CraftingDefinition {
             /**
              * The product map.
              */
-            var productMap = HashMap<Int, JewelleryItem>()
+            var productMap = HashMap<Int, Jewellery>()
 
             init {
                 val jewelleryArray = values()
@@ -93,14 +104,184 @@ object CraftingDefinition {
             }
 
             /**
-             * Gets a [JewelleryItem] by product item id.
+             * Gets a [Jewellery] by product item id.
              * @param id the item id.
-             * @return The matching [JewelleryItem] or null if not found.
+             * @return The matching [Jewellery] or null if not found.
              */
             @JvmStatic
-            fun forProduct(id: Int): JewelleryItem? {
+            fun forProduct(id: Int): Jewellery? {
                 return productMap[id]
             }
+        }
+    }
+
+    private val mouldComponentMap = mapOf(
+        CraftingDefinition.RING_MOULD     to intArrayOf(20, 22, 24, 26, 28, 30, 32, 35),
+        CraftingDefinition.NECKLACE_MOULD to intArrayOf(42, 44, 46, 48, 50, 52, 54),
+        CraftingDefinition.AMULET_MOULD   to intArrayOf(61, 63, 65, 67, 69, 71, 73),
+        CraftingDefinition.BRACELET_MOULD to intArrayOf(80, 82, 84, 86, 88, 90, 92)
+    )
+
+    /**
+     * Opens the gold jewellery crafting interface.
+     */
+    @JvmStatic
+    fun openGoldJewelleryInterface(player: Player) {
+        openInterface(player, Components.CRAFTING_GOLD_446)
+        for ((mould, components) in mouldComponentMap) {
+            val hide = !inInventory(player, mould)
+            for (component in components) {
+                sendInterfaceConfig(player, Components.CRAFTING_GOLD_446, component, hide)
+            }
+        }
+
+        val mouldButtons = listOf(
+            CraftingDefinition.RING_MOULD     to 14,
+            CraftingDefinition.NECKLACE_MOULD to 36,
+            CraftingDefinition.AMULET_MOULD   to 55,
+            CraftingDefinition.BRACELET_MOULD to 74
+        )
+
+
+        for ((mould, component) in mouldButtons) {
+            sendInterfaceConfig(
+                player,
+                Components.CRAFTING_GOLD_446,
+                component,
+                inInventory(player, mould)
+            )
+        }
+
+        for (item in Jewellery.values()) {
+            val hasAllItems = allInInventory(player, *item.items)
+            val hasMould = inInventory(player, mouldFor(item.name))
+            val meetsRequirements = getStatLevel(player, Skills.CRAFTING) >= item.level
+
+            val itemToSend = when {
+                hasAllItems && hasMould && meetsRequirements -> item.productId
+                hasMould -> getPlaceholder(item.name)
+                else -> -1
+            }
+
+            if (itemToSend != -1) {
+                sendItemZoomOnInterface(player, Components.CRAFTING_GOLD_446, item.componentId, itemToSend)
+                sendInterfaceConfig(player, Components.CRAFTING_GOLD_446, item.componentId + 1, false)
+            }
+        }
+    }
+
+    private fun getPlaceholder(name: String): Int {
+        val lower = name.lowercase()
+        return when {
+            "ring" in lower                      -> Items.RING_PICTURE_1647
+            "necklace" in lower                  -> Items.NECKLACE_PICTURE_1666
+            "amulet" in lower || "ammy" in lower -> Items.AMULET_PICTURE_1685
+            "bracelet" in lower                  -> Items.BRACELET_PICTURE_11067
+            else -> -1
+        }
+    }
+
+    /**
+     * Init crafting for a selected jewellery item.
+     */
+    @JvmStatic
+    fun make(player: Player, data: Jewellery, amount: Int) {
+        var amount = amount
+        var length = 0
+        var amt = 0
+        amt = if (data.items.contains(GOLD_BAR))
+            player.inventory.getAmount(Item(GOLD_BAR))
+        else if (data.items.contains(PERFECT_GOLD_BAR)) {
+            player.inventory.getAmount(Item(PERFECT_GOLD_BAR))
+        } else {
+            val first = player.inventory.getAmount(Item(data.items[0]))
+            val second = player.inventory.getAmount(Item(data.items[1]))
+            if (first == second) {
+                first
+            } else if (first > second) {
+                second
+            } else {
+                first
+            }
+        }
+        if (amount > amt) {
+            amount = amt
+        }
+        for (i in data.items.indices) {
+            if (player.inventory.contains(data.items[i], amount)) {
+                length++
+            }
+        }
+        if (length != data.items.size) {
+            sendMessage(player, "You don't have the required items to make this item.")
+            return
+        }
+        if (getStatLevel(player, Skills.CRAFTING) < data.level) {
+            sendMessage(player, "You need a crafting level of " + data.level + " to craft this.")
+            return
+        }
+        val items = arrayOfNulls<Item>(data.items.size)
+        for ((index, i) in data.items.indices.withIndex()) {
+            items[index] = Item(data.items[i], 1 * amount)
+        }
+
+        closeInterface(player)
+        handleJewelleryCrafting(player, data, amount)
+    }
+
+    private val mouldMap = mapOf(
+        "ring"     to CraftingDefinition.RING_MOULD,
+        "necklace" to CraftingDefinition.NECKLACE_MOULD,
+        "amulet"   to CraftingDefinition.AMULET_MOULD,
+        "bracelet" to CraftingDefinition.BRACELET_MOULD
+    )
+
+    /**
+     * Gets the correct mould id based on the item name.
+     */
+    fun mouldFor(name: String) = mouldMap.entries.firstOrNull { name.lowercase().contains(it.key) }?.value ?: -1
+
+    /**
+     * Handles crafting the jewellery.
+     */
+    private fun handleJewelleryCrafting(player: Player, type: CraftingDefinition.Jewellery, amount: Int) {
+        if (!clockReady(player, Clocks.SKILLING)) return
+
+        var remaining = amount
+
+        queueScript(player, 0, QueueStrength.NORMAL) {
+            if (remaining <= 0 || !clockReady(player, Clocks.SKILLING)) {
+                return@queueScript stopExecuting(player)
+            }
+
+            if (getStatLevel(player, Skills.CRAFTING) < type.level) {
+                sendMessage(player, "You need a Crafting level of ${type.level} to make this.")
+                return@queueScript stopExecuting(player)
+            }
+
+            if (!allInInventory(player, *type.items)) {
+                sendMessage(player, "You have run out of materials.")
+                return@queueScript stopExecuting(player)
+            }
+
+            playAudio(player, Sounds.FURNACE_2725)
+            animate(player, Animations.HUMAN_FURNACE_SMELT_3243)
+            delayClock(player, Clocks.SKILLING, 5)
+
+            val success = type.items.all { removeItem(player, it) }
+            if (!success) {
+                return@queueScript stopExecuting(player)
+            }
+
+            addItem(player, type.productId)
+            rewardXP(player, Skills.CRAFTING, type.experience)
+
+            remaining--
+
+            if (remaining > 0) {
+                setCurrentScriptState(player, 0)
+                delayScript(player, 5)
+            } else stopExecuting(player)
         }
     }
 

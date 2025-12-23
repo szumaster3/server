@@ -1,6 +1,6 @@
 package content.global.skill.summoning.familiar.npc
 
-import content.global.skill.crafting.JewelleryUtils
+import content.global.skill.crafting.CraftingDefinition
 import content.global.skill.firemaking.FireMakingPlugin
 import content.global.skill.firemaking.items.Log
 import content.global.skill.summoning.familiar.Familiar
@@ -49,13 +49,18 @@ class PyrelordNPC @JvmOverloads constructor(owner: Player? = null, id: Int = NPC
 
     override fun specialMove(special: FamiliarSpecial): Boolean {
         val item = special.node as Item
-        if (item.id != Items.GOLD_BAR_2357) {
+
+        if (item.id != Items.GOLD_BAR_2357 && item.id != Items.PERFECT_GOLD_BAR_2365) {
             sendMessage(owner, "You can only use this special on gold bars.")
             return false
         }
+
         lock(owner, 1)
-        visualize(Animation.create(8081), Graphics.create(shared.consts.Graphics.RAINING_FLAMES_1463))
-        JewelleryUtils.open(owner)
+        visualize(
+            Animation.create(8081),
+            Graphics.create(shared.consts.Graphics.RAINING_FLAMES_1463)
+        )
+        CraftingDefinition.openGoldJewelleryInterface(owner)
         return true
     }
 

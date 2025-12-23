@@ -1,7 +1,7 @@
 package content.region.kandarin.seers_village.quest.scorpcatcher.dialogue
 
 import content.data.GameAttributes
-import content.region.kandarin.seers_village.quest.scorpcatcher.ScorpionCatcherPlugin
+import content.region.kandarin.seers_village.quest.scorpcatcher.plugin.ScorpionCatcherPlugin
 import core.api.*
 import core.game.component.Component
 import core.game.dialogue.DialogueFile

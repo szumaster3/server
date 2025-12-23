@@ -24,7 +24,7 @@ class MoltenGlassMakePlugin : InteractionListener {
     }
 
     override fun defineListeners() {
-        onUseWith(IntType.SCENERY, INPUTS, *CraftingObject.FURNACES) { player, _, _ ->
+        onUseWith(IntType.SCENERY, INPUTS, *CraftingDefinition.FURNACES) { player, _, _ ->
             if (!clockReady(player, Clocks.SKILLING)) return@onUseWith true
 
             val sodaAmount = amountInInventory(player, SODA_ASH)

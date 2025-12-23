@@ -25,7 +25,7 @@ class PotteryPlugin : InteractionListener {
          * Handles crafting on pottery wheel.
          */
 
-        onUseWith(IntType.ITEM, Items.SOFT_CLAY_1761, *CraftingObject.POTTERY_WHEELS) { player, _, _ ->
+        onUseWith(IntType.ITEM, Items.SOFT_CLAY_1761, *CraftingDefinition.POTTERY_WHEELS) { player, _, _ ->
             val items = CraftingDefinition.Pottery.values().map { it.unfinished }.toTypedArray()
             sendSkillDialogue(player) {
                 withItems(*items)
@@ -157,7 +157,7 @@ class PotteryPlugin : InteractionListener {
             return true
         }
 
-        onUseWith(IntType.ITEM, CraftingDefinition.UNFIRED_POTTERY_ITEM_IDS, *CraftingObject.POTTERY_OVENS) { player, used, oven ->
+        onUseWith(IntType.ITEM, CraftingDefinition.UNFIRED_POTTERY_ITEM_IDS, *CraftingDefinition.POTTERY_OVENS) { player, used, oven ->
             val pottery = CraftingDefinition.Pottery.forId(used.id) ?: return@onUseWith false
             firePottery(player, pottery, oven)
             return@onUseWith true
@@ -167,7 +167,7 @@ class PotteryPlugin : InteractionListener {
          * Handles interaction with fire ovens.
          */
 
-        on(CraftingObject.POTTERY_OVENS, IntType.SCENERY, "fire") { player, node ->
+        on(CraftingDefinition.POTTERY_OVENS, IntType.SCENERY, "fire") { player, node ->
             sendSkillDialogue(player) {
                 val potteryMap = mapOf(
                     Items.UNFIRED_POT_1787 to CraftingDefinition.Pottery.POT,
@@ -198,7 +198,7 @@ class PotteryPlugin : InteractionListener {
          * Handles interacting with the cooking range.
          */
 
-        on(CraftingObject.RANGE, IntType.SCENERY, "fire") { player, node ->
+        on(CraftingDefinition.RANGE, IntType.SCENERY, "fire") { player, node ->
             if (inInventory(player, Items.UNCOOKED_STEW_2001, 1)) {
                 faceLocation(player, node.location)
                 openDialogue(player, 43989, Items.UNCOOKED_STEW_2001, "stew")

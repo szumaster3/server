@@ -1,4 +1,4 @@
-package content.region.kandarin.seers_village.quest.scorpcatcher
+package content.region.kandarin.seers_village.quest.scorpcatcher.plugin
 
 import content.data.GameAttributes
 import content.region.kandarin.seers_village.quest.scorpcatcher.dialogue.SeerMirrorDialogue

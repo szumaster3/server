@@ -36,7 +36,7 @@ class SilverCraftingPlugin : InteractionListener, InterfaceListener {
          * Handles use of silver bar on furnace.
          */
 
-        onUseWith(IntType.SCENERY, REQUIRED_ITEM_IDS, *CraftingObject.FURNACES) { player, _, with ->
+        onUseWith(IntType.SCENERY, REQUIRED_ITEM_IDS, *CraftingDefinition.FURNACES) { player, _, with ->
             val hasLevel = getStatLevel(player, Skills.CRAFTING) >= 16
             if (!hasLevel) {
                 sendDialogue(player, "You need a Crafting level of at least 16 to do this.")
