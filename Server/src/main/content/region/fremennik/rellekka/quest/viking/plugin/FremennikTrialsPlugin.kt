@@ -127,7 +127,10 @@ class FremennikTrialsPlugin : InteractionListener {
                     if (inInventory(player, LIT_BOMB))
                     {
                         removeItem(player, LIT_BOMB)
-                        val damage = maxOf((player.skills.lifepoints * 0.04).toInt(), 2)
+                        val safeDamage = player.skills.lifepoints - 1
+                        val calculatedDamage = (player.skills.lifepoints * 0.04).toInt().coerceAtLeast(2)
+                        val damage = calculatedDamage.coerceAtMost(safeDamage)
+
                         impact(player, damage)
                         sendMessage(player, "The strange object you lit earlier explodes in your inventory!")
                         sendChat(player, "Ow!")
