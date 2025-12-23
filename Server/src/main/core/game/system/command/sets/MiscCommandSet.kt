@@ -535,9 +535,9 @@ class MiscCommandSet : CommandSet(Privilege.ADMIN) {
             usage = "::completediaries",
             description = "Completes all diaries."
         ) { player, _ ->
-            player.achievementDiaryManager.diarys.forEach { diary ->
+            player.achievementDiaryManager.diaries.forEach { diary ->
                 diary.taskCompleted.forEachIndexed { levelIndex, tasks ->
-                    for (taskIndex in tasks.size - 1 downTo 0) {
+                    tasks.indices.reversed().forEach { taskIndex ->
                         diary.finishTask(player, levelIndex, taskIndex)
                     }
                 }

@@ -79,6 +79,46 @@ class CacheCommandSet : CommandSet(Privilege.ADMIN) {
             }
         }
 
+        /*
+         * Command for finding pickpocket-able npcs.
+         */
+
+        define(
+            name = "thievingnpc",
+            privilege = Privilege.ADMIN,
+            usage = "::findpickpocketnpcs",
+            description = "Scan all NPCs with the pickpocket option and dump their names and IDs."
+        ) { player, _ ->
+
+            val exportDir = File("dumps")
+            if (!exportDir.exists()) exportDir.mkdirs()
+
+            val timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM_HH-mm"))
+            val dump = File(exportDir, "pickpocket_npcs_$timestamp.txt")
+
+            GlobalScope.launch {
+                val results = mutableListOf<Pair<String, Int>>()
+
+                for (npcDef in NPCDefinition.getDefinitions().values) {
+                    val options = npcDef.options ?: continue
+                    if (options.any { it.equals("pick-pocket", ignoreCase = true) || it.equals("pickpocket", ignoreCase = true) }) {
+                        val name = npcDef.name ?: "Unknown"
+                        results.add(name to npcDef.id)
+                    }
+                }
+
+                results.sortWith(compareBy({ it.first.lowercase() }, { it.second }))
+
+                dump.bufferedWriter().use { writer ->
+                    for ((name, id) in results) {
+                        writer.write("${name.uppercase()}_$id\n")
+                    }
+                }
+
+                player.debug("Saved ${results.size} NPCs to ${dump.path}")
+            }
+        }
+
         define(
             name = "ifaceitem",
             privilege = Privilege.ADMIN,

@@ -86,7 +86,7 @@ class SpinningPlugin : InteractionListener, InterfaceListener {
             if (player.achievementDiaryManager.getDiary(DiaryType.SEERS_VILLAGE)?.isComplete(2) == true
                 && withinDistance(player, Location(2711, 3471, 1))
                 && player.equipment[EquipmentContainer.SLOT_HAT] != null
-                && DiaryManager(player).getHeadband() == 2
+                && DiaryManager(player).headband == 2
             ) {
                 delay = 2
             }

@@ -37,6 +37,6 @@ class ArvelDialogue(player: Player? = null) : Dialogue(player) {
     }
 
     override fun getIds(): IntArray {
-        return intArrayOf(NPCs.ARVEL_2365)
+        return intArrayOf(NPCs.ARVEL_2365, NPCs.ARVEL_7433)
     }
 }

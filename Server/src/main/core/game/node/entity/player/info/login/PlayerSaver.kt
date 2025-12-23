@@ -149,30 +149,37 @@ class PlayerSaver(val player: Player) {
         }
     }
 
+    /**
+     * Saves the player's achievement diary.
+     */
     fun saveAchievementData(root: JsonObject) {
         val achievementData = JsonArray()
-        player.achievementDiaryManager.diarys.forEach {
-            val diary = JsonObject()
-            val startedLevels = JsonArray()
-            it.levelStarted.forEach { startedLevels.add(it) }
-            diary.add("startedLevels", startedLevels)
 
-            val completedLevels = JsonArray()
-            it.taskCompleted.forEach { levelTasks ->
-                val level = JsonArray()
-                levelTasks.forEach { level.add(it) }
-                completedLevels.add(level)
+        player.achievementDiaryManager.diaries.forEach { diaryEntry ->
+            val diaryJson = JsonObject().apply {
+
+                // Serialize started levels.
+                add("startedLevels", JsonArray().apply {
+                    diaryEntry.levelStarted.forEach { add(it) }
+                })
+
+                // Serialize completed tasks per level.
+                add("completedLevels", JsonArray().apply {
+                    diaryEntry.taskCompleted.forEach { levelTasks ->
+                        add(JsonArray().apply { levelTasks.forEach { add(it) } })
+                    }
+                })
+
+                // Serialize rewarded levels.
+                add("rewardedLevels", JsonArray().apply {
+                    diaryEntry.levelRewarded.forEach { add(it) }
+                })
             }
-            diary.add("completedLevels", completedLevels)
 
-            val rewardedLevels = JsonArray()
-            it.levelRewarded.forEach { rewardedLevels.add(it) }
-            diary.add("rewardedLevels", rewardedLevels)
-
-            val diaryCollector = JsonObject()
-            diaryCollector.add(it.type.name, diary)
-            achievementData.add(diaryCollector)
+            // Add diary data under its type name.
+            achievementData.add(JsonObject().apply { add(diaryEntry.type.name, diaryJson) })
         }
+
         root.add("achievementDiaries", achievementData)
     }
 

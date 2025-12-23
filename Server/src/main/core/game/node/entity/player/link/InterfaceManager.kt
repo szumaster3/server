@@ -496,19 +496,11 @@ class InterfaceManager(
     fun openTab(slot: Int, component: Component?) {
         check(!(component!!.id == Components.WEAPON_FISTS_SEL_92 && component !is WeaponInterface)) { "Attack tab can only be instanced as " + WeaponInterface::class.java.canonicalName + "!" }
         if (component.definition!!.tabIndex != slot) {
-            log(
-                this.javaClass,
-                Log.WARN,
-                "Set tab index to " + slot + " for component " + component.id + ", definition requires updating!"
-            )
+            log(this.javaClass, Log.WARN, "Set tab index to " + slot + " for component " + component.id + ", definition requires updating!")
             component.definition.tabIndex = slot
         }
         if (component.definition.type != InterfaceType.TAB) {
-            log(
-                this.javaClass,
-                Log.WARN,
-                "Set interface type to TAB for component " + component.id + ", definition requires updating!"
-            )
+            log(this.javaClass, Log.WARN, "Set interface type to TAB for component " + component.id + ", definition requires updating!")
             component.definition.type = InterfaceType.TAB
         }
         component.open(player)

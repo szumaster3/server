@@ -35,7 +35,7 @@ class ChaliceOnKingPlugin : InteractionListener {
                 5 -> {
                     end()
                     if(!removeItem(player!!, Items.POISON_CHALICE_197, Container.INVENTORY)) return
-                    player?.achievementDiaryManager?.finishTask(player, DiaryType.SEERS_VILLAGE, 0, 3)
+                    player?.achievementDiaryManager?.finishTask(player!!, DiaryType.SEERS_VILLAGE, 0, 3)
                 }
             }
         }

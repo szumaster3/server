@@ -215,7 +215,7 @@ class WoodcuttingPulse(private val player: Player, private val node: Scenery) : 
 
         // Seers village medium reward - extra normal log while in seer's village
         if (reward == Items.LOGS_1511 && player.achievementDiaryManager.getDiary(DiaryType.SEERS_VILLAGE)
-                .isComplete(1) && player.viewport.region!!.id == 10806
+                !!.isComplete(1) && player.viewport.region!!.id == 10806
         ) {
             amount = 2
         }
@@ -243,7 +243,7 @@ class WoodcuttingPulse(private val player: Player, private val node: Scenery) : 
 
         // Seers village medium reward - extra 10% xp from maples while wearing headband
         if (reward == Items.MAPLE_LOGS_1517 && player.achievementDiaryManager.getDiary(DiaryType.SEERS_VILLAGE)
-                .isComplete(1)
+                !!.isComplete(1)
             && player.equipment[EquipmentContainer.SLOT_HAT] != null && player.equipment[EquipmentContainer.SLOT_HAT].id == 14631
         ) {
             experience *= 1.10

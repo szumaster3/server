@@ -20,8 +20,8 @@ class AdvisorDialogue : DialogueFile() {
             0 -> {
                 val diary = player!!.achievementDiaryManager.getDiary(DiaryType.FREMENNIK)!!
                 stage = when {
-                    diary.isComplete(level, true) && !Diary.hasClaimedLevelRewards(player, DiaryType.FREMENNIK, level) -> 10
-                    Diary.canReplaceReward(player, DiaryType.FREMENNIK, level) -> 12
+                    diary.isComplete(level, true) && !Diary.hasClaimedLevelRewards(player!!, DiaryType.FREMENNIK, level) -> 10
+                    Diary.canReplaceReward(player!!, DiaryType.FREMENNIK, level) -> 12
                     else -> 13
                 }
                 player(FaceAnim.FRIENDLY, "About the Achievement Diary...")

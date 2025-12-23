@@ -596,12 +596,12 @@ enum class Emotes(
                 sendDialogue(player, emote.lockedMessage ?: "You can't use this emote.")
                 return
             }
-            if (!player.achievementDiaryManager.getDiary(DiaryType.VARROCK).isComplete(1, 6) && (buttonId in 30..33)) {
+            if (!player.achievementDiaryManager.getDiary(DiaryType.VARROCK)!!.isComplete(1, 6) && (buttonId in 30..33)) {
                 if (!player.getAttribute("emote-$buttonId", false)) {
                     setAttribute(player, "emote-$buttonId", true)
                 }
                 val good = (30..33).all { player.getAttribute("emote-$it", false) }
-                player.achievementDiaryManager.getDiary(DiaryType.VARROCK).updateTask(player, 1, 6, good)
+                player.achievementDiaryManager.getDiary(DiaryType.VARROCK)!!.updateTask(player, 1, 6, good)
             }
             player.pulseManager.clear()
             emote.play(player)
