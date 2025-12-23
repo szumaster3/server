@@ -49,7 +49,7 @@ class BlackjackSwingHandler : MeleeSwingHandler(), Plugin<Any> {
                 val victimRoll = RandomFunction.random(target.skills.lifepoints + 1)
                 val nearDeath = target.skills.lifepoints <= hit
                 if (attackerRoll > victimRoll || nearDeath) {
-                    stun(target, stunTicks, false)
+                    stun(target, stunTicks, false) 
                 }
             }
         }

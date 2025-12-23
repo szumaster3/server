@@ -1,5 +1,7 @@
 package content.global.skill.thieving.pickpocket
 
+import content.global.skill.thieving.blackjack.BlackjackService
+import content.global.skill.thieving.blackjack.BlackjackState
 import content.global.skill.thieving.pickpocket.loot.FremennikCitizenLootTable
 import core.api.*
 import core.api.utils.WeightBasedTable
@@ -11,6 +13,7 @@ import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.diary.DiaryType
 import core.game.node.entity.skill.Skills
 import core.game.node.item.Item
+import core.game.world.GameWorld
 import core.game.world.map.zone.ZoneBorders
 import core.game.world.update.flag.context.Animation
 import core.tools.RandomFunction
@@ -42,6 +45,16 @@ class PickpocketListener : InteractionListener {
             if (npc.id == NPCs.CURATOR_HAIG_HALEN_646 && cabinetKey) {
                 sendMessage(player, "You have no reason to do that.")
                 return@on true
+            }
+
+            val blackjackState = npc.attributes["blackjack"] as? BlackjackState
+            if (blackjackState != null && blackjackState.isUnconscious(GameWorld.ticks)) {
+                if (blackjackState.pickpocketsLeft > 0) {
+                    blackjackState.pickpocketsLeft--
+                    sendMessage(player, "You successfully pickpocket the ${npc.name.lowercase()} (guaranteed).")
+                    BlackjackService.updateBlackjackState(npc)
+                    return@on true
+                }
             }
 
             if (!pocketData.loot.canRoll(player)) {

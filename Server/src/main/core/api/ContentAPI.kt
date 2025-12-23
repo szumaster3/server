@@ -3625,7 +3625,7 @@ fun stun(
         playAudio(entity.asPlayer(), Sounds.STUNNED_2727)
         entity.animate(Animation(424, Animator.Priority.VERY_HIGH))
         if (sendMessage) {
-            sendMessage(entity, "You have been stunned!")
+            sendMessage(entity, "You've been stunned!")
         }
     }
 }
