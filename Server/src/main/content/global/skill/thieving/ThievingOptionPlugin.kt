@@ -52,15 +52,6 @@ class ThievingOptionPlugin : InteractionListener {
         }
 
         /*
-         * Handles pickpocket NPCs.
-         */
-
-        on(IntType.NPC, "pickpocket", "pick-pocket") { player, node ->
-            ThievingDefinition.Pickpocket.attemptPickpocket(player, node.asNpc())
-            return@on true
-        }
-
-        /*
          * Handles opening locked doors.
          */
 

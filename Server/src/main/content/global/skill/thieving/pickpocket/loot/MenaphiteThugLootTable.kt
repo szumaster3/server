@@ -1,18 +1,18 @@
-package content.global.skill.thieving.loot
+package content.global.skill.thieving.pickpocket.loot
 
 import core.api.utils.WeightBasedTable
 import core.api.utils.WeightedItem
 import shared.consts.Items
 import shared.consts.NPCs
 
-object PollnivnianBanditLootTable {
+object MenaphiteThugLootTable {
 
     val NPC_ID = intArrayOf(
-        NPCs.BANDIT_1880,
-        NPCs.BANDIT_1881
+        NPCs.MENAPHITE_THUG_1904,
+        NPCs.MENAPHITE_THUG_1905
     )
 
     val LOOT = WeightBasedTable.create(
-        WeightedItem(Items.COINS_995, 50, 50, 1.0, true)
+        WeightedItem(Items.COINS_995, 60, 60, 1.0, true)
     )
 }

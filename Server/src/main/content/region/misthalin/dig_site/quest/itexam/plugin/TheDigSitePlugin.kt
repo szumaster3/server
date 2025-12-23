@@ -1,6 +1,7 @@
 package content.region.misthalin.dig_site.quest.itexam.plugin
 
 import content.global.skill.thieving.ThievingDefinition
+import content.global.skill.thieving.pickpocket.PickpocketListener
 import content.region.misthalin.dig_site.quest.itexam.TheDigSite
 import content.region.misthalin.dig_site.quest.itexam.dialogue.DigsiteWorkmanDialogueFile
 import content.region.misthalin.dig_site.quest.itexam.dialogue.PanningGuideDialogue
@@ -69,7 +70,7 @@ class TheDigSitePlugin : InteractionListener {
             sendMessage(player, "You attempt to pick the workman's pocket...")
             player.animator.animate(ThievingDefinition.PICKPOCKET_ANIM)
 
-            val roll = ThievingDefinition.pickpocketRoll(player, 84.0, 240.0, table)
+            val roll = PickpocketListener.pickpocketRoll(player, 84.0, 240.0, table)
 
             fun handleFail() {
                 val npc = node.asNpc()

@@ -1,19 +1,14 @@
 package content.global.skill.thieving
 
-import content.global.skill.thieving.loot.*
 import core.api.*
-import core.api.utils.WeightBasedTable
 import core.game.event.ResourceProducedEvent
 import core.game.global.action.DoorActionHandler.handleAutowalkDoor
 import core.game.interaction.Clocks
 import core.game.interaction.QueueStrength
-import core.game.node.Node
-import core.game.node.entity.combat.DeathTask
 import core.game.node.entity.combat.ImpactHandler
 import core.game.node.entity.impl.Animator
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
-import core.game.node.entity.player.link.diary.DiaryType
 import core.game.node.entity.skill.Skills
 import core.game.node.item.Item
 import core.game.node.scenery.Scenery
@@ -23,7 +18,6 @@ import core.game.world.GameWorld.ticks
 import core.game.world.map.Direction
 import core.game.world.map.Location
 import core.game.world.map.RegionManager
-import core.game.world.map.zone.ZoneBorders
 import core.game.world.update.flag.context.Animation
 import core.tools.RandomFunction
 import core.tools.StringUtils.isPlusN
@@ -212,181 +206,6 @@ object ThievingDefinition {
 
                 return true
             }
-        }
-    }
-
-    /**
-     * Represents pickpocket data.
-     */
-    enum class Pickpocket(val ids: IntArray, val requiredLevel: Int, val low: Double, val high: Double, val experience: Double, val stunDamageMin: Int, val stunDamageMax: Int, val stunTime: Int, val message: String?, val table: WeightBasedTable) {
-        HUMAN(HumanLootTable.NPC_ID, 1, 180.0, 240.0, 8.0, 1, 1, 5, "What do you think you're doing?", HumanLootTable.LOOT),
-        CURATOR_HAIG_HELEN(CuratorHaigHelenLootTable.NPC_ID, 1, 180.0, 240.0, 8.0, 1, 1, 5, null, CuratorHaigHelenLootTable.LOOT),
-        FARMER(FarmerLootTable.NPC_ID, 10, 180.0, 240.0, 14.5, 1, 1, 5, "What do you think you're doing?", FarmerLootTable.LOOT),
-        MALE_HAM_MEMBER(HamMemberLootTable.NPC_ID_MALE, 20, 117.0, 240.0, 22.2, 1, 3, 4, "What do you think you're doing?", HamMemberLootTable.LOOT),
-        FEMALE_HAM_MEMBER(HamMemberLootTable.NPC_ID_FEMALE, 15, 135.0, 240.0, 18.5, 1, 3, 4, "Stop! @name is a thief!", HamMemberLootTable.LOOT),
-        WARRIOR(WarriorLootTable.NPC_ID, 25, 84.0, 240.0, 26.0, 2, 2, 5, "What do you think you're doing?", WarriorLootTable.LOOT),
-        VILLAGER(VillagerLootTable.NPC_ID, 30, 74.0, 240.0, 8.0, 2, 2, 5, "Thief! Thief! Get away from me.", VillagerLootTable.LOOT),
-        ROGUE(RogueLootTable.NPC_ID, 32, 74.0, 240.0, 35.5, 2, 2, 5, "What do you think you're doing?", RogueLootTable.LOOT),
-        CAVE_GOBLIN(CaveGoblinLootTable.NPC_ID, 36, 72.0, 240.0, 40.0, 1, 1, 5, null, CaveGoblinLootTable.LOOT),
-        MASTER_FARMER(MasterFarmerLootTable.NPC_ID, 38, 90.0, 240.0, 43.0, 3, 3, 5, "Cor blimey, mate! What are ye doing in me pockets?", MasterFarmerLootTable.LOOT),
-        GUARD(GuardLootTable.NPC_ID, 40, 50.0, 240.0, 46.8, 2, 2, 5, "What do you think you're doing?", GuardLootTable.LOOT),
-        FREMENNIK_CITIZEN(FremennikCitizenLootTable.NPC_ID, 45, 65.0, 240.0, 65.0, 2, 2, 5, "You stay away from me Outlander!", FremennikCitizenLootTable.LOOT),
-        BEARDED_BANDIT(BeardedBanditLootTable.NPC_ID, 45, 50.0, 240.0, 65.0, 2, 2, 5, "What do you think you're doing?", BeardedBanditLootTable.LOOT),
-        DESERT_BANDIT(DesertBanditLootTable.NPC_ID, 53, 50.0, 240.0, 79.4, 3, 3, 5, "I'll kill you for that!", DesertBanditLootTable.LOOT),
-        POLLNIVNIAN_BANDIT(PollnivnianBanditLootTable.NPC_ID, 55, 50.0, 240.0, 84.3, 5, 5, 5, "I'll kill you for that!", PollnivnianBanditLootTable.LOOT),
-        KNIGHT_OF_ADROUGNE(KnightLootTable.NPC_ID, 55, 50.0, 240.0, 84.3, 3, 3, 6, null, KnightLootTable.LOOT),
-        YANILLE_WATCHMAN(WatchmanLootTable.NPC_ID, 65, 50.0, 240.0, 137.5, 3, 3, 5, "What do you think you're doing?", WatchmanLootTable.LOOT),
-        MENAPHITE_THUG(MenaphiteThugLootTable.NPC_ID, 65, 50.0, 240.0, 137.5, 5, 5, 5, "I'll kill you for that!", MenaphiteThugLootTable.LOOT),
-        PALADIN(PaladinLootTable.NPC_ID, 70, 50.0, 150.0, 151.8, 3, 3, 5, "Hey! Get your hands off there!", PaladinLootTable.LOOT),
-        GNOME(GnomeLootTable.NPC_ID, 75, 8.0, 120.0, 198.3, 1, 1, 5, "What do you think you're doing?", GnomeLootTable.LOOT),
-        HERO(HeroLootTable.NPC_ID, 80, 6.0, 100.0, 273.3, 6, 6, 6, "What do you think you're doing?", HeroLootTable.LOOT),
-        ELF(ElfLootTable.NPC_ID, 85, 4.0, 80.0, 353.3, 5, 5, 6, "What do you think you're doing?", ElfLootTable.LOOT);
-
-        companion object {
-            /**
-             * A map that links object IDs to their corresponding [Pickpocket] enum entry.
-             */
-            val idMap: MutableMap<Int, Pickpocket> = HashMap(Pickpocket.values().size * 5)
-
-            init {
-                Pickpocket.values().forEach { pickpocket ->
-                    pickpocket.ids.forEach { id ->
-                        idMap[id] = pickpocket
-                    }
-                }
-            }
-
-            /**
-             * Attempts to pickpocket a given NPC for the player.
-             * @param player The player attempting the pickpocket.
-             * @param node The NPC being targeted.
-             * @return `true` if the pickpocket action was processed (successfully or unsuccessfully),
-             *         `false` if the NPC cannot be pickpocketed.
-             */
-            fun attemptPickpocket(player: Player, node: Node): Boolean {
-                val pocketData = Pickpocket.forID(node.id) ?: return false
-                val npc = node.asNpc()
-                val npcName = npc.name.lowercase()
-                val cabinetKey = hasAnItem(player, Items.DISPLAY_CABINET_KEY_4617).container != null
-
-                if (player.inCombat()) {
-                    sendMessage(player, "You can't do this while in combat.")
-                    return true
-                }
-
-                if (getStatLevel(player, Skills.THIEVING) < pocketData.requiredLevel) {
-                    sendMessage(player, "You need a Thieving level of ${pocketData.requiredLevel} to do that.")
-                    return true
-                }
-
-                if (DeathTask.isDead(npc)) {
-                    sendMessage(player, "Too late, $npcName is already dead.")
-                    return true
-                }
-
-                if (npc.id == NPCs.CURATOR_HAIG_HALEN_646 && cabinetKey) {
-                    sendMessage(player, "You have no reason to do that.")
-                    return true
-                }
-
-                if (!pocketData.table.canRoll(player)) {
-                    sendMessage(player, "You don't have enough inventory space to do that.")
-                    return true
-                }
-
-                delayClock(player, Clocks.SKILLING, 2)
-                animate(player, Animation(Animations.HUMAN_PICKPOCKETING_881, Animator.Priority.HIGH))
-                sendMessage(player, "You attempt to pick the $npcName's pocket.")
-
-                if (npc.id in FremennikCitizenLootTable.NPC_ID && !isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS)) {
-                    npc.sendChat("You stay away from me outerlander!")
-                    sendMessage(player, "They are too suspicious of you for you to get close enough to steal from them.")
-                    return true
-                }
-
-                val lootTable = pickpocketRoll(player, pocketData.low, pocketData.high, pocketData.table)
-
-                if (lootTable == null) {
-                    npc.face(player)
-                    npc.animator.animate(Animation(Animations.PUNCH_422))
-                    npc.sendChat(pocketData.message)
-                    sendMessage(player, "You fail to pick the $npcName's pocket.")
-
-                    playHurtAudio(player, 20)
-                    stun(player, pocketData.stunTime)
-                    impact(player, RandomFunction.random(pocketData.stunDamageMin, pocketData.stunDamageMax), ImpactHandler.HitsplatType.NORMAL)
-                    sendMessage(player, "You feel slightly concussed from the blow.")
-                    npc.face(null)
-                } else {
-                    lock(player, 2)
-                    playAudio(player, Sounds.PICK_2581)
-                    lootTable.forEach { player.inventory.add(it) }
-
-                    if (getStatLevel(player, Skills.THIEVING) >= 40) {
-                        when {
-                            inBorders(player, ZoneBorders(3201, 3456, 3227, 3468)) && npc.id == NPCs.GUARD_5920 -> {
-                                finishDiaryTask(player, DiaryType.VARROCK, 1, 12)
-                            }
-                            inBorders(player, ZoneBorders(2934, 3399, 3399, 3307)) && npc.id in intArrayOf(NPCs.GUARD_9, NPCs.GUARD_3230, NPCs.GUARD_3228, NPCs.GUARD_3229) -> {
-                                finishDiaryTask(player, DiaryType.FALADOR, 1, 6)
-                            }
-                        }
-                    }
-
-                    sendMessage(player, if (npc.id == NPCs.CURATOR_HAIG_HALEN_646) "You steal a tiny key." else "You pick the $npcName's pocket.")
-                    rewardXP(player, Skills.THIEVING, pocketData.experience)
-                }
-
-                return true
-            }
-
-            /**
-             * Gets the [Pickpocket] instance associated with a specific object id.
-             *
-             * @param id The object ID used for lookup.
-             * @return The corresponding [Pickpocket] instance, or `null` if not found.
-             */
-            @JvmStatic
-            fun forID(id: Int): Pickpocket? = idMap[id]
-        }
-
-        /**
-         * Computes the chance of successfully pickpocketing based on the thieving level.
-         *
-         * @param player The [Player] attempting to pickpocket.
-         * @return A [Double] representing the success probability.
-         */
-        fun getSuccessChance(player: Player): Double =
-            RandomFunction.getSkillSuccessChance(low, high, player.skills.getLevel(Skills.THIEVING))
-    }
-
-    /**
-     * Attempts a pickpocket action for the player.
-     *
-     * Calculates the player successfully pickpockets an NPC based on:
-     * - The player thieving level
-     * - The NPCs low and high success thresholds
-     * - The equipment modifiers (e.g., Gloves of Silence)
-     *
-     * @param player The player attempting to pickpocket.
-     * @param low The min base success rate for the pickpocket attempt.
-     * @param high The max base success rate for the pickpocket attempt.
-     * @param table The weighted loot table to roll for rewards upon success.
-     * @return An [ArrayList] of [Item]s if the pickpocket succeeds, or `null` if it fails.
-     */
-    @JvmStatic
-    fun pickpocketRoll(player: Player, low: Double, high: Double, table: WeightBasedTable): ArrayList<Item>? {
-        var successMod = 0.0
-        if (inEquipment(player, Items.GLOVES_OF_SILENCE_10075)) {
-            successMod += 3
-        }
-        val chance = RandomFunction.randomDouble(1.0, 100.0)
-        val failThreshold =
-            RandomFunction.getSkillSuccessChance(low, high, getStatLevel(player, Skills.THIEVING)) + successMod
-        if (chance > failThreshold) {
-            return null
-        } else {
-            return table.roll()
         }
     }
 

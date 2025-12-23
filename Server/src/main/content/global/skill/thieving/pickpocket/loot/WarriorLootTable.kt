@@ -1,4 +1,4 @@
-package content.global.skill.thieving.loot
+package content.global.skill.thieving.pickpocket.loot
 
 import core.api.utils.WeightBasedTable
 import core.api.utils.WeightedItem

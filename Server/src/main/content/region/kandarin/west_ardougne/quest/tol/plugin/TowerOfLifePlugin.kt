@@ -1,6 +1,7 @@
 package content.region.kandarin.west_ardougne.quest.tol.plugin
 
 import content.global.skill.thieving.ThievingDefinition
+import content.global.skill.thieving.pickpocket.PickpocketListener
 import core.api.*
 import core.api.utils.WeightBasedTable
 import core.api.utils.WeightedItem
@@ -44,7 +45,7 @@ class TowerOfLifePlugin : InteractionListener {
         }
 
         on(npcIDs, IntType.NPC, "pickpocket") { player, node ->
-            val lootTable = ThievingDefinition.pickpocketRoll(player, 50.0, 240.0, WeightBasedTable.create(WeightedItem(Items.TRIANGLE_SANDWICH_6962, 1, 1, 1.0, true)))
+            val lootTable = PickpocketListener.pickpocketRoll(player, 50.0, 240.0, WeightBasedTable.create(WeightedItem(Items.TRIANGLE_SANDWICH_6962, 1, 1, 1.0, true)))
             val roll = RandomFunction.roll(25)
             if (freeSlots(player) == 0) {
                 sendMessage(player, "You don't have enough inventory space to do that.")

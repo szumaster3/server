@@ -1,4 +1,4 @@
-package content.global.skill.thieving.loot
+package content.global.skill.thieving.pickpocket.loot
 
 import core.api.utils.WeightBasedTable
 import core.api.utils.WeightedItem
@@ -76,12 +76,12 @@ object MasterFarmerLootTable {
 
     val LOOT: WeightBasedTable by lazy {
         WeightBasedTable().apply {
-            addAll(ALLOTMENTS)
-            addAll(HOPS)
-            addAll(FLOWERS)
-            addAll(BUSHES)
-            addAll(SPECIAL)
-            addAll(HERBS)
+            addAll(content.global.skill.thieving.pickpocket.loot.MasterFarmerLootTable.ALLOTMENTS)
+            addAll(content.global.skill.thieving.pickpocket.loot.MasterFarmerLootTable.HOPS)
+            addAll(content.global.skill.thieving.pickpocket.loot.MasterFarmerLootTable.FLOWERS)
+            addAll(content.global.skill.thieving.pickpocket.loot.MasterFarmerLootTable.BUSHES)
+            addAll(content.global.skill.thieving.pickpocket.loot.MasterFarmerLootTable.SPECIAL)
+            addAll(content.global.skill.thieving.pickpocket.loot.MasterFarmerLootTable.HERBS)
         }
     }
 }
