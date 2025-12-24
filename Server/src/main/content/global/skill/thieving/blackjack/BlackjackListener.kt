@@ -12,6 +12,7 @@ class BlackjackListener : InteractionListener {
     override fun defineListeners() {
         on(npcs, IntType.NPC, "lure") { player, node ->
             val isAdmin = player.rights == Rights.ADMINISTRATOR
+            val npc = node.asNpc()
             val opt = getUsedOption(player)
             if (!isAdmin && !hasRequirement(player, Quests.THE_FEUD)) return@on false
 
@@ -20,7 +21,7 @@ class BlackjackListener : InteractionListener {
                 return@on true
             }
 
-            BlackjackService.lure(player, node.asNpc())
+            BlackjackService.lure(player, npc)
             return@on true
         }
 
@@ -29,6 +30,8 @@ class BlackjackListener : InteractionListener {
             val npc = node.asNpc()
             val opt = getUsedOption(player)
             if (!isAdmin && !hasRequirement(player, Quests.THE_FEUD)) return@on false
+
+            BlackjackService.notify(player, npc)
 
             if(hasTimerActive<BlackjackUnconsciousTimer>(npc)) {
                 return@on true

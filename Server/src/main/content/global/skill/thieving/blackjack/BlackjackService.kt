@@ -15,6 +15,7 @@ import core.api.impact
 import core.api.rewardXP
 import core.game.interaction.MovementPulse
 import core.game.node.entity.impl.PulseType
+import core.game.world.map.RegionManager
 import core.tools.secondsToTicks
 
 object BlackjackService {
@@ -87,6 +88,22 @@ object BlackjackService {
 
         rewardXP(player, Skills.THIEVING, npcData.xp)
         sendMessage(player, "You smack the ${npc.name.lowercase()} over the head and render them unconscious.")
+    }
+
+    /**
+     * Notify when another player interact with an NPC that is currently knocked.
+     */
+    fun notify(player: Player, npc: NPC) {
+        val timer = getTimer<BlackjackUnconsciousTimer>(npc) ?: return
+        if (timer.remainingTicks <= 0 || timer.pickpocketsLeft <= 0) return
+
+        val players = RegionManager.getLocalPlayers(npc, 1)
+        for (p in players) {
+            if (p != player) {
+                sendMessage(p, "I'm teaching coshing here, not pickpocketing.")
+                p.lock(1)
+            }
+        }
     }
 
     /**
