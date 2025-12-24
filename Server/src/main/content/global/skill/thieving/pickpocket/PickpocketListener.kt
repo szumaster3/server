@@ -1,7 +1,6 @@
 package content.global.skill.thieving.pickpocket
 
 import content.global.skill.thieving.blackjack.BlackjackService
-import content.global.skill.thieving.blackjack.BlackjackState
 import content.global.skill.thieving.pickpocket.loot.FremennikCitizenLootTable
 import core.api.*
 import core.api.utils.WeightBasedTable
@@ -13,7 +12,6 @@ import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.diary.DiaryType
 import core.game.node.entity.skill.Skills
 import core.game.node.item.Item
-import core.game.world.GameWorld
 import core.game.world.map.zone.ZoneBorders
 import core.game.world.update.flag.context.Animation
 import core.tools.RandomFunction
@@ -26,6 +24,11 @@ class PickpocketListener : InteractionListener {
             val npc = node.asNpc()
             val npcName = npc.name.lowercase()
             val cabinetKey = hasAnItem(player, Items.DISPLAY_CABINET_KEY_4617).container != null
+
+            if (isStunned(player)) {
+                sendMessage(player, "You're stunned!")
+                return@on true
+            }
 
             if (player.inCombat()) {
                 sendMessage(player, "You can't do this while in combat.")
@@ -47,22 +50,20 @@ class PickpocketListener : InteractionListener {
                 return@on true
             }
 
-            val blackjackState = npc.attributes["blackjack"] as? BlackjackState
-            if (blackjackState != null && blackjackState.isUnconscious(GameWorld.ticks)) {
-                if (blackjackState.pickpocketsLeft > 0) {
-                    blackjackState.pickpocketsLeft--
-                    BlackjackService.updateBlackjackState(npc)
-                    return@on true
-                }
-            }
-
             if (!pocketData.loot.canRoll(player)) {
                 sendMessage(player, "You don't have enough inventory space to do that.")
                 return@on true
             }
 
-            delayClock(player, Clocks.SKILLING, 2)
-            animate(player, Animation(Animations.HUMAN_PICKPOCKETING_881))
+            val (delay, animation) = if (BlackjackService.canPickpocket(npc)) {
+                BlackjackService.onPickpocket(npc)
+                1 to Animation(Animations.HUMAN_BURYING_BONES_827)
+            } else {
+                2 to Animation(Animations.HUMAN_PICKPOCKETING_881)
+            }
+
+            delayClock(player, Clocks.SKILLING, delay)
+            animate(player, animation)
             sendMessage(player, "You attempt to pick the $npcName's pocket.")
 
             if (npc.id in FremennikCitizenLootTable.NPC_ID && !isQuestComplete(player, Quests.THE_FREMENNIK_TRIALS)) {
@@ -74,7 +75,7 @@ class PickpocketListener : InteractionListener {
             val lootTable = pickpocketRoll(player, pocketData.low, pocketData.high, pocketData.loot)
 
             if (lootTable == null) {
-                npc.face(player)
+                npc.faceLocation(player.location)
                 npc.animator.animate(Animation(Animations.PUNCH_422))
                 npc.sendChat(pocketData.message)
                 sendMessage(player, "You fail to pick the $npcName's pocket.")
@@ -85,7 +86,7 @@ class PickpocketListener : InteractionListener {
                 sendMessage(player, "You feel slightly concussed from the blow.")
                 npc.face(null)
             } else {
-                lock(player, 2)
+                lock(player, delay)
                 playAudio(player, Sounds.PICK_2581)
                 lootTable.forEach { player.inventory.add(it) }
 

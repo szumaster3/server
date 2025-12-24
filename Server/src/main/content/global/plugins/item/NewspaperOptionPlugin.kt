@@ -17,11 +17,6 @@ class NewspaperOptionPlugin : InteractionListener {
             sendString(player, rightPageContent, NEWSPAPER_INTERFACE_530, 8)
             return@on true
         }
-
-        on(Items.AL_KHARID_FLYER_7922, IntType.ITEM, "read") { player, _ ->
-            sendDialogueLines(player, "Come to the Al Kharid Market place! High quality", "produce at low, low prices! Show this flyer to a", "merchant for money off your next purchase,", "courtesy of Ali Morrisane!")
-            return@on true
-        }
     }
 
     companion object {

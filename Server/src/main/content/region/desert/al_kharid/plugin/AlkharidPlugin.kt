@@ -2,7 +2,6 @@ package content.region.desert.al_kharid.plugin
 
 import content.region.desert.al_kharid.dialogue.*
 import core.api.*
-import core.game.dialogue.DialogueFile
 import core.game.dialogue.FaceAnim
 import core.game.global.action.DoorActionHandler
 import core.game.interaction.IntType
@@ -64,18 +63,19 @@ class AlkharidPlugin : InteractionListener {
          */
 
         on(LEAFLET_DROPPER, IntType.NPC, "Take-flyer") { player, node ->
-            when {
-                player.inventory.containItems(Items.AL_KHARID_FLYER_7922) -> {
-                    sendNPCDialogue(player, node.id, "Are you trying to be funny or has age turned your brain to mush? You already have a flyer!", FaceAnim.CHILD_SUSPICIOUS)
-                }
-                else -> {
-                    if(freeSlots(player) == 0) {
-                        return@on true
-                    } else {
-                        openDialogue(player, LeafletDialogue(), LEAFLET_DROPPER)
-                    }
-                }
+
+            if (inInventory(player, Items.AL_KHARID_FLYER_7922)) {
+                sendNPCDialogue(player, node.id, "Are you trying to be funny or has age turned your brain to mush? You already have a flyer!", FaceAnim.CHILD_SUSPICIOUS)
+                return@on true
             }
+
+            if (freeSlots(player) == 0) {
+                sendMessage(player, "You don't have enough inventory space.")
+                return@on true
+            }
+
+            sendNPCDialogue(player, node.id, "Here! Take one and let me get back to work. I still have hundreds of these flyers to hand out, I wonder if Ali would notice if I quietly dumped them somewhere?", FaceAnim.CHILD_THINKING)
+            addItem(player, Items.AL_KHARID_FLYER_7922, 1)
             return@on true
         }
 
@@ -172,18 +172,16 @@ class AlkharidPlugin : InteractionListener {
             openDialogue(player, ZekeDialogue(), node.asNpc())
             return@on true
         }
-    }
 
-    inner class LeafletDialogue : DialogueFile() {
-        override fun handle(componentID: Int, buttonID: Int) {
-            when(stage) {
-                0 -> npcl(FaceAnim.CHILD_NORMAL, "Here! Take one and let me get back to work.").also { stage++ }
-                1 -> npcl(FaceAnim.CHILD_THINKING, "I still have hundreds of these flyers to hand out. I wonder if Ali would notice if I quietly dumped them somewhere?").also { stage++ }
-                2 -> {
-                    end()
-                    addItem(player!!, Items.AL_KHARID_FLYER_7922)
-                }
-            }
+        on(Items.AL_KHARID_FLYER_7922, IntType.ITEM, "read") { player, node ->
+            player.dialogueInterpreter.sendItemMessage(node.id, "Come to the Al Kharid Market place! High quality", "produce at low, low prices! Show this flyer to a", "merchant for money off your next purchase,", "courtesy of Ali Morrisane!")
+            sendMessage(player, "You notice that the money off voucher is out of date.")
+            return@on true
+        }
+
+        onUseWith(IntType.NPC, Items.AL_KHARID_FLYER_7922, *LEAFLET_INTERACTION_NPC){ player, _, with->
+            openDialogue(player,LeafletInteractionDialogue(with.id),with)
+            return@onUseWith true
         }
     }
 
@@ -193,5 +191,10 @@ class AlkharidPlugin : InteractionListener {
         private val HEALERS_NPC = intArrayOf(NPCs.AABLA_959, NPCs.SABREEN_960, NPCs.SURGEON_GENERAL_TAFANI_961, NPCs.JARAAH_962)
         private val TOLL_GATES = intArrayOf(Scenery.GATE_35551, Scenery.GATE_35549)
         private const val BORDER_GUARD = NPCs.BORDER_GUARD_7912
+        val LEAFLET_INTERACTION_NPC = intArrayOf(
+            NPCs.ALI_MORRISANE_1862,NPCs.ALI_MORRISANE_2961,
+            NPCs.DOMMIK_545,NPCs.LOUIE_LEGS_542,NPCs.RANAEL_544,
+            NPCs.ZEKE_541
+        )
     }
 }
