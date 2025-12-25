@@ -161,6 +161,7 @@ class StorageBoxInterface : InterfaceListener {
             type.name.contains("TRAILS") -> "Treasure chest"
             type.name.contains("SET_OF_ARMOUR") -> "Magic wardrobe"
             type.name.contains("ARMOUR_CASE") -> "Armour case"
+            type.name.contains("BOOK") -> "Bookcase"
             else -> type.name.lowercase().replaceFirstChar(Char::titlecase) + " box"
         }
         sendString(player, title, INTERFACE, 225)
