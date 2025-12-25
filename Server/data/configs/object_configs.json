@@ -15514,5 +15514,13 @@
   {
     "examine": "Single kitchen unit.",
     "ids": "17132"
+  },
+  {
+    "examine": "The trapdoor is shut tight.",
+    "ids": "28741"
+  },
+  {
+    "examine": "Allows access to the level below.",
+    "ids": "28742"
   }
 ]

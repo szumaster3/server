@@ -1,4 +1,4 @@
-package content.global.skill.summoning;
+package content.region.asgarnia.taverley.quest.wolf.plugin;
 
 import core.cache.def.impl.SceneryDefinition;
 import core.game.activity.ActivityManager;

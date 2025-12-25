@@ -2,11 +2,13 @@ package content.region.kandarin.piscatoris.plugin
 
 import content.region.kandarin.piscatoris.dialogue.KathyCorkatDialogue.Companion.sail
 import core.api.*
+import core.game.global.action.ClimbActionHandler
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.node.item.Item
 import core.game.system.task.Pulse
 import core.game.world.map.Location
+import core.game.world.update.flag.context.Animation
 import shared.consts.*
 
 class PiscatorisPlugin : InteractionListener {
@@ -81,6 +83,34 @@ class PiscatorisPlugin : InteractionListener {
 
             return@on true
         }
+
+
+        on(Scenery.TRAPDOOR_28741, IntType.SCENERY, "open") { player, node ->
+            if (!isQuestComplete(player, Quests.WOLF_WHISTLE)) {
+                sendMessage(player, "You need to complete Wolf Whistle quest to do this.")
+                return@on true
+            }
+            replaceScenery(node.asScenery(), Scenery.TRAPDOOR_28742, 80)
+            sendMessage(player, "The trapdoor opens...")
+            return@on true
+        }
+
+        on(Scenery.TRAPDOOR_28742, IntType.SCENERY, "close") { player, node ->
+            replaceScenery(node.asScenery(), Scenery.TRAPDOOR_28741, 80)
+            sendMessage(player, "You close the trapdoor.")
+            return@on true
+        }
+
+        on(Scenery.TRAPDOOR_28742, IntType.SCENERY, "climb-down") { player, node ->
+            if (!isQuestComplete(player, Quests.WOLF_WHISTLE)) {
+                sendMessage(player, "You need to complete Wolf Whistle quest to do this.")
+                return@on true
+            }
+            replaceScenery(node.asScenery(), Scenery.TRAPDOOR_28741, 80)
+            ClimbActionHandler.climb(player, Animation(827),Location(2333, 10015, 0))
+            return@on true
+        }
+
     }
 
     override fun defineDestinationOverrides() {
