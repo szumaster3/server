@@ -103,11 +103,11 @@ object LoginConfiguration {
         // center rectangle
         if(!GameWorld.settings!!.isMembers) {
             sendString(player, "0", lobbyInterface.id, 96)
-            sendString(player, "Not a Member.", lobbyInterface.id, 93)
+            sendString(player, "Not a Member", lobbyInterface.id, 93)
             sendString(player, "You are not a member. Members get loads of extra benefits and features. Click here to become a member.", lobbyInterface.id, 94)
         } else {
             sendString(player, "0", lobbyInterface.id, 96)
-            sendString(player, "Never expires.", lobbyInterface.id, 94)
+            sendString(player, "Never expires", lobbyInterface.id, 94)
         }
 
         PacketRepository.send(Interface::class.java, InterfaceContext(player, lobbyPane.id, 2, Components.WELCOME_SCREEN_378, true))
