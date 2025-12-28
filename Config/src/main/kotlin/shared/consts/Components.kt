@@ -829,4 +829,6 @@ object Components {
     const val COMPONENT_825 = 825
     const val LUC2_CHAPTER1_826 = 826
     const val LUC2_LUCIEN_PROJECTILES_827 = 827
+
+    const val GUILD_V1_834 = 834
 }
