@@ -82,6 +82,8 @@ import core.tools.RandomFunction;
 import core.tools.StringUtils;
 import core.tools.TickUtilsKt;
 import core.worker.ManagementEvents;
+import custom.guild.Guild;
+import custom.guild.GuildRank;
 import kotlin.Unit;
 import kotlin.jvm.functions.Function1;
 import proto.management.ClanLeaveNotification;
@@ -213,6 +215,16 @@ public class Player extends Entity {
      * Handles packet dispatching for the player.
      */
     private final PacketDispatch packetDispatch = new PacketDispatch(this);
+
+    /**
+     * The guild that player belonging to.
+     */
+    private Guild guild;
+
+    /**
+     * Player progression inside the guild.
+     */
+    private GuildRank guildRank;
 
     /**
      * Indicates whether the player was logged out automatically for being AFK.
@@ -1167,6 +1179,24 @@ public class Player extends Entity {
     }
 
     /**
+     * Gets guild.
+     *
+     * @return the guild
+     */
+    public Guild getGuild() {
+        return guild;
+    }
+
+    /**
+     * Gets guild rank.
+     *
+     * @return the rank
+     */
+    public GuildRank getGuildRank() {
+        return guildRank;
+    }
+
+    /**
      * Sets playing.
      *
      * @param playing the playing
@@ -1499,6 +1529,25 @@ public class Player extends Entity {
      */
     public void setArcheryTotal(int archeryTotal) {
         this.archeryTotal = archeryTotal;
+    }
+
+    /**
+     * Sets the guild.
+     *
+     * @param guild The city we belong to.
+     * @param rank The guild rank
+     */
+    public void setGuild(Guild guild, GuildRank rank) {
+        this.guild = guild;
+        this.guildRank = rank;
+    }
+
+    /**
+     * Placeholder because it's not possible.
+     */
+    public void leaveGuild() {
+        this.guild = null;
+        this.guildRank = null;
     }
 
     /**

@@ -51,9 +51,9 @@ class QuestTabInterface : InterfaceListener {
         }
 
         on(Components.GUILD_V1_834) { player, _, _, buttonID, _, _ ->
-            if (buttonID == 0) {
-                player.interfaceManager.openTab(2, Component(Components.GUILD_V1_834))
-            } else if (buttonID == 1){
+            if (buttonID == 1) {
+                player.interfaceManager.openTab(2, Component(Components.QUESTJOURNAL_V2_274))
+            } else if (buttonID == 2){
                 player.achievementDiaryManager.openTab()
             } else {
 
