@@ -831,4 +831,5 @@ object Components {
     const val LUC2_LUCIEN_PROJECTILES_827 = 827
 
     const val GUILD_V1_834 = 834
+    const val TASKS_MENU_835 = 835
 }

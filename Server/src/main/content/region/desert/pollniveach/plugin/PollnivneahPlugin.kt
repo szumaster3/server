@@ -19,10 +19,10 @@ class PollnivneahPlugin : InteractionListener {
          * Handles talking to bandits.
          */
 
-        on(NPCs.BANDIT_6388, IntType.NPC, "talk-to") { player, node ->
-            sendNPCDialogue(player, node.id, "Go away.", FaceAnim.ANNOYED)
-            return@on true
-        }
+        //on(NPCs.BANDIT_6388, IntType.NPC, "talk-to") { player, node ->
+        //    sendNPCDialogue(player, node.id, "Go away.", FaceAnim.ANNOYED)
+        //    return@on true
+        //}
 
         /*
          * Handles taking the beer from the bar table.
