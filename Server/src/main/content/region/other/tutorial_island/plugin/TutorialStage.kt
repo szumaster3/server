@@ -86,7 +86,7 @@ object TutorialStage {
             }
 
             39 -> {
-                hideTabs(player, login)
+                player.interfaceManager.removeTabs(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13)
                 removeHintIcon(player)
                 setMinimapState(player, 0)
                 registerHintIcon(player, Repository.findNPC(NPCs.RUNESCAPE_GUIDE_945)!!)
@@ -1163,7 +1163,7 @@ object TutorialStage {
 
     @JvmStatic
     fun hideTabs(player: Player, login: Boolean) {
-        val stage = getAttribute(player, GameAttributes.TUTORIAL_STAGE, -1)
+        val stage = getAttribute(player, GameAttributes.TUTORIAL_STAGE, 0)
         if (login) {
             player.interfaceManager.removeTabs(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13)
         }
