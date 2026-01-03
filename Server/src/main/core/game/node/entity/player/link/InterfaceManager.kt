@@ -753,7 +753,8 @@ class InterfaceManager(
             Components.OPTIONS_261,
             Components.EMOTES_464,
             Components.MUSIC_V3_187,
-            Components.LOGOUT_182
+            Components.LOGOUT_182,
+            Components.GUILD_V1_834
         )
     }
 }
