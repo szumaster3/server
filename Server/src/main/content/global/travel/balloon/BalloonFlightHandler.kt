@@ -53,7 +53,7 @@ class BalloonFlightHandler : InterfaceListener, InteractionListener {
     override fun defineInterfaceListeners() {
         on(Components.ZEP_BALLOON_MAP_469) { player, _, _, buttonID, _, _ ->
             val destination = BalloonDefinition.fromButtonId(buttonID) ?: return@on true
-            val isAdmin = player.rights == Rights.ADMINISTRATOR
+            // val isAdmin = player.rights == Rights.ADMINISTRATOR
             val origin = player.getAttribute<BalloonDefinition>(GameAttributes.BALLOON_ORIGIN)
 
             if (!hasLevelStat(player, Skills.FIREMAKING, destination.requiredLevel)) {
@@ -76,7 +76,7 @@ class BalloonFlightHandler : InterfaceListener, InteractionListener {
                 return@on true
             }
 
-            if (destination == BalloonDefinition.ENTRANA && !isAdmin) {
+            if (destination == BalloonDefinition.ENTRANA /*&& !isAdmin*/) {
                 if (!ItemDefinition.canEnterEntrana(player)) {
                     sendDialogue(player, "You can't take flight with weapons and armour to Entrana.")
                     return@on true
@@ -84,10 +84,10 @@ class BalloonFlightHandler : InterfaceListener, InteractionListener {
                 sendMessage(player, "You are quickly searched.")
             }
 
-            if (isAdmin) {
+            /*if (isAdmin) {
                 BalloonUtils.startFlight(player, destination)
                 return@on true
-            }
+            }*/
 
             val routeId = when (destination) {
                 BalloonDefinition.TAVERLEY -> 1
@@ -99,13 +99,15 @@ class BalloonFlightHandler : InterfaceListener, InteractionListener {
             }
 
             val isUnlocked = getVarbit(player, destination.varbitId) == 1
-            if (!isUnlocked && destination != BalloonDefinition.ENTRANA) {
+            if (!isUnlocked && destination != BalloonDefinition.ENTRANA && destination != BalloonDefinition.TAVERLEY) {
                 closeInterface(player)
                 setAttribute(player, "zep_current_route", routeId)
                 setAttribute(player, "zep_current_step_$routeId", 1)
                 openInterface(player, Components.ZEP_INTERFACE_470)
                 return@on true
             }
+
+            if (routeId <= 0) return@on true
 
             if (!removeItem(player, Item(destination.logId, 1))) {
                 val requiredItem = getItemName(destination.logId).lowercase().removeSuffix("s").trim()

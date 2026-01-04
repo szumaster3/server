@@ -15,6 +15,7 @@ import core.game.node.entity.player.link.diary.DiaryType
 import core.game.node.entity.skill.Skills
 import core.game.world.GameWorld
 import core.game.world.update.flag.context.Animation
+import core.tools.colorize
 import shared.consts.Components
 import shared.consts.NPCs
 import shared.consts.Quests
@@ -44,7 +45,7 @@ object BalloonUtils {
         sendModelOnInterface(player, Components.ZEP_INTERFACE_470, top, -1)
         sendModelOnInterface(player, Components.ZEP_INTERFACE_470, bottom, -1)
 
-        if (bottom == 98) {
+        if (bottom == 98 || bottom == 113) {
             bottom += 2
         }
 
@@ -118,7 +119,7 @@ object BalloonUtils {
             if (destination != ENTRANA) {
                 rewardXP(player, Skills.FIREMAKING, xp.toDouble())
             }
-            sendMessage(player, "You have unlocked the balloon route to ${destination.destName}!")
+            sendMessage(player, colorize("%RYou have unlocked the balloon route to ${destination.destName}!"))
         } else {
             sendDialogue(player, "You can open new locations from Entrana.")
         }
@@ -152,6 +153,10 @@ object BalloonUtils {
                 removeAttribute(player, "zep_current_step_$routeId")
                 teleport(player, balloonDestination.destination)
                 unlockDestination(player, balloonDestination)
+
+                closeOverlay(player)
+                closeInterface(player)
+
                 if (!isQuestComplete(player, Quests.ENLIGHTENED_JOURNEY))
                     openDialogue(player, FinishEnligtenedJourneyQuestDialogue())
             }

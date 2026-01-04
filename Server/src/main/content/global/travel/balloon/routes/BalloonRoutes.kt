@@ -1,5 +1,6 @@
 package content.global.travel.balloon.routes
 
+import content.global.travel.balloon.routes.screens.impl.CraftingGuildRouteScreen
 import content.global.travel.balloon.routes.screens.impl.TaverleyRouteScreen
 import core.game.node.entity.player.Player
 
@@ -39,10 +40,9 @@ object BalloonRoutes {
 
     val taverleyRoute =
         RouteData(
-            firstSequence =
-            listOf(9, 4, 5, 5, 5, 5, 5, 5, 5, 5, 6, 6, 6, 5, 5, 5, 5, 5, 5), // Aug 8, 2008
-            secondSequence = listOf(9, 5, 9, 5, 5, 5, 5, 5, 5, 4, 5, 5, 5, 5, 5, 5, 5, 5),
-            thirdSequence = listOf(5, 5, 5, 5, 5, 5, 10, 6, 5, 5, 5, 9, 5, 5, 5, 6, 5 ,5, 5, 10),
+            firstSequence = listOf(9, 4, 5, 5, 5, 5, 5, 5, 5, 5, 6, 6, 6, 5, 5, 5, 5, 5, 5), // Aug 8, 2008
+            secondSequence = listOf(9, 5, 9, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 9, 4, 5, 5, 5),
+            thirdSequence = listOf(5, 5, 5, 5, 5, 5, 5, 10, 6, 5, 5, 5, 9, 5, 5, 5, 5, 6),
             firstOverlay = TaverleyRouteScreen::firstStage,
             secondOverlay = TaverleyRouteScreen::secondStage,
             thirdOverlay = TaverleyRouteScreen::thirdStage,
@@ -56,17 +56,17 @@ object BalloonRoutes {
 
     val craftingGuildRoute =
         RouteData(
-            firstSequence = emptyList(),
-            secondSequence = emptyList(),
-            thirdSequence = emptyList(),
-            firstOverlay = { _, _ -> },
-            secondOverlay = { _, _ -> },
-            thirdOverlay = { _, _ -> },
+            firstSequence = listOf(5, 5, 5, 9, 9, 5, 5, 10, 5, 5, 5, 5, 9, 10, 5, 5, 6, 5, 9, 5),
+            secondSequence = listOf(5,6,5,9,5,5,5,5,6,5,5,5,9,5,5,5,5,5,5),
+            thirdSequence = listOf(5,5,4,5,5,5,5,5,5,10,5,5,5,6,5,5,5,6),
+            firstOverlay = CraftingGuildRouteScreen::firstStage,
+            secondOverlay = CraftingGuildRouteScreen::secondStage,
+            thirdOverlay = CraftingGuildRouteScreen::thirdStage,
             startPosition =
             listOf(
-                BalloonBasePosition(top = 0, bottom = 0), // first stage
-                BalloonBasePosition(top = 0, bottom = 0), // second stage
-                BalloonBasePosition(top = 0, bottom = 0) // third stage
+                BalloonBasePosition(top = 178, bottom = 158), // first stage
+                BalloonBasePosition(top = 159, bottom = 139), // second stage
+                BalloonBasePosition(top = 160, bottom = 140) // third stage
             )
         )
 
