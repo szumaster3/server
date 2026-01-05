@@ -1,5 +1,5 @@
 <div align="center">
-  project-name
+  <img src="https://github.com/szumaster3/windows/blob/master/welcome.png?raw=true">
 </div>
 
 <div align="center">
