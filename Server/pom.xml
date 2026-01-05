@@ -82,7 +82,7 @@
         <!-- jetbrains://idea/navigate/reference?project=openscape&path=Config -->
         <dependency>
             <groupId>org.rsps</groupId>
-            <artifactId>Config</artifactId>
+            <artifactId>Constants</artifactId>
             <version>1.0.0</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/com.mysql/mysql-connector -->

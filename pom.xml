@@ -10,7 +10,7 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>Config</module>
+        <module>Constants</module>
         <module>Server</module>
     </modules>
 
