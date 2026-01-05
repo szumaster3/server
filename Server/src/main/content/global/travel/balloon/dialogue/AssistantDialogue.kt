@@ -1,8 +1,10 @@
 package content.global.travel.balloon.dialogue
 
+import content.global.travel.balloon.utils.ChargeUtils
 import core.api.openInterface
 import core.game.dialogue.DialogueFile
 import core.game.dialogue.FaceAnim
+import core.game.dialogue.IfTopic
 import core.game.dialogue.Topic
 import core.tools.END_DIALOGUE
 import shared.consts.Components
@@ -21,6 +23,8 @@ class AssistantDialogue : DialogueFile() {
                 Topic("Yes.", 2, true),
                 Topic("No.", END_DIALOGUE),
                 Topic("Who are you?", npc?.id),
+                Topic("Store-logs", 10),
+                IfTopic("Check charges", 11, ChargeUtils.getCharges(player!!) > 1)
             )
             2 -> {
                 end()
@@ -35,6 +39,21 @@ class AssistantDialogue : DialogueFile() {
             NPCs.ASSISTANT_MARROW_5055 -> npcl(faceExpression, "I am Assistant Marrow. I'm working here part time while I study to be a doctor.").also { stage = 3 }
             NPCs.ASSISTANT_LE_SMITH_5056 -> npcl(faceExpression, "I am Assistant Le Smith. I used to work as a glider pilot, but they kicked me off.").also { stage = 4 }
             NPCs.ASSISTANT_STAN_5057 -> npcl(faceExpression, "I am Stan. Auguste hired me to look after this balloon. I make sure people are prepared to fly.").also { stage = 3 }
+
+            10 -> {
+                val gained = ChargeUtils.handOverLogs(player!!)
+                val chargeAmount = ChargeUtils.getCharges(player!!)
+                if (gained > 0) {
+                    npcl(FaceAnim.HAPPY, "Thanks! You now have $chargeAmount charges.").also { stage = END_DIALOGUE }
+                } else {
+                    npcl(FaceAnim.SAD, "You don't have any logs that I can store. You currently have $chargeAmount charges.").also { stage = END_DIALOGUE }
+                }
+            }
+
+            11 -> {
+                val chargeAmount = ChargeUtils.getCharges(player!!)
+                npc("You have $chargeAmount charges.").also { stage = END_DIALOGUE }
+            }
         }
     }
 }

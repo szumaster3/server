@@ -4,6 +4,7 @@ import content.data.Dyes
 import content.region.other.entrana.quest.zep.cutscene.ExperimentCutscene
 import core.api.*
 import core.game.dialogue.*
+import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.game.node.entity.skill.Skills
 import core.game.node.item.Item
@@ -542,4 +543,21 @@ class AugusteDialogue(player: Player? = null) : Dialogue(player) {
     private fun setGiven(player: Player, key: String) = setAttribute(player, "/save:$key", true)
 
     override fun getIds(): IntArray = intArrayOf(NPCs.AUGUSTE_5049)
+}
+
+class AugusteFirstTalkAfterQuestDialogue : DialogueFile() {
+    override fun handle(componentID: Int, buttonID: Int) {
+        npc = NPC(NPCs.AUGUSTE_5049)
+        when (stage) {
+            0 -> playerl(FaceAnim.HALF_ASKING, "So what are you going to do now?").also { stage++ }
+            1 -> npcl(FaceAnim.FRIENDLY, "I am considering starting a balloon enterprise. People all over ${GameWorld.settings?.name} will be able to travel in a new, exciting way.").also { stage++ }
+            2 -> npcl(FaceAnim.HAPPY, "As my first assistant, you will always be welcome to use a balloon. You'll have to bring your own fuel, though.").also { stage++ }
+            3 -> playerl(FaceAnim.HAPPY, "Thanks!").also { stage++ }
+            4 -> npcl(FaceAnim.HAPPY, "I will base my operations in Entrana. If you'd like to travel to new places, come see me there.").also { stage++ }
+            5 -> {
+                end()
+                finishQuest(player!!, Quests.ENLIGHTENED_JOURNEY)
+            }
+        }
+    }
 }

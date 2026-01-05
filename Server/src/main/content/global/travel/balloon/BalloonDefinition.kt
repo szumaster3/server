@@ -1,6 +1,8 @@
-package content.global.travel.balloon;
+package content.global.travel.balloon
 
+import core.api.log
 import core.game.world.map.Location
+import core.tools.Log
 import shared.consts.Items
 import shared.consts.NPCs
 import shared.consts.Vars
@@ -8,55 +10,37 @@ import shared.consts.Vars
 /**
  * Represents balloon travel data.
  */
-enum class BalloonDefinition(val destName: String, val npc: Int, val destination: Location, val logId: Int, val requiredLevel: Int, val varbitId: Int, val componentId: Int, val button: Int, val wrapperId: Int) {
-    ENTRANA("in Entrana", NPCs.AUGUSTE_5049, Location(2809, 3356), Items.LOGS_1511, 20, Vars.VARBIT_QUEST_ENLIGHTENED_JOURNEY_ENTRANA_BALLOON_2867, 25, 17, 19133),
-    TAVERLEY("in Taverley", NPCs.ASSISTANT_STAN_5057, Location(2940, 3420), Items.LOGS_1511, 20, Vars.VARBIT_QUEST_ENLIGHTENED_JOURNEY_TAVERLEY_BALLOON_2868, 22, 18, 19135),
-    CRAFT_GUILD("at the Crafting Guild", NPCs.ASSISTANT_BROCK_5054, Location(2924, 3303), Items.OAK_LOGS_1521, 30, Vars.VARBIT_QUEST_ENLIGHTENED_JOURNEY_CRAFTING_GUILD_BALLOON_2871, 20, 16, 19141),
-    VARROCK("in Varrock", NPCs.ASSISTANT_SERF_5053, Location(3298, 3481), Items.WILLOW_LOGS_1519, 40, Vars.VARBIT_QUEST_ENLIGHTENED_JOURNEY_VARROCK_BALLOON_2872, 21, 19, 19143),
-    CASTLE_WARS("at Castle Wars", NPCs.ASSISTANT_MARROW_5055, Location(2462, 3108), Items.YEW_LOGS_1515, 50, Vars.VARBIT_QUEST_ENLIGHTENED_JOURNEY_CASTLE_WARS_BALLOON_2869, 24, 14, 19137),
-    GRAND_TREE("at the Gnome Stronghold", NPCs.ASSISTANT_LE_SMITH_5056, Location(2480, 3458), Items.MAGIC_LOGS_1513, 60, Vars.VARBIT_QUEST_ENLIGHTENED_JOURNEY_GRAND_TREE_BALLOON_2870, 23, 15, 19139);
+enum class BalloonDefinition(
+    val destName: String,
+    val npc: Int,
+    val destination: Location,
+    val logId: Int,
+    val logCost: Int,
+    val chargeCost: Int,
+    val requiredLevel: Int,
+    val varbitId: Int,
+    val componentId: Int,
+    val button: Int,
+    val wrapperId: Int
+) {
+    TAVERLEY("in Taverley", NPCs.ASSISTANT_STAN_5057, Location(2940, 3420), Items.LOGS_1511, 1, 1, 20, Vars.VARBIT_QUEST_ENLIGHTENED_JOURNEY_TAVERLEY_BALLOON_2868, 22, 18, 19135),
+    CRAFT_GUILD("at the Crafting Guild", NPCs.ASSISTANT_BROCK_5054, Location(2924, 3303), Items.OAK_LOGS_1521, 2, 2, 30, Vars.VARBIT_QUEST_ENLIGHTENED_JOURNEY_CRAFTING_GUILD_BALLOON_2871, 20, 16, 19141),
+    VARROCK("in Varrock", NPCs.ASSISTANT_SERF_5053, Location(3298, 3481), Items.WILLOW_LOGS_1519, 3, 3, 40, Vars.VARBIT_QUEST_ENLIGHTENED_JOURNEY_VARROCK_BALLOON_2872, 21, 19, 19143),
+    CASTLE_WARS("at Castle Wars", NPCs.ASSISTANT_MARROW_5055, Location(2462, 3108), Items.YEW_LOGS_1515, 4, 4, 50, Vars.VARBIT_QUEST_ENLIGHTENED_JOURNEY_CASTLE_WARS_BALLOON_2869, 24, 14, 19137),
+    GRAND_TREE("at the Gnome Stronghold", NPCs.ASSISTANT_LE_SMITH_5056, Location(2480, 3458), Items.MAGIC_LOGS_1513, 5, 5, 60, Vars.VARBIT_QUEST_ENLIGHTENED_JOURNEY_GRAND_TREE_BALLOON_2870, 23, 15, 19139),
+    ENTRANA("in Entrana", NPCs.AUGUSTE_5049, Location(2809, 3356), Items.LOGS_1511, 1, 1, 20, Vars.VARBIT_QUEST_ENLIGHTENED_JOURNEY_ENTRANA_BALLOON_2867, 25, 17, 19133);
 
     companion object {
-        /**
-         * Maps NPC id to [BalloonDefinition].
-         */
-        private val npcMap: Map<Int, BalloonDefinition> by lazy {
-            values().associateBy { it.npc }
-        }
 
-        /**
-         * Maps interface button to [BalloonDefinition].
-         */
-        private val buttonToBalloon: Map<Int, BalloonDefinition> by lazy {
-            values().associateBy { it.button }
-        }
+        private val npcMap by lazy { values().associateBy { it.npc } }
+        private val buttonToBalloon by lazy { values().associateBy { it.button } }
+        private val sceneryToBalloon by lazy { values().associateBy { it.wrapperId } }
 
-        /**
-         * Gets [BalloonDefinition] for given button.
-         */
         fun fromButtonId(buttonId: Int): BalloonDefinition? = buttonToBalloon[buttonId]
-
-        /**
-         * Maps scenery to [BalloonDefinition].
-         */
-        private val sceneryToBalloon: Map<Int, BalloonDefinition> by lazy {
-            values().associateBy { it.wrapperId }
-        }
-
-        /**
-         * Gets [BalloonDefinition] for given scenery.
-         */
         fun fromSceneryId(id: Int): BalloonDefinition? = sceneryToBalloon[id]
-
-        /**
-         * Gets [BalloonDefinition] for given NPC.
-         */
         fun fromNpcId(npcId: Int): BalloonDefinition? = npcMap[npcId]
 
-        /**
-         * Animation ids for balloon travel routes.
-         */
-        private val animations: Map<Pair<BalloonDefinition, BalloonDefinition>, Int> = mapOf(
+        private val balloonInterfaceAnimation = mapOf(
             ENTRANA to TAVERLEY to 5110,
             TAVERLEY to ENTRANA to 5111,
             ENTRANA to CRAFT_GUILD to 5112,
@@ -89,12 +73,11 @@ enum class BalloonDefinition(val destName: String, val npc: Int, val destination
             GRAND_TREE to VARROCK to 5139
         )
 
-        /**
-         * Gets the animation id for travel.
-         */
         fun getAnimationId(from: BalloonDefinition, to: BalloonDefinition): Int {
-            return animations[from to to].takeIf { it != 0 }
-                ?: error("No animation for route [$from] -> [$to]")
+            return balloonInterfaceAnimation[from to to] ?: run {
+                log(this.javaClass, Log.WARN, "No animation for route [$from] -> [$to]")
+                0
+            }
         }
     }
 }

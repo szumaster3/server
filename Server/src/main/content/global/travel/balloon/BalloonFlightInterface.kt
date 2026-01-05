@@ -1,7 +1,7 @@
 package content.global.travel.balloon
 
-import content.global.travel.balloon.BalloonUtils.clearBalloonState
 import content.global.travel.balloon.routes.BalloonRoutes
+import content.global.travel.balloon.utils.DrawUtils
 import core.api.*
 import core.game.interaction.InterfaceListener
 import core.game.node.entity.player.Player
@@ -27,7 +27,7 @@ class BalloonFlightInterface : InterfaceListener {
             val step = getAttribute(player, currentId, 1)
             setAttribute(player, currentId, step)
 
-            BalloonUtils.drawBaseBalloon(player, routeId, step)
+            DrawUtils.drawBaseBalloon(player, routeId, step)
 
             BalloonRoutes.routes[routeId]
                 ?.firstOverlay
@@ -48,7 +48,7 @@ class BalloonFlightInterface : InterfaceListener {
             val index = getAttribute(player, sequenceProgressAttribute, 0)
 
             registerLogoutListener(player, "balloon-control-panel") {
-                clearBalloonState(player, routeId, step)
+                DrawUtils.clearBalloonState(player, routeId, step)
             }
 
             val sequence =
@@ -61,30 +61,30 @@ class BalloonFlightInterface : InterfaceListener {
 
             val move =
                 when (buttonID) {
-                    4 -> BalloonUtils.BalloonMove.SANDBAG
-                    9 -> BalloonUtils.BalloonMove.LOGS
-                    5 -> BalloonUtils.BalloonMove.RELAX
-                    6 -> BalloonUtils.BalloonMove.TUG
-                    10 -> BalloonUtils.BalloonMove.EMERGENCY_TUG
+                    4 -> DrawUtils.BalloonMove.SANDBAG
+                    9 -> DrawUtils.BalloonMove.LOGS
+                    5 -> DrawUtils.BalloonMove.RELAX
+                    6 -> DrawUtils.BalloonMove.TUG
+                    10 -> DrawUtils.BalloonMove.EMERGENCY_TUG
                     else -> null
                 }
 
             if (buttonID == 8 || buttonID != sequence.getOrNull(index) || move == null) {
-                clearBalloonState(player, routeId, step)
+                DrawUtils.clearBalloonState(player, routeId, step)
                 closeInterface(player)
                 closeSingleTab(player)
                 return@on true
             }
 
-            BalloonUtils.getSoundForButton(player, buttonID)
-            BalloonUtils.drawBalloon(player, move, routeId, step)
+            DrawUtils.getSoundForButton(player, buttonID)
+            DrawUtils.drawBalloon(player, move, routeId, step)
 
             setAttribute(player, sequenceProgressAttribute, index + 1)
 
             if (index + 1 >= sequence.size) {
-                BalloonUtils.reset(player, Components.ZEP_INTERFACE_470)
+                DrawUtils.reset(player, Components.ZEP_INTERFACE_470)
                 removeAttribute(player, sequenceProgressAttribute)
-                BalloonUtils.updateScreen(player, routeId, step, routeData)
+                DrawUtils.updateScreen(player, routeId, step, routeData)
             }
 
             return@on true

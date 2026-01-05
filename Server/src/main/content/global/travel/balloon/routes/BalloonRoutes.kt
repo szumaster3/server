@@ -1,7 +1,7 @@
 package content.global.travel.balloon.routes
 
-import content.global.travel.balloon.routes.screens.impl.CraftingGuildRouteScreen
-import content.global.travel.balloon.routes.screens.impl.TaverleyRouteScreen
+import content.global.travel.balloon.routes.screen.impl.CraftingGuildRouteScreen
+import content.global.travel.balloon.routes.screen.impl.TaverleyRouteScreen
 import core.game.node.entity.player.Player
 
 /**

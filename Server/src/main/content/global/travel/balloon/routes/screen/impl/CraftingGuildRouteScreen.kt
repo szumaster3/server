@@ -1,4 +1,4 @@
-package content.global.travel.balloon.routes.screens.impl
+package content.global.travel.balloon.routes.screen.impl
 
 import core.api.sendAngleOnInterface
 import core.api.sendAnimationOnInterface
