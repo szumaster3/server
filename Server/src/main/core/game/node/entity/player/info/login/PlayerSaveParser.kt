@@ -133,22 +133,20 @@ class PlayerSaveParser(val player: Player) {
         val skillData = save.getAsJsonArray("skills")
         player.skills.parse(skillData)
 
-        player.skills.experienceGained = save.get("totalEXP").asDouble
-        player.skills.experienceMultiplier = save.get("exp_multiplier").asDouble
+        player.skills.experienceGained =
+            save.get("totalEXP")?.asDouble ?: 0.0
 
-        if (GameWorld.settings?.default_xp_rate != 5.0) {
-            player.skills.experienceMultiplier = GameWorld.settings?.default_xp_rate!!
-        }
+        val defaultRate = GameWorld.settings?.default_xp_rate ?: 1.0
 
-        if (player.skills.experienceMultiplier >= 10) {
-            val divisor = player.skills.experienceMultiplier / 5.0
-            player.skills.correct(divisor)
-        }
+        player.skills.experienceMultiplier =
+            save.get("exp_multiplier")?.asDouble ?: defaultRate
 
         if (save.has("milestone")) {
             val milestone = save.getAsJsonObject("milestone")
-            player.skills.combatMilestone = milestone.get("combatMilestone").asInt
-            player.skills.skillMilestone = milestone.get("skillMilestone").asInt
+            player.skills.combatMilestone =
+                milestone.get("combatMilestone")?.asInt ?: 0
+            player.skills.skillMilestone =
+                milestone.get("skillMilestone")?.asInt ?: 0
         }
     }
 

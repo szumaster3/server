@@ -421,18 +421,6 @@ public final class Skills {
     }
 
     /**
-     * Parses experience rate from a ByteBuffer.
-     *
-     * @param buffer The ByteBuffer containing experience rate data.
-     */
-    public void parseExpRate(ByteBuffer buffer) {
-        experienceMultiplier = buffer.getDouble();
-        if (GameWorld.getSettings().getDefault_xp_rate() != experienceMultiplier) {
-            experienceMultiplier = GameWorld.getSettings().getDefault_xp_rate();
-        }
-    }
-
-    /**
      * Saves skill data to a ByteBuffer.
      *
      * @param buffer The ByteBuffer to save skill data into.
