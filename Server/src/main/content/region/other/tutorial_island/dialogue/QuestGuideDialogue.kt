@@ -2,10 +2,7 @@ package content.region.other.tutorial_island.dialogue
 
 import content.data.GameAttributes
 import content.region.other.tutorial_island.plugin.TutorialStage
-import core.api.getAttribute
-import core.api.sendItemDialogue
-import core.api.sendPlainDialogue
-import core.api.setAttribute
+import core.api.*
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
 import core.game.node.entity.npc.NPC
@@ -14,6 +11,7 @@ import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.Items
 import shared.consts.NPCs
+import shared.consts.Vars
 
 @Initializable
 class QuestGuideDialogue(player: Player? = null) : Dialogue(player) {
@@ -32,6 +30,7 @@ class QuestGuideDialogue(player: Player? = null) : Dialogue(player) {
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (getAttribute(player, GameAttributes.TUTORIAL_STAGE, 0)) {
             27 -> {
+                setVarbit(player, Vars.VARBIT_FLASHING_TAB_ICON_3756, 3)
                 sendPlainDialogue(player, true, "${core.tools.BLUE}Open the Quest Journal.", "", "Click on the flashing icon next to your inventory.")
             }
             28 -> when (stage) {

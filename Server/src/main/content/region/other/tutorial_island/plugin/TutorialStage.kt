@@ -480,7 +480,6 @@ object TutorialStage {
             27 -> {
                 hideTabs(player, login)
                 removeHintIcon(player)
-                setVarbit(player, Vars.VARBIT_FLASHING_TAB_ICON_3756, 3)
                 registerHintIcon(player, Repository.findNPC(NPCs.QUEST_GUIDE_949)!!)
                 player.interfaceManager.openTab(Component(Components.QUESTJOURNAL_V2_274))
                 Component.setUnclosable(
@@ -494,9 +493,9 @@ object TutorialStage {
             }
 
             28 -> {
-                setVarbit(player, FLASHING_ICON, 0)
                 hideTabs(player, login)
                 removeHintIcon(player)
+                setVarbit(player, FLASHING_ICON, 0)
                 registerHintIcon(player, Repository.findNPC(NPCs.QUEST_GUIDE_949)!!)
                 Component.setUnclosable(
                     player,player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
@@ -557,42 +556,34 @@ object TutorialStage {
                 removeHintIcon(player)
                 Component.setUnclosable(
                     player,player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
-                    "Please wait.",
-                    "",
-                    "Your character is now attempting to prospect the rock. This",
-                    "should only take a few seconds.",
-                    "",
-                ))
-                Pulser.submit(
-                    object : Pulse(3) {
-                        override fun pulse(): Boolean {
-                            setAttribute(player, GameAttributes.TUTORIAL_STAGE, 33)
-                            load(player, 33)
-                            return true
-                        }
-                    },
-                )
+                        "Please wait.",
+                        "",
+                        "Your character is now attempting to prospect the rock. This",
+                        "should only take a few seconds.",
+                        "",
+                    ))
+                queueScript(player, 3, QueueStrength.SOFT){
+                    setAttribute(player, GameAttributes.TUTORIAL_STAGE, 33)
+                    TutorialStage.load(player, 33)
+                    return@queueScript stopExecuting(player)
+                }
             }
 
             33 -> {
                 hideTabs(player, login)
                 removeHintIcon(player)
                 registerHintIcon(player, Location(3086, 9501, 0), 50)
-                Pulser.submit(
-                    object : Pulse(3) {
-                        override fun pulse(): Boolean {
-                            Component.setUnclosable(
-                                player,player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
-                                "It's tin.",
-                                "",
-                                "So now you know there's tin in the grey rocks, try prospecting the",
-                                "brown ones next.",
-                                "",
-                            ))
-                            return true
-                        }
-                    },
-                )
+                queueScript(player, 3, QueueStrength.SOFT){
+                    Component.setUnclosable(
+                        player,player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(
+                            "It's tin.",
+                            "",
+                            "So now you know there's tin in the grey rocks, try prospecting the",
+                            "brown ones next.",
+                            "",
+                        ))
+                    return@queueScript stopExecuting(player)
+                }
             }
 
             34 -> {
