@@ -1,6 +1,7 @@
 package content.global.random.event.evil_twin
 
 import content.global.random.RandomEventNPC
+import core.api.openDialogue
 import core.api.utils.WeightBasedTable
 import core.game.node.entity.npc.NPC
 import core.game.system.timer.impl.AntiMacro
@@ -18,5 +19,7 @@ class MollyNPC(override var loot: WeightBasedTable? = null) : RandomEventNPC(MOL
         AntiMacro.terminateEventNpc(player)
     }
 
-    override fun talkTo(npc: NPC) {}
+    override fun talkTo(npc: NPC) {
+        openDialogue(player, MollyDialogue(3))
+    }
 }
