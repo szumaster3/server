@@ -92,11 +92,11 @@ class RestlessGhostDialogue(player: Player? = null) : Dialogue(player) {
                 setQuestStage(player, Quests.THE_RESTLESS_GHOST, 30)
                 stage++
             }
-            30 -> npc(FaceAnim.HALF_GUILTY, "Ooh, thank you. That would be such a great relief!").also { stage++ }
+            30 -> npc(FaceAnim.HAPPY, "Ooh, thank you. That would be such a great relief!").also { stage++ }
             31 -> npc(FaceAnim.HALF_GUILTY, "It is so dull being a ghost...").also { stage = END_DIALOGUE }
             32 -> {
-                if (inInventory(player, Items.SKULL_964, 1)) {
-                    end()
+                if (inInventory(player, Items.GHOSTS_SKULL_553, 1)) {
+                    player(FaceAnim.HALF_GUILTY, "I have found it!").also { stage = 36 }
                 } else {
                     player(FaceAnim.HALF_GUILTY, "Sorry, I can't find it at the moment.").also { stage++ }
                 }
@@ -104,7 +104,7 @@ class RestlessGhostDialogue(player: Player? = null) : Dialogue(player) {
             33 -> npc(FaceAnim.HALF_GUILTY, "Ah well. Keep on looking.").also { stage++ }
             34 -> npc(FaceAnim.HALF_GUILTY, "I'm pretty sure it's somewhere in the tower south-west", "from here. There's a lot of levels to the tower, though. I", "suppose it might take a little while to find.").also { stage = END_DIALOGUE }
             35 -> player(FaceAnim.HALF_GUILTY, "I have found it!").also { stage++ }
-            36 -> npc(FaceAnim.HALF_GUILTY, "Hurrah! Now I can stop being a ghost! You just need", "to put it on my coffin there, and I will be free!").also { stage = END_DIALOGUE }
+            36 -> npc(FaceAnim.HAPPY, "Hurrah! Now I can stop being a ghost! You just need", "to put it on my coffin there, and I will be free!").also { stage = END_DIALOGUE }
         }
         return true
     }

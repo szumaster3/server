@@ -74,10 +74,10 @@ class RestlessGhost : Quest(Quests.THE_RESTLESS_GHOST, 25, 24, 1, Vars.VARP_QUES
 
     override fun finish(player: Player) {
         super.finish(player)
+        displayQuestItem(player, Items.GHOSTS_SKULL_553)
         drawReward(player, "1 Quest Point", 10)
         drawReward(player, "1125 Prayer XP", 11)
         sendString(player, "You have completed ${Quests.THE_RESTLESS_GHOST}!", Components.QUEST_COMPLETE_SCROLL_277, 4)
-        sendItemZoomOnInterface(player, Components.QUEST_COMPLETE_SCROLL_277, 5, Items.SKULL_964, 240)
         rewardXP(player, Skills.PRAYER, 1125.0)
         closeChatBox(player)
         setVarp(player, Vars.VARP_RESTLESS_GHOST_728, 31, true)

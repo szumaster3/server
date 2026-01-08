@@ -48,11 +48,11 @@ class RestlessGhostPlugin : InteractionListener {
                         Scenery.ALTAR_15050 -> searchAltar(player, obj)
                         Scenery.ALTAR_15051 -> {
                             if (!isQuestComplete(player, Quests.THE_RESTLESS_GHOST) &&
-                                !inBank(player, Items.SKULL_964) &&
-                                !inInventory(player, Items.SKULL_964)
+                                !inBank(player, Items.GHOSTS_SKULL_553) &&
+                                !inInventory(player, Items.GHOSTS_SKULL_553)
                             ) {
                                 sendMessage(player, "You find another skull.")
-                                addItem(player, Items.SKULL_964)
+                                addItem(player, Items.GHOSTS_SKULL_553)
                             }
                             player.questRepository.setStageNonmonotonic(player.questRepository.forIndex(25), 40)
                         }
@@ -62,10 +62,19 @@ class RestlessGhostPlugin : InteractionListener {
         }
 
         /*
+         * Handles using skull on restless ghost.
+         */
+
+        onUseWith(IntType.NPC, Items.GHOSTS_SKULL_553, NPCs.RESTLESS_GHOST_457) { player, _, _ ->
+            sendDialogue(player, "I can't give it to him. It goes right through him.")
+            return@onUseWith true
+        }
+
+        /*
          * Handles using skull on coffin.
          */
 
-        onUseWith(IntType.SCENERY, Items.SKULL_964, *COFFIN_IDS) { player, _, with ->
+        onUseWith(IntType.SCENERY, Items.GHOSTS_SKULL_553, *COFFIN_IDS) { player, _, with ->
             val coffin = with.asScenery().id
             if (coffin == Scenery.COFFIN_2145) {
                 sendDialogue(player, "Maybe I should open it first.")
@@ -77,7 +86,7 @@ class RestlessGhostPlugin : InteractionListener {
                 return@onUseWith true
             }
 
-            if (removeItem(player, Item(Items.SKULL_964, 1))) {
+            if (removeItem(player, Item(Items.GHOSTS_SKULL_553, 1))) {
                 setVarbit(player, Vars.VARBIT_RESTLESS_GHOST_PUT_SKULL_2129, 1, true)
                 animate(player, Animations.PUT_OBJECT_ON_TABLE_537)
                 playAudio(player, Sounds.RG_PLACE_SKULL_1744)
@@ -85,14 +94,6 @@ class RestlessGhostPlugin : InteractionListener {
                 RestlessGhostCutscene(player).start(true)
             }
             return@onUseWith true
-        }
-
-        /*
-         * Handles trying to drop the skull.
-         */
-        on(Items.SKULL_964, IntType.ITEM, "drop") { player, _ ->
-            sendMessage(player, "You can't drop this! Return it to the ghost.")
-            return@on false
         }
     }
 
@@ -161,7 +162,7 @@ class RestlessGhostPlugin : InteractionListener {
             return
         }
         if (n.asScenery().id != Scenery.ALTAR_15051) {
-            addItemOrDrop(player, Items.SKULL_964)
+            addItemOrDrop(player, Items.GHOSTS_SKULL_553)
             setVarp(player, Vars.VARP_RESTLESS_GHOST_728, 5, true)
             queueScript(player, 1, QueueStrength.NORMAL) {
                 setQuestStage(player, Quests.THE_RESTLESS_GHOST, 40)
