@@ -32,7 +32,7 @@ class BennyDialogue(player: Player? = null) : Dialogue(player) {
             }
 
             1 -> npc("Certainly, Guv. That'll be 50 gold pieces, please.").also { stage++ }
-            2 -> options("Sure, here you go.", "Uh, no thanks, I've changed my mind").also { stage++ }
+            2 -> options("Sure, here you go.", "Uh, no thanks, I've changed my mind.").also { stage++ }
             3 -> when (buttonId) {
                 1 -> {
                     end()
@@ -52,7 +52,21 @@ class BennyDialogue(player: Player? = null) : Dialogue(player) {
 
                 2 -> player("No, thanks.").also { stage = 8 }
             }
-
+            4 -> {
+                end()
+                if (!inInventory(player, Items.COINS_995, 50)) {
+                    sendMessage(player, "You need 50 gold coins to buy a newspaper.")
+                    return true
+                }
+                if (freeSlots(player) == 0) {
+                    sendMessage(player, "You don't have enough inventory space.")
+                    return true
+                }
+                if (removeItem(player, Item(Items.COINS_995, 50), Container.INVENTORY)) {
+                    addItemOrDrop(player, Items.NEWSPAPER_11169, 1)
+                }
+                return true
+            }
             5 -> npc("Just 50 gold pieces! An absolute bargain! Want one?").also { stage++ }
             6 -> options("Yes, please.", "No, thanks.").also { stage++ }
             7 -> when (buttonId) {
