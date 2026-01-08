@@ -26,7 +26,7 @@ internal object GameAttributes {
     const val CON = "con"
     const val PORTAL = "portal"
     const val CON_HOTSPOT = "con:hotspot"
-    const val POH_PORTAL = "construction:portal"
+    const val POH_PORTAL = "poh_entry"
     const val CON_OBJ = "construction:objs"
     const val CON_CLOCKMAKER_DIAL = "construction:clockbench"
     const val CON_PORTAL_DIR = "con:directportal"
