@@ -1,3 +1,5 @@
+package content.region.desert.al_kharid.npc
+
 import core.api.sendChat
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.npc.NPCBehavior
