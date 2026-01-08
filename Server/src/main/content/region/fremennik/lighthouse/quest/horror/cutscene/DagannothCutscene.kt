@@ -1,6 +1,6 @@
 package content.region.fremennik.lighthouse.quest.horror.cutscene
 
-import content.region.fremennik.lighthouse.quest.horror.npc.DagonnothBabyNPC
+import content.region.fremennik.lighthouse.quest.horror.npc.DagannothBabyNPC
 import core.api.clearHintIcon
 import core.api.transformNpc
 import core.api.registerHintIcon
@@ -46,7 +46,7 @@ class DagannothCutscene(
                 resetCamera()
                 runTask(player, 12) {
                     clearHintIcon(player)
-                    DagonnothBabyNPC.spawnDagannothBaby(player)
+                    DagannothBabyNPC.spawnDagannothBaby(player)
                 }
             }
         }

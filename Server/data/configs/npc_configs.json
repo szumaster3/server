@@ -46766,6 +46766,7 @@
     "agg_radius": "8",
     "examine": "The dagannoth king responsible for the death of the Bukalla.",
     "combat_style": "1",
+        "prj_height": "92",
     "melee_animation": "2855",
     "attack_speed": "4",
     "magic_level": "1",

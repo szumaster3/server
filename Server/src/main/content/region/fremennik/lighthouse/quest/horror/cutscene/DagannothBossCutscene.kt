@@ -1,6 +1,6 @@
 package content.region.fremennik.lighthouse.quest.horror.cutscene
 
-import content.region.fremennik.lighthouse.quest.horror.npc.DagonnothSessionPulse
+import content.region.fremennik.lighthouse.quest.horror.npc.DagannothSessionPulse
 import core.api.clearHintIcon
 import core.api.transformNpc
 import core.api.registerHintIcon
@@ -53,7 +53,7 @@ class DagannothBossCutscene(
                 resetCamera()
                 runTask(player, 12) {
                     clearHintIcon(player)
-                    GameWorld.Pulser.submit(DagonnothSessionPulse(player))
+                    GameWorld.Pulser.submit(DagannothSessionPulse(player))
                 }
             }
         }

@@ -12,6 +12,7 @@ import core.game.node.entity.player.Player
 import core.game.node.scenery.Scenery
 import core.game.system.task.Pulse
 import core.game.world.map.Location
+import core.game.world.update.flag.context.Graphics
 import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.*
@@ -118,7 +119,7 @@ class WizardMizgogDialogue(player: Player? = null) : Dialogue(player) {
                                         forTicks = 80
                                     )
                                 }
-                                7 -> sendGraphics(Graphics.MONK_CAST_HEAL_84, Location(3102, 3163, 2))
+                                7 -> sendGraphics(Graphics(shared.consts.Graphics.MONK_CAST_HEAL_84, 92), Location(3102, 3163, 2))
                                 12 -> {
                                     PlayerCamera(player).reset()
                                     sendMessage(player!!, "The Wizard hands you an amulet.")

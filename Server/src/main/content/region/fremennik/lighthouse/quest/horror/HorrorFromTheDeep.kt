@@ -119,7 +119,7 @@ class HorrorFromTheDeep : Quest(Quests.HORROR_FROM_THE_DEEP, 77, 76, 2, Vars.VAR
          * Trivia: The only one interface that has different text in journal.
          */
         sendString(player, "You have survived the ${Quests.HORROR_FROM_THE_DEEP}!", Components.QUEST_COMPLETE_SCROLL_277, 4)
-        sendItemZoomOnInterface(player, Components.QUEST_COMPLETE_SCROLL_277, 5, Items.RUSTY_CASKET_3849)
+        displayQuestItem(player, Items.RUSTY_CASKET_3849)
         drawReward(player, "2 Quest Points", ln++)
         drawReward(player, "4662 XP in each of: Ranged,", ln++)
         drawReward(player, "Magic, Strength", ln)

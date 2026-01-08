@@ -15,16 +15,16 @@ import shared.consts.NPCs
 import shared.consts.Quests
 
 @Initializable
-class DagonnothBabyNPC(id: Int = 0, location: Location? = null) : AbstractNPC(id, location) {
+class DagannothBabyNPC(id: Int = 0, location: Location? = null) : AbstractNPC(id, location) {
 
-    override fun construct(id: Int, location: Location, vararg objects: Any): AbstractNPC = DagonnothBabyNPC(id, location)
+    override fun construct(id: Int, location: Location, vararg objects: Any): AbstractNPC = DagannothBabyNPC(id, location)
 
     override fun getIds(): IntArray = intArrayOf(NPCs.DAGANNOTH_3591)
 
     companion object {
         @JvmStatic
         fun spawnDagannothBaby(player: Player) {
-            val dag = DagonnothBabyNPC(NPCs.DAGANNOTH_1347)
+            val dag = DagannothBabyNPC(NPCs.DAGANNOTH_1347)
             dag.location = location(2520, 4645, 0)
             dag.isWalks = true
             dag.isAggressive = true

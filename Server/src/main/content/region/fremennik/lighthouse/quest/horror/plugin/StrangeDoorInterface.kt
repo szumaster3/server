@@ -8,7 +8,7 @@ import shared.consts.Components
 import shared.consts.Quests
 import shared.consts.Sounds
 
-class MetalDoorInterface : InterfaceListener {
+class StrangeDoorInterface : InterfaceListener {
 
     private val runeComponents = mapOf(
         GameAttributes.QUEST_HFTD_USE_FIRE_RUNE  to 2,
@@ -35,14 +35,10 @@ class MetalDoorInterface : InterfaceListener {
 
             if (getAttribute(player, GameAttributes.QUEST_HFTD_UNLOCK_DOOR, 0) > UNLOCK_DOOR_THRESHOLD) {
                 closeInterface(player)
-                queueScript(player, 1, QueueStrength.SOFT) {
-                    sendMessage(player, "You hear the sound of something moving within the wall.")
-                    playAudio(player, Sounds.STRANGEDOOR_SOUND_1627)
-                    setQuestStage(player, Quests.HORROR_FROM_THE_DEEP, QUEST_STAGE_OPEN_DOOR)
-                    return@queueScript stopExecuting(player)
-                }
+                sendMessage(player, "You hear the sound of something moving within the wall.")
+                playAudio(player, Sounds.STRANGEDOOR_SOUND_1627, 1)
+                setQuestStage(player, Quests.HORROR_FROM_THE_DEEP, QUEST_STAGE_OPEN_DOOR)
             }
-
             return@onOpen true
         }
     }
