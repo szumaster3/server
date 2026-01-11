@@ -172,12 +172,12 @@ class MiningPlugin : InteractionListener {
             }
 
             anim(player, resource, tool!!)
-            return delayScript(player, getDelay())
+            return delayScript(player, getDelay(resource, tool))
         }
 
         anim(player, resource, tool!!)
         if (!checkReward(player, resource, tool)) {
-            return delayScript(player, getDelay())
+            return delayScript(player, getDelay(resource, tool))
         }
 
         var reward = resource.reward
@@ -380,7 +380,23 @@ class MiningPlugin : InteractionListener {
         return hostRatio < clientRatio
     }
 
-    fun getDelay(): Int = 1
+    fun getDelay(resource: MiningNode, tool: SkillingTool) : Int {
+        if (resource == MiningNode.RUNE_ESSENCE_0 || resource == MiningNode.RUNE_ESSENCE_1) {
+            return when (tool) {
+                SkillingTool.BRONZE_PICKAXE -> 7
+                SkillingTool.IRON_PICKAXE -> 6
+                SkillingTool.STEEL_PICKAXE -> 5
+                SkillingTool.MITHRIL_PICKAXE -> 4
+                SkillingTool.ADAMANT_PICKAXE -> 3
+                SkillingTool.RUNE_PICKAXE -> 2
+                SkillingTool.INFERNO_ADZE2 -> if (RandomFunction.random(2) == 0) 1 else 2
+                else -> 4  // fallback
+            }
+        }
+        return 4  // normal rocks
+    }
+
+
 
     fun anim(player: Player, resource: MiningNode?, tool: SkillingTool) {
         val isEssence = resource?.identifier == 14.toByte()
