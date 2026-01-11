@@ -113,33 +113,52 @@ class MiningPulse(private val player: Player, private val node: Node) : Pulse(1,
             sendMessage(player, "You need a Mining level of ${resource!!.level} to mine this rock.")
             return false
         }
-        if (SkillingTool.getPickaxe(player) == null) {
+
+        val allPickaxes = SkillingTool.values().filter {
+            inEquipmentOrInventory(player, it.id)
+        }
+
+        if (allPickaxes.isEmpty()) {
             sendMessage(player, "You do not have a pickaxe to use.")
             return false
         }
-        if(resource!!.identifier == 19.toByte() && !core.api.hasRequirement(player, Quests.TOKTZ_KET_DILL)) {
+
+        if (player.getSkills().getLevel(Skills.MINING) < resource!!.level) {
+            sendMessage(player, "You need a Mining level of ${resource!!.level} to mine this rock.")
+            return false
+        }
+
+        val usablePickaxe = allPickaxes
+            .filter { player.getSkills().getLevel(Skills.MINING) >= it.level }
+            .maxByOrNull { it.level }
+
+        if (usablePickaxe == null) {
+            sendMessage(player, "You need a pickaxe to mine this rock. You do not have a pickaxe which you have the Mining level to use.")
+            return false
+        }
+
+        if (resource!!.identifier == 19.toByte() && !hasRequirement(player, Quests.TOKTZ_KET_DILL, false)) {
             sendDialogue(player, "You do not know the technique to mine stone slabs.")
             return false
         }
 
-        if (resource!!.identifier == 19.toByte() && (SkillingTool.getPickaxe(player) == SkillingTool.INFERNO_ADZE || SkillingTool.getPickaxe(player) == SkillingTool.INFERNO_ADZE2)) {
+        if (resource!!.identifier == 19.toByte() && usablePickaxe in listOf(SkillingTool.INFERNO_ADZE, SkillingTool.INFERNO_ADZE2)) {
             sendDialogue(player, "I don't think I should use the Inferno Adze in here.")
             return false
         }
 
         if (freeSlots(player) == 0) {
+            val prefix = "Your inventory is too full to hold any more"
             val messages = mapOf(
-                4.toByte()  to "Your inventory is too full to hold any more limestone.",
-                13.toByte() to "Your inventory is too full to hold any more gems.",
-                14.toByte() to "Your inventory is too full to hold any more essence.",
-                15.toByte() to "Your inventory is too full to hold any more sandstone.",
-                16.toByte() to "Your inventory is too full to hold any more granite.",
-                19.toByte() to "Your inventory is too full to hold any more obsidian."
+                4.toByte()  to "$prefix limestone.",
+                13.toByte() to "$prefix gems.",
+                14.toByte() to "$prefix essence.",
+                15.toByte() to "$prefix sandstone.",
+                16.toByte() to "$prefix granite.",
+                19.toByte() to "$prefix obsidian."
             )
-
-            val message = messages[resource!!.identifier]
-            if (message != null) {
-                sendDialogue(player, message)
+            messages[resource!!.identifier]?.let {
+                sendDialogue(player, it)
                 return false
             }
 
@@ -148,8 +167,8 @@ class MiningPulse(private val player: Player, private val node: Node) : Pulse(1,
                 return false
             }
 
-            val item = getItemName(resource!!.reward).lowercase()
-            sendDialogue(player, "Your inventory is too full to hold any more $item.")
+            val resourceReward = getItemName(resource!!.reward).lowercase()
+            sendDialogue(player, "Your inventory is too full to hold any more $resourceReward.")
             return false
         }
 
