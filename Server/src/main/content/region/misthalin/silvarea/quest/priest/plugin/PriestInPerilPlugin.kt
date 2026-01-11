@@ -53,7 +53,8 @@ class PriestInPerilPlugin: InteractionListener {
                 val option = getUsedOption(player)
                 val questStage = getQuestStage(player, Quests.PRIEST_IN_PERIL)
 
-                if (option != "open") {
+                if (option == "knock-at") {
+
                     if (player.location.x == 3407) {
                         sendMessage(player, "You'd feel pretty strange knocking on the door from inside the building.")
                         return@on true
@@ -64,12 +65,16 @@ class PriestInPerilPlugin: InteractionListener {
                     } else {
                         sendMessages(player, "You knock at the door...", "...but nothing interesting happens.")
                     }
+
+                    return@on true
                 }
 
-                if (option == "open" && questStage < 12) {
-                    sendMessage(player, "This door is securely locked from inside.")
-                } else {
-                    DoorActionHandler.handleDoor(player, node.asScenery())
+                if (option == "open") {
+                    if (questStage < 12) {
+                        sendMessage(player, "This door is securely locked from inside.")
+                    } else {
+                        DoorActionHandler.handleDoor(player, node.asScenery())
+                    }
                 }
 
                 return@on true

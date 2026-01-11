@@ -1,16 +1,11 @@
 package content.region.asgarnia.port_sarim.plugin
 
-import content.region.asgarnia.falador.dialogue.AmbassadorSpanfippleDialogue
-import content.region.asgarnia.falador.dialogue.ApprenticeWorkmanDialogue
-import content.region.asgarnia.falador.dialogue.CassieDialogue
-import content.region.asgarnia.falador.dialogue.DrogoDwarfDialogue
 import content.region.asgarnia.port_sarim.dialogue.*
 import core.api.*
 import core.game.dialogue.DialogueFile
 import core.game.global.action.DoorActionHandler
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
-import core.game.interaction.QueueStrength
 import core.game.node.entity.npc.NPC
 import core.game.world.map.Location
 import core.tools.RandomFunction
@@ -131,7 +126,7 @@ class PortSarimPlugin : InteractionListener {
          */
 
         on(MONKS_OF_ENTRANA, IntType.NPC, "take-boat") { player, node ->
-            openDialogue(player, (node as NPC).id, node)
+            openDialogue(player, TakeBoatDialogue(), node.asNpc())
             return@on true
         }
 

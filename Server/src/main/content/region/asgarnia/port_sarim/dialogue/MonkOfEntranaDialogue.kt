@@ -54,3 +54,35 @@ class MonkOfEntranaDialogue : DialogueFile() {
         }
     }
 }
+
+class TakeBoatDialogue() : DialogueFile() {
+
+    override fun handle(componentID: Int, buttonID: Int) {
+        if (player == null || npc == null) return
+
+        val monkLeaveIds = intArrayOf(NPCs.MONK_OF_ENTRANA_2730, NPCs.MONK_OF_ENTRANA_658, NPCs.MONK_OF_ENTRANA_2731)
+
+        when (stage) {
+            0 -> if (npc!!.id in monkLeaveIds) {
+                end()
+                CharterShip.ENTRANA_TO_PORT_SARIM.sail(player!!)
+            } else {
+                if (!ItemDefinition.canEnterEntrana(player)) {
+                    npc(
+                        FaceAnim.ANGRY,
+                        "NO WEAPONS OR ARMOUR are permitted on holy",
+                        "Entrana AT ALL. We will not allow you to travel there",
+                        "in breach of mighty Saradomin's edict."
+                    ).also { stage++ }
+                } else {
+                    npc(FaceAnim.FRIENDLY, "All is satisfactory. You may board the boat now.").also { stage = 24 }
+                }
+            }
+            23 -> npc(FaceAnim.ANGRY, "Do not try and deceive us again. Come back when you", "have liad down your Zamorakian instruments of death.").also { stage = END_DIALOGUE }
+            24 -> {
+                end()
+                CharterShip.PORT_SARIM_TO_ENTRANA.sail(player!!)
+            }
+        }
+    }
+}
