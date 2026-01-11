@@ -37,6 +37,7 @@ class MazeNPC(override var loot: WeightBasedTable? = null) : RandomEventNPC(NPCs
                 Maze.MAZE_TIMER_VARP, (getAttribute(player, GameAttributes.MAZE_ATTRIBUTE_TICKS_LEFT, 0) / 3), false)
             sendNPCDialogue(player, NPCs.MYSTERIOUS_OLD_MAN_410, "You need to reach the maze center, then you'll be returned to where you were.")
             sendMessage(player, "Head for the center of the maze.")
+            npc.terminate()
             return@queueScript stopExecuting(player)
         }
     }
