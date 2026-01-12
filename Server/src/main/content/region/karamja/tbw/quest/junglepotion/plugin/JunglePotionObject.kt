@@ -13,7 +13,7 @@ import shared.consts.Scenery
 /**
  * Represents a search objects in the Jungle Potion quest.
  */
-enum class JungleObject(val objectId: Int, private val herbId: Int, val productId: Int, val stage: Int, val clue: String, private val animationId: Int = Animations.HUMAN_SEARCH_BUSHES_800) {
+enum class JunglePotionObject(val objectId: Int, private val herbId: Int, val productId: Int, val stage: Int, val clue: String, private val animationId: Int = Animations.HUMAN_SEARCH_BUSHES_800) {
     JUNGLE_VINE(Scenery.MARSHY_JUNGLE_VINE_2575, Items.GRIMY_SNAKE_WEED_1525, Items.CLEAN_SNAKE_WEED_1526, 10, "It grows near vines in an area to the south west where the ground turns soft and the water kisses your feet.", Animations.SEARCH_FOR_SNAKEWEED_JUNGLE_POTION_2094),
     PALM_TREE(Scenery.PALM_TREE_2577, Items.GRIMY_ARDRIGAL_1527, Items.CLEAN_ARDRIGAL_1528, 20, "You are looking for Ardrigal. It is related to the palm and grows in its brothers shady profusion."),
     SITO_FOIL(Scenery.SCORCHED_EARTH_2579, Items.GRIMY_SITO_FOIL_1529, Items.CLEAN_SITO_FOIL_1530, 30, "You are looking for Sito Foil, and it grows best where the ground has been blackened by the living flame."),
@@ -60,7 +60,7 @@ enum class JungleObject(val objectId: Int, private val herbId: Int, val productI
         private val BY_ID = values().associateBy { it.objectId }
         private val BY_STAGE = values().associateBy { it.stage }
 
-        fun forId(id: Int): JungleObject? = BY_ID[id]
-        fun forStage(stage: Int): JungleObject? = BY_STAGE[stage]
+        fun forId(id: Int): JunglePotionObject? = BY_ID[id]
+        fun forStage(stage: Int): JunglePotionObject? = BY_STAGE[stage]
     }
 }

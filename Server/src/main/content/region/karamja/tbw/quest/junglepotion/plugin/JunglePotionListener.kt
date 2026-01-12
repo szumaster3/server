@@ -21,7 +21,7 @@ class JunglePotionListener : InteractionListener {
 
         on(JUNGLE_OBJECTIVE, IntType.SCENERY, "search") { player, node ->
             val quest = player.getQuestRepository().getQuest(Quests.JUNGLE_POTION)
-            JungleObject.forId(node.id)?.let { search(player, quest, node.asScenery(), it) }
+            JunglePotionObject.forId(node.id)?.let { search(player, quest, node.asScenery(), it) }
             return@on true
         }
 
@@ -45,7 +45,7 @@ class JunglePotionListener : InteractionListener {
 
     }
 
-    private fun search(player: Player, quest: Quest, scenery: core.game.node.scenery.Scenery, loc: JungleObject) {
+    private fun search(player: Player, quest: Quest, scenery: core.game.node.scenery.Scenery, loc: JunglePotionObject) {
         sendMessage(player,"You search the " + getSceneryName(scenery.id).lowercase() + "...")
         if (quest.getStage(player) < loc.stage) {
             sendMessage(player, "Unfortunately, you find nothing of interest.")
@@ -61,6 +61,6 @@ class JunglePotionListener : InteractionListener {
     }
 
     companion object {
-        val JUNGLE_OBJECTIVE = JungleObject.values().map { it.objectId }.toIntArray()
+        val JUNGLE_OBJECTIVE = JunglePotionObject.values().map { it.objectId }.toIntArray()
     }
 }

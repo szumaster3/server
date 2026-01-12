@@ -1,6 +1,6 @@
 package content.region.karamja.tbw.quest.junglepotion.dialogue
 
-import content.region.karamja.tbw.quest.junglepotion.plugin.JungleObject
+import content.region.karamja.tbw.quest.junglepotion.plugin.JunglePotionObject
 import core.api.*
 import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
@@ -18,7 +18,7 @@ import shared.consts.Quests
  */
 class TrufitusDialogue(player: Player? = null) : Dialogue(player) {
 
-    private var objective: JungleObject? = null
+    private var objective: JunglePotionObject? = null
     private var quest: Quest? = null
 
     override fun open(vararg args: Any?): Boolean {
@@ -26,7 +26,7 @@ class TrufitusDialogue(player: Player? = null) : Dialogue(player) {
         when (val stageValue = quest!!.getStage(player)) {
             0 -> npc("Greetings Bwana! I am Trufitus Shakaya of the Tai", "Bwo Wannai village.")
             in listOf(10, 20, 30, 40, 50) -> {
-                objective = JungleObject.forStage(stageValue)
+                objective = JunglePotionObject.forStage(stageValue)
                 npc("Hello, Bwana, do you have the ${getItemName(objective!!.productId)}?")
             }
             60 -> sendDialogueLines(player, "Trufitus shows you some techniques in Herblore. You gain some", "experience in Herblore.")
@@ -117,7 +117,7 @@ class TrufitusDialogue(player: Player? = null) : Dialogue(player) {
                 }
                 20 -> npcl(FaceAnim.FRIENDLY, objective!!.clue).also { stage = 11 }
                 50 -> {
-                    objective = JungleObject.forStage(quest!!.getStage(player))
+                    objective = JunglePotionObject.forStage(quest!!.getStage(player))
                     val herbName = getItemName(objective!!.productId)
                     when (quest!!.getStage(player)) {
                         20 -> npc("Great, you have the Snake Weed! Many thanks. Ok,", "the next herb is called $herbName. It is related to the", "palm and crows to the east in its brother's shady profusion.").also { stage = 200 }

@@ -3,7 +3,7 @@ package content.region.karamja.tbw.quest.junglepotion
 import content.global.skill.herblore.herbs.HerbItem
 import content.region.karamja.tbw.quest.junglepotion.dialogue.JogreCavernDialogue
 import content.region.karamja.tbw.quest.junglepotion.dialogue.TrufitusDialogue
-import content.region.karamja.tbw.quest.junglepotion.plugin.JungleObject
+import content.region.karamja.tbw.quest.junglepotion.plugin.JunglePotionObject
 import core.api.*
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.quest.Quest
@@ -28,7 +28,7 @@ class JunglePotion : Quest(Quests.JUNGLE_POTION, 81, 80, 1, Vars.VARP_QUEST_JUNG
 
         when (stage) {
             10, 20, 30, 40, 50 -> {
-                val loc = JungleObject.forStage(stage)
+                val loc = JunglePotionObject.forStage(stage)
                 val herbName = getItemName(loc!!.productId)
                 if (inInventory(player, loc.productId)) {
                     line(player, "I spoke to Trufitus, he needs to commune with the", line++, true)
