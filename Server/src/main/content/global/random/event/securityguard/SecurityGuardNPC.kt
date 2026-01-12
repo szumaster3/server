@@ -17,6 +17,7 @@ class SecurityGuardNPC(
     override var loot: WeightBasedTable? = null,
 ) : RandomEventNPC(NPCs.SECURITY_GUARD_4375) {
     private var timeLeft = 0
+    val randomChat = arrayOf("Ah, time I was off now, bye!", "Well, I best be off!")
 
     override fun init() {
         super.init()
@@ -24,9 +25,27 @@ class SecurityGuardNPC(
     }
 
     override fun talkTo(npc: NPC) {
-        sendNPCDialogueLines(player, npc.id,FaceAnim.OLD_DEFAULT, false, "My records show you have your recovery questions", "set. Here, take this small gift and book and explore the", "Stronghold of Security. There's some great rewards to", "be had there!")
-        AntiMacro.rollEventLoot(player).forEach { addItemOrDrop(player, it.id, it.amount) }
-        addItemOrDrop(player, Items.SECURITY_BOOK_9003)
+
+        if (freeSlots(player) == 0) {
+            sendPlayerDialogue(player, "I don't have space to take anything from you at the moment.")
+            return
+        }
+
+        sendNPCDialogueLines(
+            player,
+            npc.id,
+            FaceAnim.OLD_DEFAULT,
+            false,
+            "My records show you have your recovery questions",
+            "set. Here, take this small gift and book and explore the",
+            "Stronghold of Security. There's some great rewards to",
+            "be had there!"
+        )
+
+        AntiMacro.rollEventLoot(player)
+            .forEach { addItemOrDrop(player, it.id, it.amount) }
+
+        addItemOrDrop(player, Items.SECURITY_BOOK_9003, 1)
         AntiMacro.terminateEventNpc(player)
     }
 
@@ -44,7 +63,7 @@ class SecurityGuardNPC(
                 if (inBorders(player, getRegionBorders(7505))) {
                     sendChat(if (player.isMale) "He" else "She" + " got away!")
                 } else {
-                    sendChat("Well, I best be off!")
+                    sendChat(randomChat.random())
                 }
             }
             AntiMacro.terminateEventNpc(player)
