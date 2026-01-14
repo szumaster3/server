@@ -166,7 +166,7 @@ class DagannothMotherNPC(id: Int = 0, location: Location? = null, session: Dagan
             dagannoth.transform(newType.npcId)
             dagannoth.skills.isLifepointsUpdate = false
             Pulser.submit(DagannothTransform(player, dagannoth))
-            dagannoth.getSkills().setLifepoints(oldHp)
+            dagannoth.getSkills().updateHitpoints(oldHp)
         }
 
         operator fun next(): DagannothType = values().random()

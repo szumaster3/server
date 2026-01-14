@@ -84,7 +84,7 @@ public final class Prayer {
         playAudio(player, Sounds.REDEMPTION_HEAL_2681);
         player.graphics(Graphics.create(436));
         player.getSkills().heal((int) (player.getSkills().getStaticLevel(Skills.PRAYER) * 0.25));
-        player.getSkills().setPrayerPoints(0.0);
+        player.getSkills().updatePrayerPoints(0.0);
         reset();
     }
 

@@ -130,7 +130,7 @@ public class PvMBots extends AIPlayer {
         this.tick++;
 
         if (this.getSkills().getLifepoints() <= 5) {
-            this.getSkills().setLifepoints(20);
+            this.getSkills().updateHitpoints(20);
         }
 
         if (this.tick == 100) this.tick = 0;

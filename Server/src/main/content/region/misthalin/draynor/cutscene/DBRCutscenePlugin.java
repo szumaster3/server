@@ -355,7 +355,7 @@ public final class DBRCutscenePlugin extends CutscenePlugin {
                 case 1:
                     getCoolMom().animate(STEAL_ANIMATION);
                     getMarketGuard().getSkills().setStaticLevel(Skills.HITPOINTS, 99);
-                    getMarketGuard().getSkills().setLifepoints(99);
+                    getMarketGuard().getSkills().updateHitpoints(99);
                     getMarketGuard().sendChat("Hey! Get your hands off there!");
                     getCoolMom().getLocks().lockMovement(1000);
                     getMarketGuard().getProperties().getCombatPulse().attack(getCoolMom());

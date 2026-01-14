@@ -174,7 +174,7 @@ public class TormentedDemonNPC extends AbstractNPC {
         int id = getCombatStyleDemon(protectionStyle, attackStyle);
         int oldHp = getSkills().getLifepoints();
         transform(id);
-        getSkills().setLifepoints(oldHp);
+        getSkills().updateHitpoints(oldHp);
 
         TD_SWING_HANDLER.style = getProperties().getCombatPulse().getStyle();
     }

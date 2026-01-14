@@ -151,9 +151,9 @@ class Skills(
     fun addExperience(slot: Int, experience: Double, playerMod: Boolean = false) {
         if (lastUpdateXp == null) lastUpdateXp = this.experience.clone()
         val mod = getExperienceMod(slot, experience, playerMod, true)
-        val player = if (entity is Player) entity else null
+        val player = entity as? Player
         val assist = entity.getExtension<AssistSessionPulse>(AssistSessionPulse::class.java)
-        if (assist != null && assist.translateExperience(player!!, slot, experience, mod)) {
+        if (assist != null && player != null && assist.translateExperience(player, slot, experience, mod)) {
             return
         }
         val already200m = this.experience[slot] == 200000000.0
@@ -331,10 +331,10 @@ class Skills(
             staticLevels[i] = getStaticLevelByExperience(i)
             dynamicLevels[i] = staticLevels[i]
             if (i == PRAYER) {
-                setPrayerPoints(staticLevels[i].toDouble())
+                updatePrayerPoints(staticLevels[i].toDouble())
             }
             if (i == HITPOINTS) {
-                setLifepoints(staticLevels[i])
+                updateHitpoints(staticLevels[i])
             }
         }
         experienceMultiplier = 1.0
@@ -562,26 +562,12 @@ class Skills(
         return getLevel(slot, false)
     }
 
-    /**
-     * Sets the entity's lifepoints.
-     *
-     * @param lifepoints The new lifepoints value.
-     */
-    fun setLifepoints(lifepoints: Int) {
+    fun updateHitpoints(lifepoints: Int) {
         this.lifepoints = lifepoints
         if (this.lifepoints < 0) {
             this.lifepoints = 0
         }
         isLifepointsUpdate = true
-    }
-
-    /**
-     * Gets the entity's current lifepoints.
-     *
-     * @return The current lifepoints.
-     */
-    fun getLifepoints(): Int {
-        return lifepoints
     }
 
     val maximumLifepoints: Int
@@ -591,15 +577,6 @@ class Skills(
          * @return the maximum lifepoints
          */
         get() = staticLevels[HITPOINTS] + lifepointsIncrease
-
-    /**
-     * Sets lifepoints increase.
-     *
-     * @param amount the amount
-     */
-    fun setLifepointsIncrease(amount: Int) {
-        this.lifepointsIncrease = amount
-    }
 
     /**
      * Heals the entity by a given amount, up to the maximum lifepoints.
@@ -643,15 +620,6 @@ class Skills(
         }
         isLifepointsUpdate = true
         return left
-    }
-
-    /**
-     * Retrieves the entity's current prayer points.
-     *
-     * @return The current prayer points.
-     */
-    fun getPrayerPoints(): Double {
-        return prayerPoints
     }
 
     /** Fully restores the entity's prayer points. */
@@ -698,12 +666,7 @@ class Skills(
         }
     }
 
-    /**
-     * Sets the entity's prayer points to a specified value.
-     *
-     * @param amount The amount to set.
-     */
-    fun setPrayerPoints(amount: Double) {
+    fun updatePrayerPoints(amount: Double) {
         prayerPoints = amount
         if (entity is Player) {
             PacketRepository.send(SkillLevel::class.java, SkillContext(entity, PRAYER))

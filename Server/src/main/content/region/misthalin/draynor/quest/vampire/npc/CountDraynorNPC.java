@@ -60,7 +60,7 @@ public class CountDraynorNPC extends AbstractNPC {
     @Override
     public void init() {
         super.init();
-        getSkills().setLifepoints(40);
+        getSkills().updateHitpoints(40);
         getSkills().setStaticLevel(Skills.HITPOINTS, 40);
         getSkills().setLevel(Skills.HITPOINTS, 40);
         this.faceLocation(Location.create(3078, 9770, 0));
