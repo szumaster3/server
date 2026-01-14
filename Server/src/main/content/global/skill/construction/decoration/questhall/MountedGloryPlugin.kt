@@ -3,6 +3,7 @@ package content.global.skill.construction.decoration.questhall
 import core.api.*
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
+import core.game.interaction.QueueStrength
 import core.game.node.Node
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.TeleportManager
@@ -25,19 +26,34 @@ class MountedGloryPlugin : InteractionListener {
 
     override fun defineListeners() {
         on(shared.consts.Scenery.AMULET_OF_GLORY_13523, IntType.SCENERY, "rub", "remove") { player, node ->
-            val option = getUsedOption(player)
-            when (option) {
+            when (getUsedOption(player)) {
+
                 "rub" -> {
                     setTitle(player, 5)
-                    sendOptions(player, "Where would you like to teleport to?", "Edgeville", "Karamja", "Draynor Village", "Al Kharid", "Nowhere")
+                    sendOptions(
+                        player,
+                        "Where would you like to teleport to?",
+                        "Edgeville",
+                        "Karamja",
+                        "Draynor Village",
+                        "Al Kharid",
+                        "Nowhere"
+                    )
+
                     addDialogueAction(player) { _, button ->
-                        when (button) {
-                            2 -> teleport(player, node, 0)
-                            3 -> teleport(player, node, 1)
-                            4 -> teleport(player, node, 2)
-                            5 -> teleport(player, node, 3)
-                            6 -> closeDialogue(player)
+                        val destination = when (button) {
+                            2 -> 0 // Edgeville
+                            3 -> 1 // Karamja
+                            4 -> 2 // Draynor
+                            5 -> 3 // Al Kharid
+                            else -> null
                         }
+
+                        if (destination != null) {
+                            teleport(player, node, destination)
+                        }
+
+                        closeDialogue(player)
                     }
                 }
 
@@ -46,34 +62,28 @@ class MountedGloryPlugin : InteractionListener {
                         sendMessage(player, "You have to be in building mode to do this.")
                         return@on true
                     }
+
                     openDialogue(player, "con:removedec", node.asScenery())
                 }
 
                 else -> return@on false
             }
+
             return@on true
         }
     }
 
-    private fun teleport(
-        player: Player,
-        `object`: Node,
-        int: Int,
-    ) {
+    private fun teleport(player: Player, node: Node, index: Int) {
         if (!player.zoneMonitor.teleport(1, Item(Items.AMULET_OF_GLORY_1704))) {
             return
         }
+
+        player.lock(5)
         player.animate(Animation(Animations.PULL_LEVER_POH_3611))
-        Executors.newSingleThreadScheduledExecutor().schedule({
-            player.pulseManager.run(
-                object : Pulse(4) {
-                    override fun pulse(): Boolean {
-                        player.lock(5)
-                        teleport(player, TELEPORTS[int], TeleportManager.TeleportType.RANDOM_EVENT_OLD)
-                        return false
-                    }
-                },
-            )
-        }, 0, TimeUnit.SECONDS)
+
+        queueScript(player, 4, QueueStrength.SOFT) { _ ->
+            teleport(player, TELEPORTS[index], TeleportManager.TeleportType.RANDOM_EVENT_OLD)
+            return@queueScript stopExecuting(player)
+        }
     }
 }

@@ -1,10 +1,7 @@
 package content.global.plugins.item
 
 import content.data.EnchantedJewellery
-import core.api.addDialogueAction
-import core.api.sendMessage
-import core.api.sendOptions
-import core.api.setTitle
+import core.api.*
 import core.cache.def.impl.ItemDefinition
 import core.game.interaction.OptionHandler
 import core.game.node.Node
@@ -32,6 +29,7 @@ class JewelleryOptionHandler : OptionHandler() {
 
     override fun handle(player: Player, node: Node, option: String): Boolean {
         val item = node.asItem()
+
         val isEquipped = option.equals("operate", ignoreCase = true)
 
         player.pulseManager.clear(PulseType.STANDARD)
@@ -58,7 +56,9 @@ class JewelleryOptionHandler : OptionHandler() {
         } else {
             setTitle(player, jewellery.options.size)
             sendOptions(player, "Where would you like to teleport to?", *jewellery.options)
+
             addDialogueAction(player) { p, buttonID ->
+                closeDialogue(p)
                 jewellery.use(p, item, buttonID - 2, isEquipped)
             }
         }

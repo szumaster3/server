@@ -27,19 +27,33 @@ class ExplorersRingPlugin : InteractionListener {
     override fun defineListeners() {
         on(RINGS, IntType.ITEM, "operate", "rub") { player, node ->
             if (getRingLevel(node.id) < 3) {
-                sendMessage(player, "This item can not be operated.")
+                sendMessage(player, "This item cannot be operated.")
                 return@on true
             }
+
             setTitle(player, 4)
-            sendOptions(player, "What would you like to do?", "Cast Low Alchemy.", "Restore run energy.", "Teleport to cabbage patch.", "Nothing.")
-            addDialogueAction(player) { player, buttonId ->
-                when(buttonId) {
-                    2 -> closeDialogue(player).also { castLowAlchemy(player) }
-                    3 -> closeDialogue(player).also { restoreRunEnergy(player, node.id) }
-                    4 -> closeDialogue(player).also { teleportToCabbagePatch(player) }
-                    5 -> closeDialogue(player)
+            sendOptions(
+                player,
+                "What would you like to do?",
+                "Cast Low Alchemy.",
+                "Restore run energy.",
+                "Teleport to cabbage patch.",
+                "Nothing."
+            )
+
+            addDialogueAction(player) { _, buttonId ->
+                val action: (() -> Unit)? = when (buttonId) {
+                    2 -> { { castLowAlchemy(player) } }
+                    3 -> { { restoreRunEnergy(player, node.id) } }
+                    4 -> { { teleportToCabbagePatch(player) } }
+                    5 -> null
+                    else -> null
                 }
+
+                action?.invoke()
+                closeDialogue(player)
             }
+
             return@on true
         }
 

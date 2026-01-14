@@ -184,6 +184,39 @@ class FishingListener : InteractionListener {
         }
     }
 
+    /*
+     private fun anim(player: Player, option: FishingOption) {
+        if (!animationFinished(player)) return
+
+        if (isBarehandEnabled(player) && option.isHarpoonType()) {
+            var counter = 0
+
+            queueScript(player, 1, QueueStrength.SOFT) {
+                counter++
+
+                when (counter) {
+                    2 -> animate(player, Animations.BAREHAND_FISHING_6709)
+                    5 -> {
+                        val fish = option.rollFish(player)
+                        when (fish) {
+                            Fish.TUNA -> animate(player, Animations.BAREHAND_TUNA_6710)
+                            Fish.SWORDFISH -> animate(player, Animations.BAREHAND_SWORDFISH_6707)
+                            Fish.SHARK -> animate(player, Animations.BAREHAND_SHARK_6705)
+                            else -> animate(player, Animations.BAREHAND_FISHING_6709)
+                        }
+                        return@queueScript stopExecuting(player)
+                    }
+                }
+
+                return@queueScript false
+            }
+
+        } else {
+            animate(player, option.animation)
+        }
+    }
+     */
+
     private fun checkRequirements(player: Player, option: FishingOption, node: Node): Boolean {
         val barehand = isBarehandEnabled(player)
 

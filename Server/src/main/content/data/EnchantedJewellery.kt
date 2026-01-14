@@ -6,6 +6,7 @@ import core.Util
 import core.api.*
 import core.game.dialogue.FaceAnim
 import core.game.event.TeleportEvent
+import core.game.interaction.QueueStrength
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.TeleportManager
 import core.game.node.item.Item
@@ -51,40 +52,39 @@ enum class EnchantedJewellery(val options: Array<String>, val locations: Array<L
     fun attemptTeleport(player: Player, item: Item, buttonID: Int, isEquipped: Boolean): Boolean {
         val itemIndex = getItemIndex(item)
         val nextJewellery = Item(getNext(itemIndex))
+
         if (!canTeleport(player, nextJewellery)) {
             return false
         }
+
         lock(player, 4)
-        closeAllInterfaces(player)
-        submitWorldPulse(
-            object : Pulse(0) {
-                private var count = 0
-                private val location: Location = if (this@EnchantedJewellery == RING_OF_LIFE) {
-                    player.getRespawnLocation()
-                } else {
-                    getLocation(buttonID)
+
+        val location = if (this@EnchantedJewellery == RING_OF_LIFE) {
+            player.getRespawnLocation()
+        } else {
+            getLocation(buttonID)
+        }
+
+        val animDuration = animationDuration(ANIMATION)
+        queueScript(player, 0, QueueStrength.SOFT) { stage ->
+            when (stage) {
+                0 -> {
+                    visualize(player, ANIMATION, Graphics)
+                    playGlobalAudio(player.location, Sounds.TP_ALL_200)
+                    player.impactHandler.disabledTicks = 4
+                    return@queueScript delayScript(player, animDuration)
+                }
+                3 -> {
+                    teleport(player, location)
+                    resetAnimator(player)
+                    handleJewelleryUsage(player, item, nextJewellery, itemIndex, isEquipped, location)
+                    return@queueScript stopExecuting(player)
                 }
 
-                override fun pulse(): Boolean {
-                    when (count) {
-                        0 -> {
-                            visualize(player, ANIMATION, Graphics)
-                            playGlobalAudio(player.location, Sounds.TP_ALL_200)
-                            player.impactHandler.disabledTicks = 4
-                        }
+                else -> return@queueScript stopExecuting(player)
+            }
+        }
 
-                        3 -> {
-                            teleport(player, location)
-                            resetAnimator(player)
-                            handleJewelleryUsage(player, item, nextJewellery, itemIndex, isEquipped, location)
-                            return true
-                        }
-                    }
-                    count++
-                    return false
-                }
-            },
-        )
         return true
     }
 
