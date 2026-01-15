@@ -31,7 +31,7 @@ class GraniteCrabNPC @JvmOverloads constructor(owner: Player? = null, id: Int = 
         if (RandomFunction.random(4) == 1) {
             val item = FISH[RandomFunction.random(FISH.size)]
             animate(Animation.create(8107))
-            if (item.id == Fish.COD.getItem().id || item.id == Fish.PIKE.getItem().id) {
+            if (item.id == Fish.COD.item.id || item.id == Fish.PIKE.item.id) {
                 owner.getSkills().addExperience(Skills.FISHING, 5.5)
             }
             produceItem(item)
@@ -54,6 +54,6 @@ class GraniteCrabNPC @JvmOverloads constructor(owner: Player? = null, id: Int = 
 
     companion object {
         private val FISH =
-            arrayOf(Fish.COD.getItem(), Fish.PIKE.getItem(), Fish.SEAWEED.getItem(), Fish.OYSTER.getItem())
+            arrayOf(Fish.COD.item, Fish.PIKE.item, Fish.SEAWEED.item, Fish.OYSTER.item)
     }
 }

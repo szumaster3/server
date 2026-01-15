@@ -57,7 +57,7 @@ class IbisNPC @JvmOverloads constructor(owner: Player? = null, id: Int = NPCs.IB
                     if (getObject(loc) != null) {
                         continue
                     }
-                    GroundItemManager.create(FISH[RandomFunction.random(FISH.size)].getItem(), loc, owner)
+                    GroundItemManager.create(FISH[RandomFunction.random(FISH.size)].item, loc, owner)
                 }
                 return true
             }

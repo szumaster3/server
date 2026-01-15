@@ -45,7 +45,7 @@ class GraniteLobsterNPC @JvmOverloads constructor(owner: Player? = null, id: Int
             val item = FISH[RandomFunction.random(FISH.size)]
             animate(Animation.create(8107))
             val fish = forItem(item)
-            owner.getSkills().addExperience(Skills.FISHING, fish!!.experience * 0.10)
+            owner.getSkills().addExperience(Skills.FISHING, fish!!.xp * 0.10)
             produceItem(item)
         }
     }

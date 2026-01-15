@@ -55,8 +55,8 @@ object TrawlerLoot {
 
     private fun rollTrawlerFish(fishLevel: Int): Item {
         while (true) {
-            for (f in trawlerFish) {
-                if (f.level > fishLevel) {
+            for (fishId in trawlerFish) {
+                if (fishId.requiredLevel > fishLevel) {
                     continue
                 }
                 val lo = 0.6133
@@ -64,7 +64,7 @@ object TrawlerLoot {
 
                 val chance = (fishLevel.toDouble() - 15.0) * ((hi - lo) / (99.0 - 15.0)) + lo
                 if (RandomFunction.random(0.0, 1.0) < chance) {
-                    return Item(f.id)
+                    return Item(fishId.id)
                 }
             }
         }

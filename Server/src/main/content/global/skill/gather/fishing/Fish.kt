@@ -4,7 +4,22 @@ import core.api.asItem
 import core.game.node.item.Item
 import shared.consts.Items
 
-enum class Fish(val id: Int, val level: Int, val experience: Double, val lowChance: Double, val highChance: Double) {
+/**
+ * Represents a fish type in the game.
+ *
+ * @property id The item id of the fish.
+ * @property level The fishing level required.
+ * @property xp The xp gained when caught.
+ * @property lowChance The min success chance.
+ * @property highChance The max success chance.
+ */
+enum class Fish(
+    val id: Int,
+    val requiredLevel: Int,
+    val xp: Double,
+    private val lowChance: Double,
+    private val highChance: Double
+) {
     SWAMP_WEED(Items.SWAMP_WEED_10978, 1, 1.0, 0.121, 0.16),
     CRAYFISH(Items.RAW_CRAYFISH_13435, 1, 10.0, 0.15, 0.5),
     SHRIMP(Items.RAW_SHRIMPS_317, 1, 10.0, 0.191, 0.5),
@@ -34,52 +49,39 @@ enum class Fish(val id: Int, val level: Int, val experience: Double, val lowChan
     SEAWEED(Items.SEAWEED_401, 16, 1.0, 0.63, 0.219),
     CASKET(Items.CASKET_405, 16, 10.0, 0.63, 0.219),
     OYSTER(Items.OYSTER_407, 16, 10.0, 0.63, 0.219),
-    GIANT_CARP(Items.RAW_GIANT_CARP_338, 10, 0.0, 0.098, 0.5)
-    ;
+    GIANT_CARP(Items.RAW_GIANT_CARP_338, 10, 0.0, 0.098, 0.5);
 
-    companion object {
-        /**
-         * Maps item IDs to their corresponding [Fish] instances.
-         */
-        @JvmStatic
-        val fishMap: HashMap<Int, Fish> = HashMap()
+    val item: Item = id.asItem()
 
-        /**
-         * Maps regular [Fish] to their corresponding "big" fish item id.
-         */
-        @JvmStatic
-        val bigFishMap: HashMap<Fish, Int> = HashMap()
-
-        init {
-            for (fish in values()) {
-                fishMap[fish.id] = fish
-            }
-            bigFishMap[BASS] = Items.BIG_BASS_7989
-            bigFishMap[SWORDFISH] = Items.BIG_SWORDFISH_7991
-            bigFishMap[SHARK] = Items.BIG_SHARK_7993
-        }
-
-        /**
-         * Returns the item id for big fishes.
-         */
-        @JvmStatic
-        fun getBigFish(fish: Fish): Int? = bigFishMap[fish]
-
-        /**
-         * Gets the [Fish] for item id.
-         */
-        @JvmStatic
-        fun forItem(item: Item): Fish? = fishMap[item.id]
+    private val successChances: DoubleArray = DoubleArray(99) { lvl ->
+        (lvl.toDouble()) * ((highChance - lowChance) / 98.0) + lowChance
     }
 
     /**
-     * Calculates the success chance of catching this fish based on the given [level].
+     * Returns the success chance at the given [level].
+     *
+     * @param level the fishing level
+     * @return chance of catching this fish at that level.
      */
-    fun getSuccessChance(level: Int): Double =
-        (level.toDouble() - 1.0) * ((highChance - lowChance) / (99.0 - 1.0)) + lowChance
+    fun getSuccessChance(level: Int): Double = successChances[level.coerceIn(1..99) - 1]
 
-    /**
-     * Converts the fish id to an [Item].
-     */
-    fun getItem(): Item = this.id.asItem()
+    companion object {
+        val fishMap: Map<Int, Fish> = values().associateBy { it.id }
+
+        private val bigFishMap: Map<Fish, Int> = mapOf(
+            BASS to Items.BIG_BASS_7989,
+            SWORDFISH to Items.BIG_SWORDFISH_7991,
+            SHARK to Items.BIG_SHARK_7993
+        )
+
+        /**
+         * Returns the item id for the big fish variant.
+         */
+        fun getBigFish(fish: Fish): Int? = bigFishMap[fish]
+
+        /**
+         * Returns the [Fish] for a given Item instance.
+         */
+        fun forItem(item: Item): Fish? = fishMap[item.id]
+    }
 }

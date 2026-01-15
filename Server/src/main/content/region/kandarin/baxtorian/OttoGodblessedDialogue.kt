@@ -149,7 +149,7 @@ class OttoGodblessedDialogue(player: Player? = null) : Dialogue(player) {
             103 -> npc("You will know when you are ready, since inspiration will", "fill your mind.").also { stage++ }
             104 -> player("So I can obtain new foods from these Fishing spots?").also { stage++ }
             105 -> npc("We do not use these fish quite as you might expect.", "When you return from Fishing we can speak more of", "this matter.").also {
-                setAttribute(player, BarbarianTraining.FISHING_BASE, true)
+                setAttribute(player, BarbarianTraining.FISHING_START, true)
                 stage = 20
             }
             106 -> player("Osprey?").also { stage++ }

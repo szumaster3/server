@@ -3,7 +3,6 @@ package content.global.skill.gather.fishing
 import core.api.*
 import core.game.node.entity.player.Player
 import core.game.node.entity.skill.Skills
-import core.game.world.update.flag.context.Animation
 import core.tools.RandomFunction
 import shared.consts.Animations
 import shared.consts.Items
@@ -11,121 +10,99 @@ import shared.consts.Items
 /**
  * Represents fishing options.
  */
-enum class FishingOption(val tool: Int, val level: Int, val animation: Animation, val bait: IntArray?, val option: String, vararg val fish: Fish) {
-    CRAYFISH_CAGE(Items.CRAYFISH_CAGE_13431, 1, Animation(Animations.USE_CRAYFISH_CAGE_10009), null, "cage", Fish.CRAYFISH),
-    SMALL_NET(Items.SMALL_FISHING_NET_303, 1, Animation(Animations.NET_FISHING_621), null, "net", Fish.SHRIMP, Fish.ANCHOVY),
-    BAIT(Items.FISHING_ROD_307, 5, Animation(Animations.ROD_FISHING_622), intArrayOf(Items.FISHING_BAIT_313), "bait", Fish.SARDINE, Fish.HERRING),
-    LURE(Items.FLY_FISHING_ROD_309, 20, Animation(Animations.ROD_FISHING_622), intArrayOf(Items.FEATHER_314, Items.STRIPY_FEATHER_10087), "lure", Fish.TROUT, Fish.SALMON, Fish.RAINBOW_FISH),
-    PIKE_BAIT(Items.FISHING_ROD_307, 25, Animation(Animations.ROD_FISHING_622), intArrayOf(Items.FISHING_BAIT_313), "bait", Fish.PIKE),
-    LOBSTER_CAGE(Items.LOBSTER_POT_301, 40, Animation(Animations.LOBSTER_FISHING), null, "cage", Fish.LOBSTER),
-    FROGSPAWN_NET(Items.SMALL_FISHING_NET_303, 33, Animation(Animations.NET_FISHING_621), null, "net", Fish.FROG_SPAWN, Fish.SWAMP_WEED),
-    HARPOON(Items.HARPOON_311, 35, Animation(Animations.HARPOON_FISHING_618), null, "harpoon", Fish.TUNA, Fish.SWORDFISH),
-    BARB_HARPOON(Items.BARB_TAIL_HARPOON_10129, 35, Animation(Animations.HARPOON_FISHING_618), null, "harpoon", Fish.TUNA, Fish.SWORDFISH),
-    BIG_NET(Items.BIG_FISHING_NET_305, 16, Animation(Animations.NET_FISHING_620), null, "net", Fish.MACKEREL, Fish.COD, Fish.BASS, Fish.SEAWEED),
-    SHARK_HARPOON(Items.HARPOON_311, 76, Animation(Animations.HARPOON_FISHING_618), null, "harpoon", Fish.SHARK),
-    MONKFISH_NET(Items.SMALL_FISHING_NET_303, 62, Animation(Animations.NET_FISHING_621), null, "net", Fish.MONKFISH),
-    MORT_MYRE_SWAMP_BAIT(Items.FISHING_ROD_307, 5, Animation(Animations.ROD_FISHING_622), intArrayOf(Items.FISHING_BAIT_313), "bait", Fish.SLIMY_EEL),
-    LUMBRIDGE_SWAMP_CAVES_BAIT(Items.FISHING_ROD_307, 5, Animation(Animations.ROD_FISHING_622), intArrayOf(Items.FISHING_BAIT_313), "bait", Fish.SLIMY_EEL, Fish.CAVE_EEL),
-    KBWANJI_NET(Items.SMALL_FISHING_NET_303, 5, Animation(Animations.NET_FISHING_621), null, "net", Fish.KARAMBWANJI),
-    KARAMBWAN_VES(Items.KARAMBWAN_VESSEL_3157, 65, Animation(Animations.FISHING_KARAMBWAN_1193), intArrayOf((Items.RAW_KARAMBWANJI_3150)), "fish", Fish.KARAMBWAN),
-    OILY_FISHING_ROD(Items.OILY_FISHING_ROD_1585, 53, Animation(Animations.ROD_FISHING_622), intArrayOf(Items.FISHING_BAIT_313), "bait", Fish.LAVA_EEL),
-    GIANT_CARP_ROD(Items.FISHING_ROD_307, 10, Animation(Animations.ROD_FISHING_622), intArrayOf(Items.RED_VINE_WORM_25), "bait", Fish.GIANT_CARP),
-    SARDINES_ROD(Items.FISHING_ROD_307, 10, Animation(Animations.ROD_FISHING_622), intArrayOf(Items.RED_VINE_WORM_25), "bait", Fish.SARDINE),
-    ;
+enum class FishingOption(
+    val tool: Int,
+    val requiredLevel: Int,
+    val animationId: Int,
+    val bait: IntArray?,
+    val optionName: String,
+    vararg val fishId: Fish
+) {
+    CrayfishCage(Items.CRAYFISH_CAGE_13431, 1, Animations.USE_CRAYFISH_CAGE_10009, null, "cage", Fish.CRAYFISH),
+    SmallNet(Items.SMALL_FISHING_NET_303, 1, Animations.NET_FISHING_621, null, "net", Fish.SHRIMP, Fish.ANCHOVY),
+    Bait(Items.FISHING_ROD_307, 5, Animations.ROD_FISHING_622, intArrayOf(Items.FISHING_BAIT_313), "bait", Fish.SARDINE, Fish.HERRING),
+    Lure(Items.FLY_FISHING_ROD_309, 20, Animations.ROD_FISHING_622, intArrayOf(Items.FEATHER_314, Items.STRIPY_FEATHER_10087), "lure", Fish.TROUT, Fish.SALMON, Fish.RAINBOW_FISH),
+    PikeBait(Items.FISHING_ROD_307, 25, Animations.ROD_FISHING_622, intArrayOf(Items.FISHING_BAIT_313), "bait", Fish.PIKE),
+    LobsterCage(Items.LOBSTER_POT_301, 40, Animations.LOBSTER_FISHING, null, "cage", Fish.LOBSTER),
+    FrogspawnNet(Items.SMALL_FISHING_NET_303, 33, Animations.NET_FISHING_621, null, "net", Fish.FROG_SPAWN, Fish.SWAMP_WEED),
+    Harpoon(Items.HARPOON_311, 35, Animations.HARPOON_FISHING_618, null, "harpoon", Fish.TUNA, Fish.SWORDFISH),
+    BarbHarpoon(Items.BARB_TAIL_HARPOON_10129, 35, Animations.HARPOON_FISHING_618, null, "harpoon", Fish.TUNA, Fish.SWORDFISH),
+    BigNet(Items.BIG_FISHING_NET_305, 16, Animations.NET_FISHING_620, null, "net", Fish.MACKEREL, Fish.COD, Fish.BASS, Fish.SEAWEED),
+    SharkHarpoon(Items.HARPOON_311, 76, Animations.HARPOON_FISHING_618, null, "harpoon", Fish.SHARK),
+    MonkfishNet(Items.SMALL_FISHING_NET_303, 62, Animations.NET_FISHING_621, null, "net", Fish.MONKFISH),
+    MortMyreSwampBait(Items.FISHING_ROD_307, 5, Animations.ROD_FISHING_622, intArrayOf(Items.FISHING_BAIT_313), "bait", Fish.SLIMY_EEL),
+    LumbridgeSwampCavesBait(Items.FISHING_ROD_307, 5, Animations.ROD_FISHING_622, intArrayOf(Items.FISHING_BAIT_313), "bait", Fish.SLIMY_EEL, Fish.CAVE_EEL),
+    KbwanjiNet(Items.SMALL_FISHING_NET_303, 5, Animations.NET_FISHING_621, null, "net", Fish.KARAMBWANJI),
+    KarambwanVes(Items.KARAMBWAN_VESSEL_3157, 65, Animations.FISHING_KARAMBWAN_1193, intArrayOf(Items.RAW_KARAMBWANJI_3150), "fish", Fish.KARAMBWAN),
+    OilyFishingRod(Items.OILY_FISHING_ROD_1585, 53, Animations.ROD_FISHING_622, intArrayOf(Items.FISHING_BAIT_313), "bait", Fish.LAVA_EEL),
+    GiantCarpRod(Items.FISHING_ROD_307, 10, Animations.ROD_FISHING_622, intArrayOf(Items.RED_VINE_WORM_25), "bait", Fish.GIANT_CARP),
+    SardinesRod(Items.FISHING_ROD_307, 10, Animations.ROD_FISHING_622, intArrayOf(Items.RED_VINE_WORM_25), "bait", Fish.SARDINE);
 
     companion object {
-        /**
-         * Maps the option name string to the corresponding [FishingOption] enum instance.
-         */
-        @JvmStatic
         private val nameMap: HashMap<String, FishingOption> = HashMap()
 
-        /**
-         * Initializes the [nameMap] with option names pointing to their respective enum values.
-         */
         init {
-            for (value in values()) {
-                nameMap[value.option] = value
-            }
+            values().forEach { nameMap[it.optionName] = it }
         }
 
         /**
-         * Retrieves a [FishingOption] by its option name.
+         * Returns the [FishingOption].
+         *
+         * @param op The fishing option.
+         * @return The [FishingOption] enum, or null.
          */
         @JvmStatic
-        fun forName(opName: String): FishingOption? = nameMap[opName]
+        fun forName(op: String) = nameMap[op]
     }
 
     /**
-     * Attempts to roll a fish that the player can catch using this fishing method.
+     * Attempts to roll a fish.
+     *
+     * @param player The player fishing.
+     * @return The [Fish] caught, or null if none.
      */
     fun rollFish(player: Player): Fish? {
-        if (this == BIG_NET) {
-            when (RandomFunction.randomize(100)) {
-                0 -> return Fish.OYSTER
-                50 -> return Fish.CASKET
-                90 -> return Fish.SEAWEED
+        if (this == BigNet) {
+            return when (RandomFunction.randomize(100)) {
+                0  -> Fish.OYSTER
+                50 -> Fish.CASKET
+                90 -> Fish.SEAWEED
+                else -> null
             }
         }
-        val vlvl = getDynLevel(player, Skills.FISHING)
-        val ilvl = vlvl + player.familiarManager.getBoost(Skills.FISHING)
-        for (f in fish) {
-            if (f.level > vlvl) {
-                continue
-            }
-            if (this == LURE && inInventory(player, Items.STRIPY_FEATHER_10087) != (f == Fish.RAINBOW_FISH)) {
-                continue
-            }
-            val chance = f.getSuccessChance(ilvl)
-            if (RandomFunction.random(0.0, 1.0) < chance) {
-                return f
-            }
+
+        val level = getDynLevel(player, Skills.FISHING)
+        val invisibleLevelBoost = level + player.familiarManager.getBoost(Skills.FISHING)
+
+        for (id in fishId) {
+            if (id.requiredLevel > level) continue
+            if (this == Lure && inInventory(player, Items.STRIPY_FEATHER_10087) != (id == Fish.RAINBOW_FISH)) continue
+            if (RandomFunction.random(0.0, 1.0) < id.getSuccessChance(invisibleLevelBoost)) return id
         }
         return null
     }
 
     /**
-     * Retrieves the name of the bait item used for this fishing option.
+     * Returns the name of the bait.
      */
-    fun getBaitName(): String {
-        if (bait != null && bait.isNotEmpty()) {
-            return getItemName(bait[0])
-        }
-        return "none"
-    }
+    fun getBaitName(): String = bait?.firstOrNull()?.let { getItemName(it) } ?: "none"
 
     /**
-     * Checks if the player has the required bait for this fishing option.
+     * Checks whether the player has any of the required bait in their inventory.
+     *
+     * @param player The player to check.
+     * @return True if the player has bait, or no bait is required.
      */
-    fun hasBait(player: Player): Boolean =
-        if (bait == null) {
-            true
-        } else {
-            var anyBait = false
-            for (b in bait) {
-                anyBait = anyBait || inInventory(player, b)
-            }
-            anyBait
-        }
+    fun hasBait(player: Player): Boolean = bait?.any { inInventory(player, it) } ?: true
 
     /**
-     * Removes one unit of bait from the player's inventory, if available.
+     * Removes one unit of bait from the player inventory.
+     *
+     * @param player The player to remove bait from.
+     * @return True if bait was removed or no bait is required, false otherwise.
      */
     fun removeBait(player: Player): Boolean {
-        return if (bait == null) {
-            true
-        } else {
-            for (i in bait.size downTo 1) {
-                if (removeItem(player, bait[i - 1], Container.INVENTORY)) {
-                    return true
-                }
-            }
-            false
-        }
+        bait?.forEach { if (removeItem(player, it, Container.INVENTORY)) return true }
+        return bait == null
     }
-
-    /**
-     * Returns the message shown when the player starts fishing with this option.
-     */
-    fun getStartMessage(): String = if (option == "net") "You cast out your net..." else "You attempt to catch a fish."
 }

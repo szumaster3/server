@@ -95,10 +95,10 @@ class FishingContest : Quest(Quests.FISHING_CONTEST, 62, 61, 1, 11, 0, 1, 5) {
                 0 -> {
                     val isMale = player!!.isMale
                     val gender = if (isMale) "lad" else "lass"
-                    sendNPCDialogueLines(player!!, npcId, FaceAnim.OLD_DEFAULT, false, "You've done us proud. Thank you $gender. I think we can", "now trust you enough to let you in...").also { stage++ }
+                    sendNPCDialogueLines(player!!, npcId, FaceAnim.OLD_HAPPY, false, "You've done us proud. Thank you $gender. I think we can", "now trust you enough to let you in...").also { stage++ }
                 }
                 1 -> sendPlayerDialogue(player!!, "In where?", FaceAnim.HALF_ASKING).also { stage++ }
-                2 -> sendNPCDialogueLines(player!!, npcId, FaceAnim.OLD_NORMAL, false, "Why, the tunnel of course! You may now come and go", "freely, avoiding the wolves and dangers of the cold, high", "mountain. You could even stop in for a beer or two!").also { stage++ }
+                2 -> sendNPCDialogueLines(player!!, npcId, FaceAnim.OLD_HAPPY, false, "Why, the tunnel of course! You may now come and go", "freely, avoiding the wolves and dangers of the cold, high", "mountain. You could even stop in for a beer or two!").also { stage++ }
                 3 -> sendPlayerDialogue(player!!, "Excellent. That will come in most handy.").also { stage = END_DIALOGUE }
             }
         }

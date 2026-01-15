@@ -166,8 +166,7 @@ class BonzoDialogue(player: Player? = null) : Dialogue(player) {
             var newSpot: NPC? = null
 
             override fun pulse(): Boolean {
-                val fishingSpotNPC = firstFishingSpot
-                if (!fishingSpotNPC.isActive) {
+                if (!firstFishingSpot.isActive) {
                     clean(player, originalLocation, region)
                     sendMessage(player, "Unable to complete action - system busy.")
                     return true
@@ -175,7 +174,7 @@ class BonzoDialogue(player: Player? = null) : Dialogue(player) {
 
                 when (counter++) {
                     0 -> {
-                        fishingSpotNPC.transform(NPCs.FISHING_SPOT_234)
+                        firstFishingSpot.transform(NPCs.FISHING_SPOT_234)
                     }
 
                     7 -> {
@@ -194,7 +193,7 @@ class BonzoDialogue(player: Player? = null) : Dialogue(player) {
                             newSpot = listOf(firstFishingSpot, secondFishingSpot, thirdFishingSpot)
                                 .firstOrNull { it.id == NPCs.FISHING_SPOT_309 || it.id == NPCs.FISHING_SPOT_233 }
                             newSpot?.transform(NPCs.FISHING_SPOT_233)
-                            fishingSpotNPC.reTransform()
+                            firstFishingSpot.reTransform()
                             registerLogoutListener(player, "fishing-contest:fishing_spot:2") {
                                 newSpot?.reTransform()
                             }

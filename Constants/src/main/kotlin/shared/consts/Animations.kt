@@ -7921,7 +7921,7 @@ object Animations {
     const val ANIMATION_8104 = 8104
     const val ANIMATION_8105 = 8105
     const val ANIMATION_8106 = 8106
-    const val LUNAR_FARM_NPC_DEFEND_8107 = 8107
+    const val GRANITE_LOBSTER_PASSIVE_8107 = 8107
     const val ANIMATION_8108 = 8108
     const val ANIMATION_8109 = 8109
     const val ANIMATION_8110 = 8110
@@ -7932,7 +7932,7 @@ object Animations {
     const val ANIMATION_8115 = 8115
     const val ANIMATION_8116 = 8116
     const val ANIMATION_8117 = 8117
-    const val ANIMATION_8118 = 8118
+    const val GRANITE_LOBSTER_SPECIAL_8118 = 8118
     const val ANIMATION_8119 = 8119
     const val ANIMATION_8120 = 8120
     const val ANIMATION_8121 = 8121
