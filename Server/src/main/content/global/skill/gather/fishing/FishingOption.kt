@@ -105,4 +105,13 @@ enum class FishingOption(
         bait?.forEach { if (removeItem(player, it, Container.INVENTORY)) return true }
         return bait == null
     }
+
+    fun getStartMessage(): String {
+        return if(optionName == "net")
+            "You cast out your net..."
+        else
+            "You attempt to catch a fish."
+    }
+
 }
+

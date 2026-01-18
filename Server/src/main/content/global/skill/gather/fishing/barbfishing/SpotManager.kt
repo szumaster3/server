@@ -1,4 +1,4 @@
-package content.global.skill.gather.fishing
+package content.global.skill.gather.fishing.barbfishing
 
 import core.api.StartupListener
 import core.api.TickListener

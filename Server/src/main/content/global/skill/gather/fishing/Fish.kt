@@ -8,7 +8,7 @@ import shared.consts.Items
  * Represents a fish type in the game.
  *
  * @property id The item id of the fish.
- * @property level The fishing level required.
+ * @property requiredLevel The fishing level required.
  * @property xp The xp gained when caught.
  * @property lowChance The min success chance.
  * @property highChance The max success chance.

@@ -96,6 +96,7 @@ object PinballUtils {
         clearLogoutListener(player, RandomEvent.logout())
         PlayerCamera(player).reset()
         openInterface(player, Components.CHATDEFAULT_137)
+        closeDialogue(player)
         closeOverlay(player)
         closeInterface(player)
         restoreTabs(player)

@@ -44,6 +44,7 @@ class KittenInteractDialogue(player: Player? = null) : Dialogue(player) {
 
         when (buttonId) {
             1 -> {
+                end()
                 queueScript(player, 1, QueueStrength.WEAK) {
                     player.animate(PLAYER_STROKE_ANIMATION)
                     familiar.face(player)
