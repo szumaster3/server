@@ -94,7 +94,11 @@ class CookingRecipeHandler : InteractionListener {
                     })
                 }
 
-                override fun getAll(index: Int): Int = maxAmount
+                override fun getAll(index: Int): Int {
+                    val ingredientAmount = amountInInventory(player, recipe.ingredientID)
+                    val secondaryAmount = if (recipe.requiresKnife) Int.MAX_VALUE else amountInInventory(player, recipe.secondaryID)
+                    return min(ingredientAmount, secondaryAmount)
+                }
             }
 
             if (maxAmount > 1) handler.open() else handler.create(0, 1)
@@ -149,7 +153,11 @@ class CookingRecipeHandler : InteractionListener {
 
     private fun processRecipe(player: Player, recipe: CookingRecipe) {
         if (!removeItem(player, recipe.ingredientID)) return
-        if (!removeItem(player, recipe.secondaryID)) return
+
+        if (!recipe.requiresKnife) {
+            if (!removeItem(player, recipe.secondaryID)) return
+        }
+
         recipe.returnsContainer?.let { addItemOrDrop(player, it, 1) }
         addItem(player, recipe.productID, 1)
         recipe.xpReward?.let { rewardXP(player, Skills.COOKING, it) }
