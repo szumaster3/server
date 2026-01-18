@@ -156,28 +156,27 @@ class PlayerSaver(val player: Player) {
         val achievementData = JsonArray()
 
         player.achievementDiaryManager.diaries.forEach { diaryEntry ->
-            val diaryJson = JsonObject().apply {
+            val diary = JsonObject()
 
-                // Serialize started levels.
-                add("startedLevels", JsonArray().apply {
-                    diaryEntry.levelStarted.forEach { add(it) }
-                })
+            val startedLevels = JsonArray()
+            diaryEntry.levelStarted.forEach { startedLevels.add(it) }
+            diary.add("startedLevels", startedLevels)
 
-                // Serialize completed tasks per level.
-                add("completedLevels", JsonArray().apply {
-                    diaryEntry.taskCompleted.forEach { levelTasks ->
-                        add(JsonArray().apply { levelTasks.forEach { add(it) } })
-                    }
-                })
-
-                // Serialize rewarded levels.
-                add("rewardedLevels", JsonArray().apply {
-                    diaryEntry.levelRewarded.forEach { add(it) }
-                })
+            val completedLevels = JsonArray()
+            diaryEntry.taskCompleted.forEach { task ->
+                val level = JsonArray()
+                task.forEach { level.add(it) }
+                completedLevels.add(level)
             }
+            diary.add("completedLevels", completedLevels)
 
-            // Add diary data under its type name.
-            achievementData.add(JsonObject().apply { add(diaryEntry.type.name, diaryJson) })
+            val rewardedLevels = JsonArray()
+            diaryEntry.levelRewarded.forEach { rewardedLevels.add(it) }
+            diary.add("rewardedLevels", rewardedLevels)
+
+            val diaryCollector = JsonObject()
+            diaryCollector.add(diaryEntry.type.name, diary)
+            achievementData.add(diaryCollector)
         }
 
         root.add("achievementDiaries", achievementData)

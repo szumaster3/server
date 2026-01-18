@@ -32,12 +32,9 @@ class DiaryManager(val player: Player) {
             val diaryJson = element.asJsonObject
             if (diaryJson.entrySet().isEmpty()) return@forEach
 
-            val rawName = diaryJson.entrySet().first().key
-            val name = rawName.replace("_", "' ")
-
-            diaries.find { it.type.name.equals(name, ignoreCase = true) }?.let { diary ->
-                val jsonKey = name.replace("' ", "_")
-                diaryJson[jsonKey]?.takeIf { it.isJsonObject }?.asJsonObject?.let(diary::parse)
+            val key = diaryJson.entrySet().first().key
+            diaries.find { it.type.name.equals(key, ignoreCase = true) }?.let { diary ->
+                diaryJson[key]?.takeIf { it.isJsonObject }?.asJsonObject?.let(diary::parse)
             }
         }
     }

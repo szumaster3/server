@@ -55,9 +55,10 @@ public final class Pet extends Familiar {
     @Override
     public void handleTickActions() {
         final PetDetails petDetails = details;
+        boolean canGetHungry = getPet().isKitten(itemId) || (!Pets.isGrownCat(itemId) && getPet().food.length > 0);
 
-        if (getPet().food.length > 0 && !pet.isGrownCat(itemId)) {
-            double amount = itemId == pet.babyItemId ? 0.025 : 0.018;
+        if (canGetHungry) {
+            double amount = itemId == getPet().babyItemId ? 0.025 : 0.018;
 
             int rate = owner.getAttribute("petrate", 1);
             if (rate == 0) {
@@ -77,7 +78,8 @@ public final class Pet extends Familiar {
             owner.sendMessage("<col=ff0000>Your pet is starving, feed it before it runs off.</col>");
             hasWarned = 2;
         }
-        if (hunger >= 100.0 && growthRate != 0 && pet.food.length != 0) {
+
+        if (hunger >= 100.0) {
             owner.getFamiliarManager().dismiss();
             owner.getFamiliarManager().removeDetails(getItemId());
             owner.getFamiliarManager().setFamiliar(null);
@@ -85,6 +87,7 @@ public final class Pet extends Familiar {
             owner.sendMessage("<col=ff0000>Your pet has run away.</col>");
             return;
         }
+
         double growth = petDetails.getGrowth();
         double growthrate = pet.growthRate;
 
@@ -95,19 +98,24 @@ public final class Pet extends Familiar {
             } else if (rate == 2) {
                 growthrate *= 100;
             }
+
             petDetails.updateGrowth(growthrate);
-            if (growth == 100.0) {
+
+            if (growth >= 100.0) {
                 growNextStage();
             }
         }
-        if ((!isInvisible() && owner.getLocation().getDistance(getLocation()) > 12) || (isInvisible() && ticks % 25 == 0)) {
+
+        if ((!isInvisible() && owner.getLocation().getDistance(getLocation()) > 12)
+                || (isInvisible() && ticks % 25 == 0)) {
             if (!call()) {
                 setInvisible(true);
             }
         } else if (!getPulseManager().hasPulseRunning()) {
             startFollowing();
         }
-        setVarp(owner, 1175, ((int) details.getGrowth() << 1) | ((int) details.getHunger() << 9));
+
+        sendConfiguration();
     }
 
     /**
