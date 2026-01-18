@@ -55,17 +55,31 @@ public final class Pet extends Familiar {
     @Override
     public void handleTickActions() {
         final PetDetails petDetails = details;
+
+        if (getPet().food.length > 0 && !pet.isGrownCat(itemId)) {
+            double amount = itemId == pet.babyItemId ? 0.025 : 0.018;
+
+            int rate = owner.getAttribute("petrate", 1);
+            if (rate == 0) {
+                amount = 0;
+            } else if (rate == 2) {
+                amount *= 100;
+            }
+
+            petDetails.updateHunger(amount);
+        }
+
         double hunger = petDetails.getHunger();
         if (hunger >= 75.0 && hunger <= 90.0 && hasWarned < 1) {
             owner.sendMessage("<col=ff0000>Your pet is getting hungry.</col>");
             hasWarned = 1;
         } else if (hunger >= 90.0 && hasWarned < 2) {
-            owner.getPacketDispatch().sendMessage("<col=ff0000>Your pet is starving, feed it before it runs off.</col>");
+            owner.sendMessage("<col=ff0000>Your pet is starving, feed it before it runs off.</col>");
             hasWarned = 2;
         }
         if (hunger >= 100.0 && growthRate != 0 && pet.food.length != 0) {
-            owner.getFamiliarManager().removeDetails(this.getItemIdHash());
             owner.getFamiliarManager().dismiss();
+            owner.getFamiliarManager().removeDetails(getItemId());
             owner.getFamiliarManager().setFamiliar(null);
             setVarp(owner, 1175, 0);
             owner.sendMessage("<col=ff0000>Your pet has run away.</col>");
@@ -73,8 +87,12 @@ public final class Pet extends Familiar {
         }
         double growth = petDetails.getGrowth();
         double growthrate = pet.growthRate;
-        if (growthrate > 0.000) {
-            if (GameWorld.getSettings().isDevMode()) {
+
+        if (growthrate > 0.0) {
+            int rate = owner.getAttribute("petrate", 1);
+            if (rate == 0) {
+                growthrate = 0;
+            } else if (rate == 2) {
                 growthrate *= 100;
             }
             petDetails.updateGrowth(growthrate);

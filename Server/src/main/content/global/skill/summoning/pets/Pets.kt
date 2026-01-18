@@ -225,5 +225,29 @@ enum class Pets(
             }
             return false
         }
+
+        /**
+         * Checks if the given item id represents a grown or overgrown cat.
+         *
+         * @param id Pet item id.
+         * @return true if grown/overgrown cat
+         */
+        @JvmStatic
+        fun isGrownCat(id: Int): Boolean {
+            val pet = forId(id) ?: return false
+
+            return when (pet) {
+                GREY_AND_BLACK_CAT,
+                WHITE_CAT,
+                BROWN_CAT,
+                BLACK_CAT,
+                GREY_AND_BROWN_CAT,
+                GREY_AND_BLUE,
+                PURPLE_CAT,
+                HELLCAT ->
+                    id == pet.grownItemId || id == pet.overgrownItemId
+                else -> false
+            }
+        }
     }
 }
