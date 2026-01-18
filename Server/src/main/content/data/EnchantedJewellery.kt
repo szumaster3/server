@@ -43,7 +43,6 @@ enum class EnchantedJewellery(val options: Array<String>, val locations: Array<L
             }
             return
         }
-        closeDialogue(player)
         attemptTeleport(player, item, buttonID, isEquipped)
     }
 
@@ -66,6 +65,7 @@ enum class EnchantedJewellery(val options: Array<String>, val locations: Array<L
             getLocation(buttonID)
         }
 
+        closeAllInterfaces(player)
         val animDuration = animationDuration(ANIMATION)
         queueScript(player, 0, QueueStrength.SOFT) { stage ->
             when (stage) {
