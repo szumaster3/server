@@ -69,23 +69,23 @@ class FortressGuardDialogue(player: Player? = null) : Dialogue(player) {
             }
 
             42 -> npc(FaceAnim.NEUTRAL, "Don't let it happen again.").also { stage = END_DIALOGUE }
-            44 -> npc(FaceAnim.NEUTRAL, "This fortress belongs to the order of Black Knights", "known as the Kinshra.").also { stage++ }
+            44 -> npc(FaceAnim.NEUTRAL, "This fortress belongs to the order of Black Knights", "known as the Kinshra.").also { stage = 46 }
             45 -> player(FaceAnim.FRIENDLY, "Oh. Okay, thanks.").also { stage = END_DIALOGUE }
 
-            50 -> options("Okay, I won't.", "I don't care. I'm going in anyway.").also { stage++ }
-            51 -> when (buttonId) {
+            46 -> options("Okay, I won't.", "I don't care. I'm going in anyway.").also { stage++ }
+            47 -> when (buttonId) {
                 1 -> player(FaceAnim.NEUTRAL, "Okay, I won't.").also { stage++ }
-                2 -> player(FaceAnim.NEUTRAL, "I don't care. I'm going in anyway.").also { stage = 54 }
+                2 -> player(FaceAnim.NEUTRAL, "I don't care. I'm going in anyway.").also { stage = 49 }
             }
-            52 -> npc(FaceAnim.NEUTRAL, "Wise move.").also { stage = END_DIALOGUE }
-            54 -> {
+            48 -> npc(FaceAnim.NEUTRAL, "Wise move.").also { stage = END_DIALOGUE }
+            49 -> {
                 end()
                 DoorActionHandler.handleAutowalkDoor(player, getObject(0, 3020, 3515)!!)
                 val npcs = getLocalNpcs(player)
                 for (npc in npcs) {
                     if (npc.id == NPCs.BLACK_KNIGHT_179) {
                         npc.attack(player)
-                        sendChat(player, "Die, intruder!")
+                        sendChat(npc, "Die, intruder!")
                         return true
                     }
                 }
