@@ -108,9 +108,41 @@ class BravekDialogue(player: Player? = null) : Dialogue(player) {
 
             in 16..100 -> when (stage) {
                 0 -> npcl(FaceAnim.NEUTRAL, "Thanks again for the hangover cure.").also { stage++ }
-                1 -> playerl(FaceAnim.NEUTRAL, "Not a problem, happy to help out.").also { stage++ }
+                1 -> if(!inInventory(player, Items.WARRANT_1503)) {
+                    npcl(FaceAnim.ASKING, "Ah now, what was it you wanted me to do for you?").also { stage = 3 }
+                } else {
+                    playerl(FaceAnim.NEUTRAL, "Not a problem, happy to help out.").also { stage++ }
+                }
                 2 -> npcl(FaceAnim.FRIENDLY, "I'm just having a little drop of whisky, then I'll feel really good.").also { stage = END_DIALOGUE }
+                3 -> playerl(FaceAnim.FRIENDLY, "I need to rescue a kidnap victim called Elena. She's being held in a plague house, I need permission to enter.").also { stage++ }
+                4 -> npcl(FaceAnim.HALF_THINKING, "Well the mourners deal with that sort of thing...").also { stage = 6 }
+                6 -> options("Ok, I'll go speak to them.", "Is that all anyone says around here?", "They won't listen to me!").also { stage++ }
+                7 -> when (buttonID) {
+                    1 -> playerl(FaceAnim.FRIENDLY, "Ok, I'll go speak to them.").also { stage = END_DIALOGUE }
+                    2 -> playerl(FaceAnim.FRIENDLY, "Is that all anyone says around here?").also { stage = 11 }
+                    3 -> playerl(FaceAnim.FRIENDLY, "They won't listen to me! They say I'm not properly equipped to go in the house, though I do have a very effective gasmask.").also { stage++ }
+                }
+                8 -> npcl(FaceAnim.FRIENDLY, "Hmmm, well I guess they're not taking the issue of a kidnapping seriously enough. They do go a bit far sometimes.").also { stage++ }
+                9 -> npcl(FaceAnim.FRIENDLY, "I've heard of Elena, she has helped us a lot... Ok, I'll give you this warrant to enter the house.").also { stage = 17 }
+                11 -> npcl(FaceAnim.FRIENDLY, "Well, they know best about plague issues.").also { stage++ }
+                12 -> playerl(FaceAnim.FRIENDLY, "Don't you want to take an interest in it at all?").also { stage++ }
+                13 -> npcl(FaceAnim.FRIENDLY, "Nope, I don't wish to take a deep interest in plagues. That stuff is too scary for me!").also { stage++ }
+                14 -> playerl(FaceAnim.FRIENDLY, "I can see why people say you're a weak leader.").also { stage++ }
+                15 -> npcl(FaceAnim.FRIENDLY, "Bah, people always criticise their leaders but delegating is the only way to lead. I delegate all plague issues to the mourners.").also { stage++ }
+                16 -> playerl(FaceAnim.FRIENDLY, "This whole city is a plague issue!").also { stage = 6 }
+                17 -> {
+                    if (freeSlots(player!!) == 0) {
+                        end()
+                        sendItemDialogue(player!!, Items.WARRANT_1503, "Bravek waves a warrant at you, but you don't have room to take it.")
+                    } else {
+                        end()
+                        sendItemDialogue(player!!, Items.WARRANT_1503, "Bravek hands you a warrant.")
+                        addItem(player!!, Items.WARRANT_1503)
+                    }
+                }
+
             }
+
         }
         return true
     }

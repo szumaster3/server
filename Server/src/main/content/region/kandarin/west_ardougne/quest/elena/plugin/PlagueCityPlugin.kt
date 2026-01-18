@@ -202,24 +202,12 @@ class PlagueCityPlugin : InteractionListener {
         on(Scenery.DOOR_35991, IntType.SCENERY, "open") { player, node ->
             val questStage = getQuestStage(player, Quests.PLAGUE_CITY)
 
-            when {
-                questStage < 11 || questStage == 16 -> {
-                    openDialogue(player, PlagueCityDoorDialogue())
-                }
-
-                questStage == 11 -> {
-                    openDialogue(player, HeadMournerDialogue())
-                }
-
-                questStage in 17..100 -> {
-                    DoorActionHandler.handleAutowalkDoor(player, node.asScenery())
-                }
-
-                else -> {
-                    openDialogue(player, MournerArdougneDialogue())
-                }
+            when (questStage) {
+                11 -> openDialogue(player, HeadMournerDialogue())
+                16 -> openDialogue(player, PlagueCityDoorDialogue())
+                in 17..100 -> DoorActionHandler.handleAutowalkDoor(player, node.asScenery())
+                else -> openDialogue(player, MournerArdougneDialogue())
             }
-
             return@on true
         }
 
@@ -543,16 +531,8 @@ class PlagueCityPlugin : InteractionListener {
         }
     }
 
-    inner class PlagueCityDoorDialogue : DialogueFile() {
-
-        init {
-            stage = 0
-        }
-
+    private class PlagueCityDoorDialogue : DialogueFile() {
         override fun handle(componentID: Int, buttonID: Int) {
-            npc = RegionManager.getLocalNpcs(Location.create(2539, 3273, 0), 3)
-                .firstOrNull { it.id == NPCs.MOURNER_3216 }
-
             when (stage) {
                 0 -> {
                     sendDialogueLines(player!!, "The door won't open.", "You notice a black cross on the door.")
@@ -560,14 +540,17 @@ class PlagueCityPlugin : InteractionListener {
                 }
 
                 1 -> {
+                    npc = RegionManager.getLocalNpcs(Location.create(2539, 3273, 0), 3)
+                        .firstOrNull { it.id == NPCs.MOURNER_717 }
+
                     if (npc != null) {
                         face(player!!, npc!!.location)
                         npc("I'd stand away from there. That black cross means that", "house has been touched by the plague.")
+                        stage = 2
                     } else {
                         player("The mourner doesn't seem to be here right now.")
                         end()
                     }
-                    stage = 2
                 }
 
                 2 -> {
