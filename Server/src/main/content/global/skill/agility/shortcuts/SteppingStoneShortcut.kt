@@ -8,81 +8,84 @@ import core.game.node.Node
 import core.game.node.entity.impl.ForceMovement
 import core.game.node.entity.player.Player
 import core.game.node.entity.skill.Skills
+import core.game.system.task.Pulse
 import core.game.world.map.Location
 import core.game.world.update.flag.context.Animation
 import core.plugin.Initializable
 import core.plugin.Plugin
 import shared.consts.Animations
-import shared.consts.Scenery
 
 /**
- * Handles the stepping stone shortcuts.
+ * Handles the stepping stone shortcut.
+ * @author Ceikry
  */
 @Initializable
 class SteppingStoneShortcut : OptionHandler() {
-    private val stones = mutableMapOf<Location, SteppingStoneInstance>()
-
-    private data class SteppingStoneInstance(
-        val pointA: Location, val pointB: Location, val option: String, val requirements: Int
-    )
+    private val stones = HashMap<Location,SteppingStoneInstance>()
+    internal class SteppingStoneInstance(val pointA: Location, val pointB: Location, val option: String, val levelReq: Int)
 
     override fun handle(player: Player?, node: Node?, option: String?): Boolean {
         player ?: return false
-        val stone = stones[player.location] ?: return false
-        if (getStatLevel(player, Skills.AGILITY) < stone.requirements) {
-            sendMessage(player, "You need an Agility level of ${stone.requirements} for this shortcut.")
+        val stone = stones[player.location]
+        stone ?: return false
+
+        if(player.skills.getLevel(Skills.AGILITY) < stone.levelReq){
+            player.sendMessage("You need an agility level of ${stone.levelReq} for this shortcut.")
             return true
         }
 
-        val destination = if (player.location == stone.pointA) stone.pointB else stone.pointA
-        val offsetX = (destination.x - player.location.x).coerceIn(-1, 1)
-        val offsetY = (destination.y - player.location.y).coerceIn(-1, 1)
-
+        val finalDest = when(player.location){
+            stone.pointA -> stone.pointB
+            stone.pointB -> stone.pointA
+            else -> player.location
+        }
+        val offset = getOffset(player,finalDest)
+        closeAllInterfaces(player)
         lock(player, 3)
         player.locks.lockTeleport(3)
-        queueScript(player, 1, QueueStrength.SOFT) {
-            if (player.location != destination) {
-                ForceMovement.run(
-                    player, player.location, player.location.transform(offsetX, offsetY, 0), ANIMATION, 10
-                )
-                return@queueScript delayScript(player, 3)
-            } else {
-                return@queueScript stopExecuting(player)
+        queueScript(player, 2, QueueStrength.SOFT) {
+            val there = player.location == finalDest
+            if (!there) {
+                lock(player, 3)
+                player.locks.lockTeleport(3)
+                ForceMovement.run(player,player.location,player.location.transform(offset.first,offset.second,0), ANIMATION,10)
+                return@queueScript delayScript(player, 2)
             }
+            return@queueScript stopExecuting(player)
         }
         return true
     }
 
-    fun configure(objects: IntArray, pointA: Location, pointB: Location, option: String, levelReq: Int) {
-        val instance = SteppingStoneInstance(pointA, pointB, option, levelReq)
-        objects.forEach { id ->
-            SceneryDefinition.forId(id).handlers["option:$option"] = this
+    fun getOffset(player: Player, location: Location): Pair<Int,Int>{
+        var diffX = location.x - player.location.x
+        var diffY = location.y - player.location.y
+        if(diffX > 1) diffX = 1
+        if(diffX < -1) diffX = -1
+        if(diffY > 1) diffY = 1
+        if(diffY < -1) diffY = -1
+        return Pair(diffX,diffY)
+    }
+
+    fun configure(objects: IntArray, pointA: Location, pointB: Location, option: String, levelReq: Int){
+        val instance = SteppingStoneInstance(pointA,pointB, option, levelReq)
+        objects.forEach {
+            SceneryDefinition.forId(it).handlers["option:$option"] = this
         }
-        stones[pointA] = instance
-        stones[pointB] = instance
+        stones.put(pointA,instance)
+        stones.put(pointB, instance)
     }
 
     override fun newInstance(arg: Any?): Plugin<Any> {
-        // Stepping stones (Karamja).
-        configure(
-            intArrayOf(Scenery.STEPPING_STONES_2335, Scenery.STEPPING_STONES_2333),
-            Location.create(2925, 2947, 0),
-            Location.create(2925, 2951, 0),
-            "cross",
-            30
-        )
-        // Stepping stones (Champions' guild).
-        configure(
-            intArrayOf(Scenery.STEPPING_STONE_9315),
-            Location.create(3149, 3363, 0),
-            Location.create(3154, 3363, 0),
-            "jump-onto",
-            31
-        )
+        configure(intArrayOf(2335,2333),Location.create(2925,2947,0),Location.create(2925,2951,0),"cross",30)
+        configure(intArrayOf(9315),Location.create(3149, 3363, 0),Location.create(3154, 3363, 0),"jump-onto",31)
+
         return this
     }
 
     companion object {
+        /**
+         * Represents the animation to use.
+         */
         private val ANIMATION = Animation(Animations.HUMAN_JUMP_SHORT_GAP_741)
     }
 }
