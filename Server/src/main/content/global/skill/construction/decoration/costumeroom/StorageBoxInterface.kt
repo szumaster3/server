@@ -156,10 +156,7 @@ class StorageBoxInterface : InterfaceListener {
 
             val obj = slots[i]
             val (name, hidden) = when (obj) {
-                is Storable -> {
-                    val itemName = names.getString(obj.displayId)
-                    itemName to (obj.displayId !in stored)
-                }
+                is Storable -> getItemName(obj.displayId) to (obj.displayId !in stored)
                 "MORE" -> "More..." to false
                 "BACK" -> "Back..." to false
                 else -> "" to true
