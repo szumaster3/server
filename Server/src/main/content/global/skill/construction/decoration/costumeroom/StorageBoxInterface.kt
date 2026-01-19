@@ -1,6 +1,7 @@
 package content.global.skill.construction.decoration.costumeroom
 
 import core.api.*
+import core.cache.def.impl.DataMap
 import core.game.interaction.InterfaceListener
 import core.game.node.entity.player.Player
 import core.game.node.item.Item
@@ -151,10 +152,14 @@ class StorageBoxInterface : InterfaceListener {
             val nameComponent = 55 + i * 2
             val iconComponent = 165 + i * 2
             val hiddenIconComponent = 166 + i * 2
+            val names = DataMap.get(380)
 
             val obj = slots[i]
             val (name, hidden) = when (obj) {
-                is Storable -> getItemName(obj.displayId) to (obj.displayId !in stored)
+                is Storable -> {
+                    val itemName = names.getString(obj.displayId)
+                    itemName to (obj.displayId !in stored)
+                }
                 "MORE" -> "More..." to false
                 "BACK" -> "Back..." to false
                 else -> "" to true
