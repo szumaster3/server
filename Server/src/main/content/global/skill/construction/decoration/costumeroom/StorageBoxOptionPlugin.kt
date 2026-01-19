@@ -1,8 +1,6 @@
 package content.global.skill.construction.decoration.costumeroom
 
-import core.api.animate
-import core.api.playAudio
-import core.api.replaceScenery
+import core.api.*
 import core.cache.def.impl.SceneryDefinition
 import core.game.interaction.OptionHandler
 import core.game.node.Node
@@ -20,39 +18,16 @@ import shared.consts.Scenery as Obj
 @Initializable
 class StorageBoxOptionPlugin : OptionHandler() {
 
-    /**
-     * Represents all storage boxes & configuration.
-     */
     private enum class StorageBox(val objectIds: IntArray, val storableType: StorableType? = null, val openable: Boolean = false, val closable: Boolean = false) {
-        // Bookcases
         BOOKCASE(intArrayOf(Obj.BOOKCASE_13597, Obj.BOOKCASE_13598, Obj.BOOKCASE_13599), StorableType.BOOK),
-        // Cape racks
         CAPE_RACK(intArrayOf(Obj.OAK_CAPE_RACK_18766, Obj.TEAK_CAPE_RACK_18767, Obj.MAHOGANY_CAPE_RACK_18768, Obj.GILDED_CAPE_RACK_18769, Obj.MARBLE_CAPE_RACK_18770, Obj.MAGIC_CAPE_RACK_18771), StorableType.CAPE),
-        // Fancy Dress Boxes
         FANCY_BOX_OPEN(intArrayOf(Obj.FANCY_DRESS_BOX_18772, Obj.FANCY_DRESS_BOX_18774, Obj.FANCY_DRESS_BOX_18776), openable = true),
         FANCY_BOX_CLOSE(intArrayOf(Obj.FANCY_DRESS_BOX_18773, Obj.FANCY_DRESS_BOX_18775, Obj.FANCY_DRESS_BOX_18777), closable = true, storableType = StorableType.FANCY),
-        // Toy Boxes
         TOY_BOX_OPEN(intArrayOf(Obj.TOY_BOX_18798, Obj.TOY_BOX_18800, Obj.TOY_BOX_18802), openable = true),
         TOY_BOX_CLOSE(intArrayOf(Obj.TOY_BOX_18799, Obj.TOY_BOX_18801, Obj.TOY_BOX_18803), closable = true, storableType = StorableType.TOY),
-        // Treasure Chests
-        TREASURE_LOW(intArrayOf(Obj.TREASURE_CHEST_18805), StorableType.LOW_LEVEL_TRAILS),
-        TREASURE_MED(intArrayOf(Obj.TREASURE_CHEST_18807), StorableType.MED_LEVEL_TRAILS),
-        TREASURE_HIGH(intArrayOf(Obj.TREASURE_CHEST_18809), StorableType.HIGH_LEVEL_TRAILS),
-        TREASURE_OPEN(intArrayOf(Obj.TREASURE_CHEST_18804, Obj.TREASURE_CHEST_18806, Obj.TREASURE_CHEST_18808), openable = true),
-        // Magic Wardrobes
-        WARDROBE_1(intArrayOf(Obj.MAGIC_WARDROBE_18785), StorableType.ONE_SET_OF_ARMOUR),
-        WARDROBE_2(intArrayOf(Obj.MAGIC_WARDROBE_18787), StorableType.TWO_SETS_OF_ARMOUR),
-        WARDROBE_3(intArrayOf(Obj.MAGIC_WARDROBE_18789), StorableType.THREE_SETS_OF_ARMOUR),
-        WARDROBE_4(intArrayOf(Obj.MAGIC_WARDROBE_18791), StorableType.FOUR_SETS_OF_ARMOUR),
-        WARDROBE_5(intArrayOf(Obj.MAGIC_WARDROBE_18793), StorableType.FIVE_SETS_OF_ARMOUR),
-        WARDROBE_6(intArrayOf(Obj.MAGIC_WARDROBE_18795), StorableType.SIX_SETS_OF_ARMOUR),
-        WARDROBE_ALL(intArrayOf(Obj.MAGIC_WARDROBE_18797), StorableType.ALL_SETS_OF_ARMOUR),
-        WARDROBE_OPEN(intArrayOf(Obj.MAGIC_WARDROBE_18784, Obj.MAGIC_WARDROBE_18786, Obj.MAGIC_WARDROBE_18788, Obj.MAGIC_WARDROBE_18790, Obj.MAGIC_WARDROBE_18792, Obj.MAGIC_WARDROBE_18794, Obj.MAGIC_WARDROBE_18796), openable = true),
-        // Armour Cases
-        ARMOUR_2(intArrayOf(Obj.ARMOUR_CASE_18779), StorableType.TWO_SETS_ARMOUR_CASE),
-        ARMOUR_4(intArrayOf(Obj.ARMOUR_CASE_18781), StorableType.FOUR_SETS_ARMOUR_CASE),
-        ARMOUR_ALL(intArrayOf(Obj.ARMOUR_CASE_18783), StorableType.ALL_SETS_ARMOUR_CASE),
-        ARMOUR_OPEN(intArrayOf(Obj.ARMOUR_CASE_18778, Obj.ARMOUR_CASE_18780, Obj.ARMOUR_CASE_18782), openable = true)
+        TREASURE_CHEST(intArrayOf(Obj.TREASURE_CHEST_18804, Obj.TREASURE_CHEST_18805, Obj.TREASURE_CHEST_18806, Obj.TREASURE_CHEST_18807, Obj.TREASURE_CHEST_18808, Obj.TREASURE_CHEST_18809), storableType = StorableType.TRAILS, openable = true),
+        MAGIC_WARDROBE(intArrayOf(Obj.MAGIC_WARDROBE_18784, Obj.MAGIC_WARDROBE_18785, Obj.MAGIC_WARDROBE_18786, Obj.MAGIC_WARDROBE_18787, Obj.MAGIC_WARDROBE_18788, Obj.MAGIC_WARDROBE_18789, Obj.MAGIC_WARDROBE_18790, Obj.MAGIC_WARDROBE_18791, Obj.MAGIC_WARDROBE_18792, Obj.MAGIC_WARDROBE_18793, Obj.MAGIC_WARDROBE_18794, Obj.MAGIC_WARDROBE_18795, Obj.MAGIC_WARDROBE_18796, Obj.MAGIC_WARDROBE_18797), storableType = StorableType.ARMOUR, openable = true),
+        ARMOUR_CASE(intArrayOf(Obj.ARMOUR_CASE_18778, Obj.ARMOUR_CASE_18779, Obj.ARMOUR_CASE_18780, Obj.ARMOUR_CASE_18781, Obj.ARMOUR_CASE_18782, Obj.ARMOUR_CASE_18783), storableType = StorableType.ARMOUR_CASE, openable = true)
     }
 
     private val allBoxes = StorageBox.values()
@@ -75,7 +50,62 @@ class StorageBoxOptionPlugin : OptionHandler() {
         val box = allBoxes.firstOrNull { obj.id in it.objectIds } ?: return true
 
         when (option) {
-            "search" -> box.storableType?.let { StorageBoxInterface.openStorage(player, it) }
+            "search" -> {
+                when (obj.id) {
+                    Obj.TREASURE_CHEST_18807 -> {
+                        setTitle(player, 2)
+                        sendOptions(
+                            player,
+                            "Take which level of Treasure Trail reward?",
+                            "Level 1",
+                            "Level 2"
+                        )
+                        addDialogueAction(player) { p, button ->
+                            val tier = when (button) {
+                                2 -> 0  // Low-level
+                                3 -> 1  // Medium-level
+                                else -> null
+                            }
+                            tier?.let {
+                                val container = p.getCostumeRoomState().getContainer(StorableType.TRAILS)
+                                container.setTier(StorableType.TRAILS, it)
+                                StorageBoxInterface.openStorage(p, StorableType.TRAILS)
+                            }
+                            return@addDialogueAction
+                        }
+                    }
+
+                    Obj.TREASURE_CHEST_18809 -> {
+                        setTitle(player, 3)
+                        sendOptions(
+                            player,
+                            "Take which level of Treasure Trail reward?",
+                            "Level 1",
+                            "Level 2",
+                            "Level 3"
+                        )
+                        addDialogueAction(player) { p, button ->
+                            val tier = when (button) {
+                                2 -> 0  // Low-level
+                                3 -> 1  // Medium-level
+                                4 -> 2  // High-level
+                                else -> null
+                            }
+                            tier?.let {
+                                val container = p.getCostumeRoomState().getContainer(StorableType.TRAILS)
+                                container.setTier(StorableType.TRAILS, it)
+                                StorageBoxInterface.openStorage(p, StorableType.TRAILS)
+                            }
+                            return@addDialogueAction
+                        }
+                    }
+
+                    else -> {
+                        box.storableType?.let { StorageBoxInterface.openStorage(player, it) }
+                    }
+                }
+            }
+
             "open" -> if (box.openable) openBox(player, obj)
             "close" -> if (box.closable) closeBox(player, obj)
         }
