@@ -72,11 +72,13 @@ class StorageBoxInterface : InterfaceListener {
         when (val clicked = slots.getOrNull(slotIndex)) {
             "MORE" -> {
                 container.nextPage(type, allItems.size, PAGE_SIZE)
+                openInterface(player, INTERFACE)
                 updateStorageInterface(player, type)
             }
 
             "BACK" -> {
                 container.prevPage(type)
+                openInterface(player, INTERFACE)
                 updateStorageInterface(player, type)
             }
 
