@@ -8,7 +8,11 @@ import core.game.interaction.InteractionListener
 import core.game.interaction.InterfaceListener
 import core.game.node.entity.player.Player
 import core.tools.DARK_PURPLE
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import shared.consts.Components
+import shared.consts.NPCs
+import shared.consts.Quests
 import shared.consts.Scenery
 
 class WarningManager : InteractionListener, InterfaceListener {
@@ -19,15 +23,36 @@ class WarningManager : InteractionListener, InterfaceListener {
          */
 
         SCENERY_WARNINGS.forEach { (sceneryId, warning) ->
-            on(sceneryId, IntType.SCENERY, "go-through", "climb", "open", "cross", "climb-down", "climb-up") { player, node ->
-                if ((sceneryId == Scenery.GATE_3506 || sceneryId == Scenery.GATE_3507) && player.location.y < 3458) {
-                    DoorActionHandler.handleAutowalkDoor(player, node.asScenery())
-                } else {
-                    handleSceneryInteraction(player, warning, node.asScenery())
+            on(
+                sceneryId,
+                IntType.SCENERY,
+                "go-through", "climb", "open", "cross", "climb-down", "climb-up"
+            ) { player, node ->
+                val scenery = node.asScenery()
+                when {
+                    (sceneryId == Scenery.GATE_3506 || sceneryId == Scenery.GATE_3507) && player.location.y < 3458 -> {
+                        DoorActionHandler.handleAutowalkDoor(player, scenery)
+                        if (player.location.y == 3457) {
+                            GlobalScope.launch {
+                                findLocalNPC(player, NPCs.ULIZIUS_1054)?.sendChat("Oh my! You're still alive!", 2)
+                            }
+                        } else if (!player.questRepository.hasStarted(Quests.NATURE_SPIRIT)) {
+                            sendNPCDialogue(
+                                player,
+                                NPCs.ULIZIUS_1054,
+                                "I'm sorry, but I'm afraid it's too dangerous to let you through this gate right now."
+                            )
+                        }
+                    }
+
+                    else -> {
+                        handleSceneryInteraction(player, warning, scenery)
+                    }
                 }
                 return@on true
             }
         }
+
 
         /*
          * Handles corporeal beast passage (ODD).

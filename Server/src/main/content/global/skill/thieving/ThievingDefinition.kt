@@ -110,20 +110,24 @@ object ThievingDefinition {
                 player.animate(Animation(Animations.HUMAN_MULTI_USE_832))
                 player.locks.lockInteractions(2)
 
-                queueScript(player, 0, QueueStrength.WEAK) {
+                queueScript(player, 1, QueueStrength.WEAK) {
                     val item = stall.randomLoot
                     val success = RandomFunction.random(15) >= 4
 
                     if (!success) {
-                        val guard = RegionManager.getLocalNpcs(player.location, 8)
+                        val guard = RegionManager.getLocalNpcs(player.location, 16)
                             .firstOrNull {
-                                !it.properties.combatPulse.isAttacking && (it.id == NPCs.GUARD_32 || it.id == NPCs.MARKET_GUARD_2236) }
+                                it.id == NPCs.GUARD_32 || it.id == NPCs.MARKET_GUARD_2236
+                            }
 
                         if (guard != null) {
+                            guard.face(player)
                             guard.sendChat("Hey! Get your hands off there!")
 
-                            Pulser.submit(object : Pulse(1) {
+                            Pulser.submit(object : Pulse(2) {
                                 override fun pulse(): Boolean {
+                                    if (!guard.isActive) return true
+                                    guard.properties.combatPulse.stop()
                                     guard.properties.combatPulse.attack(player)
                                     return true
                                 }
@@ -168,8 +172,8 @@ object ThievingDefinition {
              * Handles the stall steal cooldown.
              * @param player The player.
              * @param stallName The name of the stall.
-             * @param shopNpcId The shop owner id.
-             * @param npcIds A list of npc ids that can attack player.
+             * @param shopNpc The shop owner id.
+             * @param guardNpcIds A list of npc ids that can attack player.
              * @param range The maximum distance to search for npc (default is 8 tiles).
              * @return `true` if the player is allowed to trade, `false` if still on cooldown.
              */

@@ -83,10 +83,8 @@ public final class ItemUpdateFlag extends UpdateFlag<Object> {
             ClearGroundItem.write(buffer, item);
         } else if (isConstruct()) {
             ConstructGroundItem.write(buffer, item);
-        } else if(isAmountUpdate()){
-            UpdateGroundItemAmount.write(buffer, item, oldAmount);
         } else {
-            throw new IllegalStateException("Unhandled ItemUpdateFlag type: " + type);
+            UpdateGroundItemAmount.write(buffer, item, oldAmount);
         }
     }
 
