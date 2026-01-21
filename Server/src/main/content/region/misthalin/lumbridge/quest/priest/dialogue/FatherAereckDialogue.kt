@@ -5,6 +5,7 @@ import core.game.dialogue.Dialogue
 import core.game.dialogue.FaceAnim
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
+import core.game.node.entity.player.link.diary.DiaryType
 import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.Components
@@ -100,6 +101,7 @@ class FatherAereckDialogue(player: Player? = null) : Dialogue(player) {
             10 -> {
                 end()
                 openInterface(player, Components.GRAVESTONE_SHOP_652)
+                player.achievementDiaryManager.finishTask(player, DiaryType.LUMBRIDGE, 0, 15)
             }
 
             20 ->
