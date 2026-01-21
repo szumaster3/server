@@ -60,7 +60,9 @@ class SummoningPlugin : InteractionListener {
                 }
 
                 "renew-points" -> {
-                    if (!isQuestComplete(player, Quests.WOLF_WHISTLE)) {
+                    val wolfComplete = isQuestComplete(player, Quests.WOLF_WHISTLE)
+                    val wolfStage = getQuestStage(player, Quests.WOLF_WHISTLE)
+                    if (!wolfComplete && wolfStage != 60) {
                         sendMessage(player, "You need to complete Wolf Whistle quest to do this.")
                         return@on true
                     }
@@ -70,7 +72,7 @@ class SummoningPlugin : InteractionListener {
                     }
                     visualize(player, Animations.USE_OBELISK_8502, Graphics.INTERACT_SUMMONING_OBELISK_1308)
                     playAudio(player, Sounds.DREADFOWL_BOOST_4214)
-                    player.getSkills().setLevel(Skills.SUMMONING, getStatLevel(player, Skills.SUMMONING))
+                    player.skills.setLevel(Skills.SUMMONING, getStatLevel(player, Skills.SUMMONING))
                     player.dispatch(SummoningPointsRechargeEvent(node))
                     sendMessage(player, "You renew your summoning points.")
                     return@on true
