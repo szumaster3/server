@@ -26,15 +26,24 @@ class CauldronOfThunderPlugin : InteractionListener {
          */
 
         onUseWith(IntType.SCENERY, ITEM_MAP.keys.toIntArray(), Scenery.CAULDRON_OF_THUNDER_2142) { player, used, _ ->
+
             if (!removeItem(player, used)) {
                 return@onUseWith false
             }
+
             player.lock(1)
-            if (removeItem(player, used)) {
-                animate(player, Animations.HUMAN_WITHDRAW_833)
-                addItem(player, ITEM_MAP.getValue(used.id))
-                sendMessage(player, "You dip the " + used.name.lowercase() + " in the cauldron.")
-            }
+            animate(player, Animations.HUMAN_WITHDRAW_833)
+
+            val resultItem = ITEM_MAP[used.id]
+                ?: return@onUseWith false
+
+            addItem(player, resultItem)
+
+            sendMessage(
+                player,
+                "You dip the ${used.name.lowercase()} in the cauldron."
+            )
+
             return@onUseWith true
         }
     }
