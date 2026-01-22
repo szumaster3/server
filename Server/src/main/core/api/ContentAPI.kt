@@ -3948,7 +3948,7 @@ fun unlockEmote(player: Player, emoteId: Any) {
  * @param emote the Emotes enum entry to run.
  */
 fun emote(entity: Entity, emote: Emotes) {
-    entity.animate(emote.animation)
+    entity.animate(emote.animation?.let { Animation(it) })
 }
 
 /**
