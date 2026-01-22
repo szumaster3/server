@@ -103,7 +103,7 @@ class MageOfZamorakDialogue(player: Player? = null) : Dialogue(player) {
                     223 -> {
                         end()
                         setStage(2)
-                        addItemOrDrop(player, ORBS[0].id, 1)
+                        addItemOrDrop(player, ORBS[0], 1)
                         npc("Here, take this scrying orb.", "I have cast a standard cypher spell upon it, so that it", "will absorb mystical energies that it is exposed to.")
                     }
                     30 -> end()
@@ -111,19 +111,19 @@ class MageOfZamorakDialogue(player: Player? = null) : Dialogue(player) {
                     41 -> end()
                 }
                 2 -> when (stage) {
-                    0 -> {
-                        if (!player.hasItem(ORBS[0]) && !inInventory(player, ORBS[1].id)) {
-                            player("Uh...", "No...", "I kinda lost that orb thingy that you gave me.").also { stage++ }
-                        }
-                        if (!inInventory(player, (ORBS[1].id))) {
-                            player("No...", "Actually, I had something I wanted to ask you...").also { stage = 3 }
-                        } else {
-                            player("Yes I have! I've got it right here!").also { stage = 50 }
-                        }
+                    0 -> if (!inInventory(player, ORBS[0]) && !inInventory(player, ORBS[1])) {
+                        player("Uh...", "No...", "I kinda lost that orb thingy that you gave me.")
+                        stage++
+                    } else if (!inInventory(player, ORBS[1])) {
+                        player("No...", "Actually, I had something I wanted to ask you...")
+                        stage = 3
+                    } else {
+                        player("Yes I have! I've got it right here!")
+                        stage = 50
                     }
                     1 -> {
                         end()
-                        addItemOrDrop(player, ORBS[0].id, 1)
+                        addItemOrDrop(player, ORBS[0], 1)
                         npc("What?", "Incompetent fool. Take this.", "And do not make me regret allying myself with you.")
                     }
                     3 -> npc("I assume the task to be self-explanatory.", "What is it you wish to know?").also { stage++ }
@@ -138,7 +138,7 @@ class MageOfZamorakDialogue(player: Player? = null) : Dialogue(player) {
                     50 -> npc("Excellent.", "Give it here, and I shall examine the findings.", "Speak to me in a small while.").also { stage++ }
                     51 -> {
                         setStage(3)
-                        player.inventory.remove(ORBS[1])
+                        removeItem(player, ORBS[1])
                         end()
                     }
                 }
@@ -192,6 +192,6 @@ class MageOfZamorakDialogue(player: Player? = null) : Dialogue(player) {
     fun getStage(): Int = getVarp(player, Vars.VARP_ENTER_THE_ABYSS_PROGRESS_492)
 
     companion object {
-        private val ORBS = arrayOf(Item(Items.SCRYING_ORB_5519), Item(Items.SCRYING_ORB_5518))
+        private val ORBS = intArrayOf(Items.SCRYING_ORB_5519, Items.SCRYING_ORB_5518)
     }
 }

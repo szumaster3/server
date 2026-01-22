@@ -52,17 +52,19 @@ object EssenceTeleport {
                     0 -> player.graphics(TELEPORT_GFX)
                     1 -> {
                         if (getStage(player) == 2 && player.inventory.contains(Items.SCRYING_ORB_5519, 1)) {
-                            val item = player.inventory[player.inventory.getSlot(Item(Items.SCRYING_ORB_5519))]
+                            val slot = player.inventory.getSlot(Item(Items.SCRYING_ORB_5519))
+                            val item = if (slot >= 0) player.inventory[slot] else null
                             if (item != null) {
                                 if (item.charge == 1000) {
                                     player.savedData.globalData.resetAbyss()
                                 }
                                 val wizard = Wizard.forNPC(npc.id)
-                                if (!player.savedData.globalData.hasAbyssCharge(wizard.ordinal)) {
-                                    player.savedData.globalData.setAbyssCharge(wizard.ordinal)
-                                    item.charge = item.charge + 1
+                                val abyssIndex = wizard.ordinal - 1
+                                if (abyssIndex in 0..3 && !player.savedData.globalData.hasAbyssCharge(abyssIndex)) {
+                                    player.savedData.globalData.setAbyssCharge(abyssIndex)
+                                    item.charge++
                                     if (item.charge == 1003) {
-                                        player.sendMessage("Your scrying orb has absorbed enough teleport information.")
+                                        sendMessage(player, "Your scrying orb has absorbed enough teleport information.")
                                         removeItem(player, Items.SCRYING_ORB_5519)
                                         addItem(player, Items.SCRYING_ORB_5518)
                                     }
