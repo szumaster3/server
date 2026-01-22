@@ -1,8 +1,6 @@
 package content.region.misthalin.lumbridge.quest.lost_tribe.cutscene
 
-import core.api.animate
-import core.api.face
-import core.api.finishQuest
+import core.api.*
 import core.game.activity.Cutscene
 import core.game.component.Component
 import core.game.dialogue.FaceAnim
@@ -28,6 +26,8 @@ class LostTribeCutscene(
         addNPC(MISTAG, 8, 17, Direction.NORTH)
         addNPC(URTAG, 8, 15, Direction.NORTH)
         addNPC(SIGMUND, 13, 22, Direction.NORTH_WEST)
+        val obj = getObject(7, 17)!!
+        addScenery(36844, obj.location)
     }
 
     override fun runStage(stage: Int) {
@@ -87,6 +87,7 @@ class LostTribeCutscene(
 
             8 -> {
                 animate(getNPC(DUKE)!!, Emotes.BOW.animation)
+                getNPC(URTAG)!!.faceLocation(getNPC(DUKE)!!.location)
                 animate(getNPC(URTAG)!!, URTAG_BOW_ANIM)
                 dialogueUpdate(
                     DUKE,
@@ -139,6 +140,7 @@ class LostTribeCutscene(
             }
 
             15 -> {
+                player.faceLocation(getNPC(URTAG)!!.location)
                 dialogueUpdate(
                     URTAG,
                     FaceAnim.OLD_NORMAL,

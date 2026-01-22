@@ -46,6 +46,7 @@ class DarkZone : MapZone("Dark zone", true), EventHook<core.game.event.Event> {
         register(FALADOR_MOLE_LAIR_6992)
         register(FALADOR_MOLE_LAIR_6993)
         register(LUMBRIDGE_DUNGEON_12949)
+        register(LUMBRIDGE_DUNGEON_12950)
         register(LUMBRIDGE_DUNGEON_12693)
         register(TEARS_OF_GUTHIX_12948)
         register(DORGESHUUN_MINE_13206)
@@ -56,6 +57,7 @@ class DarkZone : MapZone("Dark zone", true), EventHook<core.game.event.Event> {
         register(DORGESH_KAAN_SOUTH_DUNGEON_10833)
         register(TEMPLE_OF_IKOV_10648)
         DORGESHUUN_MINE_13206.addException(ZoneBorders(3310, 9601, 3327, 9656))
+        LUMBRIDGE_DUNGEON_12950.addException(ZoneBorders(3208, 9615, 3220, 9626))
     }
 
     override fun continueAttack(entity: Entity, target: Node, style: CombatStyle, message: Boolean): Boolean =
@@ -66,7 +68,7 @@ class DarkZone : MapZone("Dark zone", true), EventHook<core.game.event.Event> {
         if (target is Item) {
             val s = LightSources.forLitId(target.id)
             if (s != null) {
-                val name: String = option.name.toLowerCase()
+                val name: String = option.name.lowercase()
                 val itemName = getItemName(s.litId).lowercase()
                 if (name == "drop") {
                     (e as Player).packetDispatch.sendMessage("Dropping the $itemName would leave you without a light source.")
@@ -106,9 +108,9 @@ class DarkZone : MapZone("Dark zone", true), EventHook<core.game.event.Event> {
     }
 
 
-    override fun leave(entity: Entity, logout: Boolean): Boolean {
-        if (entity is Player) entity.interfaceManager.closeOverlay()
-        entity.unhook(this)
+    override fun leave(e: Entity, logout: Boolean): Boolean {
+        if (e is Player) e.interfaceManager.closeOverlay()
+        e.unhook(this)
         return true
     }
 
@@ -166,6 +168,7 @@ class DarkZone : MapZone("Dark zone", true), EventHook<core.game.event.Event> {
         private val FALADOR_MOLE_LAIR_6993 = getRegionBorders(Regions.FALADOR_MOLE_LAIR_6993)
         private val SKAVID_CAVE_10131 = getRegionBorders(Regions.SKAVID_CAVE_10131)
         private val LUMBRIDGE_DUNGEON_12949 = getRegionBorders(Regions.LUMBRIDGE_DUNGEON_12949)
+        private val LUMBRIDGE_DUNGEON_12950 = getRegionBorders(12950)
         private val LUMBRIDGE_DUNGEON_12693 = getRegionBorders(Regions.LUMBRIDGE_DUNGEON_12693)
         private val TEARS_OF_GUTHIX_12948 = getRegionBorders(Regions.TEARS_OF_GUTHIX_12948)
         private val DORGESHUUN_MINE_13206 = getRegionBorders(Regions.DORGESHUUN_MINE_13206)

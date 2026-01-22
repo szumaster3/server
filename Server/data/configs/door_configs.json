@@ -1513,19 +1513,7 @@
   },
   {
     "id": "12348",
-    "replaceId": "10327",
-    "fence": "false",
-    "metal": "false"
-  },
-  {
-    "id": "12349",
-    "replaceId": "11382",
-    "fence": "false",
-    "metal": "false"
-  },
-  {
-    "id": "12350",
-    "replaceId": "11382",
+    "replaceId": "36845",
     "fence": "false",
     "metal": "false"
   },

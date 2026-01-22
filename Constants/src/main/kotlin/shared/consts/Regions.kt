@@ -106,6 +106,7 @@ object Regions {
     const val FALADOR_MOLE_LAIR_6993 = 6993
     const val SKAVID_CAVE_10131 = 10131
     const val LUMBRIDGE_DUNGEON_12949 = 12949
+    const val LUMBRIDGE_DUNGEON_12950 = 12950
     const val LUMBRIDGE_DUNGEON_12693 = 12693
     const val TEARS_OF_GUTHIX_12948 = 12948
     const val DORGESHUUN_MINE_13206 = 13206

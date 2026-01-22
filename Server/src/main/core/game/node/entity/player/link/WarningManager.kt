@@ -7,6 +7,7 @@ import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
 import core.game.interaction.InterfaceListener
 import core.game.node.entity.player.Player
+import core.game.world.map.Location
 import core.tools.DARK_PURPLE
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -74,6 +75,25 @@ class WarningManager : InteractionListener, InterfaceListener {
             }
             return@on true
         }
+
+        /*
+         * Handles Lumbridge cellar interaction (after quest).
+         */
+
+        on(Scenery.HOLE_6905, IntType.SCENERY, "squeeze-through") { player, _ ->
+            val warning = Warnings.LUMBRIDGE_CELLAR
+            if (!isWarningDisabled(player, warning) && player.location.x < 3221) {
+                openWarningInterface(player, warning)
+            } else {
+                WarningHandler.handleLumbridgeCellar(player)
+            }
+            return@on true
+        }
+
+        setDest(IntType.SCENERY, Scenery.HOLE_6905) { p, _ ->
+            return@setDest if(p.location.x < 3221)
+                Location.create(3219, 9618, 0) else Location.create(3222, 9618, 0)
+        }
     }
 
     override fun defineInterfaceListeners() {
@@ -96,16 +116,15 @@ class WarningManager : InteractionListener, InterfaceListener {
     private fun handleInterfaceButton(player: Player, warning: Warnings, buttonId: Int) {
         closeOverlay(player)
         closeInterface(player)
-        when (buttonId) {
-            17 -> confirmWarning(player, warning)
-            18 -> warning.action(player)
-            19, 20, 28 -> toggleWarning(player, warning)
-        }
-    }
 
-    private fun confirmWarning(player: Player, warning: Warnings) {
-        warning.action(player)
-//        incrementWarning(player, warning)
+        when (buttonId) {
+            17, 18 -> {
+                warning.action(player)
+            }
+            19, 20, 28 -> {
+                toggleWarning(player, warning)
+            }
+        }
     }
 
     private fun handleSceneryInteraction(player: Player, warning: Warnings, node: core.game.node.scenery.Scenery) {
@@ -143,9 +162,6 @@ class WarningManager : InteractionListener, InterfaceListener {
         fun isWarningDisabled(player: Player, warning: Warnings): Boolean =
             getVarbit(player, warning.varbit) == 7
 
-        private fun isWarningUnlocked(player: Player, warning: Warnings): Boolean =
-            getVarbit(player, warning.varbit) >= 6
-
         private fun incrementWarning(player: Player, warning: Warnings) {
             val current = getVarbit(player, warning.varbit)
             val next = (current + 1).coerceAtMost(6)
@@ -165,7 +181,7 @@ class WarningManager : InteractionListener, InterfaceListener {
         fun toggleWarning(player: Player, warning: Warnings) {
             val current = getVarbit(player, warning.varbit)
             val (newValue, message) = if (current == 7) {
-                6 to "You have toggled this warning screen on. You will see this interface again."
+                6 to "You have enabled this warning screen. You will see this again."
             } else {
                 7 to "You have toggled this warning screen off. You will no longer see it."
             }

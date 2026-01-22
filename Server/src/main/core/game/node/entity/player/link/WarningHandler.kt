@@ -171,4 +171,21 @@ object WarningHandler {
         }
     }
 
+    /*
+     * Handles Lumbridge cellar warning interaction.
+     */
+
+    fun handleLumbridgeCellar(player : Player) {
+        val targetLocation: core.game.world.map.Location
+        val direction: core.game.world.map.Direction
+        if (player.location.x >= 3221) {
+            targetLocation = core.game.world.map.Location.create(3219, 9618, 0)
+            direction = core.game.world.map.Direction.WEST
+        } else {
+            targetLocation = core.game.world.map.Location.create(3222, 9618, 0)
+            direction = core.game.world.map.Direction.EAST
+        }
+        sendMessage(player, "You squeeze through the hole.")
+        core.api.forceMove(player, player.location, targetLocation, 0, 90, direction, 10578)
+    }
 }

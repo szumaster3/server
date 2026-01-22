@@ -5814,7 +5814,7 @@ object Animations {
     const val ANIMATION_5997 = 5997
     const val ANIMATION_5998 = 5998
     const val ANIMATION_5999 = 5999
-    const val ANIMATION_6000 = 6000
+    const val URTAG_BOW_ANIM_6000 = 6000
     const val ANIMATION_6001 = 6001
     const val ANIMATION_6002 = 6002
     const val ANIMATION_6003 = 6003

@@ -1,5 +1,6 @@
 package content.region.misthalin.lumbridge.plugin.cellar
 
+import core.api.forceMove
 import core.api.sendMessage
 import core.cache.def.impl.SceneryDefinition
 import core.game.interaction.OptionHandler
@@ -22,7 +23,6 @@ class LumbridgeCellarPlugin : OptionHandler() {
     override fun newInstance(arg: Any?): Plugin<Any> {
         SceneryDefinition.forId(6899).handlers["option:squeeze-through"] = this
         SceneryDefinition.forId(6898).handlers["option:squeeze-through"] = this
-        SceneryDefinition.forId(6905).handlers["option:squeeze-through"] = this
         SceneryDefinition.forId(6912).handlers["option:squeeze-through"] = this
         SceneryDefinition.forId(5948).handlers["option:jump-across"] = this
         SceneryDefinition.forId(5949).handlers["option:jump-across"] = this
@@ -40,36 +40,25 @@ class LumbridgeCellarPlugin : OptionHandler() {
 
     override fun handle(player: Player, node: Node, option: String): Boolean {
         when (option) {
-
             "squeeze-through" -> {
+
                 val targetLocation: Location
                 val direction: Direction
 
-                when (node.id) {
-                    6912 -> {
-                        if (node.location.y == 9603) {
-                            targetLocation = Location.create(3224, 9601, 0)
-                            direction = Direction.SOUTH
-                        } else {
-                            targetLocation = Location.create(3224, 9603, 0)
-                            direction = Direction.NORTH
-                        }
+                if (node.id == shared.consts.Scenery.HOLE_6912) {
+                    if (node.location.y == 9603) {
+                        targetLocation = Location.create(3224, 9601, 0)
+                        direction = Direction.SOUTH
+                    } else {
+                        targetLocation = Location.create(3224, 9603, 0)
+                        direction = Direction.NORTH
                     }
-
-                    else -> {
-                        if (player.location.x >= 3221) {
-                            targetLocation = Location.create(3219, 9618, 0)
-                            direction = Direction.WEST
-                        } else {
-                            targetLocation = Location.create(3222, 9618, 0)
-                            direction = Direction.EAST
-                        }
-                    }
+                } else {
+                    return false
                 }
 
                 sendMessage(player, "You squeeze through the hole.")
-                ForceMovement.run(player, player.location, targetLocation, ANIMATION, ANIMATION, direction, 20)
-                    .endAnimation = Animation.RESET
+                forceMove(player, player.location, targetLocation, 30, 60, direction, 10578)
                 return true
             }
 
@@ -225,7 +214,6 @@ class LumbridgeCellarPlugin : OptionHandler() {
     }
      */
     companion object {
-        private val ANIMATION = Animation(Animations.DUCK_UNDER_2240)
         private val JUMP_ANIMATION = Animation(Animations.HUMAN_JUMP_SHORT_GAP_741)
     }
 }
