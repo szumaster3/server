@@ -8,6 +8,7 @@ import core.game.interaction.QueueStrength
 import core.game.node.entity.impl.Projectile
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.link.diary.DiaryType
+import core.game.node.entity.player.link.emote.Emotes
 import core.game.system.task.Pulse
 import core.game.world.map.Location
 import core.game.world.update.flag.context.Animation
@@ -53,44 +54,18 @@ class WizardTowerListener : InteractionListener {
          */
 
         on(Scenery.RAILING_37668, IntType.SCENERY, "taunt-through") { player, _ ->
-            val demon = findLocalNPC(player, NPCs.LESSER_DEMON_82)
-            if (demon == null) {
-                sendMessage(player, "No demon is nearby to taunt.")
-                return@on true
-            }
-
+            val demon = findLocalNPC(player, NPCs.LESSER_DEMON_82) ?: return@on true
             if(demon.inCombat()) {
                 sendMessage(player, "You can't do that right now.")
                 return@on true
             }
-
-            val animDelay = animationDuration(RASPBERRY_EMOTE)
-            queueScript(player, 1, QueueStrength.SOFT) { stage: Int ->
-                when(stage) {
-                    0 -> {
-                        player.walkingQueue.reset()
-                        demon.walkingQueue.reset()
-                        player.face(demon)
-                        demon.face(player)
-                        return@queueScript delayScript(player, 1)
-                    }
-
-                    1 -> {
-                        player.animate(RASPBERRY_EMOTE)
-                        sendChat(demon, "Graaaagh!")
-                        sendMessage(player, "You taunt the demon, making it growl.")
-                        return@queueScript delayScript(player, animDelay)
-                    }
-                    2 -> {
-                        finishDiaryTask(player, DiaryType.LUMBRIDGE, 1, 13)
-                        return@queueScript stopExecuting(player)
-                    }
-
-                    else -> return@queueScript stopExecuting(player)
-                }
-
-            }
-
+            forceWalk(demon, player.location, "smart")
+            face(player, demon, 3)
+            sendChat(demon, "Graaaagh!")
+            sendMessage(player, "You taunt the demon, making it growl.")
+            face(demon, player, 3)
+            finishDiaryTask(player, DiaryType.LUMBRIDGE, 1, 13)
+            emote(player, Emotes.RASPBERRY)
             return@on true
         }
 

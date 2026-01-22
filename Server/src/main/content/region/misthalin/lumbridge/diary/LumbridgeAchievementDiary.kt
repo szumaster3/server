@@ -47,22 +47,20 @@ class LumbridgeAchievementDiary : DiaryEventHookBase(DiaryType.LUMBRIDGE) {
             const val AL_KHARID_PASS_THROUGH_GATE = 4
             const val CHAMPIONS_GUILD_MINE_CLAY = 5
             const val BARBARIAN_VILLAGE_MAKE_SOFT_CLAY = 6
-            const val BARBARIAN_VILLAGE_MAKE_A_POT = 7
-            const val BARBARIAN_VILLAGE_FIRE_A_POT = 8
-            const val DRAYNOR_ENTER_SPOOKY_MANSION_COURTYARD = 9
-            const val DRAYNOR_VISIT_MARKET = 10
-            const val DRAYNOR_TALK_TO_TOWNCRIER_ABOUT_RULES = 11
-            const val WIZARDS_TOWER_CLIMB_TO_TOP = 12
-            const val SWAMP_MINE_COPPER_ORE = 13
-            const val SWAMP_CATCH_SHRIMPS = 14
-            const val SWAMP_FISHING_TUTOR_GET_A_JOB = 15
-            const val BROWSE_FATHER_AERECK_GRAVES = 16
-            const val CHURCH_PLAY_ORGAN = 17
-            const val CHURCH_RING_THE_BELL = 18
-            const val LUMBRIDGE_GUIDE_TALK_ABOUT_SOS = 19
-            const val BROWSE_GENERAL_STORE = 20
-            const val VISIT_FRED_THE_FARMER = 21
-            const val WINDMILL_MAKE_FLOUR = 22
+            const val BARBARIAN_VILLAGE_FIRE_A_POT = 7
+            const val DRAYNOR_ENTER_SPOOKY_MANSION_COURTYARD = 8
+            const val DRAYNOR_VISIT_MARKET = 9
+            const val DRAYNOR_TALK_TO_TOWNCRIER_ABOUT_RULES = 10
+            const val WIZARDS_TOWER_CLIMB_TO_TOP = 11
+            const val SWAMP_MINE_COPPER_ORE = 12
+            const val SWAMP_CATCH_SHRIMPS = 13
+            const val SWAMP_FISHING_TUTOR_GET_A_JOB = 14
+            const val BROWSE_FATHER_AERECK_GRAVES = 15
+            const val CHURCH_PLAY_ORGAN = 16
+            const val LUMBRIDGE_GUIDE_TALK_ABOUT_SOS = 17
+            const val BROWSE_GENERAL_STORE = 18
+            const val VISIT_FRED_THE_FARMER = 19
+            const val WINDMILL_MAKE_FLOUR = 20
         }
 
         object EasyTasks {
@@ -426,7 +424,7 @@ class LumbridgeAchievementDiary : DiaryEventHookBase(DiaryType.LUMBRIDGE) {
                         BeginnerTasks.CHURCH_PLAY_ORGAN,
                     )
                 }
-
+/*
                 if (event.target.id == Scenery.BELL_36976 && event.option == "ring") {
                     finishTask(
                         player,
@@ -434,6 +432,7 @@ class LumbridgeAchievementDiary : DiaryEventHookBase(DiaryType.LUMBRIDGE) {
                         BeginnerTasks.CHURCH_RING_THE_BELL,
                     )
                 }
+*/
             }
 
             13104 -> {

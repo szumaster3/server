@@ -1,9 +1,7 @@
 package content.global.travel
 
 import content.global.skill.magic.TeleportMethod
-import core.api.getVarp
-import core.api.isQuestComplete
-import core.api.playAudio
+import core.api.*
 import core.game.event.TeleportEvent
 import core.game.node.Node
 import core.game.node.entity.impl.Projectile
@@ -16,6 +14,7 @@ import core.game.world.GameWorld
 import core.game.world.map.Location
 import core.game.world.update.flag.context.Animation
 import core.game.world.update.flag.context.Graphics
+import core.tools.RandomFunction
 import shared.consts.*
 
 /**
@@ -35,7 +34,7 @@ object EssenceTeleport {
      */
     fun teleport(npc: NPC, player: Player) {
         if (!isQuestComplete(player, Quests.RUNE_MYSTERIES)) {
-            player.sendMessage("You need to complete Rune Mysteries to enter the Rune Essence mine.")
+            sendMessage(player, "You need to complete Rune Mysteries to enter the Rune Essence mine.")
             return
         }
 
@@ -46,23 +45,39 @@ object EssenceTeleport {
         playAudio(player, Sounds.CURSE_ALL_125, 0, 1)
         Projectile.create(npc, player, CURSE_PROJECTILE).send()
         npc.sendChat("Senventior Disthine Molenko!")
-
         GameWorld.Pulser.submit(object : Pulse(1) {
             var counter = 0
-
             override fun pulse(): Boolean {
                 when (counter++) {
                     0 -> player.graphics(TELEPORT_GFX)
                     1 -> {
+                        if (getStage(player) == 2 && player.inventory.contains(Items.SCRYING_ORB_5519, 1)) {
+                            val item = player.inventory[player.inventory.getSlot(Item(Items.SCRYING_ORB_5519))]
+                            if (item != null) {
+                                if (item.charge == 1000) {
+                                    player.savedData.globalData.resetAbyss()
+                                }
+                                val wizard = Wizard.forNPC(npc.id)
+                                if (!player.savedData.globalData.hasAbyssCharge(wizard.ordinal)) {
+                                    player.savedData.globalData.setAbyssCharge(wizard.ordinal)
+                                    item.charge = item.charge + 1
+                                    if (item.charge == 1003) {
+                                        player.sendMessage("Your scrying orb has absorbed enough teleport information.")
+                                        removeItem(player, Items.SCRYING_ORB_5519)
+                                        addItem(player, Items.SCRYING_ORB_5518)
+                                    }
+                                }
+                            }
+                        }
                         player.savedData.globalData.setEssenceTeleporter(npc.id)
                         player.graphics(TELEPORT_GFX)
-                        val loc = LOCATIONS.random()
-                        player.teleport(loc)
+                        val loc = LOCATIONS[RandomFunction.random(0, LOCATIONS.size)]
+                        teleport(player, loc)
                         player.dispatch(TeleportEvent(TeleportManager.TeleportType.TELE_OTHER, TeleportMethod.NPC, npc, loc))
                     }
+
                     2 -> {
-                        chargeScryingOrb(player, npc)
-                        player.unlock()
+                        unlock(player)
                         return true
                     }
                 }
@@ -97,43 +112,6 @@ object EssenceTeleport {
                 return false
             }
         })
-    }
-
-    /**
-     * Handles the charging of the scrying
-     * orb (enter the abyss) during teleportation
-     * to the essence mine.
-     */
-    private fun chargeScryingOrb(player: Player, npc: NPC) {
-        if (getStage(player) != 2) return
-        val wizard = Wizard.forNPC(npc.id)
-
-        val orbs = player.inventory.toArray().filter { it?.id == Items.SCRYING_ORB_5519 }
-
-        if (orbs.isEmpty()) return
-        var orbCharged = false
-
-        for (orb in orbs) {
-            if (orb == null) continue
-            if (orb.charge == 1000) player.savedData.globalData.resetAbyss()
-            if (!player.savedData.globalData.hasAbyssCharge(wizard.ordinal)) {
-                player.savedData.globalData.setAbyssCharge(wizard.ordinal)
-                orb.charge += 1
-            }
-            if (orb.charge >= 1003) {
-                orbCharged = true
-                break
-            }
-        }
-
-        if (orbCharged) {
-            for (orb in orbs) {
-                orb?.let { player.inventory.remove(it) }
-            }
-
-            player.inventory.add(Item(Items.SCRYING_ORB_5518))
-            player.sendMessage("Your scrying orb has absorbed enough teleport information.")
-        }
     }
 
     /**

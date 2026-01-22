@@ -3942,6 +3942,16 @@ fun unlockEmote(player: Player, emoteId: Any) {
 }
 
 /**
+ * Runs the given emote for the given entity.
+ *
+ * @param entity the entity to run the emote on.
+ * @param emote the Emotes enum entry to run.
+ */
+fun emote(entity: Entity, emote: Emotes) {
+    entity.animate(emote.animation)
+}
+
+/**
  * Check if emote is unlocked for player.
  *
  * @param player the player.

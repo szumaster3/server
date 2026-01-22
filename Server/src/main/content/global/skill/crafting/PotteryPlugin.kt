@@ -134,7 +134,7 @@ class PotteryPlugin : InteractionListener {
                                     }
                                 CraftingDefinition.Pottery.POT ->
                                     if (withinDistance(player, Location(3085, 3408, 0))) {
-                                        finishDiaryTask(player, DiaryType.LUMBRIDGE, 0, 8)
+                                        finishDiaryTask(player, DiaryType.LUMBRIDGE, 0, 7)
                                     }
                                 else -> {}
                             }
