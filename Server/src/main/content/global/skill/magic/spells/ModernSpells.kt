@@ -48,9 +48,12 @@ object ModernSpells {
     const val VULNERABILITY = 50
     const val EARTH_WAVE = 52
     const val ENFEEBLE = 53
+    const val TELEOTHER_LUMBRIDGE = 54
     const val FIRE_WAVE = 55
     const val ENTANGLE = 56
-    const val CHARGE = 58
     const val STUN = 57
+    const val CHARGE = 58
+    const val TELEOTHER_FALADOR = 59
+    const val TELEOTHER_CAMELOT = 62
     const val TELEBLOCK = 63
 }
