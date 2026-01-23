@@ -19,15 +19,9 @@ import shared.consts.Scenery
 class UnderwallTunnelShortcut : InteractionListener {
 
     companion object {
-
-        private val WEST_SIDE = Location(3138, 3516, 0)
-        private val EAST_SIDE = Location(3144, 3514, 0)
-
-        // GRAND EXCHANGE TUNNEL
-        private val OBJECTS = intArrayOf(
-            Scenery.UNDERWALL_TUNNEL_9311,
-            Scenery.UNDERWALL_TUNNEL_9312
-        )
+        private val START_LOCATION: Location = Location(3144, 3514, 0)
+        private val EXIT_LOCATION:  Location = Location(3138, 3516, 0)
+        private val OBJECTS = intArrayOf(Scenery.UNDERWALL_TUNNEL_9311, Scenery.UNDERWALL_TUNNEL_9312)
 
         private val LOW_WEST = Location(2575, 3110, 0)
         private val LOW_EAST = Location(2577, 3110, 0)
@@ -90,34 +84,28 @@ class UnderwallTunnelShortcut : InteractionListener {
         }
 
         on(OBJECTS, IntType.SCENERY, "climb-into") { player, node ->
-
             if (getStatLevel(player, Skills.AGILITY) < 21) {
                 sendMessage(player, "You need an Agility level of at least 21 to climb under this wall.")
                 return@on true
             }
 
-            player.animate(Animation(ANIMATIONS[0]))
-            player.animate(Animation(ANIMATIONS[1]), 2)
             queueScript(player, 0, QueueStrength.STRONG) {
+                if(!finishedMoving(player)) restartScript(player)
 
-                val (destination, direction) = when (node.id) {
-                    Scenery.UNDERWALL_TUNNEL_9311 -> EAST_SIDE to Direction.EAST
-                    Scenery.UNDERWALL_TUNNEL_9312 -> WEST_SIDE to Direction.WEST
+                player.animate(Animation(ANIMATIONS[0]))
+
+                val (destination, direction) = when (node.id)
+                {
+                    OBJECTS[0] -> START_LOCATION to Direction.EAST
+                    OBJECTS[1] -> EXIT_LOCATION  to Direction.WEST
                     else -> return@queueScript true
                 }
-                forceMove(
-                    player,
-                    node.location,
-                    destination,
-                    30,
-                    120,
-                    direction,
-                    ANIMATIONS[1]
-                ) {
+
+                player.animate(Animation(ANIMATIONS[1]), 2)
+                forceMove(player, node.location, destination, 30, 120, direction, ANIMATIONS[1])
+                {
                     player.animate(Animation(ANIMATIONS[2]))
-                    if (!hasDiaryTaskComplete(player, DiaryType.VARROCK, 1, 8)) {
-                        finishDiaryTask(player, DiaryType.VARROCK, 1, 8)
-                    }
+                    finishDiaryTask(player, DiaryType.VARROCK, 1, 8)
                 }
 
                 return@queueScript stopExecuting(player)
@@ -137,10 +125,9 @@ class UnderwallTunnelShortcut : InteractionListener {
         }
 
         setDest(IntType.SCENERY, OBJECTS, "climb-into") { _, node ->
-            when (node.id) {
-                Scenery.UNDERWALL_TUNNEL_9311 -> WEST_SIDE
-                Scenery.UNDERWALL_TUNNEL_9312 -> EAST_SIDE
-                else -> node.location
+            return@setDest when (node.id) {
+                Scenery.UNDERWALL_TUNNEL_9312 -> Location(3144, 3514, 0)
+                else -> Location(3138, 3516, 0)
             }
         }
     }
