@@ -22,10 +22,11 @@ class EnchantedGemPlugin : InteractionListener {
          */
 
         on(Items.ENCHANTED_GEM_4155, IntType.ITEM, "activate") { player, _ ->
+            val s = getSlayerMaster(player)
             if (!SlayerManager.getInstance(player).hasStarted())
                 sendMessage(player, "You try to activate the gem...")
             else
-                openDialogue(player, EnchantedGemDialogue())
+                openDialogue(player, EnchantedGemDialogue(), s)
 
             return@on true
         }
@@ -43,7 +44,7 @@ private class EnchantedGemDialogue : DialogueFile() {
         buttonID: Int,
     ) {
         npc = getSlayerMaster(player!!)
-        val expression = if (npc == NPC(NPCs.CHAELDAR_1598)) FaceAnim.OLD_NORMAL else FaceAnim.HALF_ASKING
+        val expression = if (npc?.id == NPCs.CHAELDAR_1598) FaceAnim.OLD_NORMAL else FaceAnim.HALF_ASKING
         when (stage) {
             0 -> npcl(expression, "Hello there ${player!!.username}, what can I help you with?").also { stage++ }
             1 ->
