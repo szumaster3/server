@@ -69,41 +69,38 @@ class LarxusDialogueFile(private val challengeStart: Boolean = false, private va
 
         when (stage) {
             0 -> {
-                face(findNPC(NPCs.LARXUS_3050)!!, player!!, 2)
-                if (entry?.varbitId != null && getVarbit(player!!, entry.varbitId) == 1) {
-                    removeItem(player!!, scrollId)
-                    npc(FaceAnim.NEUTRAL, "You've already defeated this Champion, the challenge is", "void.")
-                    stage = END_DIALOGUE
-                    return
+                val npc = findNPC(NPCs.LARXUS_3050) ?: return
+                val player = player ?: return
+
+                face(npc, player, 2)
+
+                entry?.varbitId?.let { varbitId ->
+                    if (getVarbit(player, varbitId) == 1) {
+                        end()
+                        removeItem(player, scrollId)
+                        npc(FaceAnim.NEUTRAL, "You've already defeated this Champion, the challenge is", "void.")
+                        return
+                    }
                 }
 
-                val prefix = "So you want to accept the challenge huh? Well there are some specific rules for these Champion fights. For"
-                val scrollMessage = when (scrollId) {
-                    // Earth Warrior.
-                    Items.CHAMPION_SCROLL_6798 -> "$prefix this fight you're not allowed to use any Prayer's. Do you still want to proceed?"
-                    // Ghoul.
-                    Items.CHAMPION_SCROLL_6799 -> "$prefix this fight you're only allowed to take Weapons, no other items are allowed. Do you still want to proceed?"
-                    // Giant.
-                    Items.CHAMPION_SCROLL_6800 -> "$prefix this fight you're only allowed to use Melee attacks, no Ranged or Magic. Do you still want to proceed?"
-                    // Goblin.
-                    Items.CHAMPION_SCROLL_6801 -> "$prefix this fight you're only allowed to use Magic attacks, no Melee or Ranged. Do you still want to proceed?"
-                    // Hobgoblin.
-                    Items.CHAMPION_SCROLL_6802 -> "$prefix this fight you're not allowed to use any Melee attacks. Do you still want to proceed?"
-                    // Imp.
-                    Items.CHAMPION_SCROLL_6803 -> "$prefix this fight you're not allowed to use any Special Attacks. Do you still want to proceed?"
-                    // Jogre.
-                    Items.CHAMPION_SCROLL_6804 -> "$prefix this fight you're not allowed to use any Ranged attacks. Do you still want to proceed?"
-                    // Lesser Demon.
-                    Items.CHAMPION_SCROLL_6805 -> "$prefix this fight you're allowed to use any Weapons or Armour. Do you still want to proceed?"
-                    // Skeleton.
-                    Items.CHAMPION_SCROLL_6806 -> "$prefix this fight you're only allowed to use Ranged attacks, no Melee or Magic. Do you still want to proceed?"
-                    // Zombie.
-                    Items.CHAMPION_SCROLL_6807 -> "$prefix this fight you're not allowed to use any Magic attacks. Do you still want to proceed?"
+                val prefix = "So you want to accept the challenge huh? Well there are some specific rules for these Champion fights. For this fight you're"
+                val question = "Do you still want to proceed?"
 
-                    else -> null
+                val scrollMessages = mapOf(
+                    Items.CHAMPION_SCROLL_6798 to "$prefix not allowed to use any Prayer's. $question",     // Earth Warrior
+                    Items.CHAMPION_SCROLL_6799 to "$prefix only allowed to take Weapons, no other items are allowed. $question", // Ghoul
+                    Items.CHAMPION_SCROLL_6800 to "$prefix only allowed to use Melee attacks, no Ranged or Magic. $question", // Giant
+                    Items.CHAMPION_SCROLL_6801 to "$prefix only allowed to use Magic attacks, no Melee or Ranged. $question", // Goblin
+                    Items.CHAMPION_SCROLL_6802 to "$prefix not allowed to use any Melee attacks. $question", // Hobgoblin
+                    Items.CHAMPION_SCROLL_6803 to "$prefix not allowed to use any Special Attacks. $question", // Imp
+                    Items.CHAMPION_SCROLL_6804 to "$prefix not allowed to use any Ranged attacks. $question", // Jogre
+                    Items.CHAMPION_SCROLL_6805 to "$prefix allowed to use any Weapons or Armour. $question", // Lesser Demon
+                    Items.CHAMPION_SCROLL_6806 to "$prefix only allowed to use Ranged attacks, no Melee or Magic. $question", // Skeleton
+                    Items.CHAMPION_SCROLL_6807 to "$prefix not allowed to use any Magic attacks. $question" // Zombie
+                )
+                scrollMessages[scrollId]?.let { message ->
+                    npcl(FaceAnim.NEUTRAL, message)
                 }
-
-                scrollMessage?.let { npcl(FaceAnim.NEUTRAL, it) }
                 stage = 1
             }
             1 -> showTopics(
