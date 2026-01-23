@@ -96,8 +96,8 @@ class WhatLiesBelow : Quest(Quests.WHAT_LIES_BELOW, 136, 135, 1) {
             60 -> {
                 line(player, "Rat, a trader in Varrock, has asked me to help him with a task.", line++, true)
                 line(player, "Surok, a Wizard in Varrock, has asked me to complete a task for him.", line++, true)
-                line(player, "I need to kill the outlaws west of Varrock so that I can collect", line++, true)
-                line(player, "5 of Rat's papers.", line++, true)
+                line(player, "I need to kill the outlaws west of Varrock so that", line++, true)
+                line(player, "I can collect 5 of Rat's papers.", line++, true)
                 line(player, "I have delivered Rat's folder to him.", line++, true)
                 line(player, "Perhaps I should speak to him again.", line++, true)
                 line(player, "I need to deliver Rat's letter to !!Surok Magis?? in Varrock.", line++, true)
@@ -108,16 +108,15 @@ class WhatLiesBelow : Quest(Quests.WHAT_LIES_BELOW, 136, 135, 1) {
                 line(player, "in Varrock with an empty bowl.", line++, true)
                 line(player, "I need to deliver Surok's letter to !!Rat?? who is", line++, true)
                 line(player, "waiting for me south of Varrock.", line++, true)
-                line(player, "I should speak to !!Rat?? again; he is waiting for me", line++)
-                line(player, "south of Varrock.", line++)
+                line(player, "I should speak to !!Rat?? again; he is waiting for me south of Varrock.", line++, true)
                 line(player, "I need to speak to !!Zaff?? of !!Zaff's Staffs?? in Varrock.", line++)
             }
 
             70 -> {
                 line(player, "Rat, a trader in Varrock, has asked me to help him with a task.", line++, true)
                 line(player, "Surok, a Wizard in Varrock, has asked me to complete a task for him.", line++, true)
-                line(player, "I need to kill the outlaws west of Varrock so that I can collect", line++, true)
-                line(player, "5 of Rat's papers.", line++, true)
+                line(player, "I need to kill the outlaws west of Varrock so that", line++, true)
+                line(player, "I can collect 5 of Rat's papers.", line++, true)
                 line(player, "I have delivered Rat's folder to him.", line++, true)
                 line(player, "Perhaps I should speak to him again.", line++, true)
                 line(player, "I need to deliver Rat's letter to !!Surok Magis?? in Varrock.", line++, true)
@@ -128,8 +127,7 @@ class WhatLiesBelow : Quest(Quests.WHAT_LIES_BELOW, 136, 135, 1) {
                 line(player, "in Varrock with an empty bowl.", line++, true)
                 line(player, "I need to deliver Surok's letter to !!Rat?? who is", line++, true)
                 line(player, "waiting for me south of Varrock.", line++, true)
-                line(player, "I should speak to !!Rat?? again; he is waiting for me", line++, true)
-                line(player, "south of Varrock.", line++, true)
+                line(player, "I should speak to !!Rat?? again; he is waiting for me south of Varrock.", line++, true)
                 line(player, "I need to speak to !!Zaff?? of !!Zaff's Staffs?? in Varrock.", line++, true)
                 line(player, "I need to tell !!Surok?? in Varrock that he is under arrest.", line++)
             }
@@ -137,8 +135,8 @@ class WhatLiesBelow : Quest(Quests.WHAT_LIES_BELOW, 136, 135, 1) {
             80, 90 -> {
                 line(player, "Rat, a trader in Varrock, has asked me to help him with a task.", line++, true)
                 line(player, "Surok, a Wizard in Varrock, has asked me to complete a task for him.", line++, true)
-                line(player, "I need to kill the outlaws west of Varrock so that I can collect", line++, true)
-                line(player, "5 of Rat's papers.", line++, true)
+                line(player, "I need to kill the outlaws west of Varrock so that", line++, true)
+                line(player, "I can collect 5 of Rat's papers.", line++, true)
                 line(player, "I have delivered Rat's folder to him.", line++, true)
                 line(player, "Perhaps I should speak to him again.", line++, true)
                 line(player, "I need to deliver Rat's letter to !!Surok Magis?? in Varrock.", line++, true)
