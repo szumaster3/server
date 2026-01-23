@@ -54,9 +54,9 @@ class WhatLiesBelowListener : InteractionListener {
 
         on(QUEST_ITEMS, IntType.ITEM, "read") { player, node ->
             when (node.id) {
-                11003 -> sendMessage(player, "The folder is empty at the moment so there is nothing inside to read!")
-                11008, 11007, 11006 -> sendDialogueLines(player, "The piece of papers appears to contain lots of facts and figures.", "They look like accounts and lists of items. You're", "not sure what they all mean.")
-                11009, 11010 -> {
+                Items.AN_EMPTY_FOLDER_11003 -> sendMessage(player, "The folder is empty at the moment so there is nothing inside to read!")
+                Items.RATS_PAPER_11008, Items.FULL_FOLDER_11007, Items.USED_FOLDER_11006 -> sendDialogueLines(player, "The piece of papers appears to contain lots of facts and figures.", "They look like accounts and lists of items. You're", "not sure what they all mean.")
+                Items.RATS_LETTER_11009, Items.SUROKS_LETTER_11010 -> {
                     sendMessage(player, "You read the letter.")
                     openInterface(player, if (node.id == Items.RATS_LETTER_11009) Components.SUROK_LETTER1_249 else  Components.SUROK_LETTER2_250)
                 }
@@ -120,14 +120,12 @@ class WhatLiesBelowListener : InteractionListener {
         const val CHAOS_RUNES = Items.CHAOS_RUNE_562
         const val CHAOS_TALISMAN = Items.CHAOS_TALISMAN_1452
         const val CHAOS_TIARA = Items.CHAOS_TIARA_5543
-        const val BOWL = Items.BOWL_1923
-        const val SIN_KETH_DIARY = Items.SINKETHS_DIARY_11002
         const val EMPTY_FOLDER = Items.AN_EMPTY_FOLDER_11003
         const val USED_FOLDER = Items.USED_FOLDER_11006
         const val FULL_FOLDER = Items.FULL_FOLDER_11007
         const val RATS_PAPER = Items.RATS_PAPER_11008
-        const val RATS_LETTER = Items.RATS_LETTER_11009
-        const val SUROKS_LETTER = Items.SUROKS_LETTER_11010
+        private const val RATS_LETTER = Items.RATS_LETTER_11009
+        private const val SUROKS_LETTER = Items.SUROKS_LETTER_11010
         const val WAND = Items.WAND_11012
         const val INFUSED_WAND = Items.INFUSED_WAND_11013
         const val BEACON_RING = Items.BEACON_RING_11014

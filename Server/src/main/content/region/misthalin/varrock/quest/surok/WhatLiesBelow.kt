@@ -84,8 +84,10 @@ class WhatLiesBelow : Quest(Quests.WHAT_LIES_BELOW, 136, 135, 1) {
                 line(player, "I need to talk to Surok about the secret he has for me.", line++, true)
                 line(player, "I need to infuse the metal wand with chaos runes at the Chaos Altar.", line++, true)
                 line(player, "I also need to find or buy an empty bowl.", line++, true)
-                line(player, "I need to take the glowing wand I have created back to Surok in Varrock with an empty bowl.", line++, true)
-                line(player, "I need to deliver Surok's letter to !!Rat?? who is waiting for me south of Varrock.", line++, true)
+                line(player, "I need to take the glowing wand I have created back to Surok in Varrock", line++, true)
+                line(player, "with an empty bowl.", line++, true)
+                line(player, "I need to deliver Surok's letter to !!Rat?? who is waiting for me south", line++, true)
+                line(player, "of Varrock.", line++, true)
                 line(player, "I should speak to !!Rat?? again;", line++)
                 line(player, "he is waiting for me south of Varrock.", line++)
             }
@@ -101,8 +103,10 @@ class WhatLiesBelow : Quest(Quests.WHAT_LIES_BELOW, 136, 135, 1) {
                 line(player, "I need to talk to Surok about the secret he has for me.", line++, true)
                 line(player, "I need to infuse the metal wand with chaos runes at the Chaos Altar.", line++, true)
                 line(player, "I also need to find or buy an empty bowl.", line++, true)
-                line(player, "I need to take the glowing wand I have created back to Surok in Varrock with an empty bowl.", line++, true)
-                line(player, "I need to deliver Surok's letter to !!Rat?? who is waiting for me south of Varrock.", line++, true)
+                line(player, "I need to take the glowing wand I have created back to Surok in Varrock", line++, true)
+                line(player, "with an empty bowl.", line++, true)
+                line(player, "I need to deliver Surok's letter to !!Rat?? who is waiting for me south", line++, true)
+                line(player, "of Varrock.", line++, true)
                 line(player, "I should speak to !!Rat?? again; he is waiting for me south of Varrock.", line++, true)
                 line(player, "I need to speak to !!Zaff?? of !!Zaff's Staffs?? in Varrock.", line++)
             }
@@ -118,8 +122,10 @@ class WhatLiesBelow : Quest(Quests.WHAT_LIES_BELOW, 136, 135, 1) {
                 line(player, "I need to talk to Surok about the secret he has for me.", line++, true)
                 line(player, "I need to infuse the metal wand with chaos runes at the Chaos Altar.", line++, true)
                 line(player, "I also need to find or buy an empty bowl.", line++, true)
-                line(player, "I need to take the glowing wand I have created back to Surok in Varrock with an empty bowl.", line++, true)
-                line(player, "I need to deliver Surok's letter to !!Rat?? who is waiting for me south of Varrock.", line++, true)
+                line(player, "I need to take the glowing wand I have created back to Surok in Varrock", line++, true)
+                line(player, "with an empty bowl.", line++, true)
+                line(player, "I need to deliver Surok's letter to !!Rat?? who is waiting for me south", line++, true)
+                line(player, "of Varrock.", line++, true)
                 line(player, "I should speak to !!Rat?? again; he is waiting for me south of Varrock.", line++, true)
                 line(player, "I need to speak to !!Zaff?? of !!Zaff's Staffs?? in Varrock.", line++, true)
                 line(player, "I need to tell !!Surok?? in Varrock that he is under arrest.", line++)
@@ -136,13 +142,17 @@ class WhatLiesBelow : Quest(Quests.WHAT_LIES_BELOW, 136, 135, 1) {
                 line(player, "I need to talk to Surok about the secret he has for me.", line++, true)
                 line(player, "I need to infuse the metal wand with chaos runes at the Chaos Altar.", line++, true)
                 line(player, "I also need to find or buy an empty bowl.", line++, true)
-                line(player, "I need to take the glowing wand I have created back to Surok in Varrock with an empty bowl.", line++, true)
-                line(player, "I need to deliver Surok's letter to !!Rat?? who is waiting for me south of Varrock.", line++, true)
+                line(player, "I need to take the glowing wand I have created back to Surok in Varrock", line++, true)
+                line(player, "with an empty bowl.", line++, true)
+                line(player, "I need to deliver Surok's letter to !!Rat?? who is waiting for me south", line++, true)
+                line(player, "of Varrock.", line++, true)
                 line(player, "I should speak to !!Rat?? again; he is waiting for me south of Varrock.", line++, true)
                 line(player, "I need to speak to !!Zaff?? of !!Zaff's Staffs?? in Varrock.", line++, true)
                 line(player, "I need to tell !!Surok?? in Varrock that he is under arrest.", line++, true)
-                line(player, "I need to defeat !!King Roald?? in Varrock so that !!Zaff?? can remove the mind-control spell.", line++)
-                line(player, "I need to tell !!Rat?? what has happened; he is waiting for me south of Varrock.", line++)
+                line(player, "I need to defeat !!King Roald?? in Varrock so that !!Zaff?? can remove", line++, true)
+                line(player, "the mind-control spell.", line++, true)
+                line(player, "I need to tell !!Rat?? what has happened; he is waiting for me", line++)
+                line(player, "south of Varrock.", line++)
             }
 
             100 -> {
@@ -156,13 +166,17 @@ class WhatLiesBelow : Quest(Quests.WHAT_LIES_BELOW, 136, 135, 1) {
                 line(player, "I need to talk to Surok about the secret he has for me.", line++, true)
                 line(player, "I need to infuse the metal wand with chaos runes at the Chaos Altar.", line++, true)
                 line(player, "I also need to find or buy an empty bowl.", line++, true)
-                line(player, "I need to take the glowing wand I have created back to Surok in Varrock with an empty bowl.", line++, true)
-                line(player, "I need to deliver Surok's letter to !!Rat?? who is waiting for me south of Varrock.", line++, true)
+                line(player, "I need to take the glowing wand I have created back to Surok in Varrock", line++, true)
+                line(player, "with an empty bowl.", line++, true)
+                line(player, "I need to deliver Surok's letter to !!Rat?? who is waiting for me south", line++, true)
+                line(player, "of Varrock.", line++, true)
                 line(player, "I should speak to !!Rat?? again; he is waiting for me south of Varrock.", line++, true)
                 line(player, "I need to speak to !!Zaff?? of !!Zaff's Staffs?? in Varrock.", line++, true)
                 line(player, "I need to tell !!Surok?? in Varrock that he is under arrest.", line++, true)
-                line(player, "I need to defeat !!King Roald?? in Varrock so that !!Zaff?? can remove the mind-control spell.", line++, true)
-                line(player, "I need to tell !!Rat?? what has happened; he is waiting for me south of Varrock.", line++, true)
+                line(player, "I need to defeat !!King Roald?? in Varrock so that !!Zaff?? can remove", line++, true)
+                line(player, "the mind-control spell.", line++, true)
+                line(player, "I need to tell !!Rat?? what has happened; he is waiting for me", line++, true)
+                line(player, "south of Varrock.", line++, true)
                 line++
                 line(player, "<col=FF0000>QUEST COMPLETE!</col>", line++)
                 line(player, "I have been given information about the !!Chaos Tunnel??.", line++)
@@ -222,7 +236,6 @@ class WhatLiesBelow : Quest(Quests.WHAT_LIES_BELOW, 136, 135, 1) {
         const val EMPTY_FOLDER   = Items.AN_EMPTY_FOLDER_11003
         const val USED_FOLDER    = Items.USED_FOLDER_11006
         const val FULL_FOLDER    = Items.FULL_FOLDER_11007
-        const val RATS_PAPER     = Items.RATS_PAPER_11008
         const val RATS_LETTER    = Items.RATS_LETTER_11009
         const val SUROKS_LETTER  = Items.SUROKS_LETTER_11010
         const val WAND           = Items.WAND_11012
