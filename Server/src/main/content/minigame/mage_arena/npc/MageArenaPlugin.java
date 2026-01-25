@@ -25,8 +25,6 @@ public final class MageArenaPlugin extends OptionHandler {
 
     @Override
     public Plugin<Object> newInstance(Object arg) throws Throwable {
-        ClassScanner.definePlugin(MAGE_ARENA);
-        ClassScanner.definePlugin(new KolodionNPC());
         ClassScanner.definePlugin(new MageArenaNPC());
         return this;
     }
