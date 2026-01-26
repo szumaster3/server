@@ -1,9 +1,6 @@
 package content.region.kandarin.witchaven.quest.seaslug.cutscene
 
-import core.api.animate
-import core.api.face
-import core.api.sendChat
-import core.api.setQuestStage
+import core.api.*
 import core.game.activity.Cutscene
 import core.game.node.entity.player.Player
 import core.game.world.map.Direction
@@ -54,6 +51,7 @@ class HolgartCutscene(
             3 -> {
                 teleport(getNPC(NPCs.HOLGART_698)!!, 30, 36, 1)
                 addNPC(NPCs.HOLGART_4866, 30, 36, Direction.EAST)
+                playAudio(player, 3026)
                 animate(getNPC(NPCs.HOLGART_4866)!!, Animations.SEA_SLUG_HOGART_FIX_BOAT_4786)
                 timedUpdate(8)
             }

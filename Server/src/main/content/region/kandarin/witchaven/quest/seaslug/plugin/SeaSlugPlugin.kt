@@ -89,6 +89,8 @@ class SeaSlugPlugin : InteractionListener {
          */
 
         onUseWith(IntType.NPC, LIT_TORCH, SEA_SLUG) { player, _, _ ->
+            playAudio(player, 3027)
+            animate(player, Animations.SEA_SLUG_POKE_GROUND_WITH_TORCH_4793)
             sendMessage(player, "The sea slug curls up into its shell.")
             return@onUseWith true
         }
@@ -133,8 +135,9 @@ class SeaSlugPlugin : InteractionListener {
 
         on(CRANE, IntType.SCENERY, "rotate") { player, _ ->
             if (getQuestStage(player, Quests.SEA_SLUG) == 30) {
-                playAudio(player, Sounds.SLUG_CRANE_TURN_3021)
                 KennithCutscene(player).start()
+                setQuestStage(player, Quests.SEA_SLUG, 50)
+                sendMessage(player, "You rotate the crane around.")
             } else {
                 sendMessage(player, "You rotate the crane around.")
             }
@@ -177,15 +180,26 @@ class SeaSlugPlugin : InteractionListener {
          */
 
         on(SEA_SLUG, IntType.NPC, "take") { player, _ ->
+
+            if (inInventory(player, Items.LIT_TORCH_594)) {
+                playAudio(player, 3027)
+                animate(player, Animations.SEA_SLUG_POKE_GROUND_WITH_TORCH_4793)
+                return@on true
+            }
+
             runTask(player, 1) {
                 animate(player, 1114)
-                playAudio(player, Sounds.SEASLUG_HIT_3019)
+                playAudio(player, 3025)
+                playAudio(player, Sounds.SEASLUG_HIT_3019, 3)
+
                 sendMessage(player, "You pick up the sea slug.")
                 sendMessage(player, "It sinks its teeth deep into your hand.")
                 sendMessage(player, "You drop the sea slug.")
+
                 impact(player, 3, HitsplatType.NORMAL)
                 sendChat(player, "Ouch!")
             }
+
             return@on true
         }
 

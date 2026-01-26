@@ -37,7 +37,7 @@ class PoisonWeaponPlugin : InteractionListener {
 
             if (removeItem(player, Item(item.id, amt))) {
                 addItemOrDrop(player, product, amt)
-                replaceSlot(player, used.asItem().index, Item(Items.VIAL_229, 1))
+                replaceSlot(player, used.asItem().slot, Item(Items.VIAL_229, 1))
                 sendMessage(player, "You poison the ${item.name.lowercase()}.")
             }
             return@onUseWith true
@@ -48,7 +48,7 @@ class PoisonWeaponPlugin : InteractionListener {
             val product = KarambwanPoisonSets.itemMap[item.id] ?: return@onUseWith true
 
             if (removeItem(player, used.asItem())) {
-                replaceSlot(player, item.index, Item(product.kp, 1))
+                replaceSlot(player, item.slot, Item(product.kp, 1))
                 val weaponType = if (product.name.contains("spear", ignoreCase = true)) "spear" else "hasta"
                 sendMessage(player, "You smear the poisonous Karambwan paste over the $weaponType.")
             }
@@ -61,7 +61,7 @@ class PoisonWeaponPlugin : InteractionListener {
             val amt = min(5, item.amount)
 
             if (removeItem(player, Item(item.id, amt))) {
-                replaceSlot(player, item.index, Item(base, amt))
+                replaceSlot(player, item.slot, Item(base, amt))
             }
             return@onUseWith true
         }
@@ -72,7 +72,7 @@ class PoisonWeaponPlugin : InteractionListener {
             val amt = min(5, item.amount)
 
             if (removeItem(player, Item(item.id, amt))) {
-                replaceSlot(player, item.index, Item(base, amt))
+                replaceSlot(player, item.slot, Item(base, amt))
             }
             return@onUseWith true
         }

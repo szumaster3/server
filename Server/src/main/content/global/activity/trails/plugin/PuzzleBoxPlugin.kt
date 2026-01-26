@@ -12,6 +12,7 @@ import core.net.packet.out.ContainerPacket
 import shared.consts.Components
 import shared.consts.Items
 import shared.consts.Scenery
+import shared.consts.Sounds
 import kotlin.math.absoluteValue
 
 /**
@@ -112,6 +113,7 @@ class PuzzleBoxPlugin : InteractionListener, InterfaceListener {
                     if (clickTile(puzzle, slot)) {
                         sessionState[player] = type to puzzle
                         sendPuzzle(player, type)
+                        playAudio(player, Sounds.SLIDE_PUZZLE_1859)
                         if (puzzle == solution) sendMessage(player, "Congratulations! You've solved the puzzle!")
                     }
                 }

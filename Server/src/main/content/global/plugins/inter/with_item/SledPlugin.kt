@@ -35,16 +35,30 @@ class SledPlugin : InteractionListener {
          */
 
         onUseWith(IntType.ITEM, Items.WAX_4085, Items.SLED_4083) { player, used, with ->
-            val itemSlot = used.asItem().slot
+            val waxItem = used.asItem()
+            val sledItem = with.asItem()
+
+            if (!inInventory(player, waxItem.id) || !inInventory(player, sledItem.id)) {
+                sendMessage(player, "You don't have the required items to do this.")
+                return@onUseWith true
+            }
+
             lock(player, 6)
             lockInteractions(player, 6)
-            if (removeItem(player, used.asItem()) && removeItem(player, with.asItem())) {
+
+            val waxSlot = waxItem.slot
+            val sledSlot = sledItem.slot
+
+            if (removeItem(player, waxItem) && removeItem(player, sledItem)) {
                 animate(player, Animations.WAX_SLED_1470)
                 playAudio(player, Sounds.WAX_SLED_1871)
-                replaceSlot(player, itemSlot, Item(Items.CAKE_TIN_1887))
-                replaceSlot(player, with.asItem().slot, Item(Items.SLED_4084))
+
+                replaceSlot(player, waxSlot, Item(Items.CAKE_TIN_1887))
+                replaceSlot(player, sledSlot, Item(Items.SLED_4084))
+
                 sendMessage(player, "You wax the sled. You're now ready to go.")
             }
+
             return@onUseWith true
         }
 

@@ -66,14 +66,13 @@ enum class EnchantedJewellery(val options: Array<String>, val locations: Array<L
         }
 
         closeAllInterfaces(player)
-        val animDuration = animationDuration(ANIMATION)
         queueScript(player, 0, QueueStrength.SOFT) { stage ->
             when (stage) {
                 0 -> {
                     player.impactHandler.disabledTicks = 4
                     visualize(player, ANIMATION, Graphics)
                     playGlobalAudio(player.location, Sounds.TP_ALL_200)
-                    return@queueScript delayScript(player, animDuration)
+                    return@queueScript delayScript(player, 3)
                 }
                 1 -> {
                     teleport(player, location)
@@ -116,10 +115,13 @@ enum class EnchantedJewellery(val options: Array<String>, val locations: Array<L
         }
 
         if (isLast) {
-            if (crumbled) crumbleJewellery(player, item, isEquipped)
+            if (crumbled) {
+                crumbleJewellery(player, item, isEquipped)
+            } else {
+                sendMessage(player, "You will need to recharge your ${getJewelleryType(item)} before you can use it again.")
+            }
         } else {
             replaceJewellery(player, item, nextID, isEquipped)
-            sendMessage(player, "You will need to recharge your ${getJewelleryType(item)} before you can use it again.")
         }
 
         unlock(player)

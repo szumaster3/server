@@ -39,11 +39,13 @@ class TeaMakerPlugin : InteractionListener {
             val teapot = with.asItem()
 
             if (kettle.id != Items.HOT_KETTLE_7691) return@onUseWith false
-            val newTea = TEAPOT_TO_POT_MAP[teapot.id] ?: return@onUseWith false
+            val newTeaId = TEAPOT_TO_POT_MAP[teapot.id] ?: return@onUseWith false
 
-            replaceSlot(player, kettle.slot, Item(Items.KETTLE_7688))
-            replaceSlot(player, teapot.slot, Item(newTea))
-            sendMessage(player, "You pour the water into the teapot.")
+            if (removeItem(player, kettle) && removeItem(player, teapot)) {
+                replaceSlot(player, kettle.slot, Item(Items.KETTLE_7688))
+                replaceSlot(player, teapot.slot, Item(newTeaId))
+                sendMessage(player, "You pour the water into the teapot.")
+            }
             return@onUseWith true
         }
 
@@ -52,8 +54,8 @@ class TeaMakerPlugin : InteractionListener {
          */
 
         onUseWith(IntType.ITEM, TEAPOT_PROGRESS_MAP.keys.toIntArray(), *EMPTY_CUP_IDS.toIntArray()) { player, used, with ->
-            val teapot = used.asItem()
-            val cup = with.asItem()
+            val teapot = used.asItem() ?: return@onUseWith true
+            val cup = with.asItem() ?: return@onUseWith true
 
             if (cup.id == Items.TEA_FLASK_10859) {
                 sendMessage(player, "You cannot do that.")
@@ -65,16 +67,18 @@ class TeaMakerPlugin : InteractionListener {
                 return@onUseWith false
             }
 
-            val nextState = TEAPOT_PROGRESS_MAP[teapot.id]
-            if (nextState == null) {
+            val nextStateId = TEAPOT_PROGRESS_MAP[teapot.id]
+            if (nextStateId == null) {
                 sendMessage(player, "The teapot is empty.")
                 return@onUseWith true
             }
 
-            replaceSlot(player, teapot.slot, Item(nextState))
-            replaceSlot(player, cup.slot, Item(nextCupId(cup.id)))
-            sendMessage(player, "You pour some tea.")
-            rewardXP(player, Skills.COOKING, 52.0)
+            if (removeItem(player, teapot) && removeItem(player, cup)) {
+                replaceSlot(player, teapot.slot, Item(nextStateId))
+                replaceSlot(player, cup.slot, Item(nextCupId(cup.id)))
+                sendMessage(player, "You pour some tea.")
+                rewardXP(player, Skills.COOKING, 52.0)
+            }
             return@onUseWith true
         }
 

@@ -258,7 +258,7 @@ class PriestInPerilPlugin: InteractionListener {
             if (!removeItem(player, used)) {
                 return@onUseWith false
             }
-            addItem(player, Items.BUCKET_1925)
+            replaceSlot(player, used.asItem().slot, Item(Items.BUCKET_1925))
             animate(player, Animations.PRIEST_BUCKET_1077)
             playAudio(player, Sounds.HOLY_WATER_POUR_1733)
             setQuestStage(player, Quests.PRIEST_IN_PERIL, 16)

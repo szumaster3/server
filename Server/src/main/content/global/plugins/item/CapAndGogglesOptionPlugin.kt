@@ -8,9 +8,11 @@ import shared.consts.Items
 
 class CapAndGogglesOptionPlugin : InteractionListener {
 
-    private val capAndGoggles = Items.CAP_AND_GOGGLES_9946
-    private val bomberCap = Items.BOMBER_CAP_9945
-    private val gnomeGoggles = Items.GNOME_GOGGLES_9472
+    companion object {
+        private const val capAndGoggles = Items.CAP_AND_GOGGLES_9946
+        private const val bomberCap = Items.BOMBER_CAP_9945
+        private const val gnomeGoggles = Items.GNOME_GOGGLES_9472
+    }
 
     override fun defineListeners() {
 
@@ -24,13 +26,11 @@ class CapAndGogglesOptionPlugin : InteractionListener {
                 return@on true
             }
 
-            if(removeItem(player, Item(capAndGoggles, 1))) {
-                replaceSlot(
-                    player,
-                    slot = node.index,
-                    item = Item(bomberCap, 1),
-                    container = Container.INVENTORY,
-                )
+            val item = node.asItem() ?: return@on true
+            val slot = item.slot
+
+            if (removeItem(player, item)) {
+                replaceSlot(player, slot, Item(bomberCap, 1))
                 addItem(player, gnomeGoggles, 1)
             }
             return@on true

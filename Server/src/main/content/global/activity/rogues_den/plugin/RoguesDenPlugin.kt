@@ -11,6 +11,8 @@ import core.game.node.entity.player.Player
 import core.game.node.entity.skill.Skills
 import core.game.node.item.ChanceItem
 import core.game.node.item.Item
+import core.game.world.map.Direction
+import core.game.world.map.Location
 import core.game.world.update.flag.context.Animation
 import core.tools.RandomFunction
 import shared.consts.*
@@ -41,40 +43,55 @@ class RoguesDenPlugin : InteractionListener {
         }
     }
 
-    private fun crackSafe(player: Player, node: Node) {
-        if (getStatLevel(player, Skills.THIEVING) < 50) {
-            sendMessage(player, "You need to be level 50 Thieving to crack this safe.")
-            return
-        }
-
-        if (freeSlots(player) == 0) {
-            sendMessage(player, "Not enough inventory space.")
-            return
-        }
-
-        val success = success(player, Skills.THIEVING)
-        val trapped = RandomFunction.random(3) == 1
-
-        lock(player, 4)
-        sendMessage(player, "You start cracking the safe.")
-        playAudio(player, SFX_CRACK)
-        animate(player, if (success) SAFE_CRACK_SUCCESS else SAFE_CRACK_FAIL)
-
-        queueScript(player, 3, QueueStrength.SOFT) {
-            when {
-                success -> {
-                    handleSuccess(player, node)
-                    playAudio(player, SFX_OPEN)
-                }
-                trapped -> {
-                    playAudio(player, SFX_TRAP)
-                    sendMessage(player, "You slip and trigger a trap!")
-                    impact(player, RandomFunction.random(2, 6), ImpactHandler.HitsplatType.NORMAL)
-                    drainStatLevel(player, Skills.THIEVING, 0.05, 0.05)
-                    player.animate(Animation.RESET, 1)
-                }
+    private fun crackSafe(player: Player?, node: Node?) {
+        if (player == null || node?.location == null) return
+        queueScript(player, 1, QueueStrength.WEAK) {
+            if (!finishedMoving(player)) {
+                restartScript(player)
+                return@queueScript true
             }
-            return@queueScript stopExecuting(player)
+            if (getStatLevel(player, Skills.THIEVING) < 50) {
+                sendMessage(player, "You need to be level 50 Thieving to crack this safe.")
+                return@queueScript true
+            }
+
+            if (freeSlots(player) < 1) {
+                sendMessage(player, "Not enough inventory space.")
+                return@queueScript true
+            }
+
+            val success = success(player, Skills.THIEVING)
+            val trapped = RandomFunction.random(3) == 1
+
+            lock(player, 4)
+
+            val safeLoc = Location(player.location.x, 4973)
+            player.faceLocation(safeLoc)
+
+            sendMessage(player, "You start cracking the safe.")
+            playAudio(player, SFX_CRACK)
+            animate(player, if (success) SAFE_CRACK_SUCCESS else SAFE_CRACK_FAIL)
+
+            queueScript(player, 3, QueueStrength.WEAK) {
+                when {
+                    success -> {
+                        handleSuccess(player, node)
+                        playAudio(player, SFX_OPEN)
+                    }
+                    trapped -> {
+                        val animDelay = animationDuration(Animation(1114))
+                        playAudio(player, SFX_TRAP)
+                        animate(player, 1114)
+                        sendMessage(player, "You slip and trigger a trap!")
+                        impact(player, RandomFunction.random(2, 6), ImpactHandler.HitsplatType.NORMAL)
+                        drainStatLevel(player, Skills.THIEVING, 0.05, 0.05)
+                        player.animate(Animation.RESET, animDelay)
+                    }
+                }
+                true
+            }
+
+            return@queueScript true
         }
     }
 

@@ -8,6 +8,7 @@ import content.global.skill.summoning.SummoningPouch
 import content.region.kandarin.baxtorian.BarbarianTraining
 import content.region.kandarin.piscatoris.quest.phoenix.custcene.FuneralPyreCutscene
 import content.region.kandarin.piscatoris.quest.phoenix.custcene.WoundedPhoenixCutscene
+import content.region.kandarin.witchaven.quest.seaslug.cutscene.KennithCutscene
 import content.region.other.tutorial_island.plugin.TutorialStage
 import core.api.*
 import core.cache.def.impl.NPCDefinition
@@ -39,6 +40,9 @@ class DevelopmentCommandSet : CommandSet(Privilege.ADMIN) {
 
     override fun defineCommands() {
 
+        define("kennith",privilege = Privilege.ADMIN)  { player, args ->
+            KennithCutscene(player).start()
+        }
         define("phoenix1",privilege = Privilege.ADMIN)  { player, args ->
             WoundedPhoenixCutscene(player).start()
         }

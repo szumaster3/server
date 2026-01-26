@@ -224,6 +224,7 @@ class MissCheeversPlugin : InteractionListener {
             if (removeItem(player, used.id)) {
                 sendMessage(player, "You heat the two powdered ores together in the tin.")
                 sendMessage(player, "You make a duplicate of the key in bronze.")
+                playAudio(player, Sounds.BUNSEN_BURNER_2595)
                 addItemOrDrop(player, Items.TIN_5597)
             }
             return@onUseWith true
@@ -239,18 +240,28 @@ class MissCheeversPlugin : InteractionListener {
         }
 
         onUseWith(IntType.SCENERY, Items.METAL_SPADE_5586, Scenery.BUNSEN_BURNER_7332) { player, _, _ ->
+            if (!inInventory(player, Items.METAL_SPADE_5586)) {
+                return@onUseWith true
+            }
+
             lock(player, 3)
             sendMessage(player, "You burn the wooden handle away from the spade...")
+
             queueScript(player, 1, QueueStrength.WEAK) { stage: Int ->
+                if (!inInventory(player, Items.METAL_SPADE_5586)) {
+                    return@queueScript stopExecuting(player)
+                }
+
                 when (stage) {
                     0 -> {
-                        visualize(player, -1, Graphics(157, 96))
-                        playAudio(player, Sounds.FIREWAVE_HIT_163)
-                        keepRunning(player)
+                        playAudio(player, Sounds.BUNSEN_BURNER_2595)
+                        delayScript(player, 1)
                     }
                     1 -> {
+                        visualize(player, -1, Graphics(157, 96))
+                        playAudio(player, Sounds.FIREWAVE_HIT_163)
                         removeItem(player, Items.METAL_SPADE_5586)
-                        keepRunning(player)
+                        delayScript(player, 1)
                     }
                     2 -> {
                         addItem(player, Items.METAL_SPADE_5587)
@@ -261,6 +272,7 @@ class MissCheeversPlugin : InteractionListener {
                     else -> stopExecuting(player)
                 }
             }
+
             return@onUseWith true
         }
 

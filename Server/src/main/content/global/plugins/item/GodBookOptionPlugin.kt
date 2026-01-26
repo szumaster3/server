@@ -144,15 +144,23 @@ class GodBookOptionPlugin : InteractionListener {
      * Handles blessing books.
      */
     fun bless(player: Player, item: Node, resultId: Int) {
+        val oldItem = item.asItem() ?: return
+
         when {
             getStatLevel(player, Skills.PRAYER) < 50 ->
                 sendMessage(player, "You need a Prayer level of at least 50 to do this.")
             player.skills.prayerPoints < 4 ->
                 sendMessage(player, "You need at least 4 Prayer points to do this.")
             else -> {
-                sendMessage(player, "You bless the ${item.asItem().name.lowercase()}.")
+                sendMessage(player, "You bless the ${oldItem.name.lowercase()}.")
                 player.skills.decrementPrayerPoints(40.0)
-                replaceSlot(player, item.asItem().index, Item(resultId), item.asItem())
+
+                val slot = oldItem.slot
+                val newItem = Item(resultId, 1)
+
+                if (removeItem(player, oldItem)) {
+                    replaceSlot(player, slot, newItem)
+                }
             }
         }
     }

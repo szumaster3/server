@@ -1,9 +1,6 @@
 package content.global.skill.cooking
 
-import core.api.amountInInventory
-import core.api.replaceSlot
-import core.api.rewardXP
-import core.api.sendMessage
+import core.api.*
 import core.game.node.entity.player.Player
 import core.game.node.entity.skill.Skills
 import core.game.node.item.Item
@@ -44,7 +41,7 @@ class WineFermentingPulse(delay: Int, private val player: Player) : Pulse(delay)
             val resultId = if (isSuccess) Items.JUG_OF_WINE_1993 else Items.JUG_OF_BAD_WINE_1991
 
             val slot = player.inventory.getSlot(Item(Items.UNFERMENTED_WINE_1995))
-            if (slot != -1) {
+            if (slot != -1 && removeItem(player, Item(Items.UNFERMENTED_WINE_1995))) {
                 replaceSlot(player, slot, Item(resultId))
             } else {
                 val bankSlot = player.bank.getSlot(Item(Items.UNFERMENTED_WINE_1995))

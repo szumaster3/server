@@ -77,22 +77,41 @@ class TeaflaskPlugin : InteractionListener {
     }
 
     private fun fillCup(player: Player, flask: Item, cup: Item, charge: Int) {
+        if (!inInventory(player, flask.id) || !inInventory(player, cup.id)) {
+            sendMessage(player, "You don't have the required items to do this.")
+            return
+        }
+
         if (charge <= EMPTY_CHARGE) {
             sendMessage(player, "The tea flask is empty.")
             return
         }
+
         setCharge(flask, (charge - CHARGE_PER_CUP).coerceAtLeast(EMPTY_CHARGE))
-        replaceSlot(player, cup.slot, Item(Items.CUP_OF_TEA_712))
-        sendMessage(player, "You fill the cup with tea.")
+
+        val cupSlot = cup.slot
+        if (removeItem(player, cup)) {
+            replaceSlot(player, cupSlot, Item(Items.CUP_OF_TEA_712))
+            sendMessage(player, "You fill the cup with tea.")
+        }
     }
 
     private fun addCup(player: Player, flask: Item, tea: Item, charge: Int) {
+        if (!inInventory(player, flask.id) || !inInventory(player, tea.id)) {
+            sendMessage(player, "You don't have the items required.")
+            return
+        }
+
         if (charge >= MAX_CHARGE) {
             sendMessage(player, "The tea flask is already full.")
             return
         }
-        replaceSlot(player, tea.slot, Item(Items.EMPTY_CUP_1980))
-        setCharge(flask, (charge + CHARGE_PER_CUP).coerceAtMost(MAX_CHARGE))
-        sendMessage(player, "You add the tea to the flask.")
+
+        val teaSlot = tea.slot
+        if (removeItem(player, tea)) {
+            replaceSlot(player, teaSlot, Item(Items.EMPTY_CUP_1980))
+            setCharge(flask, (charge + CHARGE_PER_CUP).coerceAtMost(MAX_CHARGE))
+            sendMessage(player, "You add the tea to the flask.")
+        }
     }
 }

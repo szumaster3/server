@@ -50,12 +50,18 @@ class SapCollectPlugin : InteractionListener {
          */
 
         on(Items.BUCKET_OF_SAP_4687, IntType.ITEM, "empty") { player, node ->
-            val item = node as Item
-            if (item.slot < 0) {
+            val bucket = node.asItem() ?: return@on false
+            val slot = bucket.slot
+
+            if (slot < 0) {
                 return@on false
             }
-            replaceSlot(player, item.slot, Item(Items.BUCKET_1925))
-            sendMessage(player, "You empty the contents of the bucket on the floor.")
+
+            if (removeItem(player, bucket)) {
+                replaceSlot(player, slot, Item(Items.BUCKET_1925))
+                sendMessage(player, "You empty the contents of the bucket on the floor.")
+            }
+
             return@on true
         }
     }

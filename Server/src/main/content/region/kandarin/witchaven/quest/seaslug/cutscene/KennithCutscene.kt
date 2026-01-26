@@ -4,10 +4,8 @@ import core.api.*
 import core.game.activity.Cutscene
 import core.game.node.entity.player.Player
 import core.game.world.map.Direction
-import shared.consts.Animations
-import shared.consts.NPCs
-import shared.consts.Quests
-import shared.consts.Scenery
+import core.game.world.update.flag.context.Animation
+import shared.consts.*
 
 /**
  * Represents saving Kennith cutscene.
@@ -23,7 +21,7 @@ class KennithCutscene(
         if (player.settings.isRunToggled) {
             player.settings.toggleRun()
         }
-        loadRegion(11059)
+        loadRegion(Regions.FISHING_PLATFORM_11059)
         addNPC(NPCs.KENNITH_4864, 16, 25, Direction.EAST, 1)
     }
 
@@ -33,34 +31,39 @@ class KennithCutscene(
                 fadeToBlack()
                 timedUpdate(6)
             }
-
             1 -> {
                 fadeFromBlack()
                 teleport(player, 20, 27, 1)
-                transformNpc(getNPC(NPCs.KENNITH_4864)!!, NPCs.KENNITH_6373, 3)
-                sendPlainDialogue(player, true, "Kennith scrambles through the broken wall...")
+                faceLocation(player, base.transform(20, 5, 1))
                 moveCamera(18, 32, 700)
                 rotateCamera(17, 24)
-                timedUpdate(6)
+                // playAudio(player, 3021)
+                val animDelay = animationDuration(Animation(4805))
+                animate(getNPC(NPCs.KENNITH_4864)!!, 4805)
+                animate(player, Animations.SEA_SLUG_USE_CRANE_4795)
+                timedUpdate(animDelay)
             }
-
             2 -> {
+                sendPlainDialogue(player, true, "Kennith scrambles through the broken wall...")
+                sendMessage(player, "You rotate the crane around.")
                 moveCamera(15, 25, 1100, 5)
                 move(getNPC(NPCs.KENNITH_4864)!!, 17, 25)
+                timedUpdate(2)
+            }
+            3 -> {
+                animate(getNPC(NPCs.KENNITH_4864)!!, 4789)
+                sendMessage(player, "You rotate the crane around.")
+                timedUpdate(1)
+            }
+            4 -> {
+                getNPC(NPCs.KENNITH_4864)!!.clear()
+                playAudio(player, 3020)
+                sendMessage(player, "You rotate the crane around.")
+                replaceScenery(getObject(18, 23, 1)!!.asScenery(), Scenery.CRANE_18326, -1)
                 timedUpdate(3)
             }
-
-            3 -> {
-                getNPC(NPCs.KENNITH_4864)!!.clear()
-                animate(player, Animations.SEA_SLUG_USE_CRANE_4795)
-                replaceScenery(getObject(18, 23, 1)!!.asScenery(), Scenery.CRANE_18326, -1)
-                timedUpdate(4)
-            }
-
-            4 -> {
-                end()
+            5 -> end{
                 sendDialogueLines(player, "Down below, you see Holgart collect the boy from the crane and", "lead him away to safety.")
-                setQuestStage(player, Quests.SEA_SLUG, 50)
             }
         }
     }
