@@ -87,7 +87,7 @@ class ShootingStarPlugin :
 
     companion object {
         private val star = ShootingStar()
-        private val tickDelay = if (GameWorld.settings?.isDevMode == true) 2000 else 25000
+        private val tickDelay = if (GameWorld.settings?.isDevMode == true) core.tools.minutesToTicks(5) else core.tools.minutesToTicks(120)
         private val scoreboardEntries = ArrayList<ScoreboardEntry>()
         private val scoreboardIface = 787
         val SHOOTING_STARS = ShootingStarType.values().map(ShootingStarType::objectId).toIntArray()
