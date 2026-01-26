@@ -90,6 +90,9 @@ class HouseServantDialogue(player: Player? = null) : Dialogue(player) {
             return true
         }
 
+        // Make servant follow the player.
+        follow(player, servant)
+
         // Handle sawmill task.
         if (sawmill) {
             npc(expression, fontColor + "Very well, I will take these logs to the mill and", fontColor + "have them converted into planks.").also { stage = 110 }
@@ -189,11 +192,7 @@ class HouseServantDialogue(player: Player? = null) : Dialogue(player) {
             }
 
             // In house options.
-            50 -> {
-                val followOp = if (servant.pulseManager.isMovingPulse) "Stop following me." else "Follow me."
-                options("Go to the bank/sawmill...", "Misc...", followOp, "You're fired!")
-                stage++
-            }
+            50 -> options("Go to the bank/sawmill...", "Misc...", "Stop following me.", "You're fired!").also { stage++ }
             51 -> {
                 type = servant.type
                 when (buttonId) {
@@ -208,7 +207,8 @@ class HouseServantDialogue(player: Player? = null) : Dialogue(player) {
                     }
                     2 -> options("Greet guests", "Cook me something").also { stage = 56 }
                     3 -> {
-                        if (servant.pulseManager.isMovingPulse) servant.pulseManager.clear(PulseType.STANDARD) else follow(player, npc)
+                        player("Stop following me.")
+                        if (servant.pulseManager.isMovingPulse) servant.pulseManager.clear(PulseType.STANDARD)
                         stage = 100
                     }
                     4 -> player("You're fired!").also { stage = 75 }
