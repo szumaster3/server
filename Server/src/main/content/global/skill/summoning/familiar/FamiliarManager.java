@@ -422,6 +422,7 @@ public final class FamiliarManager {
             return false;
         }
         if (this.familiar != familiar) {
+            //player.getPacketDispatch().sendMessage("This is not your cat.");
             player.getPacketDispatch().sendMessage("This is not your familiar.");
             return false;
         }

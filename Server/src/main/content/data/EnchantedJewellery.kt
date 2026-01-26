@@ -119,6 +119,7 @@ enum class EnchantedJewellery(val options: Array<String>, val locations: Array<L
             if (crumbled) crumbleJewellery(player, item, isEquipped)
         } else {
             replaceJewellery(player, item, nextID, isEquipped)
+            sendMessage(player, "You will need to recharge your ${getJewelleryType(item)} before you can use it again.")
         }
 
         unlock(player)

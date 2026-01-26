@@ -30,8 +30,12 @@ class BuildInterface : InterfaceListener {
         onOpen(Components.POH_BUILD_SCREEN_402) { player, _ ->
             val coins = amountInInventory(player, Items.COINS_995)
 
-            COINS_VALUE_TO_CHILD.filter { coins >= it.first }.forEach { (amount, childId) ->
-                    sendString(player, core.tools.YELLOW + "$amount coins", Components.POH_BUILD_SCREEN_402, childId)
+            COINS_VALUE_TO_CHILD
+                .filter { coins >= it.first }
+                .forEach { (amount, childIds) ->
+                    childIds.forEach { childId ->
+                        sendString(player, core.tools.YELLOW + "$amount coins", Components.POH_BUILD_SCREEN_402, childId)
+                    }
                 }
 
             return@onOpen true
@@ -167,27 +171,16 @@ class BuildInterface : InterfaceListener {
         // POH_BUILD_SCREEN_402
         private const val BASE_BUTTON_ID = 160
         private val COINS_VALUE_TO_CHILD = arrayOf(
-            1000 to 138,
-            5000 to 139,
-            7500 to 147,
-            7500 to 155,
-            7500 to 156,
-            7500 to 157,
-            10000 to 140,
-            15000 to 141,
-            25000 to 142,
-            50000 to 143,
-            50000 to 149,
-            50000 to 150,
-            75000 to 145,
-            75000 to 152,
-            100000 to 144,
-            100000 to 151,
-            150000 to 146,
-            150000 to 153,
-            150000 to 154,
-            250000 to 148,
-            250000 to 159
+            1000    to listOf(138, 139),
+            5000    to listOf(140, 141),
+            10000   to listOf(142, 143, 144),
+            25000   to listOf(145, 146, 147),
+            50000   to listOf(148, 149, 150),
+            100000  to listOf(151),
+            75000   to listOf(152),
+            150000  to listOf(153, 154),
+            7500    to listOf(155, 156, 157),
+            250000  to listOf(159)
         )
     }
 }
