@@ -41,7 +41,7 @@ class ItemColoringPlugin : InteractionListener {
                 setOf(Dyes.RED, Dyes.BLUE)    -> Dyes.PURPLE
                 else -> {
                     sendMessage(player, "Those dyes don't mix together.")
-                    return@onUseWith false
+                    return@onUseWith true
                 }
             }
 

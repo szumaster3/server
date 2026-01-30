@@ -180,26 +180,23 @@ class SeaSlugPlugin : InteractionListener {
          */
 
         on(SEA_SLUG, IntType.NPC, "take") { player, _ ->
-
             if (inInventory(player, Items.LIT_TORCH_594)) {
                 playAudio(player, 3027)
                 animate(player, Animations.SEA_SLUG_POKE_GROUND_WITH_TORCH_4793)
-                return@on true
+            } else {
+                runTask(player, 1) {
+                    animate(player, 1114)
+                    playAudio(player, 3025)
+                    playAudio(player, Sounds.SEASLUG_HIT_3019, 3)
+
+                    sendMessage(player, "You pick up the sea slug.")
+                    sendMessage(player, "It sinks its teeth deep into your hand.")
+                    sendMessage(player, "You drop the sea slug.")
+
+                    impact(player, 3, HitsplatType.NORMAL)
+                    sendChat(player, "Ouch!")
+                }
             }
-
-            runTask(player, 1) {
-                animate(player, 1114)
-                playAudio(player, 3025)
-                playAudio(player, Sounds.SEASLUG_HIT_3019, 3)
-
-                sendMessage(player, "You pick up the sea slug.")
-                sendMessage(player, "It sinks its teeth deep into your hand.")
-                sendMessage(player, "You drop the sea slug.")
-
-                impact(player, 3, HitsplatType.NORMAL)
-                sendChat(player, "Ouch!")
-            }
-
             return@on true
         }
 
@@ -208,17 +205,18 @@ class SeaSlugPlugin : InteractionListener {
          */
 
         onUseWith(IntType.ITEM, POT_OF_FLOUR, SWAMP_TAR) { player, used, with ->
+            val usedId = used.asItem()
+            val withId = with.asItem()
             if (!hasSpaceFor(player, Item(RAW_SWAMP_PASTE, 1))) {
                 sendDialogue(player, "You do not have enough inventory space.")
                 return@onUseWith true
             }
 
-            if (removeItem(player, Item(with.id, 1), Container.INVENTORY)) {
+            if (removeItem(player, withId, Container.INVENTORY)) {
                 playAudio(player, Sounds.SLUG_SMEAR_PASTE_3026)
                 sendMessage(player, "You mix the flour with the swamp tar.")
                 sendMessage(player, "It mixes into a paste.")
-
-                replaceSlot(player, used.index, Item(EMPTY_POT, 1))
+                replaceSlot(player, usedId.slot, Item(EMPTY_POT, 1))
                 addItem(player, RAW_SWAMP_PASTE, 1)
             } else {
                 sendMessage(player, "You cannot use that right now.")
