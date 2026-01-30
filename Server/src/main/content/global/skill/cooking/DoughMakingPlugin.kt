@@ -38,7 +38,7 @@ class DoughMakingPlugin : InteractionListener {
                     val emptyWaterContainerId = waterContainerMap[bucket]!!
                     addItem(player, emptyWaterContainerId)
                     addItem(player, Items.EMPTY_POT_1931)
-                    sendMessage(player, "You mix the flour and the water to make some bread.")
+                    sendMessage(player, "You mix the flour and the water to make some bread dough.")
                 } else {
                     sendMessage(player, "You need a bucket of water and a pot of flour to make bread dough.")
                 }

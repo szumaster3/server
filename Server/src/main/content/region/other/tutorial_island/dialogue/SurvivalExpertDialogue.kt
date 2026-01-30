@@ -8,6 +8,7 @@ import core.game.dialogue.FaceAnim
 import core.game.dialogue.Topic
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
+import core.game.world.GameWorld
 import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.Items
@@ -145,7 +146,7 @@ class SurvivalExpertDialogue(player: Player? = null) : Dialogue(player) {
                 10 -> npcl(FaceAnim.FRIENDLY, "You can also set fire to logs you find lying on the floor already, and some other things can also be set alight...").also { stage++ }
                 11 -> npcl(FaceAnim.FRIENDLY, "A tinderbox is always a useful item to keep around!").also { stage = 5 }
 
-                12 -> npcl(FaceAnim.FRIENDLY, "Ah, yes. Fishing! Fishing is undoubtedly one of the more popular hobbies here in Gielinor!").also { stage++ }
+                12 -> npcl(FaceAnim.FRIENDLY, "Ah, yes. Fishing! Fishing is undoubtedly one of the more popular hobbies here in ${GameWorld.settings?.name}!").also { stage++ }
                 13 -> npcl(FaceAnim.FRIENDLY, "Whenever you see sparkling waters, you can be sure there's probably some good fishing to be had there!").also { stage++ }
                 14 -> npcl(FaceAnim.FRIENDLY, "Not only are fish absolutely delicious when cooked, they will also heal lost health.").also { stage++ }
                 15 -> npcl(FaceAnim.FRIENDLY, "I would recommend everybody has a go at Fishing at least once in their lives!").also { stage = 5 }

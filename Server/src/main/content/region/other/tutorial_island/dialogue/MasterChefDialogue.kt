@@ -8,6 +8,7 @@ import core.game.dialogue.FaceAnim
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.game.node.item.Item
+import core.game.world.GameWorld
 import core.plugin.Initializable
 import core.tools.END_DIALOGUE
 import shared.consts.Items
@@ -95,7 +96,7 @@ class MasterChefDialogue(player: Player? = null) : Dialogue(player) {
                 2 -> npcl(FaceAnim.FRIENDLY, "It's quite simple. Just use a pot of flour on a bucket of water, or vice versa, and you'll make dough. You can fill a bucket with water at any sink.").also { stage++ }
                 3 -> npc(FaceAnim.HALF_ASKING, "Do you need anything else?").also { stage = 0 }
 
-                4 -> npcl(FaceAnim.FRIENDLY, "The range is the only place you can cook a lot of the more complex foods in Gielinor. To cook on a range, all you need to do is click on it.").also { stage++ }
+                4 -> npcl(FaceAnim.FRIENDLY, "The range is the only place you can cook a lot of the more complex foods in ${GameWorld.settings?.name}. To cook on a range, all you need to do is click on it.").also { stage++ }
                 5 -> npcl(FaceAnim.FRIENDLY, "You'll need to make sure you have the required items in your inventory though.").also { stage = 3 }
             }
         }
