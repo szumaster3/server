@@ -49,7 +49,7 @@ class WaydarDialogue : DialogueFile() {
             5 -> npcl("As you wish").also { stage++ }
             6 -> {
                 player!!.interfaceManager.open(Component(138))
-                submitWorldPulse(GliderPulse(1, player!!, GnomeGlider.forId(14)!!))
+                submitWorldPulse(GliderPulse(1, player!!, GnomeGlider.forButtonId(14)!!))
                 stage = END_DIALOGUE
             }
         }
