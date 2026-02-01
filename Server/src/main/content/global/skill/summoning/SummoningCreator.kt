@@ -91,6 +91,7 @@ object SummoningCreator {
     @JvmStatic
     fun create(player: Player, amount: Int, node: Any?) {
         node?.let {
+            lock(player, 3)
             player.pulseManager.run(CreatePulse(player, SummoningNode.parse(node), amount))
         }
     }
@@ -147,7 +148,6 @@ object SummoningCreator {
         }
 
         override fun animate() {
-            lock(player, 3)
             playAudio(player, Sounds.CRAFT_POUCH_4164)
             animate(player, Animations.INFUSE_SUMMONING_POUCH_8500)
         }
@@ -161,14 +161,26 @@ object SummoningCreator {
             if (delay == 1) {
                 delay = 6
                 animateScenery(player, objectIDs!!, 8509, true)
+                playAudio(player, Sounds.CRAFT_POUCH_4164)
                 return false
             }
 
             animateScenery(player, objectIDs!!, 8510, true)
-            repeat(amount) {
-                if (type.required.all { anyInInventory(player, it.id) } && player.inventory.remove(*type.required)) {
+
+            var crafted = 0
+            while (crafted < amount)
+            {
+                if (!type.required.all { player.inventory.containsItem(it) }) {
+                    return true
+                }
+
+                if (player.inventory.remove(*type.required))
+                {
                     player.inventory.add(type.product)
                     rewardXP(player, Skills.SUMMONING, type.experience)
+                    crafted++
+                } else {
+                    return true
                 }
             }
             return true
