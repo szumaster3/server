@@ -1,7 +1,7 @@
 package content.region.karamja.quest.mm.dialogue
 
-import content.global.travel.glider.Glider
-import content.global.travel.glider.GliderPulse
+import content.global.travel.GnomeGlider
+import content.global.travel.GliderPulse
 import content.region.karamja.quest.mm.cutscene.ShipyardCutscene
 import core.api.getQuestStage
 import core.api.sendNPCDialogue
@@ -49,7 +49,7 @@ class WaydarDialogue : DialogueFile() {
             5 -> npcl("As you wish").also { stage++ }
             6 -> {
                 player!!.interfaceManager.open(Component(138))
-                submitWorldPulse(GliderPulse(1, player!!, Glider.forId(14)!!))
+                submitWorldPulse(GliderPulse(1, player!!, GnomeGlider.forId(14)!!))
                 stage = END_DIALOGUE
             }
         }

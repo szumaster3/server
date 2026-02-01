@@ -45,22 +45,9 @@ class DaeroDialogue : DialogueFile() {
             16 -> options("Talk about the journey...", "Talk about the 10th squad...", "Talk about Canarock...").also { stage++ }
 
             17 -> when (buttonID) {
-                1 -> options(
-                    "What lies to the south of Karamja?",
-                    "How will i travel?",
-                    "Are you coming with me?",
-                    "Return to previous menu."
-                ).also { stage = 18 }
-                2 -> options(
-                    "Why did the king send a squad of the royal guard?",
-                    "Who is Garkor?",
-                    "Why are the 10th squad so famous?"
-                ).also { stage = 24 }
-                3 -> options(
-                    "Who is Caranock?",
-                    "What is a Gnome Liaison Officer?",
-                    "I am not sure about Caranock..."
-                ).also { stage = 34 }
+                1 -> options("What lies to the south of Karamja?", "How will i travel?", "Are you coming with me?", "Return to previous menu.").also { stage = 18 }
+                2 -> options("Why did the king send a squad of the royal guard?", "Who is Garkor?", "Why are the 10th squad so famous?").also { stage = 24 }
+                3 -> options("Who is Caranock?", "What is a Gnome Liaison Officer?", "I am not sure about Caranock...").also { stage = 34 }
             }
 
             18 -> when (buttonID) {
@@ -105,13 +92,7 @@ class DaeroDialogue : DialogueFile() {
             38 -> playerl("I do not know. He just seemed a little suspicious. He was very keen to see me leave.").also { stage++ }
             39 -> npcl(FaceAnim.OLD_DEFAULT, "I do not know him; he is from before my time. Glough would presumably have hand picked him.").also { stage++ }
 
-            40 -> options(
-                "Talk about the journey...",
-                "Talk about the 10th squad...",
-                "Talk about Canarock...",
-                "Leave...",
-            ).also { stage++ }
-
+            40 -> options("Talk about the journey...", "Talk about the 10th squad...", "Talk about Canarock...", "Leave...").also { stage++ }
             41 -> when (buttonID) {
                 1 -> options("What lies to the south of Karamja?", "How will i travel?", "Are you coming with me?", "Return to previous menu.").also { stage = 18 }
                 2 -> options("Why did the king send a squad of the royal guard?", "Who is Garkor?", "Why are the 10th squad so famous?").also { stage = 24 }

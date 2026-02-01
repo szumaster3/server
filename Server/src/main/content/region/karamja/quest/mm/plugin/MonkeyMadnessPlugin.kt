@@ -126,7 +126,7 @@ class MonkeyMadnessPlugin : InteractionListener {
                 openDialogue(player, DaeroTrainingPostQuestDialogue(), npc)
             } else if (getAttribute(player, "mm:xp_reward", false)) {
             } else {
-                when (player.location.getRegionId()) {
+                when (player.location.regionId) {
                     9782 -> openDialogue(player, DaeroDialogue(), npc)
                     9626 -> openDialogue(player, DaeroHangarDialogue(), npc)
                 }

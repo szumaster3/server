@@ -1,6 +1,6 @@
 package content.global.plugins.item
 
-import content.global.travel.glider.Glider
+import content.global.travel.GnomeGlider
 import core.api.*
 import core.game.interaction.IntType
 import core.game.interaction.InteractionListener
@@ -57,7 +57,7 @@ class GrandSeedPodOptionPlugin : InteractionListener {
                     delayScript(player, 3)
                 }
                 2 -> {
-                    teleport(player, Glider.TA_QUIR_PRIW.location)
+                    teleport(player, GnomeGlider.TA_QUIR_PRIW.location)
                     delayScript(player, 2)
                 }
                 3 -> {
