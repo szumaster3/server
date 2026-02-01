@@ -49,20 +49,14 @@ object EvilTwinUtils {
     fun start(player: Player): Boolean {
         region.add(player)
         region.setMusicId(Music.HEAD_TO_HEAD_612)
-        currentCrane =
-            Scenery(
-                shared.consts.Scenery.EVIL_CLAW_14976,
-                region.baseLocation.transform(14, 12, 0),
-                10,
-                0
-            )
+        currentCrane = Scenery(shared.consts.Scenery.EVIL_CLAW_14976, region.baseLocation.transform(14, 12, 0), 10, 0)
         val color: EvilTwinColors = RandomFunction.getRandomElement(EvilTwinColors.values())
         val model = RandomFunction.random(5)
         val hash = color.ordinal or (model shl 16)
         val npcId = getMollyId(hash)
         setAttribute(player, RANDOM_EVENT, hash)
-        val mollyNPC = NPC.create(npcId, Location.getRandomLocation(player.location, 1, true))
 
+        mollyNPC = NPC.create(npcId, Location.getRandomLocation(player.location, 1, true))
         mollyNPC?.apply {
             isWalks = false
             isNeverWalks = true
@@ -70,15 +64,21 @@ object EvilTwinUtils {
             init()
         }
 
-        sendChat(mollyNPC!!, "I need your help, ${player.username}.")
-        mollyNPC.faceTemporary(player, 3)
+        mollyNPC?.let { npc ->
+            sendChat(npc, "I need your help, ${player.username}.")
+            npc.faceTemporary(player, 3)
+        }
+
         setAttribute(player, RandomEvent.save(), player.location)
         queueScript(player, 4, QueueStrength.SOFT) {
-            teleport(player, mollyNPC, hash)
-            mollyNPC.locks.lockMovement(300000)
-            openDialogue(player, MollyDialogue(3))
-            return@queueScript stopExecuting(player)
+            mollyNPC?.let { npc ->
+                teleport(player, npc, hash)
+                npc.locks.lockMovement(300000)
+                openDialogue(player, MollyDialogue(3))
+            }
+            stopExecuting(player)
         }
+
         return true
     }
 
@@ -141,44 +141,30 @@ object EvilTwinUtils {
      * @param last The last known location of the entity.
      */
     fun locationUpdate(player: Player, entity: Entity, last: Location?) {
-        if (
-            entity == craneNPC &&
-            entity.walkingQueue.queue.size > 1 &&
-            player.interfaceManager.singleTab != null
-        ) {
-            val l: Location = entity.location
-            PacketRepository.send(
-                CameraViewPacket::class.java,
-                CameraContext(
-                    player,
-                    CameraContext.CameraType.POSITION,
-                    l.x + 2,
-                    l.y + 3,
-                    520,
-                    1,
-                    5
-                )
-            )
-            PacketRepository.send(
-                CameraViewPacket::class.java,
-                CameraContext(
-                    player,
-                    CameraContext.CameraType.ROTATION,
-                    l.x - 3,
-                    l.y - 3,
-                    420,
-                    1,
-                    5
-                )
-            )
-        } else if (entity == player) {
-            if (mollyNPC!!.isHidden(player) && entity.location.localX < 9) {
-                showNPCs(true)
-            } else if (!mollyNPC!!.isHidden(player) && entity.location.localX > 8) {
-                showNPCs(false)
+        when (entity) {
+            craneNPC -> {
+                if (entity.walkingQueue.queue.size > 1 && player.interfaceManager.singleTab != null) {
+                    val l = entity.location
+                    PacketRepository.send(
+                        CameraViewPacket::class.java,
+                        CameraContext(player, CameraContext.CameraType.POSITION, l.x + 2, l.y + 3, 520, 1, 5)
+                    )
+                    PacketRepository.send(
+                        CameraViewPacket::class.java,
+                        CameraContext(player, CameraContext.CameraType.ROTATION, l.x - 3, l.y - 3, 420, 1, 5)
+                    )
+                }
+            }
+            player -> {
+                mollyNPC?.let { npc ->
+                    if (npc.isHidden(player) && entity.location.localX < 9) {
+                        showNPCs(true)
+                    } else if (!npc.isHidden(player) && entity.location.localX > 8) {
+                        showNPCs(false)
+                    }
+                }
             }
         }
-        return locationUpdate(player, entity, last)
     }
 
     /**
@@ -244,11 +230,10 @@ object EvilTwinUtils {
      * @param showMolly True to show, false to hide.
      */
     private fun showNPCs(showMolly: Boolean) {
+        mollyNPC?.isInvisible = !showMolly
         for (npc in region.planes[0].npcs) {
             if (npc.id in NPCs.SUSPECT_3852..NPCs.SUSPECT_3891) {
-                npc.isInvisible
-            } else {
-                mollyNPC!!.isInvisible = !showMolly
+                npc.isInvisible = false
             }
         }
     }
