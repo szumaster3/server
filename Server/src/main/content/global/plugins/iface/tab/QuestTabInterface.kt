@@ -25,6 +25,8 @@ class QuestTabInterface : InterfaceListener {
         on(Components.QUESTJOURNAL_V2_274) { player, _, _, buttonID, _, _ ->
             if (buttonID == 3) {
                 player.achievementDiaryManager.openTab()
+            } else if(buttonID == 166) { // guild_button
+                player.interfaceManager.openTab(2, Component(Components.GUILD_V1_834))
             } else {
                 val quest = player.questRepository.forButtonId(buttonID)
                 if (quest != null) {
@@ -40,6 +42,8 @@ class QuestTabInterface : InterfaceListener {
         on(Components.AREA_TASK_259) { player, _, _, buttonID, _, _ ->
             if (buttonID == 8) {
                 player.interfaceManager.openTab(2, Component(Components.QUESTJOURNAL_V2_274))
+            } else if(buttonID == 34) { // guild_button
+                player.interfaceManager.openTab(2, Component(Components.GUILD_V1_834))
             } else {
                 player.achievementDiaryManager.getDiary(DiaryType.forChild(buttonID))?.open(player)
             }

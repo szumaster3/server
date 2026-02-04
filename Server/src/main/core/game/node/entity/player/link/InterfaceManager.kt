@@ -473,6 +473,7 @@ class InterfaceManager(
         close(Component(Components.STATS_320)) // Skills
         close(Component(Components.QUESTJOURNAL_V2_274)) // Quest
         close(Component(Components.AREA_TASK_259)) // Diary
+        close(Component(Components.GUILD_V1_834)) // Guild
         close(Component(Components.INVENTORY_149)) // inventory
         close(Component(Components.WORNITEMS_387)) // Equipment
         close(Component(Components.PRAYER_271)) // Prayer

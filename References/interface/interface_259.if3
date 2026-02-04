@@ -578,3 +578,13 @@ tiling=yes
 transmitop10=yes
 op10=  
 
+[com34]
+type=graphic
+x=143
+y=4
+width=18
+height=18
+graphic=graphic_1707
+transmitop1=yes
+op1=Swap to Guild List
+
