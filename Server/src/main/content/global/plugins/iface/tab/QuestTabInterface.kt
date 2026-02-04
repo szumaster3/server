@@ -1,5 +1,6 @@
 package content.global.plugins.iface.tab
 
+import content.guilds.Guilds
 import core.api.closeInterface
 import core.api.openInterface
 import core.api.sendString
@@ -9,6 +10,7 @@ import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.diary.DiaryType
 import core.game.node.entity.player.link.quest.*
 import core.game.node.entity.skill.Skills
+import core.tools.RED
 import core.tools.colorize
 import shared.consts.Components
 import shared.consts.Quests
@@ -26,7 +28,12 @@ class QuestTabInterface : InterfaceListener {
             if (buttonID == 3) {
                 player.achievementDiaryManager.openTab()
             } else if(buttonID == 166) { // guild_button
-                player.interfaceManager.openTab(2, Component(Components.GUILD_V1_834))
+                if(!Guilds.inGuild(player)) {
+                    player.sendMessage("${RED}You are not a member of any guild.")
+                    return@on true
+                } else {
+                    player.interfaceManager.openTab(2, Component(Components.GUILD_V1_834))
+                }
             } else {
                 val quest = player.questRepository.forButtonId(buttonID)
                 if (quest != null) {
@@ -43,7 +50,12 @@ class QuestTabInterface : InterfaceListener {
             if (buttonID == 8) {
                 player.interfaceManager.openTab(2, Component(Components.QUESTJOURNAL_V2_274))
             } else if(buttonID == 34) { // guild_button
-                player.interfaceManager.openTab(2, Component(Components.GUILD_V1_834))
+                if(!Guilds.inGuild(player)) {
+                    player.sendMessage("${RED}You are not a member of any guild.")
+                    return@on true
+                } else {
+                    player.interfaceManager.openTab(2, Component(Components.GUILD_V1_834))
+                }
             } else {
                 player.achievementDiaryManager.getDiary(DiaryType.forChild(buttonID))?.open(player)
             }
